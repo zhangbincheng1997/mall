@@ -8,14 +8,14 @@ import org.springframework.stereotype.Component;
 @PropertySource("classpath:my.properties")
 public class Properties {
 
-    @Value("${upload.folder}")
-    private String uploadFolder;
+    @Value("${my.school}")
+    private String school;
 
-    public String getUploadFolder() {
-        return uploadFolder;
+    public String getSchool() {
+        return school;
     }
 
-    public void setUploadFolder(String uploadFolder) {
-        this.uploadFolder = uploadFolder;
+    public void setSchool(String school) {
+        this.school = school;
     }
 }
