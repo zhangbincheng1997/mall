@@ -74,7 +74,7 @@ public class UserController {
     }
 
     @PostMapping("/upload")
-    public String singleFileUpload(@RequestParam("file") MultipartFile file,
+    public String singleFileUpload(@RequestParam("file") MultipartFile file, String info,
                                    RedirectAttributes redirectAttributes) {
         if (file.isEmpty()) {
             redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
@@ -88,7 +88,7 @@ public class UserController {
             Files.write(path, bytes);
 
             redirectAttributes.addFlashAttribute("message",
-                    "You successfully uploaded '" + file.getOriginalFilename() + "'");
+                    info + " : You successfully uploaded '" + file.getOriginalFilename() + "'");
         } catch (IOException e) {
             e.printStackTrace();
         }
