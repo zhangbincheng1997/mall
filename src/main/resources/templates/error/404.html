@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>404</title>
+</head>
+<body>
+404 Not Found
+
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+    <h1>status:[[${status}]]</h1>
+    <h2>timestamp:[[${timestamp}]]</h2>
+    <h2>timestamp:[[${#dates.format(timestamp, 'yyyy-MM-dd HH:mm:ss')}]]</h2>
+    <h2>exception:[[${exception}]]</h2>
+    <h2>message:[[${message}]]</h2>
+    <h2>path:[[${path}]]</h2>
+    <h2>errors:[[${errors}]]</h2>
+    <h2>ext:[[${ext.code}]]</h2>
+    <h2>ext:[[${ext.message}]]</h2>
+</main>
+</body>
+</html>

@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.User;
+import com.example.demo.entity.User;
 import com.example.demo.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +15,7 @@ public class UserController {
     @Resource
     UserService userService;
 
-    @RequestMapping("/")
+    @RequestMapping("/user")
     public String list(Model model) {
         List<User> users = userService.getUserList();
         model.addAttribute("users", users);

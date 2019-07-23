@@ -1,4 +1,4 @@
-package com.example.demo.util;
+package com.example.demo.base;
 
 import com.alibaba.fastjson.JSON;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -19,8 +19,8 @@ import javax.servlet.http.HttpServletRequest;
 // 定义切面
 @Aspect
 @Configuration
-public class LogAop {
-    private static final Logger logger = LoggerFactory.getLogger(LogAop.class);
+public class AopLog {
+    private static final Logger logger = LoggerFactory.getLogger(AopLog.class);
 
     // 定义切点
     @Pointcut("execution(* com.example.demo.controller.*Controller.*(..))")
