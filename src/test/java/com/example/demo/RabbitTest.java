@@ -1,6 +1,7 @@
 package com.example.demo;
 
-import com.example.demo.base.RabbitmqSender;
+import com.alibaba.fastjson.JSONObject;
+import com.example.demo.component.RabbitSender;
 import com.example.demo.entity.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,23 +13,23 @@ import java.util.Date;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class RabbitmqTest {
+public class RabbitTest {
 
     @Autowired
-    private RabbitmqSender rbSender;
+    private RabbitSender sender;
 
     @Test
-    public void testRabbitmq() {
-        String str = "hello " + new Date();
-        rbSender.send(str);
+    public void testRabbitStr() {
+        String str = new Date().toString();
+        sender.send(str);
     }
 
     @Test
-    public void testRabbitmqObj() {
+    public void testRabbitObj() {
         User user = new User();
         user.setAccount("account");
         user.setPassword("password");
         user.setNickname("nickname");
-        rbSender.send(user);
+        sender.send(user);
     }
 }

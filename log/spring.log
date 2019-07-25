@@ -1,310 +1,13 @@
-2019-07-23 15:58:35.546  INFO 6884 --- [main] com.example.demo.RabbitmqTest            : Starting RabbitmqTest on admin-PC with PID 6884 (started by admin in F:\HelloWorld\springboot-template)
-2019-07-23 15:58:35.551 DEBUG 6884 --- [main] com.example.demo.RabbitmqTest            : Running with Spring Boot v2.1.6.RELEASE, Spring v5.1.8.RELEASE
-2019-07-23 15:58:35.552  INFO 6884 --- [main] com.example.demo.RabbitmqTest            : No active profile set, falling back to default profiles: default
-2019-07-23 15:59:18.900 ERROR 6884 --- [AMQP Connection 119.29.146.115:5672] c.r.c.impl.ForgivingExceptionHandler     : An unexpected connection driver error occured
+2019-07-24 16:35:03.691  INFO 6164 --- [main] com.example.demo.RabbitmqTest            : Starting RabbitmqTest on admin-PC with PID 6164 (started by admin in F:\HelloWorld\springboot-template)
+2019-07-24 16:35:03.722 DEBUG 6164 --- [main] com.example.demo.RabbitmqTest            : Running with Spring Boot v2.1.6.RELEASE, Spring v5.1.8.RELEASE
+2019-07-24 16:35:03.722  INFO 6164 --- [main] com.example.demo.RabbitmqTest            : No active profile set, falling back to default profiles: default
+2019-07-24 16:35:32.774  INFO 6164 --- [main] com.example.demo.RabbitmqTest            : Started RabbitmqTest in 30.83 seconds (JVM running for 35.127)
+2019-07-24 16:55:52.815  INFO 6244 --- [main] com.example.demo.KafkaTest               : Starting KafkaTest on admin-PC with PID 6244 (started by admin in F:\HelloWorld\springboot-template)
+2019-07-24 16:55:52.817 DEBUG 6244 --- [main] com.example.demo.KafkaTest               : Running with Spring Boot v2.1.6.RELEASE, Spring v5.1.8.RELEASE
+2019-07-24 16:55:52.817  INFO 6244 --- [main] com.example.demo.KafkaTest               : No active profile set, falling back to default profiles: default
+2019-07-24 16:56:05.273 ERROR 6244 --- [main] o.s.boot.SpringApplication               : Application run failed
 
-java.net.SocketException: Socket Closed
-	at java.net.SocketInputStream.socketRead0(Native Method) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.read(SocketInputStream.java:170) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.read(SocketInputStream.java:141) ~[na:1.8.0_72]
-	at java.io.BufferedInputStream.fill(BufferedInputStream.java:246) ~[na:1.8.0_72]
-	at java.io.BufferedInputStream.read(BufferedInputStream.java:265) ~[na:1.8.0_72]
-	at java.io.DataInputStream.readUnsignedByte(DataInputStream.java:288) ~[na:1.8.0_72]
-	at com.rabbitmq.client.impl.Frame.readFrom(Frame.java:91) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.SocketFrameHandler.readFrame(SocketFrameHandler.java:164) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQConnection$MainLoop.run(AMQConnection.java:596) ~[amqp-client-5.4.3.jar:5.4.3]
-	at java.lang.Thread.run(Thread.java:745) [na:1.8.0_72]
-
-2019-07-23 15:59:19.813 ERROR 6884 --- [AMQP Connection 119.29.146.115:5672] c.r.c.impl.ForgivingExceptionHandler     : An unexpected connection driver error occured
-
-java.net.SocketException: socket closed
-	at java.net.SocketInputStream.socketRead0(Native Method) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.read(SocketInputStream.java:170) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.read(SocketInputStream.java:141) ~[na:1.8.0_72]
-	at java.io.BufferedInputStream.fill(BufferedInputStream.java:246) ~[na:1.8.0_72]
-	at java.io.BufferedInputStream.read(BufferedInputStream.java:265) ~[na:1.8.0_72]
-	at java.io.DataInputStream.readUnsignedByte(DataInputStream.java:288) ~[na:1.8.0_72]
-	at com.rabbitmq.client.impl.Frame.readFrom(Frame.java:91) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.SocketFrameHandler.readFrame(SocketFrameHandler.java:164) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQConnection$MainLoop.run(AMQConnection.java:596) ~[amqp-client-5.4.3.jar:5.4.3]
-	at java.lang.Thread.run(Thread.java:745) [na:1.8.0_72]
-
-2019-07-23 15:59:19.979 ERROR 6884 --- [AMQP Connection 119.29.146.115:5672] c.r.c.impl.ForgivingExceptionHandler     : An unexpected connection driver error occured
-
-java.net.SocketException: socket closed
-	at java.net.SocketInputStream.socketRead0(Native Method) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.read(SocketInputStream.java:170) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.read(SocketInputStream.java:141) ~[na:1.8.0_72]
-	at java.io.BufferedInputStream.fill(BufferedInputStream.java:246) ~[na:1.8.0_72]
-	at java.io.BufferedInputStream.read(BufferedInputStream.java:265) ~[na:1.8.0_72]
-	at java.io.DataInputStream.readUnsignedByte(DataInputStream.java:288) ~[na:1.8.0_72]
-	at com.rabbitmq.client.impl.Frame.readFrom(Frame.java:91) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.SocketFrameHandler.readFrame(SocketFrameHandler.java:164) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQConnection$MainLoop.run(AMQConnection.java:596) ~[amqp-client-5.4.3.jar:5.4.3]
-	at java.lang.Thread.run(Thread.java:745) [na:1.8.0_72]
-
-2019-07-23 15:59:20.055 ERROR 6884 --- [AMQP Connection 119.29.146.115:5672] c.r.c.impl.ForgivingExceptionHandler     : An unexpected connection driver error occured
-
-java.net.SocketException: socket closed
-	at java.net.SocketInputStream.socketRead0(Native Method) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.read(SocketInputStream.java:170) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.read(SocketInputStream.java:141) ~[na:1.8.0_72]
-	at java.io.BufferedInputStream.fill(BufferedInputStream.java:246) ~[na:1.8.0_72]
-	at java.io.BufferedInputStream.read(BufferedInputStream.java:265) ~[na:1.8.0_72]
-	at java.io.DataInputStream.readUnsignedByte(DataInputStream.java:288) ~[na:1.8.0_72]
-	at com.rabbitmq.client.impl.Frame.readFrom(Frame.java:91) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.SocketFrameHandler.readFrame(SocketFrameHandler.java:164) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQConnection$MainLoop.run(AMQConnection.java:596) ~[amqp-client-5.4.3.jar:5.4.3]
-	at java.lang.Thread.run(Thread.java:745) [na:1.8.0_72]
-
-2019-07-23 15:59:20.069  INFO 6884 --- [main] com.example.demo.RabbitmqTest            : Started RabbitmqTest in 50.5 seconds (JVM running for 58.07)
-2019-07-23 15:59:20.615 ERROR 6884 --- [AMQP Connection 119.29.146.115:5672] c.r.c.impl.ForgivingExceptionHandler     : An unexpected connection driver error occured
-
-java.net.SocketException: socket closed
-	at java.net.SocketInputStream.socketRead0(Native Method) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.read(SocketInputStream.java:170) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.read(SocketInputStream.java:141) ~[na:1.8.0_72]
-	at java.io.BufferedInputStream.fill(BufferedInputStream.java:246) ~[na:1.8.0_72]
-	at java.io.BufferedInputStream.read(BufferedInputStream.java:265) ~[na:1.8.0_72]
-	at java.io.DataInputStream.readUnsignedByte(DataInputStream.java:288) ~[na:1.8.0_72]
-	at com.rabbitmq.client.impl.Frame.readFrom(Frame.java:91) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.SocketFrameHandler.readFrame(SocketFrameHandler.java:164) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQConnection$MainLoop.run(AMQConnection.java:596) ~[amqp-client-5.4.3.jar:5.4.3]
-	at java.lang.Thread.run(Thread.java:745) [na:1.8.0_72]
-
-2019-07-23 16:02:32.948  INFO 3036 --- [main] com.example.demo.RabbitmqTest            : Starting RabbitmqTest on admin-PC with PID 3036 (started by admin in F:\HelloWorld\springboot-template)
-2019-07-23 16:02:32.950 DEBUG 3036 --- [main] com.example.demo.RabbitmqTest            : Running with Spring Boot v2.1.6.RELEASE, Spring v5.1.8.RELEASE
-2019-07-23 16:02:32.951  INFO 3036 --- [main] com.example.demo.RabbitmqTest            : No active profile set, falling back to default profiles: default
-2019-07-23 16:02:46.260 ERROR 3036 --- [AMQP Connection 119.29.146.115:5672] c.r.c.impl.ForgivingExceptionHandler     : An unexpected connection driver error occured
-
-java.net.SocketException: socket closed
-	at java.net.SocketInputStream.socketRead0(Native Method) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.read(SocketInputStream.java:170) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.read(SocketInputStream.java:141) ~[na:1.8.0_72]
-	at java.io.BufferedInputStream.fill(BufferedInputStream.java:246) ~[na:1.8.0_72]
-	at java.io.BufferedInputStream.read(BufferedInputStream.java:265) ~[na:1.8.0_72]
-	at java.io.DataInputStream.readUnsignedByte(DataInputStream.java:288) ~[na:1.8.0_72]
-	at com.rabbitmq.client.impl.Frame.readFrom(Frame.java:91) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.SocketFrameHandler.readFrame(SocketFrameHandler.java:164) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQConnection$MainLoop.run(AMQConnection.java:596) ~[amqp-client-5.4.3.jar:5.4.3]
-	at java.lang.Thread.run(Thread.java:745) [na:1.8.0_72]
-
-2019-07-23 16:02:46.397 ERROR 3036 --- [AMQP Connection 119.29.146.115:5672] c.r.c.impl.ForgivingExceptionHandler     : An unexpected connection driver error occured
-
-java.net.SocketException: socket closed
-	at java.net.SocketInputStream.socketRead0(Native Method) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.read(SocketInputStream.java:170) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.read(SocketInputStream.java:141) ~[na:1.8.0_72]
-	at java.io.BufferedInputStream.fill(BufferedInputStream.java:246) ~[na:1.8.0_72]
-	at java.io.BufferedInputStream.read(BufferedInputStream.java:265) ~[na:1.8.0_72]
-	at java.io.DataInputStream.readUnsignedByte(DataInputStream.java:288) ~[na:1.8.0_72]
-	at com.rabbitmq.client.impl.Frame.readFrom(Frame.java:91) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.SocketFrameHandler.readFrame(SocketFrameHandler.java:164) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQConnection$MainLoop.run(AMQConnection.java:596) ~[amqp-client-5.4.3.jar:5.4.3]
-	at java.lang.Thread.run(Thread.java:745) [na:1.8.0_72]
-
-2019-07-23 16:02:47.302 ERROR 3036 --- [AMQP Connection 119.29.146.115:5672] c.r.c.impl.ForgivingExceptionHandler     : An unexpected connection driver error occured
-
-java.net.SocketException: Socket Closed
-	at java.net.SocketInputStream.socketRead0(Native Method) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.read(SocketInputStream.java:170) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.read(SocketInputStream.java:141) ~[na:1.8.0_72]
-	at java.io.BufferedInputStream.fill(BufferedInputStream.java:246) ~[na:1.8.0_72]
-	at java.io.BufferedInputStream.read(BufferedInputStream.java:265) ~[na:1.8.0_72]
-	at java.io.DataInputStream.readUnsignedByte(DataInputStream.java:288) ~[na:1.8.0_72]
-	at com.rabbitmq.client.impl.Frame.readFrom(Frame.java:91) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.SocketFrameHandler.readFrame(SocketFrameHandler.java:164) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQConnection$MainLoop.run(AMQConnection.java:596) ~[amqp-client-5.4.3.jar:5.4.3]
-	at java.lang.Thread.run(Thread.java:745) [na:1.8.0_72]
-
-2019-07-23 16:02:47.944 ERROR 3036 --- [AMQP Connection 119.29.146.115:5672] c.r.c.impl.ForgivingExceptionHandler     : An unexpected connection driver error occured
-
-java.net.SocketException: socket closed
-	at java.net.SocketInputStream.socketRead0(Native Method) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.read(SocketInputStream.java:170) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.read(SocketInputStream.java:141) ~[na:1.8.0_72]
-	at java.io.BufferedInputStream.fill(BufferedInputStream.java:246) ~[na:1.8.0_72]
-	at java.io.BufferedInputStream.read(BufferedInputStream.java:265) ~[na:1.8.0_72]
-	at java.io.DataInputStream.readUnsignedByte(DataInputStream.java:288) ~[na:1.8.0_72]
-	at com.rabbitmq.client.impl.Frame.readFrom(Frame.java:91) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.SocketFrameHandler.readFrame(SocketFrameHandler.java:164) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQConnection$MainLoop.run(AMQConnection.java:596) ~[amqp-client-5.4.3.jar:5.4.3]
-	at java.lang.Thread.run(Thread.java:745) [na:1.8.0_72]
-
-2019-07-23 16:02:47.954  INFO 3036 --- [main] com.example.demo.RabbitmqTest            : Started RabbitmqTest in 15.911 seconds (JVM running for 17.629)
-2019-07-23 16:02:48.192 ERROR 3036 --- [AMQP Connection 119.29.146.115:5672] c.r.c.impl.ForgivingExceptionHandler     : An unexpected connection driver error occured
-
-java.net.SocketException: socket closed
-	at java.net.SocketInputStream.socketRead0(Native Method) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.read(SocketInputStream.java:170) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.read(SocketInputStream.java:141) ~[na:1.8.0_72]
-	at java.io.BufferedInputStream.fill(BufferedInputStream.java:246) ~[na:1.8.0_72]
-	at java.io.BufferedInputStream.read(BufferedInputStream.java:265) ~[na:1.8.0_72]
-	at java.io.DataInputStream.readUnsignedByte(DataInputStream.java:288) ~[na:1.8.0_72]
-	at com.rabbitmq.client.impl.Frame.readFrom(Frame.java:91) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.SocketFrameHandler.readFrame(SocketFrameHandler.java:164) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQConnection$MainLoop.run(AMQConnection.java:596) ~[amqp-client-5.4.3.jar:5.4.3]
-	at java.lang.Thread.run(Thread.java:745) [na:1.8.0_72]
-
-2019-07-23 16:04:28.509  INFO 6044 --- [main] com.example.demo.RabbitmqTest            : Starting RabbitmqTest on admin-PC with PID 6044 (started by admin in F:\HelloWorld\springboot-template)
-2019-07-23 16:04:28.510 DEBUG 6044 --- [main] com.example.demo.RabbitmqTest            : Running with Spring Boot v2.1.6.RELEASE, Spring v5.1.8.RELEASE
-2019-07-23 16:04:28.527  INFO 6044 --- [main] com.example.demo.RabbitmqTest            : No active profile set, falling back to default profiles: default
-2019-07-23 16:04:40.445 ERROR 6044 --- [AMQP Connection 119.29.146.115:5672] c.r.c.impl.ForgivingExceptionHandler     : An unexpected connection driver error occured
-
-java.net.SocketException: socket closed
-	at java.net.SocketInputStream.socketRead0(Native Method) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.read(SocketInputStream.java:170) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.read(SocketInputStream.java:141) ~[na:1.8.0_72]
-	at java.io.BufferedInputStream.fill(BufferedInputStream.java:246) ~[na:1.8.0_72]
-	at java.io.BufferedInputStream.read(BufferedInputStream.java:265) ~[na:1.8.0_72]
-	at java.io.DataInputStream.readUnsignedByte(DataInputStream.java:288) ~[na:1.8.0_72]
-	at com.rabbitmq.client.impl.Frame.readFrom(Frame.java:91) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.SocketFrameHandler.readFrame(SocketFrameHandler.java:164) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQConnection$MainLoop.run(AMQConnection.java:596) ~[amqp-client-5.4.3.jar:5.4.3]
-	at java.lang.Thread.run(Thread.java:745) [na:1.8.0_72]
-
-2019-07-23 16:04:40.681 ERROR 6044 --- [AMQP Connection 119.29.146.115:5672] c.r.c.impl.ForgivingExceptionHandler     : An unexpected connection driver error occured
-
-java.net.SocketException: socket closed
-	at java.net.SocketInputStream.socketRead0(Native Method) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.read(SocketInputStream.java:170) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.read(SocketInputStream.java:141) ~[na:1.8.0_72]
-	at java.io.BufferedInputStream.fill(BufferedInputStream.java:246) ~[na:1.8.0_72]
-	at java.io.BufferedInputStream.read(BufferedInputStream.java:265) ~[na:1.8.0_72]
-	at java.io.DataInputStream.readUnsignedByte(DataInputStream.java:288) ~[na:1.8.0_72]
-	at com.rabbitmq.client.impl.Frame.readFrom(Frame.java:91) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.SocketFrameHandler.readFrame(SocketFrameHandler.java:164) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQConnection$MainLoop.run(AMQConnection.java:596) ~[amqp-client-5.4.3.jar:5.4.3]
-	at java.lang.Thread.run(Thread.java:745) [na:1.8.0_72]
-
-2019-07-23 16:04:40.718  INFO 6044 --- [main] com.example.demo.RabbitmqTest            : Started RabbitmqTest in 13.227 seconds (JVM running for 14.591)
-2019-07-23 16:04:41.323 ERROR 6044 --- [AMQP Connection 119.29.146.115:5672] c.r.c.impl.ForgivingExceptionHandler     : An unexpected connection driver error occured
-
-java.net.SocketException: Socket Closed
-	at java.net.SocketInputStream.socketRead0(Native Method) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.read(SocketInputStream.java:170) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.read(SocketInputStream.java:141) ~[na:1.8.0_72]
-	at java.io.BufferedInputStream.fill(BufferedInputStream.java:246) ~[na:1.8.0_72]
-	at java.io.BufferedInputStream.read(BufferedInputStream.java:265) ~[na:1.8.0_72]
-	at java.io.DataInputStream.readUnsignedByte(DataInputStream.java:288) ~[na:1.8.0_72]
-	at com.rabbitmq.client.impl.Frame.readFrom(Frame.java:91) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.SocketFrameHandler.readFrame(SocketFrameHandler.java:164) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQConnection$MainLoop.run(AMQConnection.java:596) ~[amqp-client-5.4.3.jar:5.4.3]
-	at java.lang.Thread.run(Thread.java:745) [na:1.8.0_72]
-
-2019-07-23 16:09:06.979  INFO 7456 --- [main] com.example.demo.RabbitmqTest            : Starting RabbitmqTest on admin-PC with PID 7456 (started by admin in F:\HelloWorld\springboot-template)
-2019-07-23 16:09:06.980 DEBUG 7456 --- [main] com.example.demo.RabbitmqTest            : Running with Spring Boot v2.1.6.RELEASE, Spring v5.1.8.RELEASE
-2019-07-23 16:09:06.980  INFO 7456 --- [main] com.example.demo.RabbitmqTest            : No active profile set, falling back to default profiles: default
-2019-07-23 16:09:19.449 ERROR 7456 --- [AMQP Connection 119.29.146.115:5672] c.r.c.impl.ForgivingExceptionHandler     : An unexpected connection driver error occured
-
-java.net.SocketException: socket closed
-	at java.net.SocketInputStream.socketRead0(Native Method) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.read(SocketInputStream.java:170) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.read(SocketInputStream.java:141) ~[na:1.8.0_72]
-	at java.io.BufferedInputStream.fill(BufferedInputStream.java:246) ~[na:1.8.0_72]
-	at java.io.BufferedInputStream.read(BufferedInputStream.java:265) ~[na:1.8.0_72]
-	at java.io.DataInputStream.readUnsignedByte(DataInputStream.java:288) ~[na:1.8.0_72]
-	at com.rabbitmq.client.impl.Frame.readFrom(Frame.java:91) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.SocketFrameHandler.readFrame(SocketFrameHandler.java:164) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQConnection$MainLoop.run(AMQConnection.java:596) ~[amqp-client-5.4.3.jar:5.4.3]
-	at java.lang.Thread.run(Thread.java:745) [na:1.8.0_72]
-
-2019-07-23 16:09:19.584 ERROR 7456 --- [AMQP Connection 119.29.146.115:5672] c.r.c.impl.ForgivingExceptionHandler     : An unexpected connection driver error occured
-
-java.net.SocketException: socket closed
-	at java.net.SocketInputStream.socketRead0(Native Method) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.read(SocketInputStream.java:170) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.read(SocketInputStream.java:141) ~[na:1.8.0_72]
-	at java.io.BufferedInputStream.fill(BufferedInputStream.java:246) ~[na:1.8.0_72]
-	at java.io.BufferedInputStream.read(BufferedInputStream.java:265) ~[na:1.8.0_72]
-	at java.io.DataInputStream.readUnsignedByte(DataInputStream.java:288) ~[na:1.8.0_72]
-	at com.rabbitmq.client.impl.Frame.readFrom(Frame.java:91) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.SocketFrameHandler.readFrame(SocketFrameHandler.java:164) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQConnection$MainLoop.run(AMQConnection.java:596) ~[amqp-client-5.4.3.jar:5.4.3]
-	at java.lang.Thread.run(Thread.java:745) [na:1.8.0_72]
-
-2019-07-23 16:09:19.605  INFO 7456 --- [main] com.example.demo.RabbitmqTest            : Started RabbitmqTest in 14.036 seconds (JVM running for 15.262)
-2019-07-23 16:09:19.964 ERROR 7456 --- [AMQP Connection 119.29.146.115:5672] c.r.c.impl.ForgivingExceptionHandler     : An unexpected connection driver error occured
-
-java.net.SocketException: socket closed
-	at java.net.SocketInputStream.socketRead0(Native Method) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.read(SocketInputStream.java:170) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.read(SocketInputStream.java:141) ~[na:1.8.0_72]
-	at java.io.BufferedInputStream.fill(BufferedInputStream.java:246) ~[na:1.8.0_72]
-	at java.io.BufferedInputStream.read(BufferedInputStream.java:265) ~[na:1.8.0_72]
-	at java.io.DataInputStream.readUnsignedByte(DataInputStream.java:288) ~[na:1.8.0_72]
-	at com.rabbitmq.client.impl.Frame.readFrom(Frame.java:91) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.SocketFrameHandler.readFrame(SocketFrameHandler.java:164) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQConnection$MainLoop.run(AMQConnection.java:596) ~[amqp-client-5.4.3.jar:5.4.3]
-	at java.lang.Thread.run(Thread.java:745) [na:1.8.0_72]
-
-2019-07-23 16:10:33.886  INFO 7640 --- [main] com.example.demo.RabbitmqTest            : Starting RabbitmqTest on admin-PC with PID 7640 (started by admin in F:\HelloWorld\springboot-template)
-2019-07-23 16:10:33.887 DEBUG 7640 --- [main] com.example.demo.RabbitmqTest            : Running with Spring Boot v2.1.6.RELEASE, Spring v5.1.8.RELEASE
-2019-07-23 16:10:33.888  INFO 7640 --- [main] com.example.demo.RabbitmqTest            : No active profile set, falling back to default profiles: default
-2019-07-23 16:10:45.239 ERROR 7640 --- [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] o.s.a.r.l.SimpleMessageListenerContainer : Consumer received fatal=false exception on startup
-
-org.springframework.amqp.rabbit.listener.QueuesNotAvailableException: Cannot prepare queue for listener. Either the queue doesn't exist or the broker will not allow us to use it.
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.handleDeclarationException(BlockingQueueConsumer.java:661) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.passiveDeclarations(BlockingQueueConsumer.java:601) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.start(BlockingQueueConsumer.java:581) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.initialize(SimpleMessageListenerContainer.java:1196) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1041) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at java.lang.Thread.run(Thread.java:745) [na:1.8.0_72]
-Caused by: org.springframework.amqp.rabbit.listener.BlockingQueueConsumer$DeclarationException: Failed to declare queue(s):[string]
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.attemptPassiveDeclarations(BlockingQueueConsumer.java:710) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.passiveDeclarations(BlockingQueueConsumer.java:594) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	... 4 common frames omitted
-Caused by: java.io.IOException: null
-	at com.rabbitmq.client.impl.AMQChannel.wrap(AMQChannel.java:126) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.wrap(AMQChannel.java:122) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.exnWrappingRpc(AMQChannel.java:144) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.ChannelN.queueDeclarePassive(ChannelN.java:1006) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.ChannelN.queueDeclarePassive(ChannelN.java:52) ~[amqp-client-5.4.3.jar:5.4.3]
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_72]
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_72]
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_72]
-	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_72]
-	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory$CachedChannelInvocationHandler.invoke(CachingConnectionFactory.java:1140) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at com.sun.proxy.$Proxy132.queueDeclarePassive(Unknown Source) ~[na:na]
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.attemptPassiveDeclarations(BlockingQueueConsumer.java:689) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	... 5 common frames omitted
-Caused by: com.rabbitmq.client.ShutdownSignalException: channel error; protocol method: #method<channel.close>(reply-code=404, reply-text=NOT_FOUND - no queue 'string' in vhost '/', class-id=50, method-id=10)
-	at com.rabbitmq.utility.ValueOrException.getValue(ValueOrException.java:66) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.utility.BlockingValueOrException.uninterruptibleGetValue(BlockingValueOrException.java:36) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel$BlockingRpcContinuation.getReply(AMQChannel.java:494) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.privateRpc(AMQChannel.java:288) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.exnWrappingRpc(AMQChannel.java:138) ~[amqp-client-5.4.3.jar:5.4.3]
-	... 14 common frames omitted
-Caused by: com.rabbitmq.client.ShutdownSignalException: channel error; protocol method: #method<channel.close>(reply-code=404, reply-text=NOT_FOUND - no queue 'string' in vhost '/', class-id=50, method-id=10)
-	at com.rabbitmq.client.impl.ChannelN.asyncShutdown(ChannelN.java:516) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.ChannelN.processAsync(ChannelN.java:346) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.handleCompleteInboundCommand(AMQChannel.java:178) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.handleFrame(AMQChannel.java:111) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQConnection.readFrame(AMQConnection.java:670) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQConnection.access$300(AMQConnection.java:48) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQConnection$MainLoop.run(AMQConnection.java:597) ~[amqp-client-5.4.3.jar:5.4.3]
-	... 1 common frames omitted
-
-2019-07-23 16:10:45.327 ERROR 7640 --- [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] o.s.a.r.l.SimpleMessageListenerContainer : Stopping container from aborted consumer
-2019-07-23 16:10:46.058 ERROR 7640 --- [main] o.s.boot.SpringApplication               : Application run failed
-
-org.springframework.context.ApplicationContextException: Failed to start bean 'org.springframework.amqp.rabbit.config.internalRabbitListenerEndpointRegistry'; nested exception is org.springframework.amqp.AmqpIllegalStateException: Fatal exception on listener startup
+org.springframework.context.ApplicationContextException: Failed to start bean 'org.springframework.kafka.config.internalKafkaListenerEndpointRegistry'; nested exception is java.lang.IllegalStateException: No group.id found in consumer config, container properties, or @KafkaListener annotation; a group.id is required when group management is used.
 	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:185) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
 	at org.springframework.context.support.DefaultLifecycleProcessor.access$200(DefaultLifecycleProcessor.java:53) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
 	at org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup.start(DefaultLifecycleProcessor.java:360) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
@@ -342,57 +45,16 @@ org.springframework.context.ApplicationContextException: Failed to start bean 'o
 	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47) [junit-rt.jar:na]
 	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242) [junit-rt.jar:na]
 	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70) [junit-rt.jar:na]
-Caused by: org.springframework.amqp.AmqpIllegalStateException: Fatal exception on listener startup
-	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer.waitForConsumersToStart(SimpleMessageListenerContainer.java:553) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer.doStart(SimpleMessageListenerContainer.java:511) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.start(AbstractMessageListenerContainer.java:1296) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.RabbitListenerEndpointRegistry.startIfNecessary(RabbitListenerEndpointRegistry.java:294) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.RabbitListenerEndpointRegistry.start(RabbitListenerEndpointRegistry.java:249) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+Caused by: java.lang.IllegalStateException: No group.id found in consumer config, container properties, or @KafkaListener annotation; a group.id is required when group management is used.
+	at org.springframework.util.Assert.state(Assert.java:73) ~[spring-core-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.kafka.listener.AbstractMessageListenerContainer.checkGroupId(AbstractMessageListenerContainer.java:335) ~[spring-kafka-2.2.7.RELEASE.jar:2.2.7.RELEASE]
+	at org.springframework.kafka.listener.AbstractMessageListenerContainer.start(AbstractMessageListenerContainer.java:287) ~[spring-kafka-2.2.7.RELEASE.jar:2.2.7.RELEASE]
+	at org.springframework.kafka.config.KafkaListenerEndpointRegistry.startIfNecessary(KafkaListenerEndpointRegistry.java:306) ~[spring-kafka-2.2.7.RELEASE.jar:2.2.7.RELEASE]
+	at org.springframework.kafka.config.KafkaListenerEndpointRegistry.start(KafkaListenerEndpointRegistry.java:255) ~[spring-kafka-2.2.7.RELEASE.jar:2.2.7.RELEASE]
 	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:182) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
 	... 36 common frames omitted
-Caused by: org.springframework.amqp.rabbit.listener.QueuesNotAvailableException: Cannot prepare queue for listener. Either the queue doesn't exist or the broker will not allow us to use it.
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.handleDeclarationException(BlockingQueueConsumer.java:661) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.passiveDeclarations(BlockingQueueConsumer.java:601) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.start(BlockingQueueConsumer.java:581) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.initialize(SimpleMessageListenerContainer.java:1196) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1041) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at java.lang.Thread.run(Thread.java:745) ~[na:1.8.0_72]
-Caused by: org.springframework.amqp.rabbit.listener.BlockingQueueConsumer$DeclarationException: Failed to declare queue(s):[string]
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.attemptPassiveDeclarations(BlockingQueueConsumer.java:710) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.passiveDeclarations(BlockingQueueConsumer.java:594) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	... 4 common frames omitted
-Caused by: java.io.IOException: null
-	at com.rabbitmq.client.impl.AMQChannel.wrap(AMQChannel.java:126) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.wrap(AMQChannel.java:122) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.exnWrappingRpc(AMQChannel.java:144) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.ChannelN.queueDeclarePassive(ChannelN.java:1006) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.ChannelN.queueDeclarePassive(ChannelN.java:52) ~[amqp-client-5.4.3.jar:5.4.3]
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_72]
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_72]
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_72]
-	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_72]
-	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory$CachedChannelInvocationHandler.invoke(CachingConnectionFactory.java:1140) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at com.sun.proxy.$Proxy132.queueDeclarePassive(Unknown Source) ~[na:na]
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.attemptPassiveDeclarations(BlockingQueueConsumer.java:689) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	... 5 common frames omitted
-Caused by: com.rabbitmq.client.ShutdownSignalException: channel error; protocol method: #method<channel.close>(reply-code=404, reply-text=NOT_FOUND - no queue 'string' in vhost '/', class-id=50, method-id=10)
-	at com.rabbitmq.utility.ValueOrException.getValue(ValueOrException.java:66) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.utility.BlockingValueOrException.uninterruptibleGetValue(BlockingValueOrException.java:36) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel$BlockingRpcContinuation.getReply(AMQChannel.java:494) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.privateRpc(AMQChannel.java:288) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.exnWrappingRpc(AMQChannel.java:138) ~[amqp-client-5.4.3.jar:5.4.3]
-	... 14 common frames omitted
-Caused by: com.rabbitmq.client.ShutdownSignalException: channel error; protocol method: #method<channel.close>(reply-code=404, reply-text=NOT_FOUND - no queue 'string' in vhost '/', class-id=50, method-id=10)
-	at com.rabbitmq.client.impl.ChannelN.asyncShutdown(ChannelN.java:516) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.ChannelN.processAsync(ChannelN.java:346) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.handleCompleteInboundCommand(AMQChannel.java:178) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.handleFrame(AMQChannel.java:111) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQConnection.readFrame(AMQConnection.java:670) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQConnection.access$300(AMQConnection.java:48) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQConnection$MainLoop.run(AMQConnection.java:597) ~[amqp-client-5.4.3.jar:5.4.3]
-	... 1 common frames omitted
 
-2019-07-23 16:10:46.079 ERROR 7640 --- [main] o.s.test.context.TestContextManager      : Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@32eff876] to prepare test instance [com.example.demo.RabbitmqTest@1ed12d10]
+2019-07-24 16:56:05.285 ERROR 6244 --- [main] o.s.test.context.TestContextManager      : Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@661972b0] to prepare test instance [com.example.demo.KafkaTest@718d6b7c]
 
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:125) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
@@ -420,7 +82,7 @@ java.lang.IllegalStateException: Failed to load ApplicationContext
 	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47) [junit-rt.jar:na]
 	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242) [junit-rt.jar:na]
 	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70) [junit-rt.jar:na]
-Caused by: org.springframework.context.ApplicationContextException: Failed to start bean 'org.springframework.amqp.rabbit.config.internalRabbitListenerEndpointRegistry'; nested exception is org.springframework.amqp.AmqpIllegalStateException: Fatal exception on listener startup
+Caused by: org.springframework.context.ApplicationContextException: Failed to start bean 'org.springframework.kafka.config.internalKafkaListenerEndpointRegistry'; nested exception is java.lang.IllegalStateException: No group.id found in consumer config, container properties, or @KafkaListener annotation; a group.id is required when group management is used.
 	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:185) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
 	at org.springframework.context.support.DefaultLifecycleProcessor.access$200(DefaultLifecycleProcessor.java:53) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
 	at org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup.start(DefaultLifecycleProcessor.java:360) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
@@ -435,107 +97,21 @@ Caused by: org.springframework.context.ApplicationContextException: Failed to st
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:117) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
 	... 24 common frames omitted
-Caused by: org.springframework.amqp.AmqpIllegalStateException: Fatal exception on listener startup
-	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer.waitForConsumersToStart(SimpleMessageListenerContainer.java:553) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer.doStart(SimpleMessageListenerContainer.java:511) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.start(AbstractMessageListenerContainer.java:1296) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.RabbitListenerEndpointRegistry.startIfNecessary(RabbitListenerEndpointRegistry.java:294) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.RabbitListenerEndpointRegistry.start(RabbitListenerEndpointRegistry.java:249) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+Caused by: java.lang.IllegalStateException: No group.id found in consumer config, container properties, or @KafkaListener annotation; a group.id is required when group management is used.
+	at org.springframework.util.Assert.state(Assert.java:73) ~[spring-core-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.kafka.listener.AbstractMessageListenerContainer.checkGroupId(AbstractMessageListenerContainer.java:335) ~[spring-kafka-2.2.7.RELEASE.jar:2.2.7.RELEASE]
+	at org.springframework.kafka.listener.AbstractMessageListenerContainer.start(AbstractMessageListenerContainer.java:287) ~[spring-kafka-2.2.7.RELEASE.jar:2.2.7.RELEASE]
+	at org.springframework.kafka.config.KafkaListenerEndpointRegistry.startIfNecessary(KafkaListenerEndpointRegistry.java:306) ~[spring-kafka-2.2.7.RELEASE.jar:2.2.7.RELEASE]
+	at org.springframework.kafka.config.KafkaListenerEndpointRegistry.start(KafkaListenerEndpointRegistry.java:255) ~[spring-kafka-2.2.7.RELEASE.jar:2.2.7.RELEASE]
 	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:182) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
 	... 36 common frames omitted
-Caused by: org.springframework.amqp.rabbit.listener.QueuesNotAvailableException: Cannot prepare queue for listener. Either the queue doesn't exist or the broker will not allow us to use it.
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.handleDeclarationException(BlockingQueueConsumer.java:661) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.passiveDeclarations(BlockingQueueConsumer.java:601) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.start(BlockingQueueConsumer.java:581) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.initialize(SimpleMessageListenerContainer.java:1196) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1041) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at java.lang.Thread.run(Thread.java:745) ~[na:1.8.0_72]
-Caused by: org.springframework.amqp.rabbit.listener.BlockingQueueConsumer$DeclarationException: Failed to declare queue(s):[string]
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.attemptPassiveDeclarations(BlockingQueueConsumer.java:710) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.passiveDeclarations(BlockingQueueConsumer.java:594) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	... 4 common frames omitted
-Caused by: java.io.IOException: null
-	at com.rabbitmq.client.impl.AMQChannel.wrap(AMQChannel.java:126) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.wrap(AMQChannel.java:122) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.exnWrappingRpc(AMQChannel.java:144) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.ChannelN.queueDeclarePassive(ChannelN.java:1006) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.ChannelN.queueDeclarePassive(ChannelN.java:52) ~[amqp-client-5.4.3.jar:5.4.3]
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_72]
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_72]
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_72]
-	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_72]
-	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory$CachedChannelInvocationHandler.invoke(CachingConnectionFactory.java:1140) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at com.sun.proxy.$Proxy132.queueDeclarePassive(Unknown Source) ~[na:na]
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.attemptPassiveDeclarations(BlockingQueueConsumer.java:689) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	... 5 common frames omitted
-Caused by: com.rabbitmq.client.ShutdownSignalException: channel error; protocol method: #method<channel.close>(reply-code=404, reply-text=NOT_FOUND - no queue 'string' in vhost '/', class-id=50, method-id=10)
-	at com.rabbitmq.utility.ValueOrException.getValue(ValueOrException.java:66) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.utility.BlockingValueOrException.uninterruptibleGetValue(BlockingValueOrException.java:36) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel$BlockingRpcContinuation.getReply(AMQChannel.java:494) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.privateRpc(AMQChannel.java:288) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.exnWrappingRpc(AMQChannel.java:138) ~[amqp-client-5.4.3.jar:5.4.3]
-	... 14 common frames omitted
-Caused by: com.rabbitmq.client.ShutdownSignalException: channel error; protocol method: #method<channel.close>(reply-code=404, reply-text=NOT_FOUND - no queue 'string' in vhost '/', class-id=50, method-id=10)
-	at com.rabbitmq.client.impl.ChannelN.asyncShutdown(ChannelN.java:516) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.ChannelN.processAsync(ChannelN.java:346) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.handleCompleteInboundCommand(AMQChannel.java:178) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.handleFrame(AMQChannel.java:111) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQConnection.readFrame(AMQConnection.java:670) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQConnection.access$300(AMQConnection.java:48) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQConnection$MainLoop.run(AMQConnection.java:597) ~[amqp-client-5.4.3.jar:5.4.3]
-	... 1 common frames omitted
 
-2019-07-23 16:11:42.574  INFO 7896 --- [main] com.example.demo.RabbitmqTest            : Starting RabbitmqTest on admin-PC with PID 7896 (started by admin in F:\HelloWorld\springboot-template)
-2019-07-23 16:11:42.575 DEBUG 7896 --- [main] com.example.demo.RabbitmqTest            : Running with Spring Boot v2.1.6.RELEASE, Spring v5.1.8.RELEASE
-2019-07-23 16:11:42.575  INFO 7896 --- [main] com.example.demo.RabbitmqTest            : No active profile set, falling back to default profiles: default
-2019-07-23 16:11:55.054 ERROR 7896 --- [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] o.s.a.r.l.SimpleMessageListenerContainer : Consumer received fatal=false exception on startup
+2019-07-24 16:56:05.359  INFO 6244 --- [main] com.example.demo.KafkaTest               : Starting KafkaTest on admin-PC with PID 6244 (started by admin in F:\HelloWorld\springboot-template)
+2019-07-24 16:56:05.359 DEBUG 6244 --- [main] com.example.demo.KafkaTest               : Running with Spring Boot v2.1.6.RELEASE, Spring v5.1.8.RELEASE
+2019-07-24 16:56:05.359  INFO 6244 --- [main] com.example.demo.KafkaTest               : No active profile set, falling back to default profiles: default
+2019-07-24 16:56:08.736 ERROR 6244 --- [main] o.s.boot.SpringApplication               : Application run failed
 
-org.springframework.amqp.rabbit.listener.QueuesNotAvailableException: Cannot prepare queue for listener. Either the queue doesn't exist or the broker will not allow us to use it.
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.handleDeclarationException(BlockingQueueConsumer.java:661) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.passiveDeclarations(BlockingQueueConsumer.java:601) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.start(BlockingQueueConsumer.java:581) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.initialize(SimpleMessageListenerContainer.java:1196) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1041) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at java.lang.Thread.run(Thread.java:745) [na:1.8.0_72]
-Caused by: org.springframework.amqp.rabbit.listener.BlockingQueueConsumer$DeclarationException: Failed to declare queue(s):[string]
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.attemptPassiveDeclarations(BlockingQueueConsumer.java:710) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.passiveDeclarations(BlockingQueueConsumer.java:594) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	... 4 common frames omitted
-Caused by: java.io.IOException: null
-	at com.rabbitmq.client.impl.AMQChannel.wrap(AMQChannel.java:126) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.wrap(AMQChannel.java:122) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.exnWrappingRpc(AMQChannel.java:144) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.ChannelN.queueDeclarePassive(ChannelN.java:1006) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.ChannelN.queueDeclarePassive(ChannelN.java:52) ~[amqp-client-5.4.3.jar:5.4.3]
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_72]
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_72]
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_72]
-	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_72]
-	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory$CachedChannelInvocationHandler.invoke(CachingConnectionFactory.java:1140) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at com.sun.proxy.$Proxy132.queueDeclarePassive(Unknown Source) ~[na:na]
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.attemptPassiveDeclarations(BlockingQueueConsumer.java:689) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	... 5 common frames omitted
-Caused by: com.rabbitmq.client.ShutdownSignalException: channel error; protocol method: #method<channel.close>(reply-code=404, reply-text=NOT_FOUND - no queue 'string' in vhost '/', class-id=50, method-id=10)
-	at com.rabbitmq.utility.ValueOrException.getValue(ValueOrException.java:66) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.utility.BlockingValueOrException.uninterruptibleGetValue(BlockingValueOrException.java:36) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel$BlockingRpcContinuation.getReply(AMQChannel.java:494) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.privateRpc(AMQChannel.java:288) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.exnWrappingRpc(AMQChannel.java:138) ~[amqp-client-5.4.3.jar:5.4.3]
-	... 14 common frames omitted
-Caused by: com.rabbitmq.client.ShutdownSignalException: channel error; protocol method: #method<channel.close>(reply-code=404, reply-text=NOT_FOUND - no queue 'string' in vhost '/', class-id=50, method-id=10)
-	at com.rabbitmq.client.impl.ChannelN.asyncShutdown(ChannelN.java:516) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.ChannelN.processAsync(ChannelN.java:346) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.handleCompleteInboundCommand(AMQChannel.java:178) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.handleFrame(AMQChannel.java:111) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQConnection.readFrame(AMQConnection.java:670) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQConnection.access$300(AMQConnection.java:48) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQConnection$MainLoop.run(AMQConnection.java:597) ~[amqp-client-5.4.3.jar:5.4.3]
-	... 1 common frames omitted
-
-2019-07-23 16:11:55.077 ERROR 7896 --- [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] o.s.a.r.l.SimpleMessageListenerContainer : Stopping container from aborted consumer
-2019-07-23 16:11:55.858 ERROR 7896 --- [main] o.s.boot.SpringApplication               : Application run failed
-
-org.springframework.context.ApplicationContextException: Failed to start bean 'org.springframework.amqp.rabbit.config.internalRabbitListenerEndpointRegistry'; nested exception is org.springframework.amqp.AmqpIllegalStateException: Fatal exception on listener startup
+org.springframework.context.ApplicationContextException: Failed to start bean 'org.springframework.kafka.config.internalKafkaListenerEndpointRegistry'; nested exception is java.lang.IllegalStateException: No group.id found in consumer config, container properties, or @KafkaListener annotation; a group.id is required when group management is used.
 	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:185) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
 	at org.springframework.context.support.DefaultLifecycleProcessor.access$200(DefaultLifecycleProcessor.java:53) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
 	at org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup.start(DefaultLifecycleProcessor.java:360) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
@@ -573,57 +149,16 @@ org.springframework.context.ApplicationContextException: Failed to start bean 'o
 	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47) [junit-rt.jar:na]
 	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242) [junit-rt.jar:na]
 	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70) [junit-rt.jar:na]
-Caused by: org.springframework.amqp.AmqpIllegalStateException: Fatal exception on listener startup
-	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer.waitForConsumersToStart(SimpleMessageListenerContainer.java:553) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer.doStart(SimpleMessageListenerContainer.java:511) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.start(AbstractMessageListenerContainer.java:1296) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.RabbitListenerEndpointRegistry.startIfNecessary(RabbitListenerEndpointRegistry.java:294) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.RabbitListenerEndpointRegistry.start(RabbitListenerEndpointRegistry.java:249) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+Caused by: java.lang.IllegalStateException: No group.id found in consumer config, container properties, or @KafkaListener annotation; a group.id is required when group management is used.
+	at org.springframework.util.Assert.state(Assert.java:73) ~[spring-core-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.kafka.listener.AbstractMessageListenerContainer.checkGroupId(AbstractMessageListenerContainer.java:335) ~[spring-kafka-2.2.7.RELEASE.jar:2.2.7.RELEASE]
+	at org.springframework.kafka.listener.AbstractMessageListenerContainer.start(AbstractMessageListenerContainer.java:287) ~[spring-kafka-2.2.7.RELEASE.jar:2.2.7.RELEASE]
+	at org.springframework.kafka.config.KafkaListenerEndpointRegistry.startIfNecessary(KafkaListenerEndpointRegistry.java:306) ~[spring-kafka-2.2.7.RELEASE.jar:2.2.7.RELEASE]
+	at org.springframework.kafka.config.KafkaListenerEndpointRegistry.start(KafkaListenerEndpointRegistry.java:255) ~[spring-kafka-2.2.7.RELEASE.jar:2.2.7.RELEASE]
 	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:182) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
 	... 36 common frames omitted
-Caused by: org.springframework.amqp.rabbit.listener.QueuesNotAvailableException: Cannot prepare queue for listener. Either the queue doesn't exist or the broker will not allow us to use it.
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.handleDeclarationException(BlockingQueueConsumer.java:661) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.passiveDeclarations(BlockingQueueConsumer.java:601) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.start(BlockingQueueConsumer.java:581) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.initialize(SimpleMessageListenerContainer.java:1196) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1041) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at java.lang.Thread.run(Thread.java:745) ~[na:1.8.0_72]
-Caused by: org.springframework.amqp.rabbit.listener.BlockingQueueConsumer$DeclarationException: Failed to declare queue(s):[string]
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.attemptPassiveDeclarations(BlockingQueueConsumer.java:710) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.passiveDeclarations(BlockingQueueConsumer.java:594) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	... 4 common frames omitted
-Caused by: java.io.IOException: null
-	at com.rabbitmq.client.impl.AMQChannel.wrap(AMQChannel.java:126) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.wrap(AMQChannel.java:122) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.exnWrappingRpc(AMQChannel.java:144) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.ChannelN.queueDeclarePassive(ChannelN.java:1006) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.ChannelN.queueDeclarePassive(ChannelN.java:52) ~[amqp-client-5.4.3.jar:5.4.3]
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_72]
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_72]
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_72]
-	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_72]
-	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory$CachedChannelInvocationHandler.invoke(CachingConnectionFactory.java:1140) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at com.sun.proxy.$Proxy132.queueDeclarePassive(Unknown Source) ~[na:na]
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.attemptPassiveDeclarations(BlockingQueueConsumer.java:689) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	... 5 common frames omitted
-Caused by: com.rabbitmq.client.ShutdownSignalException: channel error; protocol method: #method<channel.close>(reply-code=404, reply-text=NOT_FOUND - no queue 'string' in vhost '/', class-id=50, method-id=10)
-	at com.rabbitmq.utility.ValueOrException.getValue(ValueOrException.java:66) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.utility.BlockingValueOrException.uninterruptibleGetValue(BlockingValueOrException.java:36) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel$BlockingRpcContinuation.getReply(AMQChannel.java:494) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.privateRpc(AMQChannel.java:288) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.exnWrappingRpc(AMQChannel.java:138) ~[amqp-client-5.4.3.jar:5.4.3]
-	... 14 common frames omitted
-Caused by: com.rabbitmq.client.ShutdownSignalException: channel error; protocol method: #method<channel.close>(reply-code=404, reply-text=NOT_FOUND - no queue 'string' in vhost '/', class-id=50, method-id=10)
-	at com.rabbitmq.client.impl.ChannelN.asyncShutdown(ChannelN.java:516) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.ChannelN.processAsync(ChannelN.java:346) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.handleCompleteInboundCommand(AMQChannel.java:178) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.handleFrame(AMQChannel.java:111) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQConnection.readFrame(AMQConnection.java:670) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQConnection.access$300(AMQConnection.java:48) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQConnection$MainLoop.run(AMQConnection.java:597) ~[amqp-client-5.4.3.jar:5.4.3]
-	... 1 common frames omitted
 
-2019-07-23 16:11:55.862 ERROR 7896 --- [main] o.s.test.context.TestContextManager      : Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@32eff876] to prepare test instance [com.example.demo.RabbitmqTest@6ca367aa]
+2019-07-24 16:56:08.737 ERROR 6244 --- [main] o.s.test.context.TestContextManager      : Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@661972b0] to prepare test instance [com.example.demo.KafkaTest@2a349a73]
 
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:125) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
@@ -651,7 +186,7 @@ java.lang.IllegalStateException: Failed to load ApplicationContext
 	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47) [junit-rt.jar:na]
 	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242) [junit-rt.jar:na]
 	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70) [junit-rt.jar:na]
-Caused by: org.springframework.context.ApplicationContextException: Failed to start bean 'org.springframework.amqp.rabbit.config.internalRabbitListenerEndpointRegistry'; nested exception is org.springframework.amqp.AmqpIllegalStateException: Fatal exception on listener startup
+Caused by: org.springframework.context.ApplicationContextException: Failed to start bean 'org.springframework.kafka.config.internalKafkaListenerEndpointRegistry'; nested exception is java.lang.IllegalStateException: No group.id found in consumer config, container properties, or @KafkaListener annotation; a group.id is required when group management is used.
 	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:185) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
 	at org.springframework.context.support.DefaultLifecycleProcessor.access$200(DefaultLifecycleProcessor.java:53) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
 	at org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup.start(DefaultLifecycleProcessor.java:360) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
@@ -666,107 +201,21 @@ Caused by: org.springframework.context.ApplicationContextException: Failed to st
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:117) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
 	... 24 common frames omitted
-Caused by: org.springframework.amqp.AmqpIllegalStateException: Fatal exception on listener startup
-	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer.waitForConsumersToStart(SimpleMessageListenerContainer.java:553) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer.doStart(SimpleMessageListenerContainer.java:511) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.start(AbstractMessageListenerContainer.java:1296) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.RabbitListenerEndpointRegistry.startIfNecessary(RabbitListenerEndpointRegistry.java:294) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.RabbitListenerEndpointRegistry.start(RabbitListenerEndpointRegistry.java:249) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+Caused by: java.lang.IllegalStateException: No group.id found in consumer config, container properties, or @KafkaListener annotation; a group.id is required when group management is used.
+	at org.springframework.util.Assert.state(Assert.java:73) ~[spring-core-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.kafka.listener.AbstractMessageListenerContainer.checkGroupId(AbstractMessageListenerContainer.java:335) ~[spring-kafka-2.2.7.RELEASE.jar:2.2.7.RELEASE]
+	at org.springframework.kafka.listener.AbstractMessageListenerContainer.start(AbstractMessageListenerContainer.java:287) ~[spring-kafka-2.2.7.RELEASE.jar:2.2.7.RELEASE]
+	at org.springframework.kafka.config.KafkaListenerEndpointRegistry.startIfNecessary(KafkaListenerEndpointRegistry.java:306) ~[spring-kafka-2.2.7.RELEASE.jar:2.2.7.RELEASE]
+	at org.springframework.kafka.config.KafkaListenerEndpointRegistry.start(KafkaListenerEndpointRegistry.java:255) ~[spring-kafka-2.2.7.RELEASE.jar:2.2.7.RELEASE]
 	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:182) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
 	... 36 common frames omitted
-Caused by: org.springframework.amqp.rabbit.listener.QueuesNotAvailableException: Cannot prepare queue for listener. Either the queue doesn't exist or the broker will not allow us to use it.
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.handleDeclarationException(BlockingQueueConsumer.java:661) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.passiveDeclarations(BlockingQueueConsumer.java:601) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.start(BlockingQueueConsumer.java:581) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.initialize(SimpleMessageListenerContainer.java:1196) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1041) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at java.lang.Thread.run(Thread.java:745) ~[na:1.8.0_72]
-Caused by: org.springframework.amqp.rabbit.listener.BlockingQueueConsumer$DeclarationException: Failed to declare queue(s):[string]
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.attemptPassiveDeclarations(BlockingQueueConsumer.java:710) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.passiveDeclarations(BlockingQueueConsumer.java:594) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	... 4 common frames omitted
-Caused by: java.io.IOException: null
-	at com.rabbitmq.client.impl.AMQChannel.wrap(AMQChannel.java:126) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.wrap(AMQChannel.java:122) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.exnWrappingRpc(AMQChannel.java:144) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.ChannelN.queueDeclarePassive(ChannelN.java:1006) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.ChannelN.queueDeclarePassive(ChannelN.java:52) ~[amqp-client-5.4.3.jar:5.4.3]
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_72]
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_72]
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_72]
-	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_72]
-	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory$CachedChannelInvocationHandler.invoke(CachingConnectionFactory.java:1140) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at com.sun.proxy.$Proxy132.queueDeclarePassive(Unknown Source) ~[na:na]
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.attemptPassiveDeclarations(BlockingQueueConsumer.java:689) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	... 5 common frames omitted
-Caused by: com.rabbitmq.client.ShutdownSignalException: channel error; protocol method: #method<channel.close>(reply-code=404, reply-text=NOT_FOUND - no queue 'string' in vhost '/', class-id=50, method-id=10)
-	at com.rabbitmq.utility.ValueOrException.getValue(ValueOrException.java:66) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.utility.BlockingValueOrException.uninterruptibleGetValue(BlockingValueOrException.java:36) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel$BlockingRpcContinuation.getReply(AMQChannel.java:494) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.privateRpc(AMQChannel.java:288) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.exnWrappingRpc(AMQChannel.java:138) ~[amqp-client-5.4.3.jar:5.4.3]
-	... 14 common frames omitted
-Caused by: com.rabbitmq.client.ShutdownSignalException: channel error; protocol method: #method<channel.close>(reply-code=404, reply-text=NOT_FOUND - no queue 'string' in vhost '/', class-id=50, method-id=10)
-	at com.rabbitmq.client.impl.ChannelN.asyncShutdown(ChannelN.java:516) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.ChannelN.processAsync(ChannelN.java:346) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.handleCompleteInboundCommand(AMQChannel.java:178) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.handleFrame(AMQChannel.java:111) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQConnection.readFrame(AMQConnection.java:670) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQConnection.access$300(AMQConnection.java:48) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQConnection$MainLoop.run(AMQConnection.java:597) ~[amqp-client-5.4.3.jar:5.4.3]
-	... 1 common frames omitted
 
-2019-07-23 16:12:32.704  INFO 8152 --- [main] com.example.demo.RabbitmqTest            : Starting RabbitmqTest on admin-PC with PID 8152 (started by admin in F:\HelloWorld\springboot-template)
-2019-07-23 16:12:32.705 DEBUG 8152 --- [main] com.example.demo.RabbitmqTest            : Running with Spring Boot v2.1.6.RELEASE, Spring v5.1.8.RELEASE
-2019-07-23 16:12:32.705  INFO 8152 --- [main] com.example.demo.RabbitmqTest            : No active profile set, falling back to default profiles: default
-2019-07-23 16:12:44.926 ERROR 8152 --- [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] o.s.a.r.l.SimpleMessageListenerContainer : Consumer received fatal=false exception on startup
+2019-07-24 16:56:32.914  INFO 7008 --- [main] com.example.demo.KafkaTest               : Starting KafkaTest on admin-PC with PID 7008 (started by admin in F:\HelloWorld\springboot-template)
+2019-07-24 16:56:32.916 DEBUG 7008 --- [main] com.example.demo.KafkaTest               : Running with Spring Boot v2.1.6.RELEASE, Spring v5.1.8.RELEASE
+2019-07-24 16:56:32.916  INFO 7008 --- [main] com.example.demo.KafkaTest               : No active profile set, falling back to default profiles: default
+2019-07-24 16:56:44.281 ERROR 7008 --- [main] o.s.boot.SpringApplication               : Application run failed
 
-org.springframework.amqp.rabbit.listener.QueuesNotAvailableException: Cannot prepare queue for listener. Either the queue doesn't exist or the broker will not allow us to use it.
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.handleDeclarationException(BlockingQueueConsumer.java:661) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.passiveDeclarations(BlockingQueueConsumer.java:601) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.start(BlockingQueueConsumer.java:581) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.initialize(SimpleMessageListenerContainer.java:1196) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1041) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at java.lang.Thread.run(Thread.java:745) [na:1.8.0_72]
-Caused by: org.springframework.amqp.rabbit.listener.BlockingQueueConsumer$DeclarationException: Failed to declare queue(s):[string]
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.attemptPassiveDeclarations(BlockingQueueConsumer.java:710) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.passiveDeclarations(BlockingQueueConsumer.java:594) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	... 4 common frames omitted
-Caused by: java.io.IOException: null
-	at com.rabbitmq.client.impl.AMQChannel.wrap(AMQChannel.java:126) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.wrap(AMQChannel.java:122) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.exnWrappingRpc(AMQChannel.java:144) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.ChannelN.queueDeclarePassive(ChannelN.java:1006) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.ChannelN.queueDeclarePassive(ChannelN.java:52) ~[amqp-client-5.4.3.jar:5.4.3]
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_72]
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_72]
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_72]
-	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_72]
-	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory$CachedChannelInvocationHandler.invoke(CachingConnectionFactory.java:1140) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at com.sun.proxy.$Proxy132.queueDeclarePassive(Unknown Source) ~[na:na]
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.attemptPassiveDeclarations(BlockingQueueConsumer.java:689) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	... 5 common frames omitted
-Caused by: com.rabbitmq.client.ShutdownSignalException: channel error; protocol method: #method<channel.close>(reply-code=404, reply-text=NOT_FOUND - no queue 'string' in vhost '/', class-id=50, method-id=10)
-	at com.rabbitmq.utility.ValueOrException.getValue(ValueOrException.java:66) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.utility.BlockingValueOrException.uninterruptibleGetValue(BlockingValueOrException.java:36) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel$BlockingRpcContinuation.getReply(AMQChannel.java:494) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.privateRpc(AMQChannel.java:288) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.exnWrappingRpc(AMQChannel.java:138) ~[amqp-client-5.4.3.jar:5.4.3]
-	... 14 common frames omitted
-Caused by: com.rabbitmq.client.ShutdownSignalException: channel error; protocol method: #method<channel.close>(reply-code=404, reply-text=NOT_FOUND - no queue 'string' in vhost '/', class-id=50, method-id=10)
-	at com.rabbitmq.client.impl.ChannelN.asyncShutdown(ChannelN.java:516) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.ChannelN.processAsync(ChannelN.java:346) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.handleCompleteInboundCommand(AMQChannel.java:178) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.handleFrame(AMQChannel.java:111) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQConnection.readFrame(AMQConnection.java:670) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQConnection.access$300(AMQConnection.java:48) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQConnection$MainLoop.run(AMQConnection.java:597) ~[amqp-client-5.4.3.jar:5.4.3]
-	... 1 common frames omitted
-
-2019-07-23 16:12:44.965 ERROR 8152 --- [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] o.s.a.r.l.SimpleMessageListenerContainer : Stopping container from aborted consumer
-2019-07-23 16:12:46.325 ERROR 8152 --- [main] o.s.boot.SpringApplication               : Application run failed
-
-org.springframework.context.ApplicationContextException: Failed to start bean 'org.springframework.amqp.rabbit.config.internalRabbitListenerEndpointRegistry'; nested exception is org.springframework.amqp.AmqpIllegalStateException: Fatal exception on listener startup
+org.springframework.context.ApplicationContextException: Failed to start bean 'org.springframework.kafka.config.internalKafkaListenerEndpointRegistry'; nested exception is java.lang.IllegalStateException: No group.id found in consumer config, container properties, or @KafkaListener annotation; a group.id is required when group management is used.
 	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:185) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
 	at org.springframework.context.support.DefaultLifecycleProcessor.access$200(DefaultLifecycleProcessor.java:53) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
 	at org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup.start(DefaultLifecycleProcessor.java:360) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
@@ -804,57 +253,16 @@ org.springframework.context.ApplicationContextException: Failed to start bean 'o
 	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47) [junit-rt.jar:na]
 	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242) [junit-rt.jar:na]
 	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70) [junit-rt.jar:na]
-Caused by: org.springframework.amqp.AmqpIllegalStateException: Fatal exception on listener startup
-	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer.waitForConsumersToStart(SimpleMessageListenerContainer.java:553) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer.doStart(SimpleMessageListenerContainer.java:511) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.start(AbstractMessageListenerContainer.java:1296) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.RabbitListenerEndpointRegistry.startIfNecessary(RabbitListenerEndpointRegistry.java:294) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.RabbitListenerEndpointRegistry.start(RabbitListenerEndpointRegistry.java:249) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+Caused by: java.lang.IllegalStateException: No group.id found in consumer config, container properties, or @KafkaListener annotation; a group.id is required when group management is used.
+	at org.springframework.util.Assert.state(Assert.java:73) ~[spring-core-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.kafka.listener.AbstractMessageListenerContainer.checkGroupId(AbstractMessageListenerContainer.java:335) ~[spring-kafka-2.2.7.RELEASE.jar:2.2.7.RELEASE]
+	at org.springframework.kafka.listener.AbstractMessageListenerContainer.start(AbstractMessageListenerContainer.java:287) ~[spring-kafka-2.2.7.RELEASE.jar:2.2.7.RELEASE]
+	at org.springframework.kafka.config.KafkaListenerEndpointRegistry.startIfNecessary(KafkaListenerEndpointRegistry.java:306) ~[spring-kafka-2.2.7.RELEASE.jar:2.2.7.RELEASE]
+	at org.springframework.kafka.config.KafkaListenerEndpointRegistry.start(KafkaListenerEndpointRegistry.java:255) ~[spring-kafka-2.2.7.RELEASE.jar:2.2.7.RELEASE]
 	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:182) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
 	... 36 common frames omitted
-Caused by: org.springframework.amqp.rabbit.listener.QueuesNotAvailableException: Cannot prepare queue for listener. Either the queue doesn't exist or the broker will not allow us to use it.
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.handleDeclarationException(BlockingQueueConsumer.java:661) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.passiveDeclarations(BlockingQueueConsumer.java:601) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.start(BlockingQueueConsumer.java:581) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.initialize(SimpleMessageListenerContainer.java:1196) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1041) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at java.lang.Thread.run(Thread.java:745) ~[na:1.8.0_72]
-Caused by: org.springframework.amqp.rabbit.listener.BlockingQueueConsumer$DeclarationException: Failed to declare queue(s):[string]
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.attemptPassiveDeclarations(BlockingQueueConsumer.java:710) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.passiveDeclarations(BlockingQueueConsumer.java:594) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	... 4 common frames omitted
-Caused by: java.io.IOException: null
-	at com.rabbitmq.client.impl.AMQChannel.wrap(AMQChannel.java:126) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.wrap(AMQChannel.java:122) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.exnWrappingRpc(AMQChannel.java:144) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.ChannelN.queueDeclarePassive(ChannelN.java:1006) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.ChannelN.queueDeclarePassive(ChannelN.java:52) ~[amqp-client-5.4.3.jar:5.4.3]
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_72]
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_72]
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_72]
-	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_72]
-	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory$CachedChannelInvocationHandler.invoke(CachingConnectionFactory.java:1140) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at com.sun.proxy.$Proxy132.queueDeclarePassive(Unknown Source) ~[na:na]
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.attemptPassiveDeclarations(BlockingQueueConsumer.java:689) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	... 5 common frames omitted
-Caused by: com.rabbitmq.client.ShutdownSignalException: channel error; protocol method: #method<channel.close>(reply-code=404, reply-text=NOT_FOUND - no queue 'string' in vhost '/', class-id=50, method-id=10)
-	at com.rabbitmq.utility.ValueOrException.getValue(ValueOrException.java:66) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.utility.BlockingValueOrException.uninterruptibleGetValue(BlockingValueOrException.java:36) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel$BlockingRpcContinuation.getReply(AMQChannel.java:494) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.privateRpc(AMQChannel.java:288) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.exnWrappingRpc(AMQChannel.java:138) ~[amqp-client-5.4.3.jar:5.4.3]
-	... 14 common frames omitted
-Caused by: com.rabbitmq.client.ShutdownSignalException: channel error; protocol method: #method<channel.close>(reply-code=404, reply-text=NOT_FOUND - no queue 'string' in vhost '/', class-id=50, method-id=10)
-	at com.rabbitmq.client.impl.ChannelN.asyncShutdown(ChannelN.java:516) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.ChannelN.processAsync(ChannelN.java:346) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.handleCompleteInboundCommand(AMQChannel.java:178) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.handleFrame(AMQChannel.java:111) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQConnection.readFrame(AMQConnection.java:670) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQConnection.access$300(AMQConnection.java:48) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQConnection$MainLoop.run(AMQConnection.java:597) ~[amqp-client-5.4.3.jar:5.4.3]
-	... 1 common frames omitted
 
-2019-07-23 16:12:46.333 ERROR 8152 --- [main] o.s.test.context.TestContextManager      : Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@5ffead27] to prepare test instance [com.example.demo.RabbitmqTest@38caad07]
+2019-07-24 16:56:44.284 ERROR 7008 --- [main] o.s.test.context.TestContextManager      : Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@661972b0] to prepare test instance [com.example.demo.KafkaTest@4b2acb12]
 
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:125) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
@@ -882,7 +290,7 @@ java.lang.IllegalStateException: Failed to load ApplicationContext
 	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47) [junit-rt.jar:na]
 	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242) [junit-rt.jar:na]
 	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70) [junit-rt.jar:na]
-Caused by: org.springframework.context.ApplicationContextException: Failed to start bean 'org.springframework.amqp.rabbit.config.internalRabbitListenerEndpointRegistry'; nested exception is org.springframework.amqp.AmqpIllegalStateException: Fatal exception on listener startup
+Caused by: org.springframework.context.ApplicationContextException: Failed to start bean 'org.springframework.kafka.config.internalKafkaListenerEndpointRegistry'; nested exception is java.lang.IllegalStateException: No group.id found in consumer config, container properties, or @KafkaListener annotation; a group.id is required when group management is used.
 	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:185) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
 	at org.springframework.context.support.DefaultLifecycleProcessor.access$200(DefaultLifecycleProcessor.java:53) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
 	at org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup.start(DefaultLifecycleProcessor.java:360) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
@@ -897,78 +305,338 @@ Caused by: org.springframework.context.ApplicationContextException: Failed to st
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:117) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
 	... 24 common frames omitted
-Caused by: org.springframework.amqp.AmqpIllegalStateException: Fatal exception on listener startup
-	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer.waitForConsumersToStart(SimpleMessageListenerContainer.java:553) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer.doStart(SimpleMessageListenerContainer.java:511) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.start(AbstractMessageListenerContainer.java:1296) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.RabbitListenerEndpointRegistry.startIfNecessary(RabbitListenerEndpointRegistry.java:294) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.RabbitListenerEndpointRegistry.start(RabbitListenerEndpointRegistry.java:249) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+Caused by: java.lang.IllegalStateException: No group.id found in consumer config, container properties, or @KafkaListener annotation; a group.id is required when group management is used.
+	at org.springframework.util.Assert.state(Assert.java:73) ~[spring-core-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.kafka.listener.AbstractMessageListenerContainer.checkGroupId(AbstractMessageListenerContainer.java:335) ~[spring-kafka-2.2.7.RELEASE.jar:2.2.7.RELEASE]
+	at org.springframework.kafka.listener.AbstractMessageListenerContainer.start(AbstractMessageListenerContainer.java:287) ~[spring-kafka-2.2.7.RELEASE.jar:2.2.7.RELEASE]
+	at org.springframework.kafka.config.KafkaListenerEndpointRegistry.startIfNecessary(KafkaListenerEndpointRegistry.java:306) ~[spring-kafka-2.2.7.RELEASE.jar:2.2.7.RELEASE]
+	at org.springframework.kafka.config.KafkaListenerEndpointRegistry.start(KafkaListenerEndpointRegistry.java:255) ~[spring-kafka-2.2.7.RELEASE.jar:2.2.7.RELEASE]
 	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:182) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
 	... 36 common frames omitted
-Caused by: org.springframework.amqp.rabbit.listener.QueuesNotAvailableException: Cannot prepare queue for listener. Either the queue doesn't exist or the broker will not allow us to use it.
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.handleDeclarationException(BlockingQueueConsumer.java:661) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.passiveDeclarations(BlockingQueueConsumer.java:601) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.start(BlockingQueueConsumer.java:581) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.initialize(SimpleMessageListenerContainer.java:1196) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1041) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at java.lang.Thread.run(Thread.java:745) ~[na:1.8.0_72]
-Caused by: org.springframework.amqp.rabbit.listener.BlockingQueueConsumer$DeclarationException: Failed to declare queue(s):[string]
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.attemptPassiveDeclarations(BlockingQueueConsumer.java:710) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.passiveDeclarations(BlockingQueueConsumer.java:594) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	... 4 common frames omitted
-Caused by: java.io.IOException: null
-	at com.rabbitmq.client.impl.AMQChannel.wrap(AMQChannel.java:126) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.wrap(AMQChannel.java:122) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.exnWrappingRpc(AMQChannel.java:144) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.ChannelN.queueDeclarePassive(ChannelN.java:1006) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.ChannelN.queueDeclarePassive(ChannelN.java:52) ~[amqp-client-5.4.3.jar:5.4.3]
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_72]
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_72]
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_72]
-	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_72]
-	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory$CachedChannelInvocationHandler.invoke(CachingConnectionFactory.java:1140) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at com.sun.proxy.$Proxy132.queueDeclarePassive(Unknown Source) ~[na:na]
-	at org.springframework.amqp.rabbit.listener.BlockingQueueConsumer.attemptPassiveDeclarations(BlockingQueueConsumer.java:689) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	... 5 common frames omitted
-Caused by: com.rabbitmq.client.ShutdownSignalException: channel error; protocol method: #method<channel.close>(reply-code=404, reply-text=NOT_FOUND - no queue 'string' in vhost '/', class-id=50, method-id=10)
-	at com.rabbitmq.utility.ValueOrException.getValue(ValueOrException.java:66) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.utility.BlockingValueOrException.uninterruptibleGetValue(BlockingValueOrException.java:36) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel$BlockingRpcContinuation.getReply(AMQChannel.java:494) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.privateRpc(AMQChannel.java:288) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.exnWrappingRpc(AMQChannel.java:138) ~[amqp-client-5.4.3.jar:5.4.3]
-	... 14 common frames omitted
-Caused by: com.rabbitmq.client.ShutdownSignalException: channel error; protocol method: #method<channel.close>(reply-code=404, reply-text=NOT_FOUND - no queue 'string' in vhost '/', class-id=50, method-id=10)
-	at com.rabbitmq.client.impl.ChannelN.asyncShutdown(ChannelN.java:516) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.ChannelN.processAsync(ChannelN.java:346) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.handleCompleteInboundCommand(AMQChannel.java:178) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.handleFrame(AMQChannel.java:111) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQConnection.readFrame(AMQConnection.java:670) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQConnection.access$300(AMQConnection.java:48) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQConnection$MainLoop.run(AMQConnection.java:597) ~[amqp-client-5.4.3.jar:5.4.3]
-	... 1 common frames omitted
 
-2019-07-23 16:14:32.365  INFO 6568 --- [main] com.example.demo.RabbitmqTest            : Starting RabbitmqTest on admin-PC with PID 6568 (started by admin in F:\HelloWorld\springboot-template)
-2019-07-23 16:14:32.367 DEBUG 6568 --- [main] com.example.demo.RabbitmqTest            : Running with Spring Boot v2.1.6.RELEASE, Spring v5.1.8.RELEASE
-2019-07-23 16:14:32.367  INFO 6568 --- [main] com.example.demo.RabbitmqTest            : No active profile set, falling back to default profiles: default
-2019-07-23 16:14:46.395 ERROR 6568 --- [AMQP Connection 119.29.146.115:5672] c.r.c.impl.ForgivingExceptionHandler     : An unexpected connection driver error occured
+2019-07-24 16:56:44.343  INFO 7008 --- [main] com.example.demo.KafkaTest               : Starting KafkaTest on admin-PC with PID 7008 (started by admin in F:\HelloWorld\springboot-template)
+2019-07-24 16:56:44.352 DEBUG 7008 --- [main] com.example.demo.KafkaTest               : Running with Spring Boot v2.1.6.RELEASE, Spring v5.1.8.RELEASE
+2019-07-24 16:56:44.353  INFO 7008 --- [main] com.example.demo.KafkaTest               : No active profile set, falling back to default profiles: default
+2019-07-24 16:56:48.695 ERROR 7008 --- [main] o.s.boot.SpringApplication               : Application run failed
 
-java.net.SocketException: socket closed
-	at java.net.SocketInputStream.socketRead0(Native Method) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.read(SocketInputStream.java:170) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.read(SocketInputStream.java:141) ~[na:1.8.0_72]
-	at java.io.BufferedInputStream.fill(BufferedInputStream.java:246) ~[na:1.8.0_72]
-	at java.io.BufferedInputStream.read(BufferedInputStream.java:265) ~[na:1.8.0_72]
-	at java.io.DataInputStream.readUnsignedByte(DataInputStream.java:288) ~[na:1.8.0_72]
-	at com.rabbitmq.client.impl.Frame.readFrom(Frame.java:91) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.SocketFrameHandler.readFrame(SocketFrameHandler.java:164) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQConnection$MainLoop.run(AMQConnection.java:596) ~[amqp-client-5.4.3.jar:5.4.3]
-	at java.lang.Thread.run(Thread.java:745) [na:1.8.0_72]
+org.springframework.context.ApplicationContextException: Failed to start bean 'org.springframework.kafka.config.internalKafkaListenerEndpointRegistry'; nested exception is java.lang.IllegalStateException: No group.id found in consumer config, container properties, or @KafkaListener annotation; a group.id is required when group management is used.
+	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:185) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.DefaultLifecycleProcessor.access$200(DefaultLifecycleProcessor.java:53) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup.start(DefaultLifecycleProcessor.java:360) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.DefaultLifecycleProcessor.startBeans(DefaultLifecycleProcessor.java:158) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.DefaultLifecycleProcessor.onRefresh(DefaultLifecycleProcessor.java:122) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:893) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:552) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:742) ~[spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:389) ~[spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:119) [spring-boot-test-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:117) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:108) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:246) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137) [junit-4.12.jar:4.12]
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70) [junit-rt.jar:na]
+Caused by: java.lang.IllegalStateException: No group.id found in consumer config, container properties, or @KafkaListener annotation; a group.id is required when group management is used.
+	at org.springframework.util.Assert.state(Assert.java:73) ~[spring-core-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.kafka.listener.AbstractMessageListenerContainer.checkGroupId(AbstractMessageListenerContainer.java:335) ~[spring-kafka-2.2.7.RELEASE.jar:2.2.7.RELEASE]
+	at org.springframework.kafka.listener.AbstractMessageListenerContainer.start(AbstractMessageListenerContainer.java:287) ~[spring-kafka-2.2.7.RELEASE.jar:2.2.7.RELEASE]
+	at org.springframework.kafka.config.KafkaListenerEndpointRegistry.startIfNecessary(KafkaListenerEndpointRegistry.java:306) ~[spring-kafka-2.2.7.RELEASE.jar:2.2.7.RELEASE]
+	at org.springframework.kafka.config.KafkaListenerEndpointRegistry.start(KafkaListenerEndpointRegistry.java:255) ~[spring-kafka-2.2.7.RELEASE.jar:2.2.7.RELEASE]
+	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:182) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	... 36 common frames omitted
 
-2019-07-23 16:14:46.397 ERROR 6568 --- [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] o.s.a.r.l.SimpleMessageListenerContainer : Failed to check/redeclare auto-delete queue(s).
+2019-07-24 16:56:48.698 ERROR 7008 --- [main] o.s.test.context.TestContextManager      : Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@661972b0] to prepare test instance [com.example.demo.KafkaTest@3ea1729e]
 
-org.springframework.amqp.AmqpIOException: java.io.IOException
-	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:71) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+java.lang.IllegalStateException: Failed to load ApplicationContext
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:125) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:108) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:246) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137) [junit-4.12.jar:4.12]
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70) [junit-rt.jar:na]
+Caused by: org.springframework.context.ApplicationContextException: Failed to start bean 'org.springframework.kafka.config.internalKafkaListenerEndpointRegistry'; nested exception is java.lang.IllegalStateException: No group.id found in consumer config, container properties, or @KafkaListener annotation; a group.id is required when group management is used.
+	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:185) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.DefaultLifecycleProcessor.access$200(DefaultLifecycleProcessor.java:53) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup.start(DefaultLifecycleProcessor.java:360) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.DefaultLifecycleProcessor.startBeans(DefaultLifecycleProcessor.java:158) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.DefaultLifecycleProcessor.onRefresh(DefaultLifecycleProcessor.java:122) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:893) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:552) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:742) ~[spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:389) ~[spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:119) ~[spring-boot-test-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:117) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	... 24 common frames omitted
+Caused by: java.lang.IllegalStateException: No group.id found in consumer config, container properties, or @KafkaListener annotation; a group.id is required when group management is used.
+	at org.springframework.util.Assert.state(Assert.java:73) ~[spring-core-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.kafka.listener.AbstractMessageListenerContainer.checkGroupId(AbstractMessageListenerContainer.java:335) ~[spring-kafka-2.2.7.RELEASE.jar:2.2.7.RELEASE]
+	at org.springframework.kafka.listener.AbstractMessageListenerContainer.start(AbstractMessageListenerContainer.java:287) ~[spring-kafka-2.2.7.RELEASE.jar:2.2.7.RELEASE]
+	at org.springframework.kafka.config.KafkaListenerEndpointRegistry.startIfNecessary(KafkaListenerEndpointRegistry.java:306) ~[spring-kafka-2.2.7.RELEASE.jar:2.2.7.RELEASE]
+	at org.springframework.kafka.config.KafkaListenerEndpointRegistry.start(KafkaListenerEndpointRegistry.java:255) ~[spring-kafka-2.2.7.RELEASE.jar:2.2.7.RELEASE]
+	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:182) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	... 36 common frames omitted
+
+2019-07-24 17:02:57.971  INFO 6940 --- [main] com.example.demo.RabbitTest              : Starting RabbitTest on admin-PC with PID 6940 (started by admin in F:\HelloWorld\springboot-template)
+2019-07-24 17:02:57.987 DEBUG 6940 --- [main] com.example.demo.RabbitTest              : Running with Spring Boot v2.1.6.RELEASE, Spring v5.1.8.RELEASE
+2019-07-24 17:02:57.987  INFO 6940 --- [main] com.example.demo.RabbitTest              : No active profile set, falling back to default profiles: default
+2019-07-24 17:03:10.731 ERROR 6940 --- [main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.context.ApplicationContextException: Failed to start bean 'org.springframework.kafka.config.internalKafkaListenerEndpointRegistry'; nested exception is java.lang.IllegalStateException: No group.id found in consumer config, container properties, or @KafkaListener annotation; a group.id is required when group management is used.
+	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:185) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.DefaultLifecycleProcessor.access$200(DefaultLifecycleProcessor.java:53) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup.start(DefaultLifecycleProcessor.java:360) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.DefaultLifecycleProcessor.startBeans(DefaultLifecycleProcessor.java:158) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.DefaultLifecycleProcessor.onRefresh(DefaultLifecycleProcessor.java:122) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:893) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:552) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:742) ~[spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:389) ~[spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:119) [spring-boot-test-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:117) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:108) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:246) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137) [junit-4.12.jar:4.12]
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70) [junit-rt.jar:na]
+Caused by: java.lang.IllegalStateException: No group.id found in consumer config, container properties, or @KafkaListener annotation; a group.id is required when group management is used.
+	at org.springframework.util.Assert.state(Assert.java:73) ~[spring-core-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.kafka.listener.AbstractMessageListenerContainer.checkGroupId(AbstractMessageListenerContainer.java:335) ~[spring-kafka-2.2.7.RELEASE.jar:2.2.7.RELEASE]
+	at org.springframework.kafka.listener.AbstractMessageListenerContainer.start(AbstractMessageListenerContainer.java:287) ~[spring-kafka-2.2.7.RELEASE.jar:2.2.7.RELEASE]
+	at org.springframework.kafka.config.KafkaListenerEndpointRegistry.startIfNecessary(KafkaListenerEndpointRegistry.java:306) ~[spring-kafka-2.2.7.RELEASE.jar:2.2.7.RELEASE]
+	at org.springframework.kafka.config.KafkaListenerEndpointRegistry.start(KafkaListenerEndpointRegistry.java:255) ~[spring-kafka-2.2.7.RELEASE.jar:2.2.7.RELEASE]
+	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:182) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	... 36 common frames omitted
+
+2019-07-24 17:03:10.731 ERROR 6940 --- [main] o.s.test.context.TestContextManager      : Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@661972b0] to prepare test instance [com.example.demo.RabbitTest@6694fb1b]
+
+java.lang.IllegalStateException: Failed to load ApplicationContext
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:125) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:108) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:246) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137) [junit-4.12.jar:4.12]
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70) [junit-rt.jar:na]
+Caused by: org.springframework.context.ApplicationContextException: Failed to start bean 'org.springframework.kafka.config.internalKafkaListenerEndpointRegistry'; nested exception is java.lang.IllegalStateException: No group.id found in consumer config, container properties, or @KafkaListener annotation; a group.id is required when group management is used.
+	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:185) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.DefaultLifecycleProcessor.access$200(DefaultLifecycleProcessor.java:53) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup.start(DefaultLifecycleProcessor.java:360) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.DefaultLifecycleProcessor.startBeans(DefaultLifecycleProcessor.java:158) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.DefaultLifecycleProcessor.onRefresh(DefaultLifecycleProcessor.java:122) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:893) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:552) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:742) ~[spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:389) ~[spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:119) ~[spring-boot-test-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:117) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	... 24 common frames omitted
+Caused by: java.lang.IllegalStateException: No group.id found in consumer config, container properties, or @KafkaListener annotation; a group.id is required when group management is used.
+	at org.springframework.util.Assert.state(Assert.java:73) ~[spring-core-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.kafka.listener.AbstractMessageListenerContainer.checkGroupId(AbstractMessageListenerContainer.java:335) ~[spring-kafka-2.2.7.RELEASE.jar:2.2.7.RELEASE]
+	at org.springframework.kafka.listener.AbstractMessageListenerContainer.start(AbstractMessageListenerContainer.java:287) ~[spring-kafka-2.2.7.RELEASE.jar:2.2.7.RELEASE]
+	at org.springframework.kafka.config.KafkaListenerEndpointRegistry.startIfNecessary(KafkaListenerEndpointRegistry.java:306) ~[spring-kafka-2.2.7.RELEASE.jar:2.2.7.RELEASE]
+	at org.springframework.kafka.config.KafkaListenerEndpointRegistry.start(KafkaListenerEndpointRegistry.java:255) ~[spring-kafka-2.2.7.RELEASE.jar:2.2.7.RELEASE]
+	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:182) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	... 36 common frames omitted
+
+2019-07-24 17:03:10.793  INFO 6940 --- [main] com.example.demo.RabbitTest              : Starting RabbitTest on admin-PC with PID 6940 (started by admin in F:\HelloWorld\springboot-template)
+2019-07-24 17:03:10.793 DEBUG 6940 --- [main] com.example.demo.RabbitTest              : Running with Spring Boot v2.1.6.RELEASE, Spring v5.1.8.RELEASE
+2019-07-24 17:03:10.809  INFO 6940 --- [main] com.example.demo.RabbitTest              : No active profile set, falling back to default profiles: default
+2019-07-24 17:03:15.736 ERROR 6940 --- [main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.context.ApplicationContextException: Failed to start bean 'org.springframework.kafka.config.internalKafkaListenerEndpointRegistry'; nested exception is java.lang.IllegalStateException: No group.id found in consumer config, container properties, or @KafkaListener annotation; a group.id is required when group management is used.
+	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:185) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.DefaultLifecycleProcessor.access$200(DefaultLifecycleProcessor.java:53) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup.start(DefaultLifecycleProcessor.java:360) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.DefaultLifecycleProcessor.startBeans(DefaultLifecycleProcessor.java:158) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.DefaultLifecycleProcessor.onRefresh(DefaultLifecycleProcessor.java:122) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:893) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:552) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:742) ~[spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:389) ~[spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:119) [spring-boot-test-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:117) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:108) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:246) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137) [junit-4.12.jar:4.12]
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70) [junit-rt.jar:na]
+Caused by: java.lang.IllegalStateException: No group.id found in consumer config, container properties, or @KafkaListener annotation; a group.id is required when group management is used.
+	at org.springframework.util.Assert.state(Assert.java:73) ~[spring-core-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.kafka.listener.AbstractMessageListenerContainer.checkGroupId(AbstractMessageListenerContainer.java:335) ~[spring-kafka-2.2.7.RELEASE.jar:2.2.7.RELEASE]
+	at org.springframework.kafka.listener.AbstractMessageListenerContainer.start(AbstractMessageListenerContainer.java:287) ~[spring-kafka-2.2.7.RELEASE.jar:2.2.7.RELEASE]
+	at org.springframework.kafka.config.KafkaListenerEndpointRegistry.startIfNecessary(KafkaListenerEndpointRegistry.java:306) ~[spring-kafka-2.2.7.RELEASE.jar:2.2.7.RELEASE]
+	at org.springframework.kafka.config.KafkaListenerEndpointRegistry.start(KafkaListenerEndpointRegistry.java:255) ~[spring-kafka-2.2.7.RELEASE.jar:2.2.7.RELEASE]
+	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:182) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	... 36 common frames omitted
+
+2019-07-24 17:03:15.744 ERROR 6940 --- [main] o.s.test.context.TestContextManager      : Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@661972b0] to prepare test instance [com.example.demo.RabbitTest@44ec4a38]
+
+java.lang.IllegalStateException: Failed to load ApplicationContext
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:125) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:108) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:246) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190) [spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137) [junit-4.12.jar:4.12]
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70) [junit-rt.jar:na]
+Caused by: org.springframework.context.ApplicationContextException: Failed to start bean 'org.springframework.kafka.config.internalKafkaListenerEndpointRegistry'; nested exception is java.lang.IllegalStateException: No group.id found in consumer config, container properties, or @KafkaListener annotation; a group.id is required when group management is used.
+	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:185) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.DefaultLifecycleProcessor.access$200(DefaultLifecycleProcessor.java:53) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup.start(DefaultLifecycleProcessor.java:360) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.DefaultLifecycleProcessor.startBeans(DefaultLifecycleProcessor.java:158) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.DefaultLifecycleProcessor.onRefresh(DefaultLifecycleProcessor.java:122) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:893) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:552) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:742) ~[spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:389) ~[spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:119) ~[spring-boot-test-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:117) ~[spring-test-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	... 24 common frames omitted
+Caused by: java.lang.IllegalStateException: No group.id found in consumer config, container properties, or @KafkaListener annotation; a group.id is required when group management is used.
+	at org.springframework.util.Assert.state(Assert.java:73) ~[spring-core-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.kafka.listener.AbstractMessageListenerContainer.checkGroupId(AbstractMessageListenerContainer.java:335) ~[spring-kafka-2.2.7.RELEASE.jar:2.2.7.RELEASE]
+	at org.springframework.kafka.listener.AbstractMessageListenerContainer.start(AbstractMessageListenerContainer.java:287) ~[spring-kafka-2.2.7.RELEASE.jar:2.2.7.RELEASE]
+	at org.springframework.kafka.config.KafkaListenerEndpointRegistry.startIfNecessary(KafkaListenerEndpointRegistry.java:306) ~[spring-kafka-2.2.7.RELEASE.jar:2.2.7.RELEASE]
+	at org.springframework.kafka.config.KafkaListenerEndpointRegistry.start(KafkaListenerEndpointRegistry.java:255) ~[spring-kafka-2.2.7.RELEASE.jar:2.2.7.RELEASE]
+	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:182) ~[spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	... 36 common frames omitted
+
+2019-07-24 17:03:56.077  INFO 7984 --- [main] com.example.demo.RabbitTest              : Starting RabbitTest on admin-PC with PID 7984 (started by admin in F:\HelloWorld\springboot-template)
+2019-07-24 17:03:56.077 DEBUG 7984 --- [main] com.example.demo.RabbitTest              : Running with Spring Boot v2.1.6.RELEASE, Spring v5.1.8.RELEASE
+2019-07-24 17:03:56.092  INFO 7984 --- [main] com.example.demo.RabbitTest              : No active profile set, falling back to default profiles: default
+2019-07-24 17:04:07.995  INFO 7984 --- [main] com.example.demo.RabbitTest              : Started RabbitTest in 12.729 seconds (JVM running for 14.717)
+2019-07-24 17:24:37.728  INFO 7068 --- [main] com.example.demo.KafkaTest               : Starting KafkaTest on admin-PC with PID 7068 (started by admin in F:\HelloWorld\springboot-template)
+2019-07-24 17:24:37.729 DEBUG 7068 --- [main] com.example.demo.KafkaTest               : Running with Spring Boot v2.1.6.RELEASE, Spring v5.1.8.RELEASE
+2019-07-24 17:24:37.731  INFO 7068 --- [main] com.example.demo.KafkaTest               : No active profile set, falling back to default profiles: default
+2019-07-24 17:24:51.581 ERROR 7068 --- [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] o.s.a.r.l.SimpleMessageListenerContainer : Failed to check/redeclare auto-delete queue(s).
+
+org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused: connect
+	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:62) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:509) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
 	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.createConnection(CachingConnectionFactory.java:702) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
 	at org.springframework.amqp.rabbit.connection.ConnectionFactoryUtils.createConnection(ConnectionFactoryUtils.java:214) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
@@ -981,80 +649,228 @@ org.springframework.amqp.AmqpIOException: java.io.IOException
 	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.initialize(SimpleMessageListenerContainer.java:1195) [spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
 	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1041) [spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
 	at java.lang.Thread.run(Thread.java:745) [na:1.8.0_72]
-Caused by: java.io.IOException: null
-	at com.rabbitmq.client.impl.AMQChannel.wrap(AMQChannel.java:126) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.wrap(AMQChannel.java:122) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.exnWrappingRpc(AMQChannel.java:144) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQConnection.start(AMQConnection.java:401) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1104) ~[amqp-client-5.4.3.jar:5.4.3]
+Caused by: java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method) ~[na:1.8.0_72]
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85) ~[na:1.8.0_72]
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350) ~[na:1.8.0_72]
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206) ~[na:1.8.0_72]
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188) ~[na:1.8.0_72]
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172) ~[na:1.8.0_72]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392) ~[na:1.8.0_72]
+	at java.net.Socket.connect(Socket.java:589) ~[na:1.8.0_72]
+	at com.rabbitmq.client.impl.SocketFrameHandlerFactory.create(SocketFrameHandlerFactory.java:60) ~[amqp-client-5.4.3.jar:5.4.3]
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1102) ~[amqp-client-5.4.3.jar:5.4.3]
 	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1054) ~[amqp-client-5.4.3.jar:5.4.3]
 	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:994) ~[amqp-client-5.4.3.jar:5.4.3]
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:462) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
 	... 11 common frames omitted
-Caused by: com.rabbitmq.client.ShutdownSignalException: connection error; protocol method: #method<connection.close>(reply-code=530, reply-text=NOT_ALLOWED - access to vhost '/' refused for user 'root', class-id=10, method-id=40)
-	at com.rabbitmq.utility.ValueOrException.getValue(ValueOrException.java:66) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.utility.BlockingValueOrException.uninterruptibleGetValue(BlockingValueOrException.java:36) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel$BlockingRpcContinuation.getReply(AMQChannel.java:494) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.privateRpc(AMQChannel.java:288) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQChannel.exnWrappingRpc(AMQChannel.java:138) ~[amqp-client-5.4.3.jar:5.4.3]
-	... 16 common frames omitted
 
-2019-07-23 16:14:46.470 ERROR 6568 --- [AMQP Connection 119.29.146.115:5672] c.r.c.impl.ForgivingExceptionHandler     : An unexpected connection driver error occured
+2019-07-24 17:24:52.673  INFO 7068 --- [main] com.example.demo.KafkaTest               : Started KafkaTest in 15.862 seconds (JVM running for 17.558)
+2019-07-24 17:30:22.866  INFO 6292 --- [main] com.example.demo.KafkaTest               : Starting KafkaTest on admin-PC with PID 6292 (started by admin in F:\HelloWorld\springboot-template)
+2019-07-24 17:30:22.866 DEBUG 6292 --- [main] com.example.demo.KafkaTest               : Running with Spring Boot v2.1.6.RELEASE, Spring v5.1.8.RELEASE
+2019-07-24 17:30:22.866  INFO 6292 --- [main] com.example.demo.KafkaTest               : No active profile set, falling back to default profiles: default
+2019-07-24 17:30:36.766 ERROR 6292 --- [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] o.s.a.r.l.SimpleMessageListenerContainer : Failed to check/redeclare auto-delete queue(s).
 
-java.net.SocketException: socket closed
-	at java.net.SocketInputStream.socketRead0(Native Method) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.read(SocketInputStream.java:170) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.read(SocketInputStream.java:141) ~[na:1.8.0_72]
-	at java.io.BufferedInputStream.fill(BufferedInputStream.java:246) ~[na:1.8.0_72]
-	at java.io.BufferedInputStream.read(BufferedInputStream.java:265) ~[na:1.8.0_72]
-	at java.io.DataInputStream.readUnsignedByte(DataInputStream.java:288) ~[na:1.8.0_72]
-	at com.rabbitmq.client.impl.Frame.readFrom(Frame.java:91) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.SocketFrameHandler.readFrame(SocketFrameHandler.java:164) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQConnection$MainLoop.run(AMQConnection.java:596) ~[amqp-client-5.4.3.jar:5.4.3]
+org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused: connect
+	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:62) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:509) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.createConnection(CachingConnectionFactory.java:702) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.amqp.rabbit.connection.ConnectionFactoryUtils.createConnection(ConnectionFactoryUtils.java:214) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.doExecute(RabbitTemplate.java:2073) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.execute(RabbitTemplate.java:2047) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.execute(RabbitTemplate.java:2027) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.amqp.rabbit.core.RabbitAdmin.getQueueProperties(RabbitAdmin.java:403) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.attemptDeclarations(AbstractMessageListenerContainer.java:1787) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.redeclareElementsIfNecessary(AbstractMessageListenerContainer.java:1768) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.initialize(SimpleMessageListenerContainer.java:1195) [spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1041) [spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at java.lang.Thread.run(Thread.java:745) [na:1.8.0_72]
+Caused by: java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method) ~[na:1.8.0_72]
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85) ~[na:1.8.0_72]
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350) ~[na:1.8.0_72]
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206) ~[na:1.8.0_72]
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188) ~[na:1.8.0_72]
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172) ~[na:1.8.0_72]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392) ~[na:1.8.0_72]
+	at java.net.Socket.connect(Socket.java:589) ~[na:1.8.0_72]
+	at com.rabbitmq.client.impl.SocketFrameHandlerFactory.create(SocketFrameHandlerFactory.java:60) ~[amqp-client-5.4.3.jar:5.4.3]
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1102) ~[amqp-client-5.4.3.jar:5.4.3]
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1054) ~[amqp-client-5.4.3.jar:5.4.3]
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:994) ~[amqp-client-5.4.3.jar:5.4.3]
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:462) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	... 11 common frames omitted
+
+2019-07-24 17:30:37.829  INFO 6292 --- [main] com.example.demo.KafkaTest               : Started KafkaTest in 16.199 seconds (JVM running for 17.561)
+2019-07-24 17:31:42.764  INFO 6164 --- [main] com.example.demo.KafkaTest               : Starting KafkaTest on admin-PC with PID 6164 (started by admin in F:\HelloWorld\springboot-template)
+2019-07-24 17:31:42.766 DEBUG 6164 --- [main] com.example.demo.KafkaTest               : Running with Spring Boot v2.1.6.RELEASE, Spring v5.1.8.RELEASE
+2019-07-24 17:31:42.766  INFO 6164 --- [main] com.example.demo.KafkaTest               : No active profile set, falling back to default profiles: default
+2019-07-24 17:31:55.495 ERROR 6164 --- [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] o.s.a.r.l.SimpleMessageListenerContainer : Failed to check/redeclare auto-delete queue(s).
+
+org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused: connect
+	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:62) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:509) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.createConnection(CachingConnectionFactory.java:702) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.amqp.rabbit.connection.ConnectionFactoryUtils.createConnection(ConnectionFactoryUtils.java:214) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.doExecute(RabbitTemplate.java:2073) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.execute(RabbitTemplate.java:2047) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.execute(RabbitTemplate.java:2027) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.amqp.rabbit.core.RabbitAdmin.getQueueProperties(RabbitAdmin.java:403) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.attemptDeclarations(AbstractMessageListenerContainer.java:1787) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.redeclareElementsIfNecessary(AbstractMessageListenerContainer.java:1768) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.initialize(SimpleMessageListenerContainer.java:1195) [spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1041) [spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at java.lang.Thread.run(Thread.java:745) [na:1.8.0_72]
+Caused by: java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method) ~[na:1.8.0_72]
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85) ~[na:1.8.0_72]
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350) ~[na:1.8.0_72]
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206) ~[na:1.8.0_72]
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188) ~[na:1.8.0_72]
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172) ~[na:1.8.0_72]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392) ~[na:1.8.0_72]
+	at java.net.Socket.connect(Socket.java:589) ~[na:1.8.0_72]
+	at com.rabbitmq.client.impl.SocketFrameHandlerFactory.create(SocketFrameHandlerFactory.java:60) ~[amqp-client-5.4.3.jar:5.4.3]
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1102) ~[amqp-client-5.4.3.jar:5.4.3]
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1054) ~[amqp-client-5.4.3.jar:5.4.3]
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:994) ~[amqp-client-5.4.3.jar:5.4.3]
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:462) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	... 11 common frames omitted
+
+2019-07-24 17:31:56.680  INFO 6164 --- [main] com.example.demo.KafkaTest               : Started KafkaTest in 15.638 seconds (JVM running for 16.975)
+2019-07-24 17:32:59.749  INFO 6456 --- [main] com.example.demo.KafkaTest               : Starting KafkaTest on admin-PC with PID 6456 (started by admin in F:\HelloWorld\springboot-template)
+2019-07-24 17:32:59.749 DEBUG 6456 --- [main] com.example.demo.KafkaTest               : Running with Spring Boot v2.1.6.RELEASE, Spring v5.1.8.RELEASE
+2019-07-24 17:32:59.749  INFO 6456 --- [main] com.example.demo.KafkaTest               : No active profile set, falling back to default profiles: default
+2019-07-24 17:33:10.672  INFO 6456 --- [main] com.example.demo.KafkaTest               : Started KafkaTest in 12.195 seconds (JVM running for 13.588)
+2019-07-24 17:34:47.845  INFO 7708 --- [main] com.example.demo.KafkaTest               : Starting KafkaTest on admin-PC with PID 7708 (started by admin in F:\HelloWorld\springboot-template)
+2019-07-24 17:34:47.845 DEBUG 7708 --- [main] com.example.demo.KafkaTest               : Running with Spring Boot v2.1.6.RELEASE, Spring v5.1.8.RELEASE
+2019-07-24 17:34:47.861  INFO 7708 --- [main] com.example.demo.KafkaTest               : No active profile set, falling back to default profiles: default
+2019-07-24 17:35:00.166  INFO 7708 --- [main] com.example.demo.KafkaTest               : Started KafkaTest in 13.247 seconds (JVM running for 14.635)
+2019-07-24 17:39:33.870  INFO 7880 --- [main] com.example.demo.KafkaTest               : Starting KafkaTest on admin-PC with PID 7880 (started by admin in F:\HelloWorld\springboot-template)
+2019-07-24 17:39:33.871 DEBUG 7880 --- [main] com.example.demo.KafkaTest               : Running with Spring Boot v2.1.6.RELEASE, Spring v5.1.8.RELEASE
+2019-07-24 17:39:33.872  INFO 7880 --- [main] com.example.demo.KafkaTest               : No active profile set, falling back to default profiles: default
+2019-07-24 17:39:46.008  INFO 7880 --- [main] com.example.demo.KafkaTest               : Started KafkaTest in 13.531 seconds (JVM running for 14.939)
+2019-07-24 17:43:38.182  INFO 5132 --- [main] com.example.demo.RabbitTest              : Starting RabbitTest on admin-PC with PID 5132 (started by admin in F:\HelloWorld\springboot-template)
+2019-07-24 17:43:38.182 DEBUG 5132 --- [main] com.example.demo.RabbitTest              : Running with Spring Boot v2.1.6.RELEASE, Spring v5.1.8.RELEASE
+2019-07-24 17:43:38.182  INFO 5132 --- [main] com.example.demo.RabbitTest              : No active profile set, falling back to default profiles: default
+2019-07-24 17:43:49.259  INFO 5132 --- [main] com.example.demo.RabbitTest              : Started RabbitTest in 12.558 seconds (JVM running for 13.779)
+2019-07-24 18:11:02.708  INFO 5216 --- [main] com.example.demo.KafkaTest               : Starting KafkaTest on admin-PC with PID 5216 (started by admin in F:\HelloWorld\springboot-template)
+2019-07-24 18:11:02.708 DEBUG 5216 --- [main] com.example.demo.KafkaTest               : Running with Spring Boot v2.1.6.RELEASE, Spring v5.1.8.RELEASE
+2019-07-24 18:11:02.708  INFO 5216 --- [main] com.example.demo.KafkaTest               : No active profile set, falling back to default profiles: default
+2019-07-24 18:11:17.174  INFO 5216 --- [main] com.example.demo.KafkaTest               : Started KafkaTest in 15.233 seconds (JVM running for 16.715)
+2019-07-24 18:11:17.587  INFO 5216 --- [kafka-producer-network-thread | producer-1] com.example.demo.component.KafkaSender   : Kafka Sender : SendResult [producerRecord=ProducerRecord(topic=message, partition=null, headers=RecordHeaders(headers = [], isReadOnly = true), key=null, value="{\"account\":\"account\",\"nickname\":\"nickname\",\"password\":\"password\"}", timestamp=null), recordMetadata=message-0@7]
+2019-07-24 18:11:17.587  INFO 5216 --- [kafka-producer-network-thread | producer-1] com.example.demo.component.KafkaSender   : Kafka Sender : SendResult [producerRecord=ProducerRecord(topic=message, partition=null, headers=RecordHeaders(headers = [], isReadOnly = true), key=null, value="Wed Jul 24 18:11:17 CST 2019", timestamp=null), recordMetadata=message-0@8]
+2019-07-24 18:11:17.618  INFO 5216 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] c.example.demo.component.KafkaReceiver   : Kafka Receiver  : "{\"account\":\"account\",\"nickname\":\"nickname\",\"password\":\"password\"}"
+2019-07-24 18:11:17.618  INFO 5216 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] c.example.demo.component.KafkaReceiver   : Kafka Receiver  : "Wed Jul 24 18:11:17 CST 2019"
+2019-07-24 18:12:16.190  INFO 7320 --- [main] com.example.demo.KafkaTest               : Starting KafkaTest on admin-PC with PID 7320 (started by admin in F:\HelloWorld\springboot-template)
+2019-07-24 18:12:16.190 DEBUG 7320 --- [main] com.example.demo.KafkaTest               : Running with Spring Boot v2.1.6.RELEASE, Spring v5.1.8.RELEASE
+2019-07-24 18:12:16.205  INFO 7320 --- [main] com.example.demo.KafkaTest               : No active profile set, falling back to default profiles: default
+2019-07-24 18:12:28.046  INFO 7320 --- [main] com.example.demo.KafkaTest               : Started KafkaTest in 13.04 seconds (JVM running for 14.561)
+2019-07-24 18:12:28.485  INFO 7320 --- [kafka-producer-network-thread | producer-1] com.example.demo.component.KafkaSender   : Kafka Sender : "{\"account\":\"account\",\"nickname\":\"nickname\",\"password\":\"password\"}"
+2019-07-24 18:12:28.485  INFO 7320 --- [kafka-producer-network-thread | producer-1] com.example.demo.component.KafkaSender   : Kafka Sender : "Wed Jul 24 18:12:28 CST 2019"
+2019-07-24 18:12:28.513  INFO 7320 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] c.example.demo.component.KafkaReceiver   : Kafka Receiver  : "{\"account\":\"account\",\"nickname\":\"nickname\",\"password\":\"password\"}"
+2019-07-24 18:12:28.513  INFO 7320 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] c.example.demo.component.KafkaReceiver   : Kafka Receiver  : "Wed Jul 24 18:12:28 CST 2019"
+2019-07-24 18:13:14.667  INFO 7436 --- [main] com.example.demo.KafkaTest               : Starting KafkaTest on admin-PC with PID 7436 (started by admin in F:\HelloWorld\springboot-template)
+2019-07-24 18:13:14.667 DEBUG 7436 --- [main] com.example.demo.KafkaTest               : Running with Spring Boot v2.1.6.RELEASE, Spring v5.1.8.RELEASE
+2019-07-24 18:13:14.667  INFO 7436 --- [main] com.example.demo.KafkaTest               : No active profile set, falling back to default profiles: default
+2019-07-24 18:13:26.173  INFO 7436 --- [main] com.example.demo.KafkaTest               : Started KafkaTest in 13.771 seconds (JVM running for 15.292)
+2019-07-24 18:13:26.551  INFO 7436 --- [kafka-producer-network-thread | producer-1] com.example.demo.component.KafkaSender   : Kafka Sender : {"account":"account","nickname":"nickname","password":"password"}
+2019-07-24 18:13:26.551  INFO 7436 --- [kafka-producer-network-thread | producer-1] com.example.demo.component.KafkaSender   : Kafka Sender : "Wed Jul 24 18:13:26 CST 2019"
+2019-07-24 18:13:26.566  INFO 7436 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] c.example.demo.component.KafkaReceiver   : Kafka Receiver  : {"account":"account","nickname":"nickname","password":"password"}
+2019-07-24 18:13:26.566  INFO 7436 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] c.example.demo.component.KafkaReceiver   : Kafka Receiver  : "Wed Jul 24 18:13:26 CST 2019"
+2019-07-24 18:13:44.501  INFO 7464 --- [main] com.example.demo.RabbitTest              : Starting RabbitTest on admin-PC with PID 7464 (started by admin in F:\HelloWorld\springboot-template)
+2019-07-24 18:13:44.501 DEBUG 7464 --- [main] com.example.demo.RabbitTest              : Running with Spring Boot v2.1.6.RELEASE, Spring v5.1.8.RELEASE
+2019-07-24 18:13:44.501  INFO 7464 --- [main] com.example.demo.RabbitTest              : No active profile set, falling back to default profiles: default
+2019-07-24 18:13:57.509  INFO 7464 --- [main] com.example.demo.RabbitTest              : Started RabbitTest in 14.312 seconds (JVM running for 15.868)
+2019-07-24 18:13:57.728  INFO 7464 --- [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] c.example.demo.component.RabbitReceiver  : Rabbit Receiver  : {"account":"account","nickname":"nickname","password":"password"}
+2019-07-24 18:13:57.743  INFO 7464 --- [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] c.example.demo.component.RabbitReceiver  : Rabbit Receiver  : "Wed Jul 24 18:13:57 CST 2019"
+2019-07-24 18:17:42.507  INFO 4260 --- [main] com.example.demo.RabbitTest              : Starting RabbitTest on admin-PC with PID 4260 (started by admin in F:\HelloWorld\springboot-template)
+2019-07-24 18:17:42.507 DEBUG 4260 --- [main] com.example.demo.RabbitTest              : Running with Spring Boot v2.1.6.RELEASE, Spring v5.1.8.RELEASE
+2019-07-24 18:17:42.522  INFO 4260 --- [main] com.example.demo.RabbitTest              : No active profile set, falling back to default profiles: default
+2019-07-24 18:17:55.293  INFO 4260 --- [main] com.example.demo.RabbitTest              : Started RabbitTest in 13.963 seconds (JVM running for 15.545)
+2019-07-24 18:17:55.698  INFO 4260 --- [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] c.example.demo.component.RabbitReceiver  : Rabbit Receiver  : {"account":"account","nickname":"nickname","password":"password"}
+2019-07-24 18:17:55.748  INFO 4260 --- [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] c.example.demo.component.RabbitReceiver  : Rabbit Receiver  : "Wed Jul 24 18:17:55 CST 2019"
+2019-07-24 18:20:41.839  INFO 6676 --- [main] com.example.demo.RabbitTest              : Starting RabbitTest on admin-PC with PID 6676 (started by admin in F:\HelloWorld\springboot-template)
+2019-07-24 18:20:41.840 DEBUG 6676 --- [main] com.example.demo.RabbitTest              : Running with Spring Boot v2.1.6.RELEASE, Spring v5.1.8.RELEASE
+2019-07-24 18:20:41.841  INFO 6676 --- [main] com.example.demo.RabbitTest              : No active profile set, falling back to default profiles: default
+2019-07-24 18:20:54.125  INFO 6676 --- [main] com.example.demo.RabbitTest              : Started RabbitTest in 13.139 seconds (JVM running for 14.838)
+2019-07-24 18:21:32.151  INFO 2956 --- [main] com.example.demo.RabbitTest              : Starting RabbitTest on admin-PC with PID 2956 (started by admin in F:\HelloWorld\springboot-template)
+2019-07-24 18:21:32.152 DEBUG 2956 --- [main] com.example.demo.RabbitTest              : Running with Spring Boot v2.1.6.RELEASE, Spring v5.1.8.RELEASE
+2019-07-24 18:21:32.153  INFO 2956 --- [main] com.example.demo.RabbitTest              : No active profile set, falling back to default profiles: default
+2019-07-24 18:21:46.273  INFO 2956 --- [main] com.example.demo.RabbitTest              : Started RabbitTest in 15.139 seconds (JVM running for 16.498)
+2019-07-24 18:21:46.476  INFO 2956 --- [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] c.example.demo.component.RabbitReceiver  : Rabbit Receiver  : {"account":"account","nickname":"nickname","password":"password"}
+2019-07-24 18:21:46.476  INFO 2956 --- [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] c.example.demo.component.RabbitReceiver  : Rabbit Receiver  : "Wed Jul 24 18:20:54 CST 2019"
+2019-07-24 18:21:46.523  INFO 2956 --- [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] c.example.demo.component.RabbitReceiver  : Rabbit Receiver  : {"account":"account","nickname":"nickname","password":"password"}
+2019-07-24 18:21:46.523  INFO 2956 --- [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] c.example.demo.component.RabbitReceiver  : Rabbit Receiver  : "Wed Jul 24 18:21:46 CST 2019"
+2019-07-24 18:26:42.651  INFO 2832 --- [main] com.example.demo.RabbitTest              : Starting RabbitTest on admin-PC with PID 2832 (started by admin in F:\HelloWorld\springboot-template)
+2019-07-24 18:26:42.651 DEBUG 2832 --- [main] com.example.demo.RabbitTest              : Running with Spring Boot v2.1.6.RELEASE, Spring v5.1.8.RELEASE
+2019-07-24 18:26:42.651  INFO 2832 --- [main] com.example.demo.RabbitTest              : No active profile set, falling back to default profiles: default
+2019-07-24 18:27:00.366  INFO 2832 --- [main] com.example.demo.RabbitTest              : Started RabbitTest in 18.991 seconds (JVM running for 20.699)
+2019-07-24 18:27:01.041  INFO 2832 --- [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] c.example.demo.component.RabbitReceiver  : Rabbit Receiver  : {"account":"account","nickname":"nickname","password":"password"}
+2019-07-24 18:27:01.143  INFO 2832 --- [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] c.example.demo.component.RabbitReceiver  : Rabbit Receiver  : "Wed Jul 24 18:27:00 CST 2019"
+2019-07-24 18:33:41.074  INFO 2072 --- [main] com.example.demo.RabbitTest              : Starting RabbitTest on admin-PC with PID 2072 (started by admin in F:\HelloWorld\springboot-template)
+2019-07-24 18:33:41.074 DEBUG 2072 --- [main] com.example.demo.RabbitTest              : Running with Spring Boot v2.1.6.RELEASE, Spring v5.1.8.RELEASE
+2019-07-24 18:33:41.074  INFO 2072 --- [main] com.example.demo.RabbitTest              : No active profile set, falling back to default profiles: default
+2019-07-24 18:33:54.685  INFO 2072 --- [main] com.example.demo.RabbitTest              : Started RabbitTest in 15.354 seconds (JVM running for 17.09)
+2019-07-24 18:33:54.995  INFO 2072 --- [AMQP Connection 119.29.146.115:5672] com.example.demo.component.RabbitSender  : Rabbit Sender: null
+2019-07-24 18:33:55.004  INFO 2072 --- [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] c.example.demo.component.RabbitReceiver  : Rabbit Receiver  : {"account":"account","nickname":"nickname","password":"password"}
+2019-07-24 18:33:55.091  INFO 2072 --- [AMQP Connection 119.29.146.115:5672] com.example.demo.component.RabbitSender  : Rabbit Sender: null
+2019-07-24 18:33:55.099  INFO 2072 --- [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] c.example.demo.component.RabbitReceiver  : Rabbit Receiver  : "Wed Jul 24 18:33:54 CST 2019"
+2019-07-24 18:34:58.907  INFO 7924 --- [main] com.example.demo.RabbitTest              : Starting RabbitTest on admin-PC with PID 7924 (started by admin in F:\HelloWorld\springboot-template)
+2019-07-24 18:34:58.907 DEBUG 7924 --- [main] com.example.demo.RabbitTest              : Running with Spring Boot v2.1.6.RELEASE, Spring v5.1.8.RELEASE
+2019-07-24 18:34:58.907  INFO 7924 --- [main] com.example.demo.RabbitTest              : No active profile set, falling back to default profiles: default
+2019-07-24 18:35:11.563  INFO 7924 --- [main] com.example.demo.RabbitTest              : Started RabbitTest in 13.272 seconds (JVM running for 14.539)
+2019-07-24 18:35:11.808 ERROR 7924 --- [AMQP Connection 119.29.146.115:5672] o.s.a.r.c.PublisherCallbackChannelImpl   : Exception delivering confirm
+
+java.lang.NullPointerException: null
+	at com.example.demo.component.RabbitSender.confirm(RabbitSender.java:30) ~[classes/:na]
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.handleConfirm(RabbitTemplate.java:2447) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.amqp.rabbit.connection.PublisherCallbackChannelImpl.doHandleConfirm(PublisherCallbackChannelImpl.java:1033) [spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.amqp.rabbit.connection.PublisherCallbackChannelImpl.doProcessAck(PublisherCallbackChannelImpl.java:980) [spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.amqp.rabbit.connection.PublisherCallbackChannelImpl.processAck(PublisherCallbackChannelImpl.java:937) [spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.amqp.rabbit.connection.PublisherCallbackChannelImpl.handleAck(PublisherCallbackChannelImpl.java:923) [spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at com.rabbitmq.client.impl.ChannelN.callConfirmListeners(ChannelN.java:492) [amqp-client-5.4.3.jar:5.4.3]
+	at com.rabbitmq.client.impl.ChannelN.processAsync(ChannelN.java:369) [amqp-client-5.4.3.jar:5.4.3]
+	at com.rabbitmq.client.impl.AMQChannel.handleCompleteInboundCommand(AMQChannel.java:178) [amqp-client-5.4.3.jar:5.4.3]
+	at com.rabbitmq.client.impl.AMQChannel.handleFrame(AMQChannel.java:111) [amqp-client-5.4.3.jar:5.4.3]
+	at com.rabbitmq.client.impl.AMQConnection.readFrame(AMQConnection.java:670) [amqp-client-5.4.3.jar:5.4.3]
+	at com.rabbitmq.client.impl.AMQConnection.access$300(AMQConnection.java:48) [amqp-client-5.4.3.jar:5.4.3]
+	at com.rabbitmq.client.impl.AMQConnection$MainLoop.run(AMQConnection.java:597) [amqp-client-5.4.3.jar:5.4.3]
 	at java.lang.Thread.run(Thread.java:745) [na:1.8.0_72]
 
-2019-07-23 16:14:46.479  INFO 6568 --- [main] com.example.demo.RabbitmqTest            : Started RabbitmqTest in 15.852 seconds (JVM running for 17.3)
-2019-07-23 16:14:46.736 ERROR 6568 --- [AMQP Connection 119.29.146.115:5672] c.r.c.impl.ForgivingExceptionHandler     : An unexpected connection driver error occured
+2019-07-24 18:35:11.808  INFO 7924 --- [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] c.example.demo.component.RabbitReceiver  : Rabbit Receiver  : {"account":"account","nickname":"nickname","password":"password"}
+2019-07-24 18:35:11.855  INFO 7924 --- [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] c.example.demo.component.RabbitReceiver  : Rabbit Receiver  : "Wed Jul 24 18:35:11 CST 2019"
+2019-07-24 18:35:11.855 ERROR 7924 --- [AMQP Connection 119.29.146.115:5672] o.s.a.r.c.PublisherCallbackChannelImpl   : Exception delivering confirm
 
-java.net.SocketException: Socket Closed
-	at java.net.SocketInputStream.socketRead0(Native Method) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.read(SocketInputStream.java:170) ~[na:1.8.0_72]
-	at java.net.SocketInputStream.read(SocketInputStream.java:141) ~[na:1.8.0_72]
-	at java.io.BufferedInputStream.fill(BufferedInputStream.java:246) ~[na:1.8.0_72]
-	at java.io.BufferedInputStream.read(BufferedInputStream.java:265) ~[na:1.8.0_72]
-	at java.io.DataInputStream.readUnsignedByte(DataInputStream.java:288) ~[na:1.8.0_72]
-	at com.rabbitmq.client.impl.Frame.readFrom(Frame.java:91) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.SocketFrameHandler.readFrame(SocketFrameHandler.java:164) ~[amqp-client-5.4.3.jar:5.4.3]
-	at com.rabbitmq.client.impl.AMQConnection$MainLoop.run(AMQConnection.java:596) ~[amqp-client-5.4.3.jar:5.4.3]
+java.lang.NullPointerException: null
+	at com.example.demo.component.RabbitSender.confirm(RabbitSender.java:30) ~[classes/:na]
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.handleConfirm(RabbitTemplate.java:2447) ~[spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.amqp.rabbit.connection.PublisherCallbackChannelImpl.doHandleConfirm(PublisherCallbackChannelImpl.java:1033) [spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.amqp.rabbit.connection.PublisherCallbackChannelImpl.doProcessAck(PublisherCallbackChannelImpl.java:980) [spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.amqp.rabbit.connection.PublisherCallbackChannelImpl.processAck(PublisherCallbackChannelImpl.java:937) [spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.amqp.rabbit.connection.PublisherCallbackChannelImpl.handleAck(PublisherCallbackChannelImpl.java:923) [spring-rabbit-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at com.rabbitmq.client.impl.ChannelN.callConfirmListeners(ChannelN.java:492) [amqp-client-5.4.3.jar:5.4.3]
+	at com.rabbitmq.client.impl.ChannelN.processAsync(ChannelN.java:369) [amqp-client-5.4.3.jar:5.4.3]
+	at com.rabbitmq.client.impl.AMQChannel.handleCompleteInboundCommand(AMQChannel.java:178) [amqp-client-5.4.3.jar:5.4.3]
+	at com.rabbitmq.client.impl.AMQChannel.handleFrame(AMQChannel.java:111) [amqp-client-5.4.3.jar:5.4.3]
+	at com.rabbitmq.client.impl.AMQConnection.readFrame(AMQConnection.java:670) [amqp-client-5.4.3.jar:5.4.3]
+	at com.rabbitmq.client.impl.AMQConnection.access$300(AMQConnection.java:48) [amqp-client-5.4.3.jar:5.4.3]
+	at com.rabbitmq.client.impl.AMQConnection$MainLoop.run(AMQConnection.java:597) [amqp-client-5.4.3.jar:5.4.3]
 	at java.lang.Thread.run(Thread.java:745) [na:1.8.0_72]
 
-2019-07-23 16:15:12.934  INFO 8160 --- [main] com.example.demo.RabbitmqTest            : Starting RabbitmqTest on admin-PC with PID 8160 (started by admin in F:\HelloWorld\springboot-template)
-2019-07-23 16:15:12.935 DEBUG 8160 --- [main] com.example.demo.RabbitmqTest            : Running with Spring Boot v2.1.6.RELEASE, Spring v5.1.8.RELEASE
-2019-07-23 16:15:12.936  INFO 8160 --- [main] com.example.demo.RabbitmqTest            : No active profile set, falling back to default profiles: default
-2019-07-23 16:15:24.606  INFO 8160 --- [main] com.example.demo.RabbitmqTest            : Started RabbitmqTest in 12.83 seconds (JVM running for 14.168)
-2019-07-23 16:16:02.991  INFO 6556 --- [main] com.example.demo.RabbitmqTest            : Starting RabbitmqTest on admin-PC with PID 6556 (started by admin in F:\HelloWorld\springboot-template)
-2019-07-23 16:16:02.992 DEBUG 6556 --- [main] com.example.demo.RabbitmqTest            : Running with Spring Boot v2.1.6.RELEASE, Spring v5.1.8.RELEASE
-2019-07-23 16:16:02.993  INFO 6556 --- [main] com.example.demo.RabbitmqTest            : No active profile set, falling back to default profiles: default
-2019-07-23 16:16:16.579  INFO 6556 --- [main] com.example.demo.RabbitmqTest            : Started RabbitmqTest in 14.963 seconds (JVM running for 16.198)
-2019-07-23 16:24:47.026  INFO 8180 --- [main] com.example.demo.RedisTest               : Starting RedisTest on admin-PC with PID 8180 (started by admin in F:\HelloWorld\springboot-template)
-2019-07-23 16:24:47.027 DEBUG 8180 --- [main] com.example.demo.RedisTest               : Running with Spring Boot v2.1.6.RELEASE, Spring v5.1.8.RELEASE
-2019-07-23 16:24:47.027  INFO 8180 --- [main] com.example.demo.RedisTest               : No active profile set, falling back to default profiles: default
-2019-07-23 16:25:00.738  INFO 8180 --- [main] com.example.demo.RedisTest               : Started RedisTest in 14.893 seconds (JVM running for 16.595)
-2019-07-23 16:26:25.126  INFO 7040 --- [main] com.example.demo.RedisTest               : Starting RedisTest on admin-PC with PID 7040 (started by admin in F:\HelloWorld\springboot-template)
-2019-07-23 16:26:25.127 DEBUG 7040 --- [main] com.example.demo.RedisTest               : Running with Spring Boot v2.1.6.RELEASE, Spring v5.1.8.RELEASE
-2019-07-23 16:26:25.128  INFO 7040 --- [main] com.example.demo.RedisTest               : No active profile set, falling back to default profiles: default
-2019-07-23 16:26:36.893  INFO 7040 --- [main] com.example.demo.RedisTest               : Started RedisTest in 13.079 seconds (JVM running for 14.349)
-2019-07-23 16:32:48.615  INFO 7944 --- [main] com.example.demo.RedisTest               : Starting RedisTest on admin-PC with PID 7944 (started by admin in F:\HelloWorld\springboot-template)
-2019-07-23 16:32:48.616 DEBUG 7944 --- [main] com.example.demo.RedisTest               : Running with Spring Boot v2.1.6.RELEASE, Spring v5.1.8.RELEASE
-2019-07-23 16:32:48.617  INFO 7944 --- [main] com.example.demo.RedisTest               : No active profile set, falling back to default profiles: default
-2019-07-23 16:33:01.307  INFO 7944 --- [main] com.example.demo.RedisTest               : Started RedisTest in 13.491 seconds (JVM running for 14.908)
-2019-07-23 16:33:30.081  INFO 5984 --- [main] com.example.demo.RedisTest               : Starting RedisTest on admin-PC with PID 5984 (started by admin in F:\HelloWorld\springboot-template)
-2019-07-23 16:33:30.083 DEBUG 5984 --- [main] com.example.demo.RedisTest               : Running with Spring Boot v2.1.6.RELEASE, Spring v5.1.8.RELEASE
-2019-07-23 16:33:30.084  INFO 5984 --- [main] com.example.demo.RedisTest               : No active profile set, falling back to default profiles: default
-2019-07-23 16:33:41.921  INFO 5984 --- [main] com.example.demo.RedisTest               : Started RedisTest in 12.736 seconds (JVM running for 14.1)
-2019-07-23 16:34:52.649  INFO 3576 --- [main] com.example.demo.RabbitmqTest            : Starting RabbitmqTest on admin-PC with PID 3576 (started by admin in F:\HelloWorld\springboot-template)
-2019-07-23 16:34:52.650 DEBUG 3576 --- [main] com.example.demo.RabbitmqTest            : Running with Spring Boot v2.1.6.RELEASE, Spring v5.1.8.RELEASE
-2019-07-23 16:34:52.651  INFO 3576 --- [main] com.example.demo.RabbitmqTest            : No active profile set, falling back to default profiles: default
-2019-07-23 16:35:05.475  INFO 3576 --- [main] com.example.demo.RabbitmqTest            : Started RabbitmqTest in 13.464 seconds (JVM running for 14.784)
+2019-07-24 18:37:07.175  INFO 7728 --- [main] com.example.demo.RabbitTest              : Starting RabbitTest on admin-PC with PID 7728 (started by admin in F:\HelloWorld\springboot-template)
+2019-07-24 18:37:07.175 DEBUG 7728 --- [main] com.example.demo.RabbitTest              : Running with Spring Boot v2.1.6.RELEASE, Spring v5.1.8.RELEASE
+2019-07-24 18:37:07.191  INFO 7728 --- [main] com.example.demo.RabbitTest              : No active profile set, falling back to default profiles: default
+2019-07-24 18:37:19.281  INFO 7728 --- [main] com.example.demo.RabbitTest              : Started RabbitTest in 13.124 seconds (JVM running for 14.574)
+2019-07-24 18:37:19.565  INFO 7728 --- [AMQP Connection 119.29.146.115:5672] com.example.demo.component.RabbitSender  : Rabbit Sender: null
+2019-07-24 18:37:19.565  INFO 7728 --- [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] c.example.demo.component.RabbitReceiver  : Rabbit Receiver  : {"account":"account","nickname":"nickname","password":"password"}
+2019-07-24 18:37:19.581  INFO 7728 --- [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] c.example.demo.component.RabbitReceiver  : Rabbit Receiver  : "Wed Jul 24 18:37:19 CST 2019"
+2019-07-24 18:37:19.581  INFO 7728 --- [AMQP Connection 119.29.146.115:5672] com.example.demo.component.RabbitSender  : Rabbit Sender: null
+2019-07-24 18:40:23.296  INFO 7504 --- [main] com.example.demo.RabbitTest              : Starting RabbitTest on admin-PC with PID 7504 (started by admin in F:\HelloWorld\springboot-template)
+2019-07-24 18:40:23.296 DEBUG 7504 --- [main] com.example.demo.RabbitTest              : Running with Spring Boot v2.1.6.RELEASE, Spring v5.1.8.RELEASE
+2019-07-24 18:40:23.296  INFO 7504 --- [main] com.example.demo.RabbitTest              : No active profile set, falling back to default profiles: default
+2019-07-24 18:40:35.421  INFO 7504 --- [main] com.example.demo.RabbitTest              : Started RabbitTest in 13.04 seconds (JVM running for 15.054)
+2019-07-24 18:40:35.624  INFO 7504 --- [main] com.example.demo.component.RabbitSender  : Rabbit Sender : {"account":"account","nickname":"nickname","password":"password"}
+2019-07-24 18:40:35.639  INFO 7504 --- [main] com.example.demo.component.RabbitSender  : Rabbit Sender : "Wed Jul 24 18:40:35 CST 2019"
+2019-07-24 18:40:35.655  INFO 7504 --- [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] c.example.demo.component.RabbitReceiver  : Rabbit Receiver  : {"account":"account","nickname":"nickname","password":"password"}
+2019-07-24 18:40:35.671  INFO 7504 --- [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] c.example.demo.component.RabbitReceiver  : Rabbit Receiver  : "Wed Jul 24 18:40:35 CST 2019"

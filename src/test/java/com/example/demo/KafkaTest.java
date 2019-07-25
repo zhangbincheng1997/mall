@@ -1,35 +1,34 @@
 package com.example.demo;
 
-import com.example.demo.component.RedisBase;
+import com.example.demo.component.KafkaSender;
 import com.example.demo.entity.User;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Date;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class RedisTest {
+public class KafkaTest {
 
     @Autowired
-    private RedisBase redisBase;
+    private KafkaSender sender;
 
     @Test
-    public void testRedis() {
-        redisBase.set("school", "xmu");
-        Assert.assertEquals("xmu", redisBase.get("school"));
+    public void testKafkaStr() {
+        String str = new Date().toString();
+        sender.send(str);
     }
 
     @Test
-    public void testRedisObj() {
+    public void testKafkaObj() {
         User user = new User();
         user.setAccount("account");
         user.setPassword("password");
         user.setNickname("nickname");
-
-        redisBase.setObj("user", user);
-        Assert.assertEquals(user.toString(), redisBase.getObj("user").toString());
+        sender.send(user);
     }
 }

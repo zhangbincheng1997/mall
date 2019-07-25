@@ -1,4 +1,4 @@
-package com.example.demo.config;
+package com.example.demo.component;
 
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
