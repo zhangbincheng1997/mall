@@ -53,10 +53,10 @@ public class AppErrorController implements ErrorController {
      */
     @RequestMapping(value = ERROR_PATH)
     @ResponseBody
-    public ApiResponse errorApiHandler(HttpServletRequest request, HttpServletResponse response) {
+    public Result errorApiHandler(HttpServletRequest request, HttpServletResponse response) {
         int status = response.getStatus();
         WebRequest webRequest = new ServletWebRequest(request);
         Map<String, Object> attr = this.errorAttributes.getErrorAttributes(webRequest, false);
-        return ApiResponse.ofMessage(status, String.valueOf(attr.getOrDefault("message", "error")));
+        return Result.message(status, String.valueOf(attr.getOrDefault("message", "error")));
     }
 }
