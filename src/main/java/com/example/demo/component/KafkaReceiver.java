@@ -11,7 +11,7 @@ import java.util.Optional;
 //@Component
 public class KafkaReceiver {
 
-    private Logger logger = LoggerFactory.getLogger(KafkaReceiver.class);
+    private static final Logger logger = LoggerFactory.getLogger(KafkaReceiver.class);
 
     @KafkaListener(topics = "message")
     public void process(ConsumerRecord<?, ?> record) {

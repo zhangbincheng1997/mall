@@ -1,13 +1,16 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.User;
+import com.example.demo.base.Result;
 import com.example.demo.service.UserService;
+import com.example.demo.vo.LoginVo;
+import com.example.demo.vo.UpdatePassVo;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 @Controller
 public class UserController {
@@ -15,40 +18,33 @@ public class UserController {
     @Resource
     UserService userService;
 
-    @RequestMapping("/user")
-    public String list(Model model) {
-        List<User> users = userService.getUserList();
-        model.addAttribute("users", users);
-        return "user/list";
+    @RequestMapping("/register")
+    @ResponseBody
+    public Result register(@Valid LoginVo loginVo) {
+        return userService.register(loginVo);
     }
 
-    @RequestMapping("/toAdd")
-    public String toAdd() {
-        return "user/userAdd";
+    @RequestMapping("/login")
+    @ResponseBody
+    public Result login(HttpServletResponse response, @Valid LoginVo loginVo) {
+        return userService.login(response, loginVo);
     }
 
-    @RequestMapping("/add")
-    public String add(User user) {
-        userService.save(user);
-        return "redirect:/";
+    @RequestMapping("/logout")
+    @ResponseBody
+    public Result logout(HttpServletRequest request, HttpServletResponse response) {
+        return userService.logout(request, response);
     }
 
-    @RequestMapping("/toEdit")
-    public String toEdit(Model model, Long id) {
-        User user = userService.findUserById(id);
-        model.addAttribute("user", user);
-        return "user/userEdit";
+    @RequestMapping("/getUserInfo")
+    @ResponseBody
+    public Result getUserInfo(HttpServletRequest request, HttpServletResponse response) {
+        return userService.getUserByToken(request, response);
     }
 
-    @RequestMapping("/edit")
-    public String edit(User user) {
-        userService.update(user);
-        return "redirect:/";
-    }
-
-    @RequestMapping("/delete")
-    public String delete(Long id) {
-        userService.deleteById(id);
-        return "redirect:/";
+    @RequestMapping("/updatePass")
+    @ResponseBody
+    public Result updatePass(HttpServletRequest request, @Valid UpdatePassVo updatePassVo) {
+        return userService.updatePass(request, updatePassVo);
     }
 }

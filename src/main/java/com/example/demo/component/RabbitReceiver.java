@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 //@Component
 public class RabbitReceiver {
 
-    private Logger logger = LoggerFactory.getLogger(RabbitReceiver.class);
+    private static final Logger logger = LoggerFactory.getLogger(RabbitReceiver.class);
 
     @RabbitHandler
     @RabbitListener(queues = "message")

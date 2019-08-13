@@ -1,18 +1,21 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.User;
+import com.example.demo.base.Result;
+import com.example.demo.vo.LoginVo;
+import com.example.demo.vo.UpdatePassVo;
 
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 public interface UserService {
 
-    List<User> getUserList();
+    Result register(LoginVo loginVo);
 
-    User findUserById(long id);
+    Result login(HttpServletResponse response, LoginVo loginVo);
 
-    void save(User user);
+    Result logout(HttpServletRequest request, HttpServletResponse response);
 
-    void update(User user);
+    Result getUserByToken(HttpServletRequest request, HttpServletResponse response);
 
-    void deleteById(long id);
+    Result updatePass(HttpServletRequest request, UpdatePassVo updatePassVo);
 }

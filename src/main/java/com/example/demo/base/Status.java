@@ -1,7 +1,7 @@
 package com.example.demo.base;
 
 /**
- * 响应码
+ * 状态码
  */
 public enum Status {
 
@@ -10,11 +10,19 @@ public enum Status {
     Forbidden(403, "Forbidden"),
     NOT_FOUND(404, "Not Found"),
     INTERNAL_SERVER_ERROR(500, "Internal Server Error"),
-    RUNTIME_EXCEPTION(1000, "运行时异常"),
-    IO_EXCEPTION(1001, "输入输出异常"),
+    BIND_EXCEPTION(1000, "Bind Exception"),
+    RUNTIME_EXCEPTION(1001, "Runtime Exception"),
+    IO_EXCEPTION(1002, "IO Exception"),
 
     // 登录
-    NOT_LOGIN(50000, "Not Login");
+    NOT_LOGIN(50000, "用户未登录"),
+    COOKIE_ERROR(50001, "COOKIE无效"),
+    SESSION_ERROR(50002, "SESSION无效"),
+
+    // 账号相关
+    MOBILE_EXIST(50010, "手机号码已经存在"),
+    MOBILE_NOT_EXIST(50011, "手机号码不存在"),
+    PASSWORD_ERROR(50012, "密码错误");
 
     private int code;
     private String message;

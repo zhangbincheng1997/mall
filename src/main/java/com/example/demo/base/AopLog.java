@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 @Aspect
 @Configuration
 public class AopLog {
+
     private static final Logger logger = LoggerFactory.getLogger(AopLog.class);
 
     // 定义切点

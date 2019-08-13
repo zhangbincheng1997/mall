@@ -4,40 +4,38 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
 
 @Entity
+@Table(name = "tb_user")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue
+    @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(nullable = false, unique = true)
-    private String account;
+    // phone全局唯一
+    @Column(name = "mobile", nullable = false, unique = true)
+    private String mobile;
 
-    @Column(nullable = false)
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(nullable = false)
+    @Column(name = "salt", nullable = false)
     private String salt;
 
-    @Column(nullable = false, unique = true)
-    private String nickname;
-
-    @Column(nullable = false)
-    private String head;
-
     // 注册时间
-    @Column(nullable = false)
-    private Date register_date;
+    @Column(name = "register_date")
+    private Date registerDate;
 
     // 上次登录时间
-    @Column(nullable = false)
-    private Date last_login_datet;
+    @Column(name = "last_login_date")
+    private Date lastLoginDate;
 
     public Long getId() {
         return id;
@@ -47,12 +45,12 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public String getAccount() {
-        return account;
+    public String getMobile() {
+        return mobile;
     }
 
-    public void setAccount(String account) {
-        this.account = account;
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 
     public String getPassword() {
@@ -71,49 +69,53 @@ public class User implements Serializable {
         this.salt = salt;
     }
 
-    public String getNickname() {
-        return nickname;
+    public Date getRegisterDate() {
+        return registerDate;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setRegisterDate(Date registerDate) {
+        this.registerDate = registerDate;
     }
 
-    public String getHead() {
-        return head;
+    public Date getLastLoginDate() {
+        return lastLoginDate;
     }
 
-    public void setHead(String head) {
-        this.head = head;
-    }
-
-    public Date getRegister_date() {
-        return register_date;
-    }
-
-    public void setRegister_date(Date register_date) {
-        this.register_date = register_date;
-    }
-
-    public Date getLast_login_datet() {
-        return last_login_datet;
-    }
-
-    public void setLast_login_datet(Date last_login_datet) {
-        this.last_login_datet = last_login_datet;
+    public void setLastLoginDate(Date lastLoginDate) {
+        this.lastLoginDate = lastLoginDate;
     }
 
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", account='" + account + '\'' +
+                ", mobile='" + mobile + '\'' +
                 ", password='" + password + '\'' +
                 ", salt='" + salt + '\'' +
-                ", nickname='" + nickname + '\'' +
-                ", head='" + head + '\'' +
-                ", register_date=" + register_date +
-                ", last_login_datet=" + last_login_datet +
+                ", registerDate=" + registerDate +
+                ", lastLoginDate=" + lastLoginDate +
                 '}';
+    }
+
+    public class UserInfo {
+
+        // 名字
+        private String name;
+
+        // 年龄
+        private Integer age;
+
+        // 性别
+        private String sex;
+
+        // 昵称
+        private String nickname;
+
+        // 地址
+        private String address;
+
+        // 头像
+        private String head;
+
     }
 }
