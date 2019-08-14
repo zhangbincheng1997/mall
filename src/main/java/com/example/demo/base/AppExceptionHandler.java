@@ -30,11 +30,11 @@ public class AppExceptionHandler {
             String msg = error.getDefaultMessage();
             return Result.message(Status.BIND_EXCEPTION.getCode(), msg);
         } else if (e instanceof RuntimeException) {
-            return Result.error(Status.RUNTIME_EXCEPTION);
+            return Result.message(Status.RUNTIME_EXCEPTION.getCode(), e.getMessage());
         } else if (e instanceof IOException) {
-            return Result.error(Status.IO_EXCEPTION);
+            return Result.message(Status.IO_EXCEPTION.getCode(), e.getMessage());
         } else {
-            return Result.error(Status.INTERNAL_SERVER_ERROR);
+            return Result.message(Status.INTERNAL_SERVER_ERROR.getCode(), e.getMessage());
         }
     }
 }

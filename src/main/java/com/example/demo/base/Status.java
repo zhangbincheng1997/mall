@@ -17,7 +17,6 @@ public enum Status {
     // 登录
     NOT_LOGIN(50000, "用户未登录"),
     COOKIE_ERROR(50001, "COOKIE无效"),
-    SESSION_ERROR(50002, "SESSION无效"),
 
     // 账号相关
     MOBILE_EXIST(50010, "手机号码已经存在"),

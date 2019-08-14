@@ -12,34 +12,53 @@ public class RedisService {
     @Autowired
     private RedisTemplate redisTemplate;
 
-    public static Integer ONE_DAY_EXPIRE = 24 * 60 * 60;
-
+    /**
+     * 设置
+     *
+     * @param key
+     * @param value
+     */
     public void set(String key, Object value) {
         redisTemplate.opsForValue().set(key, value);
     }
 
+    /**
+     * 设置
+     *
+     * @param key
+     * @param value
+     * @param expire
+     */
     public void set(String key, Object value, long expire) {
         redisTemplate.opsForValue().set(key, value, expire, TimeUnit.SECONDS);
     }
 
+    /**
+     * 获取
+     *
+     * @param key
+     * @return
+     */
     public Object get(String key) {
         return redisTemplate.opsForValue().get(key);
     }
 
+    /**
+     * 删除
+     *
+     * @param key
+     */
     public void del(String key) {
         redisTemplate.delete(key);
     }
 
-    public void hasKey(String key) {
-        redisTemplate.hasKey(key);
-    }
-
-
-    public void incr(String key) {
-        redisTemplate.opsForValue().increment(key);
-    }
-
-    public void decr(String key) {
-        redisTemplate.opsForValue().decrement(key);
+    /**
+     * 是否存在
+     *
+     * @param key
+     * @return
+     */
+    public boolean hasKey(String key) {
+        return redisTemplate.hasKey(key);
     }
 }
