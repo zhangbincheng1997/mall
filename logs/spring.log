@@ -1,12 +1,13 @@
-2019-08-15 16:41:28.061  INFO 19676 --- [restartedMain] com.example.demo.Application             : Starting Application on DESKTOP-462H7L9 with PID 19676 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
-2019-08-15 16:41:28.065 DEBUG 19676 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
-2019-08-15 16:41:28.066  INFO 19676 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
-2019-08-15 16:41:32.453 ERROR 19676 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Exception during pool initialization.
+2019-08-16 00:33:12.069  INFO 17960 --- [restartedMain] com.example.demo.Application             : Starting Application on DESKTOP-462H7L9 with PID 17960 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
+2019-08-16 00:33:12.073 DEBUG 17960 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
+2019-08-16 00:33:12.074  INFO 17960 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
+2019-08-16 00:33:15.275 ERROR 17960 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Exception during pool initialization.
 
-java.sql.SQLSyntaxErrorException: Unknown database 'demo'
-	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120) ~[mysql-connector-java-8.0.17.jar:8.0.17]
-	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97) ~[mysql-connector-java-8.0.17.jar:8.0.17]
-	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at com.mysql.cj.jdbc.exceptions.SQLError.createCommunicationsException(SQLError.java:174) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:64) ~[mysql-connector-java-8.0.17.jar:8.0.17]
 	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:827) ~[mysql-connector-java-8.0.17.jar:8.0.17]
 	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:447) ~[mysql-connector-java-8.0.17.jar:8.0.17]
 	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:237) ~[mysql-connector-java-8.0.17.jar:8.0.17]
@@ -26,11 +27,11 @@ java.sql.SQLSyntaxErrorException: Unknown database 'demo'
 	at org.springframework.boot.autoconfigure.orm.jpa.DatabaseLookup.getDatabase(DatabaseLookup.java:73) ~[spring-boot-autoconfigure-2.1.7.RELEASE.jar:2.1.7.RELEASE]
 	at org.springframework.boot.autoconfigure.orm.jpa.JpaProperties.determineDatabase(JpaProperties.java:142) ~[spring-boot-autoconfigure-2.1.7.RELEASE.jar:2.1.7.RELEASE]
 	at org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration.jpaVendorAdapter(JpaBaseConfiguration.java:113) ~[spring-boot-autoconfigure-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaConfiguration$$EnhancerBySpringCGLIB$$3f9a4f15.CGLIB$jpaVendorAdapter$8(<generated>) ~[spring-boot-autoconfigure-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-	at org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaConfiguration$$EnhancerBySpringCGLIB$$3f9a4f15$$FastClassBySpringCGLIB$$aaaaeda0.invoke(<generated>) ~[spring-boot-autoconfigure-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaConfiguration$$EnhancerBySpringCGLIB$$8e939d9d.CGLIB$jpaVendorAdapter$5(<generated>) ~[spring-boot-autoconfigure-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaConfiguration$$EnhancerBySpringCGLIB$$8e939d9d$$FastClassBySpringCGLIB$$7aa4990c.invoke(<generated>) ~[spring-boot-autoconfigure-2.1.7.RELEASE.jar:2.1.7.RELEASE]
 	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:244) ~[spring-core-5.1.9.RELEASE.jar:5.1.9.RELEASE]
 	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:363) ~[spring-context-5.1.9.RELEASE.jar:5.1.9.RELEASE]
-	at org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaConfiguration$$EnhancerBySpringCGLIB$$3f9a4f15.jpaVendorAdapter(<generated>) ~[spring-boot-autoconfigure-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaConfiguration$$EnhancerBySpringCGLIB$$8e939d9d.jpaVendorAdapter(<generated>) ~[spring-boot-autoconfigure-2.1.7.RELEASE.jar:2.1.7.RELEASE]
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:na]
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
@@ -89,13 +90,41 @@ java.sql.SQLSyntaxErrorException: Unknown database 'demo'
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
 	at java.base/java.lang.reflect.Method.invoke(Method.java:566) ~[na:na]
 	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49) ~[spring-boot-devtools-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+Caused by: com.mysql.cj.exceptions.CJCommunicationsException: Communications link failure
 
-2019-08-15 16:41:34.518 ERROR 19676 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Exception during pool initialization.
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[na:na]
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490) ~[na:na]
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:61) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:105) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:151) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.exceptions.ExceptionFactory.createCommunicationsException(ExceptionFactory.java:167) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:91) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.NativeSession.connect(NativeSession.java:150) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:947) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:817) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	... 81 common frames omitted
+Caused by: java.net.UnknownHostException: 不知道这样的主机。 (www.littleredhat1997.com)
+	at java.base/java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method) ~[na:na]
+	at java.base/java.net.InetAddress$PlatformNameService.lookupAllHostAddr(InetAddress.java:929) ~[na:na]
+	at java.base/java.net.InetAddress.getAddressesFromNameService(InetAddress.java:1515) ~[na:na]
+	at java.base/java.net.InetAddress$NameServiceAddresses.get(InetAddress.java:848) ~[na:na]
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1505) ~[na:na]
+	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1364) ~[na:na]
+	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1298) ~[na:na]
+	at com.mysql.cj.protocol.StandardSocketFactory.connect(StandardSocketFactory.java:132) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:65) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	... 84 common frames omitted
 
-java.sql.SQLSyntaxErrorException: Unknown database 'demo'
-	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120) ~[mysql-connector-java-8.0.17.jar:8.0.17]
-	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97) ~[mysql-connector-java-8.0.17.jar:8.0.17]
-	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+2019-08-16 00:33:16.520 ERROR 17960 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Exception during pool initialization.
+
+com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at com.mysql.cj.jdbc.exceptions.SQLError.createCommunicationsException(SQLError.java:174) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:64) ~[mysql-connector-java-8.0.17.jar:8.0.17]
 	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:827) ~[mysql-connector-java-8.0.17.jar:8.0.17]
 	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:447) ~[mysql-connector-java-8.0.17.jar:8.0.17]
 	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:237) ~[mysql-connector-java-8.0.17.jar:8.0.17]
@@ -151,13 +180,38 @@ java.sql.SQLSyntaxErrorException: Unknown database 'demo'
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
 	at java.base/java.lang.reflect.Method.invoke(Method.java:566) ~[na:na]
 	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49) ~[spring-boot-devtools-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+Caused by: com.mysql.cj.exceptions.CJCommunicationsException: Communications link failure
 
-2019-08-15 16:41:36.659 ERROR 19676 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Exception during pool initialization.
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[na:na]
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490) ~[na:na]
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:61) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:105) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:151) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.exceptions.ExceptionFactory.createCommunicationsException(ExceptionFactory.java:167) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:91) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.NativeSession.connect(NativeSession.java:150) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:947) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:817) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	... 54 common frames omitted
+Caused by: java.net.UnknownHostException: www.littleredhat1997.com
+	at java.base/java.net.InetAddress$CachedAddresses.get(InetAddress.java:797) ~[na:na]
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1505) ~[na:na]
+	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1364) ~[na:na]
+	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1298) ~[na:na]
+	at com.mysql.cj.protocol.StandardSocketFactory.connect(StandardSocketFactory.java:132) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:65) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	... 57 common frames omitted
 
-java.sql.SQLSyntaxErrorException: Unknown database 'demo'
-	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120) ~[mysql-connector-java-8.0.17.jar:8.0.17]
-	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97) ~[mysql-connector-java-8.0.17.jar:8.0.17]
-	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+2019-08-16 00:33:17.937 ERROR 17960 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Exception during pool initialization.
+
+com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at com.mysql.cj.jdbc.exceptions.SQLError.createCommunicationsException(SQLError.java:174) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:64) ~[mysql-connector-java-8.0.17.jar:8.0.17]
 	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:827) ~[mysql-connector-java-8.0.17.jar:8.0.17]
 	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:447) ~[mysql-connector-java-8.0.17.jar:8.0.17]
 	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:237) ~[mysql-connector-java-8.0.17.jar:8.0.17]
@@ -212,11 +266,37 @@ java.sql.SQLSyntaxErrorException: Unknown database 'demo'
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
 	at java.base/java.lang.reflect.Method.invoke(Method.java:566) ~[na:na]
 	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49) ~[spring-boot-devtools-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+Caused by: com.mysql.cj.exceptions.CJCommunicationsException: Communications link failure
 
-2019-08-15 16:41:36.669 ERROR 19676 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : Unknown database 'demo'
-2019-08-15 16:41:36.737 ERROR 19676 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[na:na]
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490) ~[na:na]
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:61) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:105) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:151) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.exceptions.ExceptionFactory.createCommunicationsException(ExceptionFactory.java:167) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:91) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.NativeSession.connect(NativeSession.java:150) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:947) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:817) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	... 53 common frames omitted
+Caused by: java.net.UnknownHostException: www.littleredhat1997.com
+	at java.base/java.net.InetAddress$CachedAddresses.get(InetAddress.java:797) ~[na:na]
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1505) ~[na:na]
+	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1364) ~[na:na]
+	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1298) ~[na:na]
+	at com.mysql.cj.protocol.StandardSocketFactory.connect(StandardSocketFactory.java:132) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:65) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	... 56 common frames omitted
 
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.SQLGrammarException: Unable to open JDBC Connection for DDL execution
+2019-08-16 00:33:17.939 ERROR 17960 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+2019-08-16 00:33:17.993 ERROR 17960 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1778) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:593) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
@@ -239,15 +319,15 @@ org.springframework.beans.factory.BeanCreationException: Error creating bean wit
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
 	at java.base/java.lang.reflect.Method.invoke(Method.java:566) ~[na:na]
 	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49) ~[spring-boot-devtools-2.1.7.RELEASE.jar:2.1.7.RELEASE]
-Caused by: javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.SQLGrammarException: Unable to open JDBC Connection for DDL execution
+Caused by: javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution
 	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:402) ~[spring-orm-5.1.9.RELEASE.jar:5.1.9.RELEASE]
 	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:377) ~[spring-orm-5.1.9.RELEASE.jar:5.1.9.RELEASE]
 	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341) ~[spring-orm-5.1.9.RELEASE.jar:5.1.9.RELEASE]
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1837) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1774) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
 	... 21 common frames omitted
-Caused by: org.hibernate.exception.SQLGrammarException: Unable to open JDBC Connection for DDL execution
-	at org.hibernate.exception.internal.SQLExceptionTypeDelegate.convert(SQLExceptionTypeDelegate.java:63) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+Caused by: org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution
+	at org.hibernate.exception.internal.SQLStateConversionDelegate.convert(SQLStateConversionDelegate.java:115) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
 	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:42) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
 	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:113) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
 	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:99) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
@@ -268,10 +348,11 @@ Caused by: org.hibernate.exception.SQLGrammarException: Unable to open JDBC Conn
 	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365) ~[spring-orm-5.1.9.RELEASE.jar:5.1.9.RELEASE]
 	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:390) ~[spring-orm-5.1.9.RELEASE.jar:5.1.9.RELEASE]
 	... 25 common frames omitted
-Caused by: java.sql.SQLSyntaxErrorException: Unknown database 'demo'
-	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120) ~[mysql-connector-java-8.0.17.jar:8.0.17]
-	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97) ~[mysql-connector-java-8.0.17.jar:8.0.17]
-	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+Caused by: com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at com.mysql.cj.jdbc.exceptions.SQLError.createCommunicationsException(SQLError.java:174) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:64) ~[mysql-connector-java-8.0.17.jar:8.0.17]
 	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:827) ~[mysql-connector-java-8.0.17.jar:8.0.17]
 	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:447) ~[mysql-connector-java-8.0.17.jar:8.0.17]
 	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:237) ~[mysql-connector-java-8.0.17.jar:8.0.17]
@@ -287,148 +368,430 @@ Caused by: java.sql.SQLSyntaxErrorException: Unknown database 'demo'
 	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:180) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
 	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:43) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
 	... 40 common frames omitted
+Caused by: com.mysql.cj.exceptions.CJCommunicationsException: Communications link failure
 
-2019-08-15 16:42:13.662  INFO 14588 --- [restartedMain] com.example.demo.Application             : Starting Application on DESKTOP-462H7L9 with PID 14588 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
-2019-08-15 16:42:13.664 DEBUG 14588 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
-2019-08-15 16:42:13.665  INFO 14588 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
-2019-08-15 16:42:20.483  INFO 14588 --- [restartedMain] com.example.demo.Application             : Started Application in 7.089 seconds (JVM running for 7.807)
-2019-08-15 16:43:29.777 ERROR 14588 --- [http-nio-8080-exec-1] c.example.demo.base.AppExceptionHandler  : org.springframework.validation.BeanPropertyBindingResult: 2 errors
-Field error in object 'userVo' on field 'mobile': rejected value [null]; codes [IsMobile.userVo.mobile,IsMobile.mobile,IsMobile.java.lang.String,IsMobile]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userVo.mobile,mobile]; arguments []; default message [mobile],true]; default message [手机号码格式错误]
-Field error in object 'userVo' on field 'mobile': rejected value [null]; codes [NotNull.userVo.mobile,NotNull.mobile,NotNull.java.lang.String,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userVo.mobile,mobile]; arguments []; default message [mobile]]; default message [不能为null]
-2019-08-15 16:43:33.234  INFO 14588 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : ***************************************************
-2019-08-15 16:43:33.235  INFO 14588 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : 请求开始, URI: /register, method: POST, params: {"mobile":["15521106350"],"password":["123456"]}
-2019-08-15 16:43:33.621 ERROR 14588 --- [http-nio-8080-exec-3] o.h.engine.jdbc.spi.SqlExceptionHelper   : Column 'birth' cannot be null
-2019-08-15 16:43:33.625 ERROR 14588 --- [http-nio-8080-exec-3] o.h.i.ExceptionMapperStandardImpl        : HHH000346: Error during managed flush [org.hibernate.exception.ConstraintViolationException: could not execute statement]
-2019-08-15 16:43:33.665 ERROR 14588 --- [http-nio-8080-exec-3] c.example.demo.base.AppExceptionHandler  : could not execute statement; SQL [n/a]; constraint [null]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement
-2019-08-15 16:44:31.438  INFO 9252 --- [restartedMain] com.example.demo.Application             : Starting Application on DESKTOP-462H7L9 with PID 9252 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
-2019-08-15 16:44:31.442 DEBUG 9252 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
-2019-08-15 16:44:31.444  INFO 9252 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
-2019-08-15 16:44:38.138  INFO 9252 --- [restartedMain] com.example.demo.Application             : Started Application in 7.006 seconds (JVM running for 7.79)
-2019-08-15 16:45:12.369  INFO 9252 --- [http-nio-8080-exec-2] com.example.demo.base.AopLog             : ***************************************************
-2019-08-15 16:45:12.370  INFO 9252 --- [http-nio-8080-exec-2] com.example.demo.base.AopLog             : 请求开始, URI: /register, method: POST, params: {"mobile":["15521106350"],"password":["123456"]}
-2019-08-15 16:45:12.781  INFO 9252 --- [http-nio-8080-exec-2] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"","message":"OK"}
-2019-08-15 16:45:21.296 ERROR 9252 --- [http-nio-8080-exec-3] c.example.demo.base.AppExceptionHandler  : Request method 'POST' not supported
-2019-08-15 16:45:24.715 ERROR 9252 --- [http-nio-8080-exec-5] c.example.demo.base.AppExceptionHandler  : null
-2019-08-15 16:48:53.953  INFO 19616 --- [restartedMain] com.example.demo.Application             : Starting Application on DESKTOP-462H7L9 with PID 19616 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
-2019-08-15 16:48:53.956 DEBUG 19616 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
-2019-08-15 16:48:53.956  INFO 19616 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
-2019-08-15 16:49:00.637  INFO 19616 --- [restartedMain] com.example.demo.Application             : Started Application in 6.961 seconds (JVM running for 7.739)
-2019-08-15 16:49:18.876 ERROR 19616 --- [http-nio-8080-exec-2] c.example.demo.base.AppExceptionHandler  : Request method 'POST' not supported
-2019-08-15 16:49:34.414  INFO 19616 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : ***************************************************
-2019-08-15 16:49:34.415  INFO 19616 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : 请求开始, URI: /login, method: POST, params: {"mobile":["15521106350"],"password":["123456"]}
-2019-08-15 16:49:34.653  INFO 19616 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"","message":"OK"}
-2019-08-15 16:49:37.699  INFO 19616 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : ***************************************************
-2019-08-15 16:49:37.699  INFO 19616 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : 请求开始, URI: /getUserInfo, method: GET, params: {}
-2019-08-15 16:49:37.702  INFO 19616 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":{"id":2},"message":"OK"}
-2019-08-15 16:50:37.300  INFO 19616 --- [http-nio-8080-exec-6] com.example.demo.base.AopLog             : ***************************************************
-2019-08-15 16:50:37.300  INFO 19616 --- [http-nio-8080-exec-6] com.example.demo.base.AopLog             : 请求开始, URI: /updateUserInfo, method: POST, params: {"nickname":["zbc"],"birth":["1997.11.27"],"sex":["male"],"head":["www.baidu.com"]}
-2019-08-15 16:50:37.531  INFO 19616 --- [http-nio-8080-exec-6] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"","message":"OK"}
-2019-08-15 16:50:41.223  INFO 19616 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : ***************************************************
-2019-08-15 16:50:41.224  INFO 19616 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : 请求开始, URI: /getUserInfo, method: GET, params: {}
-2019-08-15 16:50:41.226  INFO 19616 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":{"birth":"1997.11.27","head":"www.baidu.com","id":2,"nickname":"zbc","sex":"male"},"message":"OK"}
-2019-08-15 16:51:16.246  INFO 19616 --- [http-nio-8080-exec-8] com.example.demo.base.AopLog             : ***************************************************
-2019-08-15 16:51:16.246  INFO 19616 --- [http-nio-8080-exec-8] com.example.demo.base.AopLog             : 请求开始, URI: /login, method: POST, params: {"mobile":["15521106350"],"password":["123456"]}
-2019-08-15 16:51:16.285 ERROR 19616 --- [http-nio-8080-exec-8] o.h.engine.jdbc.spi.SqlExceptionHelper   : Table 'demo.tb_user' doesn't exist
-2019-08-15 16:51:16.290 ERROR 19616 --- [http-nio-8080-exec-8] c.example.demo.base.AppExceptionHandler  : could not extract ResultSet; SQL [n/a]; nested exception is org.hibernate.exception.SQLGrammarException: could not extract ResultSet
-2019-08-15 16:53:04.191  INFO 17440 --- [restartedMain] com.example.demo.Application             : Starting Application on DESKTOP-462H7L9 with PID 17440 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
-2019-08-15 16:53:04.194 DEBUG 17440 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
-2019-08-15 16:53:04.195  INFO 17440 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
-2019-08-15 16:53:11.234  INFO 17440 --- [restartedMain] com.example.demo.Application             : Started Application in 7.342 seconds (JVM running for 8.131)
-2019-08-15 16:53:11.778  INFO 17440 --- [http-nio-8080-exec-2] com.example.demo.base.AopLog             : ***************************************************
-2019-08-15 16:53:11.779  INFO 17440 --- [http-nio-8080-exec-2] com.example.demo.base.AopLog             : 请求开始, URI: /login, method: POST, params: {"mobile":["15521106350"],"password":["123456"]}
-2019-08-15 16:53:11.944  INFO 17440 --- [http-nio-8080-exec-2] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":50011,"message":"手机号码不存在"}
-2019-08-15 16:53:15.792  INFO 17440 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : ***************************************************
-2019-08-15 16:53:15.792  INFO 17440 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : 请求开始, URI: /login, method: POST, params: {"mobile":["15521106350"],"password":["123456"]}
-2019-08-15 16:53:15.826  INFO 17440 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":50011,"message":"手机号码不存在"}
-2019-08-15 16:53:24.067  INFO 17440 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : ***************************************************
-2019-08-15 16:53:24.067  INFO 17440 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : 请求开始, URI: /register, method: POST, params: {"mobile":["15521106350"],"password":["123456"]}
-2019-08-15 16:53:24.467  INFO 17440 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"","message":"OK"}
-2019-08-15 16:53:29.052  INFO 17440 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : ***************************************************
-2019-08-15 16:53:29.052  INFO 17440 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : 请求开始, URI: /login, method: POST, params: {"mobile":["15521106350"],"password":["123456"]}
-2019-08-15 16:53:29.194  INFO 17440 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"","message":"OK"}
-2019-08-15 16:53:30.357  INFO 17440 --- [http-nio-8080-exec-6] com.example.demo.base.AopLog             : ***************************************************
-2019-08-15 16:53:30.358  INFO 17440 --- [http-nio-8080-exec-6] com.example.demo.base.AopLog             : 请求开始, URI: /login, method: POST, params: {"mobile":["15521106350"],"password":["123456"]}
-2019-08-15 16:53:30.426  INFO 17440 --- [http-nio-8080-exec-6] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"","message":"OK"}
-2019-08-15 16:53:31.360  INFO 17440 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : ***************************************************
-2019-08-15 16:53:31.360  INFO 17440 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : 请求开始, URI: /login, method: POST, params: {"mobile":["15521106350"],"password":["123456"]}
-2019-08-15 16:53:31.474  INFO 17440 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"","message":"OK"}
-2019-08-15 16:53:36.082  INFO 17440 --- [http-nio-8080-exec-8] com.example.demo.base.AopLog             : ***************************************************
-2019-08-15 16:53:36.082  INFO 17440 --- [http-nio-8080-exec-8] com.example.demo.base.AopLog             : 请求开始, URI: /login, method: POST, params: {"mobile":["15521106350"],"password":["123456"]}
-2019-08-15 16:53:36.203  INFO 17440 --- [http-nio-8080-exec-8] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"","message":"OK"}
-2019-08-15 16:54:04.856  INFO 17440 --- [http-nio-8080-exec-9] com.example.demo.base.AopLog             : ***************************************************
-2019-08-15 16:54:04.856  INFO 17440 --- [http-nio-8080-exec-9] com.example.demo.base.AopLog             : 请求开始, URI: /updatePass, method: POST, params: {"oldPass":["123456"],"newPass":["666666"]}
-2019-08-15 16:54:05.038  INFO 17440 --- [http-nio-8080-exec-9] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"","message":"OK"}
-2019-08-15 16:54:11.600  INFO 17440 --- [http-nio-8080-exec-10] com.example.demo.base.AopLog             : ***************************************************
-2019-08-15 16:54:11.600  INFO 17440 --- [http-nio-8080-exec-10] com.example.demo.base.AopLog             : 请求开始, URI: /login, method: POST, params: {"mobile":["15521106350"],"password":["123456"]}
-2019-08-15 16:54:11.708  INFO 17440 --- [http-nio-8080-exec-10] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":50012,"message":"密码错误"}
-2019-08-15 16:54:16.327  INFO 17440 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : ***************************************************
-2019-08-15 16:54:16.327  INFO 17440 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : 请求开始, URI: /login, method: POST, params: {"mobile":["15521106350"],"password":["666666"]}
-2019-08-15 16:54:16.402  INFO 17440 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"","message":"OK"}
-2019-08-15 16:54:27.242  INFO 20368 --- [restartedMain] com.example.demo.Application             : Starting Application on DESKTOP-462H7L9 with PID 20368 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
-2019-08-15 16:54:27.244 DEBUG 20368 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
-2019-08-15 16:54:27.245  INFO 20368 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
-2019-08-15 16:54:33.683  INFO 20368 --- [restartedMain] com.example.demo.Application             : Started Application in 6.69 seconds (JVM running for 7.413)
-2019-08-15 16:54:34.740  INFO 20368 --- [http-nio-8080-exec-2] com.example.demo.base.AopLog             : ***************************************************
-2019-08-15 16:54:34.742  INFO 20368 --- [http-nio-8080-exec-2] com.example.demo.base.AopLog             : 请求开始, URI: /login, method: POST, params: {"mobile":["15521106350"],"password":["666666"]}
-2019-08-15 16:54:34.944  INFO 20368 --- [http-nio-8080-exec-2] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"","message":"OK"}
-2019-08-15 16:54:37.441  INFO 20368 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : ***************************************************
-2019-08-15 16:54:37.441  INFO 20368 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : 请求开始, URI: /login, method: POST, params: {"mobile":["15521106350"],"password":["666666"]}
-2019-08-15 16:54:37.491  INFO 20368 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"","message":"OK"}
-2019-08-15 16:54:46.895  INFO 20368 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : ***************************************************
-2019-08-15 16:54:46.896  INFO 20368 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : 请求开始, URI: /updatePass, method: POST, params: {"oldPass":["666666"],"newPass":["123456"]}
-2019-08-15 16:54:47.077  INFO 20368 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"","message":"OK"}
-2019-08-15 16:54:53.809  INFO 20368 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : ***************************************************
-2019-08-15 16:54:53.810  INFO 20368 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : 请求开始, URI: /login, method: POST, params: {"mobile":["15521106350"],"password":["123456"]}
-2019-08-15 16:54:53.863  INFO 20368 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"","message":"OK"}
-2019-08-15 16:55:24.697  INFO 20368 --- [http-nio-8080-exec-6] com.example.demo.base.AopLog             : ***************************************************
-2019-08-15 16:55:24.697  INFO 20368 --- [http-nio-8080-exec-6] com.example.demo.base.AopLog             : 请求开始, URI: /updateUserInfo, method: POST, params: {"birth":["1997/11/27"]}
-2019-08-15 16:55:24.873  INFO 20368 --- [http-nio-8080-exec-6] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"","message":"OK"}
-2019-08-15 16:55:29.110  INFO 20368 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : ***************************************************
-2019-08-15 16:55:29.110  INFO 20368 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : 请求开始, URI: /getUserInfo, method: GET, params: {}
-2019-08-15 16:55:29.113  INFO 20368 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":{"birth":"1997/11/27","id":2},"message":"OK"}
-2019-08-15 16:57:19.575  INFO 15236 --- [restartedMain] com.example.demo.Application             : Starting Application on DESKTOP-462H7L9 with PID 15236 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
-2019-08-15 16:57:19.578 DEBUG 15236 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
-2019-08-15 16:57:19.579  INFO 15236 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
-2019-08-15 16:57:26.672  INFO 15236 --- [restartedMain] com.example.demo.Application             : Started Application in 7.376 seconds (JVM running for 8.211)
-2019-08-15 16:57:27.217  INFO 15236 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : ***************************************************
-2019-08-15 16:57:27.218  INFO 15236 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : 请求开始, URI: /getUserInfo, method: GET, params: {}
-2019-08-15 16:57:27.251  INFO 15236 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":{"birth":"1997/11/27","id":2},"message":"OK"}
-2019-08-15 16:57:37.913  INFO 15236 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : ***************************************************
-2019-08-15 16:57:37.914  INFO 15236 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : 请求开始, URI: /updateUserInfo, method: POST, params: {"birth":["1997/11/27"]}
-2019-08-15 16:57:38.102  INFO 15236 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"","message":"OK"}
-2019-08-15 16:57:41.063  INFO 15236 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : ***************************************************
-2019-08-15 16:57:41.063  INFO 15236 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : 请求开始, URI: /getUserInfo, method: GET, params: {}
-2019-08-15 16:57:41.063  INFO 15236 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":{"birth":"1997/11/27","id":2},"message":"OK"}
-2019-08-15 16:58:24.099  INFO 15236 --- [http-nio-8080-exec-2] com.example.demo.base.AopLog             : ***************************************************
-2019-08-15 16:58:24.099  INFO 15236 --- [http-nio-8080-exec-2] com.example.demo.base.AopLog             : 请求开始, URI: /updateUserInfo, method: POST, params: {"birth":["1997/11/27"],"sex":["male"],"head":["www.baidu.com"]}
-2019-08-15 16:58:24.285  INFO 15236 --- [http-nio-8080-exec-2] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"","message":"OK"}
-2019-08-15 16:58:45.052  INFO 15236 --- [http-nio-8080-exec-6] com.example.demo.base.AopLog             : ***************************************************
-2019-08-15 16:58:45.053  INFO 15236 --- [http-nio-8080-exec-6] com.example.demo.base.AopLog             : 请求开始, URI: /getUserInfo, method: GET, params: {}
-2019-08-15 16:58:45.054  INFO 15236 --- [http-nio-8080-exec-6] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":{"birth":"1997/11/27","head":"www.baidu.com","id":2,"sex":"male"},"message":"OK"}
-2019-08-15 16:59:04.221  INFO 15236 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : ***************************************************
-2019-08-15 16:59:04.222  INFO 15236 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : 请求开始, URI: /updateUserInfo, method: POST, params: {"nickname":["zbc"]}
-2019-08-15 16:59:04.366  INFO 15236 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"","message":"OK"}
-2019-08-15 16:59:16.606  INFO 15236 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : ***************************************************
-2019-08-15 16:59:16.607  INFO 15236 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : 请求开始, URI: /getUserInfo, method: GET, params: {}
-2019-08-15 16:59:16.608  INFO 15236 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":{"birth":"1997/11/27","head":"www.baidu.com","id":2,"nickname":"zbc","sex":"male"},"message":"OK"}
-2019-08-15 16:59:41.725  INFO 15236 --- [http-nio-8080-exec-8] com.example.demo.base.AopLog             : ***************************************************
-2019-08-15 16:59:41.726  INFO 15236 --- [http-nio-8080-exec-8] com.example.demo.base.AopLog             : 请求开始, URI: /updateUserInfo, method: POST, params: {"head":["https://github.com/littleredhat1997"]}
-2019-08-15 16:59:41.878  INFO 15236 --- [http-nio-8080-exec-8] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"","message":"OK"}
-2019-08-15 16:59:44.892  INFO 15236 --- [http-nio-8080-exec-9] com.example.demo.base.AopLog             : ***************************************************
-2019-08-15 16:59:44.892  INFO 15236 --- [http-nio-8080-exec-9] com.example.demo.base.AopLog             : 请求开始, URI: /getUserInfo, method: GET, params: {}
-2019-08-15 16:59:44.894  INFO 15236 --- [http-nio-8080-exec-9] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":{"birth":"1997/11/27","head":"https://github.com/littleredhat1997","id":2,"nickname":"zbc","sex":"male"},"message":"OK"}
-2019-08-15 17:00:41.788  INFO 20424 --- [restartedMain] com.example.demo.Application             : Starting Application on DESKTOP-462H7L9 with PID 20424 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
-2019-08-15 17:00:41.790 DEBUG 20424 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
-2019-08-15 17:00:41.791  INFO 20424 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
-2019-08-15 17:00:49.371  INFO 20424 --- [restartedMain] com.example.demo.Application             : Started Application in 7.83 seconds (JVM running for 8.674)
-2019-08-15 17:01:02.020  INFO 20424 --- [http-nio-8080-exec-2] com.example.demo.base.AopLog             : ***************************************************
-2019-08-15 17:01:02.021  INFO 20424 --- [http-nio-8080-exec-2] com.example.demo.base.AopLog             : 请求开始, URI: /getUserInfo, method: GET, params: {}
-2019-08-15 17:01:02.049  INFO 20424 --- [http-nio-8080-exec-2] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":{"birth":"1997/11/27","head":"https://github.com/littleredhat1997","id":2,"nickname":"zbc","sex":"male"},"message":"OK"}
-2019-08-15 17:01:15.736 ERROR 20424 --- [http-nio-8080-exec-3] c.example.demo.base.AppExceptionHandler  : org.springframework.validation.BeanPropertyBindingResult: 1 errors
-Field error in object 'infoVo' on field 'nickname': rejected value [a]; codes [Length.infoVo.nickname,Length.nickname,Length.java.lang.String,Length]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [infoVo.nickname,nickname]; arguments []; default message [nickname],12,3]; default message [长度需要在3和12之间]
-2019-08-15 17:01:23.955  INFO 20424 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : ***************************************************
-2019-08-15 17:01:23.955  INFO 20424 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : 请求开始, URI: /updateUserInfo, method: POST, params: {}
-2019-08-15 17:01:24.135  INFO 20424 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"","message":"OK"}
-2019-08-15 17:01:27.801  INFO 20424 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : ***************************************************
-2019-08-15 17:01:27.802  INFO 20424 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : 请求开始, URI: /getUserInfo, method: GET, params: {}
-2019-08-15 17:01:27.802  INFO 20424 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":{"birth":"1997/11/27","head":"https://github.com/littleredhat1997","id":2,"nickname":"zbc","sex":"male"},"message":"OK"}
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[na:na]
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490) ~[na:na]
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:61) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:105) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:151) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.exceptions.ExceptionFactory.createCommunicationsException(ExceptionFactory.java:167) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:91) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.NativeSession.connect(NativeSession.java:150) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:947) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:817) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	... 53 common frames omitted
+Caused by: java.net.UnknownHostException: www.littleredhat1997.com
+	at java.base/java.net.InetAddress$CachedAddresses.get(InetAddress.java:797) ~[na:na]
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1505) ~[na:na]
+	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1364) ~[na:na]
+	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1298) ~[na:na]
+	at com.mysql.cj.protocol.StandardSocketFactory.connect(StandardSocketFactory.java:132) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:65) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	... 56 common frames omitted
+
+2019-08-16 00:33:28.158  INFO 20076 --- [restartedMain] com.example.demo.Application             : Starting Application on DESKTOP-462H7L9 with PID 20076 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
+2019-08-16 00:33:28.160 DEBUG 20076 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
+2019-08-16 00:33:28.162  INFO 20076 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
+2019-08-16 00:33:35.019  INFO 20076 --- [restartedMain] com.example.demo.Application             : Started Application in 7.226 seconds (JVM running for 8.034)
+2019-08-16 00:33:35.210  INFO 20076 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : ***************************************************
+2019-08-16 00:33:35.211  INFO 20076 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : 请求开始, URI: /getCode, method: GET, params: {}
+2019-08-16 00:33:35.410  INFO 20076 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 null
+2019-08-16 00:33:39.295  INFO 20076 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : ***************************************************
+2019-08-16 00:33:39.295  INFO 20076 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : 请求开始, URI: /getCode, method: GET, params: {}
+2019-08-16 00:33:39.314  INFO 20076 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 null
+2019-08-16 00:33:41.627  INFO 20076 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : ***************************************************
+2019-08-16 00:33:41.627  INFO 20076 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : 请求开始, URI: /getCode, method: GET, params: {}
+2019-08-16 00:33:41.646  INFO 20076 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 null
+2019-08-16 00:33:42.693  INFO 20076 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : ***************************************************
+2019-08-16 00:33:42.693  INFO 20076 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : 请求开始, URI: /getCode, method: GET, params: {}
+2019-08-16 00:33:42.710  INFO 20076 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 null
+2019-08-16 00:33:59.175  INFO 20076 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : ***************************************************
+2019-08-16 00:33:59.175  INFO 20076 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : 请求开始, URI: /checkCode, method: GET, params: {"code":["v511"]}
+2019-08-16 00:33:59.201  INFO 20076 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":50001,"message":"验证码错误"}
+2019-08-16 00:34:12.238  INFO 20076 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : ***************************************************
+2019-08-16 00:34:12.238  INFO 20076 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : 请求开始, URI: /getCode, method: GET, params: {}
+2019-08-16 00:34:12.377  INFO 20076 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 null
+2019-08-16 00:34:14.029  INFO 20076 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : ***************************************************
+2019-08-16 00:34:14.030  INFO 20076 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : 请求开始, URI: /getCode, method: GET, params: {}
+2019-08-16 00:34:14.221  INFO 20076 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 null
+2019-08-16 00:34:15.163  INFO 20076 --- [http-nio-8080-exec-9] com.example.demo.base.AopLog             : ***************************************************
+2019-08-16 00:34:15.163  INFO 20076 --- [http-nio-8080-exec-9] com.example.demo.base.AopLog             : 请求开始, URI: /getCode, method: GET, params: {}
+2019-08-16 00:34:15.262  INFO 20076 --- [http-nio-8080-exec-9] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 null
+2019-08-16 00:34:17.178  INFO 20076 --- [http-nio-8080-exec-8] com.example.demo.base.AopLog             : ***************************************************
+2019-08-16 00:34:17.178  INFO 20076 --- [http-nio-8080-exec-8] com.example.demo.base.AopLog             : 请求开始, URI: /getCode, method: GET, params: {}
+2019-08-16 00:34:17.373  INFO 20076 --- [http-nio-8080-exec-8] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 null
+2019-08-16 00:34:17.912  INFO 20076 --- [http-nio-8080-exec-10] com.example.demo.base.AopLog             : ***************************************************
+2019-08-16 00:34:17.913  INFO 20076 --- [http-nio-8080-exec-10] com.example.demo.base.AopLog             : 请求开始, URI: /getCode, method: GET, params: {}
+2019-08-16 00:34:18.022  INFO 20076 --- [http-nio-8080-exec-10] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 null
+2019-08-16 00:34:25.744  INFO 20076 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : ***************************************************
+2019-08-16 00:34:25.745  INFO 20076 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : 请求开始, URI: /checkCode, method: GET, params: {"code":["EO5S"]}
+2019-08-16 00:34:25.746  INFO 20076 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":50001,"message":"验证码错误"}
+2019-08-16 00:34:41.875  INFO 20076 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : ***************************************************
+2019-08-16 00:34:41.876  INFO 20076 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : 请求开始, URI: /getCode, method: GET, params: {}
+2019-08-16 00:34:41.996  INFO 20076 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 null
+2019-08-16 00:34:42.735  INFO 20076 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : ***************************************************
+2019-08-16 00:34:42.735  INFO 20076 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : 请求开始, URI: /getCode, method: GET, params: {}
+2019-08-16 00:34:42.836  INFO 20076 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 null
+2019-08-16 00:34:43.867  INFO 20076 --- [http-nio-8080-exec-6] com.example.demo.base.AopLog             : ***************************************************
+2019-08-16 00:34:43.868  INFO 20076 --- [http-nio-8080-exec-6] com.example.demo.base.AopLog             : 请求开始, URI: /getCode, method: GET, params: {}
+2019-08-16 00:34:44.037  INFO 20076 --- [http-nio-8080-exec-6] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 null
+2019-08-16 00:34:44.691  INFO 20076 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : ***************************************************
+2019-08-16 00:34:44.691  INFO 20076 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : 请求开始, URI: /getCode, method: GET, params: {}
+2019-08-16 00:34:45.201  INFO 20076 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 null
+2019-08-16 00:35:26.691  INFO 16952 --- [restartedMain] com.example.demo.Application             : Starting Application on DESKTOP-462H7L9 with PID 16952 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
+2019-08-16 00:35:26.693 DEBUG 16952 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
+2019-08-16 00:35:26.694  INFO 16952 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
+2019-08-16 00:35:42.867 ERROR 16952 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Exception during pool initialization.
+
+java.sql.SQLNonTransientConnectionException: No operations allowed after connection closed.
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:110) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:89) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:63) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:73) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:73) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.ConnectionImpl.setTransactionIsolation(ConnectionImpl.java:2259) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.zaxxer.hikari.pool.PoolBase.setupConnection(PoolBase.java:424) ~[HikariCP-3.2.0.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:374) ~[HikariCP-3.2.0.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:198) ~[HikariCP-3.2.0.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:467) ~[HikariCP-3.2.0.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:541) ~[HikariCP-3.2.0.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:115) ~[HikariCP-3.2.0.jar:na]
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112) ~[HikariCP-3.2.0.jar:na]
+	at org.springframework.jdbc.datasource.DataSourceUtils.fetchConnection(DataSourceUtils.java:157) ~[spring-jdbc-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.jdbc.datasource.DataSourceUtils.doGetConnection(DataSourceUtils.java:115) ~[spring-jdbc-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.jdbc.datasource.DataSourceUtils.getConnection(DataSourceUtils.java:78) ~[spring-jdbc-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.jdbc.support.JdbcUtils.extractDatabaseMetaData(JdbcUtils.java:319) ~[spring-jdbc-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.jdbc.support.JdbcUtils.extractDatabaseMetaData(JdbcUtils.java:356) ~[spring-jdbc-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.boot.autoconfigure.orm.jpa.DatabaseLookup.getDatabase(DatabaseLookup.java:73) ~[spring-boot-autoconfigure-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.boot.autoconfigure.orm.jpa.JpaProperties.determineDatabase(JpaProperties.java:142) ~[spring-boot-autoconfigure-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration.jpaVendorAdapter(JpaBaseConfiguration.java:113) ~[spring-boot-autoconfigure-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaConfiguration$$EnhancerBySpringCGLIB$$d5b8e68e.CGLIB$jpaVendorAdapter$5(<generated>) ~[spring-boot-autoconfigure-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaConfiguration$$EnhancerBySpringCGLIB$$d5b8e68e$$FastClassBySpringCGLIB$$b07dadb4.invoke(<generated>) ~[spring-boot-autoconfigure-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:244) ~[spring-core-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:363) ~[spring-context-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaConfiguration$$EnhancerBySpringCGLIB$$d5b8e68e.jpaVendorAdapter(<generated>) ~[spring-boot-autoconfigure-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566) ~[na:na]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:154) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:622) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:456) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1321) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1160) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:555) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:277) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1251) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1171) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:857) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:760) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:509) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1321) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1160) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:555) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:277) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1251) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1171) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:857) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:760) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:509) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1321) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1160) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:555) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1105) ~[spring-context-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:867) ~[spring-context-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:549) ~[spring-context-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:141) ~[spring-boot-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:743) ~[spring-boot-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:390) ~[spring-boot-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:312) ~[spring-boot-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1214) ~[spring-boot-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1203) ~[spring-boot-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at com.example.demo.Application.main(Application.java:10) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49) ~[spring-boot-devtools-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+Caused by: com.mysql.cj.exceptions.ConnectionIsClosedException: No operations allowed after connection closed.
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[na:na]
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490) ~[na:na]
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:61) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:105) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:151) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.NativeSession.checkClosed(NativeSession.java:1209) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.ConnectionImpl.checkClosed(ConnectionImpl.java:567) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.ConnectionImpl.setTransactionIsolation(ConnectionImpl.java:2206) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	... 78 common frames omitted
+
+2019-08-16 00:35:52.951  INFO 16952 --- [restartedMain] com.example.demo.Application             : Started Application in 26.577 seconds (JVM running for 27.304)
+2019-08-16 00:35:53.201  INFO 16952 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : ***************************************************
+2019-08-16 00:35:53.202  INFO 16952 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : 请求开始, URI: /getCode, method: GET, params: {}
+2019-08-16 00:35:54.141  INFO 16952 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 null
+2019-08-16 00:36:01.891  INFO 16952 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : ***************************************************
+2019-08-16 00:36:01.891  INFO 16952 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : 请求开始, URI: /checkCode, method: GET, params: {"code":["YTAR"]}
+2019-08-16 00:36:01.910  INFO 16952 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"","message":"OK"}
+2019-08-16 00:36:15.855  INFO 16952 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : ***************************************************
+2019-08-16 00:36:15.856  INFO 16952 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : 请求开始, URI: /checkCode, method: GET, params: {"code":["YTAR"]}
+2019-08-16 00:36:15.858  INFO 16952 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"","message":"OK"}
+2019-08-16 00:36:21.339  INFO 16952 --- [http-nio-8080-exec-8] com.example.demo.base.AopLog             : ***************************************************
+2019-08-16 00:36:21.340  INFO 16952 --- [http-nio-8080-exec-8] com.example.demo.base.AopLog             : 请求开始, URI: /getCode, method: GET, params: {}
+2019-08-16 00:36:32.650  INFO 16952 --- [http-nio-8080-exec-8] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 null
+2019-08-16 00:36:49.530  INFO 16952 --- [http-nio-8080-exec-6] com.example.demo.base.AopLog             : ***************************************************
+2019-08-16 00:36:49.531  INFO 16952 --- [http-nio-8080-exec-6] com.example.demo.base.AopLog             : 请求开始, URI: /checkCode, method: GET, params: {"code":["YTAR"]}
+2019-08-16 00:36:49.532  INFO 16952 --- [http-nio-8080-exec-6] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":50001,"message":"验证码错误"}
+2019-08-16 00:37:04.824  INFO 16952 --- [http-nio-8080-exec-10] com.example.demo.base.AopLog             : ***************************************************
+2019-08-16 00:37:04.824  INFO 16952 --- [http-nio-8080-exec-10] com.example.demo.base.AopLog             : 请求开始, URI: /checkCode, method: GET, params: {"code":["7916"]}
+2019-08-16 00:37:04.825  INFO 16952 --- [http-nio-8080-exec-10] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"","message":"OK"}
+2019-08-16 00:39:23.643 ERROR 16952 --- [http-nio-8080-exec-10] c.example.demo.base.AppExceptionHandler  : Redis command timed out; nested exception is io.lettuce.core.RedisCommandTimeoutException: Command timed out after 1 minute(s)
+2019-08-16 00:40:00.008 ERROR 16952 --- [pool-2-thread-1] o.s.s.s.TaskUtils$LoggingErrorHandler    : Unexpected error occurred in scheduled task.
+
+org.springframework.dao.QueryTimeoutException: Redis command timed out; nested exception is io.lettuce.core.RedisCommandTimeoutException: io.lettuce.core.RedisCommandTimeoutException: Command timed out after 1 minute(s)
+	at org.springframework.data.redis.connection.lettuce.LettuceExceptionConverter.convert(LettuceExceptionConverter.java:70) ~[spring-data-redis-2.1.10.RELEASE.jar:2.1.10.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceExceptionConverter.convert(LettuceExceptionConverter.java:41) ~[spring-data-redis-2.1.10.RELEASE.jar:2.1.10.RELEASE]
+	at org.springframework.data.redis.PassThroughExceptionTranslationStrategy.translate(PassThroughExceptionTranslationStrategy.java:44) ~[spring-data-redis-2.1.10.RELEASE.jar:2.1.10.RELEASE]
+	at org.springframework.data.redis.FallbackExceptionTranslationStrategy.translate(FallbackExceptionTranslationStrategy.java:42) ~[spring-data-redis-2.1.10.RELEASE.jar:2.1.10.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnection.convertLettuceAccessException(LettuceConnection.java:268) ~[spring-data-redis-2.1.10.RELEASE.jar:2.1.10.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceSetCommands.convertLettuceAccessException(LettuceSetCommands.java:520) ~[spring-data-redis-2.1.10.RELEASE.jar:2.1.10.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceSetCommands.sMembers(LettuceSetCommands.java:245) ~[spring-data-redis-2.1.10.RELEASE.jar:2.1.10.RELEASE]
+	at org.springframework.data.redis.connection.DefaultedRedisConnection.sMembers(DefaultedRedisConnection.java:607) ~[spring-data-redis-2.1.10.RELEASE.jar:2.1.10.RELEASE]
+	at org.springframework.data.redis.core.DefaultSetOperations.lambda$members$6(DefaultSetOperations.java:158) ~[spring-data-redis-2.1.10.RELEASE.jar:2.1.10.RELEASE]
+	at org.springframework.data.redis.core.RedisTemplate.execute(RedisTemplate.java:224) ~[spring-data-redis-2.1.10.RELEASE.jar:2.1.10.RELEASE]
+	at org.springframework.data.redis.core.RedisTemplate.execute(RedisTemplate.java:184) ~[spring-data-redis-2.1.10.RELEASE.jar:2.1.10.RELEASE]
+	at org.springframework.data.redis.core.AbstractOperations.execute(AbstractOperations.java:95) ~[spring-data-redis-2.1.10.RELEASE.jar:2.1.10.RELEASE]
+	at org.springframework.data.redis.core.DefaultSetOperations.members(DefaultSetOperations.java:158) ~[spring-data-redis-2.1.10.RELEASE.jar:2.1.10.RELEASE]
+	at org.springframework.data.redis.core.DefaultBoundSetOperations.members(DefaultBoundSetOperations.java:152) ~[spring-data-redis-2.1.10.RELEASE.jar:2.1.10.RELEASE]
+	at org.springframework.session.data.redis.RedisSessionExpirationPolicy.cleanExpiredSessions(RedisSessionExpirationPolicy.java:132) ~[spring-session-data-redis-2.1.8.RELEASE.jar:2.1.8.RELEASE]
+	at org.springframework.session.data.redis.RedisOperationsSessionRepository.cleanupExpiredSessions(RedisOperationsSessionRepository.java:430) ~[spring-session-data-redis-2.1.8.RELEASE.jar:2.1.8.RELEASE]
+	at org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration.lambda$configureTasks$0(RedisHttpSessionConfiguration.java:248) ~[spring-session-data-redis-2.1.8.RELEASE.jar:2.1.8.RELEASE]
+	at org.springframework.scheduling.support.DelegatingErrorHandlingRunnable.run(DelegatingErrorHandlingRunnable.java:54) ~[spring-context-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.scheduling.concurrent.ReschedulingRunnable.run(ReschedulingRunnable.java:93) ~[spring-context-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515) ~[na:na]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264) ~[na:na]
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:834) ~[na:na]
+Caused by: io.lettuce.core.RedisCommandTimeoutException: io.lettuce.core.RedisCommandTimeoutException: Command timed out after 1 minute(s)
+	at io.lettuce.core.LettuceFutures.awaitOrCancel(LettuceFutures.java:126) ~[lettuce-core-5.1.8.RELEASE.jar:na]
+	at io.lettuce.core.FutureSyncInvocationHandler.handleInvocation(FutureSyncInvocationHandler.java:69) ~[lettuce-core-5.1.8.RELEASE.jar:na]
+	at io.lettuce.core.internal.AbstractInvocationHandler.invoke(AbstractInvocationHandler.java:80) ~[lettuce-core-5.1.8.RELEASE.jar:na]
+	at com.sun.proxy.$Proxy161.smembers(Unknown Source) ~[na:na]
+	at org.springframework.data.redis.connection.lettuce.LettuceSetCommands.sMembers(LettuceSetCommands.java:243) ~[spring-data-redis-2.1.10.RELEASE.jar:2.1.10.RELEASE]
+	... 18 common frames omitted
+Caused by: io.lettuce.core.RedisCommandTimeoutException: Command timed out after 1 minute(s)
+	at io.lettuce.core.ExceptionFactory.createTimeoutException(ExceptionFactory.java:51) ~[lettuce-core-5.1.8.RELEASE.jar:na]
+	at io.lettuce.core.protocol.CommandExpiryWriter.lambda$potentiallyExpire$0(CommandExpiryWriter.java:167) ~[lettuce-core-5.1.8.RELEASE.jar:na]
+	at io.netty.util.concurrent.PromiseTask$RunnableAdapter.call(PromiseTask.java:38) ~[netty-common-4.1.38.Final.jar:4.1.38.Final]
+	at io.netty.util.concurrent.ScheduledFutureTask.run(ScheduledFutureTask.java:127) ~[netty-common-4.1.38.Final.jar:4.1.38.Final]
+	at io.netty.util.concurrent.DefaultEventExecutor.run(DefaultEventExecutor.java:66) ~[netty-common-4.1.38.Final.jar:4.1.38.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:918) ~[netty-common-4.1.38.Final.jar:4.1.38.Final]
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[netty-common-4.1.38.Final.jar:4.1.38.Final]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-common-4.1.38.Final.jar:4.1.38.Final]
+	... 1 common frames omitted
+
+2019-08-16 00:41:23.678 ERROR 16952 --- [http-nio-8080-exec-10] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception
+
+org.springframework.dao.QueryTimeoutException: Redis command timed out; nested exception is io.lettuce.core.RedisCommandTimeoutException: Command timed out after 1 minute(s)
+	at org.springframework.data.redis.connection.lettuce.LettuceExceptionConverter.convert(LettuceExceptionConverter.java:70) ~[spring-data-redis-2.1.10.RELEASE.jar:2.1.10.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceExceptionConverter.convert(LettuceExceptionConverter.java:41) ~[spring-data-redis-2.1.10.RELEASE.jar:2.1.10.RELEASE]
+	at org.springframework.data.redis.PassThroughExceptionTranslationStrategy.translate(PassThroughExceptionTranslationStrategy.java:44) ~[spring-data-redis-2.1.10.RELEASE.jar:2.1.10.RELEASE]
+	at org.springframework.data.redis.FallbackExceptionTranslationStrategy.translate(FallbackExceptionTranslationStrategy.java:42) ~[spring-data-redis-2.1.10.RELEASE.jar:2.1.10.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnection.convertLettuceAccessException(LettuceConnection.java:268) ~[spring-data-redis-2.1.10.RELEASE.jar:2.1.10.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceHashCommands.convertLettuceAccessException(LettuceHashCommands.java:471) ~[spring-data-redis-2.1.10.RELEASE.jar:2.1.10.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceHashCommands.hGetAll(LettuceHashCommands.java:196) ~[spring-data-redis-2.1.10.RELEASE.jar:2.1.10.RELEASE]
+	at org.springframework.data.redis.connection.DefaultedRedisConnection.hGetAll(DefaultedRedisConnection.java:933) ~[spring-data-redis-2.1.10.RELEASE.jar:2.1.10.RELEASE]
+	at org.springframework.data.redis.core.DefaultHashOperations.lambda$entries$13(DefaultHashOperations.java:245) ~[spring-data-redis-2.1.10.RELEASE.jar:2.1.10.RELEASE]
+	at org.springframework.data.redis.core.RedisTemplate.execute(RedisTemplate.java:224) ~[spring-data-redis-2.1.10.RELEASE.jar:2.1.10.RELEASE]
+	at org.springframework.data.redis.core.RedisTemplate.execute(RedisTemplate.java:184) ~[spring-data-redis-2.1.10.RELEASE.jar:2.1.10.RELEASE]
+	at org.springframework.data.redis.core.AbstractOperations.execute(AbstractOperations.java:95) ~[spring-data-redis-2.1.10.RELEASE.jar:2.1.10.RELEASE]
+	at org.springframework.data.redis.core.DefaultHashOperations.entries(DefaultHashOperations.java:245) ~[spring-data-redis-2.1.10.RELEASE.jar:2.1.10.RELEASE]
+	at org.springframework.data.redis.core.DefaultBoundHashOperations.entries(DefaultBoundHashOperations.java:183) ~[spring-data-redis-2.1.10.RELEASE.jar:2.1.10.RELEASE]
+	at org.springframework.session.data.redis.RedisOperationsSessionRepository.getSession(RedisOperationsSessionRepository.java:466) ~[spring-session-data-redis-2.1.8.RELEASE.jar:2.1.8.RELEASE]
+	at org.springframework.session.data.redis.RedisOperationsSessionRepository.findById(RedisOperationsSessionRepository.java:435) ~[spring-session-data-redis-2.1.8.RELEASE.jar:2.1.8.RELEASE]
+	at org.springframework.session.data.redis.RedisOperationsSessionRepository.findById(RedisOperationsSessionRepository.java:247) ~[spring-session-data-redis-2.1.8.RELEASE.jar:2.1.8.RELEASE]
+	at org.springframework.session.web.http.SessionRepositoryFilter$SessionRepositoryRequestWrapper.getRequestedSession(SessionRepositoryFilter.java:386) ~[spring-session-core-2.1.8.RELEASE.jar:2.1.8.RELEASE]
+	at org.springframework.session.web.http.SessionRepositoryFilter$SessionRepositoryRequestWrapper.getRequestedSessionId(SessionRepositoryFilter.java:366) ~[spring-session-core-2.1.8.RELEASE.jar:2.1.8.RELEASE]
+	at org.springframework.session.web.http.SessionRepositoryFilter$SessionRepositoryRequestWrapper.commitSession(SessionRepositoryFilter.java:249) ~[spring-session-core-2.1.8.RELEASE.jar:2.1.8.RELEASE]
+	at org.springframework.session.web.http.SessionRepositoryFilter$SessionRepositoryRequestWrapper.access$100(SessionRepositoryFilter.java:207) ~[spring-session-core-2.1.8.RELEASE.jar:2.1.8.RELEASE]
+	at org.springframework.session.web.http.SessionRepositoryFilter.doFilterInternal(SessionRepositoryFilter.java:154) ~[spring-session-core-2.1.8.RELEASE.jar:2.1.8.RELEASE]
+	at org.springframework.session.web.http.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:86) ~[spring-session-core-2.1.8.RELEASE.jar:2.1.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.22.jar:9.0.22]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.22.jar:9.0.22]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200) ~[spring-web-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:118) ~[spring-web-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.22.jar:9.0.22]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.22.jar:9.0.22]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202) ~[tomcat-embed-core-9.0.22.jar:9.0.22]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96) ~[tomcat-embed-core-9.0.22.jar:9.0.22]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490) ~[tomcat-embed-core-9.0.22.jar:9.0.22]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139) ~[tomcat-embed-core-9.0.22.jar:9.0.22]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) ~[tomcat-embed-core-9.0.22.jar:9.0.22]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-9.0.22.jar:9.0.22]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343) ~[tomcat-embed-core-9.0.22.jar:9.0.22]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408) ~[tomcat-embed-core-9.0.22.jar:9.0.22]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66) ~[tomcat-embed-core-9.0.22.jar:9.0.22]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:853) ~[tomcat-embed-core-9.0.22.jar:9.0.22]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1587) ~[tomcat-embed-core-9.0.22.jar:9.0.22]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) ~[tomcat-embed-core-9.0.22.jar:9.0.22]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628) ~[na:na]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.22.jar:9.0.22]
+	at java.base/java.lang.Thread.run(Thread.java:834) ~[na:na]
+Caused by: io.lettuce.core.RedisCommandTimeoutException: Command timed out after 1 minute(s)
+	at io.lettuce.core.ExceptionFactory.createTimeoutException(ExceptionFactory.java:51) ~[lettuce-core-5.1.8.RELEASE.jar:na]
+	at io.lettuce.core.LettuceFutures.awaitOrCancel(LettuceFutures.java:114) ~[lettuce-core-5.1.8.RELEASE.jar:na]
+	at io.lettuce.core.FutureSyncInvocationHandler.handleInvocation(FutureSyncInvocationHandler.java:69) ~[lettuce-core-5.1.8.RELEASE.jar:na]
+	at io.lettuce.core.internal.AbstractInvocationHandler.invoke(AbstractInvocationHandler.java:80) ~[lettuce-core-5.1.8.RELEASE.jar:na]
+	at com.sun.proxy.$Proxy161.hgetall(Unknown Source) ~[na:na]
+	at org.springframework.data.redis.connection.lettuce.LettuceHashCommands.hGetAll(LettuceHashCommands.java:194) ~[spring-data-redis-2.1.10.RELEASE.jar:2.1.10.RELEASE]
+	... 38 common frames omitted
+
+2019-08-16 00:46:00.807  INFO 9136 --- [restartedMain] com.example.demo.Application             : Starting Application on DESKTOP-462H7L9 with PID 9136 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
+2019-08-16 00:46:00.808 DEBUG 9136 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
+2019-08-16 00:46:00.809  INFO 9136 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
+2019-08-16 00:46:15.802  INFO 9136 --- [restartedMain] com.example.demo.Application             : Started Application in 15.246 seconds (JVM running for 15.994)
+2019-08-16 00:46:16.386  INFO 9136 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : ***************************************************
+2019-08-16 00:46:16.388  INFO 9136 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : 请求开始, URI: /getCode, method: GET, params: {}
+2019-08-16 00:46:16.706  INFO 9136 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 null
+2019-08-16 00:46:26.764  INFO 20408 --- [restartedMain] com.example.demo.Application             : Starting Application on DESKTOP-462H7L9 with PID 20408 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
+2019-08-16 00:46:26.766 DEBUG 20408 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
+2019-08-16 00:46:26.767  INFO 20408 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
+2019-08-16 00:46:33.196  INFO 20408 --- [restartedMain] com.example.demo.Application             : Started Application in 6.763 seconds (JVM running for 7.479)
+2019-08-16 00:46:40.933  INFO 13952 --- [restartedMain] com.example.demo.Application             : Starting Application on DESKTOP-462H7L9 with PID 13952 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
+2019-08-16 00:46:40.935 DEBUG 13952 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
+2019-08-16 00:46:40.935  INFO 13952 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
+2019-08-16 00:46:47.157  INFO 13952 --- [restartedMain] com.example.demo.Application             : Started Application in 6.476 seconds (JVM running for 7.203)
+2019-08-16 00:46:48.461  INFO 13952 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : ***************************************************
+2019-08-16 00:46:48.462  INFO 13952 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : 请求开始, URI: /getCode, method: GET, params: {}
+2019-08-16 00:46:48.692  INFO 13952 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 null
+2019-08-16 00:47:05.151  INFO 13952 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : ***************************************************
+2019-08-16 00:47:05.151  INFO 13952 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : 请求开始, URI: /getCode, method: GET, params: {}
+2019-08-16 00:47:05.265  INFO 13952 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 null
+2019-08-16 00:47:05.918  INFO 13952 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : ***************************************************
+2019-08-16 00:47:05.918  INFO 13952 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : 请求开始, URI: /getCode, method: GET, params: {}
+2019-08-16 00:47:06.005  INFO 13952 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 null
+2019-08-16 00:47:06.634  INFO 13952 --- [http-nio-8080-exec-8] com.example.demo.base.AopLog             : ***************************************************
+2019-08-16 00:47:06.635  INFO 13952 --- [http-nio-8080-exec-8] com.example.demo.base.AopLog             : 请求开始, URI: /getCode, method: GET, params: {}
+2019-08-16 00:47:06.728  INFO 13952 --- [http-nio-8080-exec-8] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 null
+2019-08-16 00:48:21.276  INFO 11452 --- [restartedMain] com.example.demo.Application             : Starting Application on DESKTOP-462H7L9 with PID 11452 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
+2019-08-16 00:48:21.278 DEBUG 11452 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
+2019-08-16 00:48:21.279  INFO 11452 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
+2019-08-16 00:48:35.709  INFO 11452 --- [restartedMain] com.example.demo.Application             : Started Application in 14.721 seconds (JVM running for 15.605)
+2019-08-16 00:48:36.503  INFO 11452 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : ***************************************************
+2019-08-16 00:48:36.504  INFO 11452 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : 请求开始, URI: /getCode, method: GET, params: {}
+2019-08-16 00:48:37.230  INFO 11452 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 null
+2019-08-16 00:48:48.145  INFO 19604 --- [restartedMain] com.example.demo.Application             : Starting Application on DESKTOP-462H7L9 with PID 19604 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
+2019-08-16 00:48:48.148 DEBUG 19604 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
+2019-08-16 00:48:48.149  INFO 19604 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
+2019-08-16 00:48:55.554  INFO 19604 --- [restartedMain] com.example.demo.Application             : Started Application in 7.659 seconds (JVM running for 8.379)
+2019-08-16 00:48:55.769  INFO 19604 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : ***************************************************
+2019-08-16 00:48:55.770  INFO 19604 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : 请求开始, URI: /getCode, method: GET, params: {}
+2019-08-16 00:48:56.006  INFO 19604 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 null
+2019-08-16 00:49:50.316  INFO 19676 --- [restartedMain] com.example.demo.Application             : Starting Application on DESKTOP-462H7L9 with PID 19676 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
+2019-08-16 00:49:50.317 DEBUG 19676 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
+2019-08-16 00:49:50.318  INFO 19676 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
+2019-08-16 00:50:02.228  INFO 19676 --- [restartedMain] com.example.demo.Application             : Started Application in 12.171 seconds (JVM running for 12.882)
+2019-08-16 00:50:05.456  INFO 19676 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : ***************************************************
+2019-08-16 00:50:05.457  INFO 19676 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : 请求开始, URI: /getCode, method: GET, params: {}
+2019-08-16 00:50:05.852  INFO 19676 --- [http-nio-8080-exec-2] com.example.demo.base.AopLog             : ***************************************************
+2019-08-16 00:50:05.852  INFO 19676 --- [http-nio-8080-exec-2] com.example.demo.base.AopLog             : 请求开始, URI: /getCode, method: GET, params: {}
+2019-08-16 00:50:06.975  INFO 19676 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 null
+2019-08-16 00:50:06.983  INFO 19676 --- [http-nio-8080-exec-2] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 null
+2019-08-16 00:51:09.993  INFO 19272 --- [restartedMain] com.example.demo.Application             : Starting Application on DESKTOP-462H7L9 with PID 19272 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
+2019-08-16 00:51:09.995 DEBUG 19272 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
+2019-08-16 00:51:09.996  INFO 19272 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
+2019-08-16 00:51:16.066  INFO 19272 --- [restartedMain] com.example.demo.Application             : Started Application in 6.312 seconds (JVM running for 7.037)
+2019-08-16 00:51:16.248  INFO 19272 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : ***************************************************
+2019-08-16 00:51:16.249  INFO 19272 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : 请求开始, URI: /getCode, method: GET, params: {}
+2019-08-16 00:51:16.476  INFO 19272 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 null
+2019-08-16 00:51:36.359  INFO 11748 --- [restartedMain] com.example.demo.Application             : Starting Application on DESKTOP-462H7L9 with PID 11748 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
+2019-08-16 00:51:36.362 DEBUG 11748 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
+2019-08-16 00:51:36.362  INFO 11748 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
+2019-08-16 00:51:42.713  INFO 11748 --- [restartedMain] com.example.demo.Application             : Started Application in 6.607 seconds (JVM running for 7.324)
+2019-08-16 00:51:57.464  INFO 11748 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : ***************************************************
+2019-08-16 00:51:57.466  INFO 11748 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : 请求开始, URI: /getCode, method: GET, params: {}
+2019-08-16 00:51:57.746  INFO 11748 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 null
+2019-08-16 00:52:30.393  INFO 16744 --- [restartedMain] com.example.demo.Application             : Starting Application on DESKTOP-462H7L9 with PID 16744 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
+2019-08-16 00:52:30.396 DEBUG 16744 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
+2019-08-16 00:52:30.396  INFO 16744 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
+2019-08-16 00:52:37.927  INFO 16744 --- [restartedMain] com.example.demo.Application             : Started Application in 7.799 seconds (JVM running for 8.512)
+2019-08-16 00:52:53.501  INFO 16744 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : ***************************************************
+2019-08-16 00:52:53.502  INFO 16744 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : 请求开始, URI: /getCode, method: GET, params: {}
+2019-08-16 00:52:53.783  INFO 16744 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 null
+2019-08-16 00:52:56.255  INFO 16744 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : ***************************************************
+2019-08-16 00:52:56.255  INFO 16744 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : 请求开始, URI: /getCode, method: GET, params: {}
+2019-08-16 00:52:56.362  INFO 16744 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 null
+2019-08-16 00:53:01.403  INFO 16744 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : ***************************************************
+2019-08-16 00:53:01.403  INFO 16744 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : 请求开始, URI: /getCode, method: GET, params: {}
+2019-08-16 00:53:01.706  INFO 16744 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 null
+2019-08-16 00:53:22.512  INFO 7416 --- [restartedMain] com.example.demo.Application             : Starting Application on DESKTOP-462H7L9 with PID 7416 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
+2019-08-16 00:53:22.515 DEBUG 7416 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
+2019-08-16 00:53:22.516  INFO 7416 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
+2019-08-16 00:53:29.265  INFO 7416 --- [restartedMain] com.example.demo.Application             : Started Application in 7.101 seconds (JVM running for 7.821)
+2019-08-16 00:53:30.521  INFO 7416 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : ***************************************************
+2019-08-16 00:53:30.522  INFO 7416 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : 请求开始, URI: /getCode, method: GET, params: {}
+2019-08-16 00:53:30.773  INFO 7416 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 null
+2019-08-16 00:53:32.130  INFO 7416 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : ***************************************************
+2019-08-16 00:53:32.130  INFO 7416 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : 请求开始, URI: /getCode, method: GET, params: {}
+2019-08-16 00:53:32.230  INFO 7416 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 null
+2019-08-16 00:53:32.784  INFO 7416 --- [http-nio-8080-exec-8] com.example.demo.base.AopLog             : ***************************************************
+2019-08-16 00:53:32.785  INFO 7416 --- [http-nio-8080-exec-8] com.example.demo.base.AopLog             : 请求开始, URI: /getCode, method: GET, params: {}
+2019-08-16 00:53:32.868  INFO 7416 --- [http-nio-8080-exec-8] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 null
+2019-08-16 00:53:33.544  INFO 7416 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : ***************************************************
+2019-08-16 00:53:33.544  INFO 7416 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : 请求开始, URI: /getCode, method: GET, params: {}
+2019-08-16 00:53:33.627  INFO 7416 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 null
+2019-08-16 00:53:34.295  INFO 7416 --- [http-nio-8080-exec-9] com.example.demo.base.AopLog             : ***************************************************
+2019-08-16 00:53:34.295  INFO 7416 --- [http-nio-8080-exec-9] com.example.demo.base.AopLog             : 请求开始, URI: /getCode, method: GET, params: {}
+2019-08-16 00:53:34.393  INFO 7416 --- [http-nio-8080-exec-9] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 null
+2019-08-16 00:56:08.136  INFO 16716 --- [restartedMain] com.example.demo.Application             : Starting Application on DESKTOP-462H7L9 with PID 16716 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
+2019-08-16 00:56:08.138 DEBUG 16716 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
+2019-08-16 00:56:08.139  INFO 16716 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
+2019-08-16 00:56:14.883  INFO 16716 --- [restartedMain] com.example.demo.Application             : Started Application in 7.001 seconds (JVM running for 7.702)
+2019-08-16 00:56:31.878  INFO 16716 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : ***************************************************
+2019-08-16 00:56:31.879  INFO 16716 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : 请求开始, URI: /getCode, method: GET, params: {}
+2019-08-16 00:56:32.219  INFO 16716 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 null
+2019-08-16 00:56:32.873  INFO 16716 --- [http-nio-8080-exec-2] com.example.demo.base.AopLog             : ***************************************************
+2019-08-16 00:56:32.873  INFO 16716 --- [http-nio-8080-exec-2] com.example.demo.base.AopLog             : 请求开始, URI: /getCode, method: GET, params: {}
+2019-08-16 00:56:32.991  INFO 16716 --- [http-nio-8080-exec-2] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 null
+2019-08-16 00:56:38.873  INFO 16716 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : ***************************************************
+2019-08-16 00:56:38.873  INFO 16716 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : 请求开始, URI: /checkCode, method: GET, params: {"code":["7cc6"]}
+2019-08-16 00:56:38.895  INFO 16716 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"","message":"OK"}
+2019-08-16 00:56:42.979  INFO 16716 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : ***************************************************
+2019-08-16 00:56:42.979  INFO 16716 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : 请求开始, URI: /checkCode, method: GET, params: {"code":["7cc"]}
+2019-08-16 00:56:42.980  INFO 16716 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":50001,"message":"验证码错误"}
+2019-08-16 00:56:46.633  INFO 16716 --- [http-nio-8080-exec-9] com.example.demo.base.AopLog             : ***************************************************
+2019-08-16 00:56:46.634  INFO 16716 --- [http-nio-8080-exec-9] com.example.demo.base.AopLog             : 请求开始, URI: /getCode, method: GET, params: {}
+2019-08-16 00:56:46.753  INFO 16716 --- [http-nio-8080-exec-9] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 null
+2019-08-16 00:57:53.389  INFO 19304 --- [restartedMain] com.example.demo.Application             : Starting Application on DESKTOP-462H7L9 with PID 19304 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
+2019-08-16 00:57:53.392 DEBUG 19304 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
+2019-08-16 00:57:53.392  INFO 19304 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
+2019-08-16 00:58:00.226  INFO 19304 --- [restartedMain] com.example.demo.Application             : Started Application in 7.11 seconds (JVM running for 7.855)
+2019-08-16 00:58:01.701  INFO 19304 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : ***************************************************
+2019-08-16 00:58:01.703  INFO 19304 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : 请求开始, URI: /getCode, method: GET, params: {}
+2019-08-16 00:58:01.965  INFO 19304 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 null
+2019-08-16 00:58:02.995  INFO 19304 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : ***************************************************
+2019-08-16 00:58:02.995  INFO 19304 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : 请求开始, URI: /getCode, method: GET, params: {}
+2019-08-16 00:58:03.121  INFO 19304 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 null

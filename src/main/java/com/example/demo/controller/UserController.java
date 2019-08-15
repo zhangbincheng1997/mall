@@ -42,7 +42,7 @@ public class UserController {
             @ApiImplicitParam(name = "mobile", value = "手机号码", required = true, dataType = "String"),
             @ApiImplicitParam(name = "password", value = "密码", required = true, dataType = "String"),
     })
-    @RequestMapping(value = "/login", method = {RequestMethod.GET, RequestMethod.POST})
+    @PostMapping(value = "/login")
     @ResponseBody
     public Result login(HttpServletResponse response, @Valid UserVo loginVo) {
         return userService.login(response, loginVo);
