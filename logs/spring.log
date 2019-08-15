@@ -1,0 +1,434 @@
+2019-08-15 16:41:28.061  INFO 19676 --- [restartedMain] com.example.demo.Application             : Starting Application on DESKTOP-462H7L9 with PID 19676 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
+2019-08-15 16:41:28.065 DEBUG 19676 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
+2019-08-15 16:41:28.066  INFO 19676 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
+2019-08-15 16:41:32.453 ERROR 19676 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Exception during pool initialization.
+
+java.sql.SQLSyntaxErrorException: Unknown database 'demo'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:827) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:447) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:237) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:199) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:136) ~[HikariCP-3.2.0.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:369) ~[HikariCP-3.2.0.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:198) ~[HikariCP-3.2.0.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:467) ~[HikariCP-3.2.0.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:541) ~[HikariCP-3.2.0.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:115) ~[HikariCP-3.2.0.jar:na]
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112) ~[HikariCP-3.2.0.jar:na]
+	at org.springframework.jdbc.datasource.DataSourceUtils.fetchConnection(DataSourceUtils.java:157) ~[spring-jdbc-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.jdbc.datasource.DataSourceUtils.doGetConnection(DataSourceUtils.java:115) ~[spring-jdbc-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.jdbc.datasource.DataSourceUtils.getConnection(DataSourceUtils.java:78) ~[spring-jdbc-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.jdbc.support.JdbcUtils.extractDatabaseMetaData(JdbcUtils.java:319) ~[spring-jdbc-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.jdbc.support.JdbcUtils.extractDatabaseMetaData(JdbcUtils.java:356) ~[spring-jdbc-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.boot.autoconfigure.orm.jpa.DatabaseLookup.getDatabase(DatabaseLookup.java:73) ~[spring-boot-autoconfigure-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.boot.autoconfigure.orm.jpa.JpaProperties.determineDatabase(JpaProperties.java:142) ~[spring-boot-autoconfigure-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration.jpaVendorAdapter(JpaBaseConfiguration.java:113) ~[spring-boot-autoconfigure-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaConfiguration$$EnhancerBySpringCGLIB$$3f9a4f15.CGLIB$jpaVendorAdapter$8(<generated>) ~[spring-boot-autoconfigure-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaConfiguration$$EnhancerBySpringCGLIB$$3f9a4f15$$FastClassBySpringCGLIB$$aaaaeda0.invoke(<generated>) ~[spring-boot-autoconfigure-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:244) ~[spring-core-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:363) ~[spring-context-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaConfiguration$$EnhancerBySpringCGLIB$$3f9a4f15.jpaVendorAdapter(<generated>) ~[spring-boot-autoconfigure-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566) ~[na:na]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:154) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:622) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:456) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1321) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1160) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:555) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:277) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1251) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1171) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:857) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:760) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:509) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1321) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1160) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:555) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:277) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1251) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1171) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:857) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:760) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:509) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1321) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1160) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:555) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1105) ~[spring-context-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:867) ~[spring-context-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:549) ~[spring-context-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:141) ~[spring-boot-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:743) ~[spring-boot-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:390) ~[spring-boot-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:312) ~[spring-boot-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1214) ~[spring-boot-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1203) ~[spring-boot-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at com.example.demo.Application.main(Application.java:10) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49) ~[spring-boot-devtools-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+
+2019-08-15 16:41:34.518 ERROR 19676 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Exception during pool initialization.
+
+java.sql.SQLSyntaxErrorException: Unknown database 'demo'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:827) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:447) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:237) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:199) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:136) ~[HikariCP-3.2.0.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:369) ~[HikariCP-3.2.0.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:198) ~[HikariCP-3.2.0.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:467) ~[HikariCP-3.2.0.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:541) ~[HikariCP-3.2.0.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:115) ~[HikariCP-3.2.0.jar:na]
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112) ~[HikariCP-3.2.0.jar:na]
+	at org.hibernate.engine.jdbc.connections.internal.DatasourceConnectionProviderImpl.getConnection(DatasourceConnectionProviderImpl.java:122) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:180) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:68) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:35) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:94) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:237) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:214) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory.injectServices(DefaultIdentifierGeneratorFactory.java:152) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.injectDependencies(AbstractServiceRegistryImpl.java:286) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:243) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:214) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:179) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:119) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:904) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:935) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:57) ~[spring-orm-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365) ~[spring-orm-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:390) ~[spring-orm-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:377) ~[spring-orm-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341) ~[spring-orm-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1837) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1774) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:593) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1105) ~[spring-context-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:867) ~[spring-context-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:549) ~[spring-context-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:141) ~[spring-boot-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:743) ~[spring-boot-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:390) ~[spring-boot-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:312) ~[spring-boot-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1214) ~[spring-boot-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1203) ~[spring-boot-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at com.example.demo.Application.main(Application.java:10) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49) ~[spring-boot-devtools-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+
+2019-08-15 16:41:36.659 ERROR 19676 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Exception during pool initialization.
+
+java.sql.SQLSyntaxErrorException: Unknown database 'demo'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:827) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:447) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:237) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:199) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:136) ~[HikariCP-3.2.0.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:369) ~[HikariCP-3.2.0.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:198) ~[HikariCP-3.2.0.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:467) ~[HikariCP-3.2.0.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:541) ~[HikariCP-3.2.0.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:115) ~[HikariCP-3.2.0.jar:na]
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112) ~[HikariCP-3.2.0.jar:na]
+	at org.hibernate.engine.jdbc.connections.internal.DatasourceConnectionProviderImpl.getConnection(DatasourceConnectionProviderImpl.java:122) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:180) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:43) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.hibernate.tool.schema.internal.exec.ImprovedExtractionContextImpl.getJdbcConnection(ImprovedExtractionContextImpl.java:60) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.hibernate.tool.schema.internal.exec.ImprovedExtractionContextImpl.getJdbcDatabaseMetaData(ImprovedExtractionContextImpl.java:67) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.hibernate.tool.schema.extract.internal.InformationExtractorJdbcDatabaseMetaDataImpl.getTables(InformationExtractorJdbcDatabaseMetaDataImpl.java:329) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.hibernate.tool.schema.extract.internal.DatabaseInformationImpl.getTablesInformation(DatabaseInformationImpl.java:120) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.hibernate.tool.schema.internal.GroupedSchemaMigratorImpl.performTablesMigration(GroupedSchemaMigratorImpl.java:65) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.performMigration(AbstractSchemaMigrator.java:207) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.doMigration(AbstractSchemaMigrator.java:114) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:183) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:72) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:310) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:467) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:939) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:57) ~[spring-orm-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365) ~[spring-orm-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:390) ~[spring-orm-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:377) ~[spring-orm-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341) ~[spring-orm-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1837) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1774) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:593) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1105) ~[spring-context-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:867) ~[spring-context-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:549) ~[spring-context-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:141) ~[spring-boot-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:743) ~[spring-boot-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:390) ~[spring-boot-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:312) ~[spring-boot-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1214) ~[spring-boot-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1203) ~[spring-boot-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at com.example.demo.Application.main(Application.java:10) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49) ~[spring-boot-devtools-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+
+2019-08-15 16:41:36.669 ERROR 19676 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : Unknown database 'demo'
+2019-08-15 16:41:36.737 ERROR 19676 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.SQLGrammarException: Unable to open JDBC Connection for DDL execution
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1778) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:593) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1105) ~[spring-context-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:867) ~[spring-context-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:549) ~[spring-context-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:141) ~[spring-boot-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:743) ~[spring-boot-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:390) ~[spring-boot-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:312) ~[spring-boot-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1214) ~[spring-boot-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1203) ~[spring-boot-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at com.example.demo.Application.main(Application.java:10) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49) ~[spring-boot-devtools-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+Caused by: javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.SQLGrammarException: Unable to open JDBC Connection for DDL execution
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:402) ~[spring-orm-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:377) ~[spring-orm-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341) ~[spring-orm-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1837) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1774) ~[spring-beans-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	... 21 common frames omitted
+Caused by: org.hibernate.exception.SQLGrammarException: Unable to open JDBC Connection for DDL execution
+	at org.hibernate.exception.internal.SQLExceptionTypeDelegate.convert(SQLExceptionTypeDelegate.java:63) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:42) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:113) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:99) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:69) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.hibernate.tool.schema.internal.exec.ImprovedExtractionContextImpl.getJdbcConnection(ImprovedExtractionContextImpl.java:60) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.hibernate.tool.schema.internal.exec.ImprovedExtractionContextImpl.getJdbcDatabaseMetaData(ImprovedExtractionContextImpl.java:67) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.hibernate.tool.schema.extract.internal.InformationExtractorJdbcDatabaseMetaDataImpl.getTables(InformationExtractorJdbcDatabaseMetaDataImpl.java:329) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.hibernate.tool.schema.extract.internal.DatabaseInformationImpl.getTablesInformation(DatabaseInformationImpl.java:120) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.hibernate.tool.schema.internal.GroupedSchemaMigratorImpl.performTablesMigration(GroupedSchemaMigratorImpl.java:65) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.performMigration(AbstractSchemaMigrator.java:207) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.doMigration(AbstractSchemaMigrator.java:114) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:183) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:72) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:310) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:467) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:939) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:57) ~[spring-orm-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365) ~[spring-orm-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:390) ~[spring-orm-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	... 25 common frames omitted
+Caused by: java.sql.SQLSyntaxErrorException: Unknown database 'demo'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:827) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:447) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:237) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:199) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:136) ~[HikariCP-3.2.0.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:369) ~[HikariCP-3.2.0.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:198) ~[HikariCP-3.2.0.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:467) ~[HikariCP-3.2.0.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:541) ~[HikariCP-3.2.0.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:115) ~[HikariCP-3.2.0.jar:na]
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112) ~[HikariCP-3.2.0.jar:na]
+	at org.hibernate.engine.jdbc.connections.internal.DatasourceConnectionProviderImpl.getConnection(DatasourceConnectionProviderImpl.java:122) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:180) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:43) ~[hibernate-core-5.3.10.Final.jar:5.3.10.Final]
+	... 40 common frames omitted
+
+2019-08-15 16:42:13.662  INFO 14588 --- [restartedMain] com.example.demo.Application             : Starting Application on DESKTOP-462H7L9 with PID 14588 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
+2019-08-15 16:42:13.664 DEBUG 14588 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
+2019-08-15 16:42:13.665  INFO 14588 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
+2019-08-15 16:42:20.483  INFO 14588 --- [restartedMain] com.example.demo.Application             : Started Application in 7.089 seconds (JVM running for 7.807)
+2019-08-15 16:43:29.777 ERROR 14588 --- [http-nio-8080-exec-1] c.example.demo.base.AppExceptionHandler  : org.springframework.validation.BeanPropertyBindingResult: 2 errors
+Field error in object 'userVo' on field 'mobile': rejected value [null]; codes [IsMobile.userVo.mobile,IsMobile.mobile,IsMobile.java.lang.String,IsMobile]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userVo.mobile,mobile]; arguments []; default message [mobile],true]; default message [手机号码格式错误]
+Field error in object 'userVo' on field 'mobile': rejected value [null]; codes [NotNull.userVo.mobile,NotNull.mobile,NotNull.java.lang.String,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userVo.mobile,mobile]; arguments []; default message [mobile]]; default message [不能为null]
+2019-08-15 16:43:33.234  INFO 14588 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : ***************************************************
+2019-08-15 16:43:33.235  INFO 14588 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : 请求开始, URI: /register, method: POST, params: {"mobile":["15521106350"],"password":["123456"]}
+2019-08-15 16:43:33.621 ERROR 14588 --- [http-nio-8080-exec-3] o.h.engine.jdbc.spi.SqlExceptionHelper   : Column 'birth' cannot be null
+2019-08-15 16:43:33.625 ERROR 14588 --- [http-nio-8080-exec-3] o.h.i.ExceptionMapperStandardImpl        : HHH000346: Error during managed flush [org.hibernate.exception.ConstraintViolationException: could not execute statement]
+2019-08-15 16:43:33.665 ERROR 14588 --- [http-nio-8080-exec-3] c.example.demo.base.AppExceptionHandler  : could not execute statement; SQL [n/a]; constraint [null]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement
+2019-08-15 16:44:31.438  INFO 9252 --- [restartedMain] com.example.demo.Application             : Starting Application on DESKTOP-462H7L9 with PID 9252 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
+2019-08-15 16:44:31.442 DEBUG 9252 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
+2019-08-15 16:44:31.444  INFO 9252 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
+2019-08-15 16:44:38.138  INFO 9252 --- [restartedMain] com.example.demo.Application             : Started Application in 7.006 seconds (JVM running for 7.79)
+2019-08-15 16:45:12.369  INFO 9252 --- [http-nio-8080-exec-2] com.example.demo.base.AopLog             : ***************************************************
+2019-08-15 16:45:12.370  INFO 9252 --- [http-nio-8080-exec-2] com.example.demo.base.AopLog             : 请求开始, URI: /register, method: POST, params: {"mobile":["15521106350"],"password":["123456"]}
+2019-08-15 16:45:12.781  INFO 9252 --- [http-nio-8080-exec-2] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"","message":"OK"}
+2019-08-15 16:45:21.296 ERROR 9252 --- [http-nio-8080-exec-3] c.example.demo.base.AppExceptionHandler  : Request method 'POST' not supported
+2019-08-15 16:45:24.715 ERROR 9252 --- [http-nio-8080-exec-5] c.example.demo.base.AppExceptionHandler  : null
+2019-08-15 16:48:53.953  INFO 19616 --- [restartedMain] com.example.demo.Application             : Starting Application on DESKTOP-462H7L9 with PID 19616 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
+2019-08-15 16:48:53.956 DEBUG 19616 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
+2019-08-15 16:48:53.956  INFO 19616 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
+2019-08-15 16:49:00.637  INFO 19616 --- [restartedMain] com.example.demo.Application             : Started Application in 6.961 seconds (JVM running for 7.739)
+2019-08-15 16:49:18.876 ERROR 19616 --- [http-nio-8080-exec-2] c.example.demo.base.AppExceptionHandler  : Request method 'POST' not supported
+2019-08-15 16:49:34.414  INFO 19616 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : ***************************************************
+2019-08-15 16:49:34.415  INFO 19616 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : 请求开始, URI: /login, method: POST, params: {"mobile":["15521106350"],"password":["123456"]}
+2019-08-15 16:49:34.653  INFO 19616 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"","message":"OK"}
+2019-08-15 16:49:37.699  INFO 19616 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : ***************************************************
+2019-08-15 16:49:37.699  INFO 19616 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : 请求开始, URI: /getUserInfo, method: GET, params: {}
+2019-08-15 16:49:37.702  INFO 19616 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":{"id":2},"message":"OK"}
+2019-08-15 16:50:37.300  INFO 19616 --- [http-nio-8080-exec-6] com.example.demo.base.AopLog             : ***************************************************
+2019-08-15 16:50:37.300  INFO 19616 --- [http-nio-8080-exec-6] com.example.demo.base.AopLog             : 请求开始, URI: /updateUserInfo, method: POST, params: {"nickname":["zbc"],"birth":["1997.11.27"],"sex":["male"],"head":["www.baidu.com"]}
+2019-08-15 16:50:37.531  INFO 19616 --- [http-nio-8080-exec-6] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"","message":"OK"}
+2019-08-15 16:50:41.223  INFO 19616 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : ***************************************************
+2019-08-15 16:50:41.224  INFO 19616 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : 请求开始, URI: /getUserInfo, method: GET, params: {}
+2019-08-15 16:50:41.226  INFO 19616 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":{"birth":"1997.11.27","head":"www.baidu.com","id":2,"nickname":"zbc","sex":"male"},"message":"OK"}
+2019-08-15 16:51:16.246  INFO 19616 --- [http-nio-8080-exec-8] com.example.demo.base.AopLog             : ***************************************************
+2019-08-15 16:51:16.246  INFO 19616 --- [http-nio-8080-exec-8] com.example.demo.base.AopLog             : 请求开始, URI: /login, method: POST, params: {"mobile":["15521106350"],"password":["123456"]}
+2019-08-15 16:51:16.285 ERROR 19616 --- [http-nio-8080-exec-8] o.h.engine.jdbc.spi.SqlExceptionHelper   : Table 'demo.tb_user' doesn't exist
+2019-08-15 16:51:16.290 ERROR 19616 --- [http-nio-8080-exec-8] c.example.demo.base.AppExceptionHandler  : could not extract ResultSet; SQL [n/a]; nested exception is org.hibernate.exception.SQLGrammarException: could not extract ResultSet
+2019-08-15 16:53:04.191  INFO 17440 --- [restartedMain] com.example.demo.Application             : Starting Application on DESKTOP-462H7L9 with PID 17440 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
+2019-08-15 16:53:04.194 DEBUG 17440 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
+2019-08-15 16:53:04.195  INFO 17440 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
+2019-08-15 16:53:11.234  INFO 17440 --- [restartedMain] com.example.demo.Application             : Started Application in 7.342 seconds (JVM running for 8.131)
+2019-08-15 16:53:11.778  INFO 17440 --- [http-nio-8080-exec-2] com.example.demo.base.AopLog             : ***************************************************
+2019-08-15 16:53:11.779  INFO 17440 --- [http-nio-8080-exec-2] com.example.demo.base.AopLog             : 请求开始, URI: /login, method: POST, params: {"mobile":["15521106350"],"password":["123456"]}
+2019-08-15 16:53:11.944  INFO 17440 --- [http-nio-8080-exec-2] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":50011,"message":"手机号码不存在"}
+2019-08-15 16:53:15.792  INFO 17440 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : ***************************************************
+2019-08-15 16:53:15.792  INFO 17440 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : 请求开始, URI: /login, method: POST, params: {"mobile":["15521106350"],"password":["123456"]}
+2019-08-15 16:53:15.826  INFO 17440 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":50011,"message":"手机号码不存在"}
+2019-08-15 16:53:24.067  INFO 17440 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : ***************************************************
+2019-08-15 16:53:24.067  INFO 17440 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : 请求开始, URI: /register, method: POST, params: {"mobile":["15521106350"],"password":["123456"]}
+2019-08-15 16:53:24.467  INFO 17440 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"","message":"OK"}
+2019-08-15 16:53:29.052  INFO 17440 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : ***************************************************
+2019-08-15 16:53:29.052  INFO 17440 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : 请求开始, URI: /login, method: POST, params: {"mobile":["15521106350"],"password":["123456"]}
+2019-08-15 16:53:29.194  INFO 17440 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"","message":"OK"}
+2019-08-15 16:53:30.357  INFO 17440 --- [http-nio-8080-exec-6] com.example.demo.base.AopLog             : ***************************************************
+2019-08-15 16:53:30.358  INFO 17440 --- [http-nio-8080-exec-6] com.example.demo.base.AopLog             : 请求开始, URI: /login, method: POST, params: {"mobile":["15521106350"],"password":["123456"]}
+2019-08-15 16:53:30.426  INFO 17440 --- [http-nio-8080-exec-6] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"","message":"OK"}
+2019-08-15 16:53:31.360  INFO 17440 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : ***************************************************
+2019-08-15 16:53:31.360  INFO 17440 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : 请求开始, URI: /login, method: POST, params: {"mobile":["15521106350"],"password":["123456"]}
+2019-08-15 16:53:31.474  INFO 17440 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"","message":"OK"}
+2019-08-15 16:53:36.082  INFO 17440 --- [http-nio-8080-exec-8] com.example.demo.base.AopLog             : ***************************************************
+2019-08-15 16:53:36.082  INFO 17440 --- [http-nio-8080-exec-8] com.example.demo.base.AopLog             : 请求开始, URI: /login, method: POST, params: {"mobile":["15521106350"],"password":["123456"]}
+2019-08-15 16:53:36.203  INFO 17440 --- [http-nio-8080-exec-8] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"","message":"OK"}
+2019-08-15 16:54:04.856  INFO 17440 --- [http-nio-8080-exec-9] com.example.demo.base.AopLog             : ***************************************************
+2019-08-15 16:54:04.856  INFO 17440 --- [http-nio-8080-exec-9] com.example.demo.base.AopLog             : 请求开始, URI: /updatePass, method: POST, params: {"oldPass":["123456"],"newPass":["666666"]}
+2019-08-15 16:54:05.038  INFO 17440 --- [http-nio-8080-exec-9] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"","message":"OK"}
+2019-08-15 16:54:11.600  INFO 17440 --- [http-nio-8080-exec-10] com.example.demo.base.AopLog             : ***************************************************
+2019-08-15 16:54:11.600  INFO 17440 --- [http-nio-8080-exec-10] com.example.demo.base.AopLog             : 请求开始, URI: /login, method: POST, params: {"mobile":["15521106350"],"password":["123456"]}
+2019-08-15 16:54:11.708  INFO 17440 --- [http-nio-8080-exec-10] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":50012,"message":"密码错误"}
+2019-08-15 16:54:16.327  INFO 17440 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : ***************************************************
+2019-08-15 16:54:16.327  INFO 17440 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : 请求开始, URI: /login, method: POST, params: {"mobile":["15521106350"],"password":["666666"]}
+2019-08-15 16:54:16.402  INFO 17440 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"","message":"OK"}
+2019-08-15 16:54:27.242  INFO 20368 --- [restartedMain] com.example.demo.Application             : Starting Application on DESKTOP-462H7L9 with PID 20368 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
+2019-08-15 16:54:27.244 DEBUG 20368 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
+2019-08-15 16:54:27.245  INFO 20368 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
+2019-08-15 16:54:33.683  INFO 20368 --- [restartedMain] com.example.demo.Application             : Started Application in 6.69 seconds (JVM running for 7.413)
+2019-08-15 16:54:34.740  INFO 20368 --- [http-nio-8080-exec-2] com.example.demo.base.AopLog             : ***************************************************
+2019-08-15 16:54:34.742  INFO 20368 --- [http-nio-8080-exec-2] com.example.demo.base.AopLog             : 请求开始, URI: /login, method: POST, params: {"mobile":["15521106350"],"password":["666666"]}
+2019-08-15 16:54:34.944  INFO 20368 --- [http-nio-8080-exec-2] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"","message":"OK"}
+2019-08-15 16:54:37.441  INFO 20368 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : ***************************************************
+2019-08-15 16:54:37.441  INFO 20368 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : 请求开始, URI: /login, method: POST, params: {"mobile":["15521106350"],"password":["666666"]}
+2019-08-15 16:54:37.491  INFO 20368 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"","message":"OK"}
+2019-08-15 16:54:46.895  INFO 20368 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : ***************************************************
+2019-08-15 16:54:46.896  INFO 20368 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : 请求开始, URI: /updatePass, method: POST, params: {"oldPass":["666666"],"newPass":["123456"]}
+2019-08-15 16:54:47.077  INFO 20368 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"","message":"OK"}
+2019-08-15 16:54:53.809  INFO 20368 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : ***************************************************
+2019-08-15 16:54:53.810  INFO 20368 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : 请求开始, URI: /login, method: POST, params: {"mobile":["15521106350"],"password":["123456"]}
+2019-08-15 16:54:53.863  INFO 20368 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"","message":"OK"}
+2019-08-15 16:55:24.697  INFO 20368 --- [http-nio-8080-exec-6] com.example.demo.base.AopLog             : ***************************************************
+2019-08-15 16:55:24.697  INFO 20368 --- [http-nio-8080-exec-6] com.example.demo.base.AopLog             : 请求开始, URI: /updateUserInfo, method: POST, params: {"birth":["1997/11/27"]}
+2019-08-15 16:55:24.873  INFO 20368 --- [http-nio-8080-exec-6] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"","message":"OK"}
+2019-08-15 16:55:29.110  INFO 20368 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : ***************************************************
+2019-08-15 16:55:29.110  INFO 20368 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : 请求开始, URI: /getUserInfo, method: GET, params: {}
+2019-08-15 16:55:29.113  INFO 20368 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":{"birth":"1997/11/27","id":2},"message":"OK"}
+2019-08-15 16:57:19.575  INFO 15236 --- [restartedMain] com.example.demo.Application             : Starting Application on DESKTOP-462H7L9 with PID 15236 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
+2019-08-15 16:57:19.578 DEBUG 15236 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
+2019-08-15 16:57:19.579  INFO 15236 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
+2019-08-15 16:57:26.672  INFO 15236 --- [restartedMain] com.example.demo.Application             : Started Application in 7.376 seconds (JVM running for 8.211)
+2019-08-15 16:57:27.217  INFO 15236 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : ***************************************************
+2019-08-15 16:57:27.218  INFO 15236 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : 请求开始, URI: /getUserInfo, method: GET, params: {}
+2019-08-15 16:57:27.251  INFO 15236 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":{"birth":"1997/11/27","id":2},"message":"OK"}
+2019-08-15 16:57:37.913  INFO 15236 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : ***************************************************
+2019-08-15 16:57:37.914  INFO 15236 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : 请求开始, URI: /updateUserInfo, method: POST, params: {"birth":["1997/11/27"]}
+2019-08-15 16:57:38.102  INFO 15236 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"","message":"OK"}
+2019-08-15 16:57:41.063  INFO 15236 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : ***************************************************
+2019-08-15 16:57:41.063  INFO 15236 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : 请求开始, URI: /getUserInfo, method: GET, params: {}
+2019-08-15 16:57:41.063  INFO 15236 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":{"birth":"1997/11/27","id":2},"message":"OK"}
+2019-08-15 16:58:24.099  INFO 15236 --- [http-nio-8080-exec-2] com.example.demo.base.AopLog             : ***************************************************
+2019-08-15 16:58:24.099  INFO 15236 --- [http-nio-8080-exec-2] com.example.demo.base.AopLog             : 请求开始, URI: /updateUserInfo, method: POST, params: {"birth":["1997/11/27"],"sex":["male"],"head":["www.baidu.com"]}
+2019-08-15 16:58:24.285  INFO 15236 --- [http-nio-8080-exec-2] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"","message":"OK"}
+2019-08-15 16:58:45.052  INFO 15236 --- [http-nio-8080-exec-6] com.example.demo.base.AopLog             : ***************************************************
+2019-08-15 16:58:45.053  INFO 15236 --- [http-nio-8080-exec-6] com.example.demo.base.AopLog             : 请求开始, URI: /getUserInfo, method: GET, params: {}
+2019-08-15 16:58:45.054  INFO 15236 --- [http-nio-8080-exec-6] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":{"birth":"1997/11/27","head":"www.baidu.com","id":2,"sex":"male"},"message":"OK"}
+2019-08-15 16:59:04.221  INFO 15236 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : ***************************************************
+2019-08-15 16:59:04.222  INFO 15236 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : 请求开始, URI: /updateUserInfo, method: POST, params: {"nickname":["zbc"]}
+2019-08-15 16:59:04.366  INFO 15236 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"","message":"OK"}
+2019-08-15 16:59:16.606  INFO 15236 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : ***************************************************
+2019-08-15 16:59:16.607  INFO 15236 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : 请求开始, URI: /getUserInfo, method: GET, params: {}
+2019-08-15 16:59:16.608  INFO 15236 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":{"birth":"1997/11/27","head":"www.baidu.com","id":2,"nickname":"zbc","sex":"male"},"message":"OK"}
+2019-08-15 16:59:41.725  INFO 15236 --- [http-nio-8080-exec-8] com.example.demo.base.AopLog             : ***************************************************
+2019-08-15 16:59:41.726  INFO 15236 --- [http-nio-8080-exec-8] com.example.demo.base.AopLog             : 请求开始, URI: /updateUserInfo, method: POST, params: {"head":["https://github.com/littleredhat1997"]}
+2019-08-15 16:59:41.878  INFO 15236 --- [http-nio-8080-exec-8] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"","message":"OK"}
+2019-08-15 16:59:44.892  INFO 15236 --- [http-nio-8080-exec-9] com.example.demo.base.AopLog             : ***************************************************
+2019-08-15 16:59:44.892  INFO 15236 --- [http-nio-8080-exec-9] com.example.demo.base.AopLog             : 请求开始, URI: /getUserInfo, method: GET, params: {}
+2019-08-15 16:59:44.894  INFO 15236 --- [http-nio-8080-exec-9] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":{"birth":"1997/11/27","head":"https://github.com/littleredhat1997","id":2,"nickname":"zbc","sex":"male"},"message":"OK"}
+2019-08-15 17:00:41.788  INFO 20424 --- [restartedMain] com.example.demo.Application             : Starting Application on DESKTOP-462H7L9 with PID 20424 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
+2019-08-15 17:00:41.790 DEBUG 20424 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
+2019-08-15 17:00:41.791  INFO 20424 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
+2019-08-15 17:00:49.371  INFO 20424 --- [restartedMain] com.example.demo.Application             : Started Application in 7.83 seconds (JVM running for 8.674)
+2019-08-15 17:01:02.020  INFO 20424 --- [http-nio-8080-exec-2] com.example.demo.base.AopLog             : ***************************************************
+2019-08-15 17:01:02.021  INFO 20424 --- [http-nio-8080-exec-2] com.example.demo.base.AopLog             : 请求开始, URI: /getUserInfo, method: GET, params: {}
+2019-08-15 17:01:02.049  INFO 20424 --- [http-nio-8080-exec-2] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":{"birth":"1997/11/27","head":"https://github.com/littleredhat1997","id":2,"nickname":"zbc","sex":"male"},"message":"OK"}
+2019-08-15 17:01:15.736 ERROR 20424 --- [http-nio-8080-exec-3] c.example.demo.base.AppExceptionHandler  : org.springframework.validation.BeanPropertyBindingResult: 1 errors
+Field error in object 'infoVo' on field 'nickname': rejected value [a]; codes [Length.infoVo.nickname,Length.nickname,Length.java.lang.String,Length]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [infoVo.nickname,nickname]; arguments []; default message [nickname],12,3]; default message [长度需要在3和12之间]
+2019-08-15 17:01:23.955  INFO 20424 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : ***************************************************
+2019-08-15 17:01:23.955  INFO 20424 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : 请求开始, URI: /updateUserInfo, method: POST, params: {}
+2019-08-15 17:01:24.135  INFO 20424 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"","message":"OK"}
+2019-08-15 17:01:27.801  INFO 20424 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : ***************************************************
+2019-08-15 17:01:27.802  INFO 20424 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : 请求开始, URI: /getUserInfo, method: GET, params: {}
+2019-08-15 17:01:27.802  INFO 20424 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":{"birth":"1997/11/27","head":"https://github.com/littleredhat1997","id":2,"nickname":"zbc","sex":"male"},"message":"OK"}

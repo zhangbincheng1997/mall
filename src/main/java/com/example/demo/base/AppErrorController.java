@@ -38,8 +38,6 @@ public class AppErrorController implements ErrorController {
     public String errorPageHandler(HttpServletRequest request, HttpServletResponse response) {
         int status = response.getStatus();
         switch (status) {
-            case 403:
-                return "error/403";
             case 404:
                 return "error/404";
             case 500:

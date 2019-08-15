@@ -1,14 +1,14 @@
 package com.example.demo.vo;
 
-import com.example.demo.vo.validator.IsMobile;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
-public class LoginVo {
+public class UserVo {
 
     @NotNull
-    @IsMobile
+    @Pattern(regexp = "1\\d{10}") // 手机号码
     private String mobile;
 
     @NotNull

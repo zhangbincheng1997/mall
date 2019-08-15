@@ -27,8 +27,6 @@ public class MySQLTest {
         String salt = UUIDUtils.UUID();
         user.setPassword(MD5Utils.MD5Salt("password", salt));
         user.setSalt(salt);
-        user.setRegisterDate(new Date());
-        user.setLastLoginDate(new Date());
         System.out.println(user);
 
         userRepository.save(user);

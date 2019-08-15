@@ -4,7 +4,8 @@ import com.example.demo.base.Result;
 import com.example.demo.access.AccessLimit;
 import com.example.demo.entity.User;
 import com.example.demo.service.UserService;
-import com.example.demo.vo.LoginVo;
+import com.example.demo.vo.InfoVo;
+import com.example.demo.vo.UserVo;
 import com.example.demo.vo.UpdatePassVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
@@ -31,7 +33,7 @@ public class UserController {
     })
     @PostMapping("/register")
     @ResponseBody
-    public Result register(@Valid LoginVo loginVo) {
+    public Result register(@Valid UserVo loginVo) {
         return userService.register(loginVo);
     }
 
@@ -42,7 +44,7 @@ public class UserController {
     })
     @RequestMapping(value = "/login", method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
-    public Result login(HttpServletResponse response, @Valid LoginVo loginVo) {
+    public Result login(HttpServletResponse response, @Valid UserVo loginVo) {
         return userService.login(response, loginVo);
     }
 
@@ -50,12 +52,12 @@ public class UserController {
     @GetMapping("/logout")
     @ResponseBody
     @AccessLimit
-    public Result logout(HttpServletResponse response, User user) {
-        return userService.logout(response, user);
+    public Result logout(HttpServletRequest request, HttpServletResponse response) {
+        return userService.logout(request, response);
     }
 
     @ApiOperation("获取用户信息")
-    @GetMapping("/getUserInfo")
+    @RequestMapping(value = "/getUserInfo", method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
     @AccessLimit
     public Result getUserInfo(User user) {
@@ -69,8 +71,20 @@ public class UserController {
     })
     @PostMapping("/updatePass")
     @ResponseBody
-    @AccessLimit
-    public Result updatePass(User user, @Valid UpdatePassVo updatePassVo) {
-        return userService.updatePass(user, updatePassVo);
+    public Result updatePass(HttpServletRequest request, HttpServletResponse response, @Valid UpdatePassVo updatePassVo) {
+        return userService.updatePass(request, response, updatePassVo);
+    }
+
+    @ApiOperation("修改用户信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "nickname", value = "昵称", dataType = "String"),
+            @ApiImplicitParam(name = "birth", value = "生日", dataType = "String"),
+            @ApiImplicitParam(name = "sex", value = "性别", dataType = "String"),
+            @ApiImplicitParam(name = "head", value = "头像", dataType = "String"),
+    })
+    @PostMapping("/updateUserInfo")
+    @ResponseBody
+    public Result updateUserInfo(HttpServletRequest request, HttpServletResponse response, @Valid InfoVo infoVo) {
+        return userService.updateUserInfo(request, response, infoVo);
     }
 }

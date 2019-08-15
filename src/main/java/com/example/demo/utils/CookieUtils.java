@@ -6,20 +6,34 @@ import javax.servlet.http.HttpServletResponse;
 
 public class CookieUtils {
 
-    // get cookie token
-    private String getCookieToken(HttpServletRequest request) {
+    /**
+     * 根据key获取cookie
+     *
+     * @param request
+     * @param key
+     * @return
+     */
+    public static String getCookie(HttpServletRequest request, String key) {
         Cookie[] cookies = request.getCookies();
+        if(cookies == null) return null;
         for (Cookie cookie : cookies) {
-            if (cookie.getName().equals(Constants.COOKIE_TOKEN)) {
+            if (cookie.getName().equals(key)) {
                 return cookie.getValue();
             }
         }
-        return "";
+        return null;
     }
 
-    // set cookie token
-    private void setCookieToken(HttpServletResponse response, String token, int expiry) {
-        Cookie cookie = new Cookie(Constants.COOKIE_TOKEN, token);
+    /**
+     * 设置cookie(key, value)
+     *
+     * @param response
+     * @param key
+     * @param value
+     * @param expiry
+     */
+    public static void setCookie(HttpServletResponse response, String key, String value, int expiry) {
+        Cookie cookie = new Cookie(key, value);
         cookie.setMaxAge(expiry);
         cookie.setPath("/");
         response.addCookie(cookie);

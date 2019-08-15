@@ -1,12 +1,7 @@
 package com.example.demo.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 
 @Entity
 @Table(name = "tb_user")
@@ -16,26 +11,31 @@ public class User implements Serializable {
 
     @Id
     @GeneratedValue
-    @Column(name = "id", nullable = false)
     private Long id;
 
-    // phone全局唯一
-    @Column(name = "mobile", nullable = false, unique = true)
+    // 手机号码
+    @Column(name = "mobile", nullable = false, unique = true) // 全局唯一
     private String mobile;
 
+    // 密码
     @Column(name = "password", nullable = false)
     private String password;
 
+    // 加盐
     @Column(name = "salt", nullable = false)
     private String salt;
 
-    // 注册时间
-    @Column(name = "register_date")
-    private Date registerDate;
-
-    // 上次登录时间
-    @Column(name = "last_login_date")
-    private Date lastLoginDate;
+    /**
+     * 通过关联表来保存一对一的关系
+     * 定义了一张叫"tb_user_info"的表
+     * joinColumns定义一个外键叫"user_id"，指向关系维护端User的主键
+     * inverseJoinColumns定义了一个外键叫"info_id",指向关系被维护端Info的主键
+     */
+    @OneToOne(cascade = CascadeType.ALL) // 一对一
+    @JoinTable(name = "tb_user_info",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "info_id"))
+    private Info info;
 
     public Long getId() {
         return id;
@@ -69,20 +69,12 @@ public class User implements Serializable {
         this.salt = salt;
     }
 
-    public Date getRegisterDate() {
-        return registerDate;
+    public Info getInfo() {
+        return info;
     }
 
-    public void setRegisterDate(Date registerDate) {
-        this.registerDate = registerDate;
-    }
-
-    public Date getLastLoginDate() {
-        return lastLoginDate;
-    }
-
-    public void setLastLoginDate(Date lastLoginDate) {
-        this.lastLoginDate = lastLoginDate;
+    public void setInfo(Info info) {
+        this.info = info;
     }
 
     @Override
@@ -92,30 +84,7 @@ public class User implements Serializable {
                 ", mobile='" + mobile + '\'' +
                 ", password='" + password + '\'' +
                 ", salt='" + salt + '\'' +
-                ", registerDate=" + registerDate +
-                ", lastLoginDate=" + lastLoginDate +
+                ", info=" + info +
                 '}';
-    }
-
-    public class UserInfo {
-
-        // 名字
-        private String name;
-
-        // 年龄
-        private Integer age;
-
-        // 性别
-        private String sex;
-
-        // 昵称
-        private String nickname;
-
-        // 地址
-        private String address;
-
-        // 头像
-        private String head;
-
     }
 }
