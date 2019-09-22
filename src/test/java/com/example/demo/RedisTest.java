@@ -1,7 +1,6 @@
 package com.example.demo;
 
 import com.example.demo.component.RedisService;
-import com.example.demo.entity.User;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,15 +19,5 @@ public class RedisTest {
     public void testRedis() {
         redisService.set("school", "xmu");
         Assert.assertEquals("xmu", redisService.get("school"));
-    }
-
-    @Test
-    public void testRedisObj() {
-        User user = new User();
-        user.setMobile("account");
-        user.setPassword("password");
-
-        redisService.set("user", user);
-        Assert.assertEquals(user.toString(), redisService.get("user").toString());
     }
 }

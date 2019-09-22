@@ -1,12 +1,14 @@
 package com.example.demo.component;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.TimeUnit;
 
 @Component
+@Order(1)
 public class RedisService {
 
     @Autowired
@@ -60,5 +62,25 @@ public class RedisService {
      */
     public boolean hasKey(String key) {
         return redisTemplate.hasKey(key);
+    }
+
+    /**
+     * value + 1
+     *
+     * @param key
+     * @return
+     */
+    public Long incr(String key) {
+        return redisTemplate.opsForValue().increment(key);
+    }
+
+    /**
+     * value - 1
+     *
+     * @param key
+     * @return
+     */
+    public Long decr(String key) {
+        return redisTemplate.opsForValue().decrement(key);
     }
 }

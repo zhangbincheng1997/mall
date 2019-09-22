@@ -1,6 +1,6 @@
 package com.example.demo.access;
 
-import com.example.demo.entity.User;
+import com.example.demo.model.User;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.support.WebDataBinderFactory;

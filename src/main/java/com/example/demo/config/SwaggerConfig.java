@@ -27,9 +27,8 @@ public class SwaggerConfig {
     // http://localhost:8080/swagger-ui.html
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("swagger-ui RESTful APIs")
-                .description("swagger-ui")
-                .termsOfServiceUrl("http://localhost:8080/")
+                .title("SwaggerUI演示")
+                .description("Demo模块")
                 .contact("1656704949@qq.com")
                 .version("1.0")
                 .build();

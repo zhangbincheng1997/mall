@@ -1,7 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.base.Result;
-import com.example.demo.entity.User;
+import com.example.demo.model.User;
 import com.example.demo.vo.InfoVo;
 import com.example.demo.vo.UserVo;
 import com.example.demo.vo.UpdatePassVo;

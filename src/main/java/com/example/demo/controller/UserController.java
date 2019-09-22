@@ -2,7 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.base.Result;
 import com.example.demo.access.AccessLimit;
-import com.example.demo.entity.User;
+import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 import com.example.demo.vo.InfoVo;
 import com.example.demo.vo.UserVo;
@@ -12,12 +12,12 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
 
 @Controller
 @Api(tags = "用户控制类")
@@ -31,9 +31,9 @@ public class UserController {
             @ApiImplicitParam(name = "mobile", value = "手机号码", required = true, dataType = "String"),
             @ApiImplicitParam(name = "password", value = "密码", required = true, dataType = "String"),
     })
-    @PostMapping("/register")
+    @RequestMapping("/register")
     @ResponseBody
-    public Result register(@Valid UserVo loginVo) {
+    public Result register(@Validated UserVo loginVo) {
         return userService.register(loginVo);
     }
 
@@ -42,14 +42,14 @@ public class UserController {
             @ApiImplicitParam(name = "mobile", value = "手机号码", required = true, dataType = "String"),
             @ApiImplicitParam(name = "password", value = "密码", required = true, dataType = "String"),
     })
-    @PostMapping(value = "/login")
+    @RequestMapping(value = "/login")
     @ResponseBody
-    public Result login(HttpServletResponse response, @Valid UserVo loginVo) {
+    public Result login(HttpServletResponse response, @Validated UserVo loginVo) {
         return userService.login(response, loginVo);
     }
 
     @ApiOperation("注销")
-    @GetMapping("/logout")
+    @RequestMapping("/logout")
     @ResponseBody
     @AccessLimit
     public Result logout(HttpServletRequest request, HttpServletResponse response) {
@@ -57,7 +57,7 @@ public class UserController {
     }
 
     @ApiOperation("获取用户信息")
-    @RequestMapping(value = "/getUserInfo", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "/getUserInfo")
     @ResponseBody
     @AccessLimit
     public Result getUserInfo(User user) {
@@ -69,9 +69,9 @@ public class UserController {
             @ApiImplicitParam(name = "oldPass", value = "旧密码", required = true, dataType = "String"),
             @ApiImplicitParam(name = "newPass", value = "新密码", required = true, dataType = "String"),
     })
-    @PostMapping("/updatePass")
+    @RequestMapping("/updatePass")
     @ResponseBody
-    public Result updatePass(HttpServletRequest request, HttpServletResponse response, @Valid UpdatePassVo updatePassVo) {
+    public Result updatePass(HttpServletRequest request, HttpServletResponse response, @Validated UpdatePassVo updatePassVo) {
         return userService.updatePass(request, response, updatePassVo);
     }
 
@@ -84,7 +84,7 @@ public class UserController {
     })
     @PostMapping("/updateUserInfo")
     @ResponseBody
-    public Result updateUserInfo(HttpServletRequest request, HttpServletResponse response, @Valid InfoVo infoVo) {
+    public Result updateUserInfo(HttpServletRequest request, HttpServletResponse response, @Validated InfoVo infoVo) {
         return userService.updateUserInfo(request, response, infoVo);
     }
 }

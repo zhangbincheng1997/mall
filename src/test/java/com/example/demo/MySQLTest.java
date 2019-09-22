@@ -1,7 +1,7 @@
 package com.example.demo;
 
-import com.example.demo.entity.User;
-import com.example.demo.repository.UserRepository;
+import com.example.demo.model.User;
+import com.example.demo.mapper.UserMapper;
 import com.example.demo.utils.MD5Utils;
 import com.example.demo.utils.UUIDUtils;
 import org.junit.Assert;
@@ -11,25 +11,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Date;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class MySQLTest {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserMapper userMapper;
 
     @Test
     public void testMySQL() {
         User user = new User();
-        user.setMobile("account");
+        user.setEmail("test");
         String salt = UUIDUtils.UUID();
-        user.setPassword(MD5Utils.MD5Salt("password", salt));
+        String password = MD5Utils.MD5Salt("password", salt);
+        user.setPassword(password);
         user.setSalt(salt);
         System.out.println(user);
 
-        userRepository.save(user);
-        Assert.assertEquals("account", userRepository.findById(2L).get().getMobile());
+        userMapper.insert(user);
+        Assert.assertEquals(salt, userMapper.getByEmail(user.getEmail()).getSalt());
     }
 }

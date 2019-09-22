@@ -1,80 +1,91 @@
-## 安装LNMP
-https://lnmp.org/
+## MySQL
+1. 设置MySQL服务允许外网访问
+```
+$ vim /etc/my.cnf
 
-设置MySQL服务允许外网访问
-/etc/my.ini
 [mysqld]
 port        = 3306
 bind-address = 0.0.0.0
+```
 
-设置MySQL用户允许外网访问
+2. 设置MySQL用户允许外网访问
+```
 $ mysql -u root -p
-mysql> GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '123456';
+
+mysql> GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '123456'; 
 mysql> FLUSH PRIVILEGES;
-
-## 安装Redis
-yum install redis
-/etc/redis/redis.conf
-```
-bind 127.0.0.1
-protected-mode yes
-# requirepass foobared
 ```
 
+## Tomcat
+1. 安装
 ```
-# bind 127.0.0.1
-protected-mode no
-requirepass 123456
+$ wget http://us.mirrors.quenda.co/apache/tomcat/tomcat-9/v9.0.24/bin/apache-tomcat-9.0.24.tar.gz
+$ tar -zxvf apache-tomcat-9.0.24.tar.gz
+$ mv apache-tomcat-9.0.24.tar.gz tomcat
+$ mv tomcat /usr/local
 ```
-开机自启动：chkconfig --add redis
 
-## 安装RabbitMQ
-下载：
-http://www.rabbitmq.com/releases/erlang/erlang-xxxx.rpm
-http://www.rabbitmq.com/releases/rabbitmq-server/xxxx/rabbitmq-server-xxxx.rpm
-安装：
-rpm -ivh erlang-xxxx.rpm
-rpm -ivh rabbitmq-server-xxxx.rpm
-依赖：
-yum install socat
+## Redis
+1. 安装
+```
+$ yum install redis
+```
 
-开启web插件：(localhost:15672)
-rabbitmq-plugins enable rabbitmq_management
-启动：
-service rabbitmq-server start
-关闭：
-service rabbitmq-server stop
+2. 配置
+```
+$ vim /etc/redis.conf
 
-创建用户:
-rabbitmqctl add_user root 123456
-rabbitmqctl set_user_tags root administrator
+bind 127.0.0.1         ----> # bind 127.0.0.1
+protected-mode yes     ----> protected-mode no
+# requirepass foobared ----> requirepass 123456
+daemonize no           ----> daemonize yes
+```
 
-Admin-root-Current permissions-Set permission
+3. 启动
+```
+$ redis-server /etc/redis.conf
+```
 
-## 安装Kafka
-$ wget https://mirrors.tuna.tsinghua.edu.cn/apache/kafka/2.3.0/kafka_2.12-2.3.0.tgz
-$ tar -zxvf kafka_2.12-2.3.0.tgz
-$ cd kafka_2.12-2.3.0.tgz
-$ vim config/server.properties
-advertised.listeners=PLAINTEXT://www.littleredhat1997.com:9092
-$ vim /etc/hosts
-xxx.xx.xx.xx www.littleredhat1997.com
+## RabbitMQ
+1. 安装
+```
+$ wget https://www.rabbitmq.com/releases/erlang/erlang-19.0.4-1.el7.centos.x86_64.rpm
+$ wget https://www.rabbitmq.com/releases/rabbitmq-server/v3.6.15/rabbitmq-server-3.6.15-1.el7.noarch.rpm
+$ rpm -ivh erlang-19.0.4-1.el7.centos.x86_64.rpm
+$ rpm -ivh rabbitmq-server-3.6.15-1.el7.noarch.rpm
+$ yum install socat
+```
 
-启动：
-$ nohup bin/zookeeper-server-start.sh config/zookeeper.properties &
-$ nohup bin/kafka-server-start.sh config/server.properties &
+2. 启动/关闭
+```
+$ service rabbitmq-server start
+$ service rabbitmq-server stop
+```
 
-关闭：
+3. 开启web插件
+```
+$ rabbitmq-plugins enable rabbitmq_management
 
-$ bin/kafka-server-stop.sh
+localhost:15672
 
-如果内存不足：
-$ vim bin/zookeeper-server-start.sh
-$ export KAFKA_HEAP_OPTS="-Xmx256M -Xms256M"
-$ vim bin/kafka-server-start.sh
-$ export KAFKA_HEAP_OPTS="-Xmx256M -Xms256M"
+# 创建用户
+Admin ----> Add a user ----> Username , Password and Tags(Admin)
+# 远程限制
+Admin ----> All users ----> Set permission
+```
 
 ## 端口开放
-/etc/sysconfig/iptables
--A INPUT -p tcp -m tcp --dport xxxx -j ACCEPT
-service iptables restart
+1. 修改
+```
+$ vim /etc/sysconfig/iptables
+```
+
+2. 重启
+```
+$ service iptables restart
+```
+
+3. 查看端口
+```
+$ iptables -L -n
+```

@@ -1,6 +1,6 @@
 package com.example.demo.access;
 
-import com.example.demo.entity.User;
+import com.example.demo.model.User;
 
 public class UserContext {
 

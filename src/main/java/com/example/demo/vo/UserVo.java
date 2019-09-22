@@ -1,41 +1,23 @@
 package com.example.demo.vo;
 
-import org.hibernate.validator.constraints.Length;
+import lombok.Data;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
+@Data
 public class UserVo {
 
-    @NotNull
-    @Pattern(regexp = "1\\d{10}") // 手机号码
-    private String mobile;
+//    @NotNull
+//    @Pattern(regexp = "1\\d{10}") // 手机号码
+//    private String mobile;
+
+    @NotNull(message = "邮箱不能为空")
+    @Email(message = "邮箱不符合规范") // 邮箱
+    private String email;
 
     @NotNull
-    @Length(min = 3, max = 12)
+    @Size(min = 3, max = 12)
     private String password;
-
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    @Override
-    public String toString() {
-        return "UserVo{" +
-                "mobile='" + mobile + '\'' +
-                ", password='" + password + '\'' +
-                '}';
-    }
 }
