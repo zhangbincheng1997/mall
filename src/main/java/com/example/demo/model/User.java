@@ -1,44 +1,133 @@
 package com.example.demo.model;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
-import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
 
-/**
- * JPA + MyBatis
- */
-
-@Data // auto generate getter setter
-@Entity
-@Table(name = "user")
-public class User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // 自增
-    @Column(name = "id")
+public class User implements Serializable {
     private Long id;
 
-    // 手机号码
-    @Column(name = "email", nullable = false, unique = true) // 不可为空 全局唯一
-    private String email;
+    private String username;
 
-    // 密码
-    @Column(name = "password", nullable = false) // 不可为空
     private String password;
 
-    // 加盐
-    @Column(name = "salt", nullable = false) // 不可为空
     private String salt;
 
-    /**
-     * 通过关联表来保存一对一的关系
-     * JoinColumn 通过创建新列 "info_id"
-     * JoinTable 通过创建新表 "tb_user_info"
-     */
-    @OneToOne(cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "info_id", referencedColumnName = "id", unique = true)
-//    @JoinTable(name = "tb_user_info",
-//            joinColumns = @JoinColumn(name = "user_id"),
-//            inverseJoinColumns = @JoinColumn(name = "info_id"))
-    private Info info;
+    private String email;
+
+    private String nickname;
+
+    private String icon;
+
+    private Integer gender;
+
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
+    private Date birthday;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    private Date createTime;
+
+    private static final long serialVersionUID = 1L;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    public Integer getGender() {
+        return gender;
+    }
+
+    public void setGender(Integer gender) {
+        this.gender = gender;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", username=").append(username);
+        sb.append(", password=").append(password);
+        sb.append(", salt=").append(salt);
+        sb.append(", email=").append(email);
+        sb.append(", nickname=").append(nickname);
+        sb.append(", icon=").append(icon);
+        sb.append(", gender=").append(gender);
+        sb.append(", birthday=").append(birthday);
+        sb.append(", createTime=").append(createTime);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
+    }
 }

@@ -2,7 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.base.Result;
 import com.example.demo.model.User;
-import com.example.demo.vo.InfoVo;
+import com.example.demo.vo.UserInfoVo;
 import com.example.demo.vo.UserVo;
 import com.example.demo.vo.UpdatePassVo;
 
@@ -21,5 +21,5 @@ public interface UserService {
 
     Result updatePass(HttpServletRequest request, HttpServletResponse response, UpdatePassVo updatePassVo);
 
-    Result updateUserInfo(HttpServletRequest request, HttpServletResponse response, InfoVo infoVo);
+    Result updateUserInfo(HttpServletRequest request, HttpServletResponse response, UserInfoVo userInfoVo);
 }

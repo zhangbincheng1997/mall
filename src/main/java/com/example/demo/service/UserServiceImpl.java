@@ -3,22 +3,23 @@ package com.example.demo.service;
 import com.example.demo.base.Result;
 import com.example.demo.base.Status;
 import com.example.demo.component.RedisService;
-import com.example.demo.model.Info;
-import com.example.demo.model.User;
-import com.example.demo.mapper.InfoMapper;
 import com.example.demo.mapper.UserMapper;
+import com.example.demo.model.User;
+import com.example.demo.model.UserExample;
 import com.example.demo.utils.Constants;
 import com.example.demo.utils.CookieUtils;
 import com.example.demo.utils.MD5Utils;
 import com.example.demo.utils.UUIDUtils;
-import com.example.demo.vo.InfoVo;
+import com.example.demo.vo.UserInfoVo;
 import com.example.demo.vo.UserVo;
 import com.example.demo.vo.UpdatePassVo;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -27,37 +28,62 @@ public class UserServiceImpl implements UserService {
     UserMapper userMapper;
 
     @Autowired
-    InfoMapper infoMapper;
-
-    @Autowired
     RedisService redisService;
 
     @Override
     public Result register(UserVo loginVo) {
-        User user = userMapper.getByEmail(loginVo.getEmail());
+        UserExample ex = new UserExample();
+        ex.createCriteria().andUsernameEqualTo(loginVo.getUsername());
+        List<User> userList = userMapper.selectByExample(ex);
         // EMAIL_EXIST
-        if (user != null) {
+        if (userList.size() != 0) {
             return Result.error(Status.EMAIL_EXIST);
         }
-        Info info = new Info();
-        infoMapper.insert(info);
-        user = new User();
-        user.setEmail(loginVo.getEmail());
+        User user = new User();
+        user.setUsername(loginVo.getUsername());
         String salt = UUIDUtils.UUID();
         user.setPassword(MD5Utils.MD5Salt(loginVo.getPassword(), salt));
         user.setSalt(salt);
-        user.setInfo(info);
+//
+//        Date date = new Date();
+//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        String dateStr = format.format(date);
+
         userMapper.insert(user);
         return Result.success("");
     }
 
+    /**
+     * redis
+     * username -> token
+     * token -> user
+     * <p>
+     * 异地登陆 https://www.cnblogs.com/zuoxh/p/10238594.html
+     * 将token作为value，账户的id作为key
+     * <p>
+     * 每次登录都去redis中查询该账户的登录是否过期，没有过期则删掉原来的id，token，将新生成token作为value存入redis中。
+     * 过期则没有该账户信息，则重新存入redis中
+     * <p>
+     * 用户每次请求接口都需要验证是否在登录状态。（这里需要一个filter或则intercepter）获取token。解析token。
+     * 将id从token中解析出来去。然后将用户的id作为key去redis中查询token。
+     * <p>
+     * 查询为空则表示登录过期。不为空则将解析出来的token和redis中的token作对比，如果相同，则用户状态正常则继续请求接口。
+     * 如果不相同，则账号在其他设备登录.
+     *
+     * @param response
+     * @param loginVo
+     * @return
+     */
     @Override
     public Result login(HttpServletResponse response, UserVo loginVo) {
-        User user = userMapper.getByEmail(loginVo.getEmail());
+        UserExample ex = new UserExample();
+        ex.createCriteria().andUsernameEqualTo(loginVo.getUsername());
+        List<User> userList = userMapper.selectByExample(ex);
         // EMAIL_NOT_EXIST
-        if (user == null) {
-            return Result.error(Status.EMAIL_NOT_EXIST);
+        if (userList.size() == 0) {
+            return Result.error(Status.EMAIL_EXIST);
         }
+        User user = userList.get(0);
         String dbPass = user.getPassword();
         String fmPass = MD5Utils.MD5Salt(loginVo.getPassword(), user.getSalt());
         // PASSWORD_ERROR
@@ -84,7 +110,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Result getUserInfo(User user) {
-        return Result.success(user.getInfo());
+        return Result.success(user);
     }
 
     @Override
@@ -99,7 +125,7 @@ public class UserServiceImpl implements UserService {
         }
         String newPass = MD5Utils.MD5Salt(updatePassVo.getNewPass(), user.getSalt());
         user.setPassword(newPass);
-        userMapper.updatePass(user);
+        userMapper.updateByPrimaryKeySelective(user);
         // 重新设置token、cookie时间
         redisService.set(token, user, Constants.COOKIE_EXPIRY);
         CookieUtils.setCookie(response, Constants.COOKIE_TOKEN, token, Constants.COOKIE_EXPIRY);
@@ -107,29 +133,33 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Result updateUserInfo(HttpServletRequest request, HttpServletResponse response, InfoVo infoVo) {
+    public Result updateUserInfo(HttpServletRequest request, HttpServletResponse response, UserInfoVo userInfoVo) {
         String token = CookieUtils.getCookie(request, Constants.COOKIE_TOKEN);
         User user = (User) redisService.get(token);
 
-        // infoVo => user
-        // BeanUtils.copyProperties(infoVo, user);
+        // userInfoVo => user
+//        BeanUtils.copyProperties(userInfoVo, user);
 
-        if (infoVo.getNickname() != null) {
-            user.getInfo().setNickname(infoVo.getNickname());
+        if (userInfoVo.getNickname() != null) {
+            user.setNickname(userInfoVo.getNickname());
         }
-        if (infoVo.getBirth() != null) {
-            user.getInfo().setBirth(infoVo.getBirth());
+        if (userInfoVo.getBirthday() != null) {
+            user.setBirthday(userInfoVo.getBirthday());
         }
-        if (infoVo.getSex() != null) {
-            user.getInfo().setSex(Info.Sex.parseCode(infoVo.getSex()));
+        if (userInfoVo.getGender() != null) {
+            user.setGender(userInfoVo.getGender());
         }
-        if (infoVo.getHeadUrl() != null) {
-            user.getInfo().setHeadUrl(infoVo.getHeadUrl());
+        if (userInfoVo.getIcon() != null) {
+            user.setIcon(userInfoVo.getIcon());
         }
-        infoMapper.updateInfo(user.getInfo());
+
+        userMapper.updateByPrimaryKeySelective(user);
         // 重新设置token、cookie时间
         redisService.set(token, user, Constants.COOKIE_EXPIRY);
         CookieUtils.setCookie(response, Constants.COOKIE_TOKEN, token, Constants.COOKIE_EXPIRY);
         return Result.success("");
     }
+
+    // updateByPrimaryKeySelective 部分更新
+    // updateByPrimaryKey 全部更新
 }

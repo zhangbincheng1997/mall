@@ -1,12 +1,13 @@
 package com.example.demo.component;
 
 import com.alibaba.fastjson.JSON;
-import com.example.demo.base.AppLog;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Component
 @Order(3)
 public class RabbitSender {
@@ -16,12 +17,12 @@ public class RabbitSender {
 
     public void send(String topic, String str) {
         this.rabbitTemplate.convertAndSend(topic, str);
-        AppLog.info(str);
+        log.info(str);
     }
 
     public void send(String topic, Object obj) {
         String jsonObj = JSON.toJSONString(obj);
         this.rabbitTemplate.convertAndSend(topic, jsonObj);
-        AppLog.info(jsonObj);
+        log.info(jsonObj);
     }
 }

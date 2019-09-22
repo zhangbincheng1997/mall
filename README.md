@@ -16,6 +16,9 @@ mysql> GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '123456';
 mysql> FLUSH PRIVILEGES;
 ```
 
+3. Navicat Premium 12 破解
+参考 https://www.52pojie.cn/thread-952490-1-1.html
+
 ## Tomcat
 1. 安装
 ```

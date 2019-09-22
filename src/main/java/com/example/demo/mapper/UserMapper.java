@@ -1,22 +1,30 @@
 package com.example.demo.mapper;
 
 import com.example.demo.model.User;
-import org.apache.ibatis.annotations.*;
+import com.example.demo.model.UserExample;
+import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
-@Mapper
 public interface UserMapper {
+    long countByExample(UserExample example);
 
-    // 返回自增id
-    @Insert("INSERT INTO user(email, password, salt) VALUES(#{email}, #{password}, #{salt})")
-    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-    void insert(User user);
+    int deleteByExample(UserExample example);
 
-    @Select("SELECT * FROM user WHERE email=#{email}")
-    @Results({
-            @Result(column = "info_id", property = "info", one = @One(select = "com.example.demo.mapper.InfoMapper.getById"))
-    })
-    User getByEmail(String email);
+    int deleteByPrimaryKey(Long id);
 
-    @Update("UPDATE user SET password=#{password} WHERE id=#{id}")
-    void updatePass(User user);
+    int insert(User record);
+
+    int insertSelective(User record);
+
+    List<User> selectByExample(UserExample example);
+
+    User selectByPrimaryKey(Long id);
+
+    int updateByExampleSelective(@Param("record") User record, @Param("example") UserExample example);
+
+    int updateByExample(@Param("record") User record, @Param("example") UserExample example);
+
+    int updateByPrimaryKeySelective(User record);
+
+    int updateByPrimaryKey(User record);
 }

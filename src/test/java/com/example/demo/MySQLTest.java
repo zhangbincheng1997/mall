@@ -1,7 +1,7 @@
 package com.example.demo;
 
-import com.example.demo.model.User;
 import com.example.demo.mapper.UserMapper;
+import com.example.demo.model.User;
 import com.example.demo.utils.MD5Utils;
 import com.example.demo.utils.UUIDUtils;
 import org.junit.Assert;
@@ -21,14 +21,16 @@ public class MySQLTest {
     @Test
     public void testMySQL() {
         User user = new User();
-        user.setEmail("test");
+        user.setUsername("username");
         String salt = UUIDUtils.UUID();
         String password = MD5Utils.MD5Salt("password", salt);
         user.setPassword(password);
         user.setSalt(salt);
+
+        System.out.println(user);
+        userMapper.insert(user);
         System.out.println(user);
 
-        userMapper.insert(user);
-        Assert.assertEquals(salt, userMapper.getByEmail(user.getEmail()).getSalt());
+        Assert.assertEquals(salt, userMapper.selectByPrimaryKey(user.getId()).getSalt());
     }
 }

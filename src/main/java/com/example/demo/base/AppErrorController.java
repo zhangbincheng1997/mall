@@ -3,6 +3,7 @@ package com.example.demo.base;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.error.ErrorAttributes;
 import org.springframework.boot.web.servlet.error.ErrorController;
@@ -14,6 +15,7 @@ import org.springframework.web.context.request.WebRequest;
 
 import java.util.Map;
 
+@Slf4j
 @Controller
 public class AppErrorController implements ErrorController {
 
@@ -37,6 +39,7 @@ public class AppErrorController implements ErrorController {
     @RequestMapping(value = ERROR_PATH, produces = "text/html")
     public String errorPageHandler(HttpServletRequest request, HttpServletResponse response) {
         int status = response.getStatus();
+        log.error("错误请求 : " + status);
         switch (status) {
             case 404:
                 return "error/404";

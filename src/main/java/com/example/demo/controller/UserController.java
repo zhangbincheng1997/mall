@@ -4,7 +4,7 @@ import com.example.demo.base.Result;
 import com.example.demo.access.AccessLimit;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
-import com.example.demo.vo.InfoVo;
+import com.example.demo.vo.UserInfoVo;
 import com.example.demo.vo.UserVo;
 import com.example.demo.vo.UpdatePassVo;
 import io.swagger.annotations.Api;
@@ -28,7 +28,7 @@ public class UserController {
 
     @ApiOperation("注册")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "mobile", value = "手机号码", required = true, dataType = "String"),
+            @ApiImplicitParam(name = "username", value = "账号", required = true, dataType = "String"),
             @ApiImplicitParam(name = "password", value = "密码", required = true, dataType = "String"),
     })
     @RequestMapping("/register")
@@ -39,7 +39,7 @@ public class UserController {
 
     @ApiOperation("登录")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "mobile", value = "手机号码", required = true, dataType = "String"),
+            @ApiImplicitParam(name = "username", value = "账号", required = true, dataType = "String"),
             @ApiImplicitParam(name = "password", value = "密码", required = true, dataType = "String"),
     })
     @RequestMapping(value = "/login")
@@ -78,13 +78,13 @@ public class UserController {
     @ApiOperation("修改用户信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "nickname", value = "昵称", dataType = "String"),
-            @ApiImplicitParam(name = "birth", value = "生日", dataType = "String"),
-            @ApiImplicitParam(name = "sex", value = "性别", dataType = "String"),
-            @ApiImplicitParam(name = "head", value = "头像", dataType = "String"),
+            @ApiImplicitParam(name = "icon", value = "头像", dataType = "String"),
+            @ApiImplicitParam(name = "gender", value = "性别", dataType = "Integer"),
+            @ApiImplicitParam(name = "birthday", value = "生日", dataType = "Date"),
     })
-    @PostMapping("/updateUserInfo")
+    @RequestMapping("/updateUserInfo")
     @ResponseBody
-    public Result updateUserInfo(HttpServletRequest request, HttpServletResponse response, @Validated InfoVo infoVo) {
-        return userService.updateUserInfo(request, response, infoVo);
+    public Result updateUserInfo(HttpServletRequest request, HttpServletResponse response, @Validated UserInfoVo userInfoVo) {
+        return userService.updateUserInfo(request, response, userInfoVo);
     }
 }

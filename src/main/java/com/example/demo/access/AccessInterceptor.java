@@ -33,20 +33,24 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
                 return true;
             }
 
-            String key = Constants.ACCESS_KEY + "_" + request.getRequestURL();
             int seconds = accessLimit.seconds();
             int maxCount = accessLimit.maxCount();
-            Integer count = (Integer) redisService.get(key);
-            if (count == null) {
-                redisService.set(key, Integer.valueOf(1), seconds);
-            } else if (count < maxCount) {
-                redisService.incr(key);
-            } else {
-                render(response, Status.ACCESS_LIMIT);
-                return false;
+            boolean needLogin = accessLimit.needLogin();
+
+            if (seconds != 0 && maxCount != 0) {
+                String key = Constants.ACCESS_KEY + "_" + request.getRequestURL();
+                Integer count = (Integer) redisService.get(key);
+                if (count == null) {
+                    redisService.set(key, Integer.valueOf(1), seconds);
+                } else if (count < maxCount) {
+                    redisService.incr(key);
+                } else {
+                    render(response, Status.ACCESS_LIMIT);
+                    return false;
+                }
             }
 
-            if (accessLimit.needLogin()) {
+            if (needLogin) {
                 User user = getUser(request, response);
                 if (user == null) {
                     render(response, Status.NOT_LOGIN);

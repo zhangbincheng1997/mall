@@ -1,7 +1,7 @@
 package com.example.demo.component;
 
-import com.example.demo.base.AppLog;
 import com.example.demo.utils.Constants;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Random;
 
+@Slf4j
 @Component
 @Order(2)
 public class RabbitReceiver {
@@ -29,7 +30,7 @@ public class RabbitReceiver {
     @RabbitHandler
     @RabbitListener(queues = Constants.TEST_TOPIC)
     public void testProcess(String message) {
-        AppLog.info("Rabbit Receiver [TEST] : " + message);
+        log.info("Rabbit Receiver [TEST] : " + message);
     }
 
     @RabbitHandler
@@ -50,9 +51,9 @@ public class RabbitReceiver {
             // 发送邮件
             mailSender.send(message);
             redisService.set(Constants.EMAIL_KEY + "_" + to, code, Constants.EMAIL_EXPIRY);
-            AppLog.info(message);
+            log.info(message.toString());
         } catch (Exception e) {
-            AppLog.error(e);
+            log.error("邮件发送失败", e);
         }
     }
 
