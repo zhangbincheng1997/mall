@@ -138,20 +138,7 @@ public class UserServiceImpl implements UserService {
         User user = (User) redisService.get(token);
 
         // userInfoVo => user
-//        BeanUtils.copyProperties(userInfoVo, user);
-
-        if (userInfoVo.getNickname() != null) {
-            user.setNickname(userInfoVo.getNickname());
-        }
-        if (userInfoVo.getBirthday() != null) {
-            user.setBirthday(userInfoVo.getBirthday());
-        }
-        if (userInfoVo.getGender() != null) {
-            user.setGender(userInfoVo.getGender());
-        }
-        if (userInfoVo.getIcon() != null) {
-            user.setIcon(userInfoVo.getIcon());
-        }
+        BeanUtils.copyProperties(userInfoVo, user); // 空的会覆盖
 
         userMapper.updateByPrimaryKeySelective(user);
         // 重新设置token、cookie时间
@@ -160,6 +147,6 @@ public class UserServiceImpl implements UserService {
         return Result.success("");
     }
 
-    // updateByPrimaryKeySelective 部分更新
+    // updateByPrimaryKeySelective 部分更新 null不更新
     // updateByPrimaryKey 全部更新
 }

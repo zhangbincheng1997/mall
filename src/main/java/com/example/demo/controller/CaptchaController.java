@@ -5,6 +5,10 @@ import com.example.demo.base.Result;
 import com.example.demo.base.Status;
 import com.example.demo.component.RedisService;
 import com.example.demo.utils.Constants;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
@@ -20,6 +24,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
+@Api(tags = "图像验证码控制类")
 @Controller
 @Validated
 public class CaptchaController {
@@ -89,6 +94,7 @@ public class CaptchaController {
      * @param request
      * @param response
      */
+    @ApiOperation("生成图像验证码")
     @RequestMapping("/getCaptcha")
     @AccessLimit(seconds = 60, maxCount = 10, needLogin = false)
     public void getCaptcha(HttpServletRequest request, HttpServletResponse response) {
@@ -107,11 +113,15 @@ public class CaptchaController {
      * @param code
      * @return
      */
+    @ApiOperation("验证图像验证码")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "code", value = "验证码", required = true, dataType = "String")
+    })
     @RequestMapping("/checkCaptcha")
     @ResponseBody
     @AccessLimit(seconds = 60, maxCount = 10, needLogin = false)
     public Result checkCaptcha(HttpServletRequest request,
-                               @RequestParam @Size(min = 4,max = 4) String code) {
+                                @RequestParam @Size(min = 4, max = 4) String code) {
         String redisCode = (String) redisService.get(Constants.CAPTCHA_KEY + "_" + request.getRequestURL());
         if (redisCode == null) {
             return Result.error(Status.CODE_EXPIRED);

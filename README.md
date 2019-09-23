@@ -19,6 +19,12 @@ mysql> FLUSH PRIVILEGES;
 3. Navicat Premium 12 破解
 参考 https://www.52pojie.cn/thread-952490-1-1.html
 
+Druid
+http://localhost:8080/druid/index.html
+
+MyBatis Generator
+先数据库建好表，然后Run Generator.java
+
 ## Tomcat
 1. 安装
 ```
@@ -92,3 +98,13 @@ $ service iptables restart
 ```
 $ iptables -L -n
 ```
+
+
+## 其他
+1. lombook 插件
+
+IDEA 多个主函数忽略报错运行
+Build, not error check
+
+对应Date类型，前端和数据库不一致：
+@JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")

@@ -46,7 +46,7 @@ public class AppErrorController implements ErrorController {
             case 500:
                 return "error/500";
         }
-        return "index";
+        return "/";
     }
 
     /**

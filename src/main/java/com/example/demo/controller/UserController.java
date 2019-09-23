@@ -8,8 +8,6 @@ import com.example.demo.vo.UserInfoVo;
 import com.example.demo.vo.UserVo;
 import com.example.demo.vo.UpdatePassVo;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
@@ -19,18 +17,14 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@Controller
 @Api(tags = "用户控制类")
+@Controller
 public class UserController {
 
     @Resource
     UserService userService;
 
     @ApiOperation("注册")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "username", value = "账号", required = true, dataType = "String"),
-            @ApiImplicitParam(name = "password", value = "密码", required = true, dataType = "String"),
-    })
     @RequestMapping("/register")
     @ResponseBody
     public Result register(@Validated UserVo loginVo) {
@@ -38,11 +32,7 @@ public class UserController {
     }
 
     @ApiOperation("登录")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "username", value = "账号", required = true, dataType = "String"),
-            @ApiImplicitParam(name = "password", value = "密码", required = true, dataType = "String"),
-    })
-    @RequestMapping(value = "/login")
+    @RequestMapping("/login")
     @ResponseBody
     public Result login(HttpServletResponse response, @Validated UserVo loginVo) {
         return userService.login(response, loginVo);
@@ -57,7 +47,7 @@ public class UserController {
     }
 
     @ApiOperation("获取用户信息")
-    @RequestMapping(value = "/getUserInfo")
+    @RequestMapping("/getUserInfo")
     @ResponseBody
     @AccessLimit
     public Result getUserInfo(User user) {
@@ -65,10 +55,6 @@ public class UserController {
     }
 
     @ApiOperation("修改密码")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "oldPass", value = "旧密码", required = true, dataType = "String"),
-            @ApiImplicitParam(name = "newPass", value = "新密码", required = true, dataType = "String"),
-    })
     @RequestMapping("/updatePass")
     @ResponseBody
     public Result updatePass(HttpServletRequest request, HttpServletResponse response, @Validated UpdatePassVo updatePassVo) {
@@ -76,12 +62,6 @@ public class UserController {
     }
 
     @ApiOperation("修改用户信息")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "nickname", value = "昵称", dataType = "String"),
-            @ApiImplicitParam(name = "icon", value = "头像", dataType = "String"),
-            @ApiImplicitParam(name = "gender", value = "性别", dataType = "Integer"),
-            @ApiImplicitParam(name = "birthday", value = "生日", dataType = "Date"),
-    })
     @RequestMapping("/updateUserInfo")
     @ResponseBody
     public Result updateUserInfo(HttpServletRequest request, HttpServletResponse response, @Validated UserInfoVo userInfoVo) {

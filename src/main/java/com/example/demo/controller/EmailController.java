@@ -6,6 +6,10 @@ import com.example.demo.base.Status;
 import com.example.demo.component.RabbitSender;
 import com.example.demo.component.RedisService;
 import com.example.demo.utils.Constants;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
@@ -16,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 
+@Api(tags = "邮箱验证码控制类")
 @Controller
 @Validated
 public class EmailController {
@@ -33,6 +38,10 @@ public class EmailController {
      * @param to
      * @return
      */
+    @ApiOperation("发送邮箱验证码")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "to", value = "接收者邮箱", required = true, dataType = "String")
+    })
     @RequestMapping("sendEmail")
     @ResponseBody
     @AccessLimit(seconds = 60, maxCount = 1, needLogin = false)
@@ -49,6 +58,11 @@ public class EmailController {
      * @param code
      * @return
      */
+    @ApiOperation("验证邮箱验证码")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "to", value = "接收者邮箱", required = true, dataType = "String"),
+            @ApiImplicitParam(name = "code", value = "验证码", required = true, dataType = "String")
+    })
     @RequestMapping("checkEmail")
     @ResponseBody
     @AccessLimit(seconds = 60, maxCount = 3, needLogin = false)

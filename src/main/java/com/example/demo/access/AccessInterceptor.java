@@ -25,7 +25,7 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        // 登录限制
+        // API访问限制
         if (handler instanceof HandlerMethod) {
             HandlerMethod hm = (HandlerMethod) handler;
             AccessLimit accessLimit = hm.getMethodAnnotation(AccessLimit.class);
