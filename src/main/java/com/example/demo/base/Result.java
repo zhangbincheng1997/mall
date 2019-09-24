@@ -44,15 +44,23 @@ public class Result {
         this.data = data;
     }
 
-    public static Result message(int code, String message) {
-        return new Result(code, message, null);
-    }
-
-    public static Result error(Status status) {
-        return new Result(status.getCode(), status.getMessage(), null);
+    public static Result success() {
+        return new Result(Status.SUCCESS.getCode(), Status.SUCCESS.getMessage(), null);
     }
 
     public static Result success(Object data) {
         return new Result(Status.SUCCESS.getCode(), Status.SUCCESS.getMessage(), data);
+    }
+
+    public static Result failed() {
+        return new Result(Status.FAILED.getCode(), Status.FAILED.getMessage(), null);
+    }
+
+    public static Result failed(int code, String message) {
+        return new Result(code, message, null);
+    }
+
+    public static Result failed(Status status) {
+        return new Result(status.getCode(), status.getMessage(), null);
     }
 }

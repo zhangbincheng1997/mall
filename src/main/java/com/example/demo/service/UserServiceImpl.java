@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.bean.copier.CopyOptions;
 import com.example.demo.base.Result;
 import com.example.demo.base.Status;
 import com.example.demo.component.RedisService;
@@ -13,7 +15,6 @@ import com.example.demo.utils.UUIDUtils;
 import com.example.demo.vo.UserInfoVo;
 import com.example.demo.vo.UserVo;
 import com.example.demo.vo.UpdatePassVo;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +38,7 @@ public class UserServiceImpl implements UserService {
         List<User> userList = userMapper.selectByExample(ex);
         // EMAIL_EXIST
         if (userList.size() != 0) {
-            return Result.error(Status.EMAIL_EXIST);
+            return Result.failed(Status.EMAIL_EXIST);
         }
         User user = new User();
         user.setUsername(loginVo.getUsername());
@@ -81,14 +82,14 @@ public class UserServiceImpl implements UserService {
         List<User> userList = userMapper.selectByExample(ex);
         // EMAIL_NOT_EXIST
         if (userList.size() == 0) {
-            return Result.error(Status.EMAIL_EXIST);
+            return Result.failed(Status.EMAIL_EXIST);
         }
         User user = userList.get(0);
         String dbPass = user.getPassword();
         String fmPass = MD5Utils.MD5Salt(loginVo.getPassword(), user.getSalt());
         // PASSWORD_ERROR
         if (!dbPass.equals(fmPass)) {
-            return Result.error(Status.PASSWORD_ERROR);
+            return Result.failed(Status.PASSWORD_ERROR);
         }
         String token = UUIDUtils.UUID();
         // 设置token
@@ -102,7 +103,7 @@ public class UserServiceImpl implements UserService {
     public Result logout(HttpServletRequest request, HttpServletResponse response) {
         String token = CookieUtils.getCookie(request, Constants.COOKIE_TOKEN);
         // 删除token
-        redisService.del(token);
+        redisService.delete(token);
         // 删除cookie
         CookieUtils.setCookie(response, Constants.COOKIE_TOKEN, null, 0);
         return Result.success("");
@@ -121,7 +122,7 @@ public class UserServiceImpl implements UserService {
         String fmPass = MD5Utils.MD5Salt(updatePassVo.getOldPass(), user.getSalt());
         // PASSWORD_ERROR
         if (!dbPass.equals(fmPass)) {
-            return Result.error(Status.PASSWORD_ERROR);
+            return Result.failed(Status.PASSWORD_ERROR);
         }
         String newPass = MD5Utils.MD5Salt(updatePassVo.getNewPass(), user.getSalt());
         user.setPassword(newPass);
@@ -137,16 +138,31 @@ public class UserServiceImpl implements UserService {
         String token = CookieUtils.getCookie(request, Constants.COOKIE_TOKEN);
         User user = (User) redisService.get(token);
 
-        // userInfoVo => user
-        BeanUtils.copyProperties(userInfoVo, user); // 空的会覆盖
+        // source -> target 忽略空值
+        BeanUtil.copyProperties(userInfoVo, user, CopyOptions.create().setIgnoreNullValue(true));
 
+//        if (userInfoVo.getEmail() != null) {
+//            user.setEmail(userInfoVo.getEmail());
+//        }
+//        if (userInfoVo.getIcon() != null) {
+//            user.setIcon(userInfoVo.getIcon());
+//        }
+//        if (userInfoVo.getNickname() != null) {
+//            user.setNickname(userInfoVo.getNickname());
+//        }
+//        if (userInfoVo.getGender() != null) {
+//            user.setGender(userInfoVo.getGender());
+//        }
+//        if (userInfoVo.getBirthday() != null) {
+//            user.setBirthday(userInfoVo.getBirthday());
+//        }
+
+        // updateByPrimaryKeySelective 部分更新 null不更新
+        // updateByPrimaryKey 全部更新
         userMapper.updateByPrimaryKeySelective(user);
         // 重新设置token、cookie时间
         redisService.set(token, user, Constants.COOKIE_EXPIRY);
         CookieUtils.setCookie(response, Constants.COOKIE_TOKEN, token, Constants.COOKIE_EXPIRY);
         return Result.success("");
     }
-
-    // updateByPrimaryKeySelective 部分更新 null不更新
-    // updateByPrimaryKey 全部更新
 }

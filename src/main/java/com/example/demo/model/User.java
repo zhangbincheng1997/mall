@@ -1,7 +1,5 @@
 package com.example.demo.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.io.Serializable;
 import java.util.Date;
 
@@ -16,16 +14,14 @@ public class User implements Serializable {
 
     private String email;
 
-    private String nickname;
-
     private String icon;
+
+    private String nickname;
 
     private Integer gender;
 
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
     private Date birthday;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createTime;
 
     private static final long serialVersionUID = 1L;
@@ -70,20 +66,20 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
     public String getIcon() {
         return icon;
     }
 
     public void setIcon(String icon) {
         this.icon = icon;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public Integer getGender() {
@@ -121,8 +117,8 @@ public class User implements Serializable {
         sb.append(", password=").append(password);
         sb.append(", salt=").append(salt);
         sb.append(", email=").append(email);
-        sb.append(", nickname=").append(nickname);
         sb.append(", icon=").append(icon);
+        sb.append(", nickname=").append(nickname);
         sb.append(", gender=").append(gender);
         sb.append(", birthday=").append(birthday);
         sb.append(", createTime=").append(createTime);

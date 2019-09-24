@@ -12,13 +12,20 @@ import java.util.Date;
 @Data
 public class UserInfoVo {
 
+    //    @NotNull(message = "手机不能为空")
+//    @Pattern(regexp = "1\\d{10}", message = "手机不符合规范")
+//    private String mobile;
+
+    @ApiModelProperty(value = "邮箱")
+    @Email(message = "邮箱不符合规范")
+    private String email;
+
+    @ApiModelProperty(value = "链接")
+    private String icon;
+
     @ApiModelProperty(value = "昵称")
     @Size(min = 3, max = 12, message = "昵称长度为3-12")
     private String nickname;
-
-    @ApiModelProperty(value = "链接")
-    @URL(message = "请输入正确的链接")
-    private String icon;
 
     @ApiModelProperty(value = "性别", example = "0") // Integer 需要 example
     @Range(min = 0, max = 2, message = "性别：0->未知 1->男性 2->女性")

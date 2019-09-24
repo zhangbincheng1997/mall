@@ -58,6 +58,6 @@ public class AppErrorController implements ErrorController {
         int status = response.getStatus();
         WebRequest webRequest = new ServletWebRequest(request);
         Map<String, Object> attr = this.errorAttributes.getErrorAttributes(webRequest, false);
-        return Result.message(status, String.valueOf(attr.getOrDefault("message", "error")));
+        return Result.failed(status, String.valueOf(attr.getOrDefault("message", "error")));
     }
 }

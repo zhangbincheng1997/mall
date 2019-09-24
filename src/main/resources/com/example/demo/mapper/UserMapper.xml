@@ -7,8 +7,8 @@
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="salt" jdbcType="VARCHAR" property="salt" />
     <result column="email" jdbcType="VARCHAR" property="email" />
-    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
     <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
     <result column="gender" jdbcType="INTEGER" property="gender" />
     <result column="birthday" jdbcType="DATE" property="birthday" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -72,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, username, password, salt, email, nickname, icon, gender, birthday, create_time
+    id, username, password, salt, email, icon, nickname, gender, birthday, create_time
   </sql>
   <select id="selectByExample" parameterType="com.example.demo.model.UserExample" resultMap="BaseResultMap">
     select
@@ -109,11 +109,11 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into user (username, password, salt, 
-      email, nickname, icon, 
+      email, icon, nickname, 
       gender, birthday, create_time
       )
     values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, 
-      #{email,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
       #{gender,jdbcType=INTEGER}, #{birthday,jdbcType=DATE}, #{createTime,jdbcType=TIMESTAMP}
       )
   </insert>
@@ -135,11 +135,11 @@
       <if test="email != null">
         email,
       </if>
-      <if test="nickname != null">
-        nickname,
-      </if>
       <if test="icon != null">
         icon,
+      </if>
+      <if test="nickname != null">
+        nickname,
       </if>
       <if test="gender != null">
         gender,
@@ -164,11 +164,11 @@
       <if test="email != null">
         #{email,jdbcType=VARCHAR},
       </if>
-      <if test="nickname != null">
-        #{nickname,jdbcType=VARCHAR},
-      </if>
       <if test="icon != null">
         #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
       </if>
       <if test="gender != null">
         #{gender,jdbcType=INTEGER},
@@ -205,11 +205,11 @@
       <if test="record.email != null">
         email = #{record.email,jdbcType=VARCHAR},
       </if>
-      <if test="record.nickname != null">
-        nickname = #{record.nickname,jdbcType=VARCHAR},
-      </if>
       <if test="record.icon != null">
         icon = #{record.icon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nickname != null">
+        nickname = #{record.nickname,jdbcType=VARCHAR},
       </if>
       <if test="record.gender != null">
         gender = #{record.gender,jdbcType=INTEGER},
@@ -232,8 +232,8 @@
       password = #{record.password,jdbcType=VARCHAR},
       salt = #{record.salt,jdbcType=VARCHAR},
       email = #{record.email,jdbcType=VARCHAR},
-      nickname = #{record.nickname,jdbcType=VARCHAR},
       icon = #{record.icon,jdbcType=VARCHAR},
+      nickname = #{record.nickname,jdbcType=VARCHAR},
       gender = #{record.gender,jdbcType=INTEGER},
       birthday = #{record.birthday,jdbcType=DATE},
       create_time = #{record.createTime,jdbcType=TIMESTAMP}
@@ -256,11 +256,11 @@
       <if test="email != null">
         email = #{email,jdbcType=VARCHAR},
       </if>
-      <if test="nickname != null">
-        nickname = #{nickname,jdbcType=VARCHAR},
-      </if>
       <if test="icon != null">
         icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        nickname = #{nickname,jdbcType=VARCHAR},
       </if>
       <if test="gender != null">
         gender = #{gender,jdbcType=INTEGER},
@@ -280,8 +280,8 @@
       password = #{password,jdbcType=VARCHAR},
       salt = #{salt,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
-      nickname = #{nickname,jdbcType=VARCHAR},
       icon = #{icon,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
       gender = #{gender,jdbcType=INTEGER},
       birthday = #{birthday,jdbcType=DATE},
       create_time = #{createTime,jdbcType=TIMESTAMP}

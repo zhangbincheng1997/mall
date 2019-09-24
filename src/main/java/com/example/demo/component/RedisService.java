@@ -1,8 +1,16 @@
 package com.example.demo.component;
 
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.core.annotation.Order;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.RedisSerializer;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.TimeUnit;
@@ -11,8 +19,18 @@ import java.util.concurrent.TimeUnit;
 @Order(1)
 public class RedisService {
 
-    @Autowired
     private RedisTemplate redisTemplate;
+
+    @Autowired
+    public void setRedisTemplate(RedisTemplate redisTemplate) {
+        RedisSerializer stringSerializer = new StringRedisSerializer();//序列化为String
+        Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);//序列化为Json
+        redisTemplate.setKeySerializer(stringSerializer);
+        redisTemplate.setValueSerializer(jackson2JsonRedisSerializer);
+        redisTemplate.setHashKeySerializer(stringSerializer);
+        redisTemplate.setHashValueSerializer(jackson2JsonRedisSerializer);
+        this.redisTemplate = redisTemplate;
+    }
 
     /**
      * 设置
@@ -36,6 +54,17 @@ public class RedisService {
     }
 
     /**
+     * 设置超时时间
+     *
+     * @param key
+     * @param expire
+     * @return
+     */
+    public boolean expire(String key, long expire) {
+        return redisTemplate.expire(key, expire, TimeUnit.SECONDS);
+    }
+
+    /**
      * 获取
      *
      * @param key
@@ -50,7 +79,7 @@ public class RedisService {
      *
      * @param key
      */
-    public void del(String key) {
+    public void delete(String key) {
         redisTemplate.delete(key);
     }
 
@@ -65,22 +94,22 @@ public class RedisService {
     }
 
     /**
-     * value + 1
+     * value + delta
      *
      * @param key
      * @return
      */
-    public Long incr(String key) {
-        return redisTemplate.opsForValue().increment(key);
+    public Long increment(String key, int delta) {
+        return redisTemplate.opsForValue().increment(key, delta);
     }
 
     /**
-     * value - 1
+     * value - delta
      *
      * @param key
      * @return
      */
-    public Long decr(String key) {
-        return redisTemplate.opsForValue().decrement(key);
+    public Long decrement(String key, int delta) {
+        return redisTemplate.opsForValue().decrement(key, delta);
     }
 }

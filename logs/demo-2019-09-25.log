@@ -1,0 +1,284 @@
+2019-09-25 00:34:26.212  INFO 14384 --- [restartedMain] com.example.demo.Application             : Starting Application on zzz with PID 14384 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
+2019-09-25 00:34:26.213 DEBUG 14384 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
+2019-09-25 00:34:26.214  INFO 14384 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
+2019-09-25 00:34:26.248  INFO 14384 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-09-25 00:34:26.257  INFO 14384 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-09-25 00:34:27.005  INFO 14384 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-09-25 00:34:27.006  INFO 14384 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-09-25 00:34:27.029  INFO 14384 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 14ms. Found 0 repository interfaces.
+2019-09-25 00:34:27.329  INFO 14384 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$ef100dcb] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-25 00:34:27.658  INFO 14384 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-09-25 00:34:27.685  INFO 14384 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-09-25 00:34:27.686  INFO 14384 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.22]
+2019-09-25 00:34:27.791  INFO 14384 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-09-25 00:34:27.792  INFO 14384 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1534 ms
+2019-09-25 00:34:28.195  INFO 14384 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-09-25 00:34:30.588  INFO 14384 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-09-25 00:34:31.045  INFO 14384 --- [restartedMain] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+2019-09-25 00:34:31.181  INFO 14384 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-09-25 00:34:31.226  INFO 14384 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2019-09-25 00:34:31.248  INFO 14384 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-09-25 00:34:31.645  INFO 14384 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2019-09-25 00:34:31.655  INFO 14384 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2019-09-25 00:34:31.677  INFO 14384 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2019-09-25 00:34:31.897  INFO 14384 --- [restartedMain] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [www.littleredhat1997.com:5672]
+2019-09-25 00:34:32.098  INFO 14384 --- [restartedMain] o.s.a.r.c.CachingConnectionFactory       : Created new connection: rabbitConnectionFactory#1db97f68:0/SimpleConnection@10548cd3 [delegate=amqp://root@106.54.84.40:5672/, localPort= 52604]
+2019-09-25 00:34:32.674  INFO 14384 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-09-25 00:34:32.676  INFO 14384 --- [restartedMain] com.example.demo.Application             : Started Application in 7.44 seconds (JVM running for 8.378)
+2019-09-25 00:34:40.507  INFO 14384 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-09-25 00:34:40.508  INFO 14384 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-09-25 00:34:40.517  INFO 14384 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 9 ms
+2019-09-25 00:34:45.033 ERROR 14384 --- [http-nio-8080-exec-10] c.example.demo.base.AppExceptionHandler  : Failed to convert value of type 'java.lang.String' to required type 'java.lang.Long'; nested exception is java.lang.NumberFormatException: For input string: "get"
+2019-09-25 00:34:45.061  WARN 14384 --- [http-nio-8080-exec-10] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'java.lang.Long'; nested exception is java.lang.NumberFormatException: For input string: "get"]
+2019-09-25 00:34:52.206 ERROR 14384 --- [http-nio-8080-exec-3] c.example.demo.base.AppExceptionHandler  : Failed to convert value of type 'java.lang.String' to required type 'java.lang.Long'; nested exception is java.lang.NumberFormatException: For input string: "get"
+2019-09-25 00:34:52.211  WARN 14384 --- [http-nio-8080-exec-3] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'java.lang.Long'; nested exception is java.lang.NumberFormatException: For input string: "get"]
+2019-09-25 00:35:03.180  INFO 14384 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : ***************************************************
+2019-09-25 00:35:03.180  INFO 14384 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : 请求开始, URI: /goods/1, method: GET, params: {}
+2019-09-25 00:35:03.258 DEBUG 14384 --- [http-nio-8080-exec-7] c.e.d.m.GoodsMapper.selectByPrimaryKey   : ==>  Preparing: select id, title, description, icon, price, stock from goods where id = ? 
+2019-09-25 00:35:03.275 DEBUG 14384 --- [http-nio-8080-exec-7] c.e.d.m.GoodsMapper.selectByPrimaryKey   : ==> Parameters: 1(Long)
+2019-09-25 00:35:03.341 DEBUG 14384 --- [http-nio-8080-exec-7] c.e.d.m.GoodsMapper.selectByPrimaryKey   : <==      Total: 1
+2019-09-25 00:35:03.385  INFO 14384 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":{"description":"苹果","icon":"littleredhat1997","id":1,"price":3.14,"stock":520,"title":"iphone"},"message":"SUCCESS"}
+2019-09-25 00:35:12.622  INFO 14384 --- [http-nio-8080-exec-8] com.example.demo.base.AopLog             : ***************************************************
+2019-09-25 00:35:12.623  INFO 14384 --- [http-nio-8080-exec-8] com.example.demo.base.AopLog             : 请求开始, URI: /goods/2, method: GET, params: {}
+2019-09-25 00:35:12.675 DEBUG 14384 --- [http-nio-8080-exec-8] c.e.d.m.GoodsMapper.selectByPrimaryKey   : ==>  Preparing: select id, title, description, icon, price, stock from goods where id = ? 
+2019-09-25 00:35:12.675 DEBUG 14384 --- [http-nio-8080-exec-8] c.e.d.m.GoodsMapper.selectByPrimaryKey   : ==> Parameters: 2(Long)
+2019-09-25 00:35:12.720 DEBUG 14384 --- [http-nio-8080-exec-8] c.e.d.m.GoodsMapper.selectByPrimaryKey   : <==      Total: 0
+2019-09-25 00:35:12.721  INFO 14384 --- [http-nio-8080-exec-8] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"message":"SUCCESS"}
+2019-09-25 00:35:16.959  INFO 14384 --- [http-nio-8080-exec-9] com.example.demo.base.AopLog             : ***************************************************
+2019-09-25 00:35:16.959  INFO 14384 --- [http-nio-8080-exec-9] com.example.demo.base.AopLog             : 请求开始, URI: /goods/1, method: GET, params: {}
+2019-09-25 00:35:17.014 DEBUG 14384 --- [http-nio-8080-exec-9] c.e.d.m.GoodsMapper.selectByPrimaryKey   : ==>  Preparing: select id, title, description, icon, price, stock from goods where id = ? 
+2019-09-25 00:35:17.015 DEBUG 14384 --- [http-nio-8080-exec-9] c.e.d.m.GoodsMapper.selectByPrimaryKey   : ==> Parameters: 1(Long)
+2019-09-25 00:35:17.061 DEBUG 14384 --- [http-nio-8080-exec-9] c.e.d.m.GoodsMapper.selectByPrimaryKey   : <==      Total: 1
+2019-09-25 00:35:17.062  INFO 14384 --- [http-nio-8080-exec-9] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":{"description":"苹果","icon":"littleredhat1997","id":1,"price":3.14,"stock":520,"title":"iphone"},"message":"SUCCESS"}
+2019-09-25 00:35:20.381  INFO 14384 --- [http-nio-8080-exec-6] com.example.demo.base.AopLog             : ***************************************************
+2019-09-25 00:35:20.381  INFO 14384 --- [http-nio-8080-exec-6] com.example.demo.base.AopLog             : 请求开始, URI: /goods/list, method: GET, params: {}
+2019-09-25 00:35:20.444 DEBUG 14384 --- [http-nio-8080-exec-6] c.e.d.m.GoodsMapper.selectByExample      : ==>  Preparing: select id, title, description, icon, price, stock from goods 
+2019-09-25 00:35:20.445 DEBUG 14384 --- [http-nio-8080-exec-6] c.e.d.m.GoodsMapper.selectByExample      : ==> Parameters: 
+2019-09-25 00:35:20.490 DEBUG 14384 --- [http-nio-8080-exec-6] c.e.d.m.GoodsMapper.selectByExample      : <==      Total: 1
+2019-09-25 00:35:20.491  INFO 14384 --- [http-nio-8080-exec-6] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":[{"description":"苹果","icon":"littleredhat1997","id":1,"price":3.14,"stock":520,"title":"iphone"}],"message":"SUCCESS"}
+2019-09-25 00:35:34.974 ERROR 14384 --- [http-nio-8080-exec-1] c.example.demo.base.AppExceptionHandler  : HV000030: No validator could be found for constraint 'javax.validation.constraints.Size' validating type 'java.lang.Integer'. Check configuration for 'stock'
+2019-09-25 00:35:34.975  WARN 14384 --- [http-nio-8080-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [javax.validation.UnexpectedTypeException: HV000030: No validator could be found for constraint 'javax.validation.constraints.Size' validating type 'java.lang.Integer'. Check configuration for 'stock']
+2019-09-25 00:35:59.355 ERROR 14384 --- [http-nio-8080-exec-5] c.example.demo.base.AppExceptionHandler  : HV000030: No validator could be found for constraint 'javax.validation.constraints.Size' validating type 'java.lang.Integer'. Check configuration for 'stock'
+2019-09-25 00:35:59.357  WARN 14384 --- [http-nio-8080-exec-5] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [javax.validation.UnexpectedTypeException: HV000030: No validator could be found for constraint 'javax.validation.constraints.Size' validating type 'java.lang.Integer'. Check configuration for 'stock']
+2019-09-25 00:36:04.307 ERROR 14384 --- [http-nio-8080-exec-10] c.example.demo.base.AppExceptionHandler  : HV000030: No validator could be found for constraint 'javax.validation.constraints.Size' validating type 'java.lang.Integer'. Check configuration for 'stock'
+2019-09-25 00:36:04.309  WARN 14384 --- [http-nio-8080-exec-10] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [javax.validation.UnexpectedTypeException: HV000030: No validator could be found for constraint 'javax.validation.constraints.Size' validating type 'java.lang.Integer'. Check configuration for 'stock']
+2019-09-25 00:36:52.432  INFO 4768 --- [restartedMain] com.example.demo.Application             : Starting Application on zzz with PID 4768 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
+2019-09-25 00:36:52.434 DEBUG 4768 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
+2019-09-25 00:36:52.435  INFO 4768 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
+2019-09-25 00:36:52.470  INFO 4768 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-09-25 00:36:52.470  INFO 4768 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-09-25 00:36:53.277  INFO 4768 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-09-25 00:36:53.278  INFO 4768 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-09-25 00:36:53.300  INFO 4768 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 13ms. Found 0 repository interfaces.
+2019-09-25 00:36:53.585  INFO 4768 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$5ddef318] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-25 00:36:53.890  INFO 4768 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-09-25 00:36:53.907  INFO 4768 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-09-25 00:36:53.908  INFO 4768 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.22]
+2019-09-25 00:36:53.983  INFO 4768 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-09-25 00:36:53.984  INFO 4768 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1514 ms
+2019-09-25 00:36:54.339  INFO 4768 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-09-25 00:36:56.567  INFO 4768 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-09-25 00:36:57.048  INFO 4768 --- [restartedMain] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+2019-09-25 00:36:57.188  INFO 4768 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-09-25 00:36:57.235  INFO 4768 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2019-09-25 00:36:57.265  INFO 4768 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-09-25 00:36:57.671  INFO 4768 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2019-09-25 00:36:57.684  INFO 4768 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2019-09-25 00:36:57.704  INFO 4768 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2019-09-25 00:36:57.963  INFO 4768 --- [restartedMain] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [www.littleredhat1997.com:5672]
+2019-09-25 00:36:58.158  INFO 4768 --- [restartedMain] o.s.a.r.c.CachingConnectionFactory       : Created new connection: rabbitConnectionFactory#50c493d6:0/SimpleConnection@36056cdf [delegate=amqp://root@106.54.84.40:5672/, localPort= 52679]
+2019-09-25 00:36:58.720  INFO 4768 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-09-25 00:36:58.723  INFO 4768 --- [restartedMain] com.example.demo.Application             : Started Application in 7.273 seconds (JVM running for 8.16)
+2019-09-25 00:37:00.056  INFO 4768 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-09-25 00:37:00.057  INFO 4768 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-09-25 00:37:00.067  INFO 4768 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 10 ms
+2019-09-25 00:37:00.168  INFO 4768 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : ***************************************************
+2019-09-25 00:37:00.168  INFO 4768 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : 请求开始, URI: /goods/create, method: GET, params: {"stock":[""]}
+2019-09-25 00:37:00.262 DEBUG 4768 --- [http-nio-8080-exec-1] c.e.demo.mapper.GoodsMapper.insert       : ==>  Preparing: insert into goods (title, description, icon, price, stock) values (?, ?, ?, ?, ?) 
+2019-09-25 00:37:00.279 DEBUG 4768 --- [http-nio-8080-exec-1] c.e.demo.mapper.GoodsMapper.insert       : ==> Parameters: null, null, null, null, null
+2019-09-25 00:37:00.416 ERROR 4768 --- [http-nio-8080-exec-1] c.example.demo.base.AppExceptionHandler  : 
+### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Column 'title' cannot be null
+### The error may exist in com/example/demo/mapper/GoodsMapper.xml
+### The error may involve com.example.demo.mapper.GoodsMapper.insert-Inline
+### The error occurred while setting parameters
+### SQL: insert into goods (title, description, icon,        price, stock)     values (?, ?, ?,        ?, ?)
+### Cause: java.sql.SQLIntegrityConstraintViolationException: Column 'title' cannot be null
+; Column 'title' cannot be null; nested exception is java.sql.SQLIntegrityConstraintViolationException: Column 'title' cannot be null
+2019-09-25 00:37:00.453  WARN 4768 --- [http-nio-8080-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.dao.DataIntegrityViolationException: 
+### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Column 'title' cannot be null
+### The error may exist in com/example/demo/mapper/GoodsMapper.xml
+### The error may involve com.example.demo.mapper.GoodsMapper.insert-Inline
+### The error occurred while setting parameters
+### SQL: insert into goods (title, description, icon,        price, stock)     values (?, ?, ?,        ?, ?)
+### Cause: java.sql.SQLIntegrityConstraintViolationException: Column 'title' cannot be null
+; Column 'title' cannot be null; nested exception is java.sql.SQLIntegrityConstraintViolationException: Column 'title' cannot be null]
+2019-09-25 00:37:04.052 ERROR 4768 --- [http-nio-8080-exec-2] c.example.demo.base.AppExceptionHandler  : org.springframework.validation.BeanPropertyBindingResult: 1 errors
+Field error in object 'goodsVo' on field 'stock': rejected value [111111111111111111111]; codes [typeMismatch.goodsVo.stock,typeMismatch.stock,typeMismatch.java.lang.Integer,typeMismatch]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [goodsVo.stock,stock]; arguments []; default message [stock]]; default message [Failed to convert property value of type 'java.lang.String' to required type 'java.lang.Integer' for property 'stock'; nested exception is java.lang.NumberFormatException: For input string: "111111111111111111111"]
+2019-09-25 00:37:04.055  WARN 4768 --- [http-nio-8080-exec-2] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.validation.BindException: org.springframework.validation.BeanPropertyBindingResult: 1 errors
+Field error in object 'goodsVo' on field 'stock': rejected value [111111111111111111111]; codes [typeMismatch.goodsVo.stock,typeMismatch.stock,typeMismatch.java.lang.Integer,typeMismatch]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [goodsVo.stock,stock]; arguments []; default message [stock]]; default message [Failed to convert property value of type 'java.lang.String' to required type 'java.lang.Integer' for property 'stock'; nested exception is java.lang.NumberFormatException: For input string: "111111111111111111111"]]
+2019-09-25 00:37:16.294 ERROR 4768 --- [http-nio-8080-exec-4] c.example.demo.base.AppExceptionHandler  : org.springframework.validation.BeanPropertyBindingResult: 1 errors
+Field error in object 'goodsVo' on field 'stock': rejected value [1111111111111]; codes [typeMismatch.goodsVo.stock,typeMismatch.stock,typeMismatch.java.lang.Integer,typeMismatch]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [goodsVo.stock,stock]; arguments []; default message [stock]]; default message [Failed to convert property value of type 'java.lang.String' to required type 'java.lang.Integer' for property 'stock'; nested exception is java.lang.NumberFormatException: For input string: "1111111111111"]
+2019-09-25 00:37:16.298  WARN 4768 --- [http-nio-8080-exec-4] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.validation.BindException: org.springframework.validation.BeanPropertyBindingResult: 1 errors
+Field error in object 'goodsVo' on field 'stock': rejected value [1111111111111]; codes [typeMismatch.goodsVo.stock,typeMismatch.stock,typeMismatch.java.lang.Integer,typeMismatch]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [goodsVo.stock,stock]; arguments []; default message [stock]]; default message [Failed to convert property value of type 'java.lang.String' to required type 'java.lang.Integer' for property 'stock'; nested exception is java.lang.NumberFormatException: For input string: "1111111111111"]]
+2019-09-25 00:37:19.285 ERROR 4768 --- [http-nio-8080-exec-5] c.example.demo.base.AppExceptionHandler  : org.springframework.validation.BeanPropertyBindingResult: 1 errors
+Field error in object 'goodsVo' on field 'stock': rejected value [11111111]; codes [Range.goodsVo.stock,Range.stock,Range.java.lang.Integer,Range]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [goodsVo.stock,stock]; arguments []; default message [stock],1000000,0]; default message [库存长度为0-1000000]
+2019-09-25 00:37:19.289  WARN 4768 --- [http-nio-8080-exec-5] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.validation.BindException: org.springframework.validation.BeanPropertyBindingResult: 1 errors
+Field error in object 'goodsVo' on field 'stock': rejected value [11111111]; codes [Range.goodsVo.stock,Range.stock,Range.java.lang.Integer,Range]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [goodsVo.stock,stock]; arguments []; default message [stock],1000000,0]; default message [库存长度为0-1000000]]
+2019-09-25 00:37:31.191  INFO 4768 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : ***************************************************
+2019-09-25 00:37:31.192  INFO 4768 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : 请求开始, URI: /goods/create, method: GET, params: {"stock":["1"]}
+2019-09-25 00:37:31.238 DEBUG 4768 --- [http-nio-8080-exec-7] c.e.demo.mapper.GoodsMapper.insert       : ==>  Preparing: insert into goods (title, description, icon, price, stock) values (?, ?, ?, ?, ?) 
+2019-09-25 00:37:31.240 DEBUG 4768 --- [http-nio-8080-exec-7] c.e.demo.mapper.GoodsMapper.insert       : ==> Parameters: null, null, null, null, 1(Integer)
+2019-09-25 00:37:31.285 ERROR 4768 --- [http-nio-8080-exec-7] c.example.demo.base.AppExceptionHandler  : 
+### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Column 'title' cannot be null
+### The error may exist in com/example/demo/mapper/GoodsMapper.xml
+### The error may involve com.example.demo.mapper.GoodsMapper.insert-Inline
+### The error occurred while setting parameters
+### SQL: insert into goods (title, description, icon,        price, stock)     values (?, ?, ?,        ?, ?)
+### Cause: java.sql.SQLIntegrityConstraintViolationException: Column 'title' cannot be null
+; Column 'title' cannot be null; nested exception is java.sql.SQLIntegrityConstraintViolationException: Column 'title' cannot be null
+2019-09-25 00:37:31.288  WARN 4768 --- [http-nio-8080-exec-7] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.dao.DataIntegrityViolationException: 
+### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Column 'title' cannot be null
+### The error may exist in com/example/demo/mapper/GoodsMapper.xml
+### The error may involve com.example.demo.mapper.GoodsMapper.insert-Inline
+### The error occurred while setting parameters
+### SQL: insert into goods (title, description, icon,        price, stock)     values (?, ?, ?,        ?, ?)
+### Cause: java.sql.SQLIntegrityConstraintViolationException: Column 'title' cannot be null
+; Column 'title' cannot be null; nested exception is java.sql.SQLIntegrityConstraintViolationException: Column 'title' cannot be null]
+2019-09-25 00:37:53.167  INFO 4768 --- [http-nio-8080-exec-9] com.example.demo.base.AopLog             : ***************************************************
+2019-09-25 00:37:53.167  INFO 4768 --- [http-nio-8080-exec-9] com.example.demo.base.AopLog             : 请求开始, URI: /goods/create, method: GET, params: {"title":["huawei"],"description":["mate20"],"stock":["1"]}
+2019-09-25 00:37:53.225 DEBUG 4768 --- [http-nio-8080-exec-9] c.e.demo.mapper.GoodsMapper.insert       : ==>  Preparing: insert into goods (title, description, icon, price, stock) values (?, ?, ?, ?, ?) 
+2019-09-25 00:37:53.226 DEBUG 4768 --- [http-nio-8080-exec-9] c.e.demo.mapper.GoodsMapper.insert       : ==> Parameters: huawei(String), mate20(String), null, null, 1(Integer)
+2019-09-25 00:37:53.275 ERROR 4768 --- [http-nio-8080-exec-9] c.example.demo.base.AppExceptionHandler  : 
+### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Column 'icon' cannot be null
+### The error may exist in com/example/demo/mapper/GoodsMapper.xml
+### The error may involve com.example.demo.mapper.GoodsMapper.insert-Inline
+### The error occurred while setting parameters
+### SQL: insert into goods (title, description, icon,        price, stock)     values (?, ?, ?,        ?, ?)
+### Cause: java.sql.SQLIntegrityConstraintViolationException: Column 'icon' cannot be null
+; Column 'icon' cannot be null; nested exception is java.sql.SQLIntegrityConstraintViolationException: Column 'icon' cannot be null
+2019-09-25 00:37:53.280  WARN 4768 --- [http-nio-8080-exec-9] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.dao.DataIntegrityViolationException: 
+### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Column 'icon' cannot be null
+### The error may exist in com/example/demo/mapper/GoodsMapper.xml
+### The error may involve com.example.demo.mapper.GoodsMapper.insert-Inline
+### The error occurred while setting parameters
+### SQL: insert into goods (title, description, icon,        price, stock)     values (?, ?, ?,        ?, ?)
+### Cause: java.sql.SQLIntegrityConstraintViolationException: Column 'icon' cannot be null
+; Column 'icon' cannot be null; nested exception is java.sql.SQLIntegrityConstraintViolationException: Column 'icon' cannot be null]
+2019-09-25 00:38:16.754  INFO 4768 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : ***************************************************
+2019-09-25 00:38:16.755  INFO 4768 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : 请求开始, URI: /goods/create, method: GET, params: {"title":["huawei"],"description":["mate20"],"price":["5999.99"],"stock":["1"]}
+2019-09-25 00:38:16.796 DEBUG 4768 --- [http-nio-8080-exec-1] c.e.demo.mapper.GoodsMapper.insert       : ==>  Preparing: insert into goods (title, description, icon, price, stock) values (?, ?, ?, ?, ?) 
+2019-09-25 00:38:16.797 DEBUG 4768 --- [http-nio-8080-exec-1] c.e.demo.mapper.GoodsMapper.insert       : ==> Parameters: huawei(String), mate20(String), null, 5999.99(Double), 1(Integer)
+2019-09-25 00:38:16.834 ERROR 4768 --- [http-nio-8080-exec-1] c.example.demo.base.AppExceptionHandler  : 
+### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Column 'icon' cannot be null
+### The error may exist in com/example/demo/mapper/GoodsMapper.xml
+### The error may involve com.example.demo.mapper.GoodsMapper.insert-Inline
+### The error occurred while setting parameters
+### SQL: insert into goods (title, description, icon,        price, stock)     values (?, ?, ?,        ?, ?)
+### Cause: java.sql.SQLIntegrityConstraintViolationException: Column 'icon' cannot be null
+; Column 'icon' cannot be null; nested exception is java.sql.SQLIntegrityConstraintViolationException: Column 'icon' cannot be null
+2019-09-25 00:38:16.837  WARN 4768 --- [http-nio-8080-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.dao.DataIntegrityViolationException: 
+### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Column 'icon' cannot be null
+### The error may exist in com/example/demo/mapper/GoodsMapper.xml
+### The error may involve com.example.demo.mapper.GoodsMapper.insert-Inline
+### The error occurred while setting parameters
+### SQL: insert into goods (title, description, icon,        price, stock)     values (?, ?, ?,        ?, ?)
+### Cause: java.sql.SQLIntegrityConstraintViolationException: Column 'icon' cannot be null
+; Column 'icon' cannot be null; nested exception is java.sql.SQLIntegrityConstraintViolationException: Column 'icon' cannot be null]
+2019-09-25 00:38:36.034 ERROR 4768 --- [http-nio-8080-exec-3] c.example.demo.base.AppExceptionHandler  : org.springframework.validation.BeanPropertyBindingResult: 1 errors
+Field error in object 'goodsVo' on field 'icon': rejected value [http]; codes [URL.goodsVo.icon,URL.icon,URL.java.lang.String,URL]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [goodsVo.icon,icon]; arguments []; default message [icon],[Ljavax.validation.constraints.Pattern$Flag;@5aa61fca,,-1,,.*]; default message [需要是一个合法的URL]
+2019-09-25 00:38:36.037  WARN 4768 --- [http-nio-8080-exec-3] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.validation.BindException: org.springframework.validation.BeanPropertyBindingResult: 1 errors
+Field error in object 'goodsVo' on field 'icon': rejected value [http]; codes [URL.goodsVo.icon,URL.icon,URL.java.lang.String,URL]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [goodsVo.icon,icon]; arguments []; default message [icon],[Ljavax.validation.constraints.Pattern$Flag;@5aa61fca,,-1,,.*]; default message [需要是一个合法的URL]]
+2019-09-25 00:38:38.770  INFO 4768 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : ***************************************************
+2019-09-25 00:38:38.771  INFO 4768 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : 请求开始, URI: /goods/create, method: GET, params: {"title":["huawei"],"description":["mate20"],"price":["5999.99"],"stock":["1"],"icon":["http://www.littleredhat1997.com"]}
+2019-09-25 00:38:38.811 DEBUG 4768 --- [http-nio-8080-exec-4] c.e.demo.mapper.GoodsMapper.insert       : ==>  Preparing: insert into goods (title, description, icon, price, stock) values (?, ?, ?, ?, ?) 
+2019-09-25 00:38:38.812 DEBUG 4768 --- [http-nio-8080-exec-4] c.e.demo.mapper.GoodsMapper.insert       : ==> Parameters: huawei(String), mate20(String), http://www.littleredhat1997.com(String), 5999.99(Double), 1(Integer)
+2019-09-25 00:38:38.914 DEBUG 4768 --- [http-nio-8080-exec-4] c.e.demo.mapper.GoodsMapper.insert       : <==    Updates: 1
+2019-09-25 00:38:38.918 DEBUG 4768 --- [http-nio-8080-exec-4] c.e.d.m.GoodsMapper.insert!selectKey     : ==>  Preparing: SELECT LAST_INSERT_ID() 
+2019-09-25 00:38:38.919 DEBUG 4768 --- [http-nio-8080-exec-4] c.e.d.m.GoodsMapper.insert!selectKey     : ==> Parameters: 
+2019-09-25 00:38:38.991 DEBUG 4768 --- [http-nio-8080-exec-4] c.e.d.m.GoodsMapper.insert!selectKey     : <==      Total: 1
+2019-09-25 00:38:39.021  INFO 4768 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"message":"SUCCESS"}
+2019-09-25 00:38:49.279  INFO 4768 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : ***************************************************
+2019-09-25 00:38:49.279  INFO 4768 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : 请求开始, URI: /goods/2, method: GET, params: {}
+2019-09-25 00:38:49.327 DEBUG 4768 --- [http-nio-8080-exec-5] c.e.d.m.GoodsMapper.selectByPrimaryKey   : ==>  Preparing: select id, title, description, icon, price, stock from goods where id = ? 
+2019-09-25 00:38:49.328 DEBUG 4768 --- [http-nio-8080-exec-5] c.e.d.m.GoodsMapper.selectByPrimaryKey   : ==> Parameters: 2(Long)
+2019-09-25 00:38:49.376 DEBUG 4768 --- [http-nio-8080-exec-5] c.e.d.m.GoodsMapper.selectByPrimaryKey   : <==      Total: 1
+2019-09-25 00:38:49.389  INFO 4768 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":{"description":"mate20","icon":"http://www.littleredhat1997.com","id":2,"price":5999.99,"stock":1,"title":"huawei"},"message":"SUCCESS"}
+2019-09-25 00:38:55.493  INFO 4768 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : ***************************************************
+2019-09-25 00:38:55.493  INFO 4768 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : 请求开始, URI: /goods/list, method: GET, params: {}
+2019-09-25 00:38:55.551 DEBUG 4768 --- [http-nio-8080-exec-7] c.e.d.m.GoodsMapper.selectByExample      : ==>  Preparing: select id, title, description, icon, price, stock from goods 
+2019-09-25 00:38:55.551 DEBUG 4768 --- [http-nio-8080-exec-7] c.e.d.m.GoodsMapper.selectByExample      : ==> Parameters: 
+2019-09-25 00:38:55.600 DEBUG 4768 --- [http-nio-8080-exec-7] c.e.d.m.GoodsMapper.selectByExample      : <==      Total: 2
+2019-09-25 00:38:55.601  INFO 4768 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":[{"description":"苹果","icon":"littleredhat1997","id":1,"price":3.14,"stock":520,"title":"iphone"},{"description":"mate20","icon":"http://www.littleredhat1997.com","id":2,"price":5999.99,"stock":1,"title":"huawei"}],"message":"SUCCESS"}
+2019-09-25 00:39:25.425  INFO 4768 --- [http-nio-8080-exec-9] com.example.demo.base.AopLog             : ***************************************************
+2019-09-25 00:39:25.425  INFO 4768 --- [http-nio-8080-exec-9] com.example.demo.base.AopLog             : 请求开始, URI: /goods/update/1, method: GET, params: {"price":["8999.99"]}
+2019-09-25 00:39:25.466 DEBUG 4768 --- [http-nio-8080-exec-9] c.e.d.m.GoodsMapper.updateByPrimaryKey   : ==>  Preparing: update goods set title = ?, description = ?, icon = ?, price = ?, stock = ? where id = ? 
+2019-09-25 00:39:25.467 DEBUG 4768 --- [http-nio-8080-exec-9] c.e.d.m.GoodsMapper.updateByPrimaryKey   : ==> Parameters: null, null, null, 8999.99(Double), null, 1(Long)
+2019-09-25 00:39:25.506 ERROR 4768 --- [http-nio-8080-exec-9] c.example.demo.base.AppExceptionHandler  : 
+### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Column 'title' cannot be null
+### The error may exist in com/example/demo/mapper/GoodsMapper.xml
+### The error may involve com.example.demo.mapper.GoodsMapper.updateByPrimaryKey-Inline
+### The error occurred while setting parameters
+### SQL: update goods     set title = ?,       description = ?,       icon = ?,       price = ?,       stock = ?     where id = ?
+### Cause: java.sql.SQLIntegrityConstraintViolationException: Column 'title' cannot be null
+; Column 'title' cannot be null; nested exception is java.sql.SQLIntegrityConstraintViolationException: Column 'title' cannot be null
+2019-09-25 00:39:25.517  WARN 4768 --- [http-nio-8080-exec-9] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.dao.DataIntegrityViolationException: 
+### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Column 'title' cannot be null
+### The error may exist in com/example/demo/mapper/GoodsMapper.xml
+### The error may involve com.example.demo.mapper.GoodsMapper.updateByPrimaryKey-Inline
+### The error occurred while setting parameters
+### SQL: update goods     set title = ?,       description = ?,       icon = ?,       price = ?,       stock = ?     where id = ?
+### Cause: java.sql.SQLIntegrityConstraintViolationException: Column 'title' cannot be null
+; Column 'title' cannot be null; nested exception is java.sql.SQLIntegrityConstraintViolationException: Column 'title' cannot be null]
+2019-09-25 00:40:12.458  INFO 4768 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : ***************************************************
+2019-09-25 00:40:12.458  INFO 4768 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : 请求开始, URI: /goods/list, method: GET, params: {}
+2019-09-25 00:40:12.507 DEBUG 4768 --- [http-nio-8080-exec-1] c.e.d.m.GoodsMapper.selectByExample      : ==>  Preparing: select id, title, description, icon, price, stock from goods 
+2019-09-25 00:40:12.507 DEBUG 4768 --- [http-nio-8080-exec-1] c.e.d.m.GoodsMapper.selectByExample      : ==> Parameters: 
+2019-09-25 00:40:12.547 DEBUG 4768 --- [http-nio-8080-exec-1] c.e.d.m.GoodsMapper.selectByExample      : <==      Total: 2
+2019-09-25 00:40:12.549  INFO 4768 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":[{"description":"苹果","icon":"littleredhat1997","id":1,"price":3.14,"stock":520,"title":"iphone"},{"description":"mate20","icon":"http://www.littleredhat1997.com","id":2,"price":5999.99,"stock":1,"title":"huawei"}],"message":"SUCCESS"}
+2019-09-25 00:40:45.668  INFO 504 --- [restartedMain] com.example.demo.Application             : Starting Application on zzz with PID 504 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
+2019-09-25 00:40:45.670 DEBUG 504 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
+2019-09-25 00:40:45.670  INFO 504 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
+2019-09-25 00:40:45.697  INFO 504 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-09-25 00:40:45.698  INFO 504 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-09-25 00:41:01.107  INFO 7100 --- [restartedMain] com.example.demo.Application             : Starting Application on zzz with PID 7100 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
+2019-09-25 00:41:01.109 DEBUG 7100 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
+2019-09-25 00:41:01.109  INFO 7100 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
+2019-09-25 00:41:01.141  INFO 7100 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-09-25 00:41:01.141  INFO 7100 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-09-25 00:41:01.832  INFO 7100 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-09-25 00:41:01.834  INFO 7100 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-09-25 00:41:01.854  INFO 7100 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 13ms. Found 0 repository interfaces.
+2019-09-25 00:41:02.137  INFO 7100 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$b5100b00] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-25 00:41:02.438  INFO 7100 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-09-25 00:41:02.456  INFO 7100 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-09-25 00:41:02.456  INFO 7100 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.22]
+2019-09-25 00:41:02.529  INFO 7100 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-09-25 00:41:02.530  INFO 7100 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1389 ms
+2019-09-25 00:41:02.879  INFO 7100 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-09-25 00:41:05.139  INFO 7100 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-09-25 00:41:05.597  INFO 7100 --- [restartedMain] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+2019-09-25 00:41:05.735  INFO 7100 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-09-25 00:41:05.781  INFO 7100 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2019-09-25 00:41:05.812  INFO 7100 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-09-25 00:41:06.195  INFO 7100 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2019-09-25 00:41:06.205  INFO 7100 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2019-09-25 00:41:06.226  INFO 7100 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2019-09-25 00:41:06.452  INFO 7100 --- [restartedMain] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [www.littleredhat1997.com:5672]
+2019-09-25 00:41:06.638  INFO 7100 --- [restartedMain] o.s.a.r.c.CachingConnectionFactory       : Created new connection: rabbitConnectionFactory#16180f36:0/SimpleConnection@4d80495b [delegate=amqp://root@106.54.84.40:5672/, localPort= 52798]
+2019-09-25 00:41:07.222  INFO 7100 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-09-25 00:41:07.225  INFO 7100 --- [restartedMain] com.example.demo.Application             : Started Application in 7.123 seconds (JVM running for 7.986)
+2019-09-25 00:41:12.148  INFO 7100 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-09-25 00:41:12.149  INFO 7100 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-09-25 00:41:12.158  INFO 7100 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 9 ms
+2019-09-25 00:41:12.265  INFO 7100 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : ***************************************************
+2019-09-25 00:41:12.266  INFO 7100 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : 请求开始, URI: /goods/update/1, method: GET, params: {"price":["8999.99"]}
+2019-09-25 00:41:12.362 DEBUG 7100 --- [http-nio-8080-exec-1] c.e.d.m.G.updateByPrimaryKeySelective    : ==>  Preparing: update goods SET price = ? where id = ? 
+2019-09-25 00:41:12.387 DEBUG 7100 --- [http-nio-8080-exec-1] c.e.d.m.G.updateByPrimaryKeySelective    : ==> Parameters: 8999.99(Double), 1(Long)
+2019-09-25 00:41:12.491 DEBUG 7100 --- [http-nio-8080-exec-1] c.e.d.m.G.updateByPrimaryKeySelective    : <==    Updates: 1
+2019-09-25 00:41:12.528  INFO 7100 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"message":"SUCCESS"}
+2019-09-25 00:41:15.205  INFO 7100 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : ***************************************************
+2019-09-25 00:41:15.205  INFO 7100 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : 请求开始, URI: /goods/list, method: GET, params: {}
+2019-09-25 00:41:15.258 DEBUG 7100 --- [http-nio-8080-exec-3] c.e.d.m.GoodsMapper.selectByExample      : ==>  Preparing: select id, title, description, icon, price, stock from goods 
+2019-09-25 00:41:15.258 DEBUG 7100 --- [http-nio-8080-exec-3] c.e.d.m.GoodsMapper.selectByExample      : ==> Parameters: 
+2019-09-25 00:41:15.319 DEBUG 7100 --- [http-nio-8080-exec-3] c.e.d.m.GoodsMapper.selectByExample      : <==      Total: 2
+2019-09-25 00:41:15.331  INFO 7100 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":[{"description":"苹果","icon":"littleredhat1997","id":1,"price":8999.99,"stock":520,"title":"iphone"},{"description":"mate20","icon":"http://www.littleredhat1997.com","id":2,"price":5999.99,"stock":1,"title":"huawei"}],"message":"SUCCESS"}

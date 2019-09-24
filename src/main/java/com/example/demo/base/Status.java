@@ -6,7 +6,8 @@ package com.example.demo.base;
 public enum Status {
 
     // 服务器
-    SUCCESS(200, "OK"),
+    SUCCESS(200, "SUCCESS"),
+    FAILED(250, "FAILED"),
     FORBIDDEN(403, "Forbidden"),
     NOT_FOUND(404, "Not Found"),
     INTERNAL_SERVER_ERROR(500, "Internal Server Error"),
@@ -23,7 +24,9 @@ public enum Status {
     // 账号相关
     EMAIL_EXIST(50010, "邮箱已经存在"),
     EMAIL_NOT_EXIST(50011, "邮箱不存在"),
-    PASSWORD_ERROR(50012, "密码错误");
+    PASSWORD_ERROR(50012, "密码错误"),
+
+    FILE_UPLOAD_ERROR(60001, "文件上传错误");
 
     private int code;
     private String message;

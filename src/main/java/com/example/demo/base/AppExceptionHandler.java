@@ -28,13 +28,13 @@ public class AppExceptionHandler {
             List<ObjectError> errorList = ex.getAllErrors();
             ObjectError error = errorList.get(0);
             String msg = error.getDefaultMessage();
-            return Result.message(Status.BIND_EXCEPTION.getCode(), msg);
+            return Result.failed(Status.BIND_EXCEPTION.getCode(), msg);
         } else if (e instanceof RuntimeException) {
-            return Result.message(Status.RUNTIME_EXCEPTION.getCode(), e.getMessage());
+            return Result.failed(Status.RUNTIME_EXCEPTION.getCode(), e.getMessage());
         } else if (e instanceof IOException) {
-            return Result.message(Status.IO_EXCEPTION.getCode(), e.getMessage());
+            return Result.failed(Status.IO_EXCEPTION.getCode(), e.getMessage());
         } else {
-            return Result.message(Status.INTERNAL_SERVER_ERROR.getCode(), e.getMessage());
+            return Result.failed(Status.INTERNAL_SERVER_ERROR.getCode(), e.getMessage());
         }
     }
 }

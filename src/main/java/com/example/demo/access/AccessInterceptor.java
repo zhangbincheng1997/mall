@@ -43,7 +43,7 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
                 if (count == null) {
                     redisService.set(key, Integer.valueOf(1), seconds);
                 } else if (count < maxCount) {
-                    redisService.incr(key);
+                    redisService.increment(key, 1);
                 } else {
                     render(response, Status.ACCESS_LIMIT);
                     return false;
@@ -83,7 +83,7 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
     private void render(HttpServletResponse response, Status status) throws Exception {
         response.setContentType("application/json;charset=UTF-8");
         OutputStream out = response.getOutputStream();
-        String str = JSON.toJSONString(Result.error(status));
+        String str = JSON.toJSONString(Result.failed(status));
         out.write(str.getBytes("UTF-8"));
         out.flush();
         out.close();

@@ -124,10 +124,10 @@ public class CaptchaController {
                                 @RequestParam @Size(min = 4, max = 4) String code) {
         String redisCode = (String) redisService.get(Constants.CAPTCHA_KEY + "_" + request.getRequestURL());
         if (redisCode == null) {
-            return Result.error(Status.CODE_EXPIRED);
+            return Result.failed(Status.CODE_EXPIRED);
         }
         if (redisCode.toLowerCase().equals(code.toLowerCase())) {
-            return Result.error(Status.CODE_ERROR);
+            return Result.failed(Status.CODE_ERROR);
         } else {
             return Result.success("");
         }

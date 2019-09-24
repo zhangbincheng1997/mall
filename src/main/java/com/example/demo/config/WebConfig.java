@@ -22,7 +22,6 @@ public class WebConfig implements WebMvcConfigurer {
     @Autowired
     AccessInterceptor accessInterceptor;
 
-    // controller参数赋值
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
         resolvers.add(userArgumentResolver);
@@ -31,11 +30,6 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(accessInterceptor);
-    }
-
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/images/**").addResourceLocations("classpath:/images/");
     }
 
     /**
