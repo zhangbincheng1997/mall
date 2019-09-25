@@ -1,25 +1,20 @@
 package com.example.demo.service;
 
-import com.example.demo.base.Result;
 import com.example.demo.model.User;
 import com.example.demo.vo.UserInfoVo;
 import com.example.demo.vo.UserVo;
-import com.example.demo.vo.UpdatePassVo;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 public interface UserService {
 
-    Result register(UserVo loginVo);
+    User getUserByUsername(String username);
 
-    Result login(HttpServletResponse response, UserVo loginVo);
+    User register(UserVo userVo);
 
-    Result logout(HttpServletRequest request, HttpServletResponse response);
+    String login(UserVo userVo);
 
-    Result getUserInfo(User user);
+    void logout();
 
-    Result updatePass(HttpServletRequest request, HttpServletResponse response, UpdatePassVo updatePassVo);
+    int updatePasswordByEmail(UserVo userVo);
 
-    Result updateUserInfo(HttpServletRequest request, HttpServletResponse response, UserInfoVo userInfoVo);
+    int updateUserInfoByUsername(String username, UserInfoVo userInfoVo);
 }

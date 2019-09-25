@@ -4,12 +4,9 @@ import com.alibaba.fastjson.JSON;
 import com.example.demo.base.Result;
 import com.example.demo.base.Status;
 import com.example.demo.component.RedisService;
-import com.example.demo.model.User;
 import com.example.demo.utils.Constants;
-import com.example.demo.utils.CookieUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -35,10 +32,9 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
 
             int seconds = accessLimit.seconds();
             int maxCount = accessLimit.maxCount();
-            boolean needLogin = accessLimit.needLogin();
 
             if (seconds != 0 && maxCount != 0) {
-                String key = Constants.ACCESS_KEY + "_" + request.getRequestURL();
+                String key = Constants.ACCESS_KEY + request.getRequestURL();
                 Integer count = (Integer) redisService.get(key);
                 if (count == null) {
                     redisService.set(key, Integer.valueOf(1), seconds);
@@ -49,34 +45,8 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
                     return false;
                 }
             }
-
-            if (needLogin) {
-                User user = getUser(request, response);
-                if (user == null) {
-                    render(response, Status.NOT_LOGIN);
-                    return false;
-                }
-                // 注入对象
-                UserContext.setUser(user);
-            }
         }
         return true;
-    }
-
-    // 获取用户
-    private User getUser(HttpServletRequest request, HttpServletResponse response) {
-        String token = CookieUtils.getCookie(request, Constants.COOKIE_TOKEN);
-        if (StringUtils.isEmpty(token)) {
-            return null;
-        }
-        if (redisService.hasKey(token)) {
-            // 延长有效期
-            User user = (User) redisService.get(token);
-            redisService.set(token, user, Constants.COOKIE_EXPIRY);
-            CookieUtils.setCookie(response, Constants.COOKIE_TOKEN, token, Constants.COOKIE_EXPIRY);
-            return user;
-        }
-        return null;
     }
 
     // 输出错误

@@ -1,16 +1,16 @@
 package com.example.demo.service;
 
-import com.example.demo.base.Result;
 import com.example.demo.model.Goods;
 import com.example.demo.vo.GoodsVo;
-
-import java.util.List;
+import com.github.pagehelper.PageInfo;
 
 public interface GoodsService {
 
     Goods get(Long id);
 
-    List<Goods> getList();
+    long count();
+
+    PageInfo list(String keyword, int pageNum, int pageSize);
 
     int create(GoodsVo goodsVo);
 

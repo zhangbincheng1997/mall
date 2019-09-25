@@ -10,8 +10,6 @@ public class User implements Serializable {
 
     private String password;
 
-    private String salt;
-
     private String email;
 
     private String icon;
@@ -23,6 +21,8 @@ public class User implements Serializable {
     private Date birthday;
 
     private Date createTime;
+
+    private Date loginTime;
 
     private static final long serialVersionUID = 1L;
 
@@ -48,14 +48,6 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getSalt() {
-        return salt;
-    }
-
-    public void setSalt(String salt) {
-        this.salt = salt;
     }
 
     public String getEmail() {
@@ -106,6 +98,14 @@ public class User implements Serializable {
         this.createTime = createTime;
     }
 
+    public Date getLoginTime() {
+        return loginTime;
+    }
+
+    public void setLoginTime(Date loginTime) {
+        this.loginTime = loginTime;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -115,13 +115,13 @@ public class User implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", username=").append(username);
         sb.append(", password=").append(password);
-        sb.append(", salt=").append(salt);
         sb.append(", email=").append(email);
         sb.append(", icon=").append(icon);
         sb.append(", nickname=").append(nickname);
         sb.append(", gender=").append(gender);
         sb.append(", birthday=").append(birthday);
         sb.append(", createTime=").append(createTime);
+        sb.append(", loginTime=").append(loginTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

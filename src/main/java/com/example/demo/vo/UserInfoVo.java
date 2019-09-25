@@ -3,7 +3,6 @@ package com.example.demo.vo;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.hibernate.validator.constraints.Range;
-import org.hibernate.validator.constraints.URL;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.*;
@@ -11,14 +10,6 @@ import java.util.Date;
 
 @Data
 public class UserInfoVo {
-
-    //    @NotNull(message = "手机不能为空")
-//    @Pattern(regexp = "1\\d{10}", message = "手机不符合规范")
-//    private String mobile;
-
-    @ApiModelProperty(value = "邮箱")
-    @Email(message = "邮箱不符合规范")
-    private String email;
 
     @ApiModelProperty(value = "链接")
     private String icon;

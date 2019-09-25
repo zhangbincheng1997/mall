@@ -50,7 +50,7 @@ public class RabbitReceiver {
         try {
             // 发送邮件
             mailSender.send(message);
-            redisService.set(Constants.EMAIL_KEY + "_" + to, code, Constants.EMAIL_EXPIRY);
+            redisService.set(Constants.EMAIL_KEY + to, code, Constants.EMAIL_EXPIRY);
             log.info(message.toString());
         } catch (Exception e) {
             log.error("邮件发送失败", e);

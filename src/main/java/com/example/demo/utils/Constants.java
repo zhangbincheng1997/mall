@@ -28,4 +28,15 @@ public class Constants {
      */
     public static final String TEST_TOPIC = "测试主题";
     public static final String EMAIL_TOPIC = "邮件主题";
+
+
+    /**
+     * 验证码长度
+     */
+    public static final int CODE_LENGTH = 4;
+
+    /**
+     * 七牛云重传
+     */
+    public static final int UPLOAD_RETRY = 3;
 }

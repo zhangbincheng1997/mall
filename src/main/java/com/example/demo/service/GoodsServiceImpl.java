@@ -1,12 +1,16 @@
 package com.example.demo.service;
 
-import cn.hutool.core.bean.BeanUtil;
 import com.example.demo.mapper.GoodsMapper;
 import com.example.demo.model.Goods;
+import com.example.demo.model.GoodsExample;
 import com.example.demo.vo.GoodsVo;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -14,33 +18,44 @@ import java.util.List;
 public class GoodsServiceImpl implements GoodsService {
 
     @Autowired
-    GoodsMapper goodsMapper;
+    private GoodsMapper goodsMapper;
 
     @Override
+//    @Cacheable(value = "goods", key = "#id") // EnableCaching
+    @Cacheable(value = "goods")
     public Goods get(Long id) {
         Goods goods = goodsMapper.selectByPrimaryKey(id);
         return goods;
     }
 
     @Override
-    public List<Goods> getList() {
-        List<Goods> goodsList = goodsMapper.selectByExample(null);
-        return goodsList;
+    public long count() {
+        return goodsMapper.countByExample(null);
+    }
+
+    @Override
+    public PageInfo list(String keyword, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        GoodsExample example = new GoodsExample();
+        if (!StringUtils.isEmpty(keyword)) {
+            example.or().andTitleLike("%" + keyword + "%");
+            example.or().andDescriptionLike("%" + keyword + "%");
+        }
+        List<Goods> goodsList = goodsMapper.selectByExample(example);
+        PageInfo page = new PageInfo(goodsList);
+        return page;
     }
 
     @Override
     public int create(GoodsVo goodsVo) {
         Goods goods = new Goods();
-        BeanUtil.copyProperties(goodsVo, goods);
-        int res = goodsMapper.insert(goods);
-        return res;
+        BeanUtils.copyProperties(goodsVo, goods);
+        return goodsMapper.insert(goods);
     }
 
-    // 返回的结果int值代表着对多少条记录数据的操作
     @Override
     public int delete(Long id) {
-        int res = goodsMapper.deleteByPrimaryKey(id);
-        return res;
+        return goodsMapper.deleteByPrimaryKey(id);
     }
 
     @Override
@@ -48,7 +63,6 @@ public class GoodsServiceImpl implements GoodsService {
         Goods goods = new Goods();
         goods.setId(id);
         BeanUtils.copyProperties(goodsVo, goods);
-        int res = goodsMapper.updateByPrimaryKeySelective(goods);
-        return res;
+        return goodsMapper.updateByPrimaryKeySelective(goods);
     }
 }

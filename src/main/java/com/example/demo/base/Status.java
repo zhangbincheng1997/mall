@@ -22,11 +22,12 @@ public enum Status {
     CODE_ERROR(10002, "验证码错误"),
 
     // 账号相关
-    EMAIL_EXIST(50010, "邮箱已经存在"),
-    EMAIL_NOT_EXIST(50011, "邮箱不存在"),
-    PASSWORD_ERROR(50012, "密码错误"),
-
-    FILE_UPLOAD_ERROR(60001, "文件上传错误");
+    USERNAME_EXIST(50010, "账号已经存在"),
+    USERNAME_NOT_EXIST(50011, "账号不存在"),
+    EMAIL_EXIST(50012, "邮箱已经存在"),
+    EMAIL_NOT_EXIST(50013, "邮箱不存在"),
+    USERNAME_PASSWORD_ERROR(50014, "用户名或者密码错误"),
+    USERNAME_PASSWORD_EXIST(50014, "用户名或者密码存在");
 
     private int code;
     private String message;

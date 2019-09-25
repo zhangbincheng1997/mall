@@ -1,0 +1,572 @@
+2019-09-26 01:25:15.021  INFO 14984 --- [restartedMain] com.example.demo.Application             : Starting Application on zzz with PID 14984 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
+2019-09-26 01:25:15.023 DEBUG 14984 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
+2019-09-26 01:25:15.023  INFO 14984 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
+2019-09-26 01:25:15.051  INFO 14984 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-09-26 01:25:15.059  INFO 14984 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-09-26 01:25:15.836  INFO 14984 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-09-26 01:25:15.837  INFO 14984 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-09-26 01:25:15.860  INFO 14984 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 13ms. Found 0 repository interfaces.
+2019-09-26 01:25:16.201  INFO 14984 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$f4ea366e] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-26 01:25:16.269  INFO 14984 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'redisConfig' of type [com.example.demo.config.RedisConfig$$EnhancerBySpringCGLIB$$9eb91cfe] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-26 01:25:16.547  INFO 14984 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-09-26 01:25:16.566  INFO 14984 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-09-26 01:25:16.566  INFO 14984 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.22]
+2019-09-26 01:25:16.648  INFO 14984 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-09-26 01:25:16.648  INFO 14984 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1589 ms
+2019-09-26 01:25:17.099  WARN 14984 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'tokenService': Injection of autowired dependencies failed; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'jwt.expiration' in value "${jwt.expiration}"
+2019-09-26 01:25:17.115  INFO 14984 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2019-09-26 01:25:17.131  INFO 14984 --- [restartedMain] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2019-09-26 01:25:17.137 ERROR 14984 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'tokenService': Injection of autowired dependencies failed; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'jwt.expiration' in value "${jwt.expiration}"
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:380)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1411)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:592)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:845)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:877)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:549)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:141)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:743)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:390)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:312)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1214)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1203)
+	at com.example.demo.Application.main(Application.java:12)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+Caused by: java.lang.IllegalArgumentException: Could not resolve placeholder 'jwt.expiration' in value "${jwt.expiration}"
+	at org.springframework.util.PropertyPlaceholderHelper.parseStringValue(PropertyPlaceholderHelper.java:178)
+	at org.springframework.util.PropertyPlaceholderHelper.replacePlaceholders(PropertyPlaceholderHelper.java:124)
+	at org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders(AbstractPropertyResolver.java:237)
+	at org.springframework.core.env.AbstractPropertyResolver.resolveRequiredPlaceholders(AbstractPropertyResolver.java:211)
+	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.lambda$processProperties$0(PropertySourcesPlaceholderConfigurer.java:175)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveEmbeddedValue(AbstractBeanFactory.java:851)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1192)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1171)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:593)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:90)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:374)
+	... 22 common frames omitted
+
+2019-09-26 01:27:44.893  INFO 1832 --- [restartedMain] com.example.demo.Application             : Starting Application on zzz with PID 1832 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
+2019-09-26 01:27:44.895 DEBUG 1832 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
+2019-09-26 01:27:44.895  INFO 1832 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
+2019-09-26 01:27:44.927  INFO 1832 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-09-26 01:27:44.927  INFO 1832 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-09-26 01:27:45.724  INFO 1832 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-09-26 01:27:45.725  INFO 1832 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-09-26 01:27:45.747  INFO 1832 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 13ms. Found 0 repository interfaces.
+2019-09-26 01:27:46.052  INFO 1832 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$2c971c9e] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-26 01:27:46.123  INFO 1832 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'redisConfig' of type [com.example.demo.config.RedisConfig$$EnhancerBySpringCGLIB$$d666032e] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-26 01:27:46.408  INFO 1832 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-09-26 01:27:46.434  INFO 1832 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-09-26 01:27:46.434  INFO 1832 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.22]
+2019-09-26 01:27:46.509  INFO 1832 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-09-26 01:27:46.509  INFO 1832 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1582 ms
+2019-09-26 01:27:46.996  INFO 1832 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-09-26 01:27:49.276  INFO 1832 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-09-26 01:27:49.483  WARN 1832 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'userController': Unsatisfied dependency expressed through field 'userService'; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'userServiceImpl': Unsatisfied dependency expressed through field 'passwordEncoder'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'org.springframework.security.crypto.password.PasswordEncoder' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+2019-09-26 01:27:49.483  INFO 1832 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closing ...
+2019-09-26 01:27:49.486  INFO 1832 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2019-09-26 01:27:49.502  INFO 1832 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2019-09-26 01:27:49.513  INFO 1832 --- [restartedMain] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2019-09-26 01:27:49.691 ERROR 1832 --- [restartedMain] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field passwordEncoder in com.example.demo.service.UserServiceImpl required a bean of type 'org.springframework.security.crypto.password.PasswordEncoder' that could not be found.
+
+The injection point has the following annotations:
+	- @org.springframework.beans.factory.annotation.Autowired(required=true)
+
+
+Action:
+
+Consider defining a bean of type 'org.springframework.security.crypto.password.PasswordEncoder' in your configuration.
+
+2019-09-26 01:30:42.255  INFO 8444 --- [restartedMain] com.example.demo.Application             : Starting Application on zzz with PID 8444 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
+2019-09-26 01:30:42.257 DEBUG 8444 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
+2019-09-26 01:30:42.257  INFO 8444 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
+2019-09-26 01:30:42.287  INFO 8444 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-09-26 01:30:42.287  INFO 8444 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-09-26 01:30:43.053  INFO 8444 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-09-26 01:30:43.054  INFO 8444 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-09-26 01:30:43.076  INFO 8444 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 14ms. Found 0 repository interfaces.
+2019-09-26 01:30:43.421  INFO 8444 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$5a8f7629] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-26 01:30:43.491  INFO 8444 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'redisConfig' of type [com.example.demo.config.RedisConfig$$EnhancerBySpringCGLIB$$45e5cb9] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-26 01:30:43.764  INFO 8444 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-09-26 01:30:43.783  INFO 8444 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-09-26 01:30:43.784  INFO 8444 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.22]
+2019-09-26 01:30:43.883  INFO 8444 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-09-26 01:30:43.883  INFO 8444 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1596 ms
+2019-09-26 01:30:44.365  INFO 8444 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-09-26 01:30:46.729  INFO 8444 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-09-26 01:30:47.269  INFO 8444 --- [restartedMain] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+2019-09-26 01:30:47.426  INFO 8444 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-09-26 01:30:47.474  INFO 8444 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2019-09-26 01:30:47.497  INFO 8444 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-09-26 01:30:47.890  INFO 8444 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: b670efa2-b171-4756-b7a8-f71be0a13d44
+
+2019-09-26 01:30:47.967  INFO 8444 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2625397b, org.springframework.security.web.context.SecurityContextPersistenceFilter@78a19821, org.springframework.security.web.header.HeaderWriterFilter@35d4c4ae, org.springframework.security.web.csrf.CsrfFilter@1d779eaa, org.springframework.security.web.authentication.logout.LogoutFilter@47da7c52, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@4f9d19a4, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@5eabec8b, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@4633f003, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@3b28d5ed, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3030a720, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@13fd9399, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@555a1eb, org.springframework.security.web.session.SessionManagementFilter@74b7cc9e, org.springframework.security.web.access.ExceptionTranslationFilter@5893fd85, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@2bb4eee2]
+2019-09-26 01:30:48.090  INFO 8444 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2019-09-26 01:30:48.103  INFO 8444 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2019-09-26 01:30:48.127  INFO 8444 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2019-09-26 01:30:48.339  INFO 8444 --- [restartedMain] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [www.littleredhat1997.com:5672]
+2019-09-26 01:30:48.541  INFO 8444 --- [restartedMain] o.s.a.r.c.CachingConnectionFactory       : Created new connection: rabbitConnectionFactory#68ec252e:0/SimpleConnection@50cba43 [delegate=amqp://root@106.54.84.40:5672/, localPort= 59368]
+2019-09-26 01:30:49.150  INFO 8444 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-09-26 01:30:49.152  INFO 8444 --- [restartedMain] com.example.demo.Application             : Started Application in 7.897 seconds (JVM running for 8.857)
+2019-09-26 01:50:21.248  INFO 15700 --- [restartedMain] com.example.demo.Application             : Starting Application on zzz with PID 15700 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
+2019-09-26 01:50:21.249 DEBUG 15700 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
+2019-09-26 01:50:21.250  INFO 15700 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
+2019-09-26 01:50:21.280  INFO 15700 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-09-26 01:50:21.280  INFO 15700 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-09-26 01:50:22.031  INFO 15700 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-09-26 01:50:22.032  INFO 15700 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-09-26 01:50:22.053  INFO 15700 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 13ms. Found 0 repository interfaces.
+2019-09-26 01:50:22.369  INFO 15700 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$f412cd00] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-26 01:50:22.435  INFO 15700 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'redisConfig' of type [com.example.demo.config.RedisConfig$$EnhancerBySpringCGLIB$$9de1b390] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-26 01:50:22.717  INFO 15700 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-09-26 01:50:22.737  INFO 15700 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-09-26 01:50:22.738  INFO 15700 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.22]
+2019-09-26 01:50:22.826  INFO 15700 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-09-26 01:50:22.826  INFO 15700 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1546 ms
+2019-09-26 01:50:23.301  INFO 15700 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-09-26 01:50:25.663  INFO 15700 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-09-26 01:50:26.207  INFO 15700 --- [restartedMain] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+2019-09-26 01:50:26.355  INFO 15700 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-09-26 01:50:26.402  INFO 15700 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2019-09-26 01:50:26.424  INFO 15700 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-09-26 01:50:26.822  INFO 15700 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 342f49de-3995-45a2-a9b9-a9f8a1c35c29
+
+2019-09-26 01:50:26.903  INFO 15700 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@361399f9, org.springframework.security.web.context.SecurityContextPersistenceFilter@4190c698, org.springframework.security.web.header.HeaderWriterFilter@10816a62, org.springframework.security.web.csrf.CsrfFilter@53bda700, org.springframework.security.web.authentication.logout.LogoutFilter@740e0453, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@5e2ac1b6, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@2493e1a9, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@ebe8b7e, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@2de2a20b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4036848b, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6fd57905, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2b4e761, org.springframework.security.web.session.SessionManagementFilter@39a91519, org.springframework.security.web.access.ExceptionTranslationFilter@7bcda5de, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@798b7ee8]
+2019-09-26 01:50:27.025  INFO 15700 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2019-09-26 01:50:27.037  INFO 15700 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2019-09-26 01:50:27.058  INFO 15700 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2019-09-26 01:50:27.247  INFO 15700 --- [restartedMain] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [www.littleredhat1997.com:5672]
+2019-09-26 01:50:27.444  INFO 15700 --- [restartedMain] o.s.a.r.c.CachingConnectionFactory       : Created new connection: rabbitConnectionFactory#61e125eb:0/SimpleConnection@ba1f5d4 [delegate=amqp://root@106.54.84.40:5672/, localPort= 59814]
+2019-09-26 01:50:28.045  INFO 15700 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-09-26 01:50:28.047  INFO 15700 --- [restartedMain] com.example.demo.Application             : Started Application in 7.797 seconds (JVM running for 8.785)
+2019-09-26 01:52:30.370  INFO 15700 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-09-26 01:52:30.372  INFO 15700 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-09-26 01:52:30.383  INFO 15700 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 10 ms
+2019-09-26 01:52:30.526  WARN 15700 --- [http-nio-8080-exec-1] o.a.c.util.SessionIdGeneratorBase        : Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [104] milliseconds.
+2019-09-26 02:01:37.051  INFO 11236 --- [restartedMain] com.example.demo.Application             : Starting Application on zzz with PID 11236 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
+2019-09-26 02:01:37.053 DEBUG 11236 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
+2019-09-26 02:01:37.053  INFO 11236 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
+2019-09-26 02:01:37.088  INFO 11236 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-09-26 02:01:37.088  INFO 11236 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-09-26 02:01:37.830  INFO 11236 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-09-26 02:01:37.831  INFO 11236 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-09-26 02:01:37.855  INFO 11236 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 15ms. Found 0 repository interfaces.
+2019-09-26 02:01:38.161  INFO 11236 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$685b78ac] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-26 02:01:38.230  INFO 11236 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'redisConfig' of type [com.example.demo.config.RedisConfig$$EnhancerBySpringCGLIB$$122a5f3c] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-26 02:01:38.495  INFO 11236 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-09-26 02:01:38.514  INFO 11236 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-09-26 02:01:38.514  INFO 11236 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.22]
+2019-09-26 02:01:38.607  INFO 11236 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-09-26 02:01:38.607  INFO 11236 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1519 ms
+2019-09-26 02:01:39.168  INFO 11236 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-09-26 02:01:41.684  INFO 11236 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-09-26 02:01:42.213  INFO 11236 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 07050e90-db60-417f-9a16-09d6a15f1fa2
+
+2019-09-26 02:01:42.270  INFO 11236 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@51f61b09, org.springframework.security.web.context.SecurityContextPersistenceFilter@50246f28, org.springframework.security.web.header.HeaderWriterFilter@105d2928, org.springframework.security.web.authentication.logout.LogoutFilter@feb5e29, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@401282f8, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5a77002f, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4fc583f8, org.springframework.security.web.session.SessionManagementFilter@23b8969b, org.springframework.security.web.access.ExceptionTranslationFilter@2ad4cb41]
+2019-09-26 02:01:42.292  INFO 11236 --- [restartedMain] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+2019-09-26 02:01:42.439  INFO 11236 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-09-26 02:01:42.488  INFO 11236 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2019-09-26 02:01:42.512  INFO 11236 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-09-26 02:01:42.972  INFO 11236 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2019-09-26 02:01:42.984  INFO 11236 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2019-09-26 02:01:43.006  INFO 11236 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2019-09-26 02:01:43.222  INFO 11236 --- [restartedMain] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [www.littleredhat1997.com:5672]
+2019-09-26 02:01:43.416  INFO 11236 --- [restartedMain] o.s.a.r.c.CachingConnectionFactory       : Created new connection: rabbitConnectionFactory#1a8fa4f9:0/SimpleConnection@7b168eee [delegate=amqp://root@106.54.84.40:5672/, localPort= 60364]
+2019-09-26 02:01:43.971  INFO 11236 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-09-26 02:01:43.974  INFO 11236 --- [restartedMain] com.example.demo.Application             : Started Application in 7.883 seconds (JVM running for 8.822)
+2019-09-26 02:01:48.568  INFO 11236 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-09-26 02:01:48.569  INFO 11236 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-09-26 02:01:48.578  INFO 11236 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 9 ms
+2019-09-26 02:01:48.673 ERROR 11236 --- [http-nio-8080-exec-1] c.example.demo.base.AppExceptionHandler  : org.springframework.validation.BeanPropertyBindingResult: 2 errors
+Field error in object 'userVo' on field 'password': rejected value [null]; codes [NotNull.userVo.password,NotNull.password,NotNull.java.lang.String,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userVo.password,password]; arguments []; default message [password]]; default message [密码不能为空]
+Field error in object 'userVo' on field 'username': rejected value [null]; codes [NotNull.userVo.username,NotNull.username,NotNull.java.lang.String,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userVo.username,username]; arguments []; default message [username]]; default message [账号不能为空]
+2019-09-26 02:01:48.711  WARN 11236 --- [http-nio-8080-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.validation.BindException: org.springframework.validation.BeanPropertyBindingResult: 2 errors
+Field error in object 'userVo' on field 'password': rejected value [null]; codes [NotNull.userVo.password,NotNull.password,NotNull.java.lang.String,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userVo.password,password]; arguments []; default message [password]]; default message [密码不能为空]
+Field error in object 'userVo' on field 'username': rejected value [null]; codes [NotNull.userVo.username,NotNull.username,NotNull.java.lang.String,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userVo.username,username]; arguments []; default message [username]]; default message [账号不能为空]]
+2019-09-26 02:01:53.443  INFO 11236 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : ***************************************************
+2019-09-26 02:01:53.443  INFO 11236 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : 请求开始, URI: /login, method: GET, params: {"username":["123"],"password":["666"]}
+2019-09-26 02:01:53.544 DEBUG 11236 --- [http-nio-8080-exec-3] c.e.d.mapper.UserMapper.selectByExample  : ==>  Preparing: select id, username, password, email, icon, nickname, gender, birthday, create_time, login_time from user WHERE ( username = ? ) 
+2019-09-26 02:01:53.560 DEBUG 11236 --- [http-nio-8080-exec-3] c.e.d.mapper.UserMapper.selectByExample  : ==> Parameters: 123(String)
+2019-09-26 02:01:53.703 ERROR 11236 --- [http-nio-8080-exec-3] c.example.demo.base.AppExceptionHandler  : Error attempting to get column 'create_time' from result set.  Cause: java.sql.SQLException: Zero date value prohibited
+; Zero date value prohibited; nested exception is java.sql.SQLException: Zero date value prohibited
+2019-09-26 02:01:53.708  WARN 11236 --- [http-nio-8080-exec-3] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.dao.TransientDataAccessResourceException: Error attempting to get column 'create_time' from result set.  Cause: java.sql.SQLException: Zero date value prohibited
+; Zero date value prohibited; nested exception is java.sql.SQLException: Zero date value prohibited]
+2019-09-26 02:02:00.900  INFO 11236 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : ***************************************************
+2019-09-26 02:02:00.900  INFO 11236 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : 请求开始, URI: /login, method: GET, params: {"username":["123"],"password":["123"]}
+2019-09-26 02:02:00.944 DEBUG 11236 --- [http-nio-8080-exec-5] c.e.d.mapper.UserMapper.selectByExample  : ==>  Preparing: select id, username, password, email, icon, nickname, gender, birthday, create_time, login_time from user WHERE ( username = ? ) 
+2019-09-26 02:02:00.945 DEBUG 11236 --- [http-nio-8080-exec-5] c.e.d.mapper.UserMapper.selectByExample  : ==> Parameters: 123(String)
+2019-09-26 02:02:00.995 ERROR 11236 --- [http-nio-8080-exec-5] c.example.demo.base.AppExceptionHandler  : Error attempting to get column 'create_time' from result set.  Cause: java.sql.SQLException: Zero date value prohibited
+; Zero date value prohibited; nested exception is java.sql.SQLException: Zero date value prohibited
+2019-09-26 02:02:00.999  WARN 11236 --- [http-nio-8080-exec-5] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.dao.TransientDataAccessResourceException: Error attempting to get column 'create_time' from result set.  Cause: java.sql.SQLException: Zero date value prohibited
+; Zero date value prohibited; nested exception is java.sql.SQLException: Zero date value prohibited]
+2019-09-26 02:03:23.844  INFO 11236 --- [http-nio-8080-exec-8] com.example.demo.base.AopLog             : ***************************************************
+2019-09-26 02:03:23.845  INFO 11236 --- [http-nio-8080-exec-8] com.example.demo.base.AopLog             : 请求开始, URI: /login, method: GET, params: {"username":["123"],"password":["123"]}
+2019-09-26 02:03:23.894 DEBUG 11236 --- [http-nio-8080-exec-8] c.e.d.mapper.UserMapper.selectByExample  : ==>  Preparing: select id, username, password, email, icon, nickname, gender, birthday, create_time, login_time from user WHERE ( username = ? ) 
+2019-09-26 02:03:23.895 DEBUG 11236 --- [http-nio-8080-exec-8] c.e.d.mapper.UserMapper.selectByExample  : ==> Parameters: 123(String)
+2019-09-26 02:03:23.952 DEBUG 11236 --- [http-nio-8080-exec-8] c.e.d.mapper.UserMapper.selectByExample  : <==      Total: 1
+2019-09-26 02:03:23.954  WARN 11236 --- [http-nio-8080-exec-8] o.s.s.c.bcrypt.BCryptPasswordEncoder     : Encoded password does not look like BCrypt
+2019-09-26 02:03:23.995  INFO 11236 --- [http-nio-8080-exec-8] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":50014,"message":"密码错误"}
+2019-09-26 02:04:31.659  INFO 17344 --- [restartedMain] com.example.demo.Application             : Starting Application on zzz with PID 17344 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
+2019-09-26 02:04:31.661 DEBUG 17344 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
+2019-09-26 02:04:31.661  INFO 17344 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
+2019-09-26 02:04:31.687  INFO 17344 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-09-26 02:04:31.687  INFO 17344 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-09-26 02:04:32.466  INFO 17344 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-09-26 02:04:32.467  INFO 17344 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-09-26 02:04:32.492  INFO 17344 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 15ms. Found 0 repository interfaces.
+2019-09-26 02:04:32.802  INFO 17344 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$9eda279] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-26 02:04:32.869  INFO 17344 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'redisConfig' of type [com.example.demo.config.RedisConfig$$EnhancerBySpringCGLIB$$b3bc8909] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-26 02:04:33.139  INFO 17344 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-09-26 02:04:33.157  INFO 17344 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-09-26 02:04:33.157  INFO 17344 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.22]
+2019-09-26 02:04:33.234  INFO 17344 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-09-26 02:04:33.234  INFO 17344 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1547 ms
+2019-09-26 02:04:33.776  INFO 17344 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-09-26 02:04:36.396  INFO 17344 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-09-26 02:04:36.900  INFO 17344 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: c4c51f70-d8c1-48f9-aef0-263343864f8b
+
+2019-09-26 02:04:36.955  INFO 17344 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@114f0310, org.springframework.security.web.context.SecurityContextPersistenceFilter@442fffa5, org.springframework.security.web.header.HeaderWriterFilter@45809ad6, org.springframework.security.web.authentication.logout.LogoutFilter@234070cb, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@42ea3a2c, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3a88b6a1, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7c2a2a1, org.springframework.security.web.session.SessionManagementFilter@425153f0, org.springframework.security.web.access.ExceptionTranslationFilter@79284980]
+2019-09-26 02:04:36.977  INFO 17344 --- [restartedMain] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+2019-09-26 02:04:37.130  INFO 17344 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-09-26 02:04:37.179  INFO 17344 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2019-09-26 02:04:37.202  INFO 17344 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-09-26 02:04:37.631  INFO 17344 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2019-09-26 02:04:37.643  INFO 17344 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2019-09-26 02:04:37.667  INFO 17344 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2019-09-26 02:04:37.883  INFO 17344 --- [restartedMain] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [www.littleredhat1997.com:5672]
+2019-09-26 02:04:38.185  INFO 17344 --- [restartedMain] o.s.a.r.c.CachingConnectionFactory       : Created new connection: rabbitConnectionFactory#153c7ff6:0/SimpleConnection@3a5c8ceb [delegate=amqp://root@106.54.84.40:5672/, localPort= 60454]
+2019-09-26 02:04:38.962  INFO 17344 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-09-26 02:04:38.965  INFO 17344 --- [restartedMain] com.example.demo.Application             : Started Application in 8.246 seconds (JVM running for 9.24)
+2019-09-26 02:04:43.846  INFO 17344 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-09-26 02:04:43.847  INFO 17344 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-09-26 02:04:43.857  INFO 17344 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 10 ms
+2019-09-26 02:05:15.679  INFO 17344 --- [http-nio-8080-exec-10] io.lettuce.core.EpollProvider            : Starting without optional epoll library
+2019-09-26 02:05:15.680  INFO 17344 --- [http-nio-8080-exec-10] io.lettuce.core.KqueueProvider           : Starting without optional kqueue library
+2019-09-26 02:05:16.230  INFO 17344 --- [http-nio-8080-exec-10] com.example.demo.base.AopLog             : ***************************************************
+2019-09-26 02:05:16.230  INFO 17344 --- [http-nio-8080-exec-10] com.example.demo.base.AopLog             : 请求开始, URI: /send, method: GET, params: {"email":["1656704949@qq.com"]}
+2019-09-26 02:05:16.365  INFO 17344 --- [http-nio-8080-exec-10] com.example.demo.component.RabbitSender  : 1656704949@qq.com
+2019-09-26 02:05:16.390  INFO 17344 --- [http-nio-8080-exec-10] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"message":"SUCCESS"}
+2019-09-26 02:05:18.425  INFO 17344 --- [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-1] c.example.demo.component.RabbitReceiver  : SimpleMailMessage: from=1656704949@qq.com; replyTo=null; to=1656704949@qq.com; cc=; bcc=; sentDate=null; subject=邮箱验证码; text=7117
+2019-09-26 02:05:52.530  INFO 17344 --- [http-nio-8080-exec-2] com.example.demo.base.AopLog             : ***************************************************
+2019-09-26 02:05:52.531  INFO 17344 --- [http-nio-8080-exec-2] com.example.demo.base.AopLog             : 请求开始, URI: /register, method: POST, params: {"code":["7117"],"email":["1656704949@qq.com"],"password":["123"],"username":["123"]}
+2019-09-26 02:05:52.662 DEBUG 17344 --- [http-nio-8080-exec-2] c.e.d.mapper.UserMapper.selectByExample  : ==>  Preparing: select id, username, password, email, icon, nickname, gender, birthday, create_time, login_time from user WHERE ( username = ? ) 
+2019-09-26 02:05:52.678 DEBUG 17344 --- [http-nio-8080-exec-2] c.e.d.mapper.UserMapper.selectByExample  : ==> Parameters: 123(String)
+2019-09-26 02:05:52.763 DEBUG 17344 --- [http-nio-8080-exec-2] c.e.d.mapper.UserMapper.selectByExample  : <==      Total: 1
+2019-09-26 02:05:52.765  INFO 17344 --- [http-nio-8080-exec-2] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":50014,"message":"密码错误"}
+2019-09-26 02:06:03.646  INFO 17344 --- [http-nio-8080-exec-8] com.example.demo.base.AopLog             : ***************************************************
+2019-09-26 02:06:03.646  INFO 17344 --- [http-nio-8080-exec-8] com.example.demo.base.AopLog             : 请求开始, URI: /register, method: POST, params: {"code":["7117"],"email":["1656704949@qq.com"],"password":["666"],"username":["666"]}
+2019-09-26 02:06:03.739 DEBUG 17344 --- [http-nio-8080-exec-8] c.e.d.mapper.UserMapper.selectByExample  : ==>  Preparing: select id, username, password, email, icon, nickname, gender, birthday, create_time, login_time from user WHERE ( username = ? ) 
+2019-09-26 02:06:03.740 DEBUG 17344 --- [http-nio-8080-exec-8] c.e.d.mapper.UserMapper.selectByExample  : ==> Parameters: 666(String)
+2019-09-26 02:06:03.783 DEBUG 17344 --- [http-nio-8080-exec-8] c.e.d.mapper.UserMapper.selectByExample  : <==      Total: 0
+2019-09-26 02:06:03.924 DEBUG 17344 --- [http-nio-8080-exec-8] c.example.demo.mapper.UserMapper.insert  : ==>  Preparing: insert into user (username, password, email, icon, nickname, gender, birthday, create_time, login_time ) values (?, ?, ?, ?, ?, ?, ?, ?, ? ) 
+2019-09-26 02:06:03.926 DEBUG 17344 --- [http-nio-8080-exec-8] c.example.demo.mapper.UserMapper.insert  : ==> Parameters: 666(String), $2a$10$iP9SVreUHOXzWsqOG2MBBukXX5KhuH1D.DtMknm1ZRHVJpDXbXHca(String), 1656704949@qq.com(String), null, null, null, null, 2019-09-26 02:06:03.875(Timestamp), null
+2019-09-26 02:06:04.055 DEBUG 17344 --- [http-nio-8080-exec-8] c.example.demo.mapper.UserMapper.insert  : <==    Updates: 1
+2019-09-26 02:06:04.057 DEBUG 17344 --- [http-nio-8080-exec-8] c.e.d.m.UserMapper.insert!selectKey      : ==>  Preparing: SELECT LAST_INSERT_ID() 
+2019-09-26 02:06:04.058 DEBUG 17344 --- [http-nio-8080-exec-8] c.e.d.m.UserMapper.insert!selectKey      : ==> Parameters: 
+2019-09-26 02:06:04.106 DEBUG 17344 --- [http-nio-8080-exec-8] c.e.d.m.UserMapper.insert!selectKey      : <==      Total: 1
+2019-09-26 02:06:04.110  INFO 17344 --- [http-nio-8080-exec-8] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":{"createTime":1569434763875,"email":"1656704949@qq.com","id":7,"password":"$2a$10$iP9SVreUHOXzWsqOG2MBBukXX5KhuH1D.DtMknm1ZRHVJpDXbXHca","username":"666"},"message":"SUCCESS"}
+2019-09-26 02:08:12.687  INFO 17344 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : ***************************************************
+2019-09-26 02:08:12.687  INFO 17344 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : 请求开始, URI: /login, method: POST, params: {"password":["666"],"username":["666"]}
+2019-09-26 02:08:12.736 DEBUG 17344 --- [http-nio-8080-exec-4] c.e.d.mapper.UserMapper.selectByExample  : ==>  Preparing: select id, username, password, email, icon, nickname, gender, birthday, create_time, login_time from user WHERE ( username = ? ) 
+2019-09-26 02:08:12.737 DEBUG 17344 --- [http-nio-8080-exec-4] c.e.d.mapper.UserMapper.selectByExample  : ==> Parameters: 666(String)
+2019-09-26 02:08:12.785 DEBUG 17344 --- [http-nio-8080-exec-4] c.e.d.mapper.UserMapper.selectByExample  : <==      Total: 1
+2019-09-26 02:08:12.915 DEBUG 17344 --- [http-nio-8080-exec-4] c.e.d.m.U.updateByPrimaryKeySelective    : ==>  Preparing: update user SET username = ?, password = ?, email = ?, create_time = ?, login_time = ? where id = ? 
+2019-09-26 02:08:12.916 DEBUG 17344 --- [http-nio-8080-exec-4] c.e.d.m.U.updateByPrimaryKeySelective    : ==> Parameters: 666(String), $2a$10$iP9SVreUHOXzWsqOG2MBBukXX5KhuH1D.DtMknm1ZRHVJpDXbXHca(String), 1656704949@qq.com(String), 2019-09-26 02:06:03.0(Timestamp), 2019-09-26 02:08:12.867(Timestamp), 7(Long)
+2019-09-26 02:08:13.015 DEBUG 17344 --- [http-nio-8080-exec-4] c.e.d.m.U.updateByPrimaryKeySelective    : <==    Updates: 1
+2019-09-26 02:08:13.024 ERROR 17344 --- [http-nio-8080-exec-4] c.example.demo.base.AppExceptionHandler  : Handler dispatch failed; nested exception is java.lang.NoClassDefFoundError: javax/xml/bind/DatatypeConverter
+2019-09-26 02:08:13.030  WARN 17344 --- [http-nio-8080-exec-4] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.util.NestedServletException: Handler dispatch failed; nested exception is java.lang.NoClassDefFoundError: javax/xml/bind/DatatypeConverter]
+2019-09-26 02:32:23.535  INFO 6708 --- [restartedMain] com.example.demo.Application             : Starting Application on zzz with PID 6708 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
+2019-09-26 02:32:23.537 DEBUG 6708 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
+2019-09-26 02:32:23.537  INFO 6708 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
+2019-09-26 02:32:23.572  INFO 6708 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-09-26 02:32:23.572  INFO 6708 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-09-26 02:32:24.581  INFO 6708 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-09-26 02:32:24.585  INFO 6708 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-09-26 02:32:24.626  INFO 6708 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 20ms. Found 0 repository interfaces.
+2019-09-26 02:32:25.053  INFO 6708 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$4cba0d53] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-26 02:32:25.173  INFO 6708 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'redisConfig' of type [com.example.demo.config.RedisConfig$$EnhancerBySpringCGLIB$$f688f3e3] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-26 02:32:25.668  INFO 6708 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-09-26 02:32:25.693  INFO 6708 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-09-26 02:32:25.693  INFO 6708 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.22]
+2019-09-26 02:32:25.805  INFO 6708 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-09-26 02:32:25.805  INFO 6708 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2233 ms
+2019-09-26 02:32:26.607  INFO 6708 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-09-26 02:32:29.589  INFO 6708 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-09-26 02:32:30.175  INFO 6708 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 9d112e15-df46-4f1b-a722-43ce17c5118e
+
+2019-09-26 02:32:30.252  INFO 6708 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5714cbf2, org.springframework.security.web.context.SecurityContextPersistenceFilter@339a90df, org.springframework.security.web.header.HeaderWriterFilter@7ec5b12b, org.springframework.security.web.authentication.logout.LogoutFilter@3d844ee4, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4a7cf233, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7b760b98, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2cd54f7a, org.springframework.security.web.session.SessionManagementFilter@e70b79b, org.springframework.security.web.access.ExceptionTranslationFilter@5e371ae4]
+2019-09-26 02:32:30.293  INFO 6708 --- [restartedMain] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+2019-09-26 02:32:30.473  INFO 6708 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-09-26 02:32:30.527  INFO 6708 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2019-09-26 02:32:30.555  INFO 6708 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-09-26 02:32:31.040  INFO 6708 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2019-09-26 02:32:31.056  INFO 6708 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2019-09-26 02:32:31.082  INFO 6708 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2019-09-26 02:32:31.268  INFO 6708 --- [restartedMain] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [www.littleredhat1997.com:5672]
+2019-09-26 02:32:31.551  INFO 6708 --- [restartedMain] o.s.a.r.c.CachingConnectionFactory       : Created new connection: rabbitConnectionFactory#135aee1f:0/SimpleConnection@44d47731 [delegate=amqp://root@106.54.84.40:5672/, localPort= 62941]
+2019-09-26 02:32:32.487  INFO 6708 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-09-26 02:32:32.490  INFO 6708 --- [restartedMain] com.example.demo.Application             : Started Application in 9.927 seconds (JVM running for 11.678)
+2019-09-26 02:32:35.458  INFO 6708 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-09-26 02:32:35.458  INFO 6708 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-09-26 02:32:35.470  INFO 6708 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 12 ms
+2019-09-26 02:32:44.566  INFO 6708 --- [http-nio-8080-exec-9] com.example.demo.base.AopLog             : ***************************************************
+2019-09-26 02:32:44.566  INFO 6708 --- [http-nio-8080-exec-9] com.example.demo.base.AopLog             : 请求开始, URI: /login, method: POST, params: {"password":["666"],"username":["666"]}
+2019-09-26 02:32:44.696 DEBUG 6708 --- [http-nio-8080-exec-9] c.e.d.mapper.UserMapper.selectByExample  : ==>  Preparing: select id, username, password, email, icon, nickname, gender, birthday, create_time, login_time from user WHERE ( username = ? ) 
+2019-09-26 02:32:44.721 DEBUG 6708 --- [http-nio-8080-exec-9] c.e.d.mapper.UserMapper.selectByExample  : ==> Parameters: 666(String)
+2019-09-26 02:32:44.783 DEBUG 6708 --- [http-nio-8080-exec-9] c.e.d.mapper.UserMapper.selectByExample  : <==      Total: 1
+2019-09-26 02:32:44.914 DEBUG 6708 --- [http-nio-8080-exec-9] c.e.d.m.U.updateByPrimaryKeySelective    : ==>  Preparing: update user SET username = ?, password = ?, email = ?, create_time = ?, login_time = ? where id = ? 
+2019-09-26 02:32:44.916 DEBUG 6708 --- [http-nio-8080-exec-9] c.e.d.m.U.updateByPrimaryKeySelective    : ==> Parameters: 666(String), $2a$10$iP9SVreUHOXzWsqOG2MBBukXX5KhuH1D.DtMknm1ZRHVJpDXbXHca(String), 1656704949@qq.com(String), 2019-09-26 02:06:03.0(Timestamp), 2019-09-26 02:32:44.867(Timestamp), 7(Long)
+2019-09-26 02:32:45.034 DEBUG 6708 --- [http-nio-8080-exec-9] c.e.d.m.U.updateByPrimaryKeySelective    : <==    Updates: 1
+2019-09-26 02:32:45.099  INFO 6708 --- [http-nio-8080-exec-9] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2NjYiLCJjcmVhdGVkIjoxNTY5NDM2MzY1MDM0LCJleHAiOjE1NzAwNDExNjV9.N28FpOK3vAgbyNBfhPnbsIfz_igm7gweCUhIL_OLyYhzlkgjE-8pfIlqIR1wMe4mi6zcE4T9xeE7w0QvWv2q6w","message":"SUCCESS"}
+2019-09-26 02:33:07.151  INFO 6708 --- [http-nio-8080-exec-8] com.example.demo.base.AopLog             : ***************************************************
+2019-09-26 02:33:07.152  INFO 6708 --- [http-nio-8080-exec-8] com.example.demo.base.AopLog             : 请求开始, URI: /user/info, method: GET, params: {}
+2019-09-26 02:33:07.154 ERROR 6708 --- [http-nio-8080-exec-8] c.example.demo.base.AppExceptionHandler  : Value for username cannot be null
+2019-09-26 02:33:07.159  WARN 6708 --- [http-nio-8080-exec-8] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [java.lang.RuntimeException: Value for username cannot be null]
+2019-09-26 02:41:19.248  INFO 8508 --- [restartedMain] com.example.demo.Application             : Starting Application on zzz with PID 8508 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
+2019-09-26 02:41:19.249 DEBUG 8508 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
+2019-09-26 02:41:19.250  INFO 8508 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
+2019-09-26 02:41:19.277  INFO 8508 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-09-26 02:41:19.278  INFO 8508 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-09-26 02:41:20.043  INFO 8508 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-09-26 02:41:20.045  INFO 8508 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-09-26 02:41:20.069  INFO 8508 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 14ms. Found 0 repository interfaces.
+2019-09-26 02:41:20.383  INFO 8508 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$cd5543ab] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-26 02:41:20.465  INFO 8508 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'redisConfig' of type [com.example.demo.config.RedisConfig$$EnhancerBySpringCGLIB$$77242a3b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-26 02:41:20.815  INFO 8508 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-09-26 02:41:20.832  INFO 8508 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-09-26 02:41:20.832  INFO 8508 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.22]
+2019-09-26 02:41:20.909  INFO 8508 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-09-26 02:41:20.909  INFO 8508 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1631 ms
+2019-09-26 02:41:21.602  INFO 8508 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-09-26 02:41:24.039  INFO 8508 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-09-26 02:41:24.585  INFO 8508 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 02c5e4ed-8e64-408b-8ef4-f46d1b48336c
+
+2019-09-26 02:41:24.648  INFO 8508 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@58314d86, org.springframework.security.web.context.SecurityContextPersistenceFilter@204422ff, org.springframework.security.web.header.HeaderWriterFilter@1726774e, org.springframework.security.web.authentication.logout.LogoutFilter@7bee39e8, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@34e7bf12, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4e880caa, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@26fa220, org.springframework.security.web.session.SessionManagementFilter@7f4d6adb, org.springframework.security.web.access.ExceptionTranslationFilter@3a1611c4]
+2019-09-26 02:41:24.669  INFO 8508 --- [restartedMain] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+2019-09-26 02:41:24.838  INFO 8508 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-09-26 02:41:24.885  INFO 8508 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2019-09-26 02:41:24.912  INFO 8508 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-09-26 02:41:25.382  INFO 8508 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2019-09-26 02:41:25.397  INFO 8508 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2019-09-26 02:41:25.424  INFO 8508 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2019-09-26 02:41:25.618  INFO 8508 --- [restartedMain] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [www.littleredhat1997.com:5672]
+2019-09-26 02:41:25.817  INFO 8508 --- [restartedMain] o.s.a.r.c.CachingConnectionFactory       : Created new connection: rabbitConnectionFactory#125ed0f1:0/SimpleConnection@4e5a0138 [delegate=amqp://root@106.54.84.40:5672/, localPort= 63663]
+2019-09-26 02:41:26.549  INFO 8508 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-09-26 02:41:26.554  INFO 8508 --- [restartedMain] com.example.demo.Application             : Started Application in 8.272 seconds (JVM running for 9.333)
+2019-09-26 02:41:26.592  INFO 8508 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-09-26 02:41:26.592  INFO 8508 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-09-26 02:41:26.600  INFO 8508 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 8 ms
+2019-09-26 02:42:01.060  INFO 8508 --- [http-nio-8080-exec-8] com.example.demo.base.AopLog             : ***************************************************
+2019-09-26 02:42:01.060  INFO 8508 --- [http-nio-8080-exec-8] com.example.demo.base.AopLog             : 请求开始, URI: /login, method: POST, params: {"password":["666"],"username":["666"]}
+2019-09-26 02:42:01.163 DEBUG 8508 --- [http-nio-8080-exec-8] c.e.d.mapper.UserMapper.selectByExample  : ==>  Preparing: select id, username, password, email, icon, nickname, gender, birthday, create_time, login_time from user WHERE ( username = ? ) 
+2019-09-26 02:42:01.181 DEBUG 8508 --- [http-nio-8080-exec-8] c.e.d.mapper.UserMapper.selectByExample  : ==> Parameters: 666(String)
+2019-09-26 02:42:01.238 DEBUG 8508 --- [http-nio-8080-exec-8] c.e.d.mapper.UserMapper.selectByExample  : <==      Total: 1
+2019-09-26 02:42:01.366 DEBUG 8508 --- [http-nio-8080-exec-8] c.e.d.m.U.updateByPrimaryKeySelective    : ==>  Preparing: update user SET username = ?, password = ?, email = ?, create_time = ?, login_time = ? where id = ? 
+2019-09-26 02:42:01.369 DEBUG 8508 --- [http-nio-8080-exec-8] c.e.d.m.U.updateByPrimaryKeySelective    : ==> Parameters: 666(String), $2a$10$iP9SVreUHOXzWsqOG2MBBukXX5KhuH1D.DtMknm1ZRHVJpDXbXHca(String), 1656704949@qq.com(String), 2019-09-26 02:06:03.0(Timestamp), 2019-09-26 02:42:01.321(Timestamp), 7(Long)
+2019-09-26 02:42:01.465 DEBUG 8508 --- [http-nio-8080-exec-8] c.e.d.m.U.updateByPrimaryKeySelective    : <==    Updates: 1
+2019-09-26 02:42:01.534  INFO 8508 --- [http-nio-8080-exec-8] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2NjYiLCJjcmVhdGVkIjoxNTY5NDM2OTIxNDY2LCJleHAiOjE1NzAwNDE3MjF9.Eo-1lTghJ_uZqCv6NaBW2WogMJ_SSLoQyDqdNIVzcqrGNnjS4dcmh4rvuLYMVREaRyXIXVepnoxxxH6r6QPHYA","message":"SUCCESS"}
+2019-09-26 02:42:20.600  INFO 8508 --- [http-nio-8080-exec-10] com.example.demo.base.AopLog             : ***************************************************
+2019-09-26 02:42:20.600  INFO 8508 --- [http-nio-8080-exec-10] com.example.demo.base.AopLog             : 请求开始, URI: /user/info, method: GET, params: {}
+2019-09-26 02:42:20.602 ERROR 8508 --- [http-nio-8080-exec-10] c.example.demo.base.AppExceptionHandler  : Value for username cannot be null
+2019-09-26 02:42:20.607  WARN 8508 --- [http-nio-8080-exec-10] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [java.lang.RuntimeException: Value for username cannot be null]
+2019-09-26 02:42:36.505  INFO 8508 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : ***************************************************
+2019-09-26 02:42:36.505  INFO 8508 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : 请求开始, URI: /user/info, method: GET, params: {}
+2019-09-26 02:42:36.506 ERROR 8508 --- [http-nio-8080-exec-4] c.example.demo.base.AppExceptionHandler  : Value for username cannot be null
+2019-09-26 02:42:36.508  WARN 8508 --- [http-nio-8080-exec-4] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [java.lang.RuntimeException: Value for username cannot be null]
+2019-09-26 02:42:50.440  INFO 8508 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : ***************************************************
+2019-09-26 02:42:50.441  INFO 8508 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : 请求开始, URI: /user/update, method: POST, params: {"gender":["0"],"nickname":["zzz"]}
+2019-09-26 02:42:50.443 ERROR 8508 --- [http-nio-8080-exec-7] c.example.demo.base.AppExceptionHandler  : Value for username cannot be null
+2019-09-26 02:42:50.445  WARN 8508 --- [http-nio-8080-exec-7] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [java.lang.RuntimeException: Value for username cannot be null]
+2019-09-26 02:43:51.398  INFO 12904 --- [restartedMain] com.example.demo.Application             : Starting Application on zzz with PID 12904 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
+2019-09-26 02:43:51.400 DEBUG 12904 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
+2019-09-26 02:43:51.400  INFO 12904 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
+2019-09-26 02:43:51.426  INFO 12904 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-09-26 02:43:51.426  INFO 12904 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-09-26 02:43:52.177  INFO 12904 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-09-26 02:43:52.179  INFO 12904 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-09-26 02:43:52.202  INFO 12904 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 14ms. Found 0 repository interfaces.
+2019-09-26 02:43:52.489  INFO 12904 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$972e30ab] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-26 02:43:52.565  INFO 12904 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'redisConfig' of type [com.example.demo.config.RedisConfig$$EnhancerBySpringCGLIB$$40fd173b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-26 02:43:52.939  INFO 12904 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-09-26 02:43:52.957  INFO 12904 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-09-26 02:43:52.958  INFO 12904 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.22]
+2019-09-26 02:43:53.038  INFO 12904 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-09-26 02:43:53.038  INFO 12904 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1611 ms
+2019-09-26 02:43:53.738  INFO 12904 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-09-26 02:43:56.115  INFO 12904 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-09-26 02:43:56.653  INFO 12904 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 48ba039a-a5cd-46d2-8b35-a0c0def607fa
+
+2019-09-26 02:43:56.716  INFO 12904 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@132f130b, org.springframework.security.web.context.SecurityContextPersistenceFilter@1df74d37, org.springframework.security.web.header.HeaderWriterFilter@1cd76166, org.springframework.security.web.authentication.logout.LogoutFilter@605a408d, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@649a59e2, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@a5283e6, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7af79538, org.springframework.security.web.session.SessionManagementFilter@6b87452, org.springframework.security.web.access.ExceptionTranslationFilter@31d1543b]
+2019-09-26 02:43:56.738  INFO 12904 --- [restartedMain] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+2019-09-26 02:43:56.905  INFO 12904 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-09-26 02:43:56.972  INFO 12904 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2019-09-26 02:43:57.000  INFO 12904 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-09-26 02:43:57.440  INFO 12904 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2019-09-26 02:43:57.453  INFO 12904 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2019-09-26 02:43:57.478  INFO 12904 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2019-09-26 02:43:57.651  INFO 12904 --- [restartedMain] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [www.littleredhat1997.com:5672]
+2019-09-26 02:43:57.839  INFO 12904 --- [restartedMain] o.s.a.r.c.CachingConnectionFactory       : Created new connection: rabbitConnectionFactory#36f4836b:0/SimpleConnection@24bfd5a [delegate=amqp://root@106.54.84.40:5672/, localPort= 63743]
+2019-09-26 02:43:58.621  INFO 12904 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-09-26 02:43:58.624  INFO 12904 --- [restartedMain] com.example.demo.Application             : Started Application in 8.188 seconds (JVM running for 9.323)
+2019-09-26 02:44:17.445  INFO 12904 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-09-26 02:44:17.446  INFO 12904 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-09-26 02:44:17.455  INFO 12904 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 9 ms
+2019-09-26 02:44:29.045  INFO 12904 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : ***************************************************
+2019-09-26 02:44:29.045  INFO 12904 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : 请求开始, URI: /user/info, method: GET, params: {}
+2019-09-26 02:44:29.172 DEBUG 12904 --- [http-nio-8080-exec-3] c.e.d.mapper.UserMapper.selectByExample  : ==>  Preparing: select id, username, password, email, icon, nickname, gender, birthday, create_time, login_time from user WHERE ( username = ? ) 
+2019-09-26 02:44:29.190 DEBUG 12904 --- [http-nio-8080-exec-3] c.e.d.mapper.UserMapper.selectByExample  : ==> Parameters: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2NjYiLCJjcmVhdGVkIjoxNTY5NDM2OTIxNDY2LCJleHAiOjE1NzAwNDE3MjF9.Eo-1lTghJ_uZqCv6NaBW2WogMJ_SSLoQyDqdNIVzcqrGNnjS4dcmh4rvuLYMVREaRyXIXVepnoxxxH6r6QPHYA(String)
+2019-09-26 02:44:29.245 DEBUG 12904 --- [http-nio-8080-exec-3] c.e.d.mapper.UserMapper.selectByExample  : <==      Total: 0
+2019-09-26 02:44:29.268  INFO 12904 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":10001,"message":"用户未登录"}
+2019-09-26 02:47:34.604  INFO 12008 --- [restartedMain] com.example.demo.Application             : Starting Application on zzz with PID 12008 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
+2019-09-26 02:47:34.606 DEBUG 12008 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
+2019-09-26 02:47:34.606  INFO 12008 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
+2019-09-26 02:47:34.637  INFO 12008 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-09-26 02:47:34.637  INFO 12008 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-09-26 02:47:35.434  INFO 12008 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-09-26 02:47:35.435  INFO 12008 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-09-26 02:47:35.460  INFO 12008 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 15ms. Found 0 repository interfaces.
+2019-09-26 02:47:35.753  INFO 12008 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$c8c51c25] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-26 02:47:35.828  INFO 12008 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'redisConfig' of type [com.example.demo.config.RedisConfig$$EnhancerBySpringCGLIB$$729402b5] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-26 02:47:36.226  INFO 12008 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-09-26 02:47:36.259  INFO 12008 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-09-26 02:47:36.260  INFO 12008 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.22]
+2019-09-26 02:47:36.343  INFO 12008 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-09-26 02:47:36.343  INFO 12008 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1706 ms
+2019-09-26 02:47:37.104  INFO 12008 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-09-26 02:47:39.671  INFO 12008 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-09-26 02:47:40.218  INFO 12008 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: c9b4d4fa-54be-4839-9854-41f73c24bc40
+
+2019-09-26 02:47:40.282  INFO 12008 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6f29c5a9, org.springframework.security.web.context.SecurityContextPersistenceFilter@52a17e5e, org.springframework.security.web.header.HeaderWriterFilter@422b4ed2, org.springframework.security.web.authentication.logout.LogoutFilter@2463f1f0, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@29154666, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7663456c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3d2a8497, org.springframework.security.web.session.SessionManagementFilter@30f2b4ba, org.springframework.security.web.access.ExceptionTranslationFilter@4da8d450]
+2019-09-26 02:47:40.304  INFO 12008 --- [restartedMain] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+2019-09-26 02:47:40.477  INFO 12008 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-09-26 02:47:40.522  INFO 12008 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2019-09-26 02:47:40.548  INFO 12008 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-09-26 02:47:40.997  INFO 12008 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2019-09-26 02:47:41.011  INFO 12008 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2019-09-26 02:47:41.036  INFO 12008 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2019-09-26 02:47:41.203  INFO 12008 --- [restartedMain] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [www.littleredhat1997.com:5672]
+2019-09-26 02:47:41.453  INFO 12008 --- [restartedMain] o.s.a.r.c.CachingConnectionFactory       : Created new connection: rabbitConnectionFactory#6c38cfbc:0/SimpleConnection@753505d0 [delegate=amqp://root@106.54.84.40:5672/, localPort= 63862]
+2019-09-26 02:47:42.268  INFO 12008 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-09-26 02:47:42.270  INFO 12008 --- [restartedMain] com.example.demo.Application             : Started Application in 8.648 seconds (JVM running for 9.553)
+2019-09-26 02:47:42.337  INFO 12008 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-09-26 02:47:42.337  INFO 12008 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-09-26 02:47:42.346  INFO 12008 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 9 ms
+2019-09-26 02:47:51.393  INFO 12008 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : ***************************************************
+2019-09-26 02:47:51.393  INFO 12008 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : 请求开始, URI: /user/info, method: GET, params: {}
+2019-09-26 02:47:51.451  INFO 12008 --- [http-nio-8080-exec-4] com.example.demo.component.TokenService  : JWT格式验证失败:curl -X GET "http://localhost:8080/user/info" -H "accept: */*" -H "Authorization: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2NjYiLCJjcmVhdGVkIjoxNTY5NDM2OTIxNDY2LCJleHAiOjE1NzAwNDE3MjF9.Eo-1lTghJ_uZqCv6NaBW2WogMJ_SSLoQyDqdNIVzcqrGNnjS4dcmh4rvuLYMVREaRyXIXVepnoxxxH6r6QPHYA"
+2019-09-26 02:47:51.453 ERROR 12008 --- [http-nio-8080-exec-4] c.example.demo.base.AppExceptionHandler  : Value for username cannot be null
+2019-09-26 02:47:51.457  WARN 12008 --- [http-nio-8080-exec-4] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [java.lang.RuntimeException: Value for username cannot be null]
+2019-09-26 02:50:51.955  INFO 12008 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : ***************************************************
+2019-09-26 02:50:51.956  INFO 12008 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : 请求开始, URI: /login, method: POST, params: {"password":["666"],"username":["666"]}
+2019-09-26 02:50:52.063 DEBUG 12008 --- [http-nio-8080-exec-7] c.e.d.mapper.UserMapper.selectByExample  : ==>  Preparing: select id, username, password, email, icon, nickname, gender, birthday, create_time, login_time from user WHERE ( username = ? ) 
+2019-09-26 02:50:52.081 DEBUG 12008 --- [http-nio-8080-exec-7] c.e.d.mapper.UserMapper.selectByExample  : ==> Parameters: 666(String)
+2019-09-26 02:50:52.160 DEBUG 12008 --- [http-nio-8080-exec-7] c.e.d.mapper.UserMapper.selectByExample  : <==      Total: 1
+2019-09-26 02:50:52.296 DEBUG 12008 --- [http-nio-8080-exec-7] c.e.d.m.U.updateByPrimaryKeySelective    : ==>  Preparing: update user SET username = ?, password = ?, email = ?, create_time = ?, login_time = ? where id = ? 
+2019-09-26 02:50:52.298 DEBUG 12008 --- [http-nio-8080-exec-7] c.e.d.m.U.updateByPrimaryKeySelective    : ==> Parameters: 666(String), $2a$10$iP9SVreUHOXzWsqOG2MBBukXX5KhuH1D.DtMknm1ZRHVJpDXbXHca(String), 1656704949@qq.com(String), 2019-09-26 02:06:03.0(Timestamp), 2019-09-26 02:50:52.247(Timestamp), 7(Long)
+2019-09-26 02:50:52.395 DEBUG 12008 --- [http-nio-8080-exec-7] c.e.d.m.U.updateByPrimaryKeySelective    : <==    Updates: 1
+2019-09-26 02:50:52.447  INFO 12008 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2NjYiLCJjcmVhdGVkIjoxNTY5NDM3NDUyMzk1LCJleHAiOjE1NzAwNDIyNTJ9.upEGq5ii6q3XfMs3HjyhCr9Y85nILDlSfcbv-s1RdiWr2vRiGLtS2kHfQNvD6KP0-Ks0LrbPO7gGzSpMSZRUxw","message":"SUCCESS"}
+2019-09-26 02:51:04.417  INFO 12008 --- [http-nio-8080-exec-9] com.example.demo.base.AopLog             : ***************************************************
+2019-09-26 02:51:04.418  INFO 12008 --- [http-nio-8080-exec-9] com.example.demo.base.AopLog             : 请求开始, URI: /user/info, method: GET, params: {}
+2019-09-26 02:51:04.496 DEBUG 12008 --- [http-nio-8080-exec-9] c.e.d.mapper.UserMapper.selectByExample  : ==>  Preparing: select id, username, password, email, icon, nickname, gender, birthday, create_time, login_time from user WHERE ( username = ? ) 
+2019-09-26 02:51:04.496 DEBUG 12008 --- [http-nio-8080-exec-9] c.e.d.mapper.UserMapper.selectByExample  : ==> Parameters: 666(String)
+2019-09-26 02:51:04.546 DEBUG 12008 --- [http-nio-8080-exec-9] c.e.d.mapper.UserMapper.selectByExample  : <==      Total: 1
+2019-09-26 02:51:04.556  INFO 12008 --- [http-nio-8080-exec-9] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":{"createTime":1569434763000,"email":"1656704949@qq.com","id":7,"loginTime":1569437452000,"password":"$2a$10$iP9SVreUHOXzWsqOG2MBBukXX5KhuH1D.DtMknm1ZRHVJpDXbXHca","username":"666"},"message":"SUCCESS"}
+2019-09-26 02:51:20.969  INFO 12008 --- [http-nio-8080-exec-10] com.example.demo.base.AopLog             : ***************************************************
+2019-09-26 02:51:20.969  INFO 12008 --- [http-nio-8080-exec-10] com.example.demo.base.AopLog             : 请求开始, URI: /login, method: POST, params: {"password":["666"],"username":["666"]}
+2019-09-26 02:51:21.024 DEBUG 12008 --- [http-nio-8080-exec-10] c.e.d.mapper.UserMapper.selectByExample  : ==>  Preparing: select id, username, password, email, icon, nickname, gender, birthday, create_time, login_time from user WHERE ( username = ? ) 
+2019-09-26 02:51:21.025 DEBUG 12008 --- [http-nio-8080-exec-10] c.e.d.mapper.UserMapper.selectByExample  : ==> Parameters: 666(String)
+2019-09-26 02:51:21.075 DEBUG 12008 --- [http-nio-8080-exec-10] c.e.d.mapper.UserMapper.selectByExample  : <==      Total: 1
+2019-09-26 02:51:21.221 DEBUG 12008 --- [http-nio-8080-exec-10] c.e.d.m.U.updateByPrimaryKeySelective    : ==>  Preparing: update user SET username = ?, password = ?, email = ?, create_time = ?, login_time = ? where id = ? 
+2019-09-26 02:51:21.222 DEBUG 12008 --- [http-nio-8080-exec-10] c.e.d.m.U.updateByPrimaryKeySelective    : ==> Parameters: 666(String), $2a$10$iP9SVreUHOXzWsqOG2MBBukXX5KhuH1D.DtMknm1ZRHVJpDXbXHca(String), 1656704949@qq.com(String), 2019-09-26 02:06:03.0(Timestamp), 2019-09-26 02:51:21.156(Timestamp), 7(Long)
+2019-09-26 02:51:21.344 DEBUG 12008 --- [http-nio-8080-exec-10] c.e.d.m.U.updateByPrimaryKeySelective    : <==    Updates: 1
+2019-09-26 02:51:21.346  INFO 12008 --- [http-nio-8080-exec-10] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2NjYiLCJjcmVhdGVkIjoxNTY5NDM3NDgxMzQ1LCJleHAiOjE1NzAwNDIyODF9.kwxcd-3-I9lFst9pHO_w79CB7WjhuoJNdn3IcT8AmJ15TughOLPY8mWswZwCBSL0LjKHDSOpmFtZcMg3i3tzLA","message":"SUCCESS"}
+2019-09-26 02:51:33.674  INFO 12008 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : ***************************************************
+2019-09-26 02:51:33.675  INFO 12008 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : 请求开始, URI: /user/info, method: GET, params: {}
+2019-09-26 02:51:33.727 DEBUG 12008 --- [http-nio-8080-exec-4] c.e.d.mapper.UserMapper.selectByExample  : ==>  Preparing: select id, username, password, email, icon, nickname, gender, birthday, create_time, login_time from user WHERE ( username = ? ) 
+2019-09-26 02:51:33.728 DEBUG 12008 --- [http-nio-8080-exec-4] c.e.d.mapper.UserMapper.selectByExample  : ==> Parameters: 666(String)
+2019-09-26 02:51:33.775 DEBUG 12008 --- [http-nio-8080-exec-4] c.e.d.mapper.UserMapper.selectByExample  : <==      Total: 1
+2019-09-26 02:51:33.776  INFO 12008 --- [http-nio-8080-exec-4] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":{"createTime":1569434763000,"email":"1656704949@qq.com","id":7,"loginTime":1569437481000,"password":"$2a$10$iP9SVreUHOXzWsqOG2MBBukXX5KhuH1D.DtMknm1ZRHVJpDXbXHca","username":"666"},"message":"SUCCESS"}
+2019-09-26 02:51:47.449  INFO 12008 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : ***************************************************
+2019-09-26 02:51:47.449  INFO 12008 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : 请求开始, URI: /user/update, method: POST, params: {"gender":["0"],"nickname":["zzz"]}
+2019-09-26 02:51:47.506 DEBUG 12008 --- [http-nio-8080-exec-1] c.e.d.m.U.updateByExampleSelective       : ==>  Preparing: update user SET nickname = ?, gender = ? WHERE ( username = ? ) 
+2019-09-26 02:51:47.506 DEBUG 12008 --- [http-nio-8080-exec-1] c.e.d.m.U.updateByExampleSelective       : ==> Parameters: zzz(String), 0(Integer), 666(String)
+2019-09-26 02:51:47.604 DEBUG 12008 --- [http-nio-8080-exec-1] c.e.d.m.U.updateByExampleSelective       : <==    Updates: 1
+2019-09-26 02:51:47.604  INFO 12008 --- [http-nio-8080-exec-1] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"message":"SUCCESS"}
+2019-09-26 02:51:56.854  INFO 12008 --- [http-nio-8080-exec-2] com.example.demo.base.AopLog             : ***************************************************
+2019-09-26 02:51:56.855  INFO 12008 --- [http-nio-8080-exec-2] com.example.demo.base.AopLog             : 请求开始, URI: /user/info, method: GET, params: {}
+2019-09-26 02:51:56.908 DEBUG 12008 --- [http-nio-8080-exec-2] c.e.d.mapper.UserMapper.selectByExample  : ==>  Preparing: select id, username, password, email, icon, nickname, gender, birthday, create_time, login_time from user WHERE ( username = ? ) 
+2019-09-26 02:51:56.909 DEBUG 12008 --- [http-nio-8080-exec-2] c.e.d.mapper.UserMapper.selectByExample  : ==> Parameters: 666(String)
+2019-09-26 02:51:56.963 DEBUG 12008 --- [http-nio-8080-exec-2] c.e.d.mapper.UserMapper.selectByExample  : <==      Total: 1
+2019-09-26 02:51:56.964  INFO 12008 --- [http-nio-8080-exec-2] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":{"createTime":1569434763000,"email":"1656704949@qq.com","gender":0,"id":7,"loginTime":1569437481000,"nickname":"zzz","password":"$2a$10$iP9SVreUHOXzWsqOG2MBBukXX5KhuH1D.DtMknm1ZRHVJpDXbXHca","username":"666"},"message":"SUCCESS"}
+2019-09-26 02:52:13.927  INFO 12008 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : ***************************************************
+2019-09-26 02:52:13.927  INFO 12008 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : 请求开始, URI: /user/update, method: POST, params: {"birthday":["1997-11-27"],"gender":["0"],"nickname":["zzzzz"]}
+2019-09-26 02:52:13.978 DEBUG 12008 --- [http-nio-8080-exec-5] c.e.d.m.U.updateByExampleSelective       : ==>  Preparing: update user SET nickname = ?, gender = ?, birthday = ? WHERE ( username = ? ) 
+2019-09-26 02:52:13.978 DEBUG 12008 --- [http-nio-8080-exec-5] c.e.d.m.U.updateByExampleSelective       : ==> Parameters: zzzzz(String), 0(Integer), 1997-11-27(Date), 666(String)
+2019-09-26 02:52:14.074 DEBUG 12008 --- [http-nio-8080-exec-5] c.e.d.m.U.updateByExampleSelective       : <==    Updates: 1
+2019-09-26 02:52:14.075  INFO 12008 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"message":"SUCCESS"}
+2019-09-26 02:52:24.276  INFO 12008 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : ***************************************************
+2019-09-26 02:52:24.276  INFO 12008 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : 请求开始, URI: /user/update, method: POST, params: {"birthday":["1997-11-27"],"gender":["0"]}
+2019-09-26 02:52:24.326 DEBUG 12008 --- [http-nio-8080-exec-3] c.e.d.m.U.updateByExampleSelective       : ==>  Preparing: update user SET gender = ?, birthday = ? WHERE ( username = ? ) 
+2019-09-26 02:52:24.327 DEBUG 12008 --- [http-nio-8080-exec-3] c.e.d.m.U.updateByExampleSelective       : ==> Parameters: 0(Integer), 1997-11-27(Date), 666(String)
+2019-09-26 02:52:24.425 DEBUG 12008 --- [http-nio-8080-exec-3] c.e.d.m.U.updateByExampleSelective       : <==    Updates: 1
+2019-09-26 02:52:24.426  INFO 12008 --- [http-nio-8080-exec-3] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"message":"SUCCESS"}
+2019-09-26 02:52:26.702  INFO 12008 --- [http-nio-8080-exec-6] com.example.demo.base.AopLog             : ***************************************************
+2019-09-26 02:52:26.702  INFO 12008 --- [http-nio-8080-exec-6] com.example.demo.base.AopLog             : 请求开始, URI: /user/info, method: GET, params: {}
+2019-09-26 02:52:26.746 DEBUG 12008 --- [http-nio-8080-exec-6] c.e.d.mapper.UserMapper.selectByExample  : ==>  Preparing: select id, username, password, email, icon, nickname, gender, birthday, create_time, login_time from user WHERE ( username = ? ) 
+2019-09-26 02:52:26.747 DEBUG 12008 --- [http-nio-8080-exec-6] c.e.d.mapper.UserMapper.selectByExample  : ==> Parameters: 666(String)
+2019-09-26 02:52:26.792 DEBUG 12008 --- [http-nio-8080-exec-6] c.e.d.mapper.UserMapper.selectByExample  : <==      Total: 1
+2019-09-26 02:52:26.793  INFO 12008 --- [http-nio-8080-exec-6] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":{"birthday":880502400000,"createTime":1569434763000,"email":"1656704949@qq.com","gender":0,"id":7,"loginTime":1569437481000,"nickname":"zzzzz","password":"$2a$10$iP9SVreUHOXzWsqOG2MBBukXX5KhuH1D.DtMknm1ZRHVJpDXbXHca","username":"666"},"message":"SUCCESS"}
+2019-09-26 02:52:35.921  INFO 12008 --- [http-nio-8080-exec-8] com.example.demo.base.AopLog             : ***************************************************
+2019-09-26 02:52:35.922  INFO 12008 --- [http-nio-8080-exec-8] com.example.demo.base.AopLog             : 请求开始, URI: /user/update, method: POST, params: {"birthday":["1997-11-27"],"gender":["0"]}
+2019-09-26 02:52:35.982 DEBUG 12008 --- [http-nio-8080-exec-8] c.e.d.m.U.updateByExampleSelective       : ==>  Preparing: update user SET gender = ?, birthday = ? WHERE ( username = ? ) 
+2019-09-26 02:52:35.983 DEBUG 12008 --- [http-nio-8080-exec-8] c.e.d.m.U.updateByExampleSelective       : ==> Parameters: 0(Integer), 1997-11-27(Date), 666(String)
+2019-09-26 02:52:36.075 DEBUG 12008 --- [http-nio-8080-exec-8] c.e.d.m.U.updateByExampleSelective       : <==    Updates: 1
+2019-09-26 02:52:36.076  INFO 12008 --- [http-nio-8080-exec-8] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"message":"SUCCESS"}
+2019-09-26 02:52:40.209  INFO 12008 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : ***************************************************
+2019-09-26 02:52:40.209  INFO 12008 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : 请求开始, URI: /user/info, method: GET, params: {}
+2019-09-26 02:52:40.258 DEBUG 12008 --- [http-nio-8080-exec-7] c.e.d.mapper.UserMapper.selectByExample  : ==>  Preparing: select id, username, password, email, icon, nickname, gender, birthday, create_time, login_time from user WHERE ( username = ? ) 
+2019-09-26 02:52:40.258 DEBUG 12008 --- [http-nio-8080-exec-7] c.e.d.mapper.UserMapper.selectByExample  : ==> Parameters: 666(String)
+2019-09-26 02:52:40.307 DEBUG 12008 --- [http-nio-8080-exec-7] c.e.d.mapper.UserMapper.selectByExample  : <==      Total: 1
+2019-09-26 02:52:40.307  INFO 12008 --- [http-nio-8080-exec-7] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":{"birthday":880502400000,"createTime":1569434763000,"email":"1656704949@qq.com","gender":0,"id":7,"loginTime":1569437481000,"nickname":"zzzzz","password":"$2a$10$iP9SVreUHOXzWsqOG2MBBukXX5KhuH1D.DtMknm1ZRHVJpDXbXHca","username":"666"},"message":"SUCCESS"}
+2019-09-26 02:53:32.258  INFO 12008 --- [http-nio-8080-exec-9] com.example.demo.base.AopLog             : ***************************************************
+2019-09-26 02:53:32.258  INFO 12008 --- [http-nio-8080-exec-9] com.example.demo.base.AopLog             : 请求开始, URI: /user/icon, method: POST, params: {}
+2019-09-26 02:53:34.082  INFO 12008 --- [http-nio-8080-exec-9] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 {"code":200,"data":"{\"key\":\"FjTELHXFKVZf5kxNt9LSfMRou0kz\",\"hash\":\"FjTELHXFKVZf5kxNt9LSfMRou0kz\",\"bucket\":\"zhangbincheng\",\"fsize\":\"586396\",\"width\":\"2857\", \"height\":\"2857\"}","message":"SUCCESS"}
