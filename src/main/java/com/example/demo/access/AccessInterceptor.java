@@ -5,6 +5,7 @@ import com.example.demo.base.Result;
 import com.example.demo.base.Status;
 import com.example.demo.component.RedisService;
 import com.example.demo.utils.Constants;
+import com.example.demo.utils.RenderUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.method.HandlerMethod;
@@ -41,21 +42,11 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
                 } else if (count < maxCount) {
                     redisService.increment(key, 1);
                 } else {
-                    render(response, Status.ACCESS_LIMIT);
+                    RenderUtils.render(response, Result.failed(Status.ACCESS_LIMIT));
                     return false;
                 }
             }
         }
         return true;
-    }
-
-    // 输出错误
-    private void render(HttpServletResponse response, Status status) throws Exception {
-        response.setContentType("application/json;charset=UTF-8");
-        OutputStream out = response.getOutputStream();
-        String str = JSON.toJSONString(Result.failed(status));
-        out.write(str.getBytes("UTF-8"));
-        out.flush();
-        out.close();
     }
 }

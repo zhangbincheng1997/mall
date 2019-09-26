@@ -3,7 +3,7 @@ package com.example.demo.service;
 import com.example.demo.mapper.UserMapper;
 import com.example.demo.model.User;
 import com.example.demo.model.UserExample;
-import com.example.demo.component.TokenService;
+import com.example.demo.access.JwtTokenService;
 import com.example.demo.vo.UserInfoVo;
 import com.example.demo.vo.UserVo;
 import org.springframework.beans.BeanUtils;
@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
     PasswordEncoder passwordEncoder;
 
     @Autowired
-    TokenService tokenService;
+    JwtTokenService jwtTokenService;
 
 
     @Override
@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService {
         }
         user.setLoginTime(new Date());
         userMapper.updateByPrimaryKeySelective(user);
-        String token = tokenService.generateToken(user.getUsername());
+        String token = jwtTokenService.generateToken(user.getUsername());
         return token;
     }
 

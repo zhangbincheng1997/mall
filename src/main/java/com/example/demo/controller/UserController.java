@@ -6,7 +6,7 @@ import com.example.demo.base.Status;
 import com.example.demo.component.QiniuService;
 import com.example.demo.component.RabbitSender;
 import com.example.demo.component.RedisService;
-import com.example.demo.component.TokenService;
+import com.example.demo.access.JwtTokenService;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 import com.example.demo.utils.Constants;
@@ -48,7 +48,7 @@ public class UserController {
     private QiniuService qiniuService;
 
     @Autowired
-    private TokenService tokenService;
+    private JwtTokenService jwtTokenService;
 
     @Value("${jwt.tokenHeader}")
     private String tokenHeader;
@@ -99,7 +99,7 @@ public class UserController {
     @ResponseBody
     public Result getUserInfo(HttpServletRequest request) {
         String token = request.getHeader(tokenHeader); // JWT
-        String username=tokenService.getUserNameFromToken(token);
+        String username= jwtTokenService.getUserNameFromToken(token);
         User user = userService.getUserByUsername(username);
         if (user == null) {
             return Result.failed(Status.NOT_LOGIN);
@@ -128,7 +128,7 @@ public class UserController {
     @ResponseBody
     public Result updateUserInfo(HttpServletRequest request, @Validated UserInfoVo userInfoVo) {
         String token = request.getHeader(tokenHeader); // JWT
-        String username=tokenService.getUserNameFromToken(token);
+        String username= jwtTokenService.getUserNameFromToken(token);
         int count = userService.updateUserInfoByUsername(username, userInfoVo);
         if (count != 1) {
             return Result.failed(Status.NOT_LOGIN);

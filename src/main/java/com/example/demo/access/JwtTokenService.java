@@ -1,6 +1,7 @@
-package com.example.demo.component;
+package com.example.demo.access;
 import com.example.demo.model.User;
 import io.jsonwebtoken.*;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,22 +23,26 @@ import java.util.Map;
  * Created by macro on 2018/4/26.
  */
 @Slf4j
+@Data
 @Component
-public class TokenService {
-    private static final String CLAIM_KEY_USERNAME = "sub";
-    private static final String CLAIM_KEY_CREATED = "created";
+public class JwtTokenService {
     @Value("${jwt.secret}")
     private String secret;
     @Value("${jwt.expiration}")
     private Long expiration;
+    @Value("${jwt.tokenHeader}")
+    private String tokenHeader;
+    @Value("${jwt.tokenHead}")
+    private String tokenHead;
 
     /**
      * 根据负责生成JWT的token
      */
     private String generateToken(Map<String, Object> claims) {
+        Date date = new Date(System.currentTimeMillis() + expiration * 1000);
         return Jwts.builder()
                 .setClaims(claims)
-                .setExpiration(generateExpirationDate())
+                .setExpiration(date) // 过期时间
                 .signWith(SignatureAlgorithm.HS512, secret)
                 .compact();
     }
@@ -56,13 +61,6 @@ public class TokenService {
             log.info("JWT格式验证失败:{}",token);
         }
         return claims;
-    }
-
-    /**
-     * 生成token的过期时间
-     */
-    private Date generateExpirationDate() {
-        return new Date(System.currentTimeMillis() + expiration * 1000);
     }
 
     /**
@@ -111,8 +109,9 @@ public class TokenService {
      */
     public String generateToken(String username) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put(CLAIM_KEY_USERNAME, username);
-        claims.put(CLAIM_KEY_CREATED, new Date());
+//        claims.put(Claims.ID, 520);
+        claims.put(Claims.SUBJECT, username);
+        claims.put(Claims.ISSUED_AT, new Date());
         return generateToken(claims);
     }
 
@@ -128,7 +127,7 @@ public class TokenService {
      */
     public String refreshToken(String token) {
         Claims claims = getClaimsFromToken(token);
-        claims.put(CLAIM_KEY_CREATED, new Date());
+        claims.put(Claims.ISSUED_AT, new Date());
         return generateToken(claims);
     }
 }
