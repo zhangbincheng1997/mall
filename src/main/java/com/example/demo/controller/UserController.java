@@ -75,16 +75,22 @@ public class UserController {
 
     @ApiOperation("登录")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    @ResponseBody
-    public Result login(HttpServletResponse response, @Validated UserVo userVo) {
-        String token = userService.login(userVo);
-        if (token == null) {
-            return Result.failed(Status.USERNAME_PASSWORD_ERROR);
-        } else {
-            response.setHeader(tokenHeader, token);
-            return Result.success(token);
-        }
+    public void login(String username,String password) {
+        // TODO
     }
+
+//    @ApiOperation("登录")
+//    @RequestMapping(value = "/login", method = RequestMethod.POST)
+//    @ResponseBody
+//    public Result login(HttpServletResponse response, @Validated UserVo userVo) {
+//        String token = userService.login(userVo);
+//        if (token == null) {
+//            return Result.failed(Status.USERNAME_PASSWORD_ERROR);
+//        } else {
+//            response.setHeader(tokenHeader, token);
+//            return Result.success(token);
+//        }
+//    }
 
     @ApiOperation("注销")
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
@@ -108,7 +114,7 @@ public class UserController {
     }
 
     @ApiOperation("修改密码 需要邮箱验证")
-    @RequestMapping(value = "/user/updatePassword", method = RequestMethod.POST)
+    @RequestMapping(value = "/updatePassword", method = RequestMethod.POST)
     @ResponseBody
     public Result updatePassword(@Validated UserVo userVo) {
         // 邮箱验证
@@ -153,7 +159,7 @@ public class UserController {
 
     @ApiOperation("发送邮箱验证码 1次/分")
     @ApiImplicitParams({@ApiImplicitParam(name = "email", value = "邮箱", required = true, dataType = "String")})
-    @RequestMapping(value = "send", method = RequestMethod.GET)
+    @RequestMapping(value = "/send", method = RequestMethod.GET)
     @ResponseBody
     @AccessLimit(seconds = 60, maxCount = 1)
     public Result sendEmail(@RequestParam @Email String email) {

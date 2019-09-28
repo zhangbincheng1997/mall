@@ -8,6 +8,7 @@ import com.example.demo.vo.UserInfoVo;
 import com.example.demo.vo.UserVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -56,6 +57,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String login(UserVo userVo) {
+        System.out.println("userVo" + userVo);
         User user = getUserByUsername(userVo.getUsername());
         if (user == null) {
             return null;
@@ -84,7 +86,7 @@ public class UserServiceImpl implements UserService {
         }
         User user = userList.get(0);
         user.setPassword(passwordEncoder.encode(userVo.getPassword()));
-        return userMapper.updateByExampleSelective(user, example);
+        return userMapper.updateByPrimaryKeySelective(user);
     }
 
     @Override

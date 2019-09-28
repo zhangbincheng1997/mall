@@ -21,7 +21,7 @@ import java.io.IOException;
 public class JwtAuthenticationFailureHandler implements AuthenticationFailureHandler {
     @Override
     public void onAuthenticationFailure(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
+        log.error("失败：账号密码错误"+e.getMessage(), e);
         RenderUtils.render(httpServletResponse, Result.failed(Status.USERNAME_PASSWORD_ERROR));
-        log.info("失败：账号密码错误");
     }
 }

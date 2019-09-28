@@ -30,9 +30,9 @@ public class JwtAuthenticationSuccessHandler implements AuthenticationSuccessHan
                                         HttpServletResponse httpServletResponse,
                                         Authentication authentication) throws IOException, ServletException {
         UserDetails userDetails = (UserDetails)authentication.getPrincipal();
-        SecurityContextHolder.getContext().setAuthentication(authentication); // 保存上下文
+//        SecurityContextHolder.getContext().setAuthentication(authentication); // 保存上下文
         String token = jwtTokenService.generateToken(userDetails.getUsername()); // 生成jwt
-        RenderUtils.render(httpServletResponse, Result.success(token));
         log.info("成功"+token);
+        RenderUtils.render(httpServletResponse, Result.success(token));
     }
 }

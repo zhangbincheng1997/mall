@@ -20,7 +20,7 @@ public enum Status {
     NOT_LOGIN(10001, "用户未登录"),
     CODE_EXPIRED(10002, "验证码过期"),
     CODE_ERROR(10003, "验证码错误"),
-    TOKEN_TIMEOUT(10004, "token过期"),
+    TOKEN_ERROR(10004, "没有登录，token无效"),
     PERMISSION_DENIED(10005, "权限不足"),
 
     // 账号相关

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -40,6 +41,7 @@ public class SecurityConfig   extends WebSecurityConfigurerAdapter  {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+//        http.csrf().ignoringAntMatchers("/druid/*");
         // 配置
         http
                 .csrf().disable() // 关闭csrf保护功能（跨域访问）
@@ -47,7 +49,7 @@ public class SecurityConfig   extends WebSecurityConfigurerAdapter  {
                 .and().authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll() // 跨域会请求OPTIONS
                 .antMatchers(HttpMethod.GET, // 允许对于网站静态资源的无授权访问
-                        "/",
+                        "/","/csrf",
                         "/favicon.ico",
                         "/*.html",
                         "/**/*.html",
@@ -57,10 +59,11 @@ public class SecurityConfig   extends WebSecurityConfigurerAdapter  {
                         "/v2/**",
                         "/webjars/**"
                 ).permitAll()
-                .antMatchers("/register", "/login", "/updatePassword").permitAll()
+                .antMatchers("/druid/**").permitAll()
+                .antMatchers("/register", "/login", "/updatePassword", "/send").permitAll()
 //                .antMatchers("/goods/**").hasAnyRole("ADMIN", "TEST")
                 .anyRequest().authenticated() // 其他全部需要认证
-                .and().formLogin().loginProcessingUrl("/login") // 指定登录请求路径 通过UsernamePasswordAuthenticationFilter
+                .and().formLogin().loginPage("/login").loginProcessingUrl("/login") // 指定登录请求路径 通过UsernamePasswordAuthenticationFilter
                 .successHandler(jwtAuthenticationSuccessHandler)
                 .failureHandler(jwtAuthenticationFailureHandler)
                 .and().exceptionHandling() // 处理异常
@@ -79,14 +82,15 @@ public class SecurityConfig   extends WebSecurityConfigurerAdapter  {
     }
 
     /**
-     * 通过AuthenticationManagerBuilder将我们
-     * 自定义的JwtUserDetailsServiceImpl和加密方式BCryptPasswordEncoder进行赋值。
+     * 登录时密码加密校验
+     * 只需在WebSecurityConfigurerAdapter的子类中指定密码的加密规则即可，Spring Security会自动将密码加密后与数据库比对。
      * @param auth
      * @throws Exception
      */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService()).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(userDetailsService())
+                .passwordEncoder(passwordEncoder());
     }
 
     @Autowired
@@ -101,7 +105,7 @@ public class SecurityConfig   extends WebSecurityConfigurerAdapter  {
                 User user = userService.getUserByUsername(username);
                 if (user != null) {
 //                List<Permission> permissionList = userService.getPermissionList(user.getId());
-                    log.info("成功");
+                    log.info("成功"+user);
                     return new JwtUserDetails(user.getUsername(), user.getPassword(), null);
                 }
                 throw new UsernameNotFoundException("用户名或密码错误");
