@@ -29,7 +29,7 @@ public enum Status {
     EMAIL_EXIST(50012, "邮箱已经存在"),
     EMAIL_NOT_EXIST(50013, "邮箱不存在"),
     USERNAME_PASSWORD_ERROR(50014, "用户名或者密码错误"),
-    USERNAME_PASSWORD_EXIST(50014, "用户名或者密码存在");
+    USERNAME_PASSWORD_EXIST(50015, "用户名或者密码存在");
 
     private int code;
     private String message;

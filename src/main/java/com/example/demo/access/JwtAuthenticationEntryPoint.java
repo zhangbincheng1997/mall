@@ -21,7 +21,7 @@ import java.io.IOException;
 public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
-        log.error("失败：没有登录，token无效",e);
+        log.info("失败：没有登录，token无效"+e.getMessage());
         RenderUtils.render(httpServletResponse, Result.failed(Status.TOKEN_ERROR));
     }
 }

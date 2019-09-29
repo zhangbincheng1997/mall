@@ -21,7 +21,7 @@ import java.io.IOException;
 public class JwtAccessDeniedHandler implements AccessDeniedHandler {
     @Override
     public void handle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AccessDeniedException e) throws IOException, ServletException {
-        log.error("失败：权限不足",e);
+        log.info("失败：权限不足"+e.getMessage());
         RenderUtils.render(httpServletResponse, Result.failed(Status.PERMISSION_DENIED));
     }
 }

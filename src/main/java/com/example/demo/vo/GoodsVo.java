@@ -12,7 +12,7 @@ import javax.validation.constraints.DecimalMin;
 @Data
 public class GoodsVo {
 
-    @ApiModelProperty(value = "链接")
+    @ApiModelProperty(value = "链接", required = true)
     //    @NotNull(message = "链接不能为空")
     @URL
     private String icon;

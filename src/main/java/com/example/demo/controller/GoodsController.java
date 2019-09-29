@@ -8,6 +8,7 @@ import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +25,7 @@ public class GoodsController {
     @ApiOperation("获取商品")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
+    @PreAuthorize("hasAuthority('goods:read')")
     public Result get(@PathVariable("id") Long id) {
         Goods goods = goodsService.get(id);
         return Result.success(goods);
@@ -32,6 +34,7 @@ public class GoodsController {
     @ApiOperation(value = "获取商品数量")
     @RequestMapping(value = "/count", method = RequestMethod.GET)
     @ResponseBody
+    @PreAuthorize("hasAuthority('goods:read')")
     public Result count() {
         return Result.success(goodsService.count());
     }
@@ -39,6 +42,7 @@ public class GoodsController {
     @ApiOperation(value = "获取商品列表")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
+    @PreAuthorize("hasAuthority('goods:read')")
     public Result list(@RequestParam(value = "keyword", required = false) String keyword,
                        @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                        @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize) {
@@ -49,6 +53,7 @@ public class GoodsController {
     @ApiOperation(value = "添加商品")
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
+    @PreAuthorize("hasAuthority('goods:create')")
     public Result create(@Validated GoodsVo goodsVo) {
         int count = goodsService.create(goodsVo);
         if (count == 1) {
@@ -61,6 +66,7 @@ public class GoodsController {
     @ApiOperation(value = "更新商品")
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
     @ResponseBody
+    @PreAuthorize("hasAuthority('goods:update')")
     public Result update(@PathVariable("id") Long id,
                          @Validated GoodsVo goodsVo) {
         int count = goodsService.update(id, goodsVo);
@@ -74,6 +80,7 @@ public class GoodsController {
     @ApiOperation(value = "删除商品")
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
     @ResponseBody
+    @PreAuthorize("hasAuthority('goods:delete')")
     public Result delete(@PathVariable("id") Long id) {
         int count = goodsService.delete(id);
         if (count == 1) {
@@ -81,5 +88,21 @@ public class GoodsController {
         } else {
             return Result.failed();
         }
+    }
+
+    // 以下是角色测试
+
+    @GetMapping("/admin-role")
+    @ResponseBody
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public String readAdmin() {
+        return "have a admin role";
+    }
+
+    @GetMapping("/user-role")
+    @ResponseBody
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public String readUser() {
+        return "have a user role";
     }
 }

@@ -1,6 +1,8 @@
 package com.example.demo.config;
 
 import com.example.demo.access.*;
+import com.example.demo.mapper.PermissionMapper;
+import com.example.demo.model.Permission;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -15,12 +17,15 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import java.util.List;
 
 @Slf4j
 @Configuration
@@ -104,9 +109,11 @@ public class SecurityConfig   extends WebSecurityConfigurerAdapter  {
             public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
                 User user = userService.getUserByUsername(username);
                 if (user != null) {
-//                List<Permission> permissionList = userService.getPermissionList(user.getId());
-                    log.info("成功"+user);
-                    return new JwtUserDetails(user.getUsername(), user.getPassword(), null);
+                    List<GrantedAuthority> permissionList = userService.getPermissionList(user.getId());
+                    List<GrantedAuthority> roleList = userService.getRoleList(user.getId());
+                    permissionList.addAll(roleList);
+                    log.info("成功"+roleList);
+                    return new JwtUserDetails(user.getUsername(), user.getPassword(), permissionList);
                 }
                 throw new UsernameNotFoundException("用户名或密码错误");
             }

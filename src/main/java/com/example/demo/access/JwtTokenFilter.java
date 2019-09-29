@@ -37,6 +37,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         if (!StringUtils.isEmpty(token)) {
             String username = jwtTokenService.getUserNameFromToken(token);
             log.info("checking username:{}", username);
+            // 还没认证
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
 //                if (tokenService.validateToken(authToken, userDetails)) {

@@ -1,6 +1,5 @@
 package com.example.demo.base;
 
-import java.io.IOException;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,23 +18,30 @@ public class AppExceptionHandler {
 
     private static final Logger logger = LoggerFactory.getLogger(AppExceptionHandler.class);
 
-    @ExceptionHandler(value = Exception.class)
-    public Result exceptionHandler(HttpServletRequest request, HttpServletResponse response, Exception e) {
+//    @ExceptionHandler(value = Exception.class)
+//    public Result exceptionHandler(HttpServletRequest request, HttpServletResponse response, Exception e) {
+//        logger.error(e.getMessage());
+//        e.printStackTrace();
+//        if (e instanceof BindException) {
+//            BindException ex = (BindException) e;
+//            List<ObjectError> errorList = ex.getAllErrors();
+//            ObjectError error = errorList.get(0);
+//            String msg = error.getDefaultMessage();
+//            return Result.failed(Status.BIND_EXCEPTION.getCode(), msg);
+//        } else {
+//            return Result.failed(Status.INTERNAL_SERVER_ERROR.getCode(), e.getMessage());
+//        }
+//    }
+
+    @ExceptionHandler(value = BindException.class)
+    public Result bindExceptionHandler(HttpServletRequest request, HttpServletResponse response, Exception e) {
         logger.error(e.getMessage());
         e.printStackTrace();
-        if (e instanceof BindException) {
-            BindException ex = (BindException) e;
-            List<ObjectError> errorList = ex.getAllErrors();
-            ObjectError error = errorList.get(0);
-            String msg = error.getDefaultMessage();
-            return Result.failed(Status.BIND_EXCEPTION.getCode(), msg);
-        } else if (e instanceof RuntimeException) {
-            return Result.failed(Status.RUNTIME_EXCEPTION.getCode(), e.getMessage());
-        } else if (e instanceof IOException) {
-            return Result.failed(Status.IO_EXCEPTION.getCode(), e.getMessage());
-        } else {
-            return Result.failed(Status.INTERNAL_SERVER_ERROR.getCode(), e.getMessage());
-        }
+        BindException ex = (BindException) e;
+        List<ObjectError> errorList = ex.getAllErrors();
+        ObjectError error = errorList.get(0);
+        String msg = error.getDefaultMessage();
+        return Result.failed(Status.BIND_EXCEPTION.getCode(), msg);
     }
 }
 

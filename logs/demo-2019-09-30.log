@@ -1,0 +1,929 @@
+2019-09-30 01:03:36.992  INFO 11548 --- [restartedMain] com.example.demo.Application             : Starting Application on zzz with PID 11548 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
+2019-09-30 01:03:36.994 DEBUG 11548 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
+2019-09-30 01:03:36.995  INFO 11548 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
+2019-09-30 01:03:37.027  INFO 11548 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-09-30 01:03:37.027  INFO 11548 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-09-30 01:03:37.960  INFO 11548 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-09-30 01:03:37.962  INFO 11548 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-09-30 01:03:38.002  INFO 11548 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 24ms. Found 0 repository interfaces.
+2019-09-30 01:03:38.344  INFO 11548 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$ee156b28] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:03:38.446  INFO 11548 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration$$EnhancerBySpringCGLIB$$86c33362] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:03:38.451  INFO 11548 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:03:38.455  INFO 11548 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@5665edcb' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:03:38.458  INFO 11548 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration' of type [org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration$$EnhancerBySpringCGLIB$$ab97d614] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:03:38.463  INFO 11548 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:03:38.473  INFO 11548 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'redisConfig' of type [com.example.demo.config.RedisConfig$$EnhancerBySpringCGLIB$$97e451b8] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:03:38.919  INFO 11548 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-09-30 01:03:38.938  INFO 11548 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-09-30 01:03:38.938  INFO 11548 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.22]
+2019-09-30 01:03:39.027  INFO 11548 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-09-30 01:03:39.027  INFO 11548 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2000 ms
+2019-09-30 01:03:39.421  INFO 11548 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-09-30 01:03:41.944  INFO 11548 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-09-30 01:03:42.281 DEBUG 11548 --- [restartedMain] com.example.demo.access.JwtTokenFilter   : Filter 'jwtTokenFilter' configured for use
+2019-09-30 01:03:43.651  INFO 11548 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3baff273, org.springframework.security.web.context.SecurityContextPersistenceFilter@59c80a3b, org.springframework.security.web.header.HeaderWriterFilter@2611a26a, org.springframework.security.web.authentication.logout.LogoutFilter@673d8000, com.example.demo.access.JwtTokenFilter@53aba1f7, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@45232fc8, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@591ba696, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@49b5c843, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@75b5ac54, org.springframework.security.web.session.SessionManagementFilter@535424a6, org.springframework.security.web.access.ExceptionTranslationFilter@162336ce, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@42db4a7d]
+2019-09-30 01:03:43.682  INFO 11548 --- [restartedMain] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+2019-09-30 01:03:43.939  INFO 11548 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-09-30 01:03:43.994  INFO 11548 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2019-09-30 01:03:44.033  INFO 11548 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-09-30 01:03:44.597  INFO 11548 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2019-09-30 01:03:44.613  INFO 11548 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2019-09-30 01:03:44.641  INFO 11548 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2019-09-30 01:03:44.812  INFO 11548 --- [restartedMain] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [www.littleredhat1997.com:5672]
+2019-09-30 01:03:45.266  INFO 11548 --- [restartedMain] o.s.a.r.c.CachingConnectionFactory       : Created new connection: rabbitConnectionFactory#6b5356eb:0/SimpleConnection@25712bd8 [delegate=amqp://root@106.54.84.40:5672/, localPort= 63002]
+2019-09-30 01:03:45.973  INFO 11548 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-09-30 01:03:45.976  INFO 11548 --- [restartedMain] com.example.demo.Application             : Started Application in 9.988 seconds (JVM running for 11.091)
+2019-09-30 01:03:51.399  INFO 11548 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-09-30 01:03:51.399  INFO 11548 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-09-30 01:03:51.411  INFO 11548 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 12 ms
+2019-09-30 01:04:00.177 DEBUG 11548 --- [http-nio-8080-exec-9] c.e.d.mapper.UserMapper.selectByExample  : ==>  Preparing: select id, username, password, email, icon, nickname, gender, birthday, create_time, login_time from user WHERE ( username = ? ) 
+2019-09-30 01:04:00.198 DEBUG 11548 --- [http-nio-8080-exec-9] c.e.d.mapper.UserMapper.selectByExample  : ==> Parameters: 555(String)
+2019-09-30 01:04:00.269 DEBUG 11548 --- [http-nio-8080-exec-9] c.e.d.mapper.UserMapper.selectByExample  : <==      Total: 0
+2019-09-30 01:04:00.353 ERROR 11548 --- [http-nio-8080-exec-9] c.e.d.a.JwtAuthenticationFailureHandler  : 失败：账号密码错误Bad credentials
+
+org.springframework.security.authentication.BadCredentialsException: Bad credentials
+	at org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider.authenticate(AbstractUserDetailsAuthenticationProvider.java:151)
+	at org.springframework.security.authentication.ProviderManager.authenticate(ProviderManager.java:175)
+	at org.springframework.security.authentication.ProviderManager.authenticate(ProviderManager.java:200)
+	at org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.attemptAuthentication(UsernamePasswordAuthenticationFilter.java:94)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:212)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at com.example.demo.access.JwtTokenFilter.doFilterInternal(JwtTokenFilter.java:53)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:118)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:74)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:118)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:105)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:56)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:118)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:215)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:178)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:357)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:270)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:118)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:92)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:118)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:118)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:118)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:853)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1587)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+
+2019-09-30 01:04:59.232 DEBUG 11548 --- [http-nio-8080-exec-1] c.e.d.mapper.UserMapper.selectByExample  : ==>  Preparing: select id, username, password, email, icon, nickname, gender, birthday, create_time, login_time from user WHERE ( username = ? ) 
+2019-09-30 01:04:59.234 DEBUG 11548 --- [http-nio-8080-exec-1] c.e.d.mapper.UserMapper.selectByExample  : ==> Parameters: 123(String)
+2019-09-30 01:04:59.282 DEBUG 11548 --- [http-nio-8080-exec-1] c.e.d.mapper.UserMapper.selectByExample  : <==      Total: 1
+2019-09-30 01:04:59.324 DEBUG 11548 --- [http-nio-8080-exec-1] c.e.d.m.U.getPermissionList              : ==>  Preparing: select p.* from user u LEFT JOIN user_role ur on u.id = ur.user_id LEFT JOIN role r on ur.role_id = r.id LEFT JOIN role_permission rp on rp.role_id = r.id LEFT JOIN permission p on p.id = rp.permission_id where u.id=? 
+2019-09-30 01:04:59.325 DEBUG 11548 --- [http-nio-8080-exec-1] c.e.d.m.U.getPermissionList              : ==> Parameters: 1(Long)
+2019-09-30 01:04:59.364 DEBUG 11548 --- [http-nio-8080-exec-1] c.e.d.m.U.getPermissionList              : <==      Total: 4
+2019-09-30 01:04:59.365  INFO 11548 --- [http-nio-8080-exec-1] com.example.demo.config.SecurityConfig   : 成功User [Hash = 2000006641, id=1, username=123, password=$2a$10$EnURLfqOiQKrkNv/yO9XTubJcwjejV9XPBUPfvwk5Xnx2SOwlpGZ., email=1656704949@qq.com, icon=null, nickname=null, gender=null, birthday=null, createTime=Sat Sep 28 21:35:55 CST 2019, loginTime=Sat Sep 28 22:06:14 CST 2019, serialVersionUID=1]
+2019-09-30 01:04:59.503  INFO 11548 --- [http-nio-8080-exec-1] c.e.d.a.JwtAuthenticationSuccessHandler  : 成功eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMjMiLCJleHAiOjE1NzAzODE0OTksImlhdCI6MTU2OTc3NjY5OTQ1NH0.T7dt8-3mx32kZxjvcPvspX2nJZ2skLG4CvQ-Afh0tPMnW1H4c1sGdGmrdRFYkT8WW_tHLLMAgghoF9gx_RLAYA
+2019-09-30 01:05:04.604 ERROR 11548 --- [http-nio-8080-exec-8] c.e.d.a.JwtAuthenticationEntryPoint      : 失败：没有登录，token无效
+
+org.springframework.security.authentication.InsufficientAuthenticationException: Full authentication is required to access this resource
+	at org.springframework.security.web.access.ExceptionTranslationFilter.handleSpringSecurityException(ExceptionTranslationFilter.java:190)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:141)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:137)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:111)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:170)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:200)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at com.example.demo.access.JwtTokenFilter.doFilterInternal(JwtTokenFilter.java:53)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:118)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:74)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:118)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:105)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:56)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:118)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:215)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:178)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:357)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:270)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:118)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:92)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:118)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:118)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:118)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:853)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1587)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+
+2019-09-30 01:05:37.577  INFO 11548 --- [http-nio-8080-exec-7] com.example.demo.access.JwtTokenFilter   : checking username:123
+2019-09-30 01:05:37.623 DEBUG 11548 --- [http-nio-8080-exec-7] c.e.d.mapper.UserMapper.selectByExample  : ==>  Preparing: select id, username, password, email, icon, nickname, gender, birthday, create_time, login_time from user WHERE ( username = ? ) 
+2019-09-30 01:05:37.624 DEBUG 11548 --- [http-nio-8080-exec-7] c.e.d.mapper.UserMapper.selectByExample  : ==> Parameters: 123(String)
+2019-09-30 01:05:37.671 DEBUG 11548 --- [http-nio-8080-exec-7] c.e.d.mapper.UserMapper.selectByExample  : <==      Total: 1
+2019-09-30 01:05:37.725 DEBUG 11548 --- [http-nio-8080-exec-7] c.e.d.m.U.getPermissionList              : ==>  Preparing: select p.* from user u LEFT JOIN user_role ur on u.id = ur.user_id LEFT JOIN role r on ur.role_id = r.id LEFT JOIN role_permission rp on rp.role_id = r.id LEFT JOIN permission p on p.id = rp.permission_id where u.id=? 
+2019-09-30 01:05:37.726 DEBUG 11548 --- [http-nio-8080-exec-7] c.e.d.m.U.getPermissionList              : ==> Parameters: 1(Long)
+2019-09-30 01:05:37.771 DEBUG 11548 --- [http-nio-8080-exec-7] c.e.d.m.U.getPermissionList              : <==      Total: 4
+2019-09-30 01:05:37.772  INFO 11548 --- [http-nio-8080-exec-7] com.example.demo.config.SecurityConfig   : 成功User [Hash = 988410836, id=1, username=123, password=$2a$10$EnURLfqOiQKrkNv/yO9XTubJcwjejV9XPBUPfvwk5Xnx2SOwlpGZ., email=1656704949@qq.com, icon=null, nickname=null, gender=null, birthday=null, createTime=Sat Sep 28 21:35:55 CST 2019, loginTime=Sat Sep 28 22:06:14 CST 2019, serialVersionUID=1]
+2019-09-30 01:05:37.775  INFO 11548 --- [http-nio-8080-exec-7] com.example.demo.access.JwtTokenFilter   : authenticated user:123
+2019-09-30 01:05:37.781 ERROR 11548 --- [http-nio-8080-exec-7] c.example.demo.base.AppExceptionHandler  : 不允许访问
+2019-09-30 01:05:37.795  WARN 11548 --- [http-nio-8080-exec-7] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.security.access.AccessDeniedException: 不允许访问]
+2019-09-30 01:05:58.634  INFO 11548 --- [http-nio-8080-exec-4] com.example.demo.access.JwtTokenFilter   : checking username:123
+2019-09-30 01:05:58.684 DEBUG 11548 --- [http-nio-8080-exec-4] c.e.d.mapper.UserMapper.selectByExample  : ==>  Preparing: select id, username, password, email, icon, nickname, gender, birthday, create_time, login_time from user WHERE ( username = ? ) 
+2019-09-30 01:05:58.684 DEBUG 11548 --- [http-nio-8080-exec-4] c.e.d.mapper.UserMapper.selectByExample  : ==> Parameters: 123(String)
+2019-09-30 01:05:58.733 DEBUG 11548 --- [http-nio-8080-exec-4] c.e.d.mapper.UserMapper.selectByExample  : <==      Total: 1
+2019-09-30 01:05:58.786 DEBUG 11548 --- [http-nio-8080-exec-4] c.e.d.m.U.getPermissionList              : ==>  Preparing: select p.* from user u LEFT JOIN user_role ur on u.id = ur.user_id LEFT JOIN role r on ur.role_id = r.id LEFT JOIN role_permission rp on rp.role_id = r.id LEFT JOIN permission p on p.id = rp.permission_id where u.id=? 
+2019-09-30 01:05:58.787 DEBUG 11548 --- [http-nio-8080-exec-4] c.e.d.m.U.getPermissionList              : ==> Parameters: 1(Long)
+2019-09-30 01:05:58.836 DEBUG 11548 --- [http-nio-8080-exec-4] c.e.d.m.U.getPermissionList              : <==      Total: 4
+2019-09-30 01:05:58.837  INFO 11548 --- [http-nio-8080-exec-4] com.example.demo.config.SecurityConfig   : 成功User [Hash = 1891576368, id=1, username=123, password=$2a$10$EnURLfqOiQKrkNv/yO9XTubJcwjejV9XPBUPfvwk5Xnx2SOwlpGZ., email=1656704949@qq.com, icon=null, nickname=null, gender=null, birthday=null, createTime=Sat Sep 28 21:35:55 CST 2019, loginTime=Sat Sep 28 22:06:14 CST 2019, serialVersionUID=1]
+2019-09-30 01:05:58.839  INFO 11548 --- [http-nio-8080-exec-4] com.example.demo.access.JwtTokenFilter   : authenticated user:123
+2019-09-30 01:05:58.840 ERROR 11548 --- [http-nio-8080-exec-4] c.example.demo.base.AppExceptionHandler  : 不允许访问
+2019-09-30 01:05:58.843  WARN 11548 --- [http-nio-8080-exec-4] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.security.access.AccessDeniedException: 不允许访问]
+2019-09-30 01:06:33.347  INFO 15480 --- [restartedMain] com.example.demo.Application             : Starting Application on zzz with PID 15480 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
+2019-09-30 01:06:33.349 DEBUG 15480 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
+2019-09-30 01:06:33.349  INFO 15480 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
+2019-09-30 01:06:33.376  INFO 15480 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-09-30 01:06:33.376  INFO 15480 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-09-30 01:06:34.550  INFO 15480 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-09-30 01:06:34.552  INFO 15480 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-09-30 01:06:34.586  INFO 15480 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 22ms. Found 0 repository interfaces.
+2019-09-30 01:06:34.983  INFO 15480 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$c03748a6] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:06:35.073  INFO 15480 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration$$EnhancerBySpringCGLIB$$58e510e0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:06:35.080  INFO 15480 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:06:35.083  INFO 15480 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@25862846' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:06:35.084  INFO 15480 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration' of type [org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration$$EnhancerBySpringCGLIB$$7db9b392] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:06:35.091  INFO 15480 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:06:35.102  INFO 15480 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'redisConfig' of type [com.example.demo.config.RedisConfig$$EnhancerBySpringCGLIB$$6a062f36] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:06:35.522  INFO 15480 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-09-30 01:06:35.537  INFO 15480 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-09-30 01:06:35.538  INFO 15480 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.22]
+2019-09-30 01:06:35.615  INFO 15480 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-09-30 01:06:35.615  INFO 15480 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2239 ms
+2019-09-30 01:06:35.957  INFO 15480 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-09-30 01:06:38.330  INFO 15480 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-09-30 01:06:38.592 DEBUG 15480 --- [restartedMain] com.example.demo.access.JwtTokenFilter   : Filter 'jwtTokenFilter' configured for use
+2019-09-30 01:06:39.475  INFO 15480 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@57c26d9, org.springframework.security.web.context.SecurityContextPersistenceFilter@74eadf49, org.springframework.security.web.header.HeaderWriterFilter@23430263, org.springframework.security.web.authentication.logout.LogoutFilter@18a6ca42, com.example.demo.access.JwtTokenFilter@515c6b62, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@3b24f551, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2ec276ab, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@78e65950, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@cbda5b7, org.springframework.security.web.session.SessionManagementFilter@3f367112, org.springframework.security.web.access.ExceptionTranslationFilter@1b526adb, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@38b810e]
+2019-09-30 01:06:39.500  INFO 15480 --- [restartedMain] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+2019-09-30 01:06:39.735  INFO 15480 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-09-30 01:06:39.785  INFO 15480 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2019-09-30 01:06:39.812  INFO 15480 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-09-30 01:06:40.319  INFO 15480 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2019-09-30 01:06:40.332  INFO 15480 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2019-09-30 01:06:40.358  INFO 15480 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2019-09-30 01:06:40.518  INFO 15480 --- [restartedMain] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [www.littleredhat1997.com:5672]
+2019-09-30 01:06:40.752  INFO 15480 --- [restartedMain] o.s.a.r.c.CachingConnectionFactory       : Created new connection: rabbitConnectionFactory#330e6695:0/SimpleConnection@2021851f [delegate=amqp://root@106.54.84.40:5672/, localPort= 63131]
+2019-09-30 01:06:41.617  INFO 15480 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-09-30 01:06:41.620  INFO 15480 --- [restartedMain] com.example.demo.Application             : Started Application in 9.305 seconds (JVM running for 10.25)
+2019-09-30 01:06:47.758  INFO 15480 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-09-30 01:06:47.759  INFO 15480 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-09-30 01:06:47.768  INFO 15480 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 9 ms
+2019-09-30 01:06:58.479  INFO 15480 --- [http-nio-8080-exec-6] com.example.demo.access.JwtTokenFilter   : checking username:123
+2019-09-30 01:06:58.562 DEBUG 15480 --- [http-nio-8080-exec-6] c.e.d.mapper.UserMapper.selectByExample  : ==>  Preparing: select id, username, password, email, icon, nickname, gender, birthday, create_time, login_time from user WHERE ( username = ? ) 
+2019-09-30 01:06:58.580 DEBUG 15480 --- [http-nio-8080-exec-6] c.e.d.mapper.UserMapper.selectByExample  : ==> Parameters: 123(String)
+2019-09-30 01:06:58.642 DEBUG 15480 --- [http-nio-8080-exec-6] c.e.d.mapper.UserMapper.selectByExample  : <==      Total: 1
+2019-09-30 01:06:58.685 DEBUG 15480 --- [http-nio-8080-exec-6] c.e.d.m.U.getPermissionList              : ==>  Preparing: select p.* from user u LEFT JOIN user_role ur on u.id = ur.user_id LEFT JOIN role r on ur.role_id = r.id LEFT JOIN role_permission rp on rp.role_id = r.id LEFT JOIN permission p on p.id = rp.permission_id where u.id=? 
+2019-09-30 01:06:58.686 DEBUG 15480 --- [http-nio-8080-exec-6] c.e.d.m.U.getPermissionList              : ==> Parameters: 1(Long)
+2019-09-30 01:06:58.735 DEBUG 15480 --- [http-nio-8080-exec-6] c.e.d.m.U.getPermissionList              : <==      Total: 4
+2019-09-30 01:06:58.736  INFO 15480 --- [http-nio-8080-exec-6] com.example.demo.config.SecurityConfig   : 成功User [Hash = 1576490538, id=1, username=123, password=$2a$10$EnURLfqOiQKrkNv/yO9XTubJcwjejV9XPBUPfvwk5Xnx2SOwlpGZ., email=1656704949@qq.com, icon=null, nickname=null, gender=null, birthday=null, createTime=Sat Sep 28 21:35:55 CST 2019, loginTime=Sat Sep 28 22:06:14 CST 2019, serialVersionUID=1]
+2019-09-30 01:06:58.739  INFO 15480 --- [http-nio-8080-exec-6] com.example.demo.access.JwtTokenFilter   : authenticated user:123
+2019-09-30 01:06:58.760 ERROR 15480 --- [http-nio-8080-exec-6] c.e.demo.access.JwtAccessDeniedHandler   : 失败：权限不足
+
+org.springframework.security.access.AccessDeniedException: 不允许访问
+	at org.springframework.security.access.vote.AffirmativeBased.decide(AffirmativeBased.java:84)
+	at org.springframework.security.access.intercept.AbstractSecurityInterceptor.beforeInvocation(AbstractSecurityInterceptor.java:233)
+	at org.springframework.security.access.intercept.aopalliance.MethodSecurityInterceptor.invoke(MethodSecurityInterceptor.java:65)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:93)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:688)
+	at com.example.demo.controller.GoodsController$$EnhancerBySpringCGLIB$$58657a42.readAdmin(<generated>)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:190)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:104)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:892)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:797)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1039)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:942)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1005)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:897)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:634)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:882)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:96)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:118)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:112)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:124)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:320)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:127)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:91)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:137)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:111)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:170)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:200)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at com.example.demo.access.JwtTokenFilter.doFilterInternal(JwtTokenFilter.java:53)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:118)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:74)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:118)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:105)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:56)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:118)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:215)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:178)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:357)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:270)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:118)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:92)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:118)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:118)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:118)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:853)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1587)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+
+2019-09-30 01:18:18.743  INFO 15480 --- [http-nio-8080-exec-8] com.example.demo.access.JwtTokenFilter   : checking username:123
+2019-09-30 01:18:18.791 DEBUG 15480 --- [http-nio-8080-exec-8] c.e.d.mapper.UserMapper.selectByExample  : ==>  Preparing: select id, username, password, email, icon, nickname, gender, birthday, create_time, login_time from user WHERE ( username = ? ) 
+2019-09-30 01:18:18.791 DEBUG 15480 --- [http-nio-8080-exec-8] c.e.d.mapper.UserMapper.selectByExample  : ==> Parameters: 123(String)
+2019-09-30 01:18:18.834 DEBUG 15480 --- [http-nio-8080-exec-8] c.e.d.mapper.UserMapper.selectByExample  : <==      Total: 1
+2019-09-30 01:18:18.872 DEBUG 15480 --- [http-nio-8080-exec-8] c.e.d.m.U.getPermissionList              : ==>  Preparing: select p.* from user u LEFT JOIN user_role ur on u.id = ur.user_id LEFT JOIN role r on ur.role_id = r.id LEFT JOIN role_permission rp on rp.role_id = r.id LEFT JOIN permission p on p.id = rp.permission_id where u.id=? 
+2019-09-30 01:18:18.873 DEBUG 15480 --- [http-nio-8080-exec-8] c.e.d.m.U.getPermissionList              : ==> Parameters: 1(Long)
+2019-09-30 01:18:18.910 DEBUG 15480 --- [http-nio-8080-exec-8] c.e.d.m.U.getPermissionList              : <==      Total: 4
+2019-09-30 01:18:18.911  INFO 15480 --- [http-nio-8080-exec-8] com.example.demo.config.SecurityConfig   : 成功User [Hash = 1974069674, id=1, username=123, password=$2a$10$EnURLfqOiQKrkNv/yO9XTubJcwjejV9XPBUPfvwk5Xnx2SOwlpGZ., email=1656704949@qq.com, icon=null, nickname=null, gender=null, birthday=null, createTime=Sat Sep 28 21:35:55 CST 2019, loginTime=Sat Sep 28 22:06:14 CST 2019, serialVersionUID=1]
+2019-09-30 01:18:18.913  INFO 15480 --- [http-nio-8080-exec-8] com.example.demo.access.JwtTokenFilter   : authenticated user:123
+2019-09-30 01:18:18.915 ERROR 15480 --- [http-nio-8080-exec-8] c.e.demo.access.JwtAccessDeniedHandler   : 失败：权限不足
+
+org.springframework.security.access.AccessDeniedException: 不允许访问
+	at org.springframework.security.access.vote.AffirmativeBased.decide(AffirmativeBased.java:84)
+	at org.springframework.security.access.intercept.AbstractSecurityInterceptor.beforeInvocation(AbstractSecurityInterceptor.java:233)
+	at org.springframework.security.access.intercept.aopalliance.MethodSecurityInterceptor.invoke(MethodSecurityInterceptor.java:65)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:93)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:688)
+	at com.example.demo.controller.GoodsController$$EnhancerBySpringCGLIB$$58657a42.readAdmin(<generated>)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:190)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:104)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:892)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:797)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1039)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:942)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1005)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:897)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:634)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:882)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:96)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:118)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:112)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:124)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:320)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:127)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:91)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:137)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:111)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:170)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:200)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at com.example.demo.access.JwtTokenFilter.doFilterInternal(JwtTokenFilter.java:53)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:118)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:74)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:118)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:105)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:56)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:118)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:215)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:178)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:357)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:270)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:118)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:92)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:118)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:118)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:118)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:853)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1587)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+
+2019-09-30 01:18:42.882  INFO 12324 --- [restartedMain] com.example.demo.Application             : Starting Application on zzz with PID 12324 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
+2019-09-30 01:18:42.884 DEBUG 12324 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
+2019-09-30 01:18:42.885  INFO 12324 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
+2019-09-30 01:18:42.911  INFO 12324 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-09-30 01:18:42.911  INFO 12324 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-09-30 01:18:43.697  INFO 12324 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-09-30 01:18:43.699  INFO 12324 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-09-30 01:18:43.727  INFO 12324 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 19ms. Found 0 repository interfaces.
+2019-09-30 01:18:44.026  INFO 12324 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$4979fc52] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:18:44.111  INFO 12324 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration$$EnhancerBySpringCGLIB$$e227c48c] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:18:44.116  INFO 12324 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:18:44.119  INFO 12324 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@24def749' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:18:44.120  INFO 12324 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration' of type [org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration$$EnhancerBySpringCGLIB$$6fc673e] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:18:44.126  INFO 12324 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:18:44.135  INFO 12324 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'redisConfig' of type [com.example.demo.config.RedisConfig$$EnhancerBySpringCGLIB$$f348e2e2] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:18:44.554  INFO 12324 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-09-30 01:18:44.571  INFO 12324 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-09-30 01:18:44.571  INFO 12324 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.22]
+2019-09-30 01:18:44.650  INFO 12324 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-09-30 01:18:44.651  INFO 12324 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1740 ms
+2019-09-30 01:18:45.003  INFO 12324 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-09-30 01:18:47.660  INFO 12324 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-09-30 01:18:47.913 DEBUG 12324 --- [restartedMain] com.example.demo.access.JwtTokenFilter   : Filter 'jwtTokenFilter' configured for use
+2019-09-30 01:18:48.796  INFO 12324 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6cba3c80, org.springframework.security.web.context.SecurityContextPersistenceFilter@64abc37e, org.springframework.security.web.header.HeaderWriterFilter@5bce2a5e, org.springframework.security.web.authentication.logout.LogoutFilter@76fbb605, com.example.demo.access.JwtTokenFilter@5e0357cd, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@451a949b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1c662dc0, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@445c7caa, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@26e25d3, org.springframework.security.web.session.SessionManagementFilter@2bc2da49, org.springframework.security.web.access.ExceptionTranslationFilter@15b8613e, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@10dc2ad]
+2019-09-30 01:18:48.820  INFO 12324 --- [restartedMain] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+2019-09-30 01:18:49.084  INFO 12324 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-09-30 01:18:49.134  INFO 12324 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2019-09-30 01:18:49.161  INFO 12324 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-09-30 01:18:49.655  INFO 12324 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2019-09-30 01:18:49.667  INFO 12324 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2019-09-30 01:18:49.693  INFO 12324 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2019-09-30 01:18:49.837  INFO 12324 --- [restartedMain] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [www.littleredhat1997.com:5672]
+2019-09-30 01:18:50.305  INFO 12324 --- [restartedMain] o.s.a.r.c.CachingConnectionFactory       : Created new connection: rabbitConnectionFactory#5bffcb26:0/SimpleConnection@1ea56480 [delegate=amqp://root@106.54.84.40:5672/, localPort= 63961]
+2019-09-30 01:18:50.967  INFO 12324 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-09-30 01:18:50.970  INFO 12324 --- [restartedMain] com.example.demo.Application             : Started Application in 9.07 seconds (JVM running for 10.014)
+2019-09-30 01:18:52.560  INFO 12324 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-09-30 01:18:52.560  INFO 12324 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-09-30 01:18:52.569  INFO 12324 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 9 ms
+2019-09-30 01:19:08.229  INFO 12324 --- [http-nio-8080-exec-4] com.example.demo.access.JwtTokenFilter   : checking username:123
+2019-09-30 01:19:08.328 DEBUG 12324 --- [http-nio-8080-exec-4] c.e.d.mapper.UserMapper.selectByExample  : ==>  Preparing: select id, username, password, email, icon, nickname, gender, birthday, create_time, login_time from user WHERE ( username = ? ) 
+2019-09-30 01:19:08.352 DEBUG 12324 --- [http-nio-8080-exec-4] c.e.d.mapper.UserMapper.selectByExample  : ==> Parameters: 123(String)
+2019-09-30 01:19:08.426 DEBUG 12324 --- [http-nio-8080-exec-4] c.e.d.mapper.UserMapper.selectByExample  : <==      Total: 1
+2019-09-30 01:19:08.471 DEBUG 12324 --- [http-nio-8080-exec-4] c.e.d.m.U.getPermissionList              : ==>  Preparing: select p.* from user u LEFT JOIN user_role ur on u.id = ur.user_id LEFT JOIN role r on ur.role_id = r.id LEFT JOIN role_permission rp on rp.role_id = r.id LEFT JOIN permission p on p.id = rp.permission_id where u.id=? 
+2019-09-30 01:19:08.472 DEBUG 12324 --- [http-nio-8080-exec-4] c.e.d.m.U.getPermissionList              : ==> Parameters: 1(Long)
+2019-09-30 01:19:08.515 DEBUG 12324 --- [http-nio-8080-exec-4] c.e.d.m.U.getPermissionList              : <==      Total: 4
+2019-09-30 01:19:08.515  INFO 12324 --- [http-nio-8080-exec-4] com.example.demo.config.SecurityConfig   : 成功User [Hash = 1191145818, id=1, username=123, password=$2a$10$EnURLfqOiQKrkNv/yO9XTubJcwjejV9XPBUPfvwk5Xnx2SOwlpGZ., email=1656704949@qq.com, icon=null, nickname=null, gender=null, birthday=null, createTime=Sat Sep 28 21:35:55 CST 2019, loginTime=Sat Sep 28 22:06:14 CST 2019, serialVersionUID=1]
+2019-09-30 01:19:08.517  INFO 12324 --- [http-nio-8080-exec-4] com.example.demo.access.JwtTokenFilter   : authenticated user:123
+2019-09-30 01:19:08.525 ERROR 12324 --- [http-nio-8080-exec-4] c.example.demo.base.AppExceptionHandler  : 不允许访问
+2019-09-30 01:19:08.527  WARN 12324 --- [http-nio-8080-exec-4] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.security.access.AccessDeniedException: 不允许访问]
+2019-09-30 01:20:40.616  INFO 8304 --- [restartedMain] com.example.demo.Application             : Starting Application on zzz with PID 8304 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
+2019-09-30 01:20:40.618 DEBUG 8304 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
+2019-09-30 01:20:40.618  INFO 8304 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
+2019-09-30 01:20:40.644  INFO 8304 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-09-30 01:20:40.645  INFO 8304 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-09-30 01:20:41.715  INFO 8304 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-09-30 01:20:41.716  INFO 8304 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-09-30 01:20:41.745  INFO 8304 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 20ms. Found 0 repository interfaces.
+2019-09-30 01:20:42.054  INFO 8304 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$bddddc56] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:20:42.138  INFO 8304 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration$$EnhancerBySpringCGLIB$$568ba490] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:20:42.144  INFO 8304 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:20:42.147  INFO 8304 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@1058e7f6' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:20:42.150  INFO 8304 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration' of type [org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration$$EnhancerBySpringCGLIB$$7b604742] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:20:42.157  INFO 8304 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:20:42.167  INFO 8304 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'redisConfig' of type [com.example.demo.config.RedisConfig$$EnhancerBySpringCGLIB$$67acc2e6] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:20:42.580  INFO 8304 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-09-30 01:20:42.597  INFO 8304 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-09-30 01:20:42.598  INFO 8304 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.22]
+2019-09-30 01:20:42.674  INFO 8304 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-09-30 01:20:42.675  INFO 8304 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2030 ms
+2019-09-30 01:20:43.054  INFO 8304 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-09-30 01:20:45.481  INFO 8304 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-09-30 01:20:45.727 DEBUG 8304 --- [restartedMain] com.example.demo.access.JwtTokenFilter   : Filter 'jwtTokenFilter' configured for use
+2019-09-30 01:20:46.584  INFO 8304 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@67663bbb, org.springframework.security.web.context.SecurityContextPersistenceFilter@7941cb6d, org.springframework.security.web.header.HeaderWriterFilter@6fe3f6b8, org.springframework.security.web.authentication.logout.LogoutFilter@43430335, com.example.demo.access.JwtTokenFilter@7b9b3fa6, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@719e3fbe, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@19f24ef9, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6a9d8392, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5b45d649, org.springframework.security.web.session.SessionManagementFilter@5cf361, org.springframework.security.web.access.ExceptionTranslationFilter@1ff0560b, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@6055e44d]
+2019-09-30 01:20:46.609  INFO 8304 --- [restartedMain] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+2019-09-30 01:20:46.846  INFO 8304 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-09-30 01:20:46.898  INFO 8304 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2019-09-30 01:20:46.928  INFO 8304 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-09-30 01:20:47.432  INFO 8304 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2019-09-30 01:20:47.445  INFO 8304 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2019-09-30 01:20:47.471  INFO 8304 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2019-09-30 01:20:47.615  INFO 8304 --- [restartedMain] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [www.littleredhat1997.com:5672]
+2019-09-30 01:20:48.045  INFO 8304 --- [restartedMain] o.s.a.r.c.CachingConnectionFactory       : Created new connection: rabbitConnectionFactory#29c91ebd:0/SimpleConnection@73ca5314 [delegate=amqp://root@106.54.84.40:5672/, localPort= 64059]
+2019-09-30 01:20:48.701  INFO 8304 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-09-30 01:20:48.703  INFO 8304 --- [restartedMain] com.example.demo.Application             : Started Application in 9.071 seconds (JVM running for 10.024)
+2019-09-30 01:21:17.423  INFO 8304 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-09-30 01:21:17.423  INFO 8304 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-09-30 01:21:17.432  INFO 8304 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 9 ms
+2019-09-30 01:21:17.503  INFO 8304 --- [http-nio-8080-exec-1] com.example.demo.access.JwtTokenFilter   : checking username:123
+2019-09-30 01:21:17.597 DEBUG 8304 --- [http-nio-8080-exec-1] c.e.d.mapper.UserMapper.selectByExample  : ==>  Preparing: select id, username, password, email, icon, nickname, gender, birthday, create_time, login_time from user WHERE ( username = ? ) 
+2019-09-30 01:21:17.614 DEBUG 8304 --- [http-nio-8080-exec-1] c.e.d.mapper.UserMapper.selectByExample  : ==> Parameters: 123(String)
+2019-09-30 01:21:17.706 DEBUG 8304 --- [http-nio-8080-exec-1] c.e.d.mapper.UserMapper.selectByExample  : <==      Total: 1
+2019-09-30 01:21:17.823 DEBUG 8304 --- [http-nio-8080-exec-1] c.e.d.m.U.getPermissionList              : ==>  Preparing: select p.* from user u LEFT JOIN user_role ur on u.id = ur.user_id LEFT JOIN role r on ur.role_id = r.id LEFT JOIN role_permission rp on rp.role_id = r.id LEFT JOIN permission p on p.id = rp.permission_id where u.id=? 
+2019-09-30 01:21:17.824 DEBUG 8304 --- [http-nio-8080-exec-1] c.e.d.m.U.getPermissionList              : ==> Parameters: 1(Long)
+2019-09-30 01:21:17.862 DEBUG 8304 --- [http-nio-8080-exec-1] c.e.d.m.U.getPermissionList              : <==      Total: 4
+2019-09-30 01:21:17.863  INFO 8304 --- [http-nio-8080-exec-1] com.example.demo.config.SecurityConfig   : 成功User [Hash = 325026377, id=1, username=123, password=$2a$10$EnURLfqOiQKrkNv/yO9XTubJcwjejV9XPBUPfvwk5Xnx2SOwlpGZ., email=1656704949@qq.com, icon=null, nickname=null, gender=null, birthday=null, createTime=Sat Sep 28 21:35:55 CST 2019, loginTime=Sat Sep 28 22:06:14 CST 2019, serialVersionUID=1]
+2019-09-30 01:21:17.867  INFO 8304 --- [http-nio-8080-exec-1] com.example.demo.access.JwtTokenFilter   : authenticated user:123
+2019-09-30 01:21:17.896 ERROR 8304 --- [http-nio-8080-exec-1] c.e.demo.access.JwtAccessDeniedHandler   : 失败：权限不足
+
+org.springframework.security.access.AccessDeniedException: 不允许访问
+	at org.springframework.security.access.vote.AffirmativeBased.decide(AffirmativeBased.java:84)
+	at org.springframework.security.access.intercept.AbstractSecurityInterceptor.beforeInvocation(AbstractSecurityInterceptor.java:233)
+	at org.springframework.security.access.intercept.aopalliance.MethodSecurityInterceptor.invoke(MethodSecurityInterceptor.java:65)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:93)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:688)
+	at com.example.demo.controller.GoodsController$$EnhancerBySpringCGLIB$$88fe119b.readAdmin(<generated>)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:190)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:104)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:892)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:797)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1039)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:942)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1005)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:897)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:634)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:882)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:96)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:118)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:112)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:124)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:320)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:127)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:91)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:137)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:111)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:170)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:200)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at com.example.demo.access.JwtTokenFilter.doFilterInternal(JwtTokenFilter.java:53)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:118)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:74)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:118)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:105)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:56)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:118)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:215)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:178)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:357)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:270)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:118)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:92)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:118)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:118)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:118)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:853)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1587)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+
+2019-09-30 01:43:18.392  INFO 13064 --- [restartedMain] com.example.demo.Application             : Starting Application on zzz with PID 13064 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
+2019-09-30 01:43:18.394 DEBUG 13064 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
+2019-09-30 01:43:18.394  INFO 13064 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
+2019-09-30 01:43:18.420  INFO 13064 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-09-30 01:43:18.421  INFO 13064 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-09-30 01:43:19.206  INFO 13064 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-09-30 01:43:19.208  INFO 13064 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-09-30 01:43:19.238  INFO 13064 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 19ms. Found 0 repository interfaces.
+2019-09-30 01:43:19.532  INFO 13064 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$9ef210e0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:43:19.618  INFO 13064 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration$$EnhancerBySpringCGLIB$$379fd91a] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:43:19.622  INFO 13064 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:43:19.625  INFO 13064 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@398d3bee' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:43:19.626  INFO 13064 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration' of type [org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration$$EnhancerBySpringCGLIB$$5c747bcc] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:43:19.631  INFO 13064 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:43:19.640  INFO 13064 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'redisConfig' of type [com.example.demo.config.RedisConfig$$EnhancerBySpringCGLIB$$48c0f770] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:43:20.048  INFO 13064 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-09-30 01:43:20.064  INFO 13064 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-09-30 01:43:20.064  INFO 13064 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.22]
+2019-09-30 01:43:20.141  INFO 13064 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-09-30 01:43:20.142  INFO 13064 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1721 ms
+2019-09-30 01:43:20.489  INFO 13064 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-09-30 01:43:22.936  INFO 13064 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-09-30 01:43:23.196 DEBUG 13064 --- [restartedMain] com.example.demo.access.JwtTokenFilter   : Filter 'jwtTokenFilter' configured for use
+2019-09-30 01:43:24.063  INFO 13064 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@338bebba, org.springframework.security.web.context.SecurityContextPersistenceFilter@7647bae3, org.springframework.security.web.header.HeaderWriterFilter@3d535932, org.springframework.security.web.authentication.logout.LogoutFilter@ec3b3b, com.example.demo.access.JwtTokenFilter@2189b376, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@26e25d3, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2558f0f9, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4f3d583e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5cc2795f, org.springframework.security.web.session.SessionManagementFilter@59bd10b0, org.springframework.security.web.access.ExceptionTranslationFilter@3fcf9f8d, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@5cd7eea]
+2019-09-30 01:43:24.087  INFO 13064 --- [restartedMain] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+2019-09-30 01:43:24.332  INFO 13064 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-09-30 01:43:24.386  INFO 13064 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2019-09-30 01:43:24.415  INFO 13064 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-09-30 01:43:24.936  INFO 13064 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2019-09-30 01:43:24.950  INFO 13064 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2019-09-30 01:43:24.976  INFO 13064 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2019-09-30 01:43:25.122  INFO 13064 --- [restartedMain] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [www.littleredhat1997.com:5672]
+2019-09-30 01:43:25.577  INFO 13064 --- [restartedMain] o.s.a.r.c.CachingConnectionFactory       : Created new connection: rabbitConnectionFactory#47d46444:0/SimpleConnection@5b783fd7 [delegate=amqp://root@106.54.84.40:5672/, localPort= 64828]
+2019-09-30 01:43:26.300  INFO 13064 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-09-30 01:43:26.303  INFO 13064 --- [restartedMain] com.example.demo.Application             : Started Application in 8.905 seconds (JVM running for 9.824)
+2019-09-30 01:43:33.714  INFO 13064 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-09-30 01:43:33.715  INFO 13064 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-09-30 01:43:33.726  INFO 13064 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 11 ms
+2019-09-30 01:43:40.581 DEBUG 13064 --- [http-nio-8080-exec-8] c.e.d.mapper.UserMapper.selectByExample  : ==>  Preparing: select id, username, password, email, icon, nickname, gender, birthday, create_time, login_time from user WHERE ( username = ? ) 
+2019-09-30 01:43:40.597 DEBUG 13064 --- [http-nio-8080-exec-8] c.e.d.mapper.UserMapper.selectByExample  : ==> Parameters: 123(String)
+2019-09-30 01:43:40.649 DEBUG 13064 --- [http-nio-8080-exec-8] c.e.d.mapper.UserMapper.selectByExample  : <==      Total: 1
+2019-09-30 01:43:40.693 DEBUG 13064 --- [http-nio-8080-exec-8] c.e.d.m.U.getPermissionList              : ==>  Preparing: select p.* from user u LEFT JOIN user_role ur on u.id = ur.user_id LEFT JOIN role r on ur.role_id = r.id LEFT JOIN role_permission rp on rp.role_id = r.id LEFT JOIN permission p on p.id = rp.permission_id where u.id=? 
+2019-09-30 01:43:40.694 DEBUG 13064 --- [http-nio-8080-exec-8] c.e.d.m.U.getPermissionList              : ==> Parameters: 1(Long)
+2019-09-30 01:43:40.734 DEBUG 13064 --- [http-nio-8080-exec-8] c.e.d.m.U.getPermissionList              : <==      Total: 4
+2019-09-30 01:43:40.772 DEBUG 13064 --- [http-nio-8080-exec-8] c.e.d.m.U.getPermissionList              : ==>  Preparing: select p.* from user u LEFT JOIN user_role ur on u.id = ur.user_id LEFT JOIN role r on ur.role_id = r.id LEFT JOIN role_permission rp on rp.role_id = r.id LEFT JOIN permission p on p.id = rp.permission_id where u.id=? 
+2019-09-30 01:43:40.773 DEBUG 13064 --- [http-nio-8080-exec-8] c.e.d.m.U.getPermissionList              : ==> Parameters: 1(Long)
+2019-09-30 01:43:40.821 DEBUG 13064 --- [http-nio-8080-exec-8] c.e.d.m.U.getPermissionList              : <==      Total: 4
+2019-09-30 01:43:40.822  INFO 13064 --- [http-nio-8080-exec-8] com.example.demo.config.SecurityConfig   : 成功[goods:read, goods:create, goods:update, goods:delete]
+2019-09-30 01:43:40.944  INFO 13064 --- [http-nio-8080-exec-8] c.e.d.a.JwtAuthenticationSuccessHandler  : 成功eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMjMiLCJleHAiOjE1NzAzODM4MjAsImlhdCI6MTU2OTc3OTAyMDkwNX0.9C27QYkMOSlRNf6qA5Veryy-f1wfHH6IVS-BzHIoehE8cw-MPCcx2KvcxJZuoy1TBFgdIe8u3FZe3nkh3yiWiw
+2019-09-30 01:43:50.847  INFO 13064 --- [http-nio-8080-exec-1] com.example.demo.access.JwtTokenFilter   : checking username:123
+2019-09-30 01:43:50.886 DEBUG 13064 --- [http-nio-8080-exec-1] c.e.d.mapper.UserMapper.selectByExample  : ==>  Preparing: select id, username, password, email, icon, nickname, gender, birthday, create_time, login_time from user WHERE ( username = ? ) 
+2019-09-30 01:43:50.886 DEBUG 13064 --- [http-nio-8080-exec-1] c.e.d.mapper.UserMapper.selectByExample  : ==> Parameters: 123(String)
+2019-09-30 01:43:50.933 DEBUG 13064 --- [http-nio-8080-exec-1] c.e.d.mapper.UserMapper.selectByExample  : <==      Total: 1
+2019-09-30 01:43:50.975 DEBUG 13064 --- [http-nio-8080-exec-1] c.e.d.m.U.getPermissionList              : ==>  Preparing: select p.* from user u LEFT JOIN user_role ur on u.id = ur.user_id LEFT JOIN role r on ur.role_id = r.id LEFT JOIN role_permission rp on rp.role_id = r.id LEFT JOIN permission p on p.id = rp.permission_id where u.id=? 
+2019-09-30 01:43:50.976 DEBUG 13064 --- [http-nio-8080-exec-1] c.e.d.m.U.getPermissionList              : ==> Parameters: 1(Long)
+2019-09-30 01:43:51.016 DEBUG 13064 --- [http-nio-8080-exec-1] c.e.d.m.U.getPermissionList              : <==      Total: 4
+2019-09-30 01:43:51.064 DEBUG 13064 --- [http-nio-8080-exec-1] c.e.d.m.U.getPermissionList              : ==>  Preparing: select p.* from user u LEFT JOIN user_role ur on u.id = ur.user_id LEFT JOIN role r on ur.role_id = r.id LEFT JOIN role_permission rp on rp.role_id = r.id LEFT JOIN permission p on p.id = rp.permission_id where u.id=? 
+2019-09-30 01:43:51.065 DEBUG 13064 --- [http-nio-8080-exec-1] c.e.d.m.U.getPermissionList              : ==> Parameters: 1(Long)
+2019-09-30 01:43:51.109 DEBUG 13064 --- [http-nio-8080-exec-1] c.e.d.m.U.getPermissionList              : <==      Total: 4
+2019-09-30 01:43:51.110  INFO 13064 --- [http-nio-8080-exec-1] com.example.demo.config.SecurityConfig   : 成功[goods:read, goods:create, goods:update, goods:delete]
+2019-09-30 01:43:51.113  INFO 13064 --- [http-nio-8080-exec-1] com.example.demo.access.JwtTokenFilter   : authenticated user:123
+2019-09-30 01:43:51.128  INFO 13064 --- [http-nio-8080-exec-1] c.e.demo.access.JwtAccessDeniedHandler   : 失败：权限不足不允许访问
+2019-09-30 01:43:57.272  INFO 13064 --- [http-nio-8080-exec-3] com.example.demo.access.JwtTokenFilter   : checking username:123
+2019-09-30 01:43:57.323 DEBUG 13064 --- [http-nio-8080-exec-3] c.e.d.mapper.UserMapper.selectByExample  : ==>  Preparing: select id, username, password, email, icon, nickname, gender, birthday, create_time, login_time from user WHERE ( username = ? ) 
+2019-09-30 01:43:57.324 DEBUG 13064 --- [http-nio-8080-exec-3] c.e.d.mapper.UserMapper.selectByExample  : ==> Parameters: 123(String)
+2019-09-30 01:43:57.366 DEBUG 13064 --- [http-nio-8080-exec-3] c.e.d.mapper.UserMapper.selectByExample  : <==      Total: 1
+2019-09-30 01:43:57.405 DEBUG 13064 --- [http-nio-8080-exec-3] c.e.d.m.U.getPermissionList              : ==>  Preparing: select p.* from user u LEFT JOIN user_role ur on u.id = ur.user_id LEFT JOIN role r on ur.role_id = r.id LEFT JOIN role_permission rp on rp.role_id = r.id LEFT JOIN permission p on p.id = rp.permission_id where u.id=? 
+2019-09-30 01:43:57.405 DEBUG 13064 --- [http-nio-8080-exec-3] c.e.d.m.U.getPermissionList              : ==> Parameters: 1(Long)
+2019-09-30 01:43:57.444 DEBUG 13064 --- [http-nio-8080-exec-3] c.e.d.m.U.getPermissionList              : <==      Total: 4
+2019-09-30 01:43:57.495 DEBUG 13064 --- [http-nio-8080-exec-3] c.e.d.m.U.getPermissionList              : ==>  Preparing: select p.* from user u LEFT JOIN user_role ur on u.id = ur.user_id LEFT JOIN role r on ur.role_id = r.id LEFT JOIN role_permission rp on rp.role_id = r.id LEFT JOIN permission p on p.id = rp.permission_id where u.id=? 
+2019-09-30 01:43:57.495 DEBUG 13064 --- [http-nio-8080-exec-3] c.e.d.m.U.getPermissionList              : ==> Parameters: 1(Long)
+2019-09-30 01:43:57.539 DEBUG 13064 --- [http-nio-8080-exec-3] c.e.d.m.U.getPermissionList              : <==      Total: 4
+2019-09-30 01:43:57.539  INFO 13064 --- [http-nio-8080-exec-3] com.example.demo.config.SecurityConfig   : 成功[goods:read, goods:create, goods:update, goods:delete]
+2019-09-30 01:43:57.541  INFO 13064 --- [http-nio-8080-exec-3] com.example.demo.access.JwtTokenFilter   : authenticated user:123
+2019-09-30 01:43:57.542  INFO 13064 --- [http-nio-8080-exec-3] c.e.demo.access.JwtAccessDeniedHandler   : 失败：权限不足不允许访问
+2019-09-30 01:45:41.516  INFO 16396 --- [restartedMain] com.example.demo.Application             : Starting Application on zzz with PID 16396 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
+2019-09-30 01:45:41.517 DEBUG 16396 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
+2019-09-30 01:45:41.518  INFO 16396 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
+2019-09-30 01:45:41.546  INFO 16396 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-09-30 01:45:41.546  INFO 16396 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-09-30 01:45:42.306  INFO 16396 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-09-30 01:45:42.308  INFO 16396 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-09-30 01:45:42.337  INFO 16396 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 20ms. Found 0 repository interfaces.
+2019-09-30 01:45:42.627  INFO 16396 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$73ff8] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:45:42.714  INFO 16396 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration$$EnhancerBySpringCGLIB$$98b50832] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:45:42.719  INFO 16396 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:45:42.722  INFO 16396 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@48bd0ead' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:45:42.723  INFO 16396 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration' of type [org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration$$EnhancerBySpringCGLIB$$bd89aae4] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:45:42.729  INFO 16396 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:45:42.737  INFO 16396 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'redisConfig' of type [com.example.demo.config.RedisConfig$$EnhancerBySpringCGLIB$$a9d62688] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:45:43.130  INFO 16396 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-09-30 01:45:43.148  INFO 16396 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-09-30 01:45:43.148  INFO 16396 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.22]
+2019-09-30 01:45:43.238  INFO 16396 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-09-30 01:45:43.238  INFO 16396 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1692 ms
+2019-09-30 01:45:43.591  INFO 16396 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-09-30 01:45:45.921  INFO 16396 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-09-30 01:45:46.179 DEBUG 16396 --- [restartedMain] com.example.demo.access.JwtTokenFilter   : Filter 'jwtTokenFilter' configured for use
+2019-09-30 01:45:47.056  INFO 16396 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4594e576, org.springframework.security.web.context.SecurityContextPersistenceFilter@f97b79b, org.springframework.security.web.header.HeaderWriterFilter@6fd13ae6, org.springframework.security.web.authentication.logout.LogoutFilter@1096bdfb, com.example.demo.access.JwtTokenFilter@72a76923, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@638c4b06, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1550d24, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4b799b60, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@f506028, org.springframework.security.web.session.SessionManagementFilter@6d0d86da, org.springframework.security.web.access.ExceptionTranslationFilter@6e081e0, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@34de77b6]
+2019-09-30 01:45:47.080  INFO 16396 --- [restartedMain] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+2019-09-30 01:45:47.319  INFO 16396 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-09-30 01:45:47.371  INFO 16396 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2019-09-30 01:45:47.400  INFO 16396 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-09-30 01:45:47.912  INFO 16396 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2019-09-30 01:45:47.925  INFO 16396 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2019-09-30 01:45:47.950  INFO 16396 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2019-09-30 01:45:48.102  INFO 16396 --- [restartedMain] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [www.littleredhat1997.com:5672]
+2019-09-30 01:45:48.544  INFO 16396 --- [restartedMain] o.s.a.r.c.CachingConnectionFactory       : Created new connection: rabbitConnectionFactory#5aeac3b9:0/SimpleConnection@72f57611 [delegate=amqp://root@106.54.84.40:5672/, localPort= 64914]
+2019-09-30 01:45:49.165  INFO 16396 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-09-30 01:45:49.168  INFO 16396 --- [restartedMain] com.example.demo.Application             : Started Application in 8.673 seconds (JVM running for 9.592)
+2019-09-30 01:46:09.873  INFO 16396 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-09-30 01:46:09.873  INFO 16396 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-09-30 01:46:09.884  INFO 16396 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 11 ms
+2019-09-30 01:46:09.956  INFO 16396 --- [http-nio-8080-exec-1] com.example.demo.access.JwtTokenFilter   : checking username:123
+2019-09-30 01:46:10.047 DEBUG 16396 --- [http-nio-8080-exec-1] c.e.d.mapper.UserMapper.selectByExample  : ==>  Preparing: select id, username, password, email, icon, nickname, gender, birthday, create_time, login_time from user WHERE ( username = ? ) 
+2019-09-30 01:46:10.069 DEBUG 16396 --- [http-nio-8080-exec-1] c.e.d.mapper.UserMapper.selectByExample  : ==> Parameters: 123(String)
+2019-09-30 01:46:10.127 DEBUG 16396 --- [http-nio-8080-exec-1] c.e.d.mapper.UserMapper.selectByExample  : <==      Total: 1
+2019-09-30 01:46:10.178 DEBUG 16396 --- [http-nio-8080-exec-1] c.e.d.m.U.getPermissionList              : ==>  Preparing: select p.* from user u LEFT JOIN user_role ur on u.id = ur.user_id LEFT JOIN role r on ur.role_id = r.id LEFT JOIN role_permission rp on rp.role_id = r.id LEFT JOIN permission p on p.id = rp.permission_id where u.id=? 
+2019-09-30 01:46:10.180 DEBUG 16396 --- [http-nio-8080-exec-1] c.e.d.m.U.getPermissionList              : ==> Parameters: 1(Long)
+2019-09-30 01:46:10.226 DEBUG 16396 --- [http-nio-8080-exec-1] c.e.d.m.U.getPermissionList              : <==      Total: 4
+2019-09-30 01:46:10.272 DEBUG 16396 --- [http-nio-8080-exec-1] c.e.d.m.U.getPermissionList              : ==>  Preparing: select p.* from user u LEFT JOIN user_role ur on u.id = ur.user_id LEFT JOIN role r on ur.role_id = r.id LEFT JOIN role_permission rp on rp.role_id = r.id LEFT JOIN permission p on p.id = rp.permission_id where u.id=? 
+2019-09-30 01:46:10.272 DEBUG 16396 --- [http-nio-8080-exec-1] c.e.d.m.U.getPermissionList              : ==> Parameters: 1(Long)
+2019-09-30 01:46:10.315 DEBUG 16396 --- [http-nio-8080-exec-1] c.e.d.m.U.getPermissionList              : <==      Total: 4
+2019-09-30 01:46:10.315  INFO 16396 --- [http-nio-8080-exec-1] com.example.demo.config.SecurityConfig   : 成功[goods:read, goods:create, goods:update, goods:delete]
+2019-09-30 01:46:10.322  INFO 16396 --- [http-nio-8080-exec-1] com.example.demo.access.JwtTokenFilter   : authenticated user:123
+2019-09-30 01:46:10.354  INFO 16396 --- [http-nio-8080-exec-1] c.e.demo.access.JwtAccessDeniedHandler   : 失败：权限不足不允许访问
+2019-09-30 01:46:13.653  INFO 16396 --- [http-nio-8080-exec-2] com.example.demo.access.JwtTokenFilter   : checking username:123
+2019-09-30 01:46:13.691 DEBUG 16396 --- [http-nio-8080-exec-2] c.e.d.mapper.UserMapper.selectByExample  : ==>  Preparing: select id, username, password, email, icon, nickname, gender, birthday, create_time, login_time from user WHERE ( username = ? ) 
+2019-09-30 01:46:13.692 DEBUG 16396 --- [http-nio-8080-exec-2] c.e.d.mapper.UserMapper.selectByExample  : ==> Parameters: 123(String)
+2019-09-30 01:46:13.740 DEBUG 16396 --- [http-nio-8080-exec-2] c.e.d.mapper.UserMapper.selectByExample  : <==      Total: 1
+2019-09-30 01:46:13.789 DEBUG 16396 --- [http-nio-8080-exec-2] c.e.d.m.U.getPermissionList              : ==>  Preparing: select p.* from user u LEFT JOIN user_role ur on u.id = ur.user_id LEFT JOIN role r on ur.role_id = r.id LEFT JOIN role_permission rp on rp.role_id = r.id LEFT JOIN permission p on p.id = rp.permission_id where u.id=? 
+2019-09-30 01:46:13.790 DEBUG 16396 --- [http-nio-8080-exec-2] c.e.d.m.U.getPermissionList              : ==> Parameters: 1(Long)
+2019-09-30 01:46:13.831 DEBUG 16396 --- [http-nio-8080-exec-2] c.e.d.m.U.getPermissionList              : <==      Total: 4
+2019-09-30 01:46:13.887 DEBUG 16396 --- [http-nio-8080-exec-2] c.e.d.m.U.getPermissionList              : ==>  Preparing: select p.* from user u LEFT JOIN user_role ur on u.id = ur.user_id LEFT JOIN role r on ur.role_id = r.id LEFT JOIN role_permission rp on rp.role_id = r.id LEFT JOIN permission p on p.id = rp.permission_id where u.id=? 
+2019-09-30 01:46:13.887 DEBUG 16396 --- [http-nio-8080-exec-2] c.e.d.m.U.getPermissionList              : ==> Parameters: 1(Long)
+2019-09-30 01:46:13.931 DEBUG 16396 --- [http-nio-8080-exec-2] c.e.d.m.U.getPermissionList              : <==      Total: 4
+2019-09-30 01:46:13.932  INFO 16396 --- [http-nio-8080-exec-2] com.example.demo.config.SecurityConfig   : 成功[goods:read, goods:create, goods:update, goods:delete]
+2019-09-30 01:46:13.934  INFO 16396 --- [http-nio-8080-exec-2] com.example.demo.access.JwtTokenFilter   : authenticated user:123
+2019-09-30 01:46:13.935  INFO 16396 --- [http-nio-8080-exec-2] c.e.demo.access.JwtAccessDeniedHandler   : 失败：权限不足不允许访问
+2019-09-30 01:46:43.180  INFO 13576 --- [restartedMain] com.example.demo.Application             : Starting Application on zzz with PID 13576 (D:\code\springboot-template\target\classes started by zhang in D:\code\springboot-template)
+2019-09-30 01:46:43.182 DEBUG 13576 --- [restartedMain] com.example.demo.Application             : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
+2019-09-30 01:46:43.182  INFO 13576 --- [restartedMain] com.example.demo.Application             : No active profile set, falling back to default profiles: default
+2019-09-30 01:46:43.209  INFO 13576 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-09-30 01:46:43.209  INFO 13576 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-09-30 01:46:43.970  INFO 13576 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-09-30 01:46:43.972  INFO 13576 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-09-30 01:46:44.000  INFO 13576 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 19ms. Found 0 repository interfaces.
+2019-09-30 01:46:44.486  INFO 13576 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$12f26a6c] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:46:44.567  INFO 13576 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration$$EnhancerBySpringCGLIB$$aba032a6] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:46:44.571  INFO 13576 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:46:44.574  INFO 13576 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@7b8d9e90' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:46:44.577  INFO 13576 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration' of type [org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration$$EnhancerBySpringCGLIB$$d074d558] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:46:44.583  INFO 13576 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:46:44.592  INFO 13576 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'redisConfig' of type [com.example.demo.config.RedisConfig$$EnhancerBySpringCGLIB$$bcc150fc] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-30 01:46:44.997  INFO 13576 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-09-30 01:46:45.016  INFO 13576 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-09-30 01:46:45.016  INFO 13576 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.22]
+2019-09-30 01:46:45.105  INFO 13576 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-09-30 01:46:45.105  INFO 13576 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1895 ms
+2019-09-30 01:46:45.462  INFO 13576 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-09-30 01:46:48.501  INFO 13576 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-09-30 01:46:48.752 DEBUG 13576 --- [restartedMain] com.example.demo.access.JwtTokenFilter   : Filter 'jwtTokenFilter' configured for use
+2019-09-30 01:46:49.612  INFO 13576 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@43fa0687, org.springframework.security.web.context.SecurityContextPersistenceFilter@2df67edf, org.springframework.security.web.header.HeaderWriterFilter@1e5e7128, org.springframework.security.web.authentication.logout.LogoutFilter@662d4d0f, com.example.demo.access.JwtTokenFilter@14d1e175, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@509e6324, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@34582d41, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@16ff16bd, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@451b5984, org.springframework.security.web.session.SessionManagementFilter@6bb8fab7, org.springframework.security.web.access.ExceptionTranslationFilter@6b950ab7, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@6131c3f6]
+2019-09-30 01:46:49.638  INFO 13576 --- [restartedMain] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+2019-09-30 01:46:49.881  INFO 13576 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-09-30 01:46:49.931  INFO 13576 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2019-09-30 01:46:49.963  INFO 13576 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-09-30 01:46:50.480  INFO 13576 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2019-09-30 01:46:50.492  INFO 13576 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2019-09-30 01:46:50.517  INFO 13576 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2019-09-30 01:46:50.666  INFO 13576 --- [restartedMain] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [www.littleredhat1997.com:5672]
+2019-09-30 01:46:51.132  INFO 13576 --- [restartedMain] o.s.a.r.c.CachingConnectionFactory       : Created new connection: rabbitConnectionFactory#23078d3e:0/SimpleConnection@2baad8a9 [delegate=amqp://root@106.54.84.40:5672/, localPort= 64957]
+2019-09-30 01:46:51.760  INFO 13576 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-09-30 01:46:51.763  INFO 13576 --- [restartedMain] com.example.demo.Application             : Started Application in 9.6 seconds (JVM running for 10.453)
+2019-09-30 01:46:53.602  INFO 13576 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-09-30 01:46:53.602  INFO 13576 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-09-30 01:46:53.610  INFO 13576 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 8 ms
+2019-09-30 01:46:53.681  INFO 13576 --- [http-nio-8080-exec-1] com.example.demo.access.JwtTokenFilter   : checking username:123
+2019-09-30 01:46:53.793 DEBUG 13576 --- [http-nio-8080-exec-1] c.e.d.mapper.UserMapper.selectByExample  : ==>  Preparing: select id, username, password, email, icon, nickname, gender, birthday, create_time, login_time from user WHERE ( username = ? ) 
+2019-09-30 01:46:53.817 DEBUG 13576 --- [http-nio-8080-exec-1] c.e.d.mapper.UserMapper.selectByExample  : ==> Parameters: 123(String)
+2019-09-30 01:46:53.876 DEBUG 13576 --- [http-nio-8080-exec-1] c.e.d.mapper.UserMapper.selectByExample  : <==      Total: 1
+2019-09-30 01:46:53.950 DEBUG 13576 --- [http-nio-8080-exec-1] c.e.d.m.U.getPermissionList              : ==>  Preparing: select p.* from user u LEFT JOIN user_role ur on u.id = ur.user_id LEFT JOIN role r on ur.role_id = r.id LEFT JOIN role_permission rp on rp.role_id = r.id LEFT JOIN permission p on p.id = rp.permission_id where u.id=? 
+2019-09-30 01:46:53.950 DEBUG 13576 --- [http-nio-8080-exec-1] c.e.d.m.U.getPermissionList              : ==> Parameters: 1(Long)
+2019-09-30 01:46:54.004 DEBUG 13576 --- [http-nio-8080-exec-1] c.e.d.m.U.getPermissionList              : <==      Total: 4
+2019-09-30 01:46:54.058 DEBUG 13576 --- [http-nio-8080-exec-1] c.e.d.m.U.getRoleList                    : ==>  Preparing: select r.* from user u LEFT JOIN user_role ur on u.id = ur.user_id LEFT JOIN role r on ur.role_id = r.id where u.id=? 
+2019-09-30 01:46:54.058 DEBUG 13576 --- [http-nio-8080-exec-1] c.e.d.m.U.getRoleList                    : ==> Parameters: 1(Long)
+2019-09-30 01:46:54.113 DEBUG 13576 --- [http-nio-8080-exec-1] c.e.d.m.U.getRoleList                    : <==      Total: 1
+2019-09-30 01:46:54.113  INFO 13576 --- [http-nio-8080-exec-1] com.example.demo.config.SecurityConfig   : 成功[ROLE_ADMIN]
+2019-09-30 01:46:54.117  INFO 13576 --- [http-nio-8080-exec-1] com.example.demo.access.JwtTokenFilter   : authenticated user:123
+2019-09-30 01:46:54.142  INFO 13576 --- [http-nio-8080-exec-1] c.e.demo.access.JwtAccessDeniedHandler   : 失败：权限不足不允许访问
+2019-09-30 01:46:56.697  INFO 13576 --- [http-nio-8080-exec-2] com.example.demo.access.JwtTokenFilter   : checking username:123
+2019-09-30 01:46:56.740 DEBUG 13576 --- [http-nio-8080-exec-2] c.e.d.mapper.UserMapper.selectByExample  : ==>  Preparing: select id, username, password, email, icon, nickname, gender, birthday, create_time, login_time from user WHERE ( username = ? ) 
+2019-09-30 01:46:56.741 DEBUG 13576 --- [http-nio-8080-exec-2] c.e.d.mapper.UserMapper.selectByExample  : ==> Parameters: 123(String)
+2019-09-30 01:46:56.786 DEBUG 13576 --- [http-nio-8080-exec-2] c.e.d.mapper.UserMapper.selectByExample  : <==      Total: 1
+2019-09-30 01:46:56.831 DEBUG 13576 --- [http-nio-8080-exec-2] c.e.d.m.U.getPermissionList              : ==>  Preparing: select p.* from user u LEFT JOIN user_role ur on u.id = ur.user_id LEFT JOIN role r on ur.role_id = r.id LEFT JOIN role_permission rp on rp.role_id = r.id LEFT JOIN permission p on p.id = rp.permission_id where u.id=? 
+2019-09-30 01:46:56.832 DEBUG 13576 --- [http-nio-8080-exec-2] c.e.d.m.U.getPermissionList              : ==> Parameters: 1(Long)
+2019-09-30 01:46:56.880 DEBUG 13576 --- [http-nio-8080-exec-2] c.e.d.m.U.getPermissionList              : <==      Total: 4
+2019-09-30 01:46:56.932 DEBUG 13576 --- [http-nio-8080-exec-2] c.e.d.m.U.getRoleList                    : ==>  Preparing: select r.* from user u LEFT JOIN user_role ur on u.id = ur.user_id LEFT JOIN role r on ur.role_id = r.id where u.id=? 
+2019-09-30 01:46:56.933 DEBUG 13576 --- [http-nio-8080-exec-2] c.e.d.m.U.getRoleList                    : ==> Parameters: 1(Long)
+2019-09-30 01:46:56.977 DEBUG 13576 --- [http-nio-8080-exec-2] c.e.d.m.U.getRoleList                    : <==      Total: 1
+2019-09-30 01:46:56.977  INFO 13576 --- [http-nio-8080-exec-2] com.example.demo.config.SecurityConfig   : 成功[ROLE_ADMIN]
+2019-09-30 01:46:56.980  INFO 13576 --- [http-nio-8080-exec-2] com.example.demo.access.JwtTokenFilter   : authenticated user:123
+2019-09-30 01:46:56.992  INFO 13576 --- [http-nio-8080-exec-2] com.example.demo.base.AopLog             : ***************************************************
+2019-09-30 01:46:56.993  INFO 13576 --- [http-nio-8080-exec-2] com.example.demo.base.AopLog             : 请求开始, URI: /goods/admin-role, method: GET, params: {}
+2019-09-30 01:46:56.995  INFO 13576 --- [http-nio-8080-exec-2] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 "have a admin role"
+2019-09-30 01:47:05.662 DEBUG 13576 --- [http-nio-8080-exec-3] c.e.d.mapper.UserMapper.selectByExample  : ==>  Preparing: select id, username, password, email, icon, nickname, gender, birthday, create_time, login_time from user WHERE ( username = ? ) 
+2019-09-30 01:47:05.662 DEBUG 13576 --- [http-nio-8080-exec-3] c.e.d.mapper.UserMapper.selectByExample  : ==> Parameters: 666(String)
+2019-09-30 01:47:05.710 DEBUG 13576 --- [http-nio-8080-exec-3] c.e.d.mapper.UserMapper.selectByExample  : <==      Total: 1
+2019-09-30 01:47:05.758 DEBUG 13576 --- [http-nio-8080-exec-3] c.e.d.m.U.getPermissionList              : ==>  Preparing: select p.* from user u LEFT JOIN user_role ur on u.id = ur.user_id LEFT JOIN role r on ur.role_id = r.id LEFT JOIN role_permission rp on rp.role_id = r.id LEFT JOIN permission p on p.id = rp.permission_id where u.id=? 
+2019-09-30 01:47:05.758 DEBUG 13576 --- [http-nio-8080-exec-3] c.e.d.m.U.getPermissionList              : ==> Parameters: 2(Long)
+2019-09-30 01:47:05.797 DEBUG 13576 --- [http-nio-8080-exec-3] c.e.d.m.U.getPermissionList              : <==      Total: 1
+2019-09-30 01:47:05.854 DEBUG 13576 --- [http-nio-8080-exec-3] c.e.d.m.U.getRoleList                    : ==>  Preparing: select r.* from user u LEFT JOIN user_role ur on u.id = ur.user_id LEFT JOIN role r on ur.role_id = r.id where u.id=? 
+2019-09-30 01:47:05.855 DEBUG 13576 --- [http-nio-8080-exec-3] c.e.d.m.U.getRoleList                    : ==> Parameters: 2(Long)
+2019-09-30 01:47:05.899 DEBUG 13576 --- [http-nio-8080-exec-3] c.e.d.m.U.getRoleList                    : <==      Total: 1
+2019-09-30 01:47:05.899  INFO 13576 --- [http-nio-8080-exec-3] com.example.demo.config.SecurityConfig   : 成功[ROLE_USER]
+2019-09-30 01:47:05.997  INFO 13576 --- [http-nio-8080-exec-3] c.e.d.a.JwtAuthenticationSuccessHandler  : 成功eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2NjYiLCJleHAiOjE1NzAzODQwMjUsImlhdCI6MTU2OTc3OTIyNTk4MH0.uAzOmRejWZ_O-SBVqJ08zpoqQS9E9QF9hBJLONkDXs4HljJbfHWGyDKt0hatTq9GfaRc4Ae987xjX9LFeklgqg
+2019-09-30 01:47:15.192  INFO 13576 --- [http-nio-8080-exec-4] com.example.demo.access.JwtTokenFilter   : checking username:666
+2019-09-30 01:47:15.256 DEBUG 13576 --- [http-nio-8080-exec-4] c.e.d.mapper.UserMapper.selectByExample  : ==>  Preparing: select id, username, password, email, icon, nickname, gender, birthday, create_time, login_time from user WHERE ( username = ? ) 
+2019-09-30 01:47:15.256 DEBUG 13576 --- [http-nio-8080-exec-4] c.e.d.mapper.UserMapper.selectByExample  : ==> Parameters: 666(String)
+2019-09-30 01:47:15.301 DEBUG 13576 --- [http-nio-8080-exec-4] c.e.d.mapper.UserMapper.selectByExample  : <==      Total: 1
+2019-09-30 01:47:15.342 DEBUG 13576 --- [http-nio-8080-exec-4] c.e.d.m.U.getPermissionList              : ==>  Preparing: select p.* from user u LEFT JOIN user_role ur on u.id = ur.user_id LEFT JOIN role r on ur.role_id = r.id LEFT JOIN role_permission rp on rp.role_id = r.id LEFT JOIN permission p on p.id = rp.permission_id where u.id=? 
+2019-09-30 01:47:15.342 DEBUG 13576 --- [http-nio-8080-exec-4] c.e.d.m.U.getPermissionList              : ==> Parameters: 2(Long)
+2019-09-30 01:47:15.391 DEBUG 13576 --- [http-nio-8080-exec-4] c.e.d.m.U.getPermissionList              : <==      Total: 1
+2019-09-30 01:47:15.434 DEBUG 13576 --- [http-nio-8080-exec-4] c.e.d.m.U.getRoleList                    : ==>  Preparing: select r.* from user u LEFT JOIN user_role ur on u.id = ur.user_id LEFT JOIN role r on ur.role_id = r.id where u.id=? 
+2019-09-30 01:47:15.434 DEBUG 13576 --- [http-nio-8080-exec-4] c.e.d.m.U.getRoleList                    : ==> Parameters: 2(Long)
+2019-09-30 01:47:15.480 DEBUG 13576 --- [http-nio-8080-exec-4] c.e.d.m.U.getRoleList                    : <==      Total: 1
+2019-09-30 01:47:15.480  INFO 13576 --- [http-nio-8080-exec-4] com.example.demo.config.SecurityConfig   : 成功[ROLE_USER]
+2019-09-30 01:47:15.483  INFO 13576 --- [http-nio-8080-exec-4] com.example.demo.access.JwtTokenFilter   : authenticated user:666
+2019-09-30 01:47:15.484  INFO 13576 --- [http-nio-8080-exec-4] c.e.demo.access.JwtAccessDeniedHandler   : 失败：权限不足不允许访问
+2019-09-30 01:47:17.510  INFO 13576 --- [http-nio-8080-exec-5] com.example.demo.access.JwtTokenFilter   : checking username:666
+2019-09-30 01:47:17.556 DEBUG 13576 --- [http-nio-8080-exec-5] c.e.d.mapper.UserMapper.selectByExample  : ==>  Preparing: select id, username, password, email, icon, nickname, gender, birthday, create_time, login_time from user WHERE ( username = ? ) 
+2019-09-30 01:47:17.556 DEBUG 13576 --- [http-nio-8080-exec-5] c.e.d.mapper.UserMapper.selectByExample  : ==> Parameters: 666(String)
+2019-09-30 01:47:17.609 DEBUG 13576 --- [http-nio-8080-exec-5] c.e.d.mapper.UserMapper.selectByExample  : <==      Total: 1
+2019-09-30 01:47:17.653 DEBUG 13576 --- [http-nio-8080-exec-5] c.e.d.m.U.getPermissionList              : ==>  Preparing: select p.* from user u LEFT JOIN user_role ur on u.id = ur.user_id LEFT JOIN role r on ur.role_id = r.id LEFT JOIN role_permission rp on rp.role_id = r.id LEFT JOIN permission p on p.id = rp.permission_id where u.id=? 
+2019-09-30 01:47:17.653 DEBUG 13576 --- [http-nio-8080-exec-5] c.e.d.m.U.getPermissionList              : ==> Parameters: 2(Long)
+2019-09-30 01:47:17.702 DEBUG 13576 --- [http-nio-8080-exec-5] c.e.d.m.U.getPermissionList              : <==      Total: 1
+2019-09-30 01:47:17.751 DEBUG 13576 --- [http-nio-8080-exec-5] c.e.d.m.U.getRoleList                    : ==>  Preparing: select r.* from user u LEFT JOIN user_role ur on u.id = ur.user_id LEFT JOIN role r on ur.role_id = r.id where u.id=? 
+2019-09-30 01:47:17.751 DEBUG 13576 --- [http-nio-8080-exec-5] c.e.d.m.U.getRoleList                    : ==> Parameters: 2(Long)
+2019-09-30 01:47:17.797 DEBUG 13576 --- [http-nio-8080-exec-5] c.e.d.m.U.getRoleList                    : <==      Total: 1
+2019-09-30 01:47:17.798  INFO 13576 --- [http-nio-8080-exec-5] com.example.demo.config.SecurityConfig   : 成功[ROLE_USER]
+2019-09-30 01:47:17.800  INFO 13576 --- [http-nio-8080-exec-5] com.example.demo.access.JwtTokenFilter   : authenticated user:666
+2019-09-30 01:47:17.802  INFO 13576 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : ***************************************************
+2019-09-30 01:47:17.803  INFO 13576 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : 请求开始, URI: /goods/user-role, method: GET, params: {}
+2019-09-30 01:47:17.803  INFO 13576 --- [http-nio-8080-exec-5] com.example.demo.base.AopLog             : 请求结束，controller的返回值是 "have a user role"
