@@ -2,6 +2,7 @@ package com.example.demo.access;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,27 +24,29 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 
     @Autowired
     private UserDetailsService userDetailsService;
+
     @Autowired
     private JwtTokenService jwtTokenService;
+
+    @Value("${jwt.tokenHeader}")
+    private String tokenHeader;
+
+    @Value("${jwt.tokenHead}")
+    private String tokenHead;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain chain) throws ServletException, IOException {
-        String token = request.getHeader(jwtTokenService.getTokenHeader());
-//        if (!StringUtils.isEmpty(token) && token.startsWith(tokenService.getTokenHead())) {
-//            String authToken = token.substring(tokenService.getTokenHead().length());// The part after "Bearer "
-//            String username = tokenService.getUserNameFromToken(authToken);
-        if (!StringUtils.isEmpty(token)) {
-            String username = jwtTokenService.getUserNameFromToken(token);
+        String authHeader = request.getHeader(this.tokenHeader);
+        if (!StringUtils.isEmpty(authHeader) && authHeader.startsWith(this.tokenHead)) {
+            String authToken = authHeader.replace(tokenHead, ""); // 删除"Bearer "
+            String username = jwtTokenService.getUsernameFromToken(authToken);
             log.info("checking username:{}", username);
-            // 还没认证
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
-//                if (tokenService.validateToken(authToken, userDetails)) {
-                if (jwtTokenService.validateToken(token, userDetails)) {
-                    UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-                            userDetails, null, userDetails.getAuthorities());
+                if (jwtTokenService.validateToken(authToken, userDetails)) {
+                    UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                     authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     log.info("authenticated user:{}", username);
                     SecurityContextHolder.getContext().setAuthentication(authentication);

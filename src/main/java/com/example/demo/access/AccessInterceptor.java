@@ -1,6 +1,5 @@
 package com.example.demo.access;
 
-import com.alibaba.fastjson.JSON;
 import com.example.demo.base.Result;
 import com.example.demo.base.Status;
 import com.example.demo.component.RedisService;
@@ -13,8 +12,10 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.OutputStream;
 
+/**
+ * API访问限制
+ */
 @Service
 public class AccessInterceptor extends HandlerInterceptorAdapter {
 
@@ -23,28 +24,23 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        // API访问限制
         if (handler instanceof HandlerMethod) {
             HandlerMethod hm = (HandlerMethod) handler;
             AccessLimit accessLimit = hm.getMethodAnnotation(AccessLimit.class);
             if (accessLimit == null) {
                 return true;
             }
-
             int seconds = accessLimit.seconds();
             int maxCount = accessLimit.maxCount();
-
-            if (seconds != 0 && maxCount != 0) {
-                String key = Constants.ACCESS_KEY + request.getRequestURL();
-                Integer count = (Integer) redisService.get(key);
-                if (count == null) {
-                    redisService.set(key, Integer.valueOf(1), seconds);
-                } else if (count < maxCount) {
-                    redisService.increment(key, 1);
-                } else {
-                    RenderUtils.render(response, Result.failed(Status.ACCESS_LIMIT));
-                    return false;
-                }
+            String key = Constants.ACCESS_KEY + request.getRequestURL();
+            Integer count = (Integer) redisService.get(key);
+            if (count == null) {
+                redisService.set(key, Integer.valueOf(1), seconds);
+            } else if (count < maxCount) {
+                redisService.increment(key, 1);
+            } else {
+                RenderUtils.render(response, Result.failure(Status.ACCESS_LIMIT));
+                return false;
             }
         }
         return true;

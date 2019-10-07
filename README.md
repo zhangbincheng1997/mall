@@ -1,37 +1,44 @@
+# 一个简单的SpringBoot模板
+
+## 后端技术
+| 技术 | 说明 |
+| ---- | ---- |
+| Spring Boot | MVC框架 |
+| Spring Security | 认证和授权框架 |
+| JWT | JWT单点登录 |
+| MyBatis | 数据库框架  |
+| MyBatis Generator | MyBatis代码插件 |
+| MyBatis PageHelper | MyBatis分页插件 |
+| Druid | 数据库连接池 |
+| Redis | 缓存数据库 |
+| RabbitMQ | 消息队列 |
+| QiNiu | 对象存储 |
+| Swagger | 文档接口 |
+| LogStash | 日志收集 |
+| Lombok | 简化对象封装工具（需要安装IDEA插件） |
+
+MyBatis Generator:
+数据库建表 -> Run Generator.java
+
+Druid:
+http://localhost:8080/druid/index.html
+
+Swagger:
+http://localhost:8080/swagger-ui.html
+
 ## MySQL
 1. 设置MySQL服务允许外网访问
 ```
 $ vim /etc/my.cnf
 
 [mysqld]
-port        = 3306
+port = 3306
 bind-address = 0.0.0.0
-```
 
-2. 设置MySQL用户允许外网访问
-```
 $ mysql -u root -p
 
 mysql> GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '123456'; 
 mysql> FLUSH PRIVILEGES;
-```
-
-3. Navicat Premium 12 破解
-参考 https://www.52pojie.cn/thread-952490-1-1.html
-
-Druid
-http://localhost:8080/druid/index.html
-
-MyBatis Generator
-先数据库建好表，然后Run Generator.java
-
-## Tomcat
-1. 安装
-```
-$ wget http://us.mirrors.quenda.co/apache/tomcat/tomcat-9/v9.0.24/bin/apache-tomcat-9.0.24.tar.gz
-$ tar -zxvf apache-tomcat-9.0.24.tar.gz
-$ mv apache-tomcat-9.0.24.tar.gz tomcat
-$ mv tomcat /usr/local
 ```
 
 ## Redis
@@ -83,28 +90,33 @@ Admin ----> Add a user ----> Username , Password and Tags(Admin)
 Admin ----> All users ----> Set permission
 ```
 
+## Tomcat
+1. 安装
+```
+$ wget http://us.mirrors.quenda.co/apache/tomcat/tomcat-9/v9.0.24/bin/apache-tomcat-9.0.24.tar.gz
+$ tar -zxvf apache-tomcat-9.0.24.tar.gz
+$ mv apache-tomcat-9.0.24.tar.gz tomcat
+$ mv tomcat /usr/local
+```
+
+2.启动/关闭
+```
+$ ./usr/local/tomcat/bin/start.sh
+$ ./usr/local/tomcat/bin/stop.sh
+```
+
 ## 端口开放
-1. 修改
 ```
+# 修改端口
 $ vim /etc/sysconfig/iptables
-```
-
-2. 重启
-```
+# 重启端口
 $ service iptables restart
-```
-
-3. 查看端口
-```
+# 查看端口
 $ iptables -L -n
 ```
 
-
-## 其他
-1. lombook 插件
-
-IDEA 多个主函数忽略报错运行
-Build, not error check
-
-对应Date类型，前端和数据库不一致：
-@JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
+## 参考链接
+>* Spring Boot博客：https://github.com/ityouknow/spring-boot-examples
+>* Spring Boot项目：https://github.com/macrozheng/mall
+>* Xshell 6 免费：https://www.netsarang.com/zh/free-for-home-school
+>* Navicat Premium 12 破解：https://www.52pojie.cn/thread-952490-1-1.html

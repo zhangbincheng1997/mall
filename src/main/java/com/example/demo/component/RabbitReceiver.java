@@ -24,13 +24,13 @@ public class RabbitReceiver {
     @Autowired
     private RedisService redisService;
 
-    @Value("${mail.fromMail.addr}")
+    @Value("${mail.from.addr}")
     private String from;
 
     @RabbitHandler
     @RabbitListener(queues = Constants.TEST_TOPIC)
     public void testProcess(String message) {
-        log.info("Rabbit Receiver [TEST] : " + message);
+        log.info(message);
     }
 
     @RabbitHandler

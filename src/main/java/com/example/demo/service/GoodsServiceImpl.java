@@ -21,11 +21,9 @@ public class GoodsServiceImpl implements GoodsService {
     private GoodsMapper goodsMapper;
 
     @Override
-//    @Cacheable(value = "goods", key = "#id") // EnableCaching
-    @Cacheable(value = "goods")
+    @Cacheable(value = "goods") // EnableCaching
     public Goods get(Long id) {
-        Goods goods = goodsMapper.selectByPrimaryKey(id);
-        return goods;
+        return goodsMapper.selectByPrimaryKey(id);
     }
 
     @Override

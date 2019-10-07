@@ -52,15 +52,15 @@ public class Result {
         return new Result(Status.SUCCESS.getCode(), Status.SUCCESS.getMessage(), data);
     }
 
-    public static Result failed() {
-        return new Result(Status.FAILED.getCode(), Status.FAILED.getMessage(), null);
+    public static Result failure() {
+        return new Result(Status.FAILURE.getCode(), Status.FAILURE.getMessage(), null);
     }
 
-    public static Result failed(int code, String message) {
+    public static Result failure(int code, String message) {
         return new Result(code, message, null);
     }
 
-    public static Result failed(Status status) {
+    public static Result failure(Status status) {
         return new Result(status.getCode(), status.getMessage(), null);
     }
 }

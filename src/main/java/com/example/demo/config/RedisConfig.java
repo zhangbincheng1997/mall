@@ -18,7 +18,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 import java.time.Duration;
 
 @Configuration
-@EnableCaching // 开启注解驱动的缓存管理功能
+@EnableCaching // 开启注解缓存功能
 public class RedisConfig extends CachingConfigurerSupport {
 
     @Bean
@@ -39,7 +39,7 @@ public class RedisConfig extends CachingConfigurerSupport {
 
     @Bean
     public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory) {
-        // entryTtl 过期时间默认策略，未配置的 cache 会使用这个
+        // entryTtl 过期时间
         // serializeKeysWith key序列化为String
         // serializeValuesWith value序列化为Json
         RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig()
@@ -52,7 +52,9 @@ public class RedisConfig extends CachingConfigurerSupport {
                 .cacheDefaults(redisCacheConfiguration).build();
     }
 
-    // 注解缓存key生成，使用默认即可
+    /**
+     * 生成注解缓存key，使用默认即可
+     */
 //    @Bean
 //    public KeyGenerator keyGenerator() {
 //        return new KeyGenerator() {

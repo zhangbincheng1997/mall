@@ -36,7 +36,8 @@ public class GoodsController {
     @ResponseBody
     @PreAuthorize("hasAuthority('goods:read')")
     public Result count() {
-        return Result.success(goodsService.count());
+        long count = goodsService.count();
+        return Result.success(count);
     }
 
     @ApiOperation(value = "获取商品列表")
@@ -59,7 +60,7 @@ public class GoodsController {
         if (count == 1) {
             return Result.success();
         } else {
-            return Result.failed();
+            return Result.failure();
         }
     }
 
@@ -73,7 +74,7 @@ public class GoodsController {
         if (count == 1) {
             return Result.success();
         } else {
-            return Result.failed();
+            return Result.failure();
         }
     }
 
@@ -86,23 +87,7 @@ public class GoodsController {
         if (count == 1) {
             return Result.success();
         } else {
-            return Result.failed();
+            return Result.failure();
         }
-    }
-
-    // 以下是角色测试
-
-    @GetMapping("/admin-role")
-    @ResponseBody
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public String readAdmin() {
-        return "have a admin role";
-    }
-
-    @GetMapping("/user-role")
-    @ResponseBody
-    @PreAuthorize("hasRole('ROLE_USER')")
-    public String readUser() {
-        return "have a user role";
     }
 }

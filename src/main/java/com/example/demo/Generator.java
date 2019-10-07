@@ -9,19 +9,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 生成MBG
+ * MyBatis Generator
  */
 public class Generator {
 
     public static void main(String[] args) throws Exception {
         List<String> warnings = new ArrayList<String>();
         boolean overwrite = true;
-        ConfigurationParser cp = new ConfigurationParser(warnings);
-        Configuration config = cp.parseConfiguration(
-                Generator.class.getResourceAsStream("/generatorConfig.xml"));
-        DefaultShellCallback callback = new DefaultShellCallback(overwrite);
-        MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
+        String name = "/generatorConfig.xml";
+        ConfigurationParser configurationParser = new ConfigurationParser(warnings);
+        Configuration configuration = configurationParser.parseConfiguration(
+                Generator.class.getResourceAsStream(name));
+        DefaultShellCallback shellCallback = new DefaultShellCallback(overwrite);
+        MyBatisGenerator myBatisGenerator = new MyBatisGenerator(configuration, shellCallback, warnings);
         myBatisGenerator.generate(null);
     }
-
 }

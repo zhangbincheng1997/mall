@@ -3,7 +3,6 @@ package com.example.demo.access;
 import com.example.demo.base.Result;
 import com.example.demo.base.Status;
 import com.example.demo.utils.RenderUtils;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;
@@ -14,14 +13,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * 实现接口AccessDeniedHandler，权限不足信息返回给前端。
+ * AccessDeniedHandler 权限不足
  */
-@Slf4j
 @Component
 public class JwtAccessDeniedHandler implements AccessDeniedHandler {
     @Override
-    public void handle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AccessDeniedException e) throws IOException, ServletException {
-        log.info("失败：权限不足"+e.getMessage());
-        RenderUtils.render(httpServletResponse, Result.failed(Status.PERMISSION_DENIED));
+    public void handle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
+                       AccessDeniedException e) throws IOException, ServletException {
+        RenderUtils.render(httpServletResponse, Result.failure(Status.ACCESS_DENIED));
     }
 }

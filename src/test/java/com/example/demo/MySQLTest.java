@@ -10,6 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Date;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class MySQLTest {
@@ -25,11 +27,9 @@ public class MySQLTest {
         User user = new User();
         user.setUsername("username");
         user.setPassword(passwordEncoder.encode("password"));
-
-        System.out.println(user);
+        user.setEmail("xxx@xxx.com");
+        user.setCreateTime(new Date());
         userMapper.insert(user);
-        System.out.println(user);
-
         Assert.assertEquals("username", userMapper.selectByPrimaryKey(user.getId()).getUsername());
     }
 }

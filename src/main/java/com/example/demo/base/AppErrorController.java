@@ -34,7 +34,7 @@ public class AppErrorController implements ErrorController {
     }
 
     /**
-     * Web页面错误处理
+     * HTML页面的错误处理
      */
     @RequestMapping(value = ERROR_PATH, produces = "text/html")
     public String errorPageHandler(HttpServletRequest request, HttpServletResponse response) {
@@ -45,19 +45,21 @@ public class AppErrorController implements ErrorController {
                 return "error/404";
             case 500:
                 return "error/500";
+            default:
+                return "/";
         }
-        return "/";
     }
 
     /**
-     * 除Web页面外的错误处理
+     * 非HTML页面的错误处理
      */
     @RequestMapping(value = ERROR_PATH)
     @ResponseBody
     public Result errorApiHandler(HttpServletRequest request, HttpServletResponse response) {
         int status = response.getStatus();
+        log.error("错误请求 : " + status);
         WebRequest webRequest = new ServletWebRequest(request);
         Map<String, Object> attr = this.errorAttributes.getErrorAttributes(webRequest, false);
-        return Result.failed(status, String.valueOf(attr.getOrDefault("message", "error")));
+        return Result.failure(status, String.valueOf(attr.getOrDefault("message", "error")));
     }
 }

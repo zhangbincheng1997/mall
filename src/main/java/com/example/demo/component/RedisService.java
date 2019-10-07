@@ -36,17 +36,6 @@ public class RedisService {
     }
 
     /**
-     * 设置超时时间
-     *
-     * @param key
-     * @param expire
-     * @return
-     */
-    public boolean expire(String key, long expire) {
-        return redisTemplate.expire(key, expire, TimeUnit.SECONDS);
-    }
-
-    /**
      * 获取
      *
      * @param key
@@ -63,16 +52,6 @@ public class RedisService {
      */
     public void delete(String key) {
         redisTemplate.delete(key);
-    }
-
-    /**
-     * 是否存在
-     *
-     * @param key
-     * @return
-     */
-    public boolean hasKey(String key) {
-        return redisTemplate.hasKey(key);
     }
 
     /**

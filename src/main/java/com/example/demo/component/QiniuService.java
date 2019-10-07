@@ -34,38 +34,40 @@ public class QiniuService implements InitializingBean {
     @Autowired
     private BucketManager bucketManager;
 
-    private StringMap putPolicy;
+    private long expireSeconds;
 
-    private long expireSeconds ;
+    private StringMap putPolicy;
 
     @Override
     public void afterPropertiesSet() throws Exception {
+        this.expireSeconds = 3600;
         this.putPolicy = new StringMap();
         putPolicy.put("returnBody", "{\"key\":\"$(key)\",\"hash\":\"$(etag)\",\"bucket\":\"$(bucket)\",\"fsize\":\"$(fsize)\",\"width\":\"$(imageInfo.width)\", \"height\":\"$(imageInfo.height)\"}");
-        this.expireSeconds = 3600;
     }
 
     // 获取上传凭证
-    private String getUploadToken(String keyName) {// expires policy
-        return auth.uploadToken(bucketName, keyName,  expireSeconds, putPolicy);
+    private String getUploadToken(String keyName) {
+        return auth.uploadToken(bucketName, keyName, expireSeconds, putPolicy);
     }
 
     /**
-     * 上传二进制 普通上传
+     * 上传文件 普通上传
      *
-     * @param data
+     * @param file
      * @return
+     * @throws QiniuException
      */
-    public String upload(byte[] data) throws QiniuException {
-        return upload(data, null);
+    public String upload(byte[] file) throws QiniuException {
+        return upload(file, null);
     }
 
     /**
-     * 上传二进制 覆盖上传
+     * 上传文件 覆盖上传
      *
      * @param file
      * @param fileKey
      * @return
+     * @throws QiniuException
      */
     public String upload(byte[] file, String fileKey) throws QiniuException {
         Response response = uploadManager.put(file, fileKey, getUploadToken(fileKey));
@@ -87,7 +89,7 @@ public class QiniuService implements InitializingBean {
      * @return
      * @throws QiniuException
      */
-    public Response  delete(String fileKey) throws QiniuException {
+    public Response delete(String fileKey) throws QiniuException {
         Response response = bucketManager.delete(bucketName, fileKey);
         // 重传机制 默认3次
         int retry = 0;

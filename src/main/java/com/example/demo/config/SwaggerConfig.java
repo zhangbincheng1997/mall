@@ -26,8 +26,8 @@ public class SwaggerConfig {
                 .apis(RequestHandlerSelectors.basePackage("com.example.demo.controller"))
                 .paths(PathSelectors.any())
                 .build()
-                 .securitySchemes(securitySchemes())
-                 .securityContexts(securityContexts())
+                .securitySchemes(securitySchemes())
+                .securityContexts(securityContexts())
                 ;
     }
 
@@ -51,12 +51,11 @@ public class SwaggerConfig {
     // 设置需要登录认证的路径
     private List<SecurityContext> securityContexts() {
         List<SecurityContext> result = new ArrayList<>();
-        result.add(getContextByPath("/user/.*"));
-        result.add(getContextByPath("/goods/.*"));
+        result.add(getContextByPath("/.*"));
         return result;
     }
 
-    private SecurityContext getContextByPath(String pathRegex){
+    private SecurityContext getContextByPath(String pathRegex) {
         return SecurityContext.builder()
                 .securityReferences(defaultAuth())
                 .forPaths(PathSelectors.regex(pathRegex))
