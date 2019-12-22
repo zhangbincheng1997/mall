@@ -15,23 +15,26 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @ControllerAdvice
 public class AppExceptionHandler {
 
-//    @ExceptionHandler(value = Exception.class)
-//    @ResponseBody
-//    public Result exceptionHandler(HttpServletRequest request, HttpServletResponse response, Exception e) {
-//        log.error(e.getMessage());
-//        e.printStackTrace();
-//        if (e instanceof BindException) {
-//            BindException ex = (BindException) e;
-//            List<ObjectError> errorList = ex.getAllErrors();
-//            ObjectError error = errorList.get(0);
-//            String msg = error.getDefaultMessage();
-//            return Result.failure(Status.BIND_EXCEPTION.getCode(), msg);
-//        } else {
-//            return Result.failure(Status.INTERNAL_SERVER_ERROR.getCode(), e.getMessage());
-//        }
-//    }
+    @ExceptionHandler(value = Exception.class)
+    @ResponseBody
+    public Result exceptionHandler(HttpServletRequest request, HttpServletResponse response, Exception e) {
+        log.error(e.getMessage());
+        e.printStackTrace();
+		if(e instanceof GlobalException) {
+			GlobalException ex = (GlobalException) e;
+			return Result.failure(ex.getStatus());
+		} else if (e instanceof BindException) {
+            BindException ex = (BindException) e;
+            List<ObjectError> errorList = ex.getAllErrors();
+            ObjectError error = errorList.get(0);
+            String msg = error.getDefaultMessage();
+            return Result.failure(Status.BIND_EXCEPTION.getCode(), msg);
+        } else {
+            return Result.failure(Status.INTERNAL_SERVER_ERROR);
+        }
+    }
 
-    @ExceptionHandler(value = BindException.class)
+    /*@ExceptionHandler(value = BindException.class)
     @ResponseBody
     public Result bindExceptionHandler(HttpServletRequest request, HttpServletResponse response, Exception e) {
         log.error(e.getMessage());
@@ -41,6 +44,6 @@ public class AppExceptionHandler {
         ObjectError error = errorList.get(0);
         String msg = error.getDefaultMessage();
         return Result.failure(Status.BIND_EXCEPTION.getCode(), msg);
-    }
+    }*/
 }
 

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:include="include/title :: title"></div>
+</head>
+<body style="background: #f1f1f1;">
+<div class="layui-card">
+    <div class="layui-card-header">登录</div>
+    <div class="layui-card-body">
+        <form class="layui-form layui-form-pane" method="post" action="/user/login">
+            <div class="layui-form-item">
+                <label class="layui-form-label layui-icon layui-icon-username">用户名</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="username" required lay-verify="required" placeholder="请输入用户名"
+                           autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">123</div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label layui-icon layui-icon-password">密&nbsp;&nbsp;&nbsp;码</label>
+                <div class="layui-input-inline">
+                    <input type="password" name="password" required lay-verify="required" placeholder="请输入密码"
+                           autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">123</div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label layui-icon layui-icon-vercode">验证码</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="code" placeholder="请输入验证码"
+                           autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">
+                    <img src="https://www.oschina.net/action/user/captcha"/><!--demo-->
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="login">登录</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    <a href="/view/register">前往注册</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    layui.use('element', function () {
+    });
+    layui.use('form', function () {
+        var form = layui.form;
+
+        //监听提交
+        form.on('submit(login)', function (data) {
+            $.ajax({
+                url: '/user/login',
+                data: data.field,
+                type: 'POST',
+                dataType: 'json',
+                success: function (data) {
+                    alert(data);
+                },
+                error: function (data) {
+                    alert(data);
+                }
+            });
+            return false; // require
+        });
+    });
+</script>
+</body>
+</html>

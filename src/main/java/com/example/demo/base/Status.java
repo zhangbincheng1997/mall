@@ -6,7 +6,7 @@ package com.example.demo.base;
 public enum Status {
 
     // 服务器
-    SUCCESS(200, "SUCCESS"),
+    SUCCESS(0, "SUCCESS"),
     FAILURE(250, "FAILURE"),
     FORBIDDEN(403, "拒绝执行"),
     NOT_FOUND(404, "请求失败"),
@@ -18,19 +18,17 @@ public enum Status {
     // 访问限制
     ACCESS_LIMIT(10000, "您已超出访问限制"),
     NOT_LOGIN(10001, "用户未登录"),
-    CODE_EXPIRED(10002, "验证码过期"),
-    CODE_ERROR(10003, "验证码错误"),
 
     // 账号相关
     USERNAME_EXIST(50010, "账号已经存在"),
     USERNAME_NOT_EXIST(50011, "账号不存在");
 
     private int code;
-    private String message;
+    private String msg;
 
-    Status(int code, String message) {
+    Status(int code, String msg) {
         this.code = code;
-        this.message = message;
+        this.msg = msg;
     }
 
     public int getCode() {
@@ -41,11 +39,11 @@ public enum Status {
         this.code = code;
     }
 
-    public String getMessage() {
-        return message;
+    public String getMsg() {
+        return msg;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 }

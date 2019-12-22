@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
-@Order(3)
 public class RabbitSender {
 
     @Autowired

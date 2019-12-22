@@ -1,8 +1,8 @@
 package com.example.demo.service;
 
 import com.example.demo.model.User;
-import com.example.demo.vo.UserInfoVo;
-import com.example.demo.vo.UserVo;
+import com.example.demo.dto.UserInfoDto;
+import com.example.demo.dto.UserDto;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.List;
@@ -11,11 +11,11 @@ public interface UserService {
 
     User getUserByUsername(String username);
 
-    User register(UserVo userVo);
+    User register(UserDto userDto);
 
-    int updatePasswordByEmail(UserVo userVo);
+    int updatePasswordByUsername(UserDto userDto);
 
-    int updateUserInfoByUsername(String username, UserInfoVo userInfoVo);
+    int updateUserInfoByUsername(String username, UserInfoDto userInfoDto);
 
     List<GrantedAuthority> getRoleList(Long id);
 

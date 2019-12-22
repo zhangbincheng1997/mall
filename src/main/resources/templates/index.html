@@ -1,13 +1,38 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
-    <script type="text/javascript" th:src="@{/js/jquery.js}"></script>
-    <script type="text/javascript" th:src="@{/js/bootstrap.js}"></script>
+    <div th:include="include/title :: title"></div>
 </head>
-<body>
-主页
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div th:include="include/header :: header"></div>
+    <div th:include="include/side :: side"></div>
+
+    <div class="layui-body">
+        <table class="layui-table" lay-data="{url:'/goods/list', page:true}">
+            <thead>
+            <tr>
+                <th lay-data="{field:'id', width:80, sort: true}">ID</th>
+                <th lay-data="{field:'title'}">标题</th>
+                <th lay-data="{field:'description'}">描述</th>
+                <th lay-data="{field:'icon'}">图标</th>
+                <th lay-data="{field:'price'}">价格</th>
+                <th lay-data="{field:'stock'}">库存</th>
+                <th lay-data="{field:'status'}">状态</th>
+                <th lay-data="{field:'createTime'}">创建时间</th>
+                <th lay-data="{field:'updateTime'}">修改时间</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+
+    <div th:include="include/footer :: footer"></div>
+</div>
+<script>
+    layui.use('element', function () {
+    });
+    layui.use('table', function () {
+    });
+</script>
 </body>
 </html>

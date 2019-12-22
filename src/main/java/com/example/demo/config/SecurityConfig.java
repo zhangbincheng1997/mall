@@ -52,7 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll() // 跨域会请求OPTIONS
                 .antMatchers(HttpMethod.GET,
                         "/", "/csrf",
-                        "/favicon.ico",
+                        "/favicon.ico", "/css/**", "/js/**", "/layui/**", "/goods/**", "/view/**",
                         "/*.html",
                         "/**/*.html",
                         "/**/*.css",
@@ -62,9 +62,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/webjars/**"
                 ).permitAll()
                 .antMatchers("/druid/**").permitAll()
-                .antMatchers("/register", "/login", "/updatePassword", "/send").permitAll()
+                .antMatchers("/user/register", "/user/login").permitAll()
                 .anyRequest().authenticated() // 其他全部需要认证
-                .and().formLogin().loginPage("/login").loginProcessingUrl("/login") // 登录请求 UsernamePasswordAuthenticationFilter
+                .and().formLogin().loginPage("/user/login").loginProcessingUrl("/user/login") // 登录请求 UsernamePasswordAuthenticationFilter
                 .successHandler(jwtAuthenticationSuccessHandler)
                 .failureHandler(jwtAuthenticationFailureHandler)
                 .and().exceptionHandling() // 处理异常

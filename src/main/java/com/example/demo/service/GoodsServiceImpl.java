@@ -3,7 +3,8 @@ package com.example.demo.service;
 import com.example.demo.mapper.GoodsMapper;
 import com.example.demo.model.Goods;
 import com.example.demo.model.GoodsExample;
-import com.example.demo.vo.GoodsVo;
+import com.example.demo.dto.GoodsDto;
+import com.example.demo.utils.SnowFlake;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.BeanUtils;
@@ -27,27 +28,22 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public long count() {
-        return goodsMapper.countByExample(null);
-    }
-
-    @Override
-    public PageInfo list(String keyword, int pageNum, int pageSize) {
-        PageHelper.startPage(pageNum, pageSize);
+    public PageInfo<Goods> list(String keyword, int page, int limit) {
+        PageHelper.startPage(page, limit);
         GoodsExample example = new GoodsExample();
         if (!StringUtils.isEmpty(keyword)) {
             example.or().andTitleLike("%" + keyword + "%");
             example.or().andDescriptionLike("%" + keyword + "%");
         }
         List<Goods> goodsList = goodsMapper.selectByExample(example);
-        PageInfo page = new PageInfo(goodsList);
-        return page;
+        PageInfo<Goods> pageInfo = new PageInfo(goodsList);
+        return pageInfo;
     }
 
     @Override
-    public int create(GoodsVo goodsVo) {
+    public int create(GoodsDto goodsDto) {
         Goods goods = new Goods();
-        BeanUtils.copyProperties(goodsVo, goods);
+        BeanUtils.copyProperties(goodsDto, goods);
         return goodsMapper.insert(goods);
     }
 
@@ -57,10 +53,10 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public int update(Long id, GoodsVo goodsVo) {
+    public int update(Long id, GoodsDto goodsDto) {
         Goods goods = new Goods();
         goods.setId(id);
-        BeanUtils.copyProperties(goodsVo, goods);
+        BeanUtils.copyProperties(goodsDto, goods);
         return goodsMapper.updateByPrimaryKeySelective(goods);
     }
 }

@@ -13,8 +13,4 @@ public class RabbitConfig {
         return new Queue(Constants.TEST_TOPIC);
     }
 
-    @Bean
-    public Queue emailQueue() {
-        return new Queue(Constants.EMAIL_TOPIC);
-    }
 }

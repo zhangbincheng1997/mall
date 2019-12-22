@@ -10,9 +10,7 @@ public class User implements Serializable {
 
     private String password;
 
-    private String email;
-
-    private String icon;
+    private String avatar;
 
     private String nickname;
 
@@ -50,20 +48,12 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public String getEmail() {
-        return email;
+    public String getAvatar() {
+        return avatar;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public String getNickname() {
@@ -115,8 +105,7 @@ public class User implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", username=").append(username);
         sb.append(", password=").append(password);
-        sb.append(", email=").append(email);
-        sb.append(", icon=").append(icon);
+        sb.append(", avatar=").append(avatar);
         sb.append(", nickname=").append(nickname);
         sb.append(", gender=").append(gender);
         sb.append(", birthday=").append(birthday);

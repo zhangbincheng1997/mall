@@ -10,111 +10,77 @@ import com.example.demo.access.JwtTokenService;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 import com.example.demo.utils.Constants;
-import com.example.demo.vo.UserInfoVo;
-import com.example.demo.vo.UserVo;
+import com.example.demo.dto.UserInfoDto;
+import com.example.demo.dto.UserDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.constraints.Email;
 import java.io.IOException;
+import java.security.Principal;
 
 @Api(tags = "用户控制类")
 @Slf4j
 @Validated
 @Controller
+@RequestMapping(value = "/user")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
     @Autowired
-    private RedisService redisService;
-
-    @Autowired
-    private RabbitSender rabbitSender;
-
-    @Autowired
     private QiniuService qiniuService;
 
-    @Autowired
-    private JwtTokenService jwtTokenService;
-
-    @Value("${jwt.tokenHeader}")
-    private String tokenHeader;
+    @ApiOperation("获取用户信息")
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @ResponseBody
+    public Result getUserInfo(Principal principal) {
+        String username = principal.getName(); // SecurityContextHolder上下文
+        User user = userService.getUserByUsername(username);
+        return Result.success(user);
+    }
 
     @ApiOperation("注册")
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     @ResponseBody
-    public Result register(@Validated UserVo userVo) {
-        // 邮箱验证
-        String redisCode = (String) redisService.get(Constants.EMAIL_KEY + userVo.getEmail());
-        if (redisCode == null || !redisCode.equals(userVo.getCode())) {
-            return Result.failure(Status.CODE_ERROR);
-        }
+    public Result register(@Validated UserDto userDto) {
         // 验证用户名密码
-        User user = userService.register(userVo);
-        if (user == null) {
-            return Result.failure(Status.USERNAME_EXIST);
-        }
+        User user = userService.register(userDto);
         return Result.success(user);
     }
 
-    @ApiOperation("修改密码 需要邮箱验证")
-    @RequestMapping(value = "/updatePassword", method = RequestMethod.POST)
+    @ApiOperation("修改密码")
+    @RequestMapping(value = "/pwd", method = RequestMethod.POST)
     @ResponseBody
-    public Result updatePassword(@Validated UserVo userVo) {
-        // 邮箱验证
-        String redisCode = (String) redisService.get(Constants.EMAIL_KEY + userVo.getEmail());
-        if (redisCode == null || !redisCode.equals(userVo.getCode())) {
-            return Result.failure(Status.CODE_ERROR);
-        }
-        // 更新密码
-        int count = userService.updatePasswordByEmail(userVo);
-        if (count != 1) {
-            return Result.failure(Status.USERNAME_NOT_EXIST);
-        }
+    public Result updatePassword(@Validated UserDto userDto) {
+        // 修改密码
+        userService.updatePasswordByUsername(userDto);
         return Result.success();
-    }
-
-    @ApiOperation("获取用户信息")
-    @RequestMapping(value = "/user", method = RequestMethod.GET)
-    @ResponseBody
-    public Result getUserInfo(HttpServletRequest request) {
-        String token = request.getHeader(tokenHeader); // JWT
-        String username = jwtTokenService.getUsernameFromToken(token);
-        User user = userService.getUserByUsername(username);
-        if (user == null) {
-            return Result.failure(Status.USERNAME_NOT_EXIST);
-        }
-        return Result.success(user);
     }
 
     @ApiOperation("修改用户信息")
-    @RequestMapping(value = "/user/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/", method = RequestMethod.POST)
     @ResponseBody
-    public Result updateUserInfo(HttpServletRequest request, @Validated UserInfoVo userInfoVo) {
-        String token = request.getHeader(tokenHeader); // JWT
-        String username = jwtTokenService.getUsernameFromToken(token);
-        int count = userService.updateUserInfoByUsername(username, userInfoVo);
-        if (count != 1) {
-            return Result.failure(Status.USERNAME_NOT_EXIST);
-        }
+    public Result updateUserInfo(Principal principal, @Validated UserInfoDto userInfoDto) {
+        String username = principal.getName(); // SecurityContextHolder上下文
+        // 修改信息
+        userService.updateUserInfoByUsername(username, userInfoDto);
         return Result.success();
     }
 
-    @ApiOperation("上传用户头像")
-    @RequestMapping(value = "/user/icon", method = RequestMethod.POST)
+    @ApiOperation("上传用户头像 3次/分钟")
+    @ApiImplicitParams({@ApiImplicitParam(name = "file", value = "文件", required = true, dataType = "file")})
+    @RequestMapping(value = "/icon", method = RequestMethod.POST)
     @ResponseBody
+    @AccessLimit(seconds = 60, maxCount = 3)
     public Result uploadIcon(@RequestParam("file") MultipartFile file) {
         if (!file.isEmpty()) {
             try {
@@ -125,15 +91,5 @@ public class UserController {
             }
         }
         return Result.failure();
-    }
-
-    @ApiOperation("发送邮箱验证码 1次/分")
-    @ApiImplicitParams({@ApiImplicitParam(name = "email", value = "邮箱", required = true, dataType = "String")})
-    @RequestMapping(value = "/send", method = RequestMethod.GET)
-    @ResponseBody
-    @AccessLimit(seconds = 60, maxCount = 1)
-    public Result sendEmail(@RequestParam @Email String email) {
-        rabbitSender.send(Constants.EMAIL_TOPIC, email);
-        return Result.success();
     }
 }

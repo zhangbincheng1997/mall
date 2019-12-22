@@ -1,13 +1,13 @@
-# 一个简单的SpringBoot模板
+# SpringBoot Template
 
 ## 后端技术
 | 技术 | 说明 |
 | ---- | ---- |
 | Spring Boot | MVC框架 |
-| Spring Security | 认证和授权框架 |
-| JWT | JWT单点登录 |
+| Spring Security | 安全框架 |
+| JWT | 单点登录 |
 | MyBatis | 数据库框架  |
-| MyBatis Generator | MyBatis代码插件 |
+| MyBatis Generator | MyBatis生成插件 |
 | MyBatis PageHelper | MyBatis分页插件 |
 | Druid | 数据库连接池 |
 | Redis | 缓存数据库 |
@@ -18,7 +18,7 @@
 | Lombok | 简化对象封装工具（需要安装IDEA插件） |
 
 MyBatis Generator:
-数据库建表 -> Run Generator.java
+数据库建表（见demo.sql） -> Run Generator.java
 
 Druid:
 http://localhost:8080/druid/index.html
@@ -26,8 +26,43 @@ http://localhost:8080/druid/index.html
 Swagger:
 http://localhost:8080/swagger-ui.html
 
+## 表
+MySQL5.7才支持双timestamp
+```
+CREATE TABLE `user`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `icon` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `nickname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `gender` int(11) NULL DEFAULT NULL,
+  `birthday` date NULL DEFAULT NULL,
+  `create_time` datetime(0) NOT NULL,
+  `login_time` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE `goods`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `icon` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `price` double(8, 2) NOT NULL,
+  `stock` int(11) NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT 0 COMMENT '商品状态：0正常、1下架，默认0',
+  `create_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+  `update_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+......
+```
+
 ## MySQL
-1. 设置MySQL服务允许外网访问
+1. 安装（略，或直接安装[LNMP](https://lnmp.org/)）
+
+2. 配置外网访问
 ```
 $ vim /etc/my.cnf
 
@@ -41,13 +76,19 @@ mysql> GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '123456';
 mysql> FLUSH PRIVILEGES;
 ```
 
+3. 启动/关闭
+```
+$ service mysql start
+$ service mysql stop
+```
+
 ## Redis
 1. 安装
 ```
 $ yum install redis
 ```
 
-2. 配置
+2. 配置外网访问
 ```
 $ vim /etc/redis.conf
 
@@ -57,9 +98,10 @@ protected-mode yes     ----> protected-mode no
 daemonize no           ----> daemonize yes
 ```
 
-3. 启动
+3. 启动/关闭
 ```
-$ redis-server /etc/redis.conf
+$ redis-server 或者 ($ redis-server /etc/redis.conf)
+$ redis-cli shutdown
 ```
 
 ## RabbitMQ
@@ -86,23 +128,24 @@ localhost:15672
 
 # 创建用户
 Admin ----> Add a user ----> Username , Password and Tags(Admin)
-# 远程限制
+# 外网访问
 Admin ----> All users ----> Set permission
 ```
 
 ## Tomcat
 1. 安装
 ```
-$ wget http://us.mirrors.quenda.co/apache/tomcat/tomcat-9/v9.0.24/bin/apache-tomcat-9.0.24.tar.gz
-$ tar -zxvf apache-tomcat-9.0.24.tar.gz
-$ mv apache-tomcat-9.0.24.tar.gz tomcat
+$ wget http://mirrors.tuna.tsinghua.edu.cn/apache/tomcat/tomcat-9/v9.0.30/bin/apache-tomcat-9.0.30.tar.gz
+$ tar -zxvf apache-tomcat-9.0.30.tar.gz
+$ mv apache-tomcat-9.0.30.tar.gz tomcat
 $ mv tomcat /usr/local
 ```
 
-2.启动/关闭
+2. 启动/关闭
 ```
-$ ./usr/local/tomcat/bin/start.sh
-$ ./usr/local/tomcat/bin/stop.sh
+$ cd /usr/local/tomcat
+$ ./bin/start.sh
+$ ./bin/stop.sh
 ```
 
 ## 端口开放

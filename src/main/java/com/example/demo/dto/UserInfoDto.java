@@ -1,18 +1,20 @@
-package com.example.demo.vo;
+package com.example.demo.dto;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.hibernate.validator.constraints.Range;
+import org.hibernate.validator.constraints.URL;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.*;
 import java.util.Date;
 
 @Data
-public class UserInfoVo {
+public class UserInfoDto {
 
-    @ApiModelProperty(value = "链接")
-    private String icon;
+    @ApiModelProperty(value = "头像")
+    @URL(message = "头像不符合规范")
+    private String avatar;
 
     @ApiModelProperty(value = "昵称")
     @Size(min = 3, max = 12, message = "昵称长度为3-12")

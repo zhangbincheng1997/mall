@@ -1,59 +1,38 @@
 package com.example.demo.base;
 
+import lombok.Data;
+
 /**
  * API格式封装
  */
+@Data
 public class Result {
 
     private int code;
-    private String message;
+    private String msg;
     private Object data;
 
-    public Result(int code, String message, Object data) {
+    public Result(int code, String msg, Object data) {
         this.code = code;
-        this.message = message;
+        this.msg = msg;
         this.data = data;
     }
 
     public Result() {
         this.code = Status.SUCCESS.getCode();
-        this.message = Status.SUCCESS.getMessage();
-    }
-
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public Object getData() {
-        return data;
-    }
-
-    public void setData(Object data) {
-        this.data = data;
+        this.msg = Status.SUCCESS.getMsg();
     }
 
     public static Result success() {
-        return new Result(Status.SUCCESS.getCode(), Status.SUCCESS.getMessage(), null);
+        return new Result(Status.SUCCESS.getCode(), Status.SUCCESS.getMsg(), null);
     }
 
     public static Result success(Object data) {
-        return new Result(Status.SUCCESS.getCode(), Status.SUCCESS.getMessage(), data);
+        return new Result(Status.SUCCESS.getCode(), Status.SUCCESS.getMsg(), data);
     }
 
     public static Result failure() {
-        return new Result(Status.FAILURE.getCode(), Status.FAILURE.getMessage(), null);
+        return new Result(Status.FAILURE.getCode(), Status.FAILURE.getMsg(), null);
     }
 
     public static Result failure(int code, String message) {
@@ -61,6 +40,6 @@ public class Result {
     }
 
     public static Result failure(Status status) {
-        return new Result(status.getCode(), status.getMessage(), null);
+        return new Result(status.getCode(), status.getMsg(), null);
     }
 }
