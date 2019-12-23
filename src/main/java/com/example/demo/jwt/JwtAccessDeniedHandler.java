@@ -1,4 +1,4 @@
-package com.example.demo.access;
+package com.example.demo.jwt;
 
 import com.example.demo.base.Result;
 import com.example.demo.base.Status;

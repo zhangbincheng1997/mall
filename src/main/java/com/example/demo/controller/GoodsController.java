@@ -14,9 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-
-
 @Api(tags = "商品控制类")
 @Controller
 @RequestMapping("/goods")
@@ -37,7 +34,7 @@ public class GoodsController {
     @ApiOperation(value = "获取商品列表")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
-//    @PreAuthorize("hasAuthority('goods:read')")
+    @PreAuthorize("hasAuthority('goods:read')")
     public Result list(@RequestParam(value = "keyword", required = false) String keyword,
                        @RequestParam(value = "page", defaultValue = "1") Integer page,
                        @RequestParam(value = "limit", defaultValue = "10") Integer limit) {

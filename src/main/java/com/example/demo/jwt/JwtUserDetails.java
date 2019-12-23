@@ -1,4 +1,4 @@
-package com.example.demo.access;
+package com.example.demo.jwt;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

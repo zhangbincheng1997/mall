@@ -1,4 +1,4 @@
-package com.example.demo.access;
+package com.example.demo.jwt;
 
 import io.jsonwebtoken.*;
 import lombok.extern.slf4j.Slf4j;
@@ -20,9 +20,6 @@ public class JwtTokenService {
     @Value("${jwt.expiration}")
     private Long expiration;
 
-    @Value("${jwt.tokenHeader}")
-    private String tokenHeader;
-
     @Value("${jwt.tokenHead}")
     private String tokenHead;
 
@@ -34,9 +31,7 @@ public class JwtTokenService {
      */
     public String generateToken(String username) {
         Map<String, Object> claims = new HashMap<>();
-        // claims.put(Claims.ID, 520);
         claims.put(Claims.SUBJECT, username);
-        claims.put(Claims.ISSUED_AT, new Date());
         String jwt = Jwts.builder()
                 .setClaims(claims)
                 .setExpiration(new Date(System.currentTimeMillis() + expiration * 1000)) // 过期时间
@@ -56,7 +51,7 @@ public class JwtTokenService {
         try {
             claims = Jwts.parser()
                     .setSigningKey(secret)
-                    .parseClaimsJws(tokenHead)
+                    .parseClaimsJws(token)
                     .getBody();
         } catch (Exception e) {
             log.info("JWT格式验证失败:{}", token);
@@ -72,31 +67,12 @@ public class JwtTokenService {
      */
     public String getUsernameFromToken(String token) {
         Claims claims = getClaimsFromToken(token);
-        String username = claims.getSubject();
+        String username;
+        try {
+            username = claims.getSubject();
+        } catch (Exception e) {
+            username = null;
+        }
         return username;
-    }
-
-    /**
-     * 从token中获取expiration
-     *
-     * @param token
-     * @return
-     */
-    private Date getExpirationFromToken(String token) {
-        Claims claims = getClaimsFromToken(token);
-        Date expiration = claims.getExpiration();
-        return expiration;
-    }
-
-    /**
-     * 验证token是否有效
-     *
-     * @param token
-     * @param userDetails
-     */
-    public boolean validateToken(String token, UserDetails userDetails) {
-        String username = getUsernameFromToken(token);
-        Date expiration = getExpirationFromToken(token);
-        return username.equals(userDetails.getUsername()) && !expiration.before(new Date());
     }
 }

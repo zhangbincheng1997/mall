@@ -1,13 +1,19 @@
 <!DOCTYPE html>
-<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh-CN">
 <head>
-    <div th:include="include/title :: title"></div>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>外卖后台管理系统</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="layui/css/layui.css"/>
+    <script type="text/javascript" src="layui/layui.js"></script>
+    <script type="text/javascript" src="include/config.js"></script>
 </head>
 <body style="background: #f1f1f1;">
 <div class="layui-card">
     <div class="layui-card-header">登录</div>
     <div class="layui-card-body">
-        <form class="layui-form layui-form-pane" method="post" action="/user/login">
+        <form class="layui-form layui-form-pane">
             <div class="layui-form-item">
                 <label class="layui-form-label layui-icon layui-icon-username">用户名</label>
                 <div class="layui-input-inline">
@@ -27,41 +33,49 @@
             <div class="layui-form-item">
                 <label class="layui-form-label layui-icon layui-icon-vercode">验证码</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="code" placeholder="请输入验证码"
-                           autocomplete="off" class="layui-input">
+                    <input type="text" name="code" placeholder="请输入验证码" autocomplete="off" class="layui-input">
                 </div>
                 <div class="layui-form-mid layui-word-aux">
-                    <img src="https://www.oschina.net/action/user/captcha"/><!--demo-->
+                    <img src="https://www.oschina.net/action/user/captcha" alt="captcha"/><!--demo-->
                 </div>
             </div>
             <div class="layui-form-item">
                 <div class="layui-input-block">
                     <button class="layui-btn" lay-submit lay-filter="login">登录</button>
                     <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                    <a href="/view/register">前往注册</a>
+                    <a href="register.html">前往注册</a>
                 </div>
             </div>
         </form>
     </div>
 </div>
 <script>
-    layui.use('element', function () {
-    });
-    layui.use('form', function () {
+    layui.use(['element', 'jquery', 'form'], function () {
+        var $ = layui.jquery;
         var form = layui.form;
 
-        //监听提交
+        // //监听提交
         form.on('submit(login)', function (data) {
             $.ajax({
-                url: '/user/login',
+                url: API + "login",
                 data: data.field,
                 type: 'POST',
                 dataType: 'json',
                 success: function (data) {
-                    alert(data);
+                    if (data.code === 0) {
+                        result = data.data;
+                        layui.data('token', {key: 'Authorization', value: result.token}); // 记录认证信息
+                        layui.data('user', {key: 'avatar', value: result.avatar}); // 记录用户头像
+                        layui.data('user', {key: 'nickname', value: result.nickname}); // 记录用户昵称
+                        layer.msg(data.msg, {time: 1000}, function () {
+                            window.location.href = 'index.html';
+                        });
+                    } else {
+                        layer.msg(JSON.stringify(data));
+                    }
                 },
                 error: function (data) {
-                    alert(data);
+                    layer.msg(data);
                 }
             });
             return false; // require

@@ -5,17 +5,11 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class UserVo {
+public class LoginVo {
+
+    private String token;
 
     private String avatar;
 
     private String nickname;
-
-    private Integer gender;
-
-    private Date birthday;
-
-    private Date createTime;
-
-    private Date loginTime;
 }

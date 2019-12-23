@@ -2,14 +2,9 @@ package com.example.demo.controller;
 
 import com.example.demo.base.Result;
 import com.example.demo.access.AccessLimit;
-import com.example.demo.base.Status;
 import com.example.demo.component.QiniuService;
-import com.example.demo.component.RabbitSender;
-import com.example.demo.component.RedisService;
-import com.example.demo.access.JwtTokenService;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
-import com.example.demo.utils.Constants;
 import com.example.demo.dto.UserInfoDto;
 import com.example.demo.dto.UserDto;
 import io.swagger.annotations.Api;
@@ -30,7 +25,6 @@ import java.security.Principal;
 @Slf4j
 @Validated
 @Controller
-@RequestMapping(value = "/user")
 public class UserController {
 
     @Autowired
@@ -38,15 +32,6 @@ public class UserController {
 
     @Autowired
     private QiniuService qiniuService;
-
-    @ApiOperation("获取用户信息")
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    @ResponseBody
-    public Result getUserInfo(Principal principal) {
-        String username = principal.getName(); // SecurityContextHolder上下文
-        User user = userService.getUserByUsername(username);
-        return Result.success(user);
-    }
 
     @ApiOperation("注册")
     @RequestMapping(value = "/register", method = RequestMethod.POST)
@@ -57,8 +42,17 @@ public class UserController {
         return Result.success(user);
     }
 
+    @ApiOperation("获取用户信息")
+    @RequestMapping(value = "/user", method = RequestMethod.GET)
+    @ResponseBody
+    public Result getUserInfo(Principal principal) {
+        String username = principal.getName(); // SecurityContextHolder上下文
+        User user = userService.getUserByUsername(username);
+        return Result.success(user);
+    }
+
     @ApiOperation("修改密码")
-    @RequestMapping(value = "/pwd", method = RequestMethod.POST)
+    @RequestMapping(value = "/user/pwd", method = RequestMethod.POST)
     @ResponseBody
     public Result updatePassword(@Validated UserDto userDto) {
         // 修改密码
@@ -67,7 +61,7 @@ public class UserController {
     }
 
     @ApiOperation("修改用户信息")
-    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @RequestMapping(value = "/user", method = RequestMethod.POST)
     @ResponseBody
     public Result updateUserInfo(Principal principal, @Validated UserInfoDto userInfoDto) {
         String username = principal.getName(); // SecurityContextHolder上下文
@@ -78,7 +72,7 @@ public class UserController {
 
     @ApiOperation("上传用户头像 3次/分钟")
     @ApiImplicitParams({@ApiImplicitParam(name = "file", value = "文件", required = true, dataType = "file")})
-    @RequestMapping(value = "/icon", method = RequestMethod.POST)
+    @RequestMapping(value = "/user/icon", method = RequestMethod.POST)
     @ResponseBody
     @AccessLimit(seconds = 60, maxCount = 3)
     public Result uploadIcon(@RequestParam("file") MultipartFile file) {

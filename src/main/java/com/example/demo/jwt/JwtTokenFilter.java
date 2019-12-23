@@ -1,4 +1,4 @@
-package com.example.demo.access;
+package com.example.demo.jwt;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,11 +45,11 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             log.info("checking username:{}", username);
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
-                if (jwtTokenService.validateToken(authToken, userDetails)) {
+                if (userDetails != null) { // 用户存在
                     UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                     authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                    log.info("authenticated user:{}", username);
                     SecurityContextHolder.getContext().setAuthentication(authentication);
+                    log.info("authenticated user:{}", username);
                 }
             }
         }

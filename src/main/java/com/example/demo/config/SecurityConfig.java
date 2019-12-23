@@ -1,6 +1,6 @@
 package com.example.demo.config;
 
-import com.example.demo.access.*;
+import com.example.demo.jwt.*;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -27,8 +27,7 @@ import java.util.List;
 @Slf4j
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
-// 允许 @PreAuthorize("hasAuthority('xxxx')") @PreAuthorize("hasRole('xxxx')")
+@EnableGlobalMethodSecurity(prePostEnabled = true) // 允许 @PreAuthorize("hasAuthority/hasRole('xxxx')")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -52,7 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll() // 跨域会请求OPTIONS
                 .antMatchers(HttpMethod.GET,
                         "/", "/csrf",
-                        "/favicon.ico", "/css/**", "/js/**", "/layui/**", "/goods/**", "/view/**",
+                        "/favicon.ico",
                         "/*.html",
                         "/**/*.html",
                         "/**/*.css",
@@ -62,9 +61,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/webjars/**"
                 ).permitAll()
                 .antMatchers("/druid/**").permitAll()
-                .antMatchers("/user/register", "/user/login").permitAll()
+                .antMatchers("/register", "/login").permitAll()
                 .anyRequest().authenticated() // 其他全部需要认证
-                .and().formLogin().loginPage("/user/login").loginProcessingUrl("/user/login") // 登录请求 UsernamePasswordAuthenticationFilter
+                .and().formLogin().loginProcessingUrl("/login") // 登录请求 UsernamePasswordAuthenticationFilter
                 .successHandler(jwtAuthenticationSuccessHandler)
                 .failureHandler(jwtAuthenticationFailureHandler)
                 .and().exceptionHandling() // 处理异常
@@ -94,7 +93,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
                 User user = userService.getUserByUsername(username);
                 if (user != null) {
-                    // TODO
                     List<GrantedAuthority> permissionList = userService.getPermissionList(user.getId());
                     List<GrantedAuthority> roleList = userService.getRoleList(user.getId());
                     permissionList.addAll(roleList);
