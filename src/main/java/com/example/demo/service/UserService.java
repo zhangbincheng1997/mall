@@ -13,9 +13,11 @@ public interface UserService {
 
     User register(UserDto userDto);
 
-    int updatePasswordByUsername(UserDto userDto);
-
     int updateUserInfoByUsername(String username, UserInfoDto userInfoDto);
+
+    int updatePasswordByUsername(String username, String password);
+
+    int updateAvatarByUsername(String username, String avatar);
 
     List<GrantedAuthority> getRoleList(Long id);
 

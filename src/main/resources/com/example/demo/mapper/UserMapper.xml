@@ -7,10 +7,10 @@
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="avatar" jdbcType="VARCHAR" property="avatar" />
     <result column="nickname" jdbcType="VARCHAR" property="nickname" />
-    <result column="gender" jdbcType="INTEGER" property="gender" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
     <result column="birthday" jdbcType="DATE" property="birthday" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="login_time" jdbcType="TIMESTAMP" property="loginTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -71,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, username, password, avatar, nickname, gender, birthday, create_time, login_time
+    id, username, password, avatar, nickname, sex, birthday, create_time, update_time
   </sql>
   <select id="selectByExample" parameterType="com.example.demo.model.UserExample" resultMap="BaseResultMap">
     select
@@ -108,11 +108,11 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into user (username, password, avatar, 
-      nickname, gender, birthday, 
-      create_time, login_time)
+      nickname, sex, birthday, 
+      create_time, update_time)
     values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, 
-      #{nickname,jdbcType=VARCHAR}, #{gender,jdbcType=INTEGER}, #{birthday,jdbcType=DATE}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{loginTime,jdbcType=TIMESTAMP})
+      #{nickname,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, #{birthday,jdbcType=DATE}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.example.demo.model.User">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
@@ -132,8 +132,8 @@
       <if test="nickname != null">
         nickname,
       </if>
-      <if test="gender != null">
-        gender,
+      <if test="sex != null">
+        sex,
       </if>
       <if test="birthday != null">
         birthday,
@@ -141,8 +141,8 @@
       <if test="createTime != null">
         create_time,
       </if>
-      <if test="loginTime != null">
-        login_time,
+      <if test="updateTime != null">
+        update_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -158,8 +158,8 @@
       <if test="nickname != null">
         #{nickname,jdbcType=VARCHAR},
       </if>
-      <if test="gender != null">
-        #{gender,jdbcType=INTEGER},
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
       </if>
       <if test="birthday != null">
         #{birthday,jdbcType=DATE},
@@ -167,8 +167,8 @@
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="loginTime != null">
-        #{loginTime,jdbcType=TIMESTAMP},
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -196,8 +196,8 @@
       <if test="record.nickname != null">
         nickname = #{record.nickname,jdbcType=VARCHAR},
       </if>
-      <if test="record.gender != null">
-        gender = #{record.gender,jdbcType=INTEGER},
+      <if test="record.sex != null">
+        sex = #{record.sex,jdbcType=INTEGER},
       </if>
       <if test="record.birthday != null">
         birthday = #{record.birthday,jdbcType=DATE},
@@ -205,8 +205,8 @@
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.loginTime != null">
-        login_time = #{record.loginTime,jdbcType=TIMESTAMP},
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null">
@@ -220,10 +220,10 @@
       password = #{record.password,jdbcType=VARCHAR},
       avatar = #{record.avatar,jdbcType=VARCHAR},
       nickname = #{record.nickname,jdbcType=VARCHAR},
-      gender = #{record.gender,jdbcType=INTEGER},
+      sex = #{record.sex,jdbcType=INTEGER},
       birthday = #{record.birthday,jdbcType=DATE},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      login_time = #{record.loginTime,jdbcType=TIMESTAMP}
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -243,8 +243,8 @@
       <if test="nickname != null">
         nickname = #{nickname,jdbcType=VARCHAR},
       </if>
-      <if test="gender != null">
-        gender = #{gender,jdbcType=INTEGER},
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
       </if>
       <if test="birthday != null">
         birthday = #{birthday,jdbcType=DATE},
@@ -252,8 +252,8 @@
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="loginTime != null">
-        login_time = #{loginTime,jdbcType=TIMESTAMP},
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
@@ -264,10 +264,10 @@
       password = #{password,jdbcType=VARCHAR},
       avatar = #{avatar,jdbcType=VARCHAR},
       nickname = #{nickname,jdbcType=VARCHAR},
-      gender = #{gender,jdbcType=INTEGER},
+      sex = #{sex,jdbcType=INTEGER},
       birthday = #{birthday,jdbcType=DATE},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      login_time = #{loginTime,jdbcType=TIMESTAMP}
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

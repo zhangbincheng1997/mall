@@ -7,7 +7,7 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
     <link rel="stylesheet" href="layui/css/layui.css"/>
     <script type="text/javascript" src="layui/layui.js"></script>
-    <script type="text/javascript" src="include/config.js"></script>
+    <script type="text/javascript" src="js/config.js"></script>
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
@@ -29,15 +29,15 @@
             headers: layui.data('token'),
             page: true,
             cols: [[
-                {field: 'id', title: 'ID', width: 80, sort: true}
-                , {field: 'title', title: '标题'}
-                , {field: 'description', title: '描述'}
-                , {field: 'icon', title: '图标',}
-                , {field: 'price', title: '价格'}
-                , {field: 'stock', title: '库存'}
-                , {field: 'status', title: '状态'}
-                , {field: 'createTime', title: '创建时间'}
-                , {field: 'updateTime', title: '修改时间'}
+                {field: 'id', title: 'ID', width: 80, sort: true},
+                {field: 'icon', title: '图标'},
+                {field: 'title', title: '标题'},
+                {field: 'description', title: '描述'},
+                {field: 'price', title: '价格'},
+                {field: 'stock', title: '库存'},
+                {field: 'status', title: '状态'},
+                {field: 'createTime', title: '创建时间'},
+                {field: 'updateTime', title: '修改时间'},
             ]]
         });
     });

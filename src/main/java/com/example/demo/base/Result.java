@@ -1,18 +1,19 @@
 package com.example.demo.base;
 
 import lombok.Data;
+import lombok.Getter;
 
 /**
  * API格式封装
  */
-@Data
+@Getter
 public class Result {
 
-    private int code;
+    private Integer code;
     private String msg;
     private Object data;
 
-    public Result(int code, String msg, Object data) {
+    public Result(Integer code, String msg, Object data) {
         this.code = code;
         this.msg = msg;
         this.data = data;
@@ -35,7 +36,7 @@ public class Result {
         return new Result(Status.FAILURE.getCode(), Status.FAILURE.getMsg(), null);
     }
 
-    public static Result failure(int code, String message) {
+    public static Result failure(Integer code, String message) {
         return new Result(code, message, null);
     }
 

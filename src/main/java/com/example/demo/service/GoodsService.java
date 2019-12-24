@@ -10,9 +10,9 @@ public interface GoodsService {
 
     PageInfo<Goods> list(String keyword, int page, int limit);
 
-    int create(GoodsDto goodsDto);
+    int save(GoodsDto goodsDto);
 
-    int delete(Long id);
+    int remove(Long id);
 
     int update(Long id, GoodsDto goodsDto);
 }

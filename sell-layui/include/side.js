@@ -4,7 +4,7 @@ document.write("        <ul class=\"layui-nav layui-nav-tree\">");
 document.write("            <li class=\"layui-nav-item layui-nav-itemed\">");
 document.write("                <a href=\"javascript:void(0);\">商品信息<\/a>");
 document.write("                <dl class=\"layui-nav-child\">");
-document.write("                    <dd><a href=\"javascript:void(0);\">商品列表<\/a><\/dd>");
+document.write("                    <dd><a href=\"index.html\">商品列表<\/a><\/dd>");
 document.write("                    <dd><a href=\"javascript:void(0);\">商品类目<\/a><\/dd>");
 document.write("                <\/dl>");
 document.write("            <\/li>");

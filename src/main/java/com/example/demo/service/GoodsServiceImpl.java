@@ -41,14 +41,14 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public int create(GoodsDto goodsDto) {
+    public int save(GoodsDto goodsDto) {
         Goods goods = new Goods();
         BeanUtils.copyProperties(goodsDto, goods);
         return goodsMapper.insert(goods);
     }
 
     @Override
-    public int delete(Long id) {
+    public int remove(Long id) {
         return goodsMapper.deleteByPrimaryKey(id);
     }
 

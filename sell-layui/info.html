@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>外卖后台管理系统</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="layui/css/layui.css"/>
+    <script type="text/javascript" src="layui/layui.js"></script>
+    <script type="text/javascript" src="js/config.js"></script>
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <script type="text/javascript" src="include/header.js"></script>
+    <script type="text/javascript" src="include/side.js"></script>
+    <script type="text/javascript" src="include/footer.js"></script>
+
+    <div class="layui-body">
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px">
+            <legend>基本信息</legend>
+        </fieldset>
+        <div style="width: 500px; margin: 0 auto;">
+            <form class="layui-form layui-form-pane" autocomplete="off">
+                <div class="layui-form-item">
+                    <label class="layui-form-label layui-icon layui-icon-username">头像</label>
+                    <div class="layui-input-block">
+                        <a id="upload">
+                            <img name="avatar" id="avatar" style="width: 100px; height: 100px">
+                        </a>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label layui-icon layui-icon-username">昵称</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="nickname" id="nickname" placeholder="请输入昵称" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item" pane>
+                    <label class="layui-form-label layui-icon layui-icon-username">性别</label>
+                    <div class="layui-input-block">
+                        <input type="radio" name="sex" value="0" title="保密" checked>
+                        <input type="radio" name="sex" value="1" title="男性">
+                        <input type="radio" name="sex" value="2" title="女性">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label layui-icon layui-icon-username">生日</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="birthday" id="birthday" placeholder="请输入生日" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">创建时间</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="createTime" id="createTime" class="layui-input layui-disabled"
+                               disabled>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">修改时间</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="updateTime" id="updateTime" class="layui-input layui-disabled" disabled>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit lay-filter="confirm">立即提交</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    layui.use(['jquery', 'element', 'form', 'upload', 'laydate'], function () {
+        var $ = layui.jquery;
+        var form = layui.form;
+        var upload = layui.upload;
+        var laydate = layui.laydate;
+
+        $.ajax({
+            url: API + "user",
+            headers: layui.data('token'),
+            type: 'GET',
+            dataType: 'json',
+            success: function (res) {
+                if (res.code === 0) {
+                    $('#avatar').attr('src', res.data.avatar);
+                    $('#nickname').val(res.data.nickname);
+                    $('input[name="sex"]').each(function (i, element) {
+                        if (element.value === res.data.sex.toString()) {
+                            $(element).prop('checked', true);
+                        }
+                    });
+                    $('#birthday').val(res.data.birthday);
+                    $('#createTime').val(res.data.createTime);
+                    $('#updateTime').val(res.data.updateTime);
+                    form.render(); // 刷新radio
+                } else {
+                    layer.msg(JSON.stringify(res));
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                layer.msg('出错啦...错误码: ' + jqXHR.status + ' ' + jqXHR.statusText);
+            }
+        });
+
+        form.on('submit(confirm)', function (data) {
+            delete data.field.file;
+            delete data.field.createTime;
+            delete data.field.updateTime;
+            console.log(data.field);
+            $.ajax({
+                url: API + "user",
+                headers: layui.data('token'),
+                data: data.field,
+                type: 'POST',
+                dataType: 'json',
+                success: function (res) {
+                    if (res.code === 0) {
+                        // 修改用户昵称
+                        $('#header-nickname').text(data.field.nickname);
+                        layui.data('user', {key: 'nickname', value: data.field.nickname});
+                        layer.msg(res.msg);
+                    } else {
+                        layer.msg(JSON.stringify(res));
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    layer.msg('出错啦...错误码: ' + jqXHR.status + ' ' + jqXHR.statusText);
+                }
+            });
+            return false; // require
+        });
+
+        upload.render({
+            elem: '#upload',
+            url: API + 'user/icon',
+            headers: layui.data('token'),
+            done: function (res) {
+                // 刷新用户头像
+                $('#header-avatar').attr('src', res.data);
+                $('#avatar').attr('src', res.data); // 异步 + cdn
+                layui.data('user', {key: 'avatar', value: res.data});
+                layer.msg(res.msg);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                layer.msg('出错啦...错误码: ' + jqXHR.status + ' ' + jqXHR.statusText);
+            }
+        });
+
+        laydate.render({
+            elem: '#birthday' //指定元素
+        });
+    });
+</script>
+</body>
+</html>

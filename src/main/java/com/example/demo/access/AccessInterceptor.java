@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 public class AccessInterceptor extends HandlerInterceptorAdapter {
 
     @Autowired
-    RedisService redisService;
+    private RedisService redisService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

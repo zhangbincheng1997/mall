@@ -6,21 +6,16 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class GoodsVo {
+public class UserInfoVo {
 
-    private long id;
+    private String avatar;
 
-    private String icon;
+    private String nickname;
 
-    private String title;
+    private Integer sex;
 
-    private String description;
-
-    private Double price;
-
-    private Integer stock;
-
-    private Integer status; // 商品状态：0正常、1下架，默认0
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    private Date birthday;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createTime;

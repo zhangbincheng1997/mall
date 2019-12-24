@@ -43,11 +43,11 @@ public class GoodsController {
     }
 
     @ApiOperation(value = "添加商品")
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
     @ResponseBody
-    @PreAuthorize("hasAuthority('goods:create')")
-    public Result create(@Validated GoodsDto goodsDto) {
-        int count = goodsService.create(goodsDto);
+    @PreAuthorize("hasAuthority('goods:save')")
+    public Result save(@Validated GoodsDto goodsDto) {
+        int count = goodsService.save(goodsDto);
         if (count == 1) {
             return Result.success();
         } else {
@@ -70,11 +70,11 @@ public class GoodsController {
     }
 
     @ApiOperation(value = "删除商品")
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/remove/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    @PreAuthorize("hasAuthority('goods:delete')")
-    public Result delete(@PathVariable("id") Long id) {
-        int count = goodsService.delete(id);
+    @PreAuthorize("hasAuthority('goods:remove')")
+    public Result remove(@PathVariable("id") Long id) {
+        int count = goodsService.remove(id);
         if (count == 1) {
             return Result.success();
         } else {

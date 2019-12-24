@@ -14,13 +14,13 @@ public class User implements Serializable {
 
     private String nickname;
 
-    private Integer gender;
+    private Integer sex;
 
     private Date birthday;
 
     private Date createTime;
 
-    private Date loginTime;
+    private Date updateTime;
 
     private static final long serialVersionUID = 1L;
 
@@ -64,12 +64,12 @@ public class User implements Serializable {
         this.nickname = nickname;
     }
 
-    public Integer getGender() {
-        return gender;
+    public Integer getSex() {
+        return sex;
     }
 
-    public void setGender(Integer gender) {
-        this.gender = gender;
+    public void setSex(Integer sex) {
+        this.sex = sex;
     }
 
     public Date getBirthday() {
@@ -88,12 +88,12 @@ public class User implements Serializable {
         this.createTime = createTime;
     }
 
-    public Date getLoginTime() {
-        return loginTime;
+    public Date getUpdateTime() {
+        return updateTime;
     }
 
-    public void setLoginTime(Date loginTime) {
-        this.loginTime = loginTime;
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 
     @Override
@@ -107,10 +107,10 @@ public class User implements Serializable {
         sb.append(", password=").append(password);
         sb.append(", avatar=").append(avatar);
         sb.append(", nickname=").append(nickname);
-        sb.append(", gender=").append(gender);
+        sb.append(", sex=").append(sex);
         sb.append(", birthday=").append(birthday);
         sb.append(", createTime=").append(createTime);
-        sb.append(", loginTime=").append(loginTime);
+        sb.append(", updateTime=").append(updateTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

@@ -12,7 +12,7 @@ CREATE TABLE `goods`  (
   `icon` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `price` double(8, 2) NOT NULL,
   `stock` int(11) NOT NULL,
-  `status` tinyint(4) NOT NULL DEFAULT 0 COMMENT '商品状态：0正常、1下架，默认0',
+  `status` tinyint(4) NOT NULL DEFAULT 0 COMMENT '状态：0正常、1下架，默认0',
   `create_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   `update_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
@@ -62,7 +62,7 @@ CREATE TABLE `user`  (
   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `nickname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `gender` int(11) NULL DEFAULT NULL,
+  `sex` int(11) NULL DEFAULT NULL COMMENT '性别：0未知、1男性、2女性，默认0',
   `birthday` date NULL DEFAULT NULL,
   `create_time` datetime(0) NOT NULL,
   `login_time` datetime(0) NULL DEFAULT NULL,

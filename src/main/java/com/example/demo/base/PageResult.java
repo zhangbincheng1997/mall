@@ -1,15 +1,15 @@
 package com.example.demo.base;
 
-import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
-@Data
+@Getter
 @EqualsAndHashCode(callSuper = true)
 public class PageResult extends Result {
 
     private Long count;
 
-    public PageResult(int code, String msg, Object data, Long count) {
+    public PageResult(Integer code, String msg, Object data, Long count) {
         super(code, msg, data);
         this.count = count;
     }

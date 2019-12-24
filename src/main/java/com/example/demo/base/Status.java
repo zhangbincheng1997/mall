@@ -1,8 +1,11 @@
 package com.example.demo.base;
 
+import lombok.Getter;
+
 /**
  * 状态码
  */
+@Getter
 public enum Status {
 
     // 服务器
@@ -23,27 +26,11 @@ public enum Status {
     USERNAME_EXIST(50010, "账号已经存在"),
     USERNAME_NOT_EXIST(50011, "账号不存在");
 
-    private int code;
+    private Integer code;
     private String msg;
 
-    Status(int code, String msg) {
+    Status(Integer code, String msg) {
         this.code = code;
-        this.msg = msg;
-    }
-
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
         this.msg = msg;
     }
 }

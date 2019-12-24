@@ -58,7 +58,6 @@ public class UserServiceImpl implements UserService {
             User user = new User();
             user.setUsername(userDto.getUsername());
             user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-            user.setCreateTime(new Date());
             userMapper.insert(user);
 
             UserRole userRole = new UserRole();
@@ -71,26 +70,40 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int updatePasswordByUsername(UserDto userDto) {
-        UserExample example = new UserExample();
-        example.createCriteria().andUsernameEqualTo(userDto.getUsername());
-        List<User> userList = userMapper.selectByExample(example);
-        if (CollectionUtils.isEmpty(userList)) {
-            throw new GlobalException(Status.USERNAME_NOT_EXIST);
-        }else {
-            User user = userList.get(0);
-            user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-            return userMapper.updateByPrimaryKeySelective(user);
-        }
-    }
-
-    @Override
     public int updateUserInfoByUsername(String username, UserInfoDto userInfoDto) {
         User user = new User();
         BeanUtils.copyProperties(userInfoDto, user);
         UserExample example = new UserExample();
         example.createCriteria().andUsernameEqualTo(username);
         return userMapper.updateByExampleSelective(user, example);
+    }
+
+    @Override
+    public int updatePasswordByUsername(String username,String password) {
+        UserExample example = new UserExample();
+        example.createCriteria().andUsernameEqualTo(username);
+        List<User> userList = userMapper.selectByExample(example);
+        if (CollectionUtils.isEmpty(userList)) {
+            throw new GlobalException(Status.USERNAME_NOT_EXIST);
+        }else {
+            User user = userList.get(0);
+            user.setPassword(passwordEncoder.encode(password));
+            return userMapper.updateByPrimaryKeySelective(user);
+        }
+    }
+
+    @Override
+    public int updateAvatarByUsername(String username,String avatar) {
+        UserExample example = new UserExample();
+        example.createCriteria().andUsernameEqualTo(username);
+        List<User> userList = userMapper.selectByExample(example);
+        if (CollectionUtils.isEmpty(userList)) {
+            throw new GlobalException(Status.USERNAME_NOT_EXIST);
+        }else {
+            User user = userList.get(0);
+            user.setAvatar(avatar);
+            return userMapper.updateByPrimaryKeySelective(user);
+        }
     }
 
     @Override
