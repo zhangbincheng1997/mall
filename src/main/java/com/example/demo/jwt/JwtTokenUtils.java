@@ -3,6 +3,7 @@ package com.example.demo.jwt;
 import io.jsonwebtoken.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -11,6 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
+@PropertySource({"classpath:config/jwt.properties"})
 @Component
 public class JwtTokenUtils {
 

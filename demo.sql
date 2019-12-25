@@ -65,7 +65,7 @@ CREATE TABLE `product`  (
   `price` decimal(8, 2) NOT NULL COMMENT '价格',
   `stock` int(11) NOT NULL COMMENT '库存',
   `category_id` int(11) NOT NULL COMMENT '类别ID',
-  `status` int(1) NOT NULL DEFAULT 0 COMMENT '状态：0正常、1下架，默认0',
+  `status` int(1) NOT NULL DEFAULT 0 COMMENT '状态：0关、1开，默认0',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 

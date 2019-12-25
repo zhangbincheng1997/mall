@@ -12,10 +12,12 @@ import com.qiniu.util.StringMap;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 import java.net.URLEncoder;
 
+@PropertySource({"classpath:config/qiniu.properties"})
 @Component
 public class QiniuService implements InitializingBean {
 

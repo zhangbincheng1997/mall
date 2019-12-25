@@ -8,9 +8,9 @@ import java.util.Date;
 @Data
 public class UserInfoVo {
 
-    private String avatar;
+    private String avatar = "http://qiniu.littleredhat1997.com/avatar.png";
 
-    private String nickname;
+    private String nickname = "zzz";
 
     private Integer sex;
 

@@ -1,12 +1,18 @@
 <!DOCTYPE html>
-<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh-CN">
 <head>
-    <div th:include="include/title :: title"></div>
-    <link rel="stylesheet" th:href="@{/css/login.css}"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>外卖后台管理系统</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="layui/css/layui.css"/>
+    <link rel="stylesheet" href="css/login.css"/>
+    <script type="text/javascript" src="layui/layui.js"></script>
+    <script type="text/javascript" src="js/config.js"></script>
 </head>
-<body background="http://qiniu.littleredhat1997.com/dusk.jpg">
+<body background="http://qiniu.littleredhat1997.com/dawn.jpg">
 <div class="login">
-    <h1>注册</h1>
+    <h1>登录</h1>
     <form class="layui-form" autocomplete="off">
         <div class="layui-form-item">
             <input type="text" name="username" placeholder="用户名" class="layui-input" lay-verify="required">
@@ -20,9 +26,9 @@
             <div class="code"><img id="captcha" width="120px" height="38px"></div>
         </div>
         <div class="layui-form-item">
-            <button class="layui-btn login_btn" lay-submit lay-filter="register">注册</button>
+            <button class="layui-btn login_btn" lay-submit lay-filter="login">登录</button>
             <button type="reset" class="layui-btn layui-btn-primary login_btn">重置</button>
-            <a href="toLogin"><i class="layui-icon layui-icon-return"></i>前往登录</a>
+            <a href="register.html"><i class="layui-icon layui-icon-return"></i>前往注册</a>
         </div>
     </form>
 </div>
@@ -32,29 +38,33 @@
         var form = layui.form;
 
         // 初始化验证码
-        $.get('/captcha', function (res) {
+        $.get(API + 'captcha', function (res) {
             $('#key').val(res.data.key);
             $('#captcha').attr('src', res.data.image);
         }, 'json');
 
         // 点击更换验证码
         $('#captcha').click(function () {
-            $.get('/captcha', function (res) {
+            $.get(API + 'captcha', function (res) {
                 $('#key').val(res.data.key);
                 $('#captcha').attr('src', res.data.image);
             }, 'json');
         });
 
-        form.on('submit(register)', function (data) {
+
+        form.on('submit(login)', function (data) {
             $.ajax({
-                url: "/register",
+                url: API + "login",
                 data: data.field,
                 type: 'POST',
                 dataType: 'json',
                 success: function (res) {
                     if (res.code === 0) {
+                        layui.data('token', {key: 'Authorization', value: res.data.token}); // 记录认证信息
+                        layui.data('user', {key: 'avatar', value: res.data.avatar}); // 记录用户头像
+                        layui.data('user', {key: 'nickname', value: res.data.nickname}); // 记录用户昵称
                         layer.msg(res.msg, {time: 1000}, function () {
-                            window.location.href = 'toLogin';
+                            window.location.href = 'list.html';
                         });
                     } else {
                         layer.msg(JSON.stringify(res));

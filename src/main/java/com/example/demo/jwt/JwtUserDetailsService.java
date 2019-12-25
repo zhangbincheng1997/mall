@@ -24,9 +24,11 @@ public class JwtUserDetailsService implements UserDetailsService {
     @Autowired
     private RedisService redisService;
 
+    /**
+     * 每次修改用户都要重新刷新Redis -> UserController ...
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        // TODO 其他地方可能改变
         // 从redis取用户
         User user = (User) redisService.get(Constants.USER_KEY + username); // get
         if (user == null) {

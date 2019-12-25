@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>外卖后台管理系统</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="layui/css/layui.css"/>
+    <script type="text/javascript" src="layui/layui.js"></script>
+    <script type="text/javascript" src="js/config.js"></script>
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <script type="text/javascript" src="include/header.js"></script>
+    <script type="text/javascript" src="include/side.js"></script>
+    <script type="text/javascript" src="include/footer.js"></script>
+
+    <div class="layui-body">
+        <table id="demo" lay-filter="table"></table>
+    </div>
+</div>
+<script type="text/html" id="icon">
+    <img src="{{ d.icon }}">
+</script>
+<script type="text/html" id="switch">
+    <input type="checkbox" name="status" value="{{ d.status }}" lay-skin="switch"
+           lay-text="开|关" lay-filter="switch" {{ d.status== 1 ? 'checked' : '' }}>
+</script>
+<script type="text/html" id="toolbar">
+    <a class="layui-btn layui-btn-xs" lay-event="update">修改</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+</script>
+<script>
+    layui.use(['element', 'table'], function () {
+        var table = layui.table;
+
+        table.render({
+            elem: '#demo',
+            url: API + 'product/list',
+            headers: layui.data('token'),
+            page: true,
+            toolbar: 'default',
+            cols: [[
+                {fixed: 'left', type: 'checkbox'}, // 表头
+                {field: 'id', title: 'ID', width: 60, align: 'center', sort: true},
+                {field: 'icon', title: '图标', width: 100, align: 'center', templet: '#icon'},
+                {field: 'name', title: '名称'},
+                {field: 'description', title: '描述'},
+                {field: 'price', title: '价格'},
+                {field: 'stock', title: '库存'},
+                {field: 'status', title: '状态', width: 100, align: 'center', templet: '#switch'},
+                {fixed: 'right', title: '操作', width: 120, align: 'center', toolbar: '#toolbar'} // 表尾
+            ]]
+        });
+
+        // 监听头工具栏事件
+        table.on('toolbar(table)', function (obj) {
+            var data = table.checkStatus(obj.config.id).data; // 获取选中的数据对象数组
+            console.log(data);
+            switch (obj.event) {
+                case 'add':
+                    window.location.href = "addproduct.html";
+                    break;
+                case 'update':
+                    if (data.length === 0) {
+                        layer.msg('请选择一行');
+                    } else if (data.length > 1) {
+                        layer.msg('只能同时修改一个');
+                    } else {
+                        layer.alert('修改 [id]：' + data[0].id);
+                        // TODO
+                    }
+                    break;
+                case 'delete':
+                    if (data.length === 0) {
+                        layer.msg('请选择一行');
+                    } else {
+                        layer.confirm('确认删除？', function (index) {
+                            window.location.reload();
+                            layer.close(index);
+                            // TODO
+                        });
+                    }
+                    break;
+            }
+        });
+
+        // 监听行工具事件
+        table.on('tool(table)', function (obj) {
+            var data = obj.data; // 获取选中的数据对象
+            console.log(data);
+            switch (obj.event) {
+                case 'update':
+                    layer.msg('修改操作');
+                    // TODO
+                    break;
+                case 'delete':
+                    layer.confirm('确认删除？', function (index) {
+                        window.location.reload();
+                        // TODO
+                    });
+                    break;
+            }
+        });
+    });
+</script>
+</body>
+</html>

@@ -15,8 +15,9 @@ public class Constants {
 
     public static final int UPLOAD_RETRY = 3; // 重传次数
 
-    public static final int CODE_LENGTH = 4; //验证码长度
     public static final int CODE_WIDTH = 120; // 验证码宽度
     public static final int CODE_HEIGHT = 38; // 验证码高度
+    public static final int CODE_LENGTH = 4; //验证码字符长度
+    public static final int CODE_THICKNESS = 4; // 验证码干扰线宽度
     public static final int CODE_EXPIRE = 60; // 验证码过期时间 60s
 }

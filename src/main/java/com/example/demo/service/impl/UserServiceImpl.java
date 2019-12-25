@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.example.demo.base.GlobalException;
 import com.example.demo.base.Status;
 import com.example.demo.mapper.UserMapper;
@@ -9,9 +10,7 @@ import com.example.demo.model.*;
 import com.example.demo.dto.UserInfoDto;
 import com.example.demo.dto.UserDto;
 import com.example.demo.service.UserService;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -56,7 +55,7 @@ public class UserServiceImpl implements UserService {
             User user = new User();
             user.setUsername(userDto.getUsername());
             user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-            userMapper.insert(user);
+            userMapper.insertSelective(user);
 
             UserRole userRole = new UserRole();
             userRole.setUserId(user.getId());
@@ -70,7 +69,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public int updateUserInfoByUsername(String username, UserInfoDto userInfoDto) {
         User user = new User();
-        BeanUtils.copyProperties(userInfoDto, user);
+        BeanUtil.copyProperties(userInfoDto, user);
         UserExample example = new UserExample();
         example.createCriteria().andUsernameEqualTo(username);
         return userMapper.updateByExampleSelective(user, example);
@@ -88,7 +87,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public int updateAvatarByUsername(String username, String avatar) {
         User user = new User();
-        user.setPassword(passwordEncoder.encode(username));
+        user.setAvatar(avatar);
         UserExample example = new UserExample();
         example.createCriteria().andUsernameEqualTo(username);
         return userMapper.updateByExampleSelective(user, example);

@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.example.demo.dto.ProductDto;
 import com.example.demo.mapper.ProductMapper;
 import com.example.demo.model.Product;
@@ -7,7 +8,6 @@ import com.example.demo.model.ProductExample;
 import com.example.demo.service.ProductService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -19,12 +19,12 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
 
     @Autowired
-    private ProductMapper goodsMapper;
+    private ProductMapper productMapper;
 
     @Override
-    @Cacheable(value = "goods") // EnableCaching
+    @Cacheable(value = "product") // EnableCaching
     public Product get(Long id) {
-        return goodsMapper.selectByPrimaryKey(id);
+        return productMapper.selectByPrimaryKey(id);
     }
 
     @Override
@@ -35,28 +35,29 @@ public class ProductServiceImpl implements ProductService {
             example.or().andNameLike("%" + keyword + "%");
             example.or().andDescriptionLike("%" + keyword + "%");
         }
-        List<Product> goodsList = goodsMapper.selectByExample(example);
-        PageInfo<Product> pageInfo = new PageInfo(goodsList);
+        List<Product> productList = productMapper.selectByExample(example);
+        PageInfo<Product> pageInfo = new PageInfo(productList);
         return pageInfo;
     }
 
     @Override
-    public int save(ProductDto productDto) {
-        Product goods = new Product();
-        BeanUtils.copyProperties(productDto, goods);
-        return goodsMapper.insert(goods);
+    public int add(ProductDto productDto) {
+        Product product = new Product();
+        BeanUtil.copyProperties(productDto, product);
+        product.setCategoryId(1); // TODO
+        return productMapper.insertSelective(product);
     }
 
     @Override
-    public int remove(Long id) {
-        return goodsMapper.deleteByPrimaryKey(id);
+    public int delete(Long id) {
+        return productMapper.deleteByPrimaryKey(id);
     }
 
     @Override
     public int update(Long id, ProductDto productDto) {
-        Product goods = new Product();
-        goods.setId(id);
-        BeanUtils.copyProperties(productDto, goods);
-        return goodsMapper.updateByPrimaryKeySelective(goods);
+        Product product = new Product();
+        product.setId(id);
+        BeanUtil.copyProperties(productDto, product);
+        return productMapper.updateByPrimaryKeySelective(product);
     }
 }

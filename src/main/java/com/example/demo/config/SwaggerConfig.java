@@ -27,15 +27,14 @@ public class SwaggerConfig {
                 .paths(PathSelectors.any())
                 .build()
                 .securitySchemes(securitySchemes())
-                .securityContexts(securityContexts())
-                ;
+                .securityContexts(securityContexts());
     }
 
     // http://localhost:8080/swagger-ui.html
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("SwaggerUI演示")
-                .description("Demo模板：SpringBoot + MySQL + Redis + RabbitMQ")
+                .description("Demo")
                 .contact(new Contact("张张张", "http://www.littleredhat1997.com", "1656704949@qq.com"))
                 .version("1.0")
                 .build();

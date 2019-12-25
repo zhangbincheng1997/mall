@@ -10,9 +10,9 @@ public interface ProductService {
 
     PageInfo<Product> list(String keyword, int page, int limit);
 
-    int save(ProductDto productDto);
+    int add(ProductDto productDto);
 
-    int remove(Long id);
+    int delete(Long id);
 
     int update(Long id, ProductDto productDto);
 }

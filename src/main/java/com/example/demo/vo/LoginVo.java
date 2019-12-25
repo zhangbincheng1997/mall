@@ -9,7 +9,7 @@ public class LoginVo {
 
     private String token;
 
-    private String avatar;
+    private String avatar = "http://qiniu.littleredhat1997.com/avatar.png";
 
-    private String nickname;
+    private String nickname = "zzz";
 }

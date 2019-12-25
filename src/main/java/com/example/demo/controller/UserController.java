@@ -1,33 +1,25 @@
 package com.example.demo.controller;
 
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.bean.copier.CopyOptions;
 import com.example.demo.base.Result;
-import com.example.demo.aop.AccessLimit;
-import com.example.demo.base.Status;
-import com.example.demo.component.QiniuService;
 import com.example.demo.component.RedisService;
+import com.example.demo.jwt.JwtUserDetails;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 import com.example.demo.dto.UserInfoDto;
 import com.example.demo.dto.UserDto;
+import com.example.demo.utils.Constants;
 import com.example.demo.vo.UserInfoVo;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.*;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.web.WebAttributes;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 import java.security.Principal;
 
 @Api(tags = "用户控制类")
@@ -40,7 +32,7 @@ public class UserController {
     private UserService userService;
 
     @Autowired
-    private QiniuService qiniuService;
+    private RedisService redisService;
 
     @ApiOperation("注册")
     @RequestMapping(value = "register", method = RequestMethod.POST)
@@ -53,11 +45,10 @@ public class UserController {
     @ApiOperation("获取信息")
     @RequestMapping(value = "/user", method = RequestMethod.GET)
     @ResponseBody
-    public Result getUserInfo(Principal principal) {
-        String username = principal.getName(); // SecurityContextHolder上下文
-        User user = userService.getUserByUsername(username);
+    public Result getUserInfo(Authentication authentication) {
+        JwtUserDetails userDetails = (JwtUserDetails) authentication.getPrincipal();
         UserInfoVo userInfoVo = new UserInfoVo();
-        BeanUtils.copyProperties(user, userInfoVo);
+        BeanUtil.copyProperties(userDetails.getUser(), userInfoVo, CopyOptions.create().setIgnoreNullValue(true));
         return Result.success(userInfoVo);
     }
 
@@ -67,6 +58,7 @@ public class UserController {
     public Result updateUserInfo(Principal principal, @Validated UserInfoDto userInfoDto) {
         String username = principal.getName(); // SecurityContextHolder上下文
         userService.updateUserInfoByUsername(username, userInfoDto);
+        redisService.delete(Constants.USER_KEY + username); // 刷新缓存
         return Result.success();
     }
 
@@ -76,25 +68,7 @@ public class UserController {
     public Result updatePassword(Principal principal, @RequestParam("password") String password) {
         String username = principal.getName(); // SecurityContextHolder上下文
         userService.updatePasswordByUsername(username, password);
+        redisService.delete(Constants.USER_KEY + username); // 刷新缓存
         return Result.success();
-    }
-
-    @ApiOperation("修改头像 限制ip:3次/分钟")
-    @ApiImplicitParams({@ApiImplicitParam(name = "file", value = "文件", required = true, dataType = "file")})
-    @RequestMapping(value = "/user/icon", method = RequestMethod.POST)
-    @ResponseBody
-    @AccessLimit(ip = true, time = 60, count = 3)
-    public Result uploadIcon(Principal principal, @RequestParam("file") MultipartFile file) {
-        String username = principal.getName(); // SecurityContextHolder上下文
-        if (!file.isEmpty()) {
-            try {
-                String path = qiniuService.upload(file.getBytes());
-                userService.updateAvatarByUsername(username, path);
-                return Result.success(path);
-            } catch (IOException e) {
-                log.error("上传用户头像失败", e);
-            }
-        }
-        return Result.failure();
     }
 }

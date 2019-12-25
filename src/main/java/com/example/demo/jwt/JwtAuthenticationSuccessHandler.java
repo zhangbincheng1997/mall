@@ -1,5 +1,7 @@
 package com.example.demo.jwt;
 
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.bean.copier.CopyOptions;
 import com.example.demo.base.Result;
 import com.example.demo.utils.RenderUtils;
 import com.example.demo.vo.LoginVo;
@@ -30,8 +32,7 @@ public class JwtAuthenticationSuccessHandler implements AuthenticationSuccessHan
         String token = jwtTokenUtils.generateToken(userDetails.getUsername());
         LoginVo loginVo = new LoginVo();
         loginVo.setToken(token);
-        loginVo.setAvatar(userDetails.getUser().getAvatar());
-        loginVo.setNickname(userDetails.getUser().getNickname());
+        BeanUtil.copyProperties(userDetails.getUser(), loginVo, CopyOptions.create().setIgnoreNullValue(true));
         RenderUtils.render(response, Result.success(loginVo));
     }
 }

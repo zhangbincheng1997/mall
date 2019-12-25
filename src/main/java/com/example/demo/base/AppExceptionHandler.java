@@ -33,17 +33,5 @@ public class AppExceptionHandler {
             return Result.failure(Status.INTERNAL_SERVER_ERROR);
         }
     }
-
-    /*@ExceptionHandler(value = BindException.class)
-    @ResponseBody
-    public Result bindExceptionHandler(HttpServletRequest request, HttpServletResponse response, Exception e) {
-        log.error(e.getMessage());
-        e.printStackTrace();
-        BindException ex = (BindException) e;
-        List<ObjectError> errorList = ex.getAllErrors();
-        ObjectError error = errorList.get(0);
-        String msg = error.getDefaultMessage();
-        return Result.failure(Status.BIND_EXCEPTION.getCode(), msg);
-    }*/
 }
 

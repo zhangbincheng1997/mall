@@ -1,13 +1,19 @@
 <!DOCTYPE html>
-<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh-CN">
 <head>
-    <div th:include="include/title :: title"></div>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>外卖后台管理系统</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="layui/css/layui.css"/>
+    <script type="text/javascript" src="layui/layui.js"></script>
+    <script type="text/javascript" src="js/config.js"></script>
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
-    <div th:include="include/header :: header"></div>
-    <div th:include="include/side :: side"></div>
-    <div th:include="include/footer :: footer"></div>
+    <script type="text/javascript" src="include/header.js"></script>
+    <script type="text/javascript" src="include/side.js"></script>
+    <script type="text/javascript" src="include/footer.js"></script>
 
     <div class="layui-body">
         <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px">
@@ -44,20 +50,6 @@
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">创建时间</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="createTime" id="createTime" class="layui-input layui-disabled"
-                               disabled>
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">修改时间</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="updateTime" id="updateTime" class="layui-input layui-disabled"
-                               disabled>
-                    </div>
-                </div>
-                <div class="layui-form-item">
                     <div class="layui-input-block">
                         <button class="layui-btn" lay-submit lay-filter="confirm">立即提交</button>
                         <button type="reset" class="layui-btn layui-btn-primary">重置</button>
@@ -75,7 +67,7 @@
         var laydate = layui.laydate;
 
         $.ajax({
-            url: "/user",
+            url: API + "user",
             headers: layui.data('token'),
             type: 'GET',
             dataType: 'json',
@@ -89,8 +81,6 @@
                         }
                     });
                     $('#birthday').val(res.data.birthday);
-                    $('#createTime').val(res.data.createTime);
-                    $('#updateTime').val(res.data.updateTime);
                     form.render(); // 刷新radio
                 } else {
                     layer.msg(JSON.stringify(res));
@@ -102,21 +92,23 @@
         });
 
         form.on('submit(confirm)', function (data) {
-            delete data.field.file;
-            delete data.field.createTime;
-            delete data.field.updateTime;
+            delete data.field.file; // 删除file
+            data.field.avatar = $('#avatar')[0].src; // 添加avatar
             console.log(data.field);
             $.ajax({
-                url: "/user",
+                url: API + "user",
                 headers: layui.data('token'),
                 data: data.field,
                 type: 'POST',
                 dataType: 'json',
                 success: function (res) {
                     if (res.code === 0) {
-                        // 修改用户昵称
+                        // 修改用户头像和昵称
                         $('#header-nickname').text(data.field.nickname);
+                        $('#header-avatar').attr('src', data.field.avatar);
+                        // 保存用户头像和昵称
                         layui.data('user', {key: 'nickname', value: data.field.nickname});
+                        layui.data('user', {key: 'avatar', value: data.field.data});
                         layer.msg(res.msg);
                     } else {
                         layer.msg(JSON.stringify(res));
@@ -131,13 +123,10 @@
 
         upload.render({
             elem: '#upload',
-            url: 'user/icon',
+            url: API + 'upload',
             headers: layui.data('token'),
             done: function (res) {
-                // 刷新用户头像
-                $('#header-avatar').attr('src', res.data);
                 $('#avatar').attr('src', res.data); // 异步 + cdn
-                layui.data('user', {key: 'avatar', value: res.data});
                 layer.msg(res.msg);
             },
             error: function (jqXHR, textStatus, errorThrown) {

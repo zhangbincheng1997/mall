@@ -1,8 +1,14 @@
 # sell-springboot
 前后端分离 + RESTful接口
+```
+1. GET      /url/xxx    获取
+2. POST     /url        添加
+3. PUT      /url/xxx    修改
+4. DELETE   /url/xxx    删除 
+```
 
 ## 前端技术
-[Layui](https://www.layui.com/) : [sell-layui](/sell-layui)
+[Layui](https://www.layui.com/) : [sell-layui](/sell-layui) 入口/sell-layui/login.html
 
 ## 后端技术
 | 技术 | 说明 |
@@ -13,13 +19,15 @@
 | MyBatis | 数据库框架  |
 | MyBatis Generator | MyBatis生成插件 |
 | MyBatis PageHelper | MyBatis分页插件 |
-| Druid | 数据库连接池 |
 | Redis | 缓存数据库 |
 | RabbitMQ | 消息队列 |
 | QiNiu | 对象存储 |
+| Druid | 数据库连接池 |
 | Swagger | 文档接口 |
 | LogStash | 日志收集 |
-| Lombok | 简化对象封装工具（需要安装IDEA插件） |
+| Lombok | [简化对象封装工具](https://github.com/rzwitserloot/lombok)（需要安装IDEA插件） |
+| Hutool | [工具包](https://www.bookstack.cn/books/hutool) |
+| EasyCaptcha | [验证码](https://github.com/whvcse/EasyCaptcha)
 
 MyBatis Generator(MySQL5.7):
 数据库建表（见demo.sql） -> Run Generator.java
@@ -43,7 +51,7 @@ http://localhost:8080/swagger-ui.html
      private class DefaultPreAuthenticationChecks implements UserDetailsChecker
          -> isCredentialsNonExpired()
 
-// 状态码
+// base/Status.java
 USERNAME_NOT_FOUND(1004, "认证失败：用户名不存在"),
 BAD_CREDENTIALS(1005, "认证失败：密码错误"),
 ACCOUNT_EXPIRED(1006, "认证失败：用户过期"),
@@ -54,17 +62,18 @@ DISABLED(1009, "认证失败：用户不可用"),
 
 2. UserDetailsService 缓存
 ```
+// get
+User user = (User) redisService.get(Constants.USER_KEY + username);
+// set
+redisService.set(Constants.USER_KEY + username, user, Constants.USER_EXPIRE);
+
+// utils/Constants.java
 public static final String USER_KEY = "user:"; // 用户缓存
 public static final int USER_EXPIRE = 60 * 60; // 用户缓存过期时间 60*60s
 public static final String ROLE_KEY = "role:"; // 角色缓存
 public static final int ROLE_EXPIRE = 60 * 60; // 角色缓存过期时间 60*60s
 public static final String PERMISSION_KEY = "permission:"; // 权限缓存
 public static final int PERMISSION_EXPIRE = 60 * 60; // 权限缓存过期时间 60*60s
-
-// get
-User user = (User) redisService.get(Constants.USER_KEY + username);
-// set
-redisService.set(Constants.USER_KEY + username, user, Constants.USER_EXPIRE);
 ```
 
 ## MySQL

@@ -34,24 +34,7 @@ public class AppErrorController implements ErrorController {
     }
 
     /**
-     * HTML页面的错误处理
-     */
-    @RequestMapping(value = ERROR_PATH, produces = "text/html")
-    public String errorPageHandler(HttpServletRequest request, HttpServletResponse response) {
-        int status = response.getStatus();
-        log.error("错误请求 : " + status);
-        switch (status) {
-            case 404:
-                return "error/404";
-            case 500:
-                return "error/500";
-            default:
-                return "error/unknown";
-        }
-    }
-
-    /**
-     * 非HTML页面的错误处理
+     * 输出JSON
      */
     @RequestMapping(value = ERROR_PATH)
     @ResponseBody

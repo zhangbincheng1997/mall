@@ -1,7 +1,5 @@
 package com.example.demo.jwt;
 
-import com.example.demo.model.Permission;
-import com.example.demo.model.Role;
 import com.example.demo.model.User;
 import lombok.Data;
 import lombok.Getter;
