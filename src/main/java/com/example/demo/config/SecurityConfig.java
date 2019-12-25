@@ -1,5 +1,9 @@
 package com.example.demo.config;
 
+import com.example.demo.aop.CaptchaFilter;
+import com.example.demo.aop.TokenFilter;
+import com.example.demo.base.GlobalException;
+import com.example.demo.component.RedisService;
 import com.example.demo.jwt.*;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
@@ -8,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -31,7 +38,18 @@ import java.util.List;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private JwtTokenFilter jwtTokenFilter;
+    private CaptchaFilter captchaFilter;
+    @Autowired
+    private TokenFilter tokenFilter;
+
+    @Autowired
+    private UserDetailsService userDetailsService;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private List<String> ignoreUrls;
+
     @Autowired
     private JwtAuthenticationSuccessHandler jwtAuthenticationSuccessHandler; // 登录成功
     @Autowired
@@ -43,7 +61,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        // 配置
+        // 忽略白名单
+        for (String url : ignoreUrls) {
+            http.authorizeRequests().antMatchers(url).permitAll();
+        }
+        // 配置参数
         http
                 .csrf().disable() // 关闭csrf
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 关闭session
@@ -51,60 +73,36 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll() // 跨域会请求OPTIONS
                 .antMatchers(HttpMethod.GET,
                         "/", "/csrf",
-                        "/favicon.ico",
-                        "/*.html",
-                        "/**/*.html",
-                        "/**/*.css",
-                        "/**/*.js",
-                        "/swagger-resources/**",
-                        "/v2/**",
-                        "/webjars/**"
+                        "/favicon.ico", "/**/*.css", "/**/*.js", "/layui/**",
+                        "/swagger-ui.html", "/swagger-resources/**", "/v2/**", "/webjars/**"
                 ).permitAll()
                 .antMatchers("/druid/**").permitAll()
-                .antMatchers("/register", "/login").permitAll()
+                .antMatchers("/login", "/register", "/captcha").permitAll()
                 .anyRequest().authenticated() // 其他全部需要认证
-                .and().formLogin().loginProcessingUrl("/login") // 登录请求 UsernamePasswordAuthenticationFilter
+                .and().formLogin().loginProcessingUrl("/login") // 处理登录请求
                 .successHandler(jwtAuthenticationSuccessHandler)
                 .failureHandler(jwtAuthenticationFailureHandler)
                 .and().exceptionHandling() // 处理异常
                 .authenticationEntryPoint(jwtAuthenticationEntryPoint)
                 .accessDeniedHandler(jwtAccessDeniedHandler);
-
-        // 请求顺序 JwtTokenFilter -> UsernamePasswordAuthenticationFilter
-        http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
+        // 请求顺序 CaptchaFilter -> TokenFilter -> UsernamePasswordAuthenticationFilter
+        http.addFilterBefore(captchaFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(tokenFilter, UsernamePasswordAuthenticationFilter.class);
         // 禁用缓存
         http.headers().cacheControl();
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService())
-                .passwordEncoder(passwordEncoder());
-    }
-
-    @Autowired
-    private UserService userService;
-
-    @Bean
-    public UserDetailsService userDetailsService() {
-        // 获取登录用户信息
-        return new UserDetailsService() {
-            @Override
-            public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-                User user = userService.getUserByUsername(username);
-                if (user != null) {
-                    List<GrantedAuthority> permissionList = userService.getPermissionList(user.getId());
-                    List<GrantedAuthority> roleList = userService.getRoleList(user.getId());
-                    permissionList.addAll(roleList);
-                    return new JwtUserDetails(user.getUsername(), user.getPassword(), permissionList);
-                }
-                throw new UsernameNotFoundException("用户名或密码错误");
-            }
-        };
+        auth.authenticationProvider(daoAuthenticationProvider());
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+    public DaoAuthenticationProvider daoAuthenticationProvider() {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setHideUserNotFoundExceptions(false);
+        provider.setUserDetailsService(userDetailsService);
+        provider.setPasswordEncoder(passwordEncoder);
+        return provider;
     }
 }

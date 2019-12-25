@@ -1,13 +1,10 @@
 package com.example.demo.jwt;
 
 import com.example.demo.base.Result;
-import com.example.demo.model.User;
-import com.example.demo.service.UserService;
 import com.example.demo.utils.RenderUtils;
 import com.example.demo.vo.LoginVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
@@ -23,21 +20,18 @@ import java.io.IOException;
 public class JwtAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
     @Autowired
-    private JwtTokenService jwtTokenService;
-
-    @Autowired
-    private UserService userService;
+    private JwtTokenUtils jwtTokenUtils;
 
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
+    public void onAuthenticationSuccess(HttpServletRequest request,
+                                        HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        String token = jwtTokenService.generateToken(userDetails.getUsername());
-        User user = userService.getUserByUsername(userDetails.getUsername());
+        JwtUserDetails userDetails = (JwtUserDetails) authentication.getPrincipal(); // SecurityContextHolder上下文
+        String token = jwtTokenUtils.generateToken(userDetails.getUsername());
         LoginVo loginVo = new LoginVo();
         loginVo.setToken(token);
-        loginVo.setAvatar(user.getAvatar());
-        loginVo.setNickname(user.getNickname());
-        RenderUtils.render(httpServletResponse, Result.success(loginVo));
+        loginVo.setAvatar(userDetails.getUser().getAvatar());
+        loginVo.setNickname(userDetails.getUser().getNickname());
+        RenderUtils.render(response, Result.success(loginVo));
     }
 }

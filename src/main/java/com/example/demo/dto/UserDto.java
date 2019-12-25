@@ -19,7 +19,11 @@ public class UserDto {
     @Size(min = 3, max = 12, message = "密码长度为3-12")
     private String password;
 
-    @ApiModelProperty(value = "验证码")
-//    @Size(min = Constants.CODE_LENGTH, max = Constants.CODE_LENGTH, message = "验证码不符合规范")
+    @ApiModelProperty(value = "验证码key")
+    @NotEmpty(message = "验证码key不能为空")
+    private String key;
+
+    @ApiModelProperty(value = "验证码code")
+    @NotEmpty(message = "验证码code不能为空")
     private String code;
 }

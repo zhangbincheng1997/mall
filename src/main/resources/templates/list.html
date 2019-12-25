@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:include="include/title :: title"></div>
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div th:include="include/header :: header"></div>
+    <div th:include="include/side :: side"></div>
+    <div th:include="include/footer :: footer"></div>
+
+    <div class="layui-body">
+        <table id="demo"></table>
+    </div>
+</div>
+<script>
+    layui.use(['element', 'table'], function () {
+        var table = layui.table;
+
+        table.render({
+            elem: '#demo',
+            url: '/product/list',
+            headers: layui.data('token'),
+            page: true,
+            cols: [
+                [
+                    {field: 'id', title: 'ID', width: 80, sort: true},
+                    {field: 'icon', title: '图标'},
+                    {field: 'title', title: '标题'},
+                    {field: 'description', title: '描述'},
+                    {field: 'price', title: '价格'},
+                    {field: 'stock', title: '库存'},
+                    {field: 'status', title: '状态'}
+                ]
+            ]
+        });
+    });
+</script>
+</body>
+</html>

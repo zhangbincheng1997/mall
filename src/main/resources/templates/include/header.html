@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="header">
+    <div class="layui-header">
+        <div class="layui-logo">外卖后台管理系统</div>
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item"><a href="">控制台</a></li>
+            <li class="layui-nav-item"><a href="">用户</a></li>
+            <li class="layui-nav-item">
+                <a href="javascript:void(0);">其它</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">授权管理</a></dd>
+                    <dd><a href="druid/index.html">Druid</a></dd>
+                    <dd><a href="swagger-ui.html">Swagger</a></dd>
+                </dl>
+            </li>
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="javascript:void(0);">
+                    <img id="header-avatar" class="layui-nav-img">
+                    <span id="header-nickname"></span>
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="info">基本资料</a></dd>
+                    <dd><a href="password">修改密码</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="toLogin">退出</a></li>
+        </ul>
+    </div>
+    <script>
+        layui.use(['jquery'], function () {
+            var $ = layui.jquery;
+
+            $('#header-avatar').attr('src', layui.data('user').avatar);
+            $('#header-nickname').text(layui.data('user').nickname);
+        });
+    </script>
+</div>
+</html>

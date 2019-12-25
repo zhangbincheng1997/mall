@@ -1,8 +1,10 @@
 package com.example.demo.controller;
 
 import com.example.demo.base.Result;
-import com.example.demo.access.AccessLimit;
+import com.example.demo.aop.AccessLimit;
+import com.example.demo.base.Status;
 import com.example.demo.component.QiniuService;
+import com.example.demo.component.RedisService;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 import com.example.demo.dto.UserInfoDto;
@@ -15,11 +17,16 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.*;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.web.WebAttributes;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.security.Principal;
 
@@ -36,10 +43,9 @@ public class UserController {
     private QiniuService qiniuService;
 
     @ApiOperation("注册")
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @RequestMapping(value = "register", method = RequestMethod.POST)
     @ResponseBody
     public Result register(@Validated UserDto userDto) {
-        // 验证用户名密码
         User user = userService.register(userDto);
         return Result.success(user);
     }
@@ -73,11 +79,11 @@ public class UserController {
         return Result.success();
     }
 
-    @ApiOperation("修改头像 3次/分钟")
+    @ApiOperation("修改头像 限制ip:3次/分钟")
     @ApiImplicitParams({@ApiImplicitParam(name = "file", value = "文件", required = true, dataType = "file")})
     @RequestMapping(value = "/user/icon", method = RequestMethod.POST)
     @ResponseBody
-    @AccessLimit(seconds = 60, maxCount = 3)
+    @AccessLimit(ip = true, time = 60, count = 3)
     public Result uploadIcon(Principal principal, @RequestParam("file") MultipartFile file) {
         String username = principal.getName(); // SecurityContextHolder上下文
         if (!file.isEmpty()) {
