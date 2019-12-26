@@ -1,11 +1,7 @@
 package com.example.demo.base;
 
-import lombok.Data;
 import lombok.Getter;
 
-/**
- * API格式封装
- */
 @Getter
 public class Result {
 

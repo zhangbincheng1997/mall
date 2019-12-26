@@ -6,12 +6,6 @@ import java.net.UnknownHostException;
 
 public class IPUtils {
 
-    /**
-     * 获取用户ip
-     *
-     * @param request
-     * @return
-     */
     public static String getIpAddr(HttpServletRequest request) {
         String ipAddress = request.getHeader("x-forwarded-for");
         if (ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {

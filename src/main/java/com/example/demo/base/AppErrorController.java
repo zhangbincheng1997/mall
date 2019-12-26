@@ -28,21 +28,20 @@ public class AppErrorController implements ErrorController {
         return ERROR_PATH;
     }
 
+    // TODO
     @Autowired
     public AppErrorController(ErrorAttributes errorAttributes) {
         this.errorAttributes = errorAttributes;
     }
 
-    /**
-     * 输出JSON
-     */
     @RequestMapping(value = ERROR_PATH)
     @ResponseBody
     public Result errorApiHandler(HttpServletRequest request, HttpServletResponse response) {
         int status = response.getStatus();
-        log.error("错误请求 : " + status);
         WebRequest webRequest = new ServletWebRequest(request);
         Map<String, Object> attr = this.errorAttributes.getErrorAttributes(webRequest, false);
-        return Result.failure(status, String.valueOf(attr.getOrDefault("message", "error")));
+        String msg = String.valueOf(attr.getOrDefault("message", "error"));
+        log.error(msg);
+        return Result.failure(status, msg);
     }
 }

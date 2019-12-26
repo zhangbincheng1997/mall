@@ -22,7 +22,7 @@ public class ProductDto {
 
     @ApiModelProperty(value = "名称", required = true)
     @NotEmpty(message = "名称不能为空")
-    @Length(min = 1, max = 255, message = "标题长度为1-255")
+    @Length(min = 1, max = 255, message = "名称长度为1-255")
     private String name;
 
     @ApiModelProperty(value = "描述", required = true)

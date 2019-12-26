@@ -31,3 +31,4 @@ build/
 .vscode/
 
 *.log
+application.properties

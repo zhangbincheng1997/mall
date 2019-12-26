@@ -3,7 +3,6 @@ package com.example.demo.vo;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
@@ -21,7 +20,7 @@ public class ProductVo {
 
     private Integer stock;
 
-    private Integer status; // 商品状态：0关、1开，默认0
+    private Integer status;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createTime;

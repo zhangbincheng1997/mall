@@ -2,7 +2,6 @@ package com.example.demo.utils;
 
 import com.alibaba.fastjson.JSON;
 import com.example.demo.base.Result;
-import com.example.demo.base.Status;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;

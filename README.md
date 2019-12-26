@@ -15,7 +15,7 @@
 | ---- | ---- |
 | Spring Boot | MVC框架 |
 | Spring Security | 安全框架 |
-| JWT | 单点登录 |
+| JWT | [单点登录](https://jwt.io/introduction/) |
 | MyBatis | 数据库框架  |
 | MyBatis Generator | MyBatis生成插件 |
 | MyBatis PageHelper | MyBatis分页插件 |
@@ -39,7 +39,13 @@ Swagger:
 http://localhost:8080/swagger-ui.html
 
 ## Spring Security
-1. AuthenticationProvider 顺序
+1. AOP 顺序
+```
+Filter -> Interceptor -> Aspect -> Controller
+OncePerRequestFilter 重复执行的filter只需要一次执行
+```
+
+2. AuthenticationProvider 顺序
 ```
 1. AbstractUserDetailsAuthenticationProvider.java
      private class DefaultPostAuthenticationChecks implements UserDetailsChecker
@@ -54,13 +60,13 @@ http://localhost:8080/swagger-ui.html
 // base/Status.java
 USERNAME_NOT_FOUND(1004, "认证失败：用户名不存在"),
 BAD_CREDENTIALS(1005, "认证失败：密码错误"),
-ACCOUNT_EXPIRED(1006, "认证失败：用户过期"),
+ACCOUNT_DISABLED(1006, "认证失败：用户不可用"),
 ACCOUNT_LOCKED(1007, "认证失败：用户锁定"),
-CREDENTIALS_EXPIRED(1008, "认证失败：证书过期"),
-DISABLED(1009, "认证失败：用户不可用"),
+ACCOUNT_EXPIRED(1008, "认证失败：用户过期"),
+CREDENTIALS_EXPIRED(1009, "认证失败：证书过期"),
 ```
 
-2. UserDetailsService 缓存
+3. UserDetailsService 缓存
 ```
 // get
 User user = (User) redisService.get(Constants.USER_KEY + username);

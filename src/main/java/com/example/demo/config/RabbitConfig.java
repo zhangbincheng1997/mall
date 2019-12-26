@@ -12,5 +12,4 @@ public class RabbitConfig {
     public Queue testQueue() {
         return new Queue(Constants.TEST_TOPIC);
     }
-
 }

@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-using-springbootapplication-annotation.html
+ *
  * @SpringBootApplication: same as @Configuration @EnableAutoConfiguration @ComponentScan
  * @EnableAutoConfiguration: enable Spring Boot’s auto-configuration mechanism
  * @ComponentScan: enable @Component scan on the package where the application is located

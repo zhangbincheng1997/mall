@@ -2,10 +2,8 @@ package com.example.demo.vo;
 
 import lombok.Data;
 
-import java.util.Date;
-
 @Data
-public class LoginVo {
+public class LoginSuccessVo {
 
     private String token;
 

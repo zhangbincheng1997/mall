@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * AccessDeniedHandler 权限不足
+ * AccessDeniedHandler 权限不足 拒绝访问
  */
 @Component
 public class JwtAccessDeniedHandler implements AccessDeniedHandler {

@@ -1,6 +1,5 @@
 package com.example.demo.service.impl;
 
-import cn.hutool.core.bean.BeanUtil;
 import com.example.demo.base.GlobalException;
 import com.example.demo.base.Status;
 import com.example.demo.mapper.UserMapper;
@@ -10,6 +9,7 @@ import com.example.demo.model.*;
 import com.example.demo.dto.UserInfoDto;
 import com.example.demo.dto.UserDto;
 import com.example.demo.service.UserService;
+import com.example.demo.utils.ConvertUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
         example.createCriteria().andUsernameEqualTo(username);
         List<User> userList = userMapper.selectByExample(example);
         if (userList.size() == 0) {
-            return null;//new GlobalException(Status.USERNAME_NOT_EXIST);
+            return null; // new GlobalException(Status.USERNAME_NOT_EXIST);
         } else {
             return userList.get(0);
         }
@@ -46,51 +46,36 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User register(UserDto userDto) {
-        UserExample example = new UserExample();
-        example.createCriteria().andUsernameEqualTo(userDto.getUsername());
-        List<User> userList = userMapper.selectByExample(example);
-        if (userList.size() != 0) {
+        if (getUserByUsername(userDto.getUsername()) != null) {
             throw new GlobalException(Status.USERNAME_EXIST);
         } else {
             User user = new User();
             user.setUsername(userDto.getUsername());
-            user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+            user.setPassword(passwordEncoder.encode(userDto.getPassword())); // JWT加密
             userMapper.insertSelective(user);
-
             UserRole userRole = new UserRole();
             userRole.setUserId(user.getId());
             userRole.setRoleId(2L);
             userRoleMapper.insert(userRole);
-
             return user;
         }
     }
 
     @Override
-    public int updateUserInfoByUsername(String username, UserInfoDto userInfoDto) {
-        User user = new User();
-        BeanUtil.copyProperties(userInfoDto, user);
+    public void updateUserInfoByUsername(String username, UserInfoDto userInfoDto) {
+        User user = ConvertUtils.convert(userInfoDto, User.class);
         UserExample example = new UserExample();
         example.createCriteria().andUsernameEqualTo(username);
-        return userMapper.updateByExampleSelective(user, example);
+        userMapper.updateByExampleSelective(user, example);
     }
 
     @Override
-    public int updatePasswordByUsername(String username, String password) {
+    public void updatePasswordByUsername(String username, String password) {
         User user = new User();
         user.setPassword(passwordEncoder.encode(password));
         UserExample example = new UserExample();
         example.createCriteria().andUsernameEqualTo(username);
-        return userMapper.updateByExampleSelective(user, example);
-    }
-
-    @Override
-    public int updateAvatarByUsername(String username, String avatar) {
-        User user = new User();
-        user.setAvatar(avatar);
-        UserExample example = new UserExample();
-        example.createCriteria().andUsernameEqualTo(username);
-        return userMapper.updateByExampleSelective(user, example);
+        userMapper.updateByExampleSelective(user, example);
     }
 
     @Override

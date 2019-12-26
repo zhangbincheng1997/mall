@@ -2,11 +2,7 @@ package com.example.demo.config;
 
 import com.example.demo.aop.CaptchaFilter;
 import com.example.demo.aop.TokenFilter;
-import com.example.demo.base.GlobalException;
-import com.example.demo.component.RedisService;
 import com.example.demo.jwt.*;
-import com.example.demo.model.User;
-import com.example.demo.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -40,29 +36,30 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private JwtAuthenticationSuccessHandler jwtAuthenticationSuccessHandler; // 登录成功
+    private JwtAuthenticationSuccessHandler jwtAuthenticationSuccessHandler; // 认证成功
     @Autowired
-    private JwtAuthenticationFailureHandler jwtAuthenticationFailureHandler; // 登录失败
+    private JwtAuthenticationFailureHandler jwtAuthenticationFailureHandler; // 认证失败
     @Autowired
-    private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint; // 认证失败
+    private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint; // 权限不足 认证入口点
     @Autowired
-    private JwtAccessDeniedHandler jwtAccessDeniedHandler; // 权限不足
+    private JwtAccessDeniedHandler jwtAccessDeniedHandler; // 权限不足 拒绝访问
+
+    @Autowired
+    private String[] ignoreUrls;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        // 白名单
+        for (String url : ignoreUrls) {
+            http.authorizeRequests().antMatchers(url).permitAll();
+        }
         // 配置参数
         http
                 .csrf().disable() // 关闭csrf
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 关闭session
                 .and().authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll() // 跨域会请求OPTIONS
-                .antMatchers(HttpMethod.GET,
-                        "/", "/csrf",
-                        "/favicon.ico", "/**/*.css", "/**/*.js", "/layui/**",
-                        "/swagger-ui.html", "/swagger-resources/**", "/v2/**", "/webjars/**"
-                ).permitAll()
-                .antMatchers("/druid/**").permitAll()
-                .antMatchers("/login", "/register", "/captcha").permitAll()
+                .antMatchers("/login", "/register", "/captcha").permitAll() // 登陆注册
                 .anyRequest().authenticated() // 其他全部需要认证
                 .and().formLogin().loginProcessingUrl("/login") // 处理登录请求
                 .successHandler(jwtAuthenticationSuccessHandler)
@@ -85,7 +82,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setHideUserNotFoundExceptions(false);
+        provider.setHideUserNotFoundExceptions(false); // 捕获UsernameNotFoundException
         provider.setUserDetailsService(userDetailsService);
         provider.setPasswordEncoder(passwordEncoder);
         return provider;

@@ -13,9 +13,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * 切面日志
- */
 @Slf4j
 @Aspect
 @Component

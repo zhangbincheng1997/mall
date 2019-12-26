@@ -23,8 +23,6 @@ import java.io.IOException;
 @Slf4j
 @PropertySource({"classpath:config/jwt.properties"})
 @Component
-// OncePerRequestFilter 重复执行的filter只需要一次执行
-// Filter -> Interceptor -> Aspect -> Controller
 public class TokenFilter extends OncePerRequestFilter {
 
     @Autowired

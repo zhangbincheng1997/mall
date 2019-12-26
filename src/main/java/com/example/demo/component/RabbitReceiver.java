@@ -15,5 +15,4 @@ public class RabbitReceiver {
     public void testProcess(String message) {
         log.info(message);
     }
-
 }

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 import java.util.concurrent.TimeUnit;
 
 @Component
-@Order(1)
 public class RedisService {
 
     @Autowired

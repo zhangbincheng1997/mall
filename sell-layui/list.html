@@ -19,6 +19,12 @@
         <table id="demo" lay-filter="table"></table>
     </div>
 </div>
+<script type="text/html" id="toolbar">
+    <input class="text" style="height:30px;width:200px;" name="" id="keyword"  placeholder="请输入关键词">
+     <a href="javascript:void(0);" id="search">
+        <i class="layui-icon layui-icon-search"></i> 
+    </a>
+</script>
 <script type="text/html" id="icon">
     <img src="{{ d.icon }}">
 </script>
@@ -26,12 +32,12 @@
     <input type="checkbox" name="status" value="{{ d.status }}" lay-skin="switch"
            lay-text="开|关" lay-filter="switch" {{ d.status== 1 ? 'checked' : '' }}>
 </script>
-<script type="text/html" id="toolbar">
-    <a class="layui-btn layui-btn-xs" lay-event="update">修改</a>
+<script type="text/html" id="bar">
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
 </script>
 <script>
-    layui.use(['element', 'table'], function () {
+    layui.use(['jquery', 'element', 'table'], function () {
+        var $ = layui.jquery;
         var table = layui.table;
 
         table.render({
@@ -39,48 +45,30 @@
             url: API + 'product/list',
             headers: layui.data('token'),
             page: true,
-            toolbar: 'default',
+            toolbar: '#toolbar', // 'default'
+            defaultToolbar: [{
+                title: '添加',
+                layEvent: 'add',
+                icon: 'layui-icon-add-1'
+            }, 'filter', 'exports', 'print'],
             cols: [[
-                {fixed: 'left', type: 'checkbox'}, // 表头
                 {field: 'id', title: 'ID', width: 60, align: 'center', sort: true},
-                {field: 'icon', title: '图标', width: 100, align: 'center', templet: '#icon'},
-                {field: 'name', title: '名称'},
-                {field: 'description', title: '描述'},
-                {field: 'price', title: '价格'},
-                {field: 'stock', title: '库存'},
+                {field: 'icon', title: '图标', edit: 'text', width: 100, align: 'center', templet: '#icon'},
+                {field: 'name', title: '名称', edit: 'text'},
+                {field: 'description', title: '描述', edit: 'text'},
+                {field: 'price', title: '价格', edit: 'text'},
+                {field: 'stock', title: '库存', edit: 'text'},
                 {field: 'status', title: '状态', width: 100, align: 'center', templet: '#switch'},
-                {fixed: 'right', title: '操作', width: 120, align: 'center', toolbar: '#toolbar'} // 表尾
+                {fixed: 'right', title: '操作', width: 100, align: 'center', toolbar: '#bar'}
             ]]
         });
 
         // 监听头工具栏事件
         table.on('toolbar(table)', function (obj) {
-            var data = table.checkStatus(obj.config.id).data; // 获取选中的数据对象数组
-            console.log(data);
             switch (obj.event) {
                 case 'add':
-                    window.location.href = "addproduct.html";
-                    break;
-                case 'update':
-                    if (data.length === 0) {
-                        layer.msg('请选择一行');
-                    } else if (data.length > 1) {
-                        layer.msg('只能同时修改一个');
-                    } else {
-                        layer.alert('修改 [id]：' + data[0].id);
-                        // TODO
-                    }
-                    break;
-                case 'delete':
-                    if (data.length === 0) {
-                        layer.msg('请选择一行');
-                    } else {
-                        layer.confirm('确认删除？', function (index) {
-                            window.location.reload();
-                            layer.close(index);
-                            // TODO
-                        });
-                    }
+                    layer.msg('修改操作');
+                    window.location.href = 'addproduct.html';
                     break;
             }
         });
@@ -90,17 +78,66 @@
             var data = obj.data; // 获取选中的数据对象
             console.log(data);
             switch (obj.event) {
-                case 'update':
-                    layer.msg('修改操作');
-                    // TODO
-                    break;
                 case 'delete':
                     layer.confirm('确认删除？', function (index) {
-                        window.location.reload();
-                        // TODO
+                        $.ajax({
+                            url: API + "product/" + obj.data.id,
+                            headers: layui.data('token'),
+                            type: 'DELETE',
+                            dataType: 'json',
+                            success: function (res) {
+                                if (res.code === 0) {
+                                    obj.del();
+                                    layer.msg('删除成功');
+                                } else {
+                                    layer.msg(JSON.stringify(res));
+                                }
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                layer.msg('出错啦...错误码: ' + jqXHR.status + ' ' + jqXHR.statusText);
+                            }
+                        });
                     });
                     break;
             }
+        });
+
+        //监听单元格编辑
+        table.on('edit(table)', function (obj) {
+            var that = $(this);
+            // 记录单元格编辑之前的值
+            var oldValue = that.prev().text();
+            //$(obj.tr.selector+' td[data-field="'+obj.field+'"] div').text();
+            $.ajax({
+                url: API + "product/" + obj.data.id,
+                headers: layui.data('token'),
+                data: obj.data, //所在行所有键值
+                type: 'POST',
+                dataType: 'json',
+                success: function (res) {
+                    if (res.code === 0) {
+                        layer.msg('修改成功');
+                    } else {
+                        // 修改回来
+                        that.val(oldValue);
+                        // $(obj.tr.selector + ' td[data-field="' + obj.field + '"] input').val(oldValue);
+                        layer.msg(JSON.stringify(res));
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    layer.msg('出错啦...错误码: ' + jqXHR.status + ' ' + jqXHR.statusText);
+                }
+            });
+        });
+
+        // $('#search').on('click', function(){}); 搜索一次后会失效
+        $('body').on('click', '#search', function () {
+            table.reload('demo', {
+                url: API + 'product/list',
+                headers: layui.data('token'),
+                page: true,
+                where: {keyword: $('#keyword').val()}
+            });
         });
     });
 </script>

@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import cn.hutool.core.bean.BeanUtil;
 import com.example.demo.base.PageResult;
 import com.example.demo.base.Result;
 import com.example.demo.model.Product;
@@ -14,13 +13,13 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Api(tags = "商品控制类")
+@Api(tags = "商品")
 @Controller
 @RequestMapping("/product")
 public class ProductController {
@@ -29,24 +28,22 @@ public class ProductController {
     private ProductService productService;
 
     @ApiOperation("获取商品")
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @GetMapping("/{id}")
     @ResponseBody
     @PreAuthorize("hasAuthority('product:read')")
     public Result get(@PathVariable("id") Long id) {
         Product product = productService.get(id);
-        ProductVo productVo = new ProductVo();
-        BeanUtil.copyProperties(product, productVo);
-        return Result.success(productVo);
+        return Result.success(ConvertUtils.convert(product, ProductVo.class));
     }
 
-    @ApiOperation(value = "获取商品列表")
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @ApiOperation("获取商品列表")
+    @GetMapping("/list")
     @ResponseBody
     @PreAuthorize("hasAuthority('product:read')")
     public Result list(@RequestParam(value = "keyword", required = false) String keyword,
                        @RequestParam(value = "page", defaultValue = "1") Integer page,
                        @RequestParam(value = "limit", defaultValue = "10") Integer limit) {
-        PageInfo pageInfo = productService.list(keyword, page, limit);
+        PageInfo<Product> pageInfo = productService.list(keyword, page, limit);
         List<Product> productList = pageInfo.getList();
         List<ProductVo> productVoList = productList.stream()
                 .map(product -> ConvertUtils.convert(product, ProductVo.class))
@@ -54,11 +51,11 @@ public class ProductController {
         return PageResult.success(productVoList, pageInfo.getTotal());
     }
 
-    @ApiOperation(value = "添加商品")
-    @RequestMapping(value = "", method = RequestMethod.PUT)
+    @ApiOperation("添加商品")
+    @PutMapping("")
     @ResponseBody
-    @PreAuthorize("hasAuthority('product:create')") // hasRole('ROLE_ADMIN')
-    public Result add(@Validated ProductDto productDto) {
+    @PreAuthorize("hasRole('ROLE_ADMIN')") // hasAuthority('product:create')
+    public Result add(@Valid ProductDto productDto) {
         int count = productService.add(productDto);
         if (count == 1) {
             return Result.success();
@@ -67,12 +64,12 @@ public class ProductController {
         }
     }
 
-    @ApiOperation(value = "修改商品")
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    @ApiOperation("修改商品")
+    @PostMapping("/{id}")
     @ResponseBody
     @PreAuthorize("hasAuthority('product:write')")
     public Result update(@PathVariable("id") Long id,
-                         @Validated ProductDto productDto) {
+                         @Valid ProductDto productDto) {
         int count = productService.update(id, productDto);
         if (count == 1) {
             return Result.success();
@@ -81,8 +78,8 @@ public class ProductController {
         }
     }
 
-    @ApiOperation(value = "删除商品")
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @ApiOperation("删除商品")
+    @DeleteMapping("/{id}")
     @ResponseBody
     @PreAuthorize("hasAuthority('product:delete')")
     public Result delete(@PathVariable("id") Long id) {

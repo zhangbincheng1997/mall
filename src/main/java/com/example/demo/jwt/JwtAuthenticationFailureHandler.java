@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * AuthenticationFailureHandler 登录失败
+ * AuthenticationFailureHandler 认证失败
  */
 @Component
 public class JwtAuthenticationFailureHandler implements AuthenticationFailureHandler {
@@ -28,14 +28,14 @@ public class JwtAuthenticationFailureHandler implements AuthenticationFailureHan
             status = Status.USERNAME_NOT_FOUND;
         } else if (e instanceof BadCredentialsException) {
             status = Status.BAD_CREDENTIALS;
+        } else if (e instanceof DisabledException) {
+            status = Status.ACCOUNT_DISABLED;
         } else if (e instanceof AccountExpiredException) {
             status = Status.ACCOUNT_EXPIRED;
         } else if (e instanceof LockedException) {
             status = Status.ACCOUNT_LOCKED;
         } else if (e instanceof CredentialsExpiredException) {
             status = Status.CREDENTIALS_EXPIRED;
-        } else if (e instanceof DisabledException) {
-            status = Status.DISABLED;
         }
         RenderUtils.render(response, Result.failure(status));
     }

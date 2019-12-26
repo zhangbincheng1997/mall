@@ -3,7 +3,6 @@ package com.example.demo.utils;
 public class Constants {
 
     public static final String ACCESS_KEY = "access:"; // 访问限制
-    public static final int ACCESS_EXPIRE = 60; // 访问限制过期时间 60s
     public static final String USER_KEY = "user:"; // 用户缓存
     public static final int USER_EXPIRE = 60 * 60; // 用户缓存过期时间 60*60s
     public static final String ROLE_KEY = "role:"; // 角色缓存

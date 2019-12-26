@@ -29,15 +29,14 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public PageInfo<Product> list(String keyword, int page, int limit) {
-        PageHelper.startPage(page, limit);
+        PageHelper.startPage(page, limit, "id desc");
         ProductExample example = new ProductExample();
         if (!StringUtils.isEmpty(keyword)) {
             example.or().andNameLike("%" + keyword + "%");
             example.or().andDescriptionLike("%" + keyword + "%");
         }
         List<Product> productList = productMapper.selectByExample(example);
-        PageInfo<Product> pageInfo = new PageInfo(productList);
-        return pageInfo;
+        return new PageInfo<>(productList);
     }
 
     @Override

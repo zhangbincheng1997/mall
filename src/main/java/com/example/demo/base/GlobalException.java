@@ -1,8 +1,5 @@
 package com.example.demo.base;
 
-/**
- * 全局异常
- */
 public class GlobalException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
@@ -18,7 +15,7 @@ public class GlobalException extends RuntimeException {
         return status;
     }
 
-    public void setMessage(Status status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 }

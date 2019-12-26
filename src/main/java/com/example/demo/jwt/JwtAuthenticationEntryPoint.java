@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * AuthenticationEntryPoint 认证失败
+ * AuthenticationEntryPoint 权限不足 认证入口点
  */
 @Component
 public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {

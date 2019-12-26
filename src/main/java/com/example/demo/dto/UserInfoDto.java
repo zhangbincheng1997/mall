@@ -1,14 +1,12 @@
 package com.example.demo.dto;
 
-import com.example.demo.enums.SexEnum;
-import com.example.demo.utils.EnumUtils;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Data
@@ -26,9 +24,4 @@ public class UserInfoDto {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Past(message = "生日必须是一个过去的日期")
     private Date birthday;
-
-    @JsonIgnore // 序列化时忽略属性
-    public SexEnum getSexEnum() {
-        return EnumUtils.getByCode(sex, SexEnum.class);
-    }
 }
