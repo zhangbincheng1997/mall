@@ -1,15 +1,19 @@
 package com.example.demo.service.impl;
 
-import cn.hutool.core.bean.BeanUtil;
+import com.example.demo.base.GlobalException;
+import com.example.demo.base.Status;
+import com.example.demo.dto.PageRequest;
 import com.example.demo.dto.ProductDto;
 import com.example.demo.mapper.ProductMapper;
 import com.example.demo.model.Product;
 import com.example.demo.model.ProductExample;
 import com.example.demo.service.ProductService;
+import com.example.demo.utils.ConvertUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -28,8 +32,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public PageInfo<Product> list(String keyword, int page, int limit) {
-        PageHelper.startPage(page, limit, "id desc");
+    public PageInfo<Product> list(PageRequest pageRequest) {
+        PageHelper.startPage(pageRequest.getPage(), pageRequest.getLimit(), "id desc");
+        String keyword = pageRequest.getKeyword();
         ProductExample example = new ProductExample();
         if (!StringUtils.isEmpty(keyword)) {
             example.or().andNameLike("%" + keyword + "%");
@@ -41,22 +46,22 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public int add(ProductDto productDto) {
-        Product product = new Product();
-        BeanUtil.copyProperties(productDto, product);
-        product.setCategoryId(1); // TODO
-        return productMapper.insertSelective(product);
-    }
-
-    @Override
-    public int delete(Long id) {
-        return productMapper.deleteByPrimaryKey(id);
+        try {
+            return productMapper.insertSelective(ConvertUtils.convert(productDto, Product.class));
+        } catch (DataIntegrityViolationException e) {
+            throw new GlobalException(Status.PRODUCT_CATEGORY_NOT_EXIST);
+        }
     }
 
     @Override
     public int update(Long id, ProductDto productDto) {
         Product product = new Product();
         product.setId(id);
-        BeanUtil.copyProperties(productDto, product);
-        return productMapper.updateByPrimaryKeySelective(product);
+        return productMapper.updateByPrimaryKeySelective(ConvertUtils.convert(productDto, product));
+    }
+
+    @Override
+    public int delete(Long id) {
+        return productMapper.deleteByPrimaryKey(id);
     }
 }

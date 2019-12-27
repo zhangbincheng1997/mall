@@ -3,11 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>外卖后台管理系统</title>
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
-    <link rel="stylesheet" href="layui/css/layui.css"/>
-    <script type="text/javascript" src="layui/layui.js"></script>
-    <script type="text/javascript" src="js/config.js"></script>
+    <script type="text/javascript" src="include/title.js"></script>
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
@@ -16,36 +12,97 @@
     <script type="text/javascript" src="include/footer.js"></script>
 
     <div class="layui-body">
-        <table id="demo" lay-filter="table"></table>
+        <table id="table" lay-filter="table"></table>
+    </div>
+
+    <div id="modal" style="display: none;">
+        <div style="width: 500px; margin: 0 auto;">
+            <form class="layui-form layui-form-pane" autocomplete="off">
+                <div class="layui-form-item">
+                    <label class="layui-form-label layui-icon layui-icon-username">图标</label>
+                    <div class="layui-input-block">
+                        <a id="upload">
+                            <img id="icon" width="100px" height="100px">
+                        </a>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label layui-icon layui-icon-username">名称</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="name" id="name" placeholder="请输入名称" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label layui-icon layui-icon-username">描述</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="description" id="description" placeholder="请输入描述" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label layui-icon layui-icon-username">价格</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="price" id="price" placeholder="请输入价格" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label layui-icon layui-icon-username">库存</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="stock" id="stock" placeholder="请输入库存" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit lay-filter="confirm">立即提交</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
-<script type="text/html" id="toolbar">
+<script type="text/html" id="toolbarTpl">
     <input class="text" style="height:30px;width:200px;" name="" id="keyword"  placeholder="请输入关键词">
      <a href="javascript:void(0);" id="search">
         <i class="layui-icon layui-icon-search"></i> 
     </a>
 </script>
-<script type="text/html" id="icon">
-    <img src="{{ d.icon }}">
+<script type="text/html" id="iconTpl">
+    <img src="{{ d.icon }}" width="50px" height="50px">
 </script>
-<script type="text/html" id="switch">
+
+<script type="text/html" id="selectTpl">
+    <select name="category" lay-filter="select" data-value="{{ d.category_id }}">
+    </select>
+</script>
+<script type="text/html" id="switchTpl">
     <input type="checkbox" name="status" value="{{ d.status }}" lay-skin="switch"
-           lay-text="开|关" lay-filter="switch" {{ d.status== 1 ? 'checked' : '' }}>
+           lay-text="开|关" lay-filter="switch" {{ d.status==1 ? 'checked' : '' }}>
 </script>
-<script type="text/html" id="bar">
+<script type="text/html" id="barTpl">
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
 </script>
 <script>
-    layui.use(['jquery', 'element', 'table'], function () {
+    layui.use(['jquery', 'element', 'table', 'form', 'upload'], function () {
         var $ = layui.jquery;
         var table = layui.table;
+        var form = layui.form;
+        var upload = layui.upload;
+
+        // $('#search').click(function(){}); 搜索一次后会失效
+        $('body').on('click', '#search', function () {
+            table.reload('table', {
+                url: 'product/list',
+                page: true,
+                where: {keyword: $('#keyword').val()}
+            });
+        });
 
         table.render({
-            elem: '#demo',
-            url: API + 'product/list',
-            headers: layui.data('token'),
+            elem: '#table',
+            url: 'product/list',
             page: true,
-            toolbar: '#toolbar', // 'default'
+            size: 'lg',
+            toolbar: '#toolbarTpl', // 'default'
             defaultToolbar: [{
                 title: '添加',
                 layEvent: 'add',
@@ -53,48 +110,60 @@
             }, 'filter', 'exports', 'print'],
             cols: [[
                 {field: 'id', title: 'ID', width: 60, align: 'center', sort: true},
-                {field: 'icon', title: '图标', edit: 'text', width: 100, align: 'center', templet: '#icon'},
+                {field: 'icon', title: '图标', edit: 'text', width: 100, align: 'center', templet: '#iconTpl'},
                 {field: 'name', title: '名称', edit: 'text'},
                 {field: 'description', title: '描述', edit: 'text'},
                 {field: 'price', title: '价格', edit: 'text'},
                 {field: 'stock', title: '库存', edit: 'text'},
-                {field: 'status', title: '状态', width: 100, align: 'center', templet: '#switch'},
-                {fixed: 'right', title: '操作', width: 100, align: 'center', toolbar: '#bar'}
-            ]]
+                {field: 'category_id', title: '分类', width: 200, align: 'center', templet: '#selectTpl'},
+                {field: 'status', title: '状态', width: 100, align: 'center', templet: '#switchTpl'},
+                {fixed: 'right', title: '操作', width: 100, align: 'center', toolbar: '#barTpl'}
+            ]],
+            done: function (res, curr, count) {
+                $.get('category/list', function (res) {
+                    // 获取列表
+                    $.each(res.data, function (i, value) {
+                        $('select[name="category"]').append('<option value="' + value.id + '">' + value.name + '</option>');
+                    });
+                    // 选中分类
+                    layui.each($('select[name="category"]'), function (index, item) {
+                        var elem = $(item);
+                        elem.val(elem.data('value')).parents('div.layui-table-cell').css('overflow', 'visible');
+                    });
+                    form.render(); // 刷新select
+                });
+            },
         });
 
         // 监听头工具栏事件
         table.on('toolbar(table)', function (obj) {
             switch (obj.event) {
                 case 'add':
-                    layer.msg('修改操作');
-                    window.location.href = 'addproduct.html';
+                    layer.open({
+                        type: 1, // 0：信息框，默认 1：页面层 2：iframe层 3：加载层 4：tips层
+                        title: '添加商品',
+                        content: $('#modal'),
+                        area: ['800px', '500px'],
+                        shadeClose: true,
+                        end: function () {
+                            $('#icon').removeAttr('src');
+                            $('form')[0].reset();
+                        }
+                    });
                     break;
             }
         });
 
         // 监听行工具事件
         table.on('tool(table)', function (obj) {
-            var data = obj.data; // 获取选中的数据对象
-            console.log(data);
             switch (obj.event) {
                 case 'delete':
                     layer.confirm('确认删除？', function (index) {
-                        $.ajax({
-                            url: API + "product/" + obj.data.id,
-                            headers: layui.data('token'),
-                            type: 'DELETE',
-                            dataType: 'json',
-                            success: function (res) {
-                                if (res.code === 0) {
-                                    obj.del();
-                                    layer.msg('删除成功');
-                                } else {
-                                    layer.msg(JSON.stringify(res));
-                                }
-                            },
-                            error: function (jqXHR, textStatus, errorThrown) {
-                                layer.msg('出错啦...错误码: ' + jqXHR.status + ' ' + jqXHR.statusText);
+                        $.delete('product/' + obj.data.id, function (res) {
+                            if (res.code === 0) {
+                                obj.del();
+                                layer.close(index);
+                                layer.msg(res.msg);
                             }
                         });
                     });
@@ -102,42 +171,68 @@
             }
         });
 
-        //监听单元格编辑
+        // 监听单元格编辑
         table.on('edit(table)', function (obj) {
-            var that = $(this);
-            // 记录单元格编辑之前的值
-            var oldValue = that.prev().text();
-            //$(obj.tr.selector+' td[data-field="'+obj.field+'"] div').text();
-            $.ajax({
-                url: API + "product/" + obj.data.id,
-                headers: layui.data('token'),
-                data: obj.data, //所在行所有键值
-                type: 'POST',
-                dataType: 'json',
-                success: function (res) {
-                    if (res.code === 0) {
-                        layer.msg('修改成功');
-                    } else {
-                        // 修改回来
-                        that.val(oldValue);
-                        // $(obj.tr.selector + ' td[data-field="' + obj.field + '"] input').val(oldValue);
-                        layer.msg(JSON.stringify(res));
-                    }
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    layer.msg('出错啦...错误码: ' + jqXHR.status + ' ' + jqXHR.statusText);
+            // 记录编辑之前的值
+            console.log(obj.data);
+            var old = $(this).prev().text();
+            $.post('product/' + obj.data.id, obj.data, function (res) {
+                if (res.code === 0) {
+                    layer.msg(res.msg);
+                } else {
+                    // 修改回来
+                    $(obj.tr.selector + ' td[data-field="' + obj.field + '"] input').val(old);
+                    $(obj.tr.selector + ' td[data-field="' + obj.field + '"] div').text(old);
                 }
             });
         });
 
-        // $('#search').on('click', function(){}); 搜索一次后会失效
-        $('body').on('click', '#search', function () {
-            table.reload('demo', {
-                url: API + 'product/list',
-                headers: layui.data('token'),
-                page: true,
-                where: {keyword: $('#keyword').val()}
+        // select 事件
+        form.on('select(select)', function (data) {
+            var index = $(data.elem).parents('tr').data('index');
+            var rowData = table.cache['table'][index];
+            rowData['category_id'] = data.value; // 更新缓存
+            $.post('product/' + rowData.id, rowData, function (res) {
+                if (res.code === 0) {
+                    layer.msg(res.msg);
+                }
+            })
+        });
+
+        // switch 事件
+        form.on('switch(switch)', function (data) {
+            var index = $(data.elem).parents('tr').data('index');
+            var rowData = table.cache['table'][index];
+            rowData['status'] = data.elem.checked; // 更新缓存
+            $.post('product/' + rowData.id, rowData, function (res) {
+                if (res.code === 0) {
+                    layer.msg(res.msg);
+                }
+            })
+        });
+
+        form.on('submit(confirm)', function (data) {
+            delete data.field.file; // 删除file
+            data.field.icon = $('#icon')[0].src; // 添加icon
+            $.put('product', data.field, function (res) {
+                if (res.code === 0) {
+                    var tableData = table.cache['table'];
+                    tableData.push(data.field);
+                    table.reload('table', {data: tableData});
+                    layer.closeAll('page');
+                    layer.msg(res.msg);
+                }
             });
+            return false; // require
+        });
+
+        upload.render({
+            elem: '#upload',
+            url: 'upload',
+            done: function (res) {
+                $('#icon').attr('src', res.data); // 异步 + cdn
+                layer.msg(res.msg);
+            }
         });
     });
 </script>

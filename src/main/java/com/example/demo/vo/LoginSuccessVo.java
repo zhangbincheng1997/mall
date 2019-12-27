@@ -1,13 +1,11 @@
 package com.example.demo.vo;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
-public class LoginSuccessVo {
+@EqualsAndHashCode(callSuper = true)
+public class LoginSuccessVo extends UserInfoVo {
 
     private String token;
-
-    private String avatar = "http://qiniu.littleredhat1997.com/avatar.png";
-
-    private String nickname = "zzz";
 }

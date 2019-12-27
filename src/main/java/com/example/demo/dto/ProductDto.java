@@ -1,15 +1,11 @@
 package com.example.demo.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.URL;
 
-import javax.validation.constraints.DecimalMax;
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 
 @Data
@@ -21,13 +17,11 @@ public class ProductDto {
     private String icon;
 
     @ApiModelProperty(value = "名称", required = true)
-    @NotEmpty(message = "名称不能为空")
-    @Length(min = 1, max = 255, message = "名称长度为1-255")
+    @Size(min = 1, max = 255, message = "名称长度为1-255")
     private String name;
 
     @ApiModelProperty(value = "描述", required = true)
-    @NotEmpty(message = "描述不能为空")
-    @Length(min = 1, max = 255, message = "描述长度为1-255")
+    @Size(min = 1, max = 255, message = "描述长度为1-255")
     private String description;
 
     @ApiModelProperty(value = "价格", required = true, example = "0")
@@ -38,6 +32,19 @@ public class ProductDto {
 
     @ApiModelProperty(value = "库存", required = true, example = "0")
     @NotNull(message = "库存不能为空")
-    @Range(min = 0, max = 1000000, message = "库存长度为0-1000000")
+    @Min(value = 0, message = "库存不低于0")
+    @Max(value = 1000000, message = "库存不高于1000000")
     private Integer stock;
+
+    @ApiModelProperty(value = "分类", required = true, example = "0")
+    @NotNull(message = "分类不能为空")
+    private Long categoryId;
+
+    public void setCategory_id(Long category_id) {
+        this.categoryId = category_id;
+    }
+
+    @ApiModelProperty(value = "状态", required = true, example = "0")
+    @NotNull(message = "分类不能为空")
+    private Boolean status;
 }

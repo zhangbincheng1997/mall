@@ -3,17 +3,17 @@ package com.example.demo.model;
 import java.io.Serializable;
 
 public class Category implements Serializable {
-    private Integer id;
+    private Long id;
 
     private String name;
 
     private static final long serialVersionUID = 1L;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

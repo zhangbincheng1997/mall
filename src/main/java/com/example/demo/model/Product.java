@@ -16,9 +16,9 @@ public class Product implements Serializable {
 
     private Integer stock;
 
-    private Integer categoryId;
+    private Long categoryId;
 
-    private Integer status;
+    private Boolean status;
 
     private static final long serialVersionUID = 1L;
 
@@ -70,19 +70,19 @@ public class Product implements Serializable {
         this.stock = stock;
     }
 
-    public Integer getCategoryId() {
+    public Long getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(Integer categoryId) {
+    public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
     }
 
-    public Integer getStatus() {
+    public Boolean getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(Boolean status) {
         this.status = status;
     }
 

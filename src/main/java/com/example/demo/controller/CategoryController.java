@@ -2,12 +2,12 @@ package com.example.demo.controller;
 
 import com.example.demo.base.PageResult;
 import com.example.demo.base.Result;
+import com.example.demo.dto.CategoryDto;
 import com.example.demo.dto.PageRequest;
-import com.example.demo.model.Product;
-import com.example.demo.service.ProductService;
-import com.example.demo.dto.ProductDto;
+import com.example.demo.model.Category;
+import com.example.demo.service.CategoryService;
 import com.example.demo.utils.ConvertUtils;
-import com.example.demo.vo.ProductVo;
+import com.example.demo.vo.CategoryVo;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -20,42 +20,42 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Api(tags = "商品")
+@Api(tags = "分类")
 @Controller
-@RequestMapping("/product")
-public class ProductController {
+@RequestMapping("/category")
+public class CategoryController {
 
     @Autowired
-    private ProductService productService;
+    private CategoryService categoryService;
 
-    @ApiOperation("获取商品")
+    @ApiOperation("获取分类")
     @GetMapping("/{id}")
     @ResponseBody
-    @PreAuthorize("hasAuthority('product:read')")
+    @PreAuthorize("hasAuthority('category:read')")
     public Result get(@PathVariable("id") Long id) {
-        Product product = productService.get(id);
-        return Result.success(ConvertUtils.convert(product, ProductVo.class));
+        Category category = categoryService.get(id);
+        return Result.success(ConvertUtils.convert(category, CategoryVo.class));
     }
 
-    @ApiOperation("获取商品列表")
+    @ApiOperation("获取分类列表")
     @GetMapping("/list")
     @ResponseBody
-    @PreAuthorize("hasAuthority('product:read')")
+    @PreAuthorize("hasAuthority('category:read')")
     public Result list(@Valid PageRequest pageRequest) {
-        PageInfo<Product> pageInfo = productService.list(pageRequest);
-        List<Product> productList = pageInfo.getList();
-        List<ProductVo> productVoList = productList.stream()
-                .map(product -> ConvertUtils.convert(product, ProductVo.class))
+        PageInfo<Category> pageInfo = categoryService.list(pageRequest);
+        List<Category> categoryList = pageInfo.getList();
+        List<CategoryVo> categoryVoList = categoryList.stream()
+                .map(category -> ConvertUtils.convert(category, CategoryVo.class))
                 .collect(Collectors.toList());
-        return PageResult.success(productVoList, pageInfo.getTotal());
+        return PageResult.success(categoryVoList, pageInfo.getTotal());
     }
 
-    @ApiOperation("添加商品")
+    @ApiOperation("添加分类")
     @PutMapping("")
     @ResponseBody
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public Result add(@Valid ProductDto productDto) {
-        int count = productService.add(productDto);
+    public Result add(@Valid CategoryDto categoryDto) {
+        int count = categoryService.add(categoryDto);
         if (count == 1) {
             return Result.success();
         } else {
@@ -63,13 +63,13 @@ public class ProductController {
         }
     }
 
-    @ApiOperation("修改商品")
+    @ApiOperation("修改分类")
     @PostMapping("/{id}")
     @ResponseBody
-    @PreAuthorize("hasAuthority('product:update')")
+    @PreAuthorize("hasAuthority('category:update')")
     public Result update(@PathVariable("id") Long id,
-                         @Valid ProductDto productDto) {
-        int count = productService.update(id, productDto);
+                         @Valid CategoryDto categoryDto) {
+        int count = categoryService.update(id, categoryDto);
         if (count == 1) {
             return Result.success();
         } else {
@@ -77,12 +77,12 @@ public class ProductController {
         }
     }
 
-    @ApiOperation("删除商品")
+    @ApiOperation("删除分类")
     @DeleteMapping("/{id}")
     @ResponseBody
-    @PreAuthorize("hasAuthority('product:delete')")
+    @PreAuthorize("hasAuthority('category:delete')")
     public Result delete(@PathVariable("id") Long id) {
-        int count = productService.delete(id);
+        int count = categoryService.delete(id);
         if (count == 1) {
             return Result.success();
         } else {

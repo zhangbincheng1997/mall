@@ -5,9 +5,9 @@ import cn.hutool.core.bean.copier.CopyOptions;
 
 public class ConvertUtils {
 
-    public static <T1, T2> T2 convert(T1 source, Class<T2> clazz) {
+    public static <T> T convert(Object source, Class<T> clazz) {
         try {
-            final T2 target = clazz.newInstance(); // 获得泛型实例
+            final T target = clazz.newInstance(); // 获得泛型实例
             BeanUtil.copyProperties(source, target, CopyOptions.create().setIgnoreNullValue(true)); // 复制对象
             return target;
         } catch (InstantiationException e) {
@@ -18,7 +18,7 @@ public class ConvertUtils {
         return null;
     }
 
-    public static Object convert(Object source, Object target) {
+    public static <T> T convert(Object source, T target) {
         BeanUtil.copyProperties(source, target, CopyOptions.create().setIgnoreNullValue(true)); // 复制对象
         return target;
     }

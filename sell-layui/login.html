@@ -3,12 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>外卖后台管理系统</title>
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
-    <link rel="stylesheet" href="layui/css/layui.css"/>
+    <script type="text/javascript" src="include/title.js"></script>
     <link rel="stylesheet" href="css/login.css"/>
-    <script type="text/javascript" src="layui/layui.js"></script>
-    <script type="text/javascript" src="js/config.js"></script>
 </head>
 <body background="http://qiniu.littleredhat1997.com/dawn.jpg">
 <div class="login">
@@ -33,45 +29,31 @@
     </form>
 </div>
 <script>
-    layui.use(['element', 'jquery', 'form'], function () {
+    layui.use(['jquery', 'element', 'form'], function () {
         var $ = layui.jquery;
         var form = layui.form;
 
-        // 初始化验证码
-        $.get(API + 'captcha', function (res) {
+        $.get('captcha', function (res) {
             $('#key').val(res.data.key);
             $('#captcha').attr('src', res.data.image);
-        }, 'json');
-
-        // 点击更换验证码
-        $('#captcha').click(function () {
-            $.get(API + 'captcha', function (res) {
-                $('#key').val(res.data.key);
-                $('#captcha').attr('src', res.data.image);
-            }, 'json');
         });
 
+        $('#captcha').click(function () {
+            $.get('captcha', function (res) {
+                $('#key').val(res.data.key);
+                $('#captcha').attr('src', res.data.image);
+            });
+        });
 
         form.on('submit(login)', function (data) {
-            $.ajax({
-                url: API + "login",
-                data: data.field,
-                type: 'POST',
-                dataType: 'json',
-                success: function (res) {
-                    if (res.code === 0) {
-                        layui.data('token', {key: 'Authorization', value: res.data.token}); // 记录认证信息
-                        layui.data('user', {key: 'avatar', value: res.data.avatar}); // 记录用户头像
-                        layui.data('user', {key: 'nickname', value: res.data.nickname}); // 记录用户昵称
-                        layer.msg(res.msg, {time: 1000}, function () {
-                            window.location.href = 'list.html';
-                        });
-                    } else {
-                        layer.msg(JSON.stringify(res));
-                    }
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    layer.msg('出错啦...错误码: ' + jqXHR.status + ' ' + jqXHR.statusText);
+            $.post('login', data.field, function (res) {
+                if (res.code === 0) {
+                    // local storage
+                    layui.data('token', {key: 'Authorization', value: res.data.token});
+                    layui.data('user', {key: 'info', value: res.data});
+                    layer.msg(res.msg, {time: 1000}, function () {
+                        window.location.href = 'list.html';
+                    });
                 }
             });
             return false; // require

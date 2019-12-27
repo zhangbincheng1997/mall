@@ -6,7 +6,7 @@ import com.example.demo.jwt.JwtUserDetails;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 import com.example.demo.dto.UserInfoDto;
-import com.example.demo.dto.UserDto;
+import com.example.demo.dto.RegisterDto;
 import com.example.demo.utils.Constants;
 import com.example.demo.utils.ConvertUtils;
 import com.example.demo.vo.UserInfoVo;
@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.security.Principal;
 
@@ -39,8 +38,8 @@ public class UserController {
     @ApiOperation("注册")
     @PostMapping(value = "/register")
     @ResponseBody
-    public Result register(@Valid UserDto userDto) {
-        User user = userService.register(userDto);
+    public Result register(@Valid RegisterDto registerDto) {
+        User user = userService.register(registerDto);
         return Result.success(ConvertUtils.convert(user, UserInfoVo.class));
     }
 
@@ -67,7 +66,6 @@ public class UserController {
     @ResponseBody
     public Result updatePassword(@ApiIgnore Principal principal,
                                  @RequestParam("password")
-                                 @NotEmpty(message = "密码不能为空")
                                  @Size(min = 3, max = 12, message = "密码长度为3-12") String password) {
         String username = principal.getName(); // SecurityContextHolder上下文
         userService.updatePasswordByUsername(username, password);

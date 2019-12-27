@@ -3,12 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>外卖后台管理系统</title>
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
-    <link rel="stylesheet" href="layui/css/layui.css"/>
+    <script type="text/javascript" src="include/title.js"></script>
     <link rel="stylesheet" href="css/login.css"/>
-    <script type="text/javascript" src="layui/layui.js"></script>
-    <script type="text/javascript" src="js/config.js"></script>
 </head>
 <body background="http://qiniu.littleredhat1997.com/dusk.jpg">
 <div class="login">
@@ -33,41 +29,28 @@
     </form>
 </div>
 <script>
-    layui.use(['element', 'jquery', 'form'], function () {
+    layui.use(['jquery', 'element', 'form'], function () {
         var $ = layui.jquery;
         var form = layui.form;
 
-        // 初始化验证码
-        $.get(API + 'captcha', function (res) {
+        $.get('captcha', function (res) {
             $('#key').val(res.data.key);
             $('#captcha').attr('src', res.data.image);
-        }, 'json');
+        });
 
-        // 点击更换验证码
         $('#captcha').click(function () {
-            $.get(API + 'captcha', function (res) {
+            $.get('captcha', function (res) {
                 $('#key').val(res.data.key);
                 $('#captcha').attr('src', res.data.image);
-            }, 'json');
+            });
         });
 
         form.on('submit(register)', function (data) {
-            $.ajax({
-                url: API + "register",
-                data: data.field,
-                type: 'POST',
-                dataType: 'json',
-                success: function (res) {
-                    if (res.code === 0) {
-                        layer.msg(res.msg, {time: 1000}, function () {
-                            window.location.href = 'login.html';
-                        });
-                    } else {
-                        layer.msg(JSON.stringify(res));
-                    }
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    layer.msg('出错啦...错误码: ' + jqXHR.status + ' ' + jqXHR.statusText);
+            $.post('register', data.field, function (res) {
+                if (res.code === 0) {
+                    layer.msg(res.msg, {time: 1000}, function () {
+                        window.location.href = 'login.html';
+                    });
                 }
             });
             return false; // require

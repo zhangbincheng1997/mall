@@ -1,9 +1,7 @@
 package com.example.demo.vo;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-
-import java.util.Date;
 
 @Data
 public class ProductVo {
@@ -20,11 +18,8 @@ public class ProductVo {
 
     private Integer stock;
 
-    private Integer status;
+    @JsonProperty("category_id")
+    private Integer categoryId;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date createTime;
-
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date updateTime;
+    private Boolean status;
 }

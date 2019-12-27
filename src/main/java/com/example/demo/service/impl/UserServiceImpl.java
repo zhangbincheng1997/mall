@@ -7,10 +7,11 @@ import com.example.demo.mapper.UserRoleMapper;
 import com.example.demo.mapper.UserRolePermissionMapper;
 import com.example.demo.model.*;
 import com.example.demo.dto.UserInfoDto;
-import com.example.demo.dto.UserDto;
+import com.example.demo.dto.RegisterDto;
 import com.example.demo.service.UserService;
 import com.example.demo.utils.ConvertUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -45,19 +46,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User register(UserDto userDto) {
-        if (getUserByUsername(userDto.getUsername()) != null) {
-            throw new GlobalException(Status.USERNAME_EXIST);
-        } else {
+    public User register(RegisterDto registerDto) {
+        try {
             User user = new User();
-            user.setUsername(userDto.getUsername());
-            user.setPassword(passwordEncoder.encode(userDto.getPassword())); // JWT加密
+            user.setUsername(registerDto.getUsername());
+            user.setPassword(passwordEncoder.encode(registerDto.getPassword())); // JWT加密
             userMapper.insertSelective(user);
             UserRole userRole = new UserRole();
             userRole.setUserId(user.getId());
-            userRole.setRoleId(2L);
-            userRoleMapper.insert(userRole);
+            userRole.setRoleId(2L); // TODO
+            userRoleMapper.insertSelective(userRole);
             return user;
+        } catch (DuplicateKeyException e) { // UNIQUE
+            throw new GlobalException(Status.USERNAME_EXIST);
         }
     }
 

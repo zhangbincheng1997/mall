@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolationException;
 
-import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindException;
 import org.springframework.validation.ObjectError;
@@ -30,7 +29,7 @@ public class AppExceptionHandler {
     public Result exceptionHandler(HttpServletRequest request, HttpServletResponse response, BindException e) {
         log.error(e.getMessage());
         List<ObjectError> errorMessages = e.getAllErrors();
-        String msg = errorMessages.get(0).toString();
+        String msg = errorMessages.get(0).getDefaultMessage();
         return Result.failure(Status.BIND_EXCEPTION.getCode(), msg);
     }
 
@@ -43,7 +42,7 @@ public class AppExceptionHandler {
                 .map(cv -> cv.getMessage())
                 .collect(Collectors.toList());
         String msg = errorMessages.get(0);
-        return Result.failure(Status.BIND_EXCEPTION.getCode(), msg);
+        return Result.failure(Status.CONSTRAINT_VIOLATION_EXCEPTION.getCode(), msg);
     }
 }
 

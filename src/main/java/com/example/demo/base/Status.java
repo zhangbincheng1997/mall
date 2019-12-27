@@ -11,6 +11,7 @@ public enum Status {
     FORBIDDEN(403, "拒绝执行"),
     NOT_FOUND(404, "请求失败"),
     BIND_EXCEPTION(1000, "参数错误"),
+    CONSTRAINT_VIOLATION_EXCEPTION(1001, "参数错误2"),
 
     // 认证权限
     ACCESS_DENIED(1001, "权限不足:拒绝访问"),
@@ -36,7 +37,11 @@ public enum Status {
 
     // 账号相关
     USERNAME_EXIST(50010, "账号已经存在"),
-    USERNAME_NOT_EXIST(50011, "账号不存在");
+    USERNAME_NOT_EXIST(50011, "账号不存在"),
+
+    // 商品相关
+    PRODUCT_CATEGORY_EXIST(60000, "商品分类已经存在"),
+    PRODUCT_CATEGORY_NOT_EXIST(60001, "商品分类不存在");
 
     private Integer code;
     private String msg;

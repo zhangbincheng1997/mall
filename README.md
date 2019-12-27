@@ -1,14 +1,16 @@
 # sell-springboot
 前后端分离 + RESTful接口
 ```
-1. GET      /url/xxx    获取
+1. GET      /url/{id}    获取
 2. POST     /url        添加
-3. PUT      /url/xxx    修改
-4. DELETE   /url/xxx    删除 
+3. PUT      /url/{id}    修改
+4. DELETE   /url/{id}    删除 
 ```
 
 ## 前端技术
 [Layui](https://www.layui.com/) : [sell-layui](/sell-layui) 入口/sell-layui/login.html
+
+:smile: ! 注意config.js文件，全局配置
 
 ## 后端技术
 | 技术 | 说明 |
