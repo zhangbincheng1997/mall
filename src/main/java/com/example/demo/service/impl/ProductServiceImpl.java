@@ -33,15 +33,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public PageInfo<Product> list(PageRequest pageRequest) {
-        PageHelper.startPage(pageRequest.getPage(), pageRequest.getLimit(), "id desc");
-        String keyword = pageRequest.getKeyword();
         ProductExample example = new ProductExample();
-        if (!StringUtils.isEmpty(keyword)) {
-            example.or().andNameLike("%" + keyword + "%");
-            example.or().andDescriptionLike("%" + keyword + "%");
-        }
-        List<Product> productList = productMapper.selectByExample(example);
-        return new PageInfo<>(productList);
+        return list(example, pageRequest);
     }
 
     @Override
@@ -49,7 +42,7 @@ public class ProductServiceImpl implements ProductService {
         try {
             return productMapper.insertSelective(ConvertUtils.convert(productDto, Product.class));
         } catch (DataIntegrityViolationException e) {
-            throw new GlobalException(Status.PRODUCT_CATEGORY_NOT_EXIST);
+            throw new GlobalException(Status.CATEGORY_NOT_EXIST);
         }
     }
 
@@ -63,5 +56,24 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public int delete(Long id) {
         return productMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public PageInfo<Product> listByBuyer(PageRequest pageRequest) {
+        ProductExample example = new ProductExample();
+        example.createCriteria().andStatusEqualTo(true); // 上架状态
+        example.createCriteria().andStockGreaterThan(0); // 有库存
+        return list(example, pageRequest);
+    }
+
+    private PageInfo<Product> list(ProductExample example, PageRequest pageRequest) {
+        PageHelper.startPage(pageRequest.getPage(), pageRequest.getLimit(), "id desc");
+        String keyword = pageRequest.getKeyword();
+        if (!StringUtils.isEmpty(keyword)) {
+            example.or().andNameLike("%" + keyword + "%");
+            example.or().andDescriptionLike("%" + keyword + "%");
+        }
+        List<Product> productList = productMapper.selectByExample(example);
+        return new PageInfo<>(productList);
     }
 }

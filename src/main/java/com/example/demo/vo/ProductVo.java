@@ -1,12 +1,11 @@
 package com.example.demo.vo;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data
 public class ProductVo {
 
-    private long id;
+    private Long id;
 
     private String icon;
 
@@ -18,8 +17,7 @@ public class ProductVo {
 
     private Integer stock;
 
-    @JsonProperty("category_id")
-    private Integer categoryId;
+    private Integer category;
 
     private Boolean status;
 }

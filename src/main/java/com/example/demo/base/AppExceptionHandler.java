@@ -28,8 +28,8 @@ public class AppExceptionHandler {
     @ResponseBody
     public Result exceptionHandler(HttpServletRequest request, HttpServletResponse response, BindException e) {
         log.error(e.getMessage());
-        List<ObjectError> errorMessages = e.getAllErrors();
-        String msg = errorMessages.get(0).getDefaultMessage();
+        List<ObjectError> errorList = e.getAllErrors();
+        String msg = errorList.get(0).getDefaultMessage();
         return Result.failure(Status.BIND_EXCEPTION.getCode(), msg);
     }
 
@@ -37,11 +37,11 @@ public class AppExceptionHandler {
     @ResponseBody
     public Result exceptionHandler(HttpServletRequest request, HttpServletResponse response, ConstraintViolationException e) {
         log.error(e.getMessage());
-        List<String> errorMessages = e.getConstraintViolations()
+        List<String> errorList = e.getConstraintViolations()
                 .stream()
                 .map(cv -> cv.getMessage())
                 .collect(Collectors.toList());
-        String msg = errorMessages.get(0);
+        String msg = errorList.get(0);
         return Result.failure(Status.CONSTRAINT_VIOLATION_EXCEPTION.getCode(), msg);
     }
 }

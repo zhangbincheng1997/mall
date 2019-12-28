@@ -1,6 +1,5 @@
 package com.example.demo.service.impl;
 
-import cn.hutool.core.bean.BeanUtil;
 import com.example.demo.base.GlobalException;
 import com.example.demo.base.Status;
 import com.example.demo.dto.CategoryDto;
@@ -46,7 +45,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public int add(CategoryDto categoryDto) {
-        return categoryMapper.updateByPrimaryKeySelective(ConvertUtils.convert(categoryDto, Category.class));
+        return categoryMapper.insertSelective(ConvertUtils.convert(categoryDto, Category.class));
     }
 
     @Override
@@ -56,7 +55,7 @@ public class CategoryServiceImpl implements CategoryService {
             category.setId(id);
             return categoryMapper.updateByPrimaryKeySelective(ConvertUtils.convert(categoryDto, category));
         } catch (DataIntegrityViolationException e) {
-            throw new GlobalException(Status.PRODUCT_CATEGORY_EXIST);
+            throw new GlobalException(Status.CATEGORY_EXIST);
         }
     }
 
@@ -65,7 +64,7 @@ public class CategoryServiceImpl implements CategoryService {
         try {
             return categoryMapper.deleteByPrimaryKey(id);
         } catch (DataIntegrityViolationException e) {
-            throw new GlobalException(Status.PRODUCT_CATEGORY_EXIST);
+            throw new GlobalException(Status.CATEGORY_EXIST);
         }
     }
 }

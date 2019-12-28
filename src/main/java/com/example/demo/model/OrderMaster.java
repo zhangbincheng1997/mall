@@ -1,14 +1,15 @@
 package com.example.demo.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
-public class Order implements Serializable {
+public class OrderMaster implements Serializable {
     private Long id;
 
     private String username;
 
-    private String amount;
+    private BigDecimal amount;
 
     private Integer orderStatus;
 
@@ -34,11 +35,11 @@ public class Order implements Serializable {
         this.username = username;
     }
 
-    public String getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 

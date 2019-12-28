@@ -31,7 +31,11 @@
         <javaClientGenerator targetPackage="com.example.demo.mapper" targetProject="src\main\java" type="XMLMAPPER"/>
 
         <table tableName="%">
+            <!-- 主键自动生成 -->
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="order_master">
+            <!-- 主键代码生成 -->
         </table>
     </context>
 </generatorConfiguration>

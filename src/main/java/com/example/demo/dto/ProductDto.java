@@ -1,6 +1,5 @@
 package com.example.demo.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.hibernate.validator.constraints.URL;
@@ -38,13 +37,8 @@ public class ProductDto {
 
     @ApiModelProperty(value = "分类", required = true, example = "0")
     @NotNull(message = "分类不能为空")
-    private Long categoryId;
-
-    public void setCategory_id(Long category_id) {
-        this.categoryId = category_id;
-    }
+    private Long category;
 
     @ApiModelProperty(value = "状态", required = true, example = "0")
-    @NotNull(message = "分类不能为空")
     private Boolean status;
 }

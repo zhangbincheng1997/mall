@@ -64,11 +64,11 @@ CREATE TABLE `product`  (
   `icon` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '图标',
   `price` decimal(8, 2) NOT NULL COMMENT '价格',
   `stock` int(11) NOT NULL COMMENT '库存',
-  `category_id` bigint(20) NOT NULL COMMENT '分类ID',
+  `category` bigint(20) NOT NULL COMMENT '分类ID',
   `status` tinyint(1) NOT NULL DEFAULT 0 COMMENT '状态：0关、1开，默认0',
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `category_id`(`category_id`) USING BTREE,
-  CONSTRAINT `category_id` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  INDEX `category`(`category`) USING BTREE,
+  CONSTRAINT `category` FOREIGN KEY (`category`) REFERENCES `category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB AUTO_INCREMENT = 40 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------

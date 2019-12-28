@@ -40,8 +40,12 @@ public enum Status {
     USERNAME_NOT_EXIST(50011, "账号不存在"),
 
     // 商品相关
-    PRODUCT_CATEGORY_EXIST(60000, "商品分类已经存在"),
-    PRODUCT_CATEGORY_NOT_EXIST(60001, "商品分类不存在");
+    PRODUCT_NOT_EXIST(60000, "商品不存在"),
+    PRODUCT_STATUS_NOT_ON(60001, "商品下架"),
+    PRODUCT_STOCK_NOT_ENOUGH(60002, "商品库存不足"),
+    CATEGORY_EXIST(60010, "分类已经存在"),
+    CATEGORY_NOT_EXIST(60011, "分类不存在"),
+    ORDER_NOT_EXIST(60020, "订单不存在");
 
     private Integer code;
     private String msg;

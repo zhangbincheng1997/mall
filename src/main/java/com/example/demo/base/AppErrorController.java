@@ -21,17 +21,12 @@ public class AppErrorController implements ErrorController {
 
     private static final String ERROR_PATH = "/error";
 
+    @Autowired
     private ErrorAttributes errorAttributes;
 
     @Override
     public String getErrorPath() {
         return ERROR_PATH;
-    }
-
-    // TODO
-    @Autowired
-    public AppErrorController(ErrorAttributes errorAttributes) {
-        this.errorAttributes = errorAttributes;
     }
 
     @RequestMapping(value = ERROR_PATH)

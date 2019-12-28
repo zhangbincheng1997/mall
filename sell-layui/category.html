@@ -16,7 +16,7 @@
     </div>
 
     <div id="modal" style="display: none;">
-        <div style="width: 500px; margin: 0 auto;">
+        <div style="width: 500px; margin: 0 auto; padding: 20px;">
             <form class="layui-form layui-form-pane" autocomplete="off">
                 <div class="layui-form-item">
                     <label class="layui-form-label layui-icon layui-icon-username">名称</label>
@@ -62,6 +62,7 @@
             elem: '#table',
             url: 'category/list',
             page: true,
+            size: 'lg',
             toolbar: '#toolbarTpl', // 'default'
             defaultToolbar: [{
                 title: '添加',
@@ -83,7 +84,7 @@
                         type: 1, // 0：信息框，默认 1：页面层 2：iframe层 3：加载层 4：tips层
                         title: '添加分类',
                         content: $('#modal'),
-                        area: ['500px', '150px'],
+                        area: ['800px', '200px'],
                         shadeClose: true,
                         end: function () {
                             $('form')[0].reset();
@@ -114,7 +115,7 @@
         table.on('edit(table)', function (obj) {
             // 记录编辑之前的值
             var old = $(this).prev().text();
-            $.post('category/' + obj.data.id, obj.data, function (res) {
+            $.put('category/' + obj.data.id, obj.data, function (res) {
                 if (res.code === 0) {
                     layer.msg(res.msg);
                 } else {
@@ -126,7 +127,7 @@
         });
 
         form.on('submit(confirm)', function (data) {
-            $.put('category', data.field, function (res) {
+            $.post('category', data.field, function (res) {
                 if (res.code === 0) {
                     var old = table.cache['table'];
                     old.push(data.field);

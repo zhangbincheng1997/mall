@@ -3,6 +3,7 @@ package com.example.demo;
 import cn.hutool.core.lang.Snowflake;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -10,7 +11,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class DemoTest {
 
-    private Snowflake snowflake = new Snowflake(0, 0);
+    @Autowired
+    private Snowflake snowflake;
 
     @Test
     public void testDemo() {

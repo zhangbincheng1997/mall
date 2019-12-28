@@ -51,7 +51,7 @@ public class CategoryController {
     }
 
     @ApiOperation("添加分类")
-    @PutMapping("")
+    @PostMapping("")
     @ResponseBody
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Result add(@Valid CategoryDto categoryDto) {
@@ -64,7 +64,7 @@ public class CategoryController {
     }
 
     @ApiOperation("修改分类")
-    @PostMapping("/{id}")
+    @PutMapping("/{id}")
     @ResponseBody
     @PreAuthorize("hasAuthority('category:update')")
     public Result update(@PathVariable("id") Long id,

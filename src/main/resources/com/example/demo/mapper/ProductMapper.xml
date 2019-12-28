@@ -8,7 +8,7 @@
     <result column="icon" jdbcType="VARCHAR" property="icon" />
     <result column="price" jdbcType="DECIMAL" property="price" />
     <result column="stock" jdbcType="INTEGER" property="stock" />
-    <result column="category_id" jdbcType="BIGINT" property="categoryId" />
+    <result column="category" jdbcType="BIGINT" property="category" />
     <result column="status" jdbcType="BIT" property="status" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -70,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, description, icon, price, stock, category_id, status
+    id, name, description, icon, price, stock, category, status
   </sql>
   <select id="selectByExample" parameterType="com.example.demo.model.ProductExample" resultMap="BaseResultMap">
     select
@@ -107,10 +107,10 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into product (name, description, icon, 
-      price, stock, category_id, 
+      price, stock, category, 
       status)
     values (#{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, 
-      #{price,jdbcType=DECIMAL}, #{stock,jdbcType=INTEGER}, #{categoryId,jdbcType=BIGINT}, 
+      #{price,jdbcType=DECIMAL}, #{stock,jdbcType=INTEGER}, #{category,jdbcType=BIGINT}, 
       #{status,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="com.example.demo.model.Product">
@@ -134,8 +134,8 @@
       <if test="stock != null">
         stock,
       </if>
-      <if test="categoryId != null">
-        category_id,
+      <if test="category != null">
+        category,
       </if>
       <if test="status != null">
         status,
@@ -157,8 +157,8 @@
       <if test="stock != null">
         #{stock,jdbcType=INTEGER},
       </if>
-      <if test="categoryId != null">
-        #{categoryId,jdbcType=BIGINT},
+      <if test="category != null">
+        #{category,jdbcType=BIGINT},
       </if>
       <if test="status != null">
         #{status,jdbcType=BIT},
@@ -192,8 +192,8 @@
       <if test="record.stock != null">
         stock = #{record.stock,jdbcType=INTEGER},
       </if>
-      <if test="record.categoryId != null">
-        category_id = #{record.categoryId,jdbcType=BIGINT},
+      <if test="record.category != null">
+        category = #{record.category,jdbcType=BIGINT},
       </if>
       <if test="record.status != null">
         status = #{record.status,jdbcType=BIT},
@@ -211,7 +211,7 @@
       icon = #{record.icon,jdbcType=VARCHAR},
       price = #{record.price,jdbcType=DECIMAL},
       stock = #{record.stock,jdbcType=INTEGER},
-      category_id = #{record.categoryId,jdbcType=BIGINT},
+      category = #{record.category,jdbcType=BIGINT},
       status = #{record.status,jdbcType=BIT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -235,8 +235,8 @@
       <if test="stock != null">
         stock = #{stock,jdbcType=INTEGER},
       </if>
-      <if test="categoryId != null">
-        category_id = #{categoryId,jdbcType=BIGINT},
+      <if test="category != null">
+        category = #{category,jdbcType=BIGINT},
       </if>
       <if test="status != null">
         status = #{status,jdbcType=BIT},
@@ -251,7 +251,7 @@
       icon = #{icon,jdbcType=VARCHAR},
       price = #{price,jdbcType=DECIMAL},
       stock = #{stock,jdbcType=INTEGER},
-      category_id = #{categoryId,jdbcType=BIGINT},
+      category = #{category,jdbcType=BIGINT},
       status = #{status,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}
   </update>

@@ -1,17 +1,18 @@
 package com.example.demo.model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class OrderExample {
+public class OrderMasterExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public OrderExample() {
+    public OrderMasterExample() {
         oredCriteria = new ArrayList<>();
     }
 
@@ -245,62 +246,52 @@ public class OrderExample {
             return (Criteria) this;
         }
 
-        public Criteria andAmountEqualTo(String value) {
+        public Criteria andAmountEqualTo(BigDecimal value) {
             addCriterion("amount =", value, "amount");
             return (Criteria) this;
         }
 
-        public Criteria andAmountNotEqualTo(String value) {
+        public Criteria andAmountNotEqualTo(BigDecimal value) {
             addCriterion("amount <>", value, "amount");
             return (Criteria) this;
         }
 
-        public Criteria andAmountGreaterThan(String value) {
+        public Criteria andAmountGreaterThan(BigDecimal value) {
             addCriterion("amount >", value, "amount");
             return (Criteria) this;
         }
 
-        public Criteria andAmountGreaterThanOrEqualTo(String value) {
+        public Criteria andAmountGreaterThanOrEqualTo(BigDecimal value) {
             addCriterion("amount >=", value, "amount");
             return (Criteria) this;
         }
 
-        public Criteria andAmountLessThan(String value) {
+        public Criteria andAmountLessThan(BigDecimal value) {
             addCriterion("amount <", value, "amount");
             return (Criteria) this;
         }
 
-        public Criteria andAmountLessThanOrEqualTo(String value) {
+        public Criteria andAmountLessThanOrEqualTo(BigDecimal value) {
             addCriterion("amount <=", value, "amount");
             return (Criteria) this;
         }
 
-        public Criteria andAmountLike(String value) {
-            addCriterion("amount like", value, "amount");
-            return (Criteria) this;
-        }
-
-        public Criteria andAmountNotLike(String value) {
-            addCriterion("amount not like", value, "amount");
-            return (Criteria) this;
-        }
-
-        public Criteria andAmountIn(List<String> values) {
+        public Criteria andAmountIn(List<BigDecimal> values) {
             addCriterion("amount in", values, "amount");
             return (Criteria) this;
         }
 
-        public Criteria andAmountNotIn(List<String> values) {
+        public Criteria andAmountNotIn(List<BigDecimal> values) {
             addCriterion("amount not in", values, "amount");
             return (Criteria) this;
         }
 
-        public Criteria andAmountBetween(String value1, String value2) {
+        public Criteria andAmountBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("amount between", value1, value2, "amount");
             return (Criteria) this;
         }
 
-        public Criteria andAmountNotBetween(String value1, String value2) {
+        public Criteria andAmountNotBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("amount not between", value1, value2, "amount");
             return (Criteria) this;
         }

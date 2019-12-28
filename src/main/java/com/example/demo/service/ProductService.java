@@ -16,4 +16,9 @@ public interface ProductService {
     int update(Long id, ProductDto productDto);
 
     int delete(Long id);
+
+    /**
+     * 买家
+     */
+    PageInfo<Product> listByBuyer(PageRequest pageRequest);
 }

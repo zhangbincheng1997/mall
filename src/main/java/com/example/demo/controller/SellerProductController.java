@@ -20,10 +20,10 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Api(tags = "商品")
+@Api(tags = "卖家商品")
 @Controller
-@RequestMapping("/product")
-public class ProductController {
+@RequestMapping("/seller/product")
+public class SellerProductController {
 
     @Autowired
     private ProductService productService;
@@ -31,7 +31,7 @@ public class ProductController {
     @ApiOperation("获取商品")
     @GetMapping("/{id}")
     @ResponseBody
-    @PreAuthorize("hasAuthority('product:read')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Result get(@PathVariable("id") Long id) {
         Product product = productService.get(id);
         return Result.success(ConvertUtils.convert(product, ProductVo.class));
@@ -40,7 +40,7 @@ public class ProductController {
     @ApiOperation("获取商品列表")
     @GetMapping("/list")
     @ResponseBody
-    @PreAuthorize("hasAuthority('product:read')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Result list(@Valid PageRequest pageRequest) {
         PageInfo<Product> pageInfo = productService.list(pageRequest);
         List<Product> productList = pageInfo.getList();
@@ -51,7 +51,7 @@ public class ProductController {
     }
 
     @ApiOperation("添加商品")
-    @PutMapping("")
+    @PostMapping("")
     @ResponseBody
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Result add(@Valid ProductDto productDto) {
@@ -64,9 +64,9 @@ public class ProductController {
     }
 
     @ApiOperation("修改商品")
-    @PostMapping("/{id}")
+    @PutMapping("/{id}")
     @ResponseBody
-    @PreAuthorize("hasAuthority('product:update')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Result update(@PathVariable("id") Long id,
                          @Valid ProductDto productDto) {
         int count = productService.update(id, productDto);
@@ -80,7 +80,7 @@ public class ProductController {
     @ApiOperation("删除商品")
     @DeleteMapping("/{id}")
     @ResponseBody
-    @PreAuthorize("hasAuthority('product:delete')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Result delete(@PathVariable("id") Long id) {
         int count = productService.delete(id);
         if (count == 1) {

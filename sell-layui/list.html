@@ -16,7 +16,7 @@
     </div>
 
     <div id="modal" style="display: none;">
-        <div style="width: 500px; margin: 0 auto;">
+        <div style="width: 500px; margin: 0 auto; padding: 20px;">
             <form class="layui-form layui-form-pane" autocomplete="off">
                 <div class="layui-form-item">
                     <label class="layui-form-label layui-icon layui-icon-username">图标</label>
@@ -51,6 +51,20 @@
                     </div>
                 </div>
                 <div class="layui-form-item">
+                    <label class="layui-form-label layui-icon layui-icon-username">分类</label>
+                    <div class="layui-input-block">
+                        <select name="category">
+                            <option></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label layui-icon layui-icon-username">状态</label>
+                    <div class="layui-input-block">
+                        <input type="checkbox" name="status" value="1" lay-skin="switch" lay-text="开|关">
+                    </div>
+                </div>
+                <div class="layui-form-item">
                     <div class="layui-input-block">
                         <button class="layui-btn" lay-submit lay-filter="confirm">立即提交</button>
                         <button type="reset" class="layui-btn layui-btn-primary">重置</button>
@@ -69,13 +83,12 @@
 <script type="text/html" id="iconTpl">
     <img src="{{ d.icon }}" width="50px" height="50px">
 </script>
-
 <script type="text/html" id="selectTpl">
-    <select name="category" lay-filter="select" data-value="{{ d.category_id }}">
+    <select name="category" lay-filter="select" data-value="{{ d.category }}">
     </select>
 </script>
 <script type="text/html" id="switchTpl">
-    <input type="checkbox" name="status" value="{{ d.status }}" lay-skin="switch"
+    <input type="checkbox" name="status" value="1" lay-skin="switch"
            lay-text="开|关" lay-filter="switch" {{ d.status==1 ? 'checked' : '' }}>
 </script>
 <script type="text/html" id="barTpl">
@@ -91,7 +104,7 @@
         // $('#search').click(function(){}); 搜索一次后会失效
         $('body').on('click', '#search', function () {
             table.reload('table', {
-                url: 'product/list',
+                url: 'seller/product/list',
                 page: true,
                 where: {keyword: $('#keyword').val()}
             });
@@ -99,7 +112,7 @@
 
         table.render({
             elem: '#table',
-            url: 'product/list',
+            url: 'seller/product/list',
             page: true,
             size: 'lg',
             toolbar: '#toolbarTpl', // 'default'
@@ -115,7 +128,7 @@
                 {field: 'description', title: '描述', edit: 'text'},
                 {field: 'price', title: '价格', edit: 'text'},
                 {field: 'stock', title: '库存', edit: 'text'},
-                {field: 'category_id', title: '分类', width: 200, align: 'center', templet: '#selectTpl'},
+                {field: 'category', title: '分类', width: 200, align: 'center', templet: '#selectTpl'},
                 {field: 'status', title: '状态', width: 100, align: 'center', templet: '#switchTpl'},
                 {fixed: 'right', title: '操作', width: 100, align: 'center', toolbar: '#barTpl'}
             ]],
@@ -143,10 +156,11 @@
                         type: 1, // 0：信息框，默认 1：页面层 2：iframe层 3：加载层 4：tips层
                         title: '添加商品',
                         content: $('#modal'),
-                        area: ['800px', '500px'],
+                        area: ['800px', '600px'],
                         shadeClose: true,
                         end: function () {
                             $('#icon').removeAttr('src');
+                            $("#category").removeAttr('selected');
                             $('form')[0].reset();
                         }
                     });
@@ -159,7 +173,7 @@
             switch (obj.event) {
                 case 'delete':
                     layer.confirm('确认删除？', function (index) {
-                        $.delete('product/' + obj.data.id, function (res) {
+                        $.delete('seller/product/' + obj.data.id, function (res) {
                             if (res.code === 0) {
                                 obj.del();
                                 layer.close(index);
@@ -174,9 +188,8 @@
         // 监听单元格编辑
         table.on('edit(table)', function (obj) {
             // 记录编辑之前的值
-            console.log(obj.data);
             var old = $(this).prev().text();
-            $.post('product/' + obj.data.id, obj.data, function (res) {
+            $.put('product/' + obj.data.id, obj.data, function (res) {
                 if (res.code === 0) {
                     layer.msg(res.msg);
                 } else {
@@ -191,8 +204,8 @@
         form.on('select(select)', function (data) {
             var index = $(data.elem).parents('tr').data('index');
             var rowData = table.cache['table'][index];
-            rowData['category_id'] = data.value; // 更新缓存
-            $.post('product/' + rowData.id, rowData, function (res) {
+            rowData['category'] = data.value; // 更新缓存
+            $.put('seller/product/' + rowData.id, rowData, function (res) {
                 if (res.code === 0) {
                     layer.msg(res.msg);
                 }
@@ -204,7 +217,7 @@
             var index = $(data.elem).parents('tr').data('index');
             var rowData = table.cache['table'][index];
             rowData['status'] = data.elem.checked; // 更新缓存
-            $.post('product/' + rowData.id, rowData, function (res) {
+            $.put('seller/product/' + rowData.id, rowData, function (res) {
                 if (res.code === 0) {
                     layer.msg(res.msg);
                 }
@@ -214,7 +227,7 @@
         form.on('submit(confirm)', function (data) {
             delete data.field.file; // 删除file
             data.field.icon = $('#icon')[0].src; // 添加icon
-            $.put('product', data.field, function (res) {
+            $.post('seller/product', data.field, function (res) {
                 if (res.code === 0) {
                     var tableData = table.cache['table'];
                     tableData.push(data.field);
