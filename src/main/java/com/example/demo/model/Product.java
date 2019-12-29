@@ -16,6 +16,8 @@ public class Product implements Serializable {
 
     private Integer stock;
 
+    private Integer sales;
+
     private Long category;
 
     private Boolean status;
@@ -70,6 +72,14 @@ public class Product implements Serializable {
         this.stock = stock;
     }
 
+    public Integer getSales() {
+        return sales;
+    }
+
+    public void setSales(Integer sales) {
+        this.sales = sales;
+    }
+
     public Long getCategory() {
         return category;
     }
@@ -98,6 +108,7 @@ public class Product implements Serializable {
         sb.append(", icon=").append(icon);
         sb.append(", price=").append(price);
         sb.append(", stock=").append(stock);
+        sb.append(", sales=").append(sales);
         sb.append(", category=").append(category);
         sb.append(", status=").append(status);
         sb.append(", serialVersionUID=").append(serialVersionUID);

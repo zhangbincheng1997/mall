@@ -5,7 +5,9 @@ import java.io.Serializable;
 public class Category implements Serializable {
     private Long id;
 
-    private String name;
+    private String title;
+
+    private Long pid;
 
     private static final long serialVersionUID = 1L;
 
@@ -17,12 +19,20 @@ public class Category implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Long getPid() {
+        return pid;
+    }
+
+    public void setPid(Long pid) {
+        this.pid = pid;
     }
 
     @Override
@@ -32,7 +42,8 @@ public class Category implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", name=").append(name);
+        sb.append(", title=").append(title);
+        sb.append(", pid=").append(pid);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

@@ -1,4 +1,4 @@
-window.API = "http://localhost:8080/";
+var API = "http://localhost:8080/";
 
 layui.use('jquery', function () {
     var $ = layui.jquery;

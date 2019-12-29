@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
             userMapper.insertSelective(user);
             UserRole userRole = new UserRole();
             userRole.setUserId(user.getId());
-            userRole.setRoleId(2L); // TODO
+            userRole.setRoleId(2L); // 默认为ROLE_USER
             userRoleMapper.insertSelective(userRole);
             return user;
         } catch (DuplicateKeyException e) { // UNIQUE

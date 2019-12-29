@@ -34,6 +34,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public PageInfo<Product> list(PageRequest pageRequest) {
         ProductExample example = new ProductExample();
+        String keyword = pageRequest.getKeyword();
+        if (!StringUtils.isEmpty(keyword)) {
+            ProductExample.Criteria criteria = example.createCriteria();
+            criteria.andNameLike("%" + keyword + "%");
+        }
         return list(example, pageRequest);
     }
 
@@ -61,18 +66,18 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public PageInfo<Product> listByBuyer(PageRequest pageRequest) {
         ProductExample example = new ProductExample();
-        example.createCriteria().andStatusEqualTo(true); // 上架状态
-        example.createCriteria().andStockGreaterThan(0); // 有库存
+        ProductExample.Criteria criteria = example.createCriteria();
+        criteria.andStatusEqualTo(true); // 上架状态
+        criteria.andStockGreaterThan(0); // 有库存
+        String keyword = pageRequest.getKeyword();
+        if (!StringUtils.isEmpty(keyword)) {
+            criteria.andNameLike("%" + keyword + "%");
+        }
         return list(example, pageRequest);
     }
 
     private PageInfo<Product> list(ProductExample example, PageRequest pageRequest) {
         PageHelper.startPage(pageRequest.getPage(), pageRequest.getLimit(), "id desc");
-        String keyword = pageRequest.getKeyword();
-        if (!StringUtils.isEmpty(keyword)) {
-            example.or().andNameLike("%" + keyword + "%");
-            example.or().andDescriptionLike("%" + keyword + "%");
-        }
         List<Product> productList = productMapper.selectByExample(example);
         return new PageInfo<>(productList);
     }

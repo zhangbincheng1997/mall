@@ -45,6 +45,7 @@ public enum Status {
     PRODUCT_STOCK_NOT_ENOUGH(60002, "商品库存不足"),
     CATEGORY_EXIST(60010, "分类已经存在"),
     CATEGORY_NOT_EXIST(60011, "分类不存在"),
+    CATEGORY_NOT_DELETE(60012, "分类不允许删除"),
     ORDER_NOT_EXIST(60020, "订单不存在");
 
     private Integer code;

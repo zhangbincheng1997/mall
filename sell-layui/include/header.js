@@ -1,13 +1,11 @@
 document.write("<div class=\"layui-header\">");
 document.write("    <div class=\"layui-logo\">外卖后台管理系统<\/div>");
 document.write("    <ul class=\"layui-nav layui-layout-left\">");
-document.write("        <li class=\"layui-nav-item\"><a href=\"\">控制台<\/a><\/li>");
 document.write("        <li class=\"layui-nav-item\"><a href=\"\">用户<\/a><\/li>");
 document.write("        <li class=\"layui-nav-item\">");
 document.write("            <a href=\"javascript:void(0);\">其它<\/a>");
 document.write("            <dl class=\"layui-nav-child\">");
-document.write("                <dd><a href=\"\">授权管理<\/a><\/dd>");
-document.write("                <dd><a href=\"" + API + "druid\/list.html\">Druid<\/a><\/dd>");
+document.write("                <dd><a href=\"" + API + "druid\/product.html\">Druid<\/a><\/dd>");
 document.write("                <dd><a href=\"" + API + "swagger-ui.html\">Swagger<\/a><\/dd>");
 document.write("            <\/dl>");
 document.write("        <\/li>");

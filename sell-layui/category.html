@@ -12,131 +12,69 @@
     <script type="text/javascript" src="include/footer.js"></script>
 
     <div class="layui-body">
-        <table id="table" lay-filter="table"></table>
-    </div>
-
-    <div id="modal" style="display: none;">
-        <div style="width: 500px; margin: 0 auto; padding: 20px;">
-            <form class="layui-form layui-form-pane" autocomplete="off">
-                <div class="layui-form-item">
-                    <label class="layui-form-label layui-icon layui-icon-username">名称</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="name" id="name" placeholder="请输入名称" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <div class="layui-input-block">
-                        <button class="layui-btn" lay-submit lay-filter="confirm">立即提交</button>
-                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                    </div>
-                </div>
-            </form>
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+            <legend>分类管理</legend>
+        </fieldset>
+        <div style="width: 500px; margin: 0 auto;">
+            <div id="tree"></div>
         </div>
     </div>
 </div>
-<script type="text/html" id="toolbarTpl">
-    <input class="text" style="height:30px;width:200px;" name="" id="keyword"  placeholder="请输入关键词">
-     <a href="javascript:void(0);" id="search">
-        <i class="layui-icon layui-icon-search"></i> 
-    </a>
-</script>
-<script type="text/html" id="barTpl">
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
-</script>
 <script>
-    layui.use(['jquery', 'element', 'table', 'form', 'upload'], function () {
+    layui.use(['jquery', 'element', 'tree'], function () {
         var $ = layui.jquery;
-        var table = layui.table;
-        var form = layui.form;
+        var tree = layui.tree;
 
-        // $('#search').click(function(){}); 搜索一次后会失效
-        $('body').on('click', '#search', function () {
-            table.reload('table', {
-                url: 'category/list',
-                page: true,
-                where: {keyword: $('#keyword').val()}
-            });
-        });
-
-        table.render({
-            elem: '#table',
-            url: 'category/list',
-            page: true,
-            size: 'lg',
-            toolbar: '#toolbarTpl', // 'default'
-            defaultToolbar: [{
-                title: '添加',
-                layEvent: 'add',
-                icon: 'layui-icon-add-1'
-            }, 'filter', 'exports', 'print'],
-            cols: [[
-                {field: 'id', title: 'ID', width: 60, align: 'center', sort: true},
-                {field: 'name', title: '名称', edit: 'text'},
-                {fixed: 'right', title: '操作', width: 100, align: 'center', toolbar: '#barTpl'}
-            ]]
-        });
-
-        // 监听头工具栏事件
-        table.on('toolbar(table)', function (obj) {
-            switch (obj.event) {
-                case 'add':
-                    layer.open({
-                        type: 1, // 0：信息框，默认 1：页面层 2：iframe层 3：加载层 4：tips层
-                        title: '添加分类',
-                        content: $('#modal'),
-                        area: ['800px', '200px'],
-                        shadeClose: true,
-                        end: function () {
-                            $('form')[0].reset();
-                        }
-                    });
-                    break;
-            }
-        });
-
-        // 监听行工具事件
-        table.on('tool(table)', function (obj) {
-            switch (obj.event) {
-                case 'delete':
-                    layer.confirm('确认删除？', function (index) {
-                        $.delete('category/' + obj.data.id, function (res) {
-                            if (res.code === 0) {
-                                obj.del();
-                                layer.close(index);
-                                layer.msg(res.msg);
+        $.get('category/list', function (res) {
+            tree.render({
+                elem: '#tree',
+                // data: [{value: 0, title: '所有商品', children: res.data, spread: true}], // 构造根节点
+                data: res.data,
+                id: 'demo', // reload
+                edit: ['add', 'update', 'del'],
+                showLine: true,
+                operate: function (obj) {
+                    switch (obj.type) {
+                        case 'add':
+                            console.log(obj.data);
+                            $.post('category', {title: '未命名', pid: obj.data.id}, function (res) {
+                                if (res.code === 0) {
+                                    layer.msg(res.msg);
+                                }
+                                setTimeout(function () {
+                                    window.location.reload();
+                                }, 1000); // 有点粗暴
+                            });
+                            break;
+                        case 'update':
+                            $.put('category/' + obj.data.id, {title: obj.data.title}, function (res) {
+                                if (res.code === 0) {
+                                    layer.msg(res.msg);
+                                }
+                                setTimeout(function () {
+                                    window.location.reload();
+                                }, 1000); // 有点粗暴
+                            });
+                            break;
+                        case 'del':
+                            if (obj.data.children.length !== 0) {
+                                layer.alert("请先删除子分类后再进行操作！");
+                                tree.update('demo', {});
+                            } else {
+                                $.delete('category/' + obj.data.id, function (res) {
+                                    if (res.code === 0) {
+                                        layer.msg(res.msg);
+                                    } else {
+                                        setTimeout(function () {
+                                            window.location.reload();
+                                        }, 1000); // 有点粗暴
+                                    }
+                                });
                             }
-                        });
-                    });
-                    break;
-            }
-        });
-
-        // 监听单元格编辑
-        table.on('edit(table)', function (obj) {
-            // 记录编辑之前的值
-            var old = $(this).prev().text();
-            $.put('category/' + obj.data.id, obj.data, function (res) {
-                if (res.code === 0) {
-                    layer.msg(res.msg);
-                } else {
-                    // 修改回来
-                    $(obj.tr.selector + ' td[data-field="' + obj.field + '"] input').val(old);
-                    $(obj.tr.selector + ' td[data-field="' + obj.field + '"] div').text(old);
+                            break;
+                    }
                 }
             });
-        });
-
-        form.on('submit(confirm)', function (data) {
-            $.post('category', data.field, function (res) {
-                if (res.code === 0) {
-                    var old = table.cache['table'];
-                    old.push(data.field);
-                    table.reload('table', {data: old});
-                    layer.closeAll('page');
-                    layer.msg(res.msg);
-                }
-            });
-            return false; // require
         });
     });
 </script>

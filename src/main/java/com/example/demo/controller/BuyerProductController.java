@@ -11,7 +11,6 @@ import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,9 +27,8 @@ public class BuyerProductController {
     private ProductService productService;
 
     @ApiOperation("获取商品列表")
-    @GetMapping("/list")
+    @GetMapping("")
     @ResponseBody
-    @PreAuthorize("hasRole('ROLE_USER')")
     public Result list(@Valid PageRequest pageRequest) {
         PageInfo<Product> pageInfo = productService.listByBuyer(pageRequest);
         List<Product> productList = pageInfo.getList();

@@ -3,12 +3,9 @@ package com.example.demo.controller;
 import com.example.demo.base.PageResult;
 import com.example.demo.base.Result;
 import com.example.demo.dto.CategoryDto;
-import com.example.demo.dto.PageRequest;
 import com.example.demo.model.Category;
 import com.example.demo.service.CategoryService;
-import com.example.demo.utils.ConvertUtils;
 import com.example.demo.vo.CategoryVo;
-import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Api(tags = "分类")
 @Controller
@@ -28,26 +25,13 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-    @ApiOperation("获取分类")
-    @GetMapping("/{id}")
-    @ResponseBody
-    @PreAuthorize("hasAuthority('category:read')")
-    public Result get(@PathVariable("id") Long id) {
-        Category category = categoryService.get(id);
-        return Result.success(ConvertUtils.convert(category, CategoryVo.class));
-    }
-
     @ApiOperation("获取分类列表")
     @GetMapping("/list")
     @ResponseBody
     @PreAuthorize("hasAuthority('category:read')")
-    public Result list(@Valid PageRequest pageRequest) {
-        PageInfo<Category> pageInfo = categoryService.list(pageRequest);
-        List<Category> categoryList = pageInfo.getList();
-        List<CategoryVo> categoryVoList = categoryList.stream()
-                .map(category -> ConvertUtils.convert(category, CategoryVo.class))
-                .collect(Collectors.toList());
-        return PageResult.success(categoryVoList, pageInfo.getTotal());
+    public Result list(@RequestParam(name = "id", defaultValue = "0") Long id) {
+        List<CategoryVo> categoryVoList = categoryService.list(id);
+        return PageResult.success(categoryVoList);
     }
 
     @ApiOperation("添加分类")

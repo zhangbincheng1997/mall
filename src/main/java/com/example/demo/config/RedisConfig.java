@@ -1,5 +1,6 @@
 package com.example.demo.config;
 
+import com.example.demo.utils.Constants;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
@@ -42,7 +43,7 @@ public class RedisConfig extends CachingConfigurerSupport {
                         .fromSerializer(new StringRedisSerializer()))
                 .serializeValuesWith(RedisSerializationContext.SerializationPair
                         .fromSerializer(new GenericJackson2JsonRedisSerializer()))
-                .entryTtl(Duration.ofSeconds(60));
+                .entryTtl(Duration.ofSeconds(Constants.REDIS_CACHE_EXPIRE));
         return RedisCacheManager.builder(RedisCacheWriter.nonLockingRedisCacheWriter(redisConnectionFactory))
                 .cacheDefaults(redisCacheConfiguration).build();
     }

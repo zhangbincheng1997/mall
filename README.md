@@ -1,10 +1,10 @@
 # sell-springboot
 前后端分离 + RESTful接口
 ```
-1. GET      /url/{id}    获取
-2. POST     /url        添加
-3. PUT      /url/{id}    修改
-4. DELETE   /url/{id}    删除 
+1. 获取 GET      /url/{id}
+2. 添加 POST     /url
+3. 修改 PUT      /url/{id}
+4. 删除 DELETE   /url/{id}
 ```
 
 ## 前端技术

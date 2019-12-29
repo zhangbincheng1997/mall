@@ -8,6 +8,7 @@
     <result column="icon" jdbcType="VARCHAR" property="icon" />
     <result column="price" jdbcType="DECIMAL" property="price" />
     <result column="stock" jdbcType="INTEGER" property="stock" />
+    <result column="sales" jdbcType="INTEGER" property="sales" />
     <result column="category" jdbcType="BIGINT" property="category" />
     <result column="status" jdbcType="BIT" property="status" />
   </resultMap>
@@ -70,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, description, icon, price, stock, category, status
+    id, name, description, icon, price, stock, sales, category, status
   </sql>
   <select id="selectByExample" parameterType="com.example.demo.model.ProductExample" resultMap="BaseResultMap">
     select
@@ -107,11 +108,11 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into product (name, description, icon, 
-      price, stock, category, 
-      status)
+      price, stock, sales, 
+      category, status)
     values (#{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, 
-      #{price,jdbcType=DECIMAL}, #{stock,jdbcType=INTEGER}, #{category,jdbcType=BIGINT}, 
-      #{status,jdbcType=BIT})
+      #{price,jdbcType=DECIMAL}, #{stock,jdbcType=INTEGER}, #{sales,jdbcType=INTEGER}, 
+      #{category,jdbcType=BIGINT}, #{status,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="com.example.demo.model.Product">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
@@ -133,6 +134,9 @@
       </if>
       <if test="stock != null">
         stock,
+      </if>
+      <if test="sales != null">
+        sales,
       </if>
       <if test="category != null">
         category,
@@ -156,6 +160,9 @@
       </if>
       <if test="stock != null">
         #{stock,jdbcType=INTEGER},
+      </if>
+      <if test="sales != null">
+        #{sales,jdbcType=INTEGER},
       </if>
       <if test="category != null">
         #{category,jdbcType=BIGINT},
@@ -192,6 +199,9 @@
       <if test="record.stock != null">
         stock = #{record.stock,jdbcType=INTEGER},
       </if>
+      <if test="record.sales != null">
+        sales = #{record.sales,jdbcType=INTEGER},
+      </if>
       <if test="record.category != null">
         category = #{record.category,jdbcType=BIGINT},
       </if>
@@ -211,6 +221,7 @@
       icon = #{record.icon,jdbcType=VARCHAR},
       price = #{record.price,jdbcType=DECIMAL},
       stock = #{record.stock,jdbcType=INTEGER},
+      sales = #{record.sales,jdbcType=INTEGER},
       category = #{record.category,jdbcType=BIGINT},
       status = #{record.status,jdbcType=BIT}
     <if test="_parameter != null">
@@ -235,6 +246,9 @@
       <if test="stock != null">
         stock = #{stock,jdbcType=INTEGER},
       </if>
+      <if test="sales != null">
+        sales = #{sales,jdbcType=INTEGER},
+      </if>
       <if test="category != null">
         category = #{category,jdbcType=BIGINT},
       </if>
@@ -251,6 +265,7 @@
       icon = #{icon,jdbcType=VARCHAR},
       price = #{price,jdbcType=DECIMAL},
       stock = #{stock,jdbcType=INTEGER},
+      sales = #{sales,jdbcType=INTEGER},
       category = #{category,jdbcType=BIGINT},
       status = #{status,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}
