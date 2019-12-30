@@ -2,7 +2,7 @@ package com.example.demo.utils;
 
 import com.example.demo.enums.CodeEnum;
 
-public class EnumUtils {
+public class EnumUtil {
 
     public static <T extends CodeEnum> T getByCode(Integer code, Class<T> enumClass) {
         for (T each: enumClass.getEnumConstants()) {

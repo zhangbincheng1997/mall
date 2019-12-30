@@ -1,8 +1,10 @@
 package com.example.demo.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -10,9 +12,13 @@ public class CategoryVo {
 
     private Long id;
 
-    private String title;
+    private String name;
 
     private List<CategoryVo> children = new ArrayList<>();
 
-    private Boolean spread = true; // 展开
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Date createTime;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Date updateTime;
 }

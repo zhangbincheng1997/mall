@@ -58,19 +58,19 @@
     <div class="commod-cont-wrap">
         <div class="commod-cont w1200 layui-clear">
             <div class="left-nav">
+                <div class="title">所有商品</div>
                 <!-- 模版导入 -->
                 <script type="text/html" id="category">
-                    <div class="title">{{ d.title }}</div><!-- 根分类 -->
                     <div class="list-box">
-                        {{# layui.each(d.children, function(index, item){ }}
+                        {{# layui.each(d, function(index, item){ }}
                         <dl>
                             <dt>
-                                {{ item.title }}<!-- 一级分类 -->
+                                {{ item.name }}<!-- 一级分类 -->
                             </dt>
                             {{# layui.each(item.children, function(index2, item2){ }}
                             <dd>
-                                <a href="javascript:window.location.href='index.html?keyword={{ item2.title }}';">
-                                    {{ item2.title }}<!-- 二级分类 -->
+                                <a href="javascript:window.location.href='index.html?category={{ item2.id }}';">
+                                    {{ item2.name }}<!-- 二级分类 -->
                                 </a>
                             </dd>
                             {{# }); }}
@@ -96,10 +96,10 @@
                         <div class="cont-list layui-clear">
                             {{# layui.each(d.data, function(index, item){ }}
                             <div class="item">
-
                                 <div class="img">
                                     <a href="javascript:void(0);">
-                                        <img src="{{ item.icon }}" width="280px" height="280px">
+                                        <img src="{{ item.icon }}" title="{{ item.description }}" width="280px"
+                                             height="280px">
                                     </a>
                                 </div>
                                 <div class="text">
@@ -151,13 +151,16 @@
         var $ = layui.$, laytpl = layui.laytpl, laypage = layui.laypage;
 
         $.get('category/list', function (res) {
-            laytpl(category.innerHTML).render(res.data[0], function (html) {
+            laytpl(category.innerHTML).render(res.data, function (html) {
                 $('#categoryView').html(html);
             });
         });
 
-        $.get('buyer/product?limit=12&page=1&keyword=' + getQueryVariable('keyword'), function (res) {
-            render(res); // 模板
+        var para = '&keyword=' + getQueryVariable('keyword') + '&category=' + getQueryVariable('category');
+        $.get('buyer/product?limit=12&page=1' + para, function (res) {
+            laytpl(product.innerHTML).render(res, function (html) {
+                $('#productView').html(html);
+            });
             // 分页
             laypage.render({
                 elem: 'page',
@@ -166,18 +169,14 @@
                     // 首次不执行
                     if (!first) {
                         $.get('buyer/product?limit=12&page=' + obj.curr, function (res) {
-                            render(res); // 模板
+                            laytpl(product.innerHTML).render(res, function (html) {
+                                $('#productView').html(html);
+                            });
                         });
                     }
                 }
             });
         });
-
-        function render(res) {
-            laytpl(product.innerHTML).render(res, function (html) {
-                $('#productView').html(html);
-            });
-        }
 
         function getQueryVariable(variable) {
             var query = window.location.search.substring(1);

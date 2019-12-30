@@ -2,7 +2,7 @@ package com.example.demo.jwt;
 
 import com.example.demo.base.Result;
 import com.example.demo.base.Status;
-import com.example.demo.utils.RenderUtils;
+import com.example.demo.utils.RenderUtil;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;
@@ -21,6 +21,6 @@ public class JwtAccessDeniedHandler implements AccessDeniedHandler {
     public void handle(HttpServletRequest request,
                        HttpServletResponse response,
                        AccessDeniedException e) throws IOException, ServletException {
-        RenderUtils.render(response, Result.failure(Status.ACCESS_DENIED));
+        RenderUtil.render(response, Result.failure(Status.ACCESS_DENIED));
     }
 }

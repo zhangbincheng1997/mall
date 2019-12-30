@@ -1,11 +1,11 @@
 package com.example.demo.aop;
 
+import cn.hutool.core.net.NetUtil;
 import com.example.demo.base.Result;
 import com.example.demo.base.Status;
 import com.example.demo.component.RedisService;
 import com.example.demo.utils.Constants;
-import com.example.demo.utils.IPUtils;
-import com.example.demo.utils.RenderUtils;
+import com.example.demo.utils.RenderUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
@@ -37,7 +37,7 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
             int count = accessLimit.count();
             String key = Constants.ACCESS_KEY + request.getRequestURI();
             if (ip) {
-                key += ":" + IPUtils.getIpAddr(request);
+                key += ":" + getClientIP(request);
             }
             Integer now = (Integer) redisService.get(key);
             if (now == null) {
@@ -45,10 +45,23 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
             } else if (now < count) {
                 redisService.increment(key, 1);
             } else {
-                RenderUtils.render(response, Result.failure(Status.ACCESS_LIMIT));
+                RenderUtil.render(response, Result.failure(Status.ACCESS_LIMIT));
                 return false;
             }
         }
         return true;
+    }
+
+    public static String getClientIP(HttpServletRequest request) {
+        String[] headers = {"X-Forwarded-For", "X-Real-IP", "Proxy-Client-IP", "WL-Proxy-Client-IP", "HTTP_CLIENT_IP", "HTTP_X_FORWARDED_FOR"};
+        String ip;
+        for (String header : headers) {
+            ip = request.getHeader(header);
+            if (!NetUtil.isUnknow(ip)) {
+                return NetUtil.getMultistageReverseProxyIp(ip);
+            }
+        }
+        ip = request.getRemoteAddr();
+        return NetUtil.getMultistageReverseProxyIp(ip);
     }
 }

@@ -73,10 +73,8 @@
     </div>
 </div>
 <script type="text/html" id="toolbarTpl">
-    <input class="text" style="height:30px;width:200px;" name="" id="keyword"  placeholder="请输入关键词">
-     <a href="javascript:void(0);" id="search">
-        <i class="layui-icon layui-icon-search"></i> 
-    </a>
+    <div id="categorySearch" style="width: 250px; float: left;"></div>
+    <div id="keywordSearch" style="width: 250px; float: left;"></div>
 </script>
 <script type="text/html" id="iconTpl">
     <img src="{{ d.icon }}" width="50px" height="50px">
@@ -92,19 +90,10 @@
     layui.config({
         base: 'layui/lay/extend/'
     }).extend({
-        xmSelect: 'xm-select'
+        xmSelect: 'xm-select' // https://gitee.com/maplemei/xm-select
     }).use(['jquery', 'element', 'table', 'form', 'upload', 'xmSelect'], function () {
         var xmSelect = layui.xmSelect;
         var $ = layui.jquery, table = layui.table, form = layui.form, upload = layui.upload;
-
-        // $('#search').click(function(){}); 搜索一次后会失效
-        $('body').on('click', '#search', function () {
-            table.reload('table', {
-                url: 'seller/product/list',
-                page: true,
-                where: {keyword: $('#keyword').val()}
-            });
-        });
 
         table.render({
             elem: '#table',
@@ -125,11 +114,11 @@
                 {field: 'price', title: '价格', edit: 'text'},
                 {field: 'stock', title: '库存', edit: 'text'},
                 {
-                    field: 'category', title: '分类', width: 200, align: 'center', templet: function (d) {
+                    field: 'category', title: '分类', width: 200, templet: function (d) {
                         return '<div id="XM-' + d.id + '" ></div>'
                     }
                 },
-                {field: 'status', title: '状态', width: 100, align: 'center', templet: '#switchTpl'},
+                {field: 'status', title: '状态', width: 100, templet: '#switchTpl'},
                 {title: '操作', width: 100, align: 'center', toolbar: '#barTpl'}
             ]],
             done: function (res, curr, count) {
@@ -139,21 +128,22 @@
                     cells[i].style.overflow = 'unset';
                     cells[i].style.height = 'auto';
                 }
+                // Layui不成熟 每次 table reload 都要重新 render toolbar （待改进）
                 $.get('category/list', function (result) {
-                    // 渲染单选
+                    var categoryData = result.data;
                     res.data.forEach((item, index) => {
                         xmSelect.render({
                             el: '#XM-' + item.id,
-                            model: {label: {type: 'text'}},
+                            model: {icon: 'hidden', label: {type: 'text'}},
                             radio: true,
                             clickClose: true,
                             tree: {
                                 show: true,
-                                strict: false, // 非严格模式
-                                expandedKeys: true, //展开节点
+                                strict: false,
+                                expandedKeys: true,
                             },
-                            data: result.data,
-                            prop: {value: 'id', name: 'title'},
+                            data: categoryData,
+                            prop: {value: 'id'},
                             initValue: [item.category],
                             on: function (data) {
                                 if (data.isAdd) {
@@ -168,27 +158,76 @@
                             },
                         });
                     });
+
+                    xmSelect.render({
+                        el: '#category',
+                        tips: '请选择分类',
+                        name: 'category',
+                        layVerify: 'required',
+                        model: {icon: 'hidden', label: {type: 'text'}},
+                        radio: true,
+                        clickClose: true,
+                        tree: {
+                            show: true,
+                            strict: false,
+                            expandedKeys: true,
+                        },
+                        data: categoryData,
+                        prop: {value: 'id'}
+                    });
+
+                    xmSelect.render({
+                        el: '#categorySearch',
+                        tips: '分类搜索',
+                        layVerify: 'required',
+                        model: {icon: 'hidden', label: {type: 'text'}},
+                        radio: true,
+                        clickClose: true,
+                        tree: {
+                            show: true,
+                            strict: false,
+                            expandedKeys: true,
+                        },
+                        data: categoryData,
+                        prop: {value: 'id'},
+                        on: function (data) {
+                            table.reload('table', {
+                                url: 'buyer/product',
+                                page: {
+                                    curr: 1 //重新从第 1 页开始
+                                },
+                                where: {category: data.change[0].id, keyword: ''} // 搜索分类
+                            });
+                        }
+                    });
+
+                    xmSelect.render({
+                        el: '#keywordSearch',
+                        tips: '关键词搜索',
+                        layVerify: 'required',
+                        model: {icon: 'hidden', label: {type: 'text'}},
+                        clickClose: true,
+                        data: [], // 不需要
+                        prop: {value: 'id'},
+                        filterable: true,
+                        create: function (val, arr) {
+                            console.log(arr);
+                            if (arr.length === 0) {
+                                return {name: val, id: val}
+                            }
+                        },
+                        on: function (data) {
+                            table.reload('table', {
+                                url: 'buyer/product',
+                                page: {
+                                    curr: 1 //重新从第 1 页开始
+                                },
+                                where: {keyword: data.change[0].name, category: 0} // 搜索关键词
+                            });
+                        }
+                    });
                 });
             }
-        });
-
-        // 渲染单选
-        $.get('category/list', function (result) {
-            xmSelect.render({
-                el: '#category',
-                name: 'category',
-                layVerify: 'required',
-                model: {label: {type: 'text'}},
-                radio: true,
-                clickClose: true,
-                tree: {
-                    show: true,
-                    strict: false,
-                    expandedKeys: true,
-                },
-                data: result.data,
-                prop: {value: 'id', name: 'title'},
-            });
         });
 
         // 监听头工具栏事件
@@ -217,8 +256,6 @@
                         $.delete('seller/product/' + obj.data.id, function (res) {
                             if (res.code === 0) {
                                 obj.del();
-                                layer.close(index);
-                                layer.msg(res.msg);
                             }
                         });
                     });
@@ -231,9 +268,7 @@
             // 记录编辑之前的值
             var old = $(this).prev().text();
             $.put('seller/product/' + obj.data.id, obj.data, function (res) {
-                if (res.code === 0) {
-                    layer.msg(res.msg);
-                } else {
+                if (res.code !== 0) {
                     // 修改回来
                     $(obj.tr.selector + ' td[data-field="' + obj.field + '"] input').val(old);
                     $(obj.tr.selector + ' td[data-field="' + obj.field + '"] div').text(old);
@@ -247,8 +282,9 @@
             var rowData = table.cache['table'][index];
             rowData['status'] = data.elem.checked; // 更新缓存
             $.put('seller/product/' + rowData.id, rowData, function (res) {
-                if (res.code === 0) {
-                    layer.msg(res.msg);
+                if(res.code !== 0) {
+                    // 修改回来
+                    // TODO
                 }
             })
         });
@@ -261,8 +297,9 @@
                     var tableData = table.cache['table'];
                     tableData.push(data.field);
                     table.reload('table', {data: tableData});
-                    layer.closeAll('page');
+                    layer.closeAll();
                     layer.msg(res.msg);
+                    // TODO
                 }
             });
             return false; // require
@@ -276,8 +313,7 @@
                 layer.msg(res.msg);
             }
         });
-    })
-    ;
+    });
 </script>
 </body>
 </html>

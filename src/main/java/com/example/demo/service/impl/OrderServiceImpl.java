@@ -1,7 +1,7 @@
 package com.example.demo.service.impl;
 
+import cn.hutool.core.convert.Convert;
 import cn.hutool.core.lang.Snowflake;
-import com.alibaba.fastjson.JSON;
 import com.example.demo.base.GlobalException;
 import com.example.demo.base.PageResult;
 import com.example.demo.base.Status;
@@ -13,7 +13,6 @@ import com.example.demo.mapper.OrderMasterMapper;
 import com.example.demo.mapper.ProductMapper;
 import com.example.demo.model.*;
 import com.example.demo.service.OrderService;
-import com.example.demo.utils.ConvertUtils;
 import com.example.demo.vo.OrderDetailVo;
 import com.example.demo.vo.OrderMasterVo;
 import com.github.pagehelper.PageHelper;
@@ -25,7 +24,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -51,24 +49,23 @@ public class OrderServiceImpl implements OrderService {
         List<OrderDetail> orderDetailList = orderDetailMapper.selectByExample(example);
         List<OrderDetailVo> orderDetailVoList = orderDetailList
                 .stream()
-                .map(orderDetail -> ConvertUtils.convert(orderDetail, OrderDetailVo.class))
+                .map(orderDetail -> Convert.convert(OrderDetailVo.class, orderDetail))
                 .collect(Collectors.toList());
         return orderDetailVoList;
     }
 
-    private PageResult getList(OrderMasterExample example) {
+    private PageInfo<OrderMasterVo> getList(OrderMasterExample example) {
         List<OrderMaster> orderList = orderMasterMapper.selectByExample(example);
         // page
         PageInfo<OrderMaster> pageInfo = new PageInfo<>(orderList);
         // convert
         List<OrderMasterVo> orderMasterVoList = pageInfo.getList()
                 .stream()
-                .map(order -> ConvertUtils.convert(order, OrderMasterVo.class))
+                .map(order -> Convert.convert(OrderMasterVo.class, order))
                 .collect(Collectors.toList());
         // add detail
         orderMasterVoList.forEach(orderMasterVo -> orderMasterVo.setProducts(getDetail(orderMasterVo.getId())));
-        PageResult pageResult = PageResult.success(orderMasterVoList, pageInfo.getTotal());
-        return pageResult;
+        return new PageInfo<>(orderMasterVoList);
     }
 
     /**
@@ -78,14 +75,14 @@ public class OrderServiceImpl implements OrderService {
     public OrderMasterVo get(Long id) {
         OrderMaster order = orderMasterMapper.selectByPrimaryKey(id);
         // convert
-        OrderMasterVo orderMasterVo = ConvertUtils.convert(order, OrderMasterVo.class);
+        OrderMasterVo orderMasterVo = Convert.convert(OrderMasterVo.class, order);
         // add detail
         orderMasterVo.setProducts(getDetail(id));
         return orderMasterVo;
     }
 
     @Override
-    public PageResult list(PageRequest pageRequest) {
+    public PageInfo<OrderMasterVo> list(PageRequest pageRequest) {
         PageHelper.startPage(pageRequest.getPage(), pageRequest.getLimit(), "id desc");
         String keyword = pageRequest.getKeyword();
         OrderMasterExample example = new OrderMasterExample();
@@ -123,14 +120,14 @@ public class OrderServiceImpl implements OrderService {
         List<OrderMaster> orderList = orderMasterMapper.selectByExample(example);
         if (orderList.size() == 0) throw new GlobalException(Status.ORDER_NOT_EXIST);
         // convert
-        OrderMasterVo orderMasterVo = ConvertUtils.convert(orderList.get(0), OrderMasterVo.class);
+        OrderMasterVo orderMasterVo = Convert.convert(OrderMasterVo.class, orderList.get(0));
         // add detail
         orderMasterVo.setProducts(getDetail(id));
         return orderMasterVo;
     }
 
     @Override
-    public PageResult listByBuyer(String username, PageRequest pageRequest) {
+    public PageInfo<OrderMasterVo> listByBuyer(String username, PageRequest pageRequest) {
         String keyword = pageRequest.getKeyword();
         OrderMasterExample example = new OrderMasterExample();
         example.createCriteria().andUsernameEqualTo(username);
@@ -174,7 +171,7 @@ public class OrderServiceImpl implements OrderService {
             orderDetail.setProductPrice(product.getPrice());
             orderDetail.setProductQuantity(productQuantity);
             // 添加订单详情
-            orderDetailMapper.insert(orderDetail);
+            orderDetailMapper.insertSelective(orderDetail);
 
             // 累加价格
             amount = amount.add(product.getPrice().multiply(new BigDecimal(productQuantity)));

@@ -8,38 +8,48 @@
 ```
 
 ## 前端技术
-[Layui](https://www.layui.com/) : [sell-layui](/sell-layui) 入口/sell-layui/login.html
+[sell-layui](/sell-layui)
+1. [Layui](https://www.layui.com/)
+2. [插件](https://fly.layui.com/extend/treeSelect/)
+3. [模板](https://fly.layui.com/store/layuiMaternalBabyMall/)
 
 :smile: ! 注意config.js文件，全局配置
 
 ## 后端技术
 | 技术 | 说明 |
 | ---- | ---- |
-| Spring Boot | MVC框架 |
-| Spring Security | 安全框架 |
-| JWT | [单点登录](https://jwt.io/introduction/) |
-| MyBatis | 数据库框架  |
-| MyBatis Generator | MyBatis生成插件 |
-| MyBatis PageHelper | MyBatis分页插件 |
-| Redis | 缓存数据库 |
-| RabbitMQ | 消息队列 |
-| QiNiu | 对象存储 |
-| Druid | 数据库连接池 |
-| Swagger | 文档接口 |
-| LogStash | 日志收集 |
-| Lombok | [简化对象封装工具](https://github.com/rzwitserloot/lombok)（需要安装IDEA插件） |
-| Hutool | [工具包](https://www.bookstack.cn/books/hutool) |
-| EasyCaptcha | [验证码](https://github.com/whvcse/EasyCaptcha)
+| [Spring Framework](https://github.com/spring-projects/spring-framework) | IoC(控制反转)、AOP(面向切面) |
+| [Spring Boot](https://github.com/spring-projects/spring-boot) | MVC框架 |
+| [Spring Security](https://github.com/spring-projects/spring-security) | 安全框架 |
+| [JWT](https://github.com/jwtk/jjwt) | 单点登录 |
+| [MyBatis](https://github.com/mybatis/mybatis-3) | 数据库框架  |
+| [MyBatis Generator](https://github.com/mybatis/generator) | MyBatis生成插件 |
+| [MyBatis PageHelper](https://github.com/pagehelper/Mybatis-PageHelper) | MyBatis分页插件 |
+| [Redis](https://github.com/antirez/redis) | NoSQL |
+| [RabbitMQ](https://github.com/rabbitmq/rabbitmq-server) | 消息队列 |
+| [QiNiu](https://github.com/qiniu/java-sdk) | 对象存储 |
+| [Druid](https://github.com/alibaba/druid/) | 数据库连接池 |
+| [Swagger](https://github.com/swagger-api/swagger-ui) | 文档接口 |
+| [LogStash](https://github.com/elastic/logstash) | 日志收集 |
+| [Lombok](https://github.com/rzwitserloot/lombok) | 简化对象封装工具（需要安装IDEA插件） |
+| [Hutool](https://github.com/looly/hutool) | Java工具类库 |
+| [EasyCaptcha](https://github.com/whvcse/EasyCaptcha) | 验证码
 
-MyBatis Generator(MySQL5.7):
-数据库建表（见demo.sql） -> Run Generator.java
+MyBatis Generator:
+>* 数据库建表（见demo.sql） -> Run Generator.java
+>* MySQL5.7 支持双timestamp
+>* OrderMaster表主键不自增，由Snowflake雪花算法生成
 
 Druid:
 http://localhost:8080/druid/index.html
+> * spring.datasource.druid.stat-view-servlet.login-username=druid
+> * spring.datasource.druid.stat-view-servlet.login-password=druid
 
 Swagger:
 http://localhost:8080/swagger-ui.html
-
+>* [swagger2markup](https://github.com/Swagger2Markup/swagger2markup): json -> asciidoc
+>* [asciidoctor](https://github.com/asciidoctor/asciidoctor) asciidoc -> html/pdf
+>
 ## Spring Security
 1. AOP 顺序
 ```

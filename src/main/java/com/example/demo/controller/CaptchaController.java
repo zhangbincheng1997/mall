@@ -27,7 +27,7 @@ public class CaptchaController {
     @ApiOperation("获取验证码")
     @GetMapping("")
     @ResponseBody
-    public Result captcha() {
+    public Result<Map<String, String>> captcha() {
         // 使用静态验证码
         // SpecCaptcha specCaptcha = new SpecCaptcha(Constants.CODE_WIDTH, Constants.CODE_HEIGHT, Constants.CODE_LENGTH);
         // 使用动态验证码

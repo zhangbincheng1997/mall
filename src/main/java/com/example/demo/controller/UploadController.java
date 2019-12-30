@@ -25,7 +25,7 @@ public class UploadController {
     @PostMapping("")
     @ResponseBody
     @AccessLimit(ip = true, time = 60, count = 3)
-    public Result uploadIcon(@RequestParam("file") MultipartFile file) {
+    public Result<String> uploadIcon(@RequestParam("file") MultipartFile file) {
         if (!file.isEmpty()) {
             try {
                 String path = qiniuService.upload(file.getBytes());

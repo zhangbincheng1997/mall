@@ -1,10 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.CategoryDto;
-import com.example.demo.dto.PageRequest;
-import com.example.demo.model.Category;
 import com.example.demo.vo.CategoryVo;
-import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 

@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 
-public class RenderUtils {
+public class RenderUtil {
 
     public static void render(HttpServletResponse response, Result result) throws IOException {
         // 允许跨域

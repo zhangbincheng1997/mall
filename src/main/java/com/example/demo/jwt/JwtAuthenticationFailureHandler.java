@@ -2,7 +2,7 @@ package com.example.demo.jwt;
 
 import com.example.demo.base.Result;
 import com.example.demo.base.Status;
-import com.example.demo.utils.RenderUtils;
+import com.example.demo.utils.RenderUtil;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -37,6 +37,6 @@ public class JwtAuthenticationFailureHandler implements AuthenticationFailureHan
         } else if (e instanceof CredentialsExpiredException) {
             status = Status.CREDENTIALS_EXPIRED;
         }
-        RenderUtils.render(response, Result.failure(status));
+        RenderUtil.render(response, Result.failure(status));
     }
 }

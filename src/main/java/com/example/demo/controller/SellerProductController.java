@@ -1,12 +1,12 @@
 package com.example.demo.controller;
 
+import cn.hutool.core.convert.Convert;
 import com.example.demo.base.PageResult;
 import com.example.demo.base.Result;
 import com.example.demo.dto.PageRequest;
 import com.example.demo.model.Product;
 import com.example.demo.service.ProductService;
 import com.example.demo.dto.ProductDto;
-import com.example.demo.utils.ConvertUtils;
 import com.example.demo.vo.ProductVo;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Api(tags = "卖家商品")
 @Controller
@@ -32,29 +31,25 @@ public class SellerProductController {
     @GetMapping("/{id}")
     @ResponseBody
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public Result get(@PathVariable("id") Long id) {
+    public Result<ProductVo> get(@PathVariable("id") Long id) {
         Product product = productService.get(id);
-        return Result.success(ConvertUtils.convert(product, ProductVo.class));
+        return Result.success(Convert.convert(ProductVo.class, product));
     }
 
     @ApiOperation("获取商品列表")
     @GetMapping("/list")
     @ResponseBody
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public Result list(@Valid PageRequest pageRequest) {
-        PageInfo<Product> pageInfo = productService.list(pageRequest);
-        List<Product> productList = pageInfo.getList();
-        List<ProductVo> productVoList = productList.stream()
-                .map(product -> ConvertUtils.convert(product, ProductVo.class))
-                .collect(Collectors.toList());
-        return PageResult.success(productVoList, pageInfo.getTotal());
+    public Result<List<ProductVo>> list(@Valid PageRequest pageRequest) {
+        PageInfo<ProductVo> pageInfo = productService.list(pageRequest);
+        return PageResult.success(pageInfo.getList(), pageInfo.getTotal());
     }
 
     @ApiOperation("添加商品")
     @PostMapping("")
     @ResponseBody
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public Result add(@Valid ProductDto productDto) {
+    public Result<String> add(@Valid ProductDto productDto) {
         int count = productService.add(productDto);
         if (count == 1) {
             return Result.success();
@@ -67,8 +62,8 @@ public class SellerProductController {
     @PutMapping("/{id}")
     @ResponseBody
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public Result update(@PathVariable("id") Long id,
-                         @Valid ProductDto productDto) {
+    public Result<String> update(@PathVariable("id") Long id,
+                                 @Valid ProductDto productDto) {
         int count = productService.update(id, productDto);
         if (count == 1) {
             return Result.success();
@@ -81,7 +76,7 @@ public class SellerProductController {
     @DeleteMapping("/{id}")
     @ResponseBody
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public Result delete(@PathVariable("id") Long id) {
+    public Result<String> delete(@PathVariable("id") Long id) {
         int count = productService.delete(id);
         if (count == 1) {
             return Result.success();

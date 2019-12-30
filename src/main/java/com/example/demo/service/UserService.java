@@ -10,11 +10,11 @@ public interface UserService {
 
     User getUserByUsername(String username);
 
-    User register(RegisterDto registerDto);
+    int register(RegisterDto registerDto);
 
-    void updateUserInfoByUsername(String username, UserInfoDto userInfoDto);
+    int updateUserInfoByUsername(String username, UserInfoDto userInfoDto);
 
-    void updatePasswordByUsername(String username, String password);
+    int updatePasswordByUsername(String username, String password);
 
     List<String> getRoleList(Long id);
 

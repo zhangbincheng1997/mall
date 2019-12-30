@@ -3,7 +3,7 @@ package com.example.demo.aop;
 import com.example.demo.base.Result;
 import com.example.demo.base.Status;
 import com.example.demo.component.RedisService;
-import com.example.demo.utils.RenderUtils;
+import com.example.demo.utils.RenderUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -31,9 +31,9 @@ public class CaptchaFilter extends OncePerRequestFilter {
             String redisCode = (String) redisService.get(key);
             // 判断验证码
             if (redisCode == null) {
-                RenderUtils.render(response, Result.failure(Status.CAPTCHA_EXPIRE));
+                RenderUtil.render(response, Result.failure(Status.CAPTCHA_EXPIRE));
             } else if (!redisCode.equals(code.toLowerCase())) {
-                RenderUtils.render(response, Result.failure(Status.CAPTCHA_ERROR));
+                RenderUtil.render(response, Result.failure(Status.CAPTCHA_ERROR));
             }
         }
         chain.doFilter(request, response);

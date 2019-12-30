@@ -3,8 +3,10 @@
 <mapper namespace="com.example.demo.mapper.CategoryMapper">
   <resultMap id="BaseResultMap" type="com.example.demo.model.Category">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="pid" jdbcType="BIGINT" property="pid" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -65,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, title, pid
+    id, name, pid, create_time, update_time
   </sql>
   <select id="selectByExample" parameterType="com.example.demo.model.CategoryExample" resultMap="BaseResultMap">
     select
@@ -101,8 +103,10 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into category (title, pid)
-    values (#{title,jdbcType=VARCHAR}, #{pid,jdbcType=BIGINT})
+    insert into category (name, pid, create_time, 
+      update_time)
+    values (#{name,jdbcType=VARCHAR}, #{pid,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.example.demo.model.Category">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
@@ -110,19 +114,31 @@
     </selectKey>
     insert into category
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="title != null">
-        title,
+      <if test="name != null">
+        name,
       </if>
       <if test="pid != null">
         pid,
       </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="title != null">
-        #{title,jdbcType=VARCHAR},
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
       </if>
       <if test="pid != null">
         #{pid,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -138,11 +154,17 @@
       <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.title != null">
-        title = #{record.title,jdbcType=VARCHAR},
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
       </if>
       <if test="record.pid != null">
         pid = #{record.pid,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null">
@@ -152,8 +174,10 @@
   <update id="updateByExample" parameterType="map">
     update category
     set id = #{record.id,jdbcType=BIGINT},
-      title = #{record.title,jdbcType=VARCHAR},
-      pid = #{record.pid,jdbcType=BIGINT}
+      name = #{record.name,jdbcType=VARCHAR},
+      pid = #{record.pid,jdbcType=BIGINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -161,19 +185,27 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.model.Category">
     update category
     <set>
-      <if test="title != null">
-        title = #{title,jdbcType=VARCHAR},
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
       </if>
       <if test="pid != null">
         pid = #{pid,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.example.demo.model.Category">
     update category
-    set title = #{title,jdbcType=VARCHAR},
-      pid = #{pid,jdbcType=BIGINT}
+    set name = #{name,jdbcType=VARCHAR},
+      pid = #{pid,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>
