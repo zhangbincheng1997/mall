@@ -1,13 +1,13 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.CategoryDto;
-import com.example.demo.vo.CategoryVo;
+import com.example.demo.model.Category;
 
 import java.util.List;
 
 public interface CategoryService {
 
-    List<CategoryVo> list(Long id);
+    List<Category> list(Long id);
 
     int add(CategoryDto categoryDto);
 

@@ -23,7 +23,8 @@ public class CaptchaFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
-        if (request.getMethod().equals("POST") && request.getRequestURI().equals("/login")) {
+        if (request.getMethod().equals("POST") &&
+                (request.getRequestURI().equals("/login") || request.getRequestURI().equals("/register"))) {
             // 获取参数中的验证码
             String key = request.getParameter("key") == null ? "" : request.getParameter("key");
             String code = request.getParameter("code") == null ? "" : request.getParameter("code");

@@ -50,6 +50,13 @@
                 {field: 'updateTime', title: '修改时间'},
                 {title: '操作', width: 200, align: 'center', toolbar: '#barTpl'}
             ],
+            getThead: function () {
+                return '<tr><td colspan="6">' +
+                    '<button type="button" class="layui-btn layui-btn-fluid" id="addRoot">' +
+                    '<i class="layui-icon layui-icon-add-1"></i>' +
+                    '</button>' +
+                    '</td></tr>';
+            },
             reqData: function (data, callback) {
                 // 通过callback方法回调数据
                 var id = data ? data.id : '';
@@ -90,6 +97,14 @@
                 }
             });
         });
+
+        $('#addRoot').click(function () {
+            $.post('category', {name: '未命名', pid: 0}, function (res) {
+                if (res.code === 0) {
+                    tb.refresh(); // 成功-刷新(异步模式)
+                }
+            });
+        })
     });
 </script>
 </body>

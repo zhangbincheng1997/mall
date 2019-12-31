@@ -34,7 +34,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public PageInfo<ProductVo> list(PageRequest pageRequest) {
+    public PageInfo<Product> list(PageRequest pageRequest) {
         ProductExample example = new ProductExample();
         return list(example, pageRequest);
     }
@@ -61,7 +61,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public PageInfo<ProductVo> listByBuyer(PageRequest pageRequest) {
+    public PageInfo<Product> listByBuyer(PageRequest pageRequest) {
         ProductExample example = new ProductExample();
         ProductExample.Criteria criteria = example.createCriteria();
         criteria.andStatusEqualTo(true); // 上架状态
@@ -69,7 +69,7 @@ public class ProductServiceImpl implements ProductService {
         return list(example, pageRequest);
     }
 
-    private PageInfo<ProductVo> list(ProductExample example, PageRequest pageRequest) {
+    private PageInfo<Product> list(ProductExample example, PageRequest pageRequest) {
         String keyword = pageRequest.getKeyword();
         if (!StringUtils.isEmpty(keyword)) {
             example.getOredCriteria().get(0).andNameLike("%" + keyword + "%");
@@ -80,9 +80,6 @@ public class ProductServiceImpl implements ProductService {
         }
         PageHelper.startPage(pageRequest.getPage(), pageRequest.getLimit(), "id desc");
         List<Product> productList = productMapper.selectByExample(example);
-        List<ProductVo> productVoList = productList.stream()
-                .map(product -> Convert.convert(ProductVo.class, product))
-                .collect(Collectors.toList());
-        return new PageInfo<>(productVoList);
+        return new PageInfo<>(productList);
     }
 }

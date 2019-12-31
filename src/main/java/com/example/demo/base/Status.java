@@ -44,9 +44,17 @@ public enum Status {
     PRODUCT_STATUS_NOT_ON(60001, "商品下架"),
     PRODUCT_STOCK_NOT_ENOUGH(60002, "商品库存不足"),
     CATEGORY_EXIST(60010, "分类已经存在"),
-    CATEGORY_NOT_EXIST(60011, "分类不存在"),
-    CATEGORY_NOT_DELETE(60012, "分类不允许删除"),
-    ORDER_NOT_EXIST(60020, "订单不存在");
+    CATEGORY_ROOT_NOT_EXIST(60012, "分类父类不存在"),
+    CATEGORY_NOT_EXIST(60012, "分类不存在"),
+    CATEGORY_NOT_DELETE(60013, "分类不允许删除"),
+    ORDER_NOT_EXIST(60020, "订单不存在"),
+
+    // 支付相关
+    PAY_BUG(70000, "支付异常"),
+    PAY_CHECK_BUG(70001, "支付检查异常"),
+    ORDER_NOT_NEW(70002, "不属于新订单"),
+    ORDER_NOT_PAY(70003, "订单未付款"),
+    ORDER_NOT_REQUEST_REFUND(70004, "订单没有申请退款");
 
     private Integer code;
     private String msg;

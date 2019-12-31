@@ -28,7 +28,7 @@ public class MySQLTest {
         user.setUsername("username");
         user.setPassword(passwordEncoder.encode("password"));
         user.setCreateTime(new Date());
-        userMapper.insert(user);
+        userMapper.insertSelective(user);
         Assert.assertEquals("username", userMapper.selectByPrimaryKey(user.getId()).getUsername());
     }
 }

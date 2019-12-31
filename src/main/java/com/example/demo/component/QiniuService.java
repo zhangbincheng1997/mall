@@ -1,6 +1,7 @@
 package com.example.demo.component;
 
 import com.alibaba.fastjson.JSONObject;
+import com.example.demo.config.QiniuConfig;
 import com.example.demo.utils.Constants;
 import com.qiniu.common.QiniuException;
 import com.qiniu.http.Response;
@@ -17,18 +18,14 @@ import org.springframework.stereotype.Component;
 
 import java.net.URLEncoder;
 
-@PropertySource({"classpath:config/qiniu.properties"})
 @Component
 public class QiniuService implements InitializingBean {
 
-    @Value("${qiniu.bucket.name}")
-    private String bucketName;
-
-    @Value("${qiniu.domain.name}")
-    private String domainName;
-
     @Autowired
     private Auth auth;
+
+    @Autowired
+    private QiniuConfig qiniuConfig;
 
     @Autowired
     private UploadManager uploadManager;
@@ -49,7 +46,7 @@ public class QiniuService implements InitializingBean {
 
     // 获取上传凭证
     private String getUploadToken(String keyName) {
-        return auth.uploadToken(bucketName, keyName, expireSeconds, putPolicy);
+        return auth.uploadToken(qiniuConfig.getBucketName(), keyName, expireSeconds, putPolicy);
     }
 
     /**
@@ -80,7 +77,7 @@ public class QiniuService implements InitializingBean {
             retry++;
         }
         DefaultPutRet ret = JSONObject.parseObject(response.bodyString(), DefaultPutRet.class);
-        String path = domainName + ret.key;
+        String path = qiniuConfig.getDomainName() + ret.key;
         return path; // return response.bodyString();
     }
 
@@ -92,25 +89,12 @@ public class QiniuService implements InitializingBean {
      * @throws QiniuException
      */
     public Response delete(String fileKey) throws QiniuException {
-        Response response = bucketManager.delete(bucketName, fileKey);
+        Response response = bucketManager.delete(qiniuConfig.getBucketName(), fileKey);
         // 重传机制 默认3次
         int retry = 0;
         while (response.needRetry() && retry++ < Constants.UPLOAD_RETRY) {
-            response = bucketManager.delete(bucketName, fileKey);
+            response = bucketManager.delete(qiniuConfig.getBucketName(), fileKey);
         }
         return response;
-    }
-
-    /**
-     * 获取文件
-     *
-     * @param fileKey
-     * @return
-     * @throws Exception
-     */
-    public String get(String fileKey) throws Exception {
-        String encodedFileName = URLEncoder.encode(fileKey, "utf-8").replace("+", "%20");
-        String url = String.format("%s/%s", domainName, encodedFileName);
-        return url;
     }
 }

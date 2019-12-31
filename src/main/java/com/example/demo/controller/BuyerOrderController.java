@@ -1,11 +1,15 @@
 package com.example.demo.controller;
 
+import cn.hutool.core.convert.Convert;
 import com.alibaba.fastjson.JSONObject;
 import com.example.demo.base.PageResult;
 import com.example.demo.base.Result;
 import com.example.demo.dto.OrderMasterDto;
 import com.example.demo.dto.PageRequest;
+import com.example.demo.model.OrderDetail;
+import com.example.demo.model.OrderMaster;
 import com.example.demo.service.OrderService;
+import com.example.demo.vo.OrderDetailVo;
 import com.example.demo.vo.OrderMasterVo;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
@@ -18,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Api(tags = "买家订单")
 @Controller
@@ -32,7 +37,12 @@ public class BuyerOrderController {
     @ResponseBody
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     public Result<OrderMasterVo> get(Principal principal, @PathVariable("id") Long id) {
-        OrderMasterVo orderMasterVo = orderService.getByBuyer(principal.getName(), id);
+        // get
+        OrderMaster orderMaster = orderService.getByBuyer(principal.getName(), id);
+        // convert
+        OrderMasterVo orderMasterVo = Convert.convert(OrderMasterVo.class, orderMaster);
+        // add detail
+        orderMasterVo.setProducts(getDetail(orderMaster.getId()));
         return Result.success(orderMasterVo);
     }
 
@@ -41,28 +51,23 @@ public class BuyerOrderController {
     @ResponseBody
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     public PageResult<List<OrderMasterVo>> list(Principal principal, @Valid PageRequest pageRequest) {
-        PageInfo<OrderMasterVo> pageInfo = orderService.listByBuyer(principal.getName(), pageRequest);
-        return PageResult.success(pageInfo.getList(), pageInfo.getTotal());
+        // page
+        PageInfo<OrderMaster> pageInfo = orderService.listByBuyer(principal.getName(), pageRequest);
+        // convert
+        List<OrderMasterVo> orderMasterVoList = pageInfo.getList()
+                .stream()
+                .map(order -> Convert.convert(OrderMasterVo.class, order))
+                .collect(Collectors.toList());
+        // add detail
+        orderMasterVoList.forEach(orderMasterVo -> orderMasterVo.setProducts(getDetail(orderMasterVo.getId())));
+        return PageResult.success(orderMasterVoList, pageInfo.getTotal());
     }
 
-    /**
-     * {
-     * "products": [
-     * {
-     * "id": 2,
-     * "quantity": 2
-     * },...
-     * ]
-     * }
-     */
-    @ApiOperation("购买")
-    @PostMapping("")
-    @ResponseBody // TODO 以后换个controller  @RequestBody必须
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
-    public Result<JSONObject> buy(Principal principal, @Valid @RequestBody OrderMasterDto orderMasterDto) {
-        Long orderId = orderService.buy(principal.getName(), orderMasterDto);
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("orderId", orderId);
-        return Result.success(jsonObject);
+    private List<OrderDetailVo> getDetail(Long id) {
+        List<OrderDetail> orderDetailList = orderService.getDetail(id);
+        return orderDetailList
+                .stream()
+                .map(orderDetail -> Convert.convert(OrderDetailVo.class, orderDetail))
+                .collect(Collectors.toList());
     }
 }

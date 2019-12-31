@@ -1,9 +1,7 @@
 package com.example.demo.service.impl;
 
-import cn.hutool.core.convert.Convert;
 import cn.hutool.core.lang.Snowflake;
 import com.example.demo.base.GlobalException;
-import com.example.demo.base.PageResult;
 import com.example.demo.base.Status;
 import com.example.demo.dto.OrderDetailDto;
 import com.example.demo.dto.OrderMasterDto;
@@ -13,8 +11,6 @@ import com.example.demo.mapper.OrderMasterMapper;
 import com.example.demo.mapper.ProductMapper;
 import com.example.demo.model.*;
 import com.example.demo.service.OrderService;
-import com.example.demo.vo.OrderDetailVo;
-import com.example.demo.vo.OrderMasterVo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +21,6 @@ import org.springframework.util.StringUtils;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -43,53 +38,31 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderDetailMapper orderDetailMapper;
 
-    private List<OrderDetailVo> getDetail(Long id) {
+    @Override
+    public List<OrderDetail> getDetail(Long id) {
         OrderDetailExample example = new OrderDetailExample();
         example.createCriteria().andOrderIdEqualTo(id);
-        List<OrderDetail> orderDetailList = orderDetailMapper.selectByExample(example);
-        List<OrderDetailVo> orderDetailVoList = orderDetailList
-                .stream()
-                .map(orderDetail -> Convert.convert(OrderDetailVo.class, orderDetail))
-                .collect(Collectors.toList());
-        return orderDetailVoList;
-    }
-
-    private PageInfo<OrderMasterVo> getList(OrderMasterExample example) {
-        List<OrderMaster> orderList = orderMasterMapper.selectByExample(example);
-        // page
-        PageInfo<OrderMaster> pageInfo = new PageInfo<>(orderList);
-        // convert
-        List<OrderMasterVo> orderMasterVoList = pageInfo.getList()
-                .stream()
-                .map(order -> Convert.convert(OrderMasterVo.class, order))
-                .collect(Collectors.toList());
-        // add detail
-        orderMasterVoList.forEach(orderMasterVo -> orderMasterVo.setProducts(getDetail(orderMasterVo.getId())));
-        return new PageInfo<>(orderMasterVoList);
+        return orderDetailMapper.selectByExample(example);
     }
 
     /**
      * Seller
      */
     @Override
-    public OrderMasterVo get(Long id) {
-        OrderMaster order = orderMasterMapper.selectByPrimaryKey(id);
-        // convert
-        OrderMasterVo orderMasterVo = Convert.convert(OrderMasterVo.class, order);
-        // add detail
-        orderMasterVo.setProducts(getDetail(id));
-        return orderMasterVo;
+    public OrderMaster get(Long id) {
+        return orderMasterMapper.selectByPrimaryKey(id);
     }
 
     @Override
-    public PageInfo<OrderMasterVo> list(PageRequest pageRequest) {
+    public PageInfo<OrderMaster> list(PageRequest pageRequest) {
         PageHelper.startPage(pageRequest.getPage(), pageRequest.getLimit(), "id desc");
         String keyword = pageRequest.getKeyword();
         OrderMasterExample example = new OrderMasterExample();
         if (!StringUtils.isEmpty(keyword)) {
             example.or().andUsernameLike("%" + keyword + "%");
         }
-        return getList(example);
+        List<OrderMaster> orderList = orderMasterMapper.selectByExample(example);
+       return new PageInfo<OrderMaster>(orderList);
     }
 
     @Override
@@ -114,32 +87,29 @@ public class OrderServiceImpl implements OrderService {
      * Buyer
      */
     @Override
-    public OrderMasterVo getByBuyer(String username, Long id) {
+    public OrderMaster getByBuyer(String username, Long id) {
         OrderMasterExample example = new OrderMasterExample();
         example.createCriteria().andIdEqualTo(id).andUsernameEqualTo(username);
         List<OrderMaster> orderList = orderMasterMapper.selectByExample(example);
         if (orderList.size() == 0) throw new GlobalException(Status.ORDER_NOT_EXIST);
-        // convert
-        OrderMasterVo orderMasterVo = Convert.convert(OrderMasterVo.class, orderList.get(0));
-        // add detail
-        orderMasterVo.setProducts(getDetail(id));
-        return orderMasterVo;
+        return orderList.get(0);
     }
 
     @Override
-    public PageInfo<OrderMasterVo> listByBuyer(String username, PageRequest pageRequest) {
+    public PageInfo<OrderMaster> listByBuyer(String username, PageRequest pageRequest) {
         String keyword = pageRequest.getKeyword();
         OrderMasterExample example = new OrderMasterExample();
         example.createCriteria().andUsernameEqualTo(username);
         if (!StringUtils.isEmpty(keyword)) {
             example.or().andUsernameLike("%" + keyword + "%");
         }
-        return getList(example);
+        List<OrderMaster> orderList = orderMasterMapper.selectByExample(example);
+        return new PageInfo<OrderMaster>(orderList);
     }
 
     @Transactional // 事务ACID
     @Override
-    public Long buy(String username, OrderMasterDto orderMasterDto) {
+    public OrderMaster buy(String username, OrderMasterDto orderMasterDto) {
         // 创建订单
         OrderMaster order = new OrderMaster();
         order.setUsername(username);
@@ -179,6 +149,6 @@ public class OrderServiceImpl implements OrderService {
         order.setAmount(amount);
         // 添加订单
         orderMasterMapper.insertSelective(order);
-        return orderId;
+        return order;
     }
 }

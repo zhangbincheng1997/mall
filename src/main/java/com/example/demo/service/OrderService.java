@@ -1,18 +1,24 @@
 package com.example.demo.service;
 
+import com.example.demo.base.PageResult;
 import com.example.demo.dto.OrderMasterDto;
 import com.example.demo.dto.PageRequest;
-import com.example.demo.vo.OrderMasterVo;
+import com.example.demo.model.OrderDetail;
+import com.example.demo.model.OrderMaster;
 import com.github.pagehelper.PageInfo;
 
+import java.util.List;
+
 public interface OrderService {
+
+    List<OrderDetail> getDetail(Long id);
 
     /**
      * Seller
      */
-    OrderMasterVo get(Long id);
+    OrderMaster get(Long id);
 
-    PageInfo<OrderMasterVo> list(PageRequest pageRequest);
+    PageInfo<OrderMaster> list(PageRequest pageRequest);
 
     int updateOrderStatus(Long id, Integer orderStatus);
 
@@ -21,9 +27,9 @@ public interface OrderService {
     /**
      * Buyer
      */
-    OrderMasterVo getByBuyer(String username, Long id);
+    OrderMaster getByBuyer(String username, Long id);
 
-    PageInfo<OrderMasterVo> listByBuyer(String username, PageRequest pageRequest);
+    PageInfo<OrderMaster> listByBuyer(String username, PageRequest pageRequest);
 
-    Long buy(String username, OrderMasterDto orderMasterDto);
+    OrderMaster buy(String username, OrderMasterDto orderMasterDto);
 }

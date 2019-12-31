@@ -1,10 +1,8 @@
 package com.example.demo.base;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode(callSuper = true)
 public class PageResult<T> extends Result<T> {
 
     private Long count;

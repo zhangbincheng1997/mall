@@ -19,14 +19,14 @@ public class AppExceptionHandler {
 
     @ExceptionHandler(value = GlobalException.class)
     @ResponseBody
-    public Result exceptionHandler(HttpServletRequest request, HttpServletResponse response, GlobalException e) {
+    public Result<String> exceptionHandler(HttpServletRequest request, HttpServletResponse response, GlobalException e) {
         log.error(e.getMessage());
         return Result.failure(e.getStatus());
     }
 
     @ExceptionHandler(value = BindException.class)
     @ResponseBody
-    public Result exceptionHandler(HttpServletRequest request, HttpServletResponse response, BindException e) {
+    public Result<String>  exceptionHandler(HttpServletRequest request, HttpServletResponse response, BindException e) {
         log.error(e.getMessage());
         List<ObjectError> errorList = e.getAllErrors();
         String msg = errorList.get(0).getDefaultMessage();
@@ -35,7 +35,7 @@ public class AppExceptionHandler {
 
     @ExceptionHandler(value = ConstraintViolationException.class)
     @ResponseBody
-    public Result exceptionHandler(HttpServletRequest request, HttpServletResponse response, ConstraintViolationException e) {
+    public Result<String>  exceptionHandler(HttpServletRequest request, HttpServletResponse response, ConstraintViolationException e) {
         log.error(e.getMessage());
         List<String> errorList = e.getConstraintViolations()
                 .stream()

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Api(tags = "卖家商品")
 @Controller
@@ -40,9 +41,12 @@ public class SellerProductController {
     @GetMapping("/list")
     @ResponseBody
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public Result<List<ProductVo>> list(@Valid PageRequest pageRequest) {
-        PageInfo<ProductVo> pageInfo = productService.list(pageRequest);
-        return PageResult.success(pageInfo.getList(), pageInfo.getTotal());
+    public PageResult<List<ProductVo>> list(@Valid PageRequest pageRequest) {
+        PageInfo<Product> pageInfo = productService.listByBuyer(pageRequest);
+        List<ProductVo> productVoList = pageInfo.getList().stream()
+                .map(product -> Convert.convert(ProductVo.class, product))
+                .collect(Collectors.toList());
+        return PageResult.success(productVoList, pageInfo.getTotal());
     }
 
     @ApiOperation("添加商品")

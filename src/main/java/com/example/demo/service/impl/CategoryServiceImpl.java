@@ -8,7 +8,6 @@ import com.example.demo.mapper.CategoryMapper;
 import com.example.demo.model.Category;
 import com.example.demo.model.CategoryExample;
 import com.example.demo.service.CategoryService;
-import com.example.demo.vo.CategoryVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -17,7 +16,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -28,35 +26,18 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     @Cacheable(value = "category") // EnableCaching
-    public List<CategoryVo> list(Long id) {
-        // 全部读出 加速搜索
-        CategoryExample example = new CategoryExample();
-        List<Category> categoryList = categoryMapper.selectByExample(example);
-        return get(categoryList, id);
-    }
-
-    // 递归调用
-    public List<CategoryVo> get(List<Category> categoryList, Long id) {
-        List<CategoryVo> categoryVoList = getByPid(categoryList, id);
-        categoryVoList.forEach(categoryVo -> categoryVo.setChildren(get(categoryList, categoryVo.getId())));
-        return categoryVoList;
-    }
-
-    public List<CategoryVo> getByPid(List<Category> categoryList, Long id) {
-        return categoryList.stream()
-                .filter(category -> category.getPid().equals(id))
-                .map(category -> Convert.convert(CategoryVo.class, category))
-                .collect(Collectors.toList());
+    public List<Category> list(Long id) {
+        return categoryMapper.selectByExample(new CategoryExample());
     }
 
     @Override
     @CacheEvict(value = "category", allEntries = true) // 清除缓存
     public int add(CategoryDto categoryDto) {
-        Category category = categoryMapper.selectByPrimaryKey(categoryDto.getPid());
-        if (category == null) throw new GlobalException(Status.CATEGORY_EXIST);
-        category.setName(categoryDto.getName()); // name
-        category.setPid(categoryDto.getPid()); // pid
-        return categoryMapper.insertSelective(category);
+        if (categoryDto.getPid() != 0L) { // 检查父类是否存在
+            Category category = categoryMapper.selectByPrimaryKey(categoryDto.getPid());
+            if (category == null) throw new GlobalException(Status.CATEGORY_ROOT_NOT_EXIST);
+        }
+        return categoryMapper.insertSelective(Convert.convert(Category.class, categoryDto));
     }
 
     @Override

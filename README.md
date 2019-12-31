@@ -47,9 +47,11 @@ http://localhost:8080/druid/index.html
 
 Swagger:
 http://localhost:8080/swagger-ui.html
->* [swagger2markup](https://github.com/Swagger2Markup/swagger2markup): json -> asciidoc
->* [asciidoctor](https://github.com/asciidoctor/asciidoctor) asciidoc -> html/pdf
->
+>* [swagger2markup](https://swagger2markup.github.io/swagger2markup): json -> asciidoc
+>>* swagger2markup:convertSwagger2markup
+>* [asciidoctor](https://asciidoctor.org/docs/asciidoctor-maven-plugin/) asciidoc -> html/pdf
+>>* asciidoctor:process-asciidoc
+
 ## Spring Security
 1. AOP 顺序
 ```

@@ -1,8 +1,9 @@
 package com.example.demo.controller;
 
+import cn.hutool.core.convert.Convert;
 import com.example.demo.base.PageResult;
-import com.example.demo.base.Result;
 import com.example.demo.dto.PageRequest;
+import com.example.demo.model.Product;
 import com.example.demo.service.ProductService;
 import com.example.demo.vo.ProductVo;
 import com.github.pagehelper.PageInfo;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Api(tags = "买家商品")
 @Controller
@@ -26,8 +28,11 @@ public class BuyerProductController {
     @ApiOperation("获取商品列表")
     @GetMapping("")
     @ResponseBody
-    public Result<List<ProductVo>> list(@Valid PageRequest pageRequest) {
-        PageInfo<ProductVo> pageInfo = productService.listByBuyer(pageRequest);
-        return PageResult.success(pageInfo.getList(), pageInfo.getTotal());
+    public PageResult<List<ProductVo>> list(@Valid PageRequest pageRequest) {
+        PageInfo<Product> pageInfo = productService.listByBuyer(pageRequest);
+        List<ProductVo> productVoList = pageInfo.getList().stream()
+                .map(product -> Convert.convert(ProductVo.class, product))
+                .collect(Collectors.toList());
+        return PageResult.success(productVoList, pageInfo.getTotal());
     }
 }

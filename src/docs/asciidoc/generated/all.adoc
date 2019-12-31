@@ -1,0 +1,2198 @@
+= SwaggerUI演示
+
+
+[[_overview]]
+== 概览
+Demo
+
+
+=== 版本信息
+[%hardbreaks]
+__版本__ : 1.0
+
+
+=== 联系方式
+[%hardbreaks]
+__名字__ : 张张张
+__邮箱__ : 1656704949@qq.com
+
+
+=== URI scheme
+[%hardbreaks]
+__域名__ : localhost:8080
+__基础路径__ : /
+
+
+=== 标签
+
+* 上传文件 : Upload Controller
+* 买家商品 : Buyer Product Controller
+* 买家订单 : Buyer Order Controller
+* 分类 : Category Controller
+* 卖家商品 : Seller Product Controller
+* 商家订单 : Seller Order Controller
+* 用户 : User Controller
+* 验证码 : Captcha Controller
+
+
+
+
+[[_paths]]
+== 资源
+
+[[_d039fd1dac8a822d503e5db104660a0f]]
+=== 上传文件
+Upload Controller
+
+
+[[_uploadiconusingpost]]
+==== 上传文件 限制ip:3次/分钟
+....
+POST /upload
+....
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**FormData**|**file** +
+__必填__|file|file
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_e249bf1902de7f75aaed353ffea96339,Result«string»>>
+|**201**|Created|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `multipart/form-data`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== 安全
+
+[options="header", cols=".^3,.^4,.^13"]
+|===
+|类型|名称|作用域
+|**apiKey**|**<<_authorization,Authorization>>**|global
+|===
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/upload
+----
+
+
+====== 请求 formData
+[source,json]
+----
+"file"
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : "string",
+  "msg" : "string"
+}
+----
+
+
+[[_2db7ac3ad8c1290e17374876db11200b]]
+=== 买家商品
+Buyer Product Controller
+
+
+[[_listusingget_1]]
+==== 获取商品列表
+....
+GET /buyer/product
+....
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**category** +
+__可选__|分类|string
+|**Query**|**keyword** +
+__可选__|关键词|string
+|**Query**|**limit** +
+__可选__|大小|integer (int32)
+|**Query**|**page** +
+__可选__|页面|integer (int32)
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_9ece88679ef49b52fa8054756f295ebc,Result«List«ProductVo»»>>
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 生成
+
+* `*/*`
+
+
+===== 安全
+
+[options="header", cols=".^3,.^4,.^13"]
+|===
+|类型|名称|作用域
+|**apiKey**|**<<_authorization,Authorization>>**|global
+|===
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/buyer/product
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "category" : "string",
+  "keyword" : "string",
+  "limit" : 0,
+  "page" : 0
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : [ {
+    "category" : 0,
+    "description" : "string",
+    "icon" : "string",
+    "id" : 0,
+    "name" : "string",
+    "price" : "string",
+    "status" : true,
+    "stock" : 0
+  } ],
+  "msg" : "string"
+}
+----
+
+
+[[_bfb423ddd24327122520521e2e86521c]]
+=== 买家订单
+Buyer Order Controller
+
+
+[[_buyusingpost]]
+==== 购买
+....
+POST /buyer/order
+....
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**name** +
+__可选__||string
+|**Body**|**orderMasterDto** +
+__必填__|orderMasterDto|<<_ordermasterdto,OrderMasterDto>>
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_e2c2cc8d9a81136ae046564ef5c5a043,Result«JSONObject»>>
+|**201**|Created|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== 安全
+
+[options="header", cols=".^3,.^4,.^13"]
+|===
+|类型|名称|作用域
+|**apiKey**|**<<_authorization,Authorization>>**|global
+|===
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/buyer/order
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "name" : "string"
+}
+----
+
+
+====== 请求 body
+[source,json]
+----
+{
+  "products" : [ {
+    "id" : 0,
+    "quantity" : 0
+  } ]
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : {
+    "string" : "object"
+  },
+  "msg" : "string"
+}
+----
+
+
+[[_listusingget]]
+==== 获取订单列表
+....
+GET /buyer/order/list
+....
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**category** +
+__可选__|分类|string
+|**Query**|**keyword** +
+__可选__|关键词|string
+|**Query**|**limit** +
+__可选__|大小|integer (int32)
+|**Query**|**name** +
+__可选__||string
+|**Query**|**page** +
+__可选__|页面|integer (int32)
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_1f21b23816b7d121de58f8bedebd3b10,PageResult«List«OrderMasterVo»»>>
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 生成
+
+* `*/*`
+
+
+===== 安全
+
+[options="header", cols=".^3,.^4,.^13"]
+|===
+|类型|名称|作用域
+|**apiKey**|**<<_authorization,Authorization>>**|global
+|===
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/buyer/order/list
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "category" : "string",
+  "keyword" : "string",
+  "limit" : 0,
+  "name" : "string",
+  "page" : 0
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : 0,
+  "count" : 0,
+  "data" : [ {
+    "amount" : "string",
+    "createTime" : "string",
+    "id" : 0,
+    "orderStatus" : 0,
+    "payStatus" : 0,
+    "products" : [ {
+      "icon" : "string",
+      "name" : "string",
+      "price" : "string",
+      "quantity" : 0
+    } ],
+    "username" : "string"
+  } ],
+  "msg" : "string"
+}
+----
+
+
+[[_getusingget]]
+==== 获取订单
+....
+GET /buyer/order/{id}
+....
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Path**|**id** +
+__必填__|id|integer (int64)
+|**Query**|**name** +
+__可选__||string
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_e8a681c0958ce285b09fa7e499d68744,Result«OrderMasterVo»>>
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 生成
+
+* `*/*`
+
+
+===== 安全
+
+[options="header", cols=".^3,.^4,.^13"]
+|===
+|类型|名称|作用域
+|**apiKey**|**<<_authorization,Authorization>>**|global
+|===
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/buyer/order/0
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "name" : "string"
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : {
+    "amount" : "string",
+    "createTime" : "string",
+    "id" : 0,
+    "orderStatus" : 0,
+    "payStatus" : 0,
+    "products" : [ {
+      "icon" : "string",
+      "name" : "string",
+      "price" : "string",
+      "quantity" : 0
+    } ],
+    "username" : "string"
+  },
+  "msg" : "string"
+}
+----
+
+
+[[_bf16c35c8f8a73d19b3dae8ef554dbeb]]
+=== 分类
+Category Controller
+
+
+[[_addusingpost]]
+==== 添加分类
+....
+POST /category
+....
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**name** +
+__必填__|分类|string
+|**Query**|**pid** +
+__必填__|PID|integer (int64)
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_e249bf1902de7f75aaed353ffea96339,Result«string»>>
+|**201**|Created|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== 安全
+
+[options="header", cols=".^3,.^4,.^13"]
+|===
+|类型|名称|作用域
+|**apiKey**|**<<_authorization,Authorization>>**|global
+|===
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/category
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "name" : "string",
+  "pid" : 0
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : "string",
+  "msg" : "string"
+}
+----
+
+
+[[_listusingget_2]]
+==== 获取分类列表
+....
+GET /category/list
+....
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4,.^2"]
+|===
+|类型|名称|说明|类型|默认值
+|**Query**|**id** +
+__可选__|id|integer (int64)|`0`
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_e11e875f50acb7ab89dd088e4c705587,Result«List«CategoryVo»»>>
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 生成
+
+* `*/*`
+
+
+===== 安全
+
+[options="header", cols=".^3,.^4,.^13"]
+|===
+|类型|名称|作用域
+|**apiKey**|**<<_authorization,Authorization>>**|global
+|===
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/category/list
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "id" : 0
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : [ {
+    "children" : [ {
+      "children" : [ "..." ],
+      "createTime" : "string",
+      "id" : 0,
+      "name" : "string",
+      "updateTime" : "string"
+    } ],
+    "createTime" : "string",
+    "id" : 0,
+    "name" : "string",
+    "updateTime" : "string"
+  } ],
+  "msg" : "string"
+}
+----
+
+
+[[_updateusingput]]
+==== 修改分类
+....
+PUT /category/{id}
+....
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Path**|**id** +
+__必填__|id|integer (int64)
+|**Query**|**name** +
+__必填__|分类|string
+|**Query**|**pid** +
+__必填__|PID|integer (int64)
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_e249bf1902de7f75aaed353ffea96339,Result«string»>>
+|**201**|Created|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== 安全
+
+[options="header", cols=".^3,.^4,.^13"]
+|===
+|类型|名称|作用域
+|**apiKey**|**<<_authorization,Authorization>>**|global
+|===
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/category/0
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "name" : "string",
+  "pid" : 0
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : "string",
+  "msg" : "string"
+}
+----
+
+
+[[_deleteusingdelete]]
+==== 删除分类
+....
+DELETE /category/{id}
+....
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Path**|**id** +
+__必填__|id|integer (int64)
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_e249bf1902de7f75aaed353ffea96339,Result«string»>>
+|**204**|No Content|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|===
+
+
+===== 生成
+
+* `*/*`
+
+
+===== 安全
+
+[options="header", cols=".^3,.^4,.^13"]
+|===
+|类型|名称|作用域
+|**apiKey**|**<<_authorization,Authorization>>**|global
+|===
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/category/0
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : "string",
+  "msg" : "string"
+}
+----
+
+
+[[_40025e5824fc3cfc64eff48dc0dc8186]]
+=== 卖家商品
+Seller Product Controller
+
+
+[[_addusingpost_1]]
+==== 添加商品
+....
+POST /seller/product
+....
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**category** +
+__必填__|分类|integer (int64)
+|**Query**|**description** +
+__必填__|描述|string
+|**Query**|**icon** +
+__必填__|图标|string
+|**Query**|**name** +
+__必填__|名称|string
+|**Query**|**price** +
+__必填__|价格|number
+|**Query**|**status** +
+__必填__|状态|boolean
+|**Query**|**stock** +
+__必填__|库存|integer (int32)
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_e249bf1902de7f75aaed353ffea96339,Result«string»>>
+|**201**|Created|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== 安全
+
+[options="header", cols=".^3,.^4,.^13"]
+|===
+|类型|名称|作用域
+|**apiKey**|**<<_authorization,Authorization>>**|global
+|===
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/seller/product
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "category" : 0,
+  "description" : "string",
+  "icon" : "string",
+  "name" : "string",
+  "price" : 0.0,
+  "status" : "0",
+  "stock" : 0
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : "string",
+  "msg" : "string"
+}
+----
+
+
+[[_listusingget_4]]
+==== 获取商品列表
+....
+GET /seller/product/list
+....
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**category** +
+__可选__|分类|string
+|**Query**|**keyword** +
+__可选__|关键词|string
+|**Query**|**limit** +
+__可选__|大小|integer (int32)
+|**Query**|**page** +
+__可选__|页面|integer (int32)
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_9ece88679ef49b52fa8054756f295ebc,Result«List«ProductVo»»>>
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 生成
+
+* `*/*`
+
+
+===== 安全
+
+[options="header", cols=".^3,.^4,.^13"]
+|===
+|类型|名称|作用域
+|**apiKey**|**<<_authorization,Authorization>>**|global
+|===
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/seller/product/list
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "category" : "string",
+  "keyword" : "string",
+  "limit" : 0,
+  "page" : 0
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : [ {
+    "category" : 0,
+    "description" : "string",
+    "icon" : "string",
+    "id" : 0,
+    "name" : "string",
+    "price" : "string",
+    "status" : true,
+    "stock" : 0
+  } ],
+  "msg" : "string"
+}
+----
+
+
+[[_getusingget_2]]
+==== 获取商品
+....
+GET /seller/product/{id}
+....
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Path**|**id** +
+__必填__|id|integer (int64)
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_7cae426b3e5d74d2ee7c4a5b651eec95,Result«ProductVo»>>
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 生成
+
+* `*/*`
+
+
+===== 安全
+
+[options="header", cols=".^3,.^4,.^13"]
+|===
+|类型|名称|作用域
+|**apiKey**|**<<_authorization,Authorization>>**|global
+|===
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/seller/product/0
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : {
+    "category" : 0,
+    "description" : "string",
+    "icon" : "string",
+    "id" : 0,
+    "name" : "string",
+    "price" : "string",
+    "status" : true,
+    "stock" : 0
+  },
+  "msg" : "string"
+}
+----
+
+
+[[_updateusingput_1]]
+==== 修改商品
+....
+PUT /seller/product/{id}
+....
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Path**|**id** +
+__必填__|id|integer (int64)
+|**Query**|**category** +
+__必填__|分类|integer (int64)
+|**Query**|**description** +
+__必填__|描述|string
+|**Query**|**icon** +
+__必填__|图标|string
+|**Query**|**name** +
+__必填__|名称|string
+|**Query**|**price** +
+__必填__|价格|number
+|**Query**|**status** +
+__必填__|状态|boolean
+|**Query**|**stock** +
+__必填__|库存|integer (int32)
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_e249bf1902de7f75aaed353ffea96339,Result«string»>>
+|**201**|Created|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== 安全
+
+[options="header", cols=".^3,.^4,.^13"]
+|===
+|类型|名称|作用域
+|**apiKey**|**<<_authorization,Authorization>>**|global
+|===
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/seller/product/0
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "category" : 0,
+  "description" : "string",
+  "icon" : "string",
+  "name" : "string",
+  "price" : 0.0,
+  "status" : "0",
+  "stock" : 0
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : "string",
+  "msg" : "string"
+}
+----
+
+
+[[_deleteusingdelete_1]]
+==== 删除商品
+....
+DELETE /seller/product/{id}
+....
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Path**|**id** +
+__必填__|id|integer (int64)
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_e249bf1902de7f75aaed353ffea96339,Result«string»>>
+|**204**|No Content|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|===
+
+
+===== 生成
+
+* `*/*`
+
+
+===== 安全
+
+[options="header", cols=".^3,.^4,.^13"]
+|===
+|类型|名称|作用域
+|**apiKey**|**<<_authorization,Authorization>>**|global
+|===
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/seller/product/0
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : "string",
+  "msg" : "string"
+}
+----
+
+
+[[_efd712023816194b8503723bfd76f1cd]]
+=== 商家订单
+Seller Order Controller
+
+
+[[_listusingget_3]]
+==== 获取订单列表
+....
+GET /seller/order/list
+....
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**category** +
+__可选__|分类|string
+|**Query**|**keyword** +
+__可选__|关键词|string
+|**Query**|**limit** +
+__可选__|大小|integer (int32)
+|**Query**|**page** +
+__可选__|页面|integer (int32)
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_1f21b23816b7d121de58f8bedebd3b10,PageResult«List«OrderMasterVo»»>>
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 生成
+
+* `*/*`
+
+
+===== 安全
+
+[options="header", cols=".^3,.^4,.^13"]
+|===
+|类型|名称|作用域
+|**apiKey**|**<<_authorization,Authorization>>**|global
+|===
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/seller/order/list
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "category" : "string",
+  "keyword" : "string",
+  "limit" : 0,
+  "page" : 0
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : 0,
+  "count" : 0,
+  "data" : [ {
+    "amount" : "string",
+    "createTime" : "string",
+    "id" : 0,
+    "orderStatus" : 0,
+    "payStatus" : 0,
+    "products" : [ {
+      "icon" : "string",
+      "name" : "string",
+      "price" : "string",
+      "quantity" : 0
+    } ],
+    "username" : "string"
+  } ],
+  "msg" : "string"
+}
+----
+
+
+[[_getusingget_1]]
+==== 获取订单
+....
+GET /seller/order/{id}
+....
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Path**|**id** +
+__必填__|id|integer (int64)
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_e8a681c0958ce285b09fa7e499d68744,Result«OrderMasterVo»>>
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 生成
+
+* `*/*`
+
+
+===== 安全
+
+[options="header", cols=".^3,.^4,.^13"]
+|===
+|类型|名称|作用域
+|**apiKey**|**<<_authorization,Authorization>>**|global
+|===
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/seller/order/0
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : {
+    "amount" : "string",
+    "createTime" : "string",
+    "id" : 0,
+    "orderStatus" : 0,
+    "payStatus" : 0,
+    "products" : [ {
+      "icon" : "string",
+      "name" : "string",
+      "price" : "string",
+      "quantity" : 0
+    } ],
+    "username" : "string"
+  },
+  "msg" : "string"
+}
+----
+
+
+[[_updateorderstatususingput]]
+==== 修改订单状态
+....
+PUT /seller/order/{id}/status
+....
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4,.^2"]
+|===
+|类型|名称|说明|类型|默认值
+|**Path**|**id** +
+__必填__|id|integer (int64)|
+|**Query**|**orderStatus** +
+__可选__|orderStatus|integer (int32)|`0`
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_e249bf1902de7f75aaed353ffea96339,Result«string»>>
+|**201**|Created|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== 安全
+
+[options="header", cols=".^3,.^4,.^13"]
+|===
+|类型|名称|作用域
+|**apiKey**|**<<_authorization,Authorization>>**|global
+|===
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/seller/order/0/status
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "orderStatus" : 0
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : "string",
+  "msg" : "string"
+}
+----
+
+
+[[_6352f1a072c12b600cd8669cd91a062d]]
+=== 用户
+User Controller
+
+
+[[_registerusingpost]]
+==== 注册
+....
+POST /register
+....
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**code** +
+__可选__|验证码code|string
+|**Query**|**key** +
+__可选__|验证码key|string
+|**Query**|**password** +
+__必填__|密码|string
+|**Query**|**username** +
+__必填__|用户名|string
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_e249bf1902de7f75aaed353ffea96339,Result«string»>>
+|**201**|Created|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== 安全
+
+[options="header", cols=".^3,.^4,.^13"]
+|===
+|类型|名称|作用域
+|**apiKey**|**<<_authorization,Authorization>>**|global
+|===
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/register
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "code" : "string",
+  "key" : "string",
+  "password" : "string",
+  "username" : "string"
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : "string",
+  "msg" : "string"
+}
+----
+
+
+[[_updateuserinfousingpost]]
+==== 修改信息
+....
+POST /user
+....
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**avatar** +
+__可选__|头像|string
+|**Query**|**birthday** +
+__可选__|生日|string (date-time)
+|**Query**|**nickname** +
+__可选__|昵称|string
+|**Query**|**sex** +
+__可选__|性别|integer (int32)
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_e249bf1902de7f75aaed353ffea96339,Result«string»>>
+|**201**|Created|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== 安全
+
+[options="header", cols=".^3,.^4,.^13"]
+|===
+|类型|名称|作用域
+|**apiKey**|**<<_authorization,Authorization>>**|global
+|===
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/user
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "avatar" : "string",
+  "birthday" : "string",
+  "nickname" : "string",
+  "sex" : 0
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : "string",
+  "msg" : "string"
+}
+----
+
+
+[[_getuserinfousingget]]
+==== 获取信息
+....
+GET /user
+....
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_6a7769d5484a7bc6cd3f5c087f40419d,Result«UserInfoVo»>>
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 生成
+
+* `*/*`
+
+
+===== 安全
+
+[options="header", cols=".^3,.^4,.^13"]
+|===
+|类型|名称|作用域
+|**apiKey**|**<<_authorization,Authorization>>**|global
+|===
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/user
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : {
+    "avatar" : "string",
+    "birthday" : "string",
+    "createTime" : "string",
+    "nickname" : "string",
+    "sex" : 0,
+    "updateTime" : "string"
+  },
+  "msg" : "string"
+}
+----
+
+
+[[_updatepasswordusingpost]]
+==== 修改密码
+....
+POST /user/password
+....
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**password** +
+__必填__|password|string
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_e249bf1902de7f75aaed353ffea96339,Result«string»>>
+|**201**|Created|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== 安全
+
+[options="header", cols=".^3,.^4,.^13"]
+|===
+|类型|名称|作用域
+|**apiKey**|**<<_authorization,Authorization>>**|global
+|===
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/user/password
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "password" : "string"
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : "string",
+  "msg" : "string"
+}
+----
+
+
+[[_563f8a45246bd349c36063e35facceb8]]
+=== 验证码
+Captcha Controller
+
+
+[[_captchausingget]]
+==== 获取验证码
+....
+GET /captcha
+....
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_2b408732324d6149675a66eb92b7df06,Result«Map«string,string»»>>
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 生成
+
+* `*/*`
+
+
+===== 安全
+
+[options="header", cols=".^3,.^4,.^13"]
+|===
+|类型|名称|作用域
+|**apiKey**|**<<_authorization,Authorization>>**|global
+|===
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/captcha
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : {
+    "string" : "string"
+  },
+  "msg" : "string"
+}
+----
+
+
+
+
+[[_definitions]]
+== 定义
+
+[[_categoryvo]]
+=== CategoryVo
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|名称|说明|类型
+|**children** +
+__可选__|**样例** : `[ "<<_categoryvo>>" ]`|< <<_categoryvo,CategoryVo>> > array
+|**createTime** +
+__可选__|**样例** : `"string"`|string (date-time)
+|**id** +
+__可选__|**样例** : `0`|integer (int64)
+|**name** +
+__可选__|**样例** : `"string"`|string
+|**updateTime** +
+__可选__|**样例** : `"string"`|string (date-time)
+|===
+
+
+[[_jsonobject]]
+=== JSONObject
+__类型__ : < string, object > map
+
+
+[[_fe5293b8150fdf81185174959d77609c]]
+=== Map«string,string»
+__类型__ : < string, string > map
+
+
+[[_orderdetaildto]]
+=== OrderDetailDto
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|名称|说明|类型
+|**id** +
+__可选__|商品ID +
+**样例** : `0`|integer (int64)
+|**quantity** +
+__可选__|商品数量 +
+**样例** : `0`|integer (int32)
+|===
+
+
+[[_orderdetailvo]]
+=== OrderDetailVo
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|名称|说明|类型
+|**icon** +
+__可选__|**样例** : `"string"`|string
+|**name** +
+__可选__|**样例** : `"string"`|string
+|**price** +
+__可选__|**样例** : `"string"`|string
+|**quantity** +
+__可选__|**样例** : `0`|integer (int32)
+|===
+
+
+[[_ordermasterdto]]
+=== OrderMasterDto
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|名称|说明|类型
+|**products** +
+__可选__|**样例** : `[ "<<_orderdetaildto>>" ]`|< <<_orderdetaildto,OrderDetailDto>> > array
+|===
+
+
+[[_ordermastervo]]
+=== OrderMasterVo
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|名称|说明|类型
+|**amount** +
+__可选__|**样例** : `"string"`|string
+|**createTime** +
+__可选__|**样例** : `"string"`|string (date-time)
+|**id** +
+__可选__|**样例** : `0`|integer (int64)
+|**orderStatus** +
+__可选__|**样例** : `0`|integer (int32)
+|**payStatus** +
+__可选__|**样例** : `0`|integer (int32)
+|**products** +
+__可选__|**样例** : `[ "<<_orderdetailvo>>" ]`|< <<_orderdetailvo,OrderDetailVo>> > array
+|**username** +
+__可选__|**样例** : `"string"`|string
+|===
+
+
+[[_1f21b23816b7d121de58f8bedebd3b10]]
+=== PageResult«List«OrderMasterVo»»
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|名称|说明|类型
+|**code** +
+__可选__|**样例** : `0`|integer (int32)
+|**count** +
+__可选__|**样例** : `0`|integer (int64)
+|**data** +
+__可选__|**样例** : `[ "<<_ordermastervo>>" ]`|< <<_ordermastervo,OrderMasterVo>> > array
+|**msg** +
+__可选__|**样例** : `"string"`|string
+|===
+
+
+[[_productvo]]
+=== ProductVo
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|名称|说明|类型
+|**category** +
+__可选__|**样例** : `0`|integer (int32)
+|**description** +
+__可选__|**样例** : `"string"`|string
+|**icon** +
+__可选__|**样例** : `"string"`|string
+|**id** +
+__可选__|**样例** : `0`|integer (int64)
+|**name** +
+__可选__|**样例** : `"string"`|string
+|**price** +
+__可选__|**样例** : `"string"`|string
+|**status** +
+__可选__|**样例** : `true`|boolean
+|**stock** +
+__可选__|**样例** : `0`|integer (int32)
+|===
+
+
+[[_e2c2cc8d9a81136ae046564ef5c5a043]]
+=== Result«JSONObject»
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|名称|说明|类型
+|**code** +
+__可选__|**样例** : `0`|integer (int32)
+|**data** +
+__可选__|**样例** : `{
+  "string" : "object"
+}`|< string, object > map
+|**msg** +
+__可选__|**样例** : `"string"`|string
+|===
+
+
+[[_e11e875f50acb7ab89dd088e4c705587]]
+=== Result«List«CategoryVo»»
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|名称|说明|类型
+|**code** +
+__可选__|**样例** : `0`|integer (int32)
+|**data** +
+__可选__|**样例** : `[ "<<_categoryvo>>" ]`|< <<_categoryvo,CategoryVo>> > array
+|**msg** +
+__可选__|**样例** : `"string"`|string
+|===
+
+
+[[_9ece88679ef49b52fa8054756f295ebc]]
+=== Result«List«ProductVo»»
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|名称|说明|类型
+|**code** +
+__可选__|**样例** : `0`|integer (int32)
+|**data** +
+__可选__|**样例** : `[ "<<_productvo>>" ]`|< <<_productvo,ProductVo>> > array
+|**msg** +
+__可选__|**样例** : `"string"`|string
+|===
+
+
+[[_2b408732324d6149675a66eb92b7df06]]
+=== Result«Map«string,string»»
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|名称|说明|类型
+|**code** +
+__可选__|**样例** : `0`|integer (int32)
+|**data** +
+__可选__|**样例** : `{
+  "string" : "string"
+}`|< string, string > map
+|**msg** +
+__可选__|**样例** : `"string"`|string
+|===
+
+
+[[_e8a681c0958ce285b09fa7e499d68744]]
+=== Result«OrderMasterVo»
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|名称|说明|类型
+|**code** +
+__可选__|**样例** : `0`|integer (int32)
+|**data** +
+__可选__|**样例** : `"<<_ordermastervo>>"`|<<_ordermastervo,OrderMasterVo>>
+|**msg** +
+__可选__|**样例** : `"string"`|string
+|===
+
+
+[[_7cae426b3e5d74d2ee7c4a5b651eec95]]
+=== Result«ProductVo»
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|名称|说明|类型
+|**code** +
+__可选__|**样例** : `0`|integer (int32)
+|**data** +
+__可选__|**样例** : `"<<_productvo>>"`|<<_productvo,ProductVo>>
+|**msg** +
+__可选__|**样例** : `"string"`|string
+|===
+
+
+[[_6a7769d5484a7bc6cd3f5c087f40419d]]
+=== Result«UserInfoVo»
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|名称|说明|类型
+|**code** +
+__可选__|**样例** : `0`|integer (int32)
+|**data** +
+__可选__|**样例** : `"<<_userinfovo>>"`|<<_userinfovo,UserInfoVo>>
+|**msg** +
+__可选__|**样例** : `"string"`|string
+|===
+
+
+[[_e249bf1902de7f75aaed353ffea96339]]
+=== Result«string»
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|名称|说明|类型
+|**code** +
+__可选__|**样例** : `0`|integer (int32)
+|**data** +
+__可选__|**样例** : `"string"`|string
+|**msg** +
+__可选__|**样例** : `"string"`|string
+|===
+
+
+[[_userinfovo]]
+=== UserInfoVo
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|名称|说明|类型
+|**avatar** +
+__可选__|**样例** : `"string"`|string
+|**birthday** +
+__可选__|**样例** : `"string"`|string (date-time)
+|**createTime** +
+__可选__|**样例** : `"string"`|string (date-time)
+|**nickname** +
+__可选__|**样例** : `"string"`|string
+|**sex** +
+__可选__|**样例** : `0`|integer (int32)
+|**updateTime** +
+__可选__|**样例** : `"string"`|string (date-time)
+|===
+
+
+
+
+[[_securityscheme]]
+== 安全
+
+[[_authorization]]
+=== Authorization
+[%hardbreaks]
+__类型__ : apiKey
+__名称__ : Authorization
+__在__ : HEADER
+
+
+
