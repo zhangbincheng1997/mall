@@ -7,32 +7,12 @@
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
-    <script type="text/javascript" src="include/header.js"></script>
-    <script type="text/javascript" src="include/side.js"></script>
-    <script type="text/javascript" src="include/footer.js"></script>
+    <script type="text/javascript" src="include/admin/side.js"></script>
+    <script type="text/javascript" src="include/admin/header.js"></script>
+    <script type="text/javascript" src="include/admin/footer.js"></script>
 
     <div class="layui-body">
         <table id="table" lay-filter="table"></table>
-    </div>
-
-    <div id="addModal" style="display: none;">
-        <div style="width: 500px; margin: 0 auto; padding: 20px;">
-            <div class="layui-form layui-form-pane" autocomplete="off">
-                <div class="layui-form-item">
-                    <label class="layui-form-label layui-icon layui-icon-username">测试</label>
-                    <div class="layui-input-block">
-                        <textarea name="products" id="products" placeholder="JSON" class="layui-textarea" rows="20">
-                        </textarea>
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <div class="layui-input-block">
-                        <button class="layui-btn" lay-submit lay-filter="confirm">立即提交</button>
-                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 
     <div id="detailModal" style="display: none;">
@@ -51,19 +31,25 @@
     <img src="{{ d.icon }}" width="50px" height="50px">
 </script>
 <script type="text/html" id="barTpl">
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="detail">详情</a>
+    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="detail">详情</a>
+    {{# if (d.orderStatus == '新订单' && d.payStatus == '未付款') { }}
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="close">关闭订单</a>
+    {{# } else if (d.orderStatus == '买家申请退款') { }}
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="deal">处理退款</a>
+    {{# } else if (d.orderStatus == '新订单') { }}
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="refund">主动退款</a>
+    <a class="layui-btn layui-btn-success layui-btn-xs" lay-event="finish">完成</a>
+    {{# } }}
 </script>
 <script>
     layui.use(['jquery', 'element', 'table', 'form'], function () {
         var $ = layui.jquery;
         var table = layui.table;
-        var form = layui.form;
 
         // $('#search').click(function(){}); 搜索一次后会失效
         $('body').on('click', '#search', function () {
             table.reload('table', {
-                url: 'seller/order/list',
-                page: true,
+                // url: 'seller/order/list',
                 where: {keyword: $('#keyword').val()}
             });
         });
@@ -74,47 +60,16 @@
             page: true,
             size: 'lg',
             toolbar: '#toolbarTpl', // 'default'
-            defaultToolbar: [{
-                title: '添加',
-                layEvent: 'add',
-                icon: 'layui-icon-add-1'
-            }, 'filter', 'exports', 'print'],
             cols: [[
-                {field: 'id', title: 'ID', width: 100, align: 'center', sort: true},
+                {field: 'id', title: 'ID', width: 100, align: 'center', sort: true, edit: true},
                 {field: 'username', title: '用户名'},
                 {field: 'amount', title: '总金额'},
                 {field: 'orderStatus', title: '订单状态'},
                 {field: 'payStatus', title: '支付状态'},
                 {field: 'createTime', title: '创建时间'},
-                {fixed: 'right', title: '操作', width: 100, align: 'center', toolbar: '#barTpl'}
+                {field: 'updateTime', title: '修改时间'},
+                {fixed: 'right', title: '操作', width: 200, toolbar: '#barTpl'}
             ]]
-        });
-
-        // 监听头工具栏事件
-        table.on('toolbar(table)', function (obj) {
-            switch (obj.event) {
-                case 'add':
-                    layer.open({
-                        type: 1, // 0：信息框，默认 1：页面层 2：iframe层 3：加载层 4：tips层
-                        title: '添加分类',
-                        content: $('#addModal'),
-                        area: ['800px', '600px'],
-                        shadeClose: true,
-                        success: function () {
-                            $('#products').val(
-                                '{\n'
-                                + ' "products": [\n'
-                                + '     {\n'
-                                + '         "id": 1,\n'
-                                + '         "quantity": 1\n'
-                                + '     }\n'
-                                + ' ]\n'
-                                + '}\n'
-                            );
-                        }
-                    });
-                    break;
-            }
         });
 
         // 监听行工具事件
@@ -125,7 +80,7 @@
                         type: 1, // 0：信息框，默认 1：页面层 2：iframe层 3：加载层 4：tips层
                         title: '订单详情',
                         content: $('#detailModal'),
-                        area: ['800px', 200 * obj.data.products.length + 'px'],
+                        area: ['800px', 200 + 50 * obj.data.products.length + 'px'],
                         shadeClose: true,
                         success: function () {
                             table.render({
@@ -133,6 +88,7 @@
                                 data: obj.data.products,
                                 size: 'lg',
                                 cols: [[
+                                    {field: 'id', title: 'ID', width: 100, align: 'center', sort: true, edit: true},
                                     {field: 'icon', title: '图标', width: 100, align: 'center', templet: '#iconTpl'},
                                     {field: 'name', title: '名称'},
                                     {field: 'price', title: '价格'},
@@ -142,26 +98,43 @@
                         }
                     });
                     break;
+                case 'finish':
+                    layer.confirm('确认完成？', function (index) {
+                        $.post('seller/pay/finish/' + obj.data.id, function (res) {
+                            if (res.code === 0) {
+                                table.reload('table', {page: {curr: $(".layui-laypage-em").next().html()}});
+                            }
+                        });
+                    });
+                    break;
+                case 'close':
+                    layer.confirm('确认关闭订单？', function (index) {
+                        $.post('seller/pay/close/' + obj.data.id, function (res) {
+                            if (res.code === 0) {
+                                table.reload('table', {page: {curr: $(".layui-laypage-em").next().html()}});
+                            }
+                        });
+                    });
+                    break;
+                case 'deal':
+                    layer.confirm('确认处理退款？', function (index) {
+                        $.post('seller/pay/deal/' + obj.data.id, function (res) {
+                            if (res.code === 0) {
+                                table.reload('table', {page: {curr: $(".layui-laypage-em").next().html()}});
+                            }
+                        });
+                    });
+                    break;
+                case 'refund':
+                    layer.confirm('确认主动退款？', function (index) {
+                        $.post('seller/pay/refund/' + obj.data.id, function (res) {
+                            if (res.code === 0) {
+                                table.reload('table', {page: {curr: $(".layui-laypage-em").next().html()}});
+                            }
+                        });
+                    });
+                    break;
             }
-        });
-
-        form.on('submit(confirm)', function (data) {
-            $.ajax({
-                url: 'buyer/order',
-                type: 'POST',
-                contentType: "application/json",
-                data: data.field.products,
-                success: function (res) {
-                    if (res.code === 0) {
-                        // var tableData = table.cache['table'];
-                        // tableData.push(data.field);
-                        // table.reload('table', {data: tableData});
-                        // layer.closeAll('page');
-                        layer.msg(res.msg);
-                    }
-                }
-            });
-            return false; // require
         });
     });
 </script>

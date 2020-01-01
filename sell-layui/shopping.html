@@ -7,129 +7,159 @@
     <script type="text/javascript" src="include/title.js"></script>
 </head>
 <body>
-
-<div class="site-nav-bg">
-    <div class="site-nav w1200">
-        <p class="sn-back-home">
-            <i class="layui-icon layui-icon-home"></i>
-            <a href="index.html">控制台</a>
-        </p>
-        <div class="sn-quick-menu">
-            <div class="login"><a href="login.html">登录</a></div>
-            <div class="login"><a href="register.html">注册</a></div>
-            <div class="sp-cart"><a href="shopping.html">我的购物</a><span>520</span></div>
-        </div>
-    </div>
-</div>
-
-<div class="header">
-    <div class="headerLayout w1200">
-        <div class="headerCon">
-            <h1 class="mallLogo">
-                <a href="#" title="新华书店">
-                    <img src="img/logo.png" width="100px">
-                </a>
-            </h1>
-            <div class="mallSearch">
-                <form action="" class="layui-form">
-                    <input type="text" name="keyword" required lay-verify="required" autocomplete="off"
-                           class="layui-input" placeholder="请输入需要的商品">
-                    <button class="layui-btn" lay-submit lay-filter="formDemo">
-                        <i class="layui-icon layui-icon-search"></i>
-                    </button>
-                    <input type="hidden" name="" value="">
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
+<div id="pay" style="display: none;"></div> <!-- 支付跳转 -->
+<script type="text/javascript" src="include/user/site-nav.js"></script>
+<script type="text/javascript" src="include/user/header.js"></script>
 <div class="content content-nav-base commodity-content">
-    <div class="main-nav">
-        <div class="inner-cont0">
-            <div class="inner-cont1 w1200">
-                <div class="inner-cont2">
-                    <a href="index.html" class="active">所有商品</a>
-                    <a href="javascript:void (0)">敬请期待</a>
-                </div>
-            </div>
-        </div>
-    </div>
+    <script type="text/javascript" src="include/user/main-nav.js"></script>
     <div class="commod-cont-wrap">
         <div class="commod-cont w1200 layui-clear">
-<!--            TODO-->
+            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px">
+                <legend>订单列表</legend>
+            </fieldset>
+            <table id="table" lay-filter="table"></table>
+            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px">
+                <legend>购物列表</legend>
+            </fieldset>
+            <form class="layui-form" autocomplete="off">
+                    <textarea name="products" id="products" placeholder="JSON" class="layui-textarea" rows="20">
+                        </textarea>
+                <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="confirm">立即提交</button>
+            </form>
         </div>
-    </div>
-</div>
 
-<div class="footer">
-    <div class="ng-promise-box">
-        <div class="ng-promise w1200">
-            <p class="text">
-                <a class="icon1" href="javascript:void(0);">7天无理由退换货</a>
-                <a class="icon2" href="javascript:void(0);">满99元全场免邮</a>
-                <a class="icon3" style="margin-right: 0" href="javascript:void(0);">100%品质保证</a>
-            </p>
+        <div id="detailModal" style="display: none;">
+            <div style="width: 500px; margin: 0 auto; padding: 20px;">
+                <table id="table2" lay-filter="table2"></table>
+            </div>
         </div>
     </div>
-    <div class="mod_help w1200">
-        <p>
-            <a href="javascript:void(0);">关于我们</a>
-            <span>|</span>
-            <a href="javascript:void(0);">帮助中心</a>
-            <span>|</span>
-            <a href="javascript:void(0);">售后服务</a>
-            <span>|</span>
-            <a href="javascript:void(0);">母婴资讯</a>
-            <span>|</span>
-            <a href="javascript:void(0);">关于货源</a>
-        </p>
-        <p>新华书店版权所有 &copy; 2020-2024</p>
-    </div>
 </div>
+<script type="text/javascript" src="include/user/footer.js"></script>
+<script type="text/html" id="toolbarTpl">
+    <input class="text" style="height:30px;width:200px;" name="" id="keyword"  placeholder="请输入关键词">
+     <a href="javascript:void(0);" id="search">
+        <i class="layui-icon layui-icon-search"></i> 
+    </a>
+</script>
+<script type="text/html" id="iconTpl">
+    <img src="{{ d.icon }}" width="50px" height="50px">
+</script>
+<script type="text/html" id="barTpl">
+    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="detail">详情</a>
+    {{# if (d.orderStatus == '新订单' && d.payStatus == '未付款') { }}
+    <a class="layui-btn layui-btn-success layui-btn-xs" lay-event="pay">付款</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="close">关闭订单</a>
+    {{# } else if (d.orderStatus == '新订单' && d.payStatus == '已付款') { }}
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="refund">申请退款</a>
+    {{# } }}
+</script>
 <script>
-    layui.use(['jquery', 'laytpl', 'laypage'], function () {
-        var $ = layui.$, laytpl = layui.laytpl, laypage = layui.laypage;
+    layui.use(['jquery', 'laytpl', 'laypage', 'form', 'table'], function () {
+        var $ = layui.$, form = layui.form, table = layui.table;
 
-        // $.get('category/list', function (res) {
-        //     laytpl(category.innerHTML).render(res.data, function (html) {
-        //         $('#categoryView').html(html);
-        //     });
-        // });
-        //
-        // var para = '&keyword=' + getQueryVariable('keyword') + '&category=' + getQueryVariable('category');
-        // $.get('buyer/product?limit=12&page=1' + para, function (res) {
-        //     laytpl(product.innerHTML).render(res, function (html) {
-        //         $('#productView').html(html);
-        //     });
-        //     // 分页
-        //     laypage.render({
-        //         elem: 'page',
-        //         count: res.count,
-        //         jump: function (obj, first) {
-        //             // 首次不执行
-        //             if (!first) {
-        //                 $.get('buyer/product?limit=12&page=' + obj.curr, function (res) {
-        //                     laytpl(product.innerHTML).render(res, function (html) {
-        //                         $('#productView').html(html);
-        //                     });
-        //                 });
-        //             }
-        //         }
-        //     });
-        // });
-        //
-        // function getQueryVariable(variable) {
-        //     var query = window.location.search.substring(1);
-        //     var vars = query.split("&");
-        //     for (var i = 0; i < vars.length; i++) {
-        //         var pair = vars[i].split("=");
-        //         if (pair[0] === variable) {
-        //             return pair[1];
-        //         }
-        //     }
-        //     return '';
-        // }
+        // $('#search').click(function(){}); 搜索一次后会失效
+        $('body').on('click', '#search', function () {
+            table.reload('table', {
+                // url: 'seller/order/list',
+                where: {keyword: $('#keyword').val()}
+            });
+        });
+
+        table.render({
+            elem: '#table',
+            url: 'buyer/order/list',
+            page: true,
+            size: 'lg',
+            toolbar: '#toolbarTpl', // 'default'
+            cols: [[
+                {field: 'id', title: 'ID', width: 100, align: 'center', sort: true, edit: true},
+                {field: 'username', title: '用户名'},
+                {field: 'amount', title: '总金额'},
+                {field: 'orderStatus', title: '订单状态'},
+                {field: 'payStatus', title: '支付状态'},
+                {field: 'createTime', title: '创建时间'},
+                {field: 'updateTime', title: '修改时间'},
+                {fixed: 'right', title: '操作', width: 200, toolbar: '#barTpl'}
+            ]]
+        });
+
+        // 监听行工具事件
+        table.on('tool(table)', function (obj) {
+            switch (obj.event) {
+                case 'detail':
+                    layer.open({
+                        type: 1, // 0：信息框，默认 1：页面层 2：iframe层 3：加载层 4：tips层
+                        title: '订单详情',
+                        content: $('#detailModal'),
+                        area: ['800px', 200 + 50 * obj.data.products.length + 'px'],
+                        shadeClose: true,
+                        success: function () {
+                            table.render({
+                                elem: '#table2',
+                                data: obj.data.products,
+                                size: 'lg',
+                                cols: [[
+                                    {field: 'id', title: 'ID', width: 100, align: 'center', sort: true, edit: true},
+                                    {field: 'icon', title: '图标', width: 100, align: 'center', templet: '#iconTpl'},
+                                    {field: 'name', title: '名称'},
+                                    {field: 'price', title: '价格'},
+                                    {field: 'quantity', title: '数量'},
+                                ]]
+                            });
+                        }
+                    });
+                    break;
+                case 'pay':
+                    $.post('buyer/pay/' + obj.data.id, function (res) {
+                        $('#pay').html(res); // 支付跳转
+                    }, 'html');
+                    break;
+                case 'close':
+                    layer.confirm('确认关闭订单？', function (index) {
+                        $.post('buyer/pay/close/' + obj.data.id, function (res) {
+                            if (res.code === 0) {
+                                table.reload('table', {page: {curr: $(".layui-laypage-em").next().html()}});
+                            }
+                        });
+                    });
+                    break;
+                case 'refund':
+                    layer.confirm('确认申请退款？', function (index) {
+                        $.post('buyer/pay/refund/' + obj.data.id, function (res) {
+                            if (res.code === 0) {
+                                table.reload('table', {page: {curr: $(".layui-laypage-em").next().html()}});
+                            }
+                        });
+                    });
+                    break;
+            }
+        });
+
+        // 点击购买
+        form.on('submit(confirm)', function (data) {
+            $.ajax({
+                url: 'buyer/pay',
+                type: 'POST',
+                contentType: "application/json",
+                data: data.field.products,
+                dataType: 'html',
+                success: function (res) {
+                    $('#pay').html(res); // 支付跳转
+                }
+            });
+            return false; // require
+        });
+
+        $('#products').val(
+            '{\n'
+            + ' "products": [\n'
+            + '     {\n'
+            + '         "id": 1,\n'
+            + '         "quantity": 1\n'
+            + '     }\n'
+            + ' ]\n'
+            + '}\n');
     });
 </script>
 </body>

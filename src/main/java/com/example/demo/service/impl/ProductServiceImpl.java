@@ -5,6 +5,7 @@ import com.example.demo.base.GlobalException;
 import com.example.demo.base.Status;
 import com.example.demo.dto.PageRequest;
 import com.example.demo.dto.ProductDto;
+import com.example.demo.mapper.ProductCustomMapper;
 import com.example.demo.mapper.ProductMapper;
 import com.example.demo.model.Product;
 import com.example.demo.model.ProductExample;
@@ -28,7 +29,6 @@ public class ProductServiceImpl implements ProductService {
     private ProductMapper productMapper;
 
     @Override
-    @Cacheable(value = "product") // EnableCaching
     public Product get(Long id) {
         return productMapper.selectByPrimaryKey(id);
     }
@@ -65,7 +65,6 @@ public class ProductServiceImpl implements ProductService {
         ProductExample example = new ProductExample();
         ProductExample.Criteria criteria = example.createCriteria();
         criteria.andStatusEqualTo(true); // 上架状态
-        criteria.andStockGreaterThan(0); // 有库存
         return list(example, pageRequest);
     }
 

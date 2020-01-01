@@ -26,7 +26,7 @@ public class SellerPayController {
     private OrderService orderService;
 
     @ApiOperation("卖家主动退款")
-    @RequestMapping(value = "/refund/{id}")
+    @PostMapping(value = "/refund/{id}")
     @ResponseBody
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public Result<String> refund(@PathVariable("id") Long id) {
@@ -36,10 +36,12 @@ public class SellerPayController {
         if (!order.getOrderStatus().equals(OrderStatusEnum.NEW.getCode()))
             return Result.failure(Status.ORDER_NOT_NEW); // 不属于新订单
         if (!order.getPayStatus().equals(PayStatusEnum.TRUE.getCode()))
-            return Result.failure(Status.ORDER_NOT_PAY); // 未付款
+            return Result.failure(Status.ORDER_NOT_PAY); // 不属于已付款
         // 处理退款
         boolean isSuccess = payService.refund(order.getId(), order.getAmount());
         if (isSuccess) { // 退款成功，更新状态
+            // 修改商品数量
+            orderService.returnStock(id);
             orderService.updateOrderStatus(id, OrderStatusEnum.SELLER_REFUND_SUCCESS.getCode()); // SELLER_REFUND_SUCCESS
             orderService.updatePayStatus(id, PayStatusEnum.REFUND.getCode());
             return Result.success();
@@ -48,7 +50,7 @@ public class SellerPayController {
     }
 
     @ApiOperation("卖家处理买家退款")
-    @RequestMapping(value = "/deal/{id}")
+    @PostMapping(value = "/deal/{id}")
     @ResponseBody
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public Result<String> deal(@PathVariable("id") Long id) {
@@ -60,6 +62,8 @@ public class SellerPayController {
         // 处理退款
         boolean isSuccess = payService.refund(order.getId(), order.getAmount());
         if (isSuccess) { // 退款成功，更新状态
+            // 修改商品数量
+            orderService.returnStock(id);
             orderService.updateOrderStatus(id, OrderStatusEnum.BUYER_REFUND_SUCCESS.getCode()); // BUYER_REFUND_SUCCESS
             orderService.updatePayStatus(id, PayStatusEnum.REFUND.getCode());
             return Result.success();
@@ -67,8 +71,28 @@ public class SellerPayController {
         return Result.failure();
     }
 
+    @ApiOperation("卖家关闭订单 太久未支付")
+    @PostMapping(value = "/close/{id}")
+    @ResponseBody
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    public Result<String> close(@PathVariable("id") Long id) {
+        // 确认存在
+        OrderMaster order = orderService.get(id);
+        // 检查状态
+        if (!order.getOrderStatus().equals(OrderStatusEnum.NEW.getCode()))
+            return Result.failure(Status.ORDER_NOT_NEW); // 不属于新订单
+        if (!order.getPayStatus().equals(PayStatusEnum.FALSE.getCode()))
+            return Result.failure(Status.ORDER_PAY); // 不属于未付款
+        // 处理关闭
+        payService.close(order.getId());
+        // 不管是否关闭成功，都更新状态，不同于其他方法
+        orderService.returnStock(id);
+        orderService.updateOrderStatus(id, OrderStatusEnum.CLOSED.getCode());
+        return Result.success();
+    }
+
     @ApiOperation("卖家完成订单")
-    @RequestMapping(value = "/finish/{id}")
+    @PostMapping(value = "/finish/{id}")
     @ResponseBody
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public Result<String> finish(@PathVariable("id") Long id) {
@@ -78,7 +102,7 @@ public class SellerPayController {
         if (!order.getOrderStatus().equals(OrderStatusEnum.NEW.getCode()))
             return Result.failure(Status.ORDER_NOT_NEW); // 不属于新订单
         if (!order.getPayStatus().equals(PayStatusEnum.TRUE.getCode()))
-            return Result.failure(Status.ORDER_NOT_PAY); // 未付款
+            return Result.failure(Status.ORDER_NOT_PAY); // 不属于已付款
         // 修改订单状态
         int count = orderService.updateOrderStatus(id, OrderStatusEnum.FINISH.getCode());
         if (count != 0) {

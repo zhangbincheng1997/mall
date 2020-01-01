@@ -24,6 +24,8 @@ public interface OrderService {
 
     int updatePayStatus(Long id, Integer payStatus);
 
+    void returnStock(Long id);
+
     /**
      * Buyer
      */

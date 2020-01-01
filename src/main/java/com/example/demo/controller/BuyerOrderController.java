@@ -40,9 +40,7 @@ public class BuyerOrderController {
         // get
         OrderMaster orderMaster = orderService.getByBuyer(principal.getName(), id);
         // convert
-        OrderMasterVo orderMasterVo = Convert.convert(OrderMasterVo.class, orderMaster);
-        // add detail
-        orderMasterVo.setProducts(getDetail(orderMaster.getId()));
+        OrderMasterVo orderMasterVo = getDetail(orderMaster);
         return Result.success(orderMasterVo);
     }
 
@@ -56,18 +54,20 @@ public class BuyerOrderController {
         // convert
         List<OrderMasterVo> orderMasterVoList = pageInfo.getList()
                 .stream()
-                .map(order -> Convert.convert(OrderMasterVo.class, order))
+                .map(order -> getDetail(order))
                 .collect(Collectors.toList());
-        // add detail
-        orderMasterVoList.forEach(orderMasterVo -> orderMasterVo.setProducts(getDetail(orderMasterVo.getId())));
         return PageResult.success(orderMasterVoList, pageInfo.getTotal());
     }
 
-    private List<OrderDetailVo> getDetail(Long id) {
-        List<OrderDetail> orderDetailList = orderService.getDetail(id);
-        return orderDetailList
+    // 重复了...待优化
+    private OrderMasterVo getDetail(OrderMaster orderMaster) {
+        OrderMasterVo orderMasterVo = Convert.convert(OrderMasterVo.class, orderMaster);
+        List<OrderDetail> orderDetailList = orderService.getDetail(orderMaster.getId());
+        List<OrderDetailVo> orderDetailVoList = orderDetailList
                 .stream()
                 .map(orderDetail -> Convert.convert(OrderDetailVo.class, orderDetail))
                 .collect(Collectors.toList());
+        orderMasterVo.setProducts(orderDetailVoList);
+        return orderMasterVo;
     }
 }

@@ -7,54 +7,10 @@
     <script type="text/javascript" src="include/title.js"></script>
 </head>
 <body>
-
-<div class="site-nav-bg">
-    <div class="site-nav w1200">
-        <p class="sn-back-home">
-            <i class="layui-icon layui-icon-home"></i>
-            <a href="index.html">控制台</a>
-        </p>
-        <div class="sn-quick-menu">
-            <div class="login"><a href="login.html">登录</a></div>
-            <div class="login"><a href="register.html">注册</a></div>
-            <div class="sp-cart"><a href="shopping.html">我的购物</a><span>520</span></div>
-        </div>
-    </div>
-</div>
-
-<div class="header">
-    <div class="headerLayout w1200">
-        <div class="headerCon">
-            <h1 class="mallLogo">
-                <a href="#" title="新华书店">
-                    <img src="img/logo.png" width="100px">
-                </a>
-            </h1>
-            <div class="mallSearch">
-                <form action="" class="layui-form">
-                    <input type="text" name="keyword" required lay-verify="required" autocomplete="off"
-                           class="layui-input" placeholder="请输入需要的商品">
-                    <button class="layui-btn" lay-submit lay-filter="formDemo">
-                        <i class="layui-icon layui-icon-search"></i>
-                    </button>
-                    <input type="hidden" name="" value="">
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
+<script type="text/javascript" src="include/user/site-nav.js"></script>
+<script type="text/javascript" src="include/user/header.js"></script>
 <div class="content content-nav-base commodity-content">
-    <div class="main-nav">
-        <div class="inner-cont0">
-            <div class="inner-cont1 w1200">
-                <div class="inner-cont2">
-                    <a href="index.html" class="active">所有商品</a>
-                    <a href="javascript:void (0)">敬请期待</a>
-                </div>
-            </div>
-        </div>
-    </div>
+    <script type="text/javascript" src="include/user/main-nav.js"></script>
     <div class="commod-cont-wrap">
         <div class="commod-cont w1200 layui-clear">
             <div class="left-nav">
@@ -69,7 +25,7 @@
                             </dt>
                             {{# layui.each(item.children, function(index2, item2){ }}
                             <dd>
-                                <a href="javascript:window.location.href='index.html?category={{ item2.id }}';">
+                                <a href="javascript:window.location.href='mall.html?category={{ item2.id }}';">
                                     {{ item2.name }}<!-- 二级分类 -->
                                 </a>
                             </dd>
@@ -103,7 +59,7 @@
                                     </a>
                                 </div>
                                 <div class="text">
-                                    <p class="title">{{ item.name }}</p>
+                                    <p class="title">{{ item.name }}(id:{{ item.id }})</p>
                                     <p class="price">
                                         <span class="pri">￥{{ item.price }}</span>
                                         <span class="nub">{{ item.stock }}库存</span>
@@ -120,32 +76,7 @@
         </div>
     </div>
 </div>
-
-<div class="footer">
-    <div class="ng-promise-box">
-        <div class="ng-promise w1200">
-            <p class="text">
-                <a class="icon1" href="javascript:void(0);">7天无理由退换货</a>
-                <a class="icon2" href="javascript:void(0);">满99元全场免邮</a>
-                <a class="icon3" style="margin-right: 0" href="javascript:void(0);">100%品质保证</a>
-            </p>
-        </div>
-    </div>
-    <div class="mod_help w1200">
-        <p>
-            <a href="javascript:void(0);">关于我们</a>
-            <span>|</span>
-            <a href="javascript:void(0);">帮助中心</a>
-            <span>|</span>
-            <a href="javascript:void(0);">售后服务</a>
-            <span>|</span>
-            <a href="javascript:void(0);">母婴资讯</a>
-            <span>|</span>
-            <a href="javascript:void(0);">关于货源</a>
-        </p>
-        <p>新华书店版权所有 &copy; 2020-2024</p>
-    </div>
-</div>
+<script type="text/javascript" src="include/user/footer.js"></script>
 <script>
     layui.use(['jquery', 'laytpl', 'laypage'], function () {
         var $ = layui.$, laytpl = layui.laytpl, laypage = layui.laypage;
@@ -165,6 +96,7 @@
             laypage.render({
                 elem: 'page',
                 count: res.count,
+                limit: 12,
                 jump: function (obj, first) {
                     // 首次不执行
                     if (!first) {

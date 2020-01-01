@@ -1,0 +1,10 @@
+document.write("<div class=\"main-nav\">");
+document.write("        <div class=\"inner-cont0\">");
+document.write("            <div class=\"inner-cont1 w1200\">");
+document.write("                <div class=\"inner-cont2\">");
+document.write("                    <a href=\"mall.html\" class=\"active\">所有商品<\/a>");
+document.write("                    <a href=\"javascript:void (0)\">敬请期待<\/a>");
+document.write("                <\/div>");
+document.write("            <\/div>");
+document.write("        <\/div>");
+document.write("    <\/div>");

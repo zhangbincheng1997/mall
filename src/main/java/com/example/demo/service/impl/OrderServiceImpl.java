@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import cn.hutool.core.convert.Convert;
 import cn.hutool.core.lang.Snowflake;
 import com.example.demo.base.GlobalException;
 import com.example.demo.base.Status;
@@ -8,6 +9,7 @@ import com.example.demo.dto.OrderMasterDto;
 import com.example.demo.dto.PageRequest;
 import com.example.demo.mapper.OrderDetailMapper;
 import com.example.demo.mapper.OrderMasterMapper;
+import com.example.demo.mapper.ProductCustomMapper;
 import com.example.demo.mapper.ProductMapper;
 import com.example.demo.model.*;
 import com.example.demo.service.OrderService;
@@ -15,9 +17,10 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -31,6 +34,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private ProductMapper productMapper;
+
+    @Autowired
+    private ProductCustomMapper productCustomMapper;
 
     @Autowired
     private OrderMasterMapper orderMasterMapper;
@@ -49,23 +55,28 @@ public class OrderServiceImpl implements OrderService {
      * Seller
      */
     @Override
+    @Cacheable(cacheNames = "order", key = "#id")
     public OrderMaster get(Long id) {
-        return orderMasterMapper.selectByPrimaryKey(id);
+        OrderMaster orderMaster = orderMasterMapper.selectByPrimaryKey(id);
+        if (orderMaster == null) throw new GlobalException(Status.ORDER_NOT_EXIST);
+        return orderMaster;
     }
 
     @Override
     public PageInfo<OrderMaster> list(PageRequest pageRequest) {
-        PageHelper.startPage(pageRequest.getPage(), pageRequest.getLimit(), "id desc");
+        PageHelper.startPage(pageRequest.getPage(), pageRequest.getLimit(), "update_time desc, id desc");
         String keyword = pageRequest.getKeyword();
         OrderMasterExample example = new OrderMasterExample();
-        if (!StringUtils.isEmpty(keyword)) {
-            example.or().andUsernameLike("%" + keyword + "%");
+        Long id = Convert.toLong(keyword);
+        if (id != null) {
+            example.or().andIdEqualTo(id);
         }
         List<OrderMaster> orderList = orderMasterMapper.selectByExample(example);
-       return new PageInfo<OrderMaster>(orderList);
+        return new PageInfo<OrderMaster>(orderList);
     }
 
     @Override
+    @CacheEvict(cacheNames = "order", key = "#id")
     public int updateOrderStatus(Long id, Integer orderStatus) {
         OrderMaster order = new OrderMaster();
         order.setOrderStatus(orderStatus);
@@ -75,6 +86,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    @CacheEvict(cacheNames = "order", key = "#id")
     public int updatePayStatus(Long id, Integer payStatus) {
         OrderMaster order = new OrderMaster();
         order.setPayStatus(payStatus);
@@ -83,10 +95,19 @@ public class OrderServiceImpl implements OrderService {
         return orderMasterMapper.updateByExampleSelective(order, example);
     }
 
+    @Override
+    @Transactional
+    public void returnStock(Long id) {
+        List<OrderDetail> orderDetailList = getDetail(id);
+        orderDetailList.forEach(orderDetail -> productCustomMapper.increaseStock(orderDetail.getProductId(),
+                orderDetail.getProductQuantity()));
+    }
+
     /**
      * Buyer
      */
     @Override
+    @Cacheable(cacheNames = "order", key = "#id")
     public OrderMaster getByBuyer(String username, Long id) {
         OrderMasterExample example = new OrderMasterExample();
         example.createCriteria().andIdEqualTo(id).andUsernameEqualTo(username);
@@ -97,11 +118,13 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public PageInfo<OrderMaster> listByBuyer(String username, PageRequest pageRequest) {
+        PageHelper.startPage(pageRequest.getPage(), pageRequest.getLimit(), "update_time desc, id desc");
         String keyword = pageRequest.getKeyword();
         OrderMasterExample example = new OrderMasterExample();
         example.createCriteria().andUsernameEqualTo(username);
-        if (!StringUtils.isEmpty(keyword)) {
-            example.or().andUsernameLike("%" + keyword + "%");
+        Long id = Convert.toLong(keyword);
+        if (id != null) {
+            example.getOredCriteria().get(0).andIdEqualTo(id);
         }
         List<OrderMaster> orderList = orderMasterMapper.selectByExample(example);
         return new PageInfo<OrderMaster>(orderList);

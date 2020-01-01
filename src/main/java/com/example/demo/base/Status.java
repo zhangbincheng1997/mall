@@ -12,6 +12,7 @@ public enum Status {
     NOT_FOUND(404, "请求失败"),
     BIND_EXCEPTION(1000, "参数错误"),
     CONSTRAINT_VIOLATION_EXCEPTION(1001, "参数错误2"),
+    HTTP_MESSAGE_NOT_READABLE_EXCEPTION(1002, "参数错误3"),
 
     // 认证权限
     ACCESS_DENIED(1001, "权限不足:拒绝访问"),
@@ -25,7 +26,7 @@ public enum Status {
     CREDENTIALS_EXPIRED(1008, "认证失败：证书过期"),
 
     // 访问限制
-    ACCESS_LIMIT(10000, "您已超出访问限制"),
+    ACCESS_LIMIT(10000, "操作太频繁了，已超出访问限制！"),
 
     // 验证码
     CAPTCHA_EXPIRE(20000, "验证码过期"),
@@ -54,7 +55,8 @@ public enum Status {
     PAY_CHECK_BUG(70001, "支付检查异常"),
     ORDER_NOT_NEW(70002, "不属于新订单"),
     ORDER_NOT_PAY(70003, "订单未付款"),
-    ORDER_NOT_REQUEST_REFUND(70004, "订单没有申请退款");
+    ORDER_PAY(70004, "订单已付款"),
+    ORDER_NOT_REQUEST_REFUND(70005, "订单没有申请退款");
 
     private Integer code;
     private String msg;

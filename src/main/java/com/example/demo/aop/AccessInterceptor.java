@@ -35,13 +35,13 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
             boolean ip = accessLimit.ip();
             int time = accessLimit.time();
             int count = accessLimit.count();
-            String key = Constants.ACCESS_KEY + request.getRequestURI();
+            String key = Constants.ACCESS_KEY + request.getRequestURI() + ":" + request.getMethod();
             if (ip) {
                 key += ":" + getClientIP(request);
             }
             Integer now = (Integer) redisService.get(key);
             if (now == null) {
-                redisService.set(key, Integer.valueOf(1), time);
+                redisService.set(key, 1, time);
             } else if (now < count) {
                 redisService.increment(key, 1);
             } else {

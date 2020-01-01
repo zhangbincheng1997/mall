@@ -17,10 +17,6 @@ public class RegisterDto {
     @Size(min = 3, max = 12, message = "密码长度为3-12")
     private String password;
 
-    /**
-     * TODO 手机验证码
-     */
-
     @ApiModelProperty(value = "验证码key")
     @NotEmpty(message = "验证码key不能为空")
     private String key;

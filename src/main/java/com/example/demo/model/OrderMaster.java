@@ -17,6 +17,8 @@ public class OrderMaster implements Serializable {
 
     private Date createTime;
 
+    private Date updateTime;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -67,6 +69,14 @@ public class OrderMaster implements Serializable {
         this.createTime = createTime;
     }
 
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -79,6 +89,7 @@ public class OrderMaster implements Serializable {
         sb.append(", orderStatus=").append(orderStatus);
         sb.append(", payStatus=").append(payStatus);
         sb.append(", createTime=").append(createTime);
+        sb.append(", updateTime=").append(updateTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

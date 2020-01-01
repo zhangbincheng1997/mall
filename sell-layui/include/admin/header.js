@@ -6,7 +6,7 @@ document.write("        <li class=\"layui-nav-item\">");
 document.write("            <a href=\"javascript:void(0);\">其它<\/a>");
 document.write("            <dl class=\"layui-nav-child\">");
 document.write("                <dd><a href=\"" + API + "druid\/product.html\">Druid<\/a><\/dd>");
-document.write("                <dd><a href=\"" + API + "swagger-ui.html\">Swagger<\/a><\/dd>");
+document.write("                <dd><a href=" + API + "\"swagger-ui.html\">Swagger<\/a><\/dd>");
 document.write("            <\/dl>");
 document.write("        <\/li>");
 document.write("    <\/ul>");

@@ -96,6 +96,23 @@ public static final String PERMISSION_KEY = "permission:"; // 权限缓存
 public static final int PERMISSION_EXPIRE = 60 * 60; // 权限缓存过期时间 60*60s
 ```
 
+## 支付
+见
+>* https://github.com/littleredhat1997/pay-demo
+>* https://openhome.alipay.com/platform/appDaily.htm
+>* https://docs.open.alipay.com/284
+```
+$ ssh -NR 8888:127.0.0.1:8080 root@www.littleredhat1997.com
+```
+
+## 细粒度锁
+Redis
+TODO
+
+## 测压
+JMeter
+TODO
+
 ## MySQL
 1. 安装（略，或直接安装[LNMP](https://lnmp.org/)）
 
