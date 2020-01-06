@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.aop.AccessLimit;
 import com.example.demo.base.Result;
 import com.example.demo.base.Status;
 import com.example.demo.component.PayService;
@@ -29,6 +30,7 @@ public class SellerPayController {
     @PostMapping(value = "/refund/{id}")
     @ResponseBody
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @AccessLimit(ip = true, time = 10, count = 1) // 防止重复主动退款
     public Result<String> refund(@PathVariable("id") Long id) {
         // 确认存在
         OrderMaster order = orderService.get(id);
@@ -41,7 +43,8 @@ public class SellerPayController {
         boolean isSuccess = payService.refund(order.getId(), order.getAmount());
         if (isSuccess) { // 退款成功，更新状态
             // 修改商品数量
-            orderService.returnStock(id);
+            orderService.increaseStock(id); // MYSQL
+            orderService.addStockRedis(id); // REDIS
             orderService.updateOrderStatus(id, OrderStatusEnum.SELLER_REFUND_SUCCESS.getCode()); // SELLER_REFUND_SUCCESS
             orderService.updatePayStatus(id, PayStatusEnum.REFUND.getCode());
             return Result.success();
@@ -53,6 +56,7 @@ public class SellerPayController {
     @PostMapping(value = "/deal/{id}")
     @ResponseBody
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @AccessLimit(ip = true, time = 10, count = 1) // 防止重复处理退款
     public Result<String> deal(@PathVariable("id") Long id) {
         // 确认存在
         OrderMaster order = orderService.get(id);
@@ -63,7 +67,8 @@ public class SellerPayController {
         boolean isSuccess = payService.refund(order.getId(), order.getAmount());
         if (isSuccess) { // 退款成功，更新状态
             // 修改商品数量
-            orderService.returnStock(id);
+            orderService.increaseStock(id); // MYSQL
+            orderService.addStockRedis(id); // REDIS
             orderService.updateOrderStatus(id, OrderStatusEnum.BUYER_REFUND_SUCCESS.getCode()); // BUYER_REFUND_SUCCESS
             orderService.updatePayStatus(id, PayStatusEnum.REFUND.getCode());
             return Result.success();
@@ -75,6 +80,7 @@ public class SellerPayController {
     @PostMapping(value = "/close/{id}")
     @ResponseBody
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @AccessLimit(ip = true, time = 10, count = 1) // 防止重复关闭订单
     public Result<String> close(@PathVariable("id") Long id) {
         // 确认存在
         OrderMaster order = orderService.get(id);
@@ -86,7 +92,7 @@ public class SellerPayController {
         // 处理关闭
         payService.close(order.getId());
         // 不管是否关闭成功，都更新状态，不同于其他方法
-        orderService.returnStock(id);
+        orderService.addStockRedis(id);
         orderService.updateOrderStatus(id, OrderStatusEnum.CLOSED.getCode());
         return Result.success();
     }
@@ -95,6 +101,7 @@ public class SellerPayController {
     @PostMapping(value = "/finish/{id}")
     @ResponseBody
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @AccessLimit(ip = true, time = 10, count = 1) // 防止重复完成订单
     public Result<String> finish(@PathVariable("id") Long id) {
         // 确认存在
         OrderMaster order = orderService.get(id);

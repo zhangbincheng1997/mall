@@ -12,7 +12,11 @@ import org.springframework.data.redis.cache.RedisCacheWriter;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.*;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
 
+import javax.sql.DataSource;
+import java.sql.SQLException;
 import java.time.Duration;
 
 @Configuration
@@ -24,6 +28,7 @@ public class RedisConfig extends CachingConfigurerSupport {
         RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
         // 配置连接工厂
         redisTemplate.setConnectionFactory(redisConnectionFactory);
+        redisTemplate.setEnableTransactionSupport(true); // 事务支持
         // key序列化为String
         redisTemplate.setKeySerializer(new StringRedisSerializer());
         redisTemplate.setHashKeySerializer(new StringRedisSerializer());
@@ -31,6 +36,12 @@ public class RedisConfig extends CachingConfigurerSupport {
         redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer());
         redisTemplate.setHashValueSerializer(new GenericJackson2JsonRedisSerializer());
         return redisTemplate;
+    }
+
+    // 事务管理器
+    @Bean
+    public PlatformTransactionManager transactionManager(DataSource dataSource) throws SQLException {
+        return new DataSourceTransactionManager(dataSource);
     }
 
     @Bean

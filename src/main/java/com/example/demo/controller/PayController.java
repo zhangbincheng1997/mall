@@ -45,6 +45,7 @@ public class PayController {
             // 包括通知中的 app_id、out_trade_no、total_amount 是否与请求中的一致，
             // 并根据 trade_status 进行后续业务处理。
             Long id = new Long(request.getParameter("out_trade_no")); // id
+            orderService.decreaseStock(id); // MYSQL 真正写入数据库
             int count = orderService.updatePayStatus(id, PayStatusEnum.TRUE.getCode());
             if (count != 0) {
                 log.info("Notify 验证成功");

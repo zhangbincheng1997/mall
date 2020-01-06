@@ -16,7 +16,7 @@ public class RedisTest {
     private RedisService redisService;
 
     @Test
-    public void testRedis() {
+    public void testDemo() {
         redisService.set("school", "xmu");
         Assert.assertEquals("xmu", redisService.get("school"));
     }

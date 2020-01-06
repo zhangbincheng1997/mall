@@ -57,20 +57,6 @@ public class SellerOrderController {
         return PageResult.success(orderMasterVoList, pageInfo.getTotal());
     }
 
-    @ApiOperation("修改订单状态")
-    @PutMapping("/{id}/status")
-    @ResponseBody
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public Result<String> updateOrderStatus(@PathVariable("id") Long id,
-                                            @RequestParam(name = "orderStatus", defaultValue = "0") Integer orderStatus) {
-        int count = orderService.updateOrderStatus(id, orderStatus);
-        if (count == 1) {
-            return Result.success();
-        } else {
-            return Result.failure();
-        }
-    }
-
     // 重复了...待优化
     private OrderMasterVo getDetail(OrderMaster orderMaster) {
         OrderMasterVo orderMasterVo = Convert.convert(OrderMasterVo.class, orderMaster);

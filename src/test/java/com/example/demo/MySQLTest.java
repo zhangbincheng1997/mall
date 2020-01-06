@@ -23,7 +23,7 @@ public class MySQLTest {
     private PasswordEncoder passwordEncoder;
 
     @Test
-    public void testMySQL() {
+    public void testDemo() {
         User user = new User();
         user.setUsername("username");
         user.setPassword(passwordEncoder.encode("password"));

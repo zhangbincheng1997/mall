@@ -10,6 +10,6 @@ public class RabbitConfig {
 
     @Bean
     public Queue testQueue() {
-        return new Queue(Constants.TEST_TOPIC);
+        return new Queue(Constants.ORDER_TOPIC);
     }
 }

@@ -26,7 +26,6 @@ public class WebConfig implements WebMvcConfigurer {
     @Bean
     public String[] getIgnoreUrls() {
         return new String[]{"/", "/csrf", "/favicon.ico", "/**/*.css", "/**/*.js", "/layui/**",
-                "/swagger-ui.html", "/swagger-resources/**", "/v2/**", "/webjars/**", "/druid/**",
-                "/buyer/product"};
+                "/swagger-ui.html", "/swagger-resources/**", "/v2/**", "/webjars/**", "/druid/**", "/test/**"};
     }
 }

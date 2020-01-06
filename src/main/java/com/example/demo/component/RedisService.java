@@ -1,8 +1,6 @@
 package com.example.demo.component;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.annotation.Order;
-import org.springframework.data.redis.core.RedisKeyValueTemplate;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
@@ -16,9 +14,6 @@ public class RedisService {
 
     /**
      * 设置
-     *
-     * @param key
-     * @param value
      */
     public void set(String key, Object value) {
         redisTemplate.opsForValue().set(key, value);
@@ -26,20 +21,20 @@ public class RedisService {
 
     /**
      * 设置
-     *
-     * @param key
-     * @param value
-     * @param expire
      */
     public void set(String key, Object value, long expire) {
         redisTemplate.opsForValue().set(key, value, expire, TimeUnit.SECONDS);
     }
 
     /**
+     * 设置
+     */
+    public void set(String key, Object value, long expire, TimeUnit timeUint) {
+        redisTemplate.opsForValue().set(key, value, expire, timeUint);
+    }
+
+    /**
      * 获取
-     *
-     * @param key
-     * @return
      */
     public Object get(String key) {
         return redisTemplate.opsForValue().get(key);
@@ -47,8 +42,6 @@ public class RedisService {
 
     /**
      * 删除
-     *
-     * @param key
      */
     public void delete(String key) {
         redisTemplate.delete(key);
@@ -56,9 +49,6 @@ public class RedisService {
 
     /**
      * value + delta
-     *
-     * @param key
-     * @return
      */
     public Long increment(String key, int delta) {
         return redisTemplate.opsForValue().increment(key, delta);
@@ -66,9 +56,6 @@ public class RedisService {
 
     /**
      * value - delta
-     *
-     * @param key
-     * @return
      */
     public Long decrement(String key, int delta) {
         return redisTemplate.opsForValue().decrement(key, delta);

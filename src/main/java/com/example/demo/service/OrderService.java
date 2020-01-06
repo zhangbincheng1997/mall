@@ -5,6 +5,7 @@ import com.example.demo.dto.OrderMasterDto;
 import com.example.demo.dto.PageRequest;
 import com.example.demo.model.OrderDetail;
 import com.example.demo.model.OrderMaster;
+import com.example.demo.vo.OrderMasterVo;
 import com.github.pagehelper.PageInfo;
 
 import java.util.List;
@@ -24,7 +25,9 @@ public interface OrderService {
 
     int updatePayStatus(Long id, Integer payStatus);
 
-    void returnStock(Long id);
+    void increaseStock(Long id);
+    void decreaseStock(Long id);
+    void addStockRedis(Long id);
 
     /**
      * Buyer
@@ -33,5 +36,7 @@ public interface OrderService {
 
     PageInfo<OrderMaster> listByBuyer(String username, PageRequest pageRequest);
 
-    OrderMaster buy(String username, OrderMasterDto orderMasterDto);
+    String buy(String username, OrderMasterDto orderMasterDto);
+
+    OrderMasterVo polling(String uuid);
 }

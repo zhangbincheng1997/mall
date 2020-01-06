@@ -19,9 +19,9 @@ public class RabbitTest {
     private RabbitSender sender;
 
     @Test
-    public void testRabbitStr() throws InterruptedException {
+    public void testDemo() throws InterruptedException {
         for (int i = 0; i < 10; i++) {
-            sender.send(Constants.TEST_TOPIC, LocalDateTime.now());
+            sender.send(Constants.ORDER_TOPIC, LocalDateTime.now());
             TimeUnit.SECONDS.sleep(1);
         }
     }

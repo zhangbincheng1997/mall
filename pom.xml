@@ -16,6 +16,7 @@
     <description>Demo project for Spring Boot</description>
 
     <properties>
+        <redisson.version>3.12.0</redisson.version>
         <java.version>1.8</java.version>
         <jjwt.version>0.9.1</jjwt.version>
         <qiniu.version>7.2.28</qiniu.version>
@@ -75,6 +76,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson-spring-boot-starter</artifactId>
+            <version>${redisson.version}</version>
         </dependency>
 
         <dependency>

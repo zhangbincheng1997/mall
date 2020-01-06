@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.aop.AccessLimit;
 import com.example.demo.base.Result;
 import com.example.demo.base.Status;
 import com.example.demo.component.PayService;
@@ -8,6 +9,7 @@ import com.example.demo.enums.OrderStatusEnum;
 import com.example.demo.enums.PayStatusEnum;
 import com.example.demo.model.OrderMaster;
 import com.example.demo.service.OrderService;
+import com.example.demo.vo.OrderMasterVo;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,22 +33,37 @@ public class BuyerPayController {
     @Autowired
     private OrderService orderService;
 
-    @ApiOperation("购买 PC端支付 下单")// TODO 高并发 防止超卖
+    @ApiOperation("购买 创建订单")
     @PostMapping("")
     @ResponseBody
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')") // RequestBody JSON
-    public void buy(@ApiIgnore Principal principal, @Valid @RequestBody OrderMasterDto orderMasterDto,
+    @AccessLimit(ip = true, time = 10, count = 1) // 防止重复下单
+    public Result<String> buy(@ApiIgnore Principal principal, @Valid @RequestBody OrderMasterDto orderMasterDto,
                     HttpServletResponse response) {
         // 创建订单
-        OrderMaster order = orderService.buy(principal.getName(), orderMasterDto);
-        // 调用接口
-        payService.pay(order.getId(), order.getAmount(), response);
+        orderService.buy(principal.getName(), orderMasterDto);
+        return Result.success();
     }
 
-    @ApiOperation("购买 PC端支付 下单但是之前未付款")
+    @ApiOperation("购买 创建订单")
+    @GetMapping("/polling/{uuid}")
+    @ResponseBody
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')") // RequestBody JSON
+    public Result<OrderMasterVo> buy(String uuid) {
+        // 创建订单
+        OrderMasterVo orderMasterVo = orderService.polling(uuid);
+        if(orderMasterVo !=null) { // 成功
+            return Result.success(orderMasterVo);
+        }else {
+            return Result.failure();
+        }
+    }
+
+    @ApiOperation("购买 PC端支付")
     @PostMapping("/{id}")
     @ResponseBody
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')") // RequestBody JSON
+    @AccessLimit(ip = true, time = 10, count = 1) // 防止重复下单
     public void buyById(@ApiIgnore Principal principal, @PathVariable("id") Long id, HttpServletResponse response) {
         // 查找订单
         OrderMaster order = orderService.getByBuyer(principal.getName(), id);
@@ -58,6 +75,7 @@ public class BuyerPayController {
     @PostMapping(value = "/close/{id}")
     @ResponseBody
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
+    @AccessLimit(ip = true, time = 10, count = 1) // 防止重复关闭订单
     public Result<String> close(@ApiIgnore Principal principal, @PathVariable("id") Long id) {
         // 确认存在
         OrderMaster order = orderService.getByBuyer(principal.getName(), id);
@@ -69,7 +87,7 @@ public class BuyerPayController {
         // 处理关闭
         payService.close(order.getId());
         // 不管是否关闭成功，都更新状态，不同于其他方法
-        orderService.returnStock(id);
+        orderService.addStockRedis(id);
         orderService.updateOrderStatus(id, OrderStatusEnum.CLOSED.getCode());
         return Result.success();
     }
@@ -78,6 +96,7 @@ public class BuyerPayController {
     @PostMapping(value = "/refund/{id}")
     @ResponseBody
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
+    @AccessLimit(ip = true, time = 10, count = 1) // 防止重复申请退款
     public Result<String> refund(@ApiIgnore Principal principal, @PathVariable("id") Long id) {
         // 确认存在
         OrderMaster order = orderService.getByBuyer(principal.getName(), id);

@@ -14,14 +14,8 @@ public class RabbitSender {
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
-    public void send(String topic, String str) {
-        this.rabbitTemplate.convertAndSend(topic, str);
-        log.info(str);
-    }
-
-    public void send(String topic, Object obj) {
-        String jsonObj = JSON.toJSONString(obj);
-        this.rabbitTemplate.convertAndSend(topic, jsonObj);
-        log.info(jsonObj);
+    public void send(String topic, String obj) {
+        this.rabbitTemplate.convertAndSend(topic, obj);
+        log.info(obj);
     }
 }

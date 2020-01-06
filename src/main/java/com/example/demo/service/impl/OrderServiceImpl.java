@@ -1,20 +1,25 @@
 package com.example.demo.service.impl;
 
 import cn.hutool.core.convert.Convert;
-import cn.hutool.core.lang.Snowflake;
+import com.alibaba.fastjson.JSONObject;
 import com.example.demo.base.GlobalException;
 import com.example.demo.base.Status;
+import com.example.demo.component.RabbitSender;
+import com.example.demo.component.RedisLocker;
+import com.example.demo.component.RedisService;
 import com.example.demo.dto.OrderDetailDto;
 import com.example.demo.dto.OrderMasterDto;
 import com.example.demo.dto.PageRequest;
 import com.example.demo.mapper.OrderDetailMapper;
 import com.example.demo.mapper.OrderMasterMapper;
 import com.example.demo.mapper.ProductCustomMapper;
-import com.example.demo.mapper.ProductMapper;
 import com.example.demo.model.*;
 import com.example.demo.service.OrderService;
+import com.example.demo.utils.Constants;
+import com.example.demo.vo.OrderMasterVo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import io.swagger.models.auth.In;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -22,18 +27,21 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
 import java.util.List;
+import java.util.UUID;
 
 @Slf4j
 @Service
 public class OrderServiceImpl implements OrderService {
 
     @Autowired
-    private Snowflake snowflake;
+    private RedisService redisService;
 
     @Autowired
-    private ProductMapper productMapper;
+    private RedisLocker redisLocker;
+
+    @Autowired
+    private RabbitSender rabbitSender;
 
     @Autowired
     private ProductCustomMapper productCustomMapper;
@@ -95,12 +103,41 @@ public class OrderServiceImpl implements OrderService {
         return orderMasterMapper.updateByExampleSelective(order, example);
     }
 
+    // 修改数据库商品数量
     @Override
     @Transactional
-    public void returnStock(Long id) {
+    public void increaseStock(Long id) {
         List<OrderDetail> orderDetailList = getDetail(id);
-        orderDetailList.forEach(orderDetail -> productCustomMapper.increaseStock(orderDetail.getProductId(),
-                orderDetail.getProductQuantity()));
+        // lock
+        orderDetailList.forEach(orderDetail -> {
+            redisLocker.lock(Constants.REDIS_PRODUCT_MYSQL_LOCK + orderDetail.getProductId());
+            productCustomMapper.increaseStock(orderDetail.getProductId(), orderDetail.getProductQuantity());
+            redisLocker.unlock(Constants.REDIS_PRODUCT_MYSQL_LOCK + orderDetail.getProductId());
+        });
+    }
+
+    @Override
+    @Transactional
+    public void decreaseStock(Long id) {
+        List<OrderDetail> orderDetailList = getDetail(id);
+        // lock
+        orderDetailList.forEach(orderDetail -> {
+            redisLocker.lock(Constants.REDIS_PRODUCT_MYSQL_LOCK + orderDetail.getProductId());
+            productCustomMapper.decreaseStock(orderDetail.getProductId(), orderDetail.getProductQuantity());
+            redisLocker.unlock(Constants.REDIS_PRODUCT_MYSQL_LOCK + orderDetail.getProductId());
+        });
+    }
+
+    @Override
+    @Transactional
+    public void addStockRedis(Long id) {
+        List<OrderDetail> orderDetailList = getDetail(id);
+        // lock
+        orderDetailList.forEach(orderDetail -> {
+            redisLocker.lock(Constants.REDIS_PRODUCT_REDIS_LOCK + orderDetail.getProductId());
+            redisService.increment(Constants.REDIS_PRODUCT_STOCK + orderDetail.getProductId(), orderDetail.getProductQuantity());
+            redisLocker.lock(Constants.REDIS_PRODUCT_REDIS_LOCK + orderDetail.getProductId());
+        });
     }
 
     /**
@@ -130,48 +167,58 @@ public class OrderServiceImpl implements OrderService {
         return new PageInfo<OrderMaster>(orderList);
     }
 
-    @Transactional // 事务ACID
+    /**
+     * https://github.com/coderliguoqing/distributed-seckill
+     * 创建订单：1.校验状态 redis减库存 3.MQ创建订单 4.轮询查询订单
+     * 支付回调：1.校验状态 2.修改订单状态 3.mysql减库存
+     * 取消支付：1.校验状态 2.修改订单状态 3.redis回退
+     * 订单退款：1.校验状态 2.修改订单状态 3.redis回退 4.mysql回退
+     *
+     * @param username
+     * @param orderMasterDto
+     * @return
+     */
     @Override
-    public OrderMaster buy(String username, OrderMasterDto orderMasterDto) {
-        // 创建订单
-        OrderMaster order = new OrderMaster();
-        order.setUsername(username);
-        // 雪花算法 生成全局唯一ID
-        Long orderId = snowflake.nextId();
-        order.setId(orderId);
-        // 计算价格
-        BigDecimal amount = new BigDecimal(0);
+    @Transactional // 事务ACID
+    public String buy(String username, OrderMasterDto orderMasterDto) {
+        // 判断是否可以下单
         for (OrderDetailDto orderDetailDto : orderMasterDto.getProducts()) {
             Long productId = orderDetailDto.getId();
             Integer productQuantity = orderDetailDto.getQuantity();
-            Product product = productMapper.selectByPrimaryKey(productId);
+            // lock
+            redisLocker.lock(Constants.REDIS_PRODUCT_REDIS_LOCK + productId, Constants.REDIS_LOCK_LEASE_TIME);
+
+            // 从redis获取
+            Integer stock = (Integer) redisService.get(Constants.REDIS_PRODUCT_STOCK + productId);
             // 商品不存在
-            if (product == null) throw new GlobalException(Status.PRODUCT_NOT_EXIST);
-            // 下架状态
-            if (!product.getStatus()) throw new GlobalException(Status.PRODUCT_STATUS_NOT_ON);
+            if (stock == null) throw new GlobalException(Status.PRODUCT_NOT_EXIST);
             // 库存不足
-            if (product.getStock() < productQuantity) throw new GlobalException(Status.PRODUCT_STOCK_NOT_ENOUGH);
-            // 减库存
-            product.setStock(product.getStock() - productQuantity);
-            productMapper.updateByPrimaryKeySelective(product);
+            if (stock < productQuantity) throw new GlobalException(Status.PRODUCT_STOCK_NOT_ENOUGH);
 
-            // 创建订单详情
-            OrderDetail orderDetail = new OrderDetail();
-            orderDetail.setOrderId(orderId);
-            orderDetail.setProductId(productId);
-            orderDetail.setProductIcon(product.getIcon());
-            orderDetail.setProductName(product.getName());
-            orderDetail.setProductPrice(product.getPrice());
-            orderDetail.setProductQuantity(productQuantity);
-            // 添加订单详情
-            orderDetailMapper.insertSelective(orderDetail);
+            // 预减库存
+            redisService.decrement(Constants.REDIS_PRODUCT_INFO + productId, productQuantity);
 
-            // 累加价格
-            amount = amount.add(product.getPrice().multiply(new BigDecimal(productQuantity)));
+            // unlock
+            redisLocker.unlock(Constants.REDIS_PRODUCT_REDIS_LOCK + productId);
         }
-        order.setAmount(amount);
-        // 添加订单
-        orderMasterMapper.insertSelective(order);
-        return order;
+        String uuid = UUID.randomUUID().toString();
+        redisService.set(Constants.REDIS_PRODUCT_POLLING + uuid, null); // 设置轮询记录
+
+        JSONObject jsonStr = new JSONObject();
+        jsonStr.put("username", username);
+        jsonStr.put("orderMasterDto", orderMasterDto);
+        jsonStr.put("uuid", uuid);
+        rabbitSender.send(Constants.ORDER_TOPIC, jsonStr.toJSONString()); // 发送消息队列
+
+        return uuid;
+    }
+
+    // 轮询是否存在
+    // 存在则继续轮询
+    @Override
+    public OrderMasterVo polling(String uuid) {
+        OrderMaster orderMaster = (OrderMaster) redisService.get(Constants.REDIS_PRODUCT_POLLING + uuid);
+        if (orderMaster == null) return null;
+        else return Convert.convert(OrderMasterVo.class, orderMaster);
     }
 }
