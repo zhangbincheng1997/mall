@@ -11,7 +11,7 @@ import com.example.demo.dto.ProductDto;
 import com.example.demo.mapper.ProductMapper;
 import com.example.demo.model.Product;
 import com.example.demo.model.ProductExample;
-import com.example.demo.service.ProductService;
+import com.example.demo.service.SellerProductService;
 import com.example.demo.utils.Constants;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -23,7 +23,7 @@ import org.springframework.util.StringUtils;
 import java.util.List;
 
 @Service
-public class ProductServiceImpl implements ProductService {
+public class SellerProductServiceImpl implements SellerProductService {
 
     @Autowired
     private RedisService redisService;
@@ -35,6 +35,8 @@ public class ProductServiceImpl implements ProductService {
     private ProductMapper productMapper;
 
     @Override
+    //    @Cacheable(cacheNames = "product", key = "#id")
+    //    @CacheEvict(cacheNames = "product", key = "#id")
     public Product get(Long id) {
         return productMapper.selectByPrimaryKey(id);
     }
@@ -43,6 +45,20 @@ public class ProductServiceImpl implements ProductService {
     public PageInfo<Product> list(PageRequest pageRequest) {
         ProductExample example = new ProductExample();
         return list(example, pageRequest);
+    }
+
+    private PageInfo<Product> list(ProductExample example, PageRequest pageRequest) {
+        String keyword = pageRequest.getKeyword();
+        if (!StringUtils.isEmpty(keyword)) {
+            example.getOredCriteria().get(0).andNameLike("%" + keyword + "%");
+        }
+        String category = pageRequest.getCategory();
+        if (!StringUtils.isEmpty(category)) {
+            example.getOredCriteria().get(0).andCategoryEqualTo(new Long(category));
+        }
+        PageHelper.startPage(pageRequest.getPage(), pageRequest.getLimit(), "id desc");
+        List<Product> productList = productMapper.selectByExample(example);
+        return new PageInfo<>(productList);
     }
 
     private void addToRedis(Product product) {
@@ -65,7 +81,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public int add(ProductDto productDto) {
+    public int create(ProductDto productDto) {
         try {
             Product product = Convert.convert(Product.class, productDto);
             int count = productMapper.insertSelective(product);
@@ -90,27 +106,5 @@ public class ProductServiceImpl implements ProductService {
         int count = productMapper.deleteByPrimaryKey(id);
         if (count != 0) deleteFromRedis(id);
         return count;
-    }
-
-    @Override
-    public PageInfo<Product> listByBuyer(PageRequest pageRequest) {
-        ProductExample example = new ProductExample();
-        ProductExample.Criteria criteria = example.createCriteria();
-        criteria.andStatusEqualTo(true); // 上架状态
-        return list(example, pageRequest);
-    }
-
-    private PageInfo<Product> list(ProductExample example, PageRequest pageRequest) {
-        String keyword = pageRequest.getKeyword();
-        if (!StringUtils.isEmpty(keyword)) {
-            example.getOredCriteria().get(0).andNameLike("%" + keyword + "%");
-        }
-        String category = pageRequest.getCategory();
-        if (!StringUtils.isEmpty(category)) {
-            example.getOredCriteria().get(0).andCategoryEqualTo(new Long(category));
-        }
-        PageHelper.startPage(pageRequest.getPage(), pageRequest.getLimit(), "id desc");
-        List<Product> productList = productMapper.selectByExample(example);
-        return new PageInfo<>(productList);
     }
 }

@@ -31,7 +31,7 @@ public class TestController {
                 public void run() {
                     try {
                         redisLocker.lock("test", 1L);
-                        log.info(++counter + "");
+                        log.info(String.valueOf(++counter));
                     } finally {
                         redisLocker.unlock("test");
                     }

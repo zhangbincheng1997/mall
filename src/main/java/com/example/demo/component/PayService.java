@@ -77,22 +77,6 @@ public class PayService {
         }
     }
 
-    // https://docs.open.alipay.com/api_1/alipay.trade.close
-    public boolean close(Long id )   {
-        AlipayTradeCloseRequest request = new AlipayTradeCloseRequest();
-        Map<String, Object> biz = new HashMap<>();
-        biz.put("out_trade_no", id);
-        log.info(JSON.toJSONString(biz));
-        request.setBizContent(JSON.toJSONString(biz));
-        AlipayTradeCloseResponse response = null;
-        try {
-            response = alipayClient.execute(request);
-            return response.isSuccess();
-        } catch (AlipayApiException e) {
-            throw new GlobalException(Status.PAY_BUG);
-        }
-    }
-
     // 检查密钥
     public boolean check(HttpServletRequest request) {
         // 获取支付宝POST过来的反馈信息

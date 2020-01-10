@@ -41,7 +41,7 @@ public class CategoryController {
     @ResponseBody
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Result<String> add(@Valid CategoryDto categoryDto) {
-        int count = categoryService.add(categoryDto);
+        int count = categoryService.create(categoryDto);
         if (count == 1) {
             return Result.success();
         } else {

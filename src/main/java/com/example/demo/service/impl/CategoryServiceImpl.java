@@ -32,7 +32,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     @CacheEvict(value = "category", allEntries = true) // 清除缓存
-    public int add(CategoryDto categoryDto) {
+    public int create(CategoryDto categoryDto) {
         if (categoryDto.getPid() != 0L) { // 检查父类是否存在
             Category category = categoryMapper.selectByPrimaryKey(categoryDto.getPid());
             if (category == null) throw new GlobalException(Status.CATEGORY_ROOT_NOT_EXIST);

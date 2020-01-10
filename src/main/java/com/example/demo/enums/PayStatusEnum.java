@@ -6,8 +6,7 @@ import lombok.Getter;
 public enum PayStatusEnum implements CodeEnum {
 
     FALSE(0, "未付款"), //  默认
-    TRUE(1, "已付款"),
-    REFUND(2, "已退款");
+    TRUE(1, "已付款");
 
     private Integer code;
     private String msg;

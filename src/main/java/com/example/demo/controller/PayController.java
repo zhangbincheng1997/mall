@@ -2,8 +2,8 @@ package com.example.demo.controller;
 
 import com.example.demo.component.PayService;
 import com.example.demo.enums.PayStatusEnum;
-import com.example.demo.mapper.OrderMasterMapper;
 import com.example.demo.service.OrderService;
+import com.example.demo.service.SellerOrderService;
 import com.example.demo.utils.Constants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 @Slf4j
 @Controller

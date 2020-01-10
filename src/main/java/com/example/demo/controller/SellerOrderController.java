@@ -7,9 +7,9 @@ import com.example.demo.dto.PageRequest;
 import com.example.demo.model.OrderDetail;
 import com.example.demo.model.OrderMaster;
 import com.example.demo.service.OrderService;
+import com.example.demo.service.SellerOrderService;
 import com.example.demo.vo.OrderDetailVo;
 import com.example.demo.vo.OrderMasterVo;
-import com.example.demo.vo.ProductVo;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -28,6 +28,8 @@ import java.util.stream.Collectors;
 public class SellerOrderController {
 
     @Autowired
+    private SellerOrderService sellerOrderService;
+    @Autowired
     private OrderService orderService;
 
     @ApiOperation("获取订单")
@@ -36,7 +38,7 @@ public class SellerOrderController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Result<OrderMasterVo> get(@PathVariable("id") Long id) {
         // get
-        OrderMaster orderMaster = orderService.get(id);
+        OrderMaster orderMaster = sellerOrderService.get(id);
         // convert
         OrderMasterVo orderMasterVo = getDetail(orderMaster);
         return Result.success(orderMasterVo);
@@ -48,7 +50,7 @@ public class SellerOrderController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public PageResult<List<OrderMasterVo>> list(@Valid PageRequest pageRequest) {
         // page
-        PageInfo<OrderMaster> pageInfo = orderService.list(pageRequest);
+        PageInfo<OrderMaster> pageInfo = sellerOrderService.list(pageRequest);
         // convert
         List<OrderMasterVo> orderMasterVoList = pageInfo.getList()
                 .stream()
@@ -57,7 +59,6 @@ public class SellerOrderController {
         return PageResult.success(orderMasterVoList, pageInfo.getTotal());
     }
 
-    // 重复了...待优化
     private OrderMasterVo getDetail(OrderMaster orderMaster) {
         OrderMasterVo orderMasterVo = Convert.convert(OrderMasterVo.class, orderMaster);
         List<OrderDetail> orderDetailList = orderService.getDetail(orderMaster.getId());

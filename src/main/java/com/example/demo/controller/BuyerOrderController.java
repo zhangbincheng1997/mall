@@ -1,14 +1,14 @@
 package com.example.demo.controller;
 
 import cn.hutool.core.convert.Convert;
-import com.alibaba.fastjson.JSONObject;
 import com.example.demo.base.PageResult;
 import com.example.demo.base.Result;
-import com.example.demo.dto.OrderMasterDto;
 import com.example.demo.dto.PageRequest;
 import com.example.demo.model.OrderDetail;
 import com.example.demo.model.OrderMaster;
+import com.example.demo.service.BuyerOrderService;
 import com.example.demo.service.OrderService;
+import com.example.demo.service.SellerOrderService;
 import com.example.demo.vo.OrderDetailVo;
 import com.example.demo.vo.OrderMasterVo;
 import com.github.pagehelper.PageInfo;
@@ -30,6 +30,8 @@ import java.util.stream.Collectors;
 public class BuyerOrderController {
 
     @Autowired
+    private BuyerOrderService buyerOrderService;
+    @Autowired
     private OrderService orderService;
 
     @ApiOperation("获取订单")
@@ -38,7 +40,7 @@ public class BuyerOrderController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     public Result<OrderMasterVo> get(Principal principal, @PathVariable("id") Long id) {
         // get
-        OrderMaster orderMaster = orderService.getByBuyer(principal.getName(), id);
+        OrderMaster orderMaster = buyerOrderService.get(principal.getName(), id);
         // convert
         OrderMasterVo orderMasterVo = getDetail(orderMaster);
         return Result.success(orderMasterVo);
@@ -50,7 +52,7 @@ public class BuyerOrderController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     public PageResult<List<OrderMasterVo>> list(Principal principal, @Valid PageRequest pageRequest) {
         // page
-        PageInfo<OrderMaster> pageInfo = orderService.listByBuyer(principal.getName(), pageRequest);
+        PageInfo<OrderMaster> pageInfo = buyerOrderService.list(principal.getName(), pageRequest);
         // convert
         List<OrderMasterVo> orderMasterVoList = pageInfo.getList()
                 .stream()
@@ -59,7 +61,6 @@ public class BuyerOrderController {
         return PageResult.success(orderMasterVoList, pageInfo.getTotal());
     }
 
-    // 重复了...待优化
     private OrderMasterVo getDetail(OrderMaster orderMaster) {
         OrderMasterVo orderMasterVo = Convert.convert(OrderMasterVo.class, orderMaster);
         List<OrderDetail> orderDetailList = orderService.getDetail(orderMaster.getId());

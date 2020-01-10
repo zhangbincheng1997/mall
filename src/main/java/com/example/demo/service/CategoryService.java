@@ -9,7 +9,7 @@ public interface CategoryService {
 
     List<Category> list(Long id);
 
-    int add(CategoryDto categoryDto);
+    int create(CategoryDto categoryDto);
 
     int update(Long id, CategoryDto categoryDto);
 
