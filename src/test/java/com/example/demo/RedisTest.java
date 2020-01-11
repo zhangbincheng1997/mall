@@ -1,6 +1,8 @@
 package com.example.demo;
 
 import com.example.demo.component.RedisService;
+import com.example.demo.model.User;
+import com.example.demo.utils.Constants;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

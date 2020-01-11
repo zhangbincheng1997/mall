@@ -6,7 +6,7 @@
 
 
 body{font-family: "Microsoft YaHei", "SimSun", '\5b8b\4f53', sans-serif;  -moz-user-select:none;
-      -webkit-user-select: none;       
+      -webkit-user-select: none;
       -ms-user-select: none;     }
 .w1200{width: 1200px; margin:0 auto;}
 .nobor{border-bottom: 0!important;}
@@ -61,8 +61,8 @@ i{font-style: normal;}
 .content .floors .sk_bd .item{float: left; margin:28px 0 0 35px;}
 .content .floors .sk_bd .item img{width: 190px; height: 190px;}
 .content .floors .sk_bd .item .title{font-size: 16px; line-height: 40px;}
-.content .floors .sk_bd .item .price span{color: #ee0000; font-size: 24px} 
-.content .floors .sk_bd .item .price del{color: #888; font-size: 16px; padding-left: 40px;}  
+.content .floors .sk_bd .item .price span{color: #ee0000; font-size: 24px}
+.content .floors .sk_bd .item .price del{color: #888; font-size: 16px; padding-left: 40px;}
 .content .floors .sk_bd .layui-carousel-arrow[lay-type=sub]{display: none;}
 .content .hot-recommend-con{background: #f8f8f8; padding:80px 0 70px 0;}
 .content .hot-recommend-con .hot-con1 .item{width: 390px; height: 500px; background: #fff; margin-right: 15px; float: left; padding: 20px; box-sizing: border-box;}
@@ -125,7 +125,7 @@ i{font-style: normal;}
 .commodity-content .commod-cont-wrap{background: #f8f8f8; padding: 50px 0 90px 0;}
 .commodity-content .commod-cont .left-nav{width: 200px; line-height: 38px; background: #fff; float: left; margin-right: 58px;}
 .commodity-content .commod-cont .left-nav .list-box{border:1px solid #eeeeee;}
-.commodity-content .commod-cont .left-nav .title{color: #fff; font-size: 16px; background: #333333; text-align: center;} 
+.commodity-content .commod-cont .left-nav .title{color: #fff; font-size: 16px; background: #333333; text-align: center;}
 .commodity-content .commod-cont .left-nav .list-box dt,.commodity-content .commod-cont .left-nav .list-box dd{border-bottom:1px dashed #eeeeee; cursor: pointer;}
 .commodity-content .commod-cont .left-nav .list-box dd:hover a{color:#ff5500;}
 .commodity-content .commod-cont .left-nav .list-box dt{font-size: 14px; color: #333; padding-left: 30px; background: url(../img/off-icon.png) 8px -2px no-repeat; cursor: pointer;}

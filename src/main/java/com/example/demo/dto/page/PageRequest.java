@@ -1,4 +1,4 @@
-package com.example.demo.dto;
+package com.example.demo.dto.page;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -11,10 +11,4 @@ public class PageRequest {
 
     @ApiModelProperty(value = "大小", example = "0")
     Integer limit = 10;
-
-    @ApiModelProperty(value = "关键词")
-    String keyword = "";
-
-    @ApiModelProperty(value = "分类")
-    String category = "";
 }

@@ -31,12 +31,18 @@
                         <input type="text" name="nickname" id="nickname" placeholder="请输入昵称" class="layui-input">
                     </div>
                 </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label layui-icon layui-icon-username">邮箱</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="email" id="email" placeholder="请输入邮箱" class="layui-input">
+                    </div>
+                </div>
                 <div class="layui-form-item" pane>
                     <label class="layui-form-label layui-icon layui-icon-username">性别</label>
                     <div class="layui-input-block">
-                        <input type="radio" name="sex" value="0" title="保密" checked>
-                        <input type="radio" name="sex" value="1" title="男性">
-                        <input type="radio" name="sex" value="2" title="女性">
+                        <input type="radio" name="gender" value="0" title="保密" checked>
+                        <input type="radio" name="gender" value="1" title="男性">
+                        <input type="radio" name="gender" value="2" title="女性">
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -66,7 +72,8 @@
             if (res.code === 0) {
                 $('#avatar').attr('src', res.data.avatar);
                 $('#nickname').val(res.data.nickname);
-                $('input[name="sex"]').each(function (i, element) {
+                $('#email').val(res.data.email);
+                $('input[name="gender"]').each(function (i, element) {
                     if (element.value === res.data.sex.toString()) {
                         $(element).prop('checked', true);
                     }

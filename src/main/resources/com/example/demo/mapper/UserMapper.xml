@@ -7,7 +7,8 @@
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="avatar" jdbcType="VARCHAR" property="avatar" />
     <result column="nickname" jdbcType="VARCHAR" property="nickname" />
-    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="gender" jdbcType="INTEGER" property="gender" />
     <result column="birthday" jdbcType="DATE" property="birthday" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -69,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, username, password, avatar, nickname, sex, birthday
+    id, username, password, avatar, nickname, email, gender, birthday
   </sql>
   <select id="selectByExample" parameterType="com.example.demo.model.UserExample" resultMap="BaseResultMap">
     select
@@ -106,11 +107,11 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into user (username, password, avatar, 
-      nickname, sex, birthday
-      )
+      nickname, email, gender, 
+      birthday)
     values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, 
-      #{nickname,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, #{birthday,jdbcType=DATE}
-      )
+      #{nickname,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{gender,jdbcType=INTEGER}, 
+      #{birthday,jdbcType=DATE})
   </insert>
   <insert id="insertSelective" parameterType="com.example.demo.model.User">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
@@ -130,8 +131,11 @@
       <if test="nickname != null">
         nickname,
       </if>
-      <if test="sex != null">
-        sex,
+      <if test="email != null">
+        email,
+      </if>
+      <if test="gender != null">
+        gender,
       </if>
       <if test="birthday != null">
         birthday,
@@ -150,8 +154,11 @@
       <if test="nickname != null">
         #{nickname,jdbcType=VARCHAR},
       </if>
-      <if test="sex != null">
-        #{sex,jdbcType=INTEGER},
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=INTEGER},
       </if>
       <if test="birthday != null">
         #{birthday,jdbcType=DATE},
@@ -182,8 +189,11 @@
       <if test="record.nickname != null">
         nickname = #{record.nickname,jdbcType=VARCHAR},
       </if>
-      <if test="record.sex != null">
-        sex = #{record.sex,jdbcType=INTEGER},
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gender != null">
+        gender = #{record.gender,jdbcType=INTEGER},
       </if>
       <if test="record.birthday != null">
         birthday = #{record.birthday,jdbcType=DATE},
@@ -200,7 +210,8 @@
       password = #{record.password,jdbcType=VARCHAR},
       avatar = #{record.avatar,jdbcType=VARCHAR},
       nickname = #{record.nickname,jdbcType=VARCHAR},
-      sex = #{record.sex,jdbcType=INTEGER},
+      email = #{record.email,jdbcType=VARCHAR},
+      gender = #{record.gender,jdbcType=INTEGER},
       birthday = #{record.birthday,jdbcType=DATE}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -221,8 +232,11 @@
       <if test="nickname != null">
         nickname = #{nickname,jdbcType=VARCHAR},
       </if>
-      <if test="sex != null">
-        sex = #{sex,jdbcType=INTEGER},
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=INTEGER},
       </if>
       <if test="birthday != null">
         birthday = #{birthday,jdbcType=DATE},
@@ -236,7 +250,8 @@
       password = #{password,jdbcType=VARCHAR},
       avatar = #{avatar,jdbcType=VARCHAR},
       nickname = #{nickname,jdbcType=VARCHAR},
-      sex = #{sex,jdbcType=INTEGER},
+      email = #{email,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=INTEGER},
       birthday = #{birthday,jdbcType=DATE}
     where id = #{id,jdbcType=BIGINT}
   </update>

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 @Component
@@ -59,5 +60,13 @@ public class RedisService {
      */
     public Long decrement(String key, int delta) {
         return redisTemplate.opsForValue().decrement(key, delta);
+    }
+
+
+    /**
+     * keys
+     */
+    public Set<String> keys(String key) {
+        return redisTemplate.keys(key + "*");
     }
 }

@@ -22,35 +22,45 @@
     </div>
 </div>
 <script type="text/html" id="toolbarTpl">
-    <input class="text" style="height:30px;width:200px;" name="" id="keyword"  placeholder="请输入关键词">
-     <a href="javascript:void(0);" id="search">
-        <i class="layui-icon layui-icon-search"></i> 
-    </a>
+    <div class="layui-inline">
+        <select name="select" lay-filter="statusSearch">
+            <option value="">所有订单</option>
+            <option value="0">新订单</option>
+            <option value="1">已付款</option>
+            <option value="2">已接单</option>
+            <option value="3">已发货</option>
+            <option value="4">已取消</option>
+            <option value="5">已完成</option>
+            <option value="6">退款申请</option>
+            <option value="7">退款成功</option>
+        </select>
+    </div>
 </script>
 <script type="text/html" id="iconTpl">
     <img src="{{ d.icon }}" width="50px" height="50px">
 </script>
 <script type="text/html" id="barTpl">
     <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="detail">详情</a>
-    {{# if (d.orderStatus == '新订单' && d.payStatus == '未付款') { }}
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="close">关闭订单</a>
-    {{# } else if (d.orderStatus == '买家申请退款') { }}
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="deal">处理退款</a>
-    {{# } else if (d.orderStatus == '新订单') { }}
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="refund">主动退款</a>
-    <a class="layui-btn layui-btn-success layui-btn-xs" lay-event="finish">完成</a>
+    {{# if (d.orderStatus == '新订单') { }}
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="cancel">取消</a>
+    {{# } else if (d.orderStatus == '已付款') { }}
+    <a class="layui-btn layui-btn-success layui-btn-xs" lay-event="order">接单</a>
+    {{# } else if (d.orderStatus == '已接单') { }}
+    <a class="layui-btn layui-btn-success layui-btn-xs" lay-event="ship">发货</a>
+    {{# } else if (d.orderStatus == '申请退款') { }}
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="deal">退款</a>
     {{# } }}
 </script>
 <script>
-    layui.use(['jquery', 'element', 'table', 'form'], function () {
+    layui.use(['jquery', 'element', 'form', 'table'], function () {
         var $ = layui.jquery;
+        var form = layui.form;
         var table = layui.table;
 
-        // $('#search').click(function(){}); 搜索一次后会失效
-        $('body').on('click', '#search', function () {
+        form.on('select(statusSearch)', function (data) {
             table.reload('table', {
                 // url: 'seller/order/list',
-                where: {keyword: $('#keyword').val()}
+                where: {status: data.value}
             });
         });
 
@@ -62,13 +72,13 @@
             toolbar: '#toolbarTpl', // 'default'
             cols: [[
                 {field: 'id', title: 'ID', width: 100, align: 'center', sort: true, edit: true},
-                {field: 'username', title: '用户名'},
+                {field: 'nickname', title: '昵称'},
+                {field: 'email', title: '邮箱'},
                 {field: 'amount', title: '总金额'},
                 {field: 'orderStatus', title: '订单状态'},
-                {field: 'payStatus', title: '支付状态'},
                 {field: 'createTime', title: '创建时间'},
                 {field: 'updateTime', title: '修改时间'},
-                {fixed: 'right', title: '操作', width: 200, toolbar: '#barTpl'}
+                {fixed: 'right', title: '操作', width: 120, toolbar: '#barTpl'}
             ]]
         });
 
@@ -76,40 +86,33 @@
         table.on('tool(table)', function (obj) {
             switch (obj.event) {
                 case 'detail':
-                    layer.open({
-                        type: 1, // 0：信息框，默认 1：页面层 2：iframe层 3：加载层 4：tips层
-                        title: '订单详情',
-                        content: $('#detailModal'),
-                        area: ['800px', 200 + 50 * obj.data.products.length + 'px'],
-                        shadeClose: true,
-                        success: function () {
-                            table.render({
-                                elem: '#table2',
-                                data: obj.data.products,
-                                size: 'lg',
-                                cols: [[
-                                    {field: 'id', title: 'ID', width: 100, align: 'center', sort: true, edit: true},
-                                    {field: 'icon', title: '图标', width: 100, align: 'center', templet: '#iconTpl'},
-                                    {field: 'name', title: '名称'},
-                                    {field: 'price', title: '价格'},
-                                    {field: 'quantity', title: '数量'},
-                                ]]
-                            });
-                        }
-                    });
-                    break;
-                case 'finish':
-                    layer.confirm('确认完成？', function (index) {
-                        $.post('seller/pay/finish/' + obj.data.id, function (res) {
-                            if (res.code === 0) {
-                                table.reload('table', {page: {curr: $(".layui-laypage-em").next().html()}});
+                    $.get('seller/order/detail/' + obj.data.id, function (res) {
+                        layer.open({
+                            type: 1, // 0：信息框，默认 1：页面层 2：iframe层 3：加载层 4：tips层
+                            title: '订单详情',
+                            content: $('#detailModal'),
+                            area: ['800px', 200 + 50 * res.data.length + 'px'],
+                            shadeClose: true,
+                            success: function () {
+                                table.render({
+                                    elem: '#table2',
+                                    data: res.data,
+                                    size: 'lg',
+                                    cols: [[
+                                        {field: 'id', title: 'ID', width: 100, align: 'center', sort: true, edit: true},
+                                        {field: 'icon', title: '图标', width: 100, align: 'center', templet: '#iconTpl'},
+                                        {field: 'name', title: '名称'},
+                                        {field: 'price', title: '价格'},
+                                        {field: 'quantity', title: '数量'},
+                                    ]]
+                                });
                             }
                         });
                     });
                     break;
-                case 'close':
-                    layer.confirm('确认关闭订单？', function (index) {
-                        $.post('seller/pay/close/' + obj.data.id, function (res) {
+                case 'cancel':
+                    layer.confirm('确认取消订单？', function (index) {
+                        $.post('seller/pay/cancel/' + obj.data.id, function (res) {
                             if (res.code === 0) {
                                 table.reload('table', {page: {curr: $(".layui-laypage-em").next().html()}});
                             }
@@ -125,9 +128,18 @@
                         });
                     });
                     break;
-                case 'refund':
-                    layer.confirm('确认主动退款？', function (index) {
-                        $.post('seller/pay/refund/' + obj.data.id, function (res) {
+                case 'order':
+                    layer.confirm('确认接单？', function (index) {
+                        $.post('seller/pay/order/' + obj.data.id, function (res) {
+                            if (res.code === 0) {
+                                table.reload('table', {page: {curr: $(".layui-laypage-em").next().html()}});
+                            }
+                        });
+                    });
+                    break;
+                case 'ship':
+                    layer.confirm('确认发货？', function (index) {
+                        $.post('seller/pay/ship/' + obj.data.id, function (res) {
                             if (res.code === 0) {
                                 table.reload('table', {page: {curr: $(".layui-laypage-em").next().html()}});
                             }

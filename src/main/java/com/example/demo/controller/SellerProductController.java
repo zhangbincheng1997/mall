@@ -3,7 +3,7 @@ package com.example.demo.controller;
 import cn.hutool.core.convert.Convert;
 import com.example.demo.base.PageResult;
 import com.example.demo.base.Result;
-import com.example.demo.dto.PageRequest;
+import com.example.demo.dto.page.ProductPageRequest;
 import com.example.demo.model.Product;
 import com.example.demo.service.SellerProductService;
 import com.example.demo.dto.ProductDto;
@@ -41,7 +41,7 @@ public class SellerProductController {
     @GetMapping("/list")
     @ResponseBody
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public PageResult<List<ProductVo>> list(@Valid PageRequest pageRequest) {
+    public PageResult<List<ProductVo>> list(@Valid ProductPageRequest pageRequest) {
         PageInfo<Product> pageInfo = sellerProductService.list(pageRequest);
         List<ProductVo> productVoList = pageInfo.getList().stream()
                 .map(product -> Convert.convert(ProductVo.class, product))

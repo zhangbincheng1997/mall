@@ -23,6 +23,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
     }
+
     @Bean
     public String[] getIgnoreUrls() {
         return new String[]{"/", "/csrf", "/favicon.ico", "/**/*.css", "/**/*.js", "/layui/**",

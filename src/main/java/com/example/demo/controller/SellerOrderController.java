@@ -3,10 +3,9 @@ package com.example.demo.controller;
 import cn.hutool.core.convert.Convert;
 import com.example.demo.base.PageResult;
 import com.example.demo.base.Result;
-import com.example.demo.dto.PageRequest;
+import com.example.demo.dto.page.OrderPageRequest;
 import com.example.demo.model.OrderDetail;
 import com.example.demo.model.OrderMaster;
-import com.example.demo.service.OrderService;
 import com.example.demo.service.SellerOrderService;
 import com.example.demo.vo.OrderDetailVo;
 import com.example.demo.vo.OrderMasterVo;
@@ -29,44 +28,32 @@ public class SellerOrderController {
 
     @Autowired
     private SellerOrderService sellerOrderService;
-    @Autowired
-    private OrderService orderService;
-
-    @ApiOperation("获取订单")
-    @GetMapping("/{id}")
-    @ResponseBody
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public Result<OrderMasterVo> get(@PathVariable("id") Long id) {
-        // get
-        OrderMaster orderMaster = sellerOrderService.get(id);
-        // convert
-        OrderMasterVo orderMasterVo = getDetail(orderMaster);
-        return Result.success(orderMasterVo);
-    }
 
     @ApiOperation("获取订单列表")
     @GetMapping("/list")
     @ResponseBody
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public PageResult<List<OrderMasterVo>> list(@Valid PageRequest pageRequest) {
+    public PageResult<List<OrderMasterVo>> list(@Valid OrderPageRequest pageRequest) {
         // page
         PageInfo<OrderMaster> pageInfo = sellerOrderService.list(pageRequest);
         // convert
         List<OrderMasterVo> orderMasterVoList = pageInfo.getList()
                 .stream()
-                .map(order -> getDetail(order))
+                .map(order -> Convert.convert(OrderMasterVo.class, order))
                 .collect(Collectors.toList());
         return PageResult.success(orderMasterVoList, pageInfo.getTotal());
     }
 
-    private OrderMasterVo getDetail(OrderMaster orderMaster) {
-        OrderMasterVo orderMasterVo = Convert.convert(OrderMasterVo.class, orderMaster);
-        List<OrderDetail> orderDetailList = orderService.getDetail(orderMaster.getId());
+    @ApiOperation("获取订单详情")
+    @GetMapping("/detail/{id}")
+    @ResponseBody
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public Result<List<OrderDetailVo>> detail(@PathVariable("id") Long id) {
+        List<OrderDetail> orderDetailList = sellerOrderService.getDetail(id);
         List<OrderDetailVo> orderDetailVoList = orderDetailList
                 .stream()
                 .map(orderDetail -> Convert.convert(OrderDetailVo.class, orderDetail))
                 .collect(Collectors.toList());
-        orderMasterVo.setProducts(orderDetailVoList);
-        return orderMasterVo;
+        return Result.success(orderDetailVoList);
     }
 }

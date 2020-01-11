@@ -14,7 +14,9 @@ public class User implements Serializable {
 
     private String nickname;
 
-    private Integer sex;
+    private String email;
+
+    private Integer gender;
 
     private Date birthday;
 
@@ -60,12 +62,20 @@ public class User implements Serializable {
         this.nickname = nickname;
     }
 
-    public Integer getSex() {
-        return sex;
+    public String getEmail() {
+        return email;
     }
 
-    public void setSex(Integer sex) {
-        this.sex = sex;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Integer getGender() {
+        return gender;
+    }
+
+    public void setGender(Integer gender) {
+        this.gender = gender;
     }
 
     public Date getBirthday() {
@@ -87,7 +97,8 @@ public class User implements Serializable {
         sb.append(", password=").append(password);
         sb.append(", avatar=").append(avatar);
         sb.append(", nickname=").append(nickname);
-        sb.append(", sex=").append(sex);
+        sb.append(", email=").append(email);
+        sb.append(", gender=").append(gender);
         sb.append(", birthday=").append(birthday);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

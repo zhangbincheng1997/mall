@@ -1,6 +1,5 @@
 package com.example.demo;
 
-import com.alibaba.fastjson.JSONObject;
 import com.example.demo.component.RedisService;
 import com.example.demo.mapper.ProductMapper;
 import com.example.demo.model.Product;
@@ -41,11 +40,6 @@ public class Application implements CommandLineRunner {
         List<Product> productList = productMapper.selectByExample(new ProductExample());
         // 初始化
         productList.forEach(product -> {
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("icon", product.getIcon());
-            jsonObject.put("name", product.getName());
-            jsonObject.put("price", product.getPrice());
-            redisService.set(Constants.REDIS_PRODUCT_INFO + product.getId(), jsonObject);
             redisService.set(Constants.REDIS_PRODUCT_STOCK + product.getId(), product.getStock());
         });
     }

@@ -4,10 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.internal.util.AlipaySignature;
-import com.alipay.api.request.AlipayTradeCloseRequest;
 import com.alipay.api.request.AlipayTradePagePayRequest;
 import com.alipay.api.request.AlipayTradeRefundRequest;
-import com.alipay.api.response.AlipayTradeCloseResponse;
 import com.alipay.api.response.AlipayTradeRefundResponse;
 import com.example.demo.base.GlobalException;
 import com.example.demo.base.Status;
@@ -37,11 +35,9 @@ public class PayService {
 
     // https://docs.open.alipay.com/api_1/alipay.trade.pay/
     public void pay(Long id, BigDecimal amount, HttpServletResponse response) {
-        // 支付
         AlipayTradePagePayRequest request = new AlipayTradePagePayRequest();
         request.setReturnUrl(payConfig.getReturnUrl()); // 沙箱设置授权回调地址
         request.setNotifyUrl(payConfig.getNotifyUrl()); // 沙箱设置授权回调地址
-        // 设置参数
         Map<String, Object> biz = new HashMap<>();
         biz.put("out_trade_no", id);
         biz.put("total_amount", amount);
@@ -50,7 +46,6 @@ public class PayService {
         biz.put("body", Constants.PAY_BODY);
         log.info(JSON.toJSONString(biz));
         request.setBizContent(JSON.toJSONString(biz));
-        // 渲染页面
         try {
             String form = alipayClient.pageExecute(request).getBody();
             RenderUtil.render(response, form);
@@ -79,7 +74,6 @@ public class PayService {
 
     // 检查密钥
     public boolean check(HttpServletRequest request) {
-        // 获取支付宝POST过来的反馈信息
         Map<String, String> map = requestToMap(request);
         try {
             log.info(JSON.toJSONString(map));

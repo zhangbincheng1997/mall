@@ -1,12 +1,11 @@
 package com.example.demo.service.impl;
 
 import cn.hutool.core.convert.Convert;
-import com.alibaba.fastjson.JSONObject;
 import com.example.demo.base.GlobalException;
 import com.example.demo.base.Status;
 import com.example.demo.component.RedisLocker;
 import com.example.demo.component.RedisService;
-import com.example.demo.dto.PageRequest;
+import com.example.demo.dto.page.ProductPageRequest;
 import com.example.demo.dto.ProductDto;
 import com.example.demo.mapper.ProductMapper;
 import com.example.demo.model.Product;
@@ -35,49 +34,27 @@ public class SellerProductServiceImpl implements SellerProductService {
     private ProductMapper productMapper;
 
     @Override
-    //    @Cacheable(cacheNames = "product", key = "#id")
-    //    @CacheEvict(cacheNames = "product", key = "#id")
     public Product get(Long id) {
         return productMapper.selectByPrimaryKey(id);
     }
 
     @Override
-    public PageInfo<Product> list(PageRequest pageRequest) {
+    public PageInfo<Product> list(ProductPageRequest pageRequest) {
         ProductExample example = new ProductExample();
-        return list(example, pageRequest);
-    }
+        ProductExample.Criteria criteria = example.createCriteria();
 
-    private PageInfo<Product> list(ProductExample example, PageRequest pageRequest) {
         String keyword = pageRequest.getKeyword();
+        String select = pageRequest.getCategory();
         if (!StringUtils.isEmpty(keyword)) {
-            example.getOredCriteria().get(0).andNameLike("%" + keyword + "%");
+            criteria.andNameLike("%" + keyword + "%");
         }
-        String category = pageRequest.getCategory();
-        if (!StringUtils.isEmpty(category)) {
-            example.getOredCriteria().get(0).andCategoryEqualTo(new Long(category));
+        if (!StringUtils.isEmpty(select)) {
+            criteria.andCategoryEqualTo(new Long(select));
         }
+
         PageHelper.startPage(pageRequest.getPage(), pageRequest.getLimit(), "id desc");
         List<Product> productList = productMapper.selectByExample(example);
         return new PageInfo<>(productList);
-    }
-
-    private void addToRedis(Product product) {
-        if (!product.getStatus()) return;
-        redisLocker.lock(Constants.REDIS_PRODUCT_REDIS_LOCK + product.getId(), Constants.REDIS_LOCK_LEASE_TIME);
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("icon", product.getIcon());
-        jsonObject.put("name", product.getName());
-        jsonObject.put("price", product.getPrice());
-        redisService.set(Constants.REDIS_PRODUCT_INFO + product.getId(), jsonObject);
-        redisService.set(Constants.REDIS_PRODUCT_STOCK + product.getId(), product.getStock());
-        redisLocker.unlock(Constants.REDIS_PRODUCT_REDIS_LOCK + product.getId());
-    }
-
-    private void deleteFromRedis(Long id) {
-        redisLocker.lock(Constants.REDIS_PRODUCT_REDIS_LOCK + id, Constants.REDIS_LOCK_LEASE_TIME);
-        redisService.delete(Constants.REDIS_PRODUCT_STOCK + id);
-        redisService.delete(Constants.REDIS_PRODUCT_INFO + id);
-        redisLocker.unlock(Constants.REDIS_PRODUCT_REDIS_LOCK + id);
     }
 
     @Override
@@ -106,5 +83,18 @@ public class SellerProductServiceImpl implements SellerProductService {
         int count = productMapper.deleteByPrimaryKey(id);
         if (count != 0) deleteFromRedis(id);
         return count;
+    }
+
+    private void addToRedis(Product product) {
+        if (!product.getStatus()) return;
+        redisLocker.lock(Constants.REDIS_PRODUCT_REDIS_LOCK + product.getId(), Constants.REDIS_LOCK_LEASE_TIME);
+        redisService.set(Constants.REDIS_PRODUCT_STOCK + product.getId(), product.getStock());
+        redisLocker.unlock(Constants.REDIS_PRODUCT_REDIS_LOCK + product.getId());
+    }
+
+    private void deleteFromRedis(Long id) {
+        redisLocker.lock(Constants.REDIS_PRODUCT_REDIS_LOCK + id, Constants.REDIS_LOCK_LEASE_TIME);
+        redisService.delete(Constants.REDIS_PRODUCT_STOCK + id);
+        redisLocker.unlock(Constants.REDIS_PRODUCT_REDIS_LOCK + id);
     }
 }

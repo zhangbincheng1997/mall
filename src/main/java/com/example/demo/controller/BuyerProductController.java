@@ -2,11 +2,9 @@ package com.example.demo.controller;
 
 import cn.hutool.core.convert.Convert;
 import com.example.demo.base.PageResult;
-import com.example.demo.dto.PageRequest;
+import com.example.demo.dto.page.ProductPageRequest;
 import com.example.demo.model.Product;
 import com.example.demo.service.BuyerProductService;
-import com.example.demo.service.SellerProductService;
-import com.example.demo.service.impl.BuyerProductServiceImpl;
 import com.example.demo.vo.ProductVo;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
@@ -30,7 +28,7 @@ public class BuyerProductController {
     @ApiOperation("获取商品列表")
     @GetMapping("")
     @ResponseBody
-    public PageResult<List<ProductVo>> list(@Valid PageRequest pageRequest) {
+    public PageResult<List<ProductVo>> list(@Valid ProductPageRequest pageRequest) {
         PageInfo<Product> pageInfo = buyerProductService.list(pageRequest);
         List<ProductVo> productVoList = pageInfo.getList().stream()
                 .map(product -> Convert.convert(ProductVo.class, product))

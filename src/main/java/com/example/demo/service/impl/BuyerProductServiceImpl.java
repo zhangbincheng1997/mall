@@ -1,6 +1,6 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.dto.PageRequest;
+import com.example.demo.dto.page.ProductPageRequest;
 import com.example.demo.mapper.ProductMapper;
 import com.example.demo.model.Product;
 import com.example.demo.model.ProductExample;
@@ -19,24 +19,21 @@ public class BuyerProductServiceImpl implements BuyerProductService {
     @Autowired
     private ProductMapper productMapper;
 
-
     @Override
-    public PageInfo<Product> list(PageRequest pageRequest) {
+    public PageInfo<Product> list(ProductPageRequest pageRequest) {
         ProductExample example = new ProductExample();
         ProductExample.Criteria criteria = example.createCriteria();
         criteria.andStatusEqualTo(true); // 上架状态
-        return list(example, pageRequest);
-    }
 
-    private PageInfo<Product> list(ProductExample example, PageRequest pageRequest) {
         String keyword = pageRequest.getKeyword();
+        String select = pageRequest.getCategory();
         if (!StringUtils.isEmpty(keyword)) {
-            example.getOredCriteria().get(0).andNameLike("%" + keyword + "%");
+            criteria.andNameLike("%" + keyword + "%");
         }
-        String category = pageRequest.getCategory();
-        if (!StringUtils.isEmpty(category)) {
-            example.getOredCriteria().get(0).andCategoryEqualTo(new Long(category));
+        if (!StringUtils.isEmpty(select)) {
+            criteria.andCategoryEqualTo(new Long(select));
         }
+
         PageHelper.startPage(pageRequest.getPage(), pageRequest.getLimit(), "id desc");
         List<Product> productList = productMapper.selectByExample(example);
         return new PageInfo<>(productList);

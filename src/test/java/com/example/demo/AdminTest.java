@@ -14,7 +14,7 @@ import java.util.Date;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class MySQLTest {
+public class AdminTest {
 
     @Autowired
     private UserMapper userMapper;
@@ -25,9 +25,9 @@ public class MySQLTest {
     @Test
     public void testDemo() {
         User user = new User();
-        user.setUsername("username");
-        user.setPassword(passwordEncoder.encode("password"));
+        user.setUsername("admin");
+        user.setPassword(passwordEncoder.encode("admin"));
         userMapper.insertSelective(user);
-        Assert.assertEquals("username", userMapper.selectByPrimaryKey(user.getId()).getUsername());
+        Assert.assertEquals("admin", userMapper.selectByPrimaryKey(user.getId()).getUsername());
     }
 }

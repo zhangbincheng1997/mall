@@ -1,12 +1,16 @@
 package com.example.demo.dto;
 
+import cn.hutool.core.lang.PatternPool;
+import cn.hutool.core.lang.Validator;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.URL;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
@@ -21,9 +25,13 @@ public class UserInfoDto {
     @Size(min = 3, max = 12, message = "昵称长度为3-12")
     private String nickname;
 
+    @ApiModelProperty(value = "邮箱")
+    @Email(message = "邮箱不符合规范")
+    private String email;
+
     @ApiModelProperty(value = "性别", example = "0") // Integer 需要 example
     @Range(min = 0, max = 2, message = "性别：0未知、1男性、2女性，默认0")
-    private Integer sex;
+    private Integer gender;
 
     @ApiModelProperty(value = "生日")
     @DateTimeFormat(pattern = "yyyy-MM-dd")

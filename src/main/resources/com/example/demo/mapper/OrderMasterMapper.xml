@@ -4,9 +4,10 @@
   <resultMap id="BaseResultMap" type="com.example.demo.model.OrderMaster">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="amount" jdbcType="DECIMAL" property="amount" />
     <result column="order_status" jdbcType="INTEGER" property="orderStatus" />
-    <result column="pay_status" jdbcType="INTEGER" property="payStatus" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
@@ -69,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, username, amount, order_status, pay_status, create_time, update_time
+    id, username, nickname, email, amount, order_status, create_time, update_time
   </sql>
   <select id="selectByExample" parameterType="com.example.demo.model.OrderMasterExample" resultMap="BaseResultMap">
     select
@@ -102,12 +103,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.example.demo.model.OrderMaster">
-    insert into order_master (id, username, amount, 
-      order_status, pay_status, create_time, 
-      update_time)
-    values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{amount,jdbcType=DECIMAL}, 
-      #{orderStatus,jdbcType=INTEGER}, #{payStatus,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP})
+    insert into order_master (id, username, nickname, 
+      email, amount, order_status, 
+      create_time, update_time)
+    values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{amount,jdbcType=DECIMAL}, #{orderStatus,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.example.demo.model.OrderMaster">
     insert into order_master
@@ -118,14 +119,17 @@
       <if test="username != null">
         username,
       </if>
+      <if test="nickname != null">
+        nickname,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
       <if test="amount != null">
         amount,
       </if>
       <if test="orderStatus != null">
         order_status,
-      </if>
-      <if test="payStatus != null">
-        pay_status,
       </if>
       <if test="createTime != null">
         create_time,
@@ -141,14 +145,17 @@
       <if test="username != null">
         #{username,jdbcType=VARCHAR},
       </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
       <if test="amount != null">
         #{amount,jdbcType=DECIMAL},
       </if>
       <if test="orderStatus != null">
         #{orderStatus,jdbcType=INTEGER},
-      </if>
-      <if test="payStatus != null">
-        #{payStatus,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -173,14 +180,17 @@
       <if test="record.username != null">
         username = #{record.username,jdbcType=VARCHAR},
       </if>
+      <if test="record.nickname != null">
+        nickname = #{record.nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
       <if test="record.amount != null">
         amount = #{record.amount,jdbcType=DECIMAL},
       </if>
       <if test="record.orderStatus != null">
         order_status = #{record.orderStatus,jdbcType=INTEGER},
-      </if>
-      <if test="record.payStatus != null">
-        pay_status = #{record.payStatus,jdbcType=INTEGER},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -197,9 +207,10 @@
     update order_master
     set id = #{record.id,jdbcType=BIGINT},
       username = #{record.username,jdbcType=VARCHAR},
+      nickname = #{record.nickname,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
       amount = #{record.amount,jdbcType=DECIMAL},
       order_status = #{record.orderStatus,jdbcType=INTEGER},
-      pay_status = #{record.payStatus,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
@@ -212,14 +223,17 @@
       <if test="username != null">
         username = #{username,jdbcType=VARCHAR},
       </if>
+      <if test="nickname != null">
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
       <if test="amount != null">
         amount = #{amount,jdbcType=DECIMAL},
       </if>
       <if test="orderStatus != null">
         order_status = #{orderStatus,jdbcType=INTEGER},
-      </if>
-      <if test="payStatus != null">
-        pay_status = #{payStatus,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -233,9 +247,10 @@
   <update id="updateByPrimaryKey" parameterType="com.example.demo.model.OrderMaster">
     update order_master
     set username = #{username,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
       amount = #{amount,jdbcType=DECIMAL},
       order_status = #{orderStatus,jdbcType=INTEGER},
-      pay_status = #{payStatus,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}

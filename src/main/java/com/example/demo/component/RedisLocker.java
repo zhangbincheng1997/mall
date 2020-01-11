@@ -2,6 +2,7 @@ package com.example.demo.component;
 
 import java.util.concurrent.TimeUnit;
 
+import org.redisson.RedissonMultiLock;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +25,7 @@ public class RedisLocker {
      * @return
      */
     public RLock lock(String lockKey) {
-        RLock lock = redissonClient.getLock(lockKey);
-        lock.lock();
-        return lock;
+        return lock(lockKey, -1L);
     }
 
     /**
@@ -41,9 +40,7 @@ public class RedisLocker {
      * @return
      */
     public RLock lock(String lockKey, long leaseTime) {
-        RLock lock = redissonClient.getLock(lockKey);
-        lock.lock(leaseTime, TimeUnit.SECONDS);
-        return lock;
+        return lock(lockKey, leaseTime, TimeUnit.SECONDS);
     }
 
     /**
@@ -62,6 +59,25 @@ public class RedisLocker {
         RLock lock = redissonClient.getLock(lockKey);
         lock.lock(leaseTime, unit);
         return lock;
+    }
+
+    public RedissonMultiLock multiLock(String... lockKey) {
+        return multiLock(-1L, lockKey);
+    }
+
+    public RedissonMultiLock multiLock(long leaseTime, String... lockKey) {
+        return multiLock(leaseTime, TimeUnit.SECONDS, lockKey);
+    }
+
+    public RedissonMultiLock multiLock(long leaseTime, TimeUnit timeUnit, String... lockKey) {
+        RLock[] rLocks = new RLock[lockKey.length];
+        for (int i = 0, length = lockKey.length; i < length; i++) {
+            RLock lock = redissonClient.getLock(lockKey[i]);
+            rLocks[i] = lock;
+        }
+        RedissonMultiLock multiLock = new RedissonMultiLock(rLocks);
+        multiLock.lock(leaseTime, timeUnit);
+        return multiLock;
     }
 
     /**

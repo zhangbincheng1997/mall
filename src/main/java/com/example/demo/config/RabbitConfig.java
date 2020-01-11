@@ -9,7 +9,12 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitConfig {
 
     @Bean
-    public Queue testQueue() {
+    public Queue orderQueue() {
         return new Queue(Constants.ORDER_TOPIC);
+    }
+
+    @Bean
+    public Queue emailQueue() {
+        return new Queue(Constants.EMAIL_TOPIC);
     }
 }

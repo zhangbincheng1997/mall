@@ -1,12 +1,7 @@
 package com.example.demo.service.impl;
 
-import cn.hutool.core.convert.Convert;
-import com.example.demo.base.GlobalException;
-import com.example.demo.base.Status;
-import com.example.demo.component.RabbitSender;
 import com.example.demo.component.RedisLocker;
 import com.example.demo.component.RedisService;
-import com.example.demo.dto.PageRequest;
 import com.example.demo.mapper.OrderDetailMapper;
 import com.example.demo.mapper.OrderMasterMapper;
 import com.example.demo.mapper.ProductCustomMapper;
@@ -15,10 +10,7 @@ import com.example.demo.model.OrderDetailExample;
 import com.example.demo.model.OrderMaster;
 import com.example.demo.model.OrderMasterExample;
 import com.example.demo.service.OrderService;
-import com.example.demo.service.SellerOrderService;
 import com.example.demo.utils.Constants;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,6 +33,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private OrderMasterMapper orderMasterMapper;
+
     @Autowired
     private OrderDetailMapper orderDetailMapper;
 
@@ -55,15 +48,6 @@ public class OrderServiceImpl implements OrderService {
     public int updateOrderStatus(Long id, Integer orderStatus) {
         OrderMaster order = new OrderMaster();
         order.setOrderStatus(orderStatus);
-        OrderMasterExample example = new OrderMasterExample();
-        example.createCriteria().andIdEqualTo(id);
-        return orderMasterMapper.updateByExampleSelective(order, example);
-    }
-
-    @Override
-    public int updatePayStatus(Long id, Integer payStatus) {
-        OrderMaster order = new OrderMaster();
-        order.setPayStatus(payStatus);
         OrderMasterExample example = new OrderMasterExample();
         example.createCriteria().andIdEqualTo(id);
         return orderMasterMapper.updateByExampleSelective(order, example);

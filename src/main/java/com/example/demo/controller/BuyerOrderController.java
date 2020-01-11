@@ -3,12 +3,10 @@ package com.example.demo.controller;
 import cn.hutool.core.convert.Convert;
 import com.example.demo.base.PageResult;
 import com.example.demo.base.Result;
-import com.example.demo.dto.PageRequest;
+import com.example.demo.dto.page.OrderPageRequest;
 import com.example.demo.model.OrderDetail;
 import com.example.demo.model.OrderMaster;
 import com.example.demo.service.BuyerOrderService;
-import com.example.demo.service.OrderService;
-import com.example.demo.service.SellerOrderService;
 import com.example.demo.vo.OrderDetailVo;
 import com.example.demo.vo.OrderMasterVo;
 import com.github.pagehelper.PageInfo;
@@ -18,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -31,44 +30,32 @@ public class BuyerOrderController {
 
     @Autowired
     private BuyerOrderService buyerOrderService;
-    @Autowired
-    private OrderService orderService;
-
-    @ApiOperation("获取订单")
-    @GetMapping("/{id}")
-    @ResponseBody
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
-    public Result<OrderMasterVo> get(Principal principal, @PathVariable("id") Long id) {
-        // get
-        OrderMaster orderMaster = buyerOrderService.get(principal.getName(), id);
-        // convert
-        OrderMasterVo orderMasterVo = getDetail(orderMaster);
-        return Result.success(orderMasterVo);
-    }
 
     @ApiOperation("获取订单列表")
     @GetMapping("/list")
     @ResponseBody
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
-    public PageResult<List<OrderMasterVo>> list(Principal principal, @Valid PageRequest pageRequest) {
+    public PageResult<List<OrderMasterVo>> list(@ApiIgnore Principal principal, @Valid OrderPageRequest pageRequest) {
         // page
         PageInfo<OrderMaster> pageInfo = buyerOrderService.list(principal.getName(), pageRequest);
         // convert
         List<OrderMasterVo> orderMasterVoList = pageInfo.getList()
                 .stream()
-                .map(order -> getDetail(order))
+                .map(order -> Convert.convert(OrderMasterVo.class, order))
                 .collect(Collectors.toList());
         return PageResult.success(orderMasterVoList, pageInfo.getTotal());
     }
 
-    private OrderMasterVo getDetail(OrderMaster orderMaster) {
-        OrderMasterVo orderMasterVo = Convert.convert(OrderMasterVo.class, orderMaster);
-        List<OrderDetail> orderDetailList = orderService.getDetail(orderMaster.getId());
+    @ApiOperation("获取订单详情")
+    @GetMapping("/detail/{id}")
+    @ResponseBody
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
+    public Result<List<OrderDetailVo>> detail(@ApiIgnore Principal principal, @PathVariable("id") Long id) {
+        List<OrderDetail> orderDetailList = buyerOrderService.getDetail(principal.getName(), id);
         List<OrderDetailVo> orderDetailVoList = orderDetailList
                 .stream()
                 .map(orderDetail -> Convert.convert(OrderDetailVo.class, orderDetail))
                 .collect(Collectors.toList());
-        orderMasterVo.setProducts(orderDetailVoList);
-        return orderMasterVo;
+        return Result.success(orderDetailVoList);
     }
 }

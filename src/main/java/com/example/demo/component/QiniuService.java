@@ -9,17 +9,11 @@ import com.qiniu.storage.BucketManager;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.storage.model.DefaultPutRet;
 import com.qiniu.util.Auth;
-import com.qiniu.util.StringMap;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
-import java.net.URLEncoder;
-
 @Component
-public class QiniuService implements InitializingBean {
+public class QiniuService {
 
     @Autowired
     private Auth auth;
@@ -33,20 +27,9 @@ public class QiniuService implements InitializingBean {
     @Autowired
     private BucketManager bucketManager;
 
-    private long expireSeconds;
-
-    private StringMap putPolicy;
-
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        this.expireSeconds = 3600;
-        this.putPolicy = new StringMap();
-        putPolicy.put("returnBody", "{\"key\":\"$(key)\",\"hash\":\"$(etag)\",\"bucket\":\"$(bucket)\",\"fsize\":\"$(fsize)\",\"width\":\"$(imageInfo.width)\", \"height\":\"$(imageInfo.height)\"}");
-    }
-
     // 获取上传凭证
     private String getUploadToken(String keyName) {
-        return auth.uploadToken(qiniuConfig.getBucketName(), keyName, expireSeconds, putPolicy);
+        return auth.uploadToken(qiniuConfig.getBucketName(), keyName, Constants.EXPIRE_SECONDS, Constants.PUT_POLICY);
     }
 
     /**

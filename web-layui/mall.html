@@ -81,6 +81,10 @@
     layui.use(['jquery', 'laytpl', 'laypage'], function () {
         var $ = layui.$, laytpl = layui.laytpl, laypage = layui.laypage;
 
+        function addCart() {
+            console.log(1111);
+        }
+
         $.get('category/list', function (res) {
             laytpl(category.innerHTML).render(res.data, function (html) {
                 $('#categoryView').html(html);

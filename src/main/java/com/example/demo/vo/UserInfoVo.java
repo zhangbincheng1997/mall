@@ -12,7 +12,9 @@ public class UserInfoVo {
 
     private String nickname;
 
-    private Integer sex;
+    private String email;
+
+    private Integer gender;
 
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date birthday;

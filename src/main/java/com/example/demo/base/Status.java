@@ -37,26 +37,32 @@ public enum Status {
     FILE_UPLOAD_ERROR(30001, "咋回事，文件有毒？"),
 
     // 账号相关
-    USERNAME_EXIST(50010, "账号已经存在"),
-    USERNAME_NOT_EXIST(50011, "账号不存在"),
+    USERNAME_EXIST(40010, "账号已经存在"),
+    USERNAME_NOT_EXIST(40011, "账号不存在"),
 
     // 商品相关
-    PRODUCT_NOT_EXIST(60000, "商品不存在"),
-    PRODUCT_STATUS_NOT_ON(60001, "商品下架"),
-    PRODUCT_STOCK_NOT_ENOUGH(60002, "商品库存不足"),
-    CATEGORY_EXIST(60010, "分类已经存在"),
-    CATEGORY_ROOT_NOT_EXIST(60012, "分类父类不存在"),
-    CATEGORY_NOT_EXIST(60012, "分类不存在"),
-    CATEGORY_NOT_DELETE(60013, "分类不允许删除"),
-    ORDER_NOT_EXIST(60020, "订单不存在"),
+    PRODUCT_NOT_EXIST(50000, "商品不存在"),
+    PRODUCT_STATUS_NOT_ON(50001, "商品下架"),
+    PRODUCT_STOCK_NOT_ENOUGH(50002, "商品库存不足"),
+    CATEGORY_EXIST(50010, "分类已经存在"),
+    CATEGORY_ROOT_NOT_EXIST(50012, "分类父类不存在"),
+    CATEGORY_NOT_EXIST(50012, "分类不存在"),
+    CATEGORY_NOT_DELETE(50013, "分类不允许删除"),
+    ORDER_NOT_EXIST(50020, "订单不存在"),
 
     // 支付相关
-    PAY_BUG(70000, "支付异常"),
-    PAY_CHECK_BUG(70001, "支付检查异常"),
-    ORDER_NOT_NEW(70002, "不属于新订单"),
-    ORDER_NOT_PAY(70003, "订单未付款"),
-    ORDER_PAY(70004, "订单已付款"),
-    ORDER_NOT_REQUEST_REFUND(70005, "订单没有申请退款");
+    PAY_BUG(60000, "支付异常"),
+    PAY_CHECK_BUG(60001, "支付检查异常"),
+
+    // 订单
+    ORDER_NOT_NEW(70000, "订单不属于新订单"),
+    ORDER_NOT_PAY(70001, "订单不属于已付款"),
+    ORDER_NOT_ORDER(70002, "订单不属于已接单"),
+    ORDER_NOT_SHIP(70003, "订单不属于已发货"),
+    ORDER_CANCEL(70004, "订单已取消"),
+    ORDER_FINISH(70005, "订单已完成"),
+    ORDER_NOT_REFUND_REQUEST(70006, "订单没有退款申请"),
+    ORDER_REFUND_SUCCESS(70007, "订单退款成功");
 
     private Integer code;
     private String msg;

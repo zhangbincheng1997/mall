@@ -1,9 +1,8 @@
 package com.example.demo.controller;
 
 import com.example.demo.component.PayService;
-import com.example.demo.enums.PayStatusEnum;
+import com.example.demo.enums.OrderStatusEnum;
 import com.example.demo.service.OrderService;
-import com.example.demo.service.SellerOrderService;
 import com.example.demo.utils.Constants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,12 +39,9 @@ public class PayController {
         boolean verifyResult = payService.check(request);
         if (verifyResult) {
             // https://docs.open.alipay.com/270/105899/
-            // 接收到异步通知并验签通过后，一定要检查通知内容，
-            // 包括通知中的 app_id、out_trade_no、total_amount 是否与请求中的一致，
-            // 并根据 trade_status 进行后续业务处理。
             Long id = new Long(request.getParameter("out_trade_no")); // id
             orderService.decreaseStock(id); // MYSQL 真正写入数据库
-            int count = orderService.updatePayStatus(id, PayStatusEnum.TRUE.getCode());
+            int count = orderService.updateOrderStatus(id, OrderStatusEnum.PAY.getCode());
             if (count != 0) {
                 log.info("Notify 验证成功");
                 return "success";

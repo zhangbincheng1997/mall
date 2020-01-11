@@ -9,11 +9,13 @@ public class OrderMaster implements Serializable {
 
     private String username;
 
+    private String nickname;
+
+    private String email;
+
     private BigDecimal amount;
 
     private Integer orderStatus;
-
-    private Integer payStatus;
 
     private Date createTime;
 
@@ -37,6 +39,22 @@ public class OrderMaster implements Serializable {
         this.username = username;
     }
 
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public BigDecimal getAmount() {
         return amount;
     }
@@ -51,14 +69,6 @@ public class OrderMaster implements Serializable {
 
     public void setOrderStatus(Integer orderStatus) {
         this.orderStatus = orderStatus;
-    }
-
-    public Integer getPayStatus() {
-        return payStatus;
-    }
-
-    public void setPayStatus(Integer payStatus) {
-        this.payStatus = payStatus;
     }
 
     public Date getCreateTime() {
@@ -85,9 +95,10 @@ public class OrderMaster implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", username=").append(username);
+        sb.append(", nickname=").append(nickname);
+        sb.append(", email=").append(email);
         sb.append(", amount=").append(amount);
         sb.append(", orderStatus=").append(orderStatus);
-        sb.append(", payStatus=").append(payStatus);
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);

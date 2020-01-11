@@ -2,7 +2,7 @@ document.write("<div class=\"header\">");
 document.write("    <div class=\"headerLayout w1200\">");
 document.write("        <div class=\"headerCon\">");
 document.write("            <h1 class=\"mallLogo\">");
-document.write("                <a href=\"mall.index\" title=\"新华书店\">");
+document.write("                <a href=\"mall.html\" title=\"新华书店\">");
 document.write("                    <img src=\"img\/logo.png\" width=\"100px\">");
 document.write("                <\/a>");
 document.write("            <\/h1>");

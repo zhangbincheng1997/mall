@@ -12,7 +12,7 @@ public class PageResult<T> extends Result<T> {
         this.count = count;
     }
 
-    public static<T> PageResult<T> success(T data, Long count) {
+    public static <T> PageResult<T> success(T data, Long count) {
         return new PageResult<T>(Status.SUCCESS.getCode(), Status.SUCCESS.getMsg(), data, count);
     }
 }
