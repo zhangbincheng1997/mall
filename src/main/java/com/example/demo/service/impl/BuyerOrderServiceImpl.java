@@ -2,19 +2,20 @@ package com.example.demo.service.impl;
 
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.lang.Snowflake;
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.example.demo.base.GlobalException;
 import com.example.demo.base.Status;
 import com.example.demo.component.RabbitSender;
 import com.example.demo.component.RedisLocker;
 import com.example.demo.component.RedisService;
-import com.example.demo.dto.OrderDetailDto;
-import com.example.demo.dto.OrderMasterDto;
+import com.example.demo.dto.CartDto;
 import com.example.demo.dto.page.OrderPageRequest;
 import com.example.demo.mapper.OrderDetailMapper;
 import com.example.demo.mapper.OrderMasterMapper;
 import com.example.demo.model.*;
 import com.example.demo.service.BuyerOrderService;
+import com.example.demo.service.CartService;
 import com.example.demo.service.UserService;
 import com.example.demo.utils.Constants;
 import com.github.pagehelper.PageHelper;
@@ -28,6 +29,7 @@ import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -52,7 +54,7 @@ public class BuyerOrderServiceImpl implements BuyerOrderService {
     private OrderDetailMapper orderDetailMapper;
 
     @Autowired
-    private UserService userService;
+    private CartService cartService;
 
     @Override
     public OrderMaster get(String username, Long id) {
@@ -95,16 +97,21 @@ public class BuyerOrderServiceImpl implements BuyerOrderService {
      * 订单退款：1.校验状态 2.redis回退 3.mysql回退
      *
      * @param user
-     * @param orderMasterDto
      * @return
      */
     @Override
-    public String buy(User user, OrderMasterDto orderMasterDto) {
+    public String buy(User user) {
+        List<CartDto> cartDtoList = cartService.listCheck(user.getUsername()); // 下单部分
         List<String> lockKey = new ArrayList<String>();
+
         // 检查数量
-        for (OrderDetailDto orderDetailDto : orderMasterDto.getProducts()) {
-            Long productId = orderDetailDto.getId();
-            Integer productQuantity = orderDetailDto.getQuantity();
+        for (CartDto cartDto : cartDtoList) {
+            if (!cartDto.getChecked()) {
+                cartDtoList.remove(cartDto);
+                continue;
+            }
+            Long productId = cartDto.getId();
+            Integer productQuantity = cartDto.getQuantity();
             // 从redis获取
             Integer stock = (Integer) redisService.get(Constants.REDIS_PRODUCT_STOCK + productId);
             // 商品不存在
@@ -114,22 +121,27 @@ public class BuyerOrderServiceImpl implements BuyerOrderService {
             // 添加
             lockKey.add(Constants.REDIS_PRODUCT_STOCK + productId);
         }
+
         // lock
-        RedissonMultiLock multiLock = redisLocker.multiLock(Convert.toStrArray(lockKey));
-        for (OrderDetailDto orderDetailDto : orderMasterDto.getProducts()) {
-            Long productId = orderDetailDto.getId();
-            Integer productQuantity = orderDetailDto.getQuantity();
+//        RedissonMultiLock multiLock = redisLocker.multiLock(Convert.toStrArray(lockKey));
+        for (CartDto cartDto : cartDtoList) {
+            Long productId = cartDto.getId();
+            Integer productQuantity = cartDto.getQuantity();
             // 预减库存
             redisService.decrement(Constants.REDIS_PRODUCT_STOCK + productId, productQuantity);
         }
         // unlock
-        multiLock.unlock();
+//        multiLock.unlock();
+
+        // 清空购物车
+        List<Long> ids = cartDtoList.stream().map(CartDto::getId).collect(Collectors.toList());
+        cartService.delete(user.getUsername(), ids);
 
         JSONObject jsonStr = new JSONObject();
         Long orderId = snowflake.nextId(); // 雪花算法 生成全局唯一ID
         jsonStr.put("orderId", orderId);
         jsonStr.put("user", user);
-        jsonStr.put("orderMasterDto", orderMasterDto);
+        jsonStr.put("cartDtoList", cartDtoList);
         rabbitSender.send(Constants.ORDER_TOPIC, jsonStr.toJSONString()); // 发送消息队列
         return String.valueOf(orderId);
     }

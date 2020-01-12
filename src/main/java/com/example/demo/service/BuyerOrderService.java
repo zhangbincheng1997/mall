@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.OrderMasterDto;
 import com.example.demo.dto.page.OrderPageRequest;
 import com.example.demo.model.OrderDetail;
 import com.example.demo.model.OrderMaster;
@@ -17,5 +16,5 @@ public interface BuyerOrderService {
 
     PageInfo<OrderMaster> list(String username, OrderPageRequest pageRequest);
 
-    String buy(User user, OrderMasterDto orderMasterDto);
+    String buy(User user);
 }

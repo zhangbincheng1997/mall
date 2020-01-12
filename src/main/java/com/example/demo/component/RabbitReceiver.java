@@ -1,9 +1,7 @@
 package com.example.demo.component;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.example.demo.dto.OrderDetailDto;
-import com.example.demo.dto.OrderMasterDto;
+import com.example.demo.dto.CartDto;
 import com.example.demo.mapper.OrderDetailMapper;
 import com.example.demo.mapper.OrderMasterMapper;
 import com.example.demo.mapper.ProductMapper;
@@ -16,11 +14,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Slf4j
 @Component
@@ -44,14 +41,14 @@ public class RabbitReceiver {
     public void process(String message) {
         JSONObject jsonObject = JSONObject.parseObject(message);
         Long orderId = (Long) jsonObject.get("orderId");
-        User user = JSON.toJavaObject(jsonObject.getJSONObject("user"), User.class);
-        OrderMasterDto orderMasterDto = JSON.toJavaObject(jsonObject.getJSONObject("orderMasterDto"), OrderMasterDto.class);
+        User user = JSONObject.parseObject(jsonObject.getString("user"), User.class);
+        List<CartDto> cartDtoList = JSONObject.parseArray(jsonObject.getString("cartDtoList"), CartDto.class);
 
         // 计算价格
         BigDecimal amount = new BigDecimal(0);
-        for (OrderDetailDto orderDetailDto : orderMasterDto.getProducts()) {
-            Long productId = orderDetailDto.getId();
-            Integer productQuantity = orderDetailDto.getQuantity();
+        for (CartDto cartDto : cartDtoList) {
+            Long productId = cartDto.getId();
+            Integer productQuantity = cartDto.getQuantity();
 
             // 创建订单详情
             OrderDetail orderDetail = new OrderDetail();

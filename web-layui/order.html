@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <script type="text/javascript" src="include/title.js"></script>
+    <script type="text/javascript" src="include/admin/title.js"></script>
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
@@ -41,11 +41,9 @@
 </script>
 <script type="text/html" id="barTpl">
     <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="detail">详情</a>
-    {{# if (d.orderStatus == '新订单') { }}
+    {{# if (d.orderStatus == '待付款') { }}
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="cancel">取消</a>
-    {{# } else if (d.orderStatus == '已付款') { }}
-    <a class="layui-btn layui-btn-success layui-btn-xs" lay-event="order">接单</a>
-    {{# } else if (d.orderStatus == '已接单') { }}
+    {{# } else if (d.orderStatus == '待发货') { }}
     <a class="layui-btn layui-btn-success layui-btn-xs" lay-event="ship">发货</a>
     {{# } else if (d.orderStatus == '申请退款') { }}
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="deal">退款</a>
@@ -122,15 +120,6 @@
                 case 'deal':
                     layer.confirm('确认处理退款？', function (index) {
                         $.post('seller/pay/deal/' + obj.data.id, function (res) {
-                            if (res.code === 0) {
-                                table.reload('table', {page: {curr: $(".layui-laypage-em").next().html()}});
-                            }
-                        });
-                    });
-                    break;
-                case 'order':
-                    layer.confirm('确认接单？', function (index) {
-                        $.post('seller/pay/order/' + obj.data.id, function (res) {
                             if (res.code === 0) {
                                 table.reload('table', {page: {curr: $(".layui-laypage-em").next().html()}});
                             }

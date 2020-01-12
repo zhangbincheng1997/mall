@@ -14,4 +14,6 @@ public class CartVo {
     private String price; // BigDecimal -> String
 
     private Integer quantity;
+
+    private Boolean checked;
 }

@@ -1,11 +1,9 @@
 package com.example.demo.controller;
 
-import cn.hutool.core.convert.Convert;
 import com.example.demo.aop.AccessLimit;
 import com.example.demo.base.Result;
 import com.example.demo.base.Status;
 import com.example.demo.component.PayService;
-import com.example.demo.dto.OrderMasterDto;
 import com.example.demo.enums.OrderStatusEnum;
 import com.example.demo.jwt.JwtUserDetails;
 import com.example.demo.model.OrderMaster;
@@ -21,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
 import java.security.Principal;
 
 @Slf4j
@@ -43,12 +40,11 @@ public class BuyerPayController {
     @ResponseBody
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')") // RequestBody JSON
     @AccessLimit(ip = true, time = 1, count = 1) // 防止重复下单
-    public Result<String> buy(@ApiIgnore Authentication authentication,
-                              @Valid @RequestBody OrderMasterDto orderMasterDto) {
+    public Result<String> create(@ApiIgnore Authentication authentication) {
         // 创建订单
         JwtUserDetails userDetails = (JwtUserDetails) authentication.getPrincipal();
-        buyerOrderService.buy(userDetails.getUser(), orderMasterDto);
-        return Result.success();
+        String orderId = buyerOrderService.buy(userDetails.getUser());
+        return Result.success(orderId);
     }
 
     @ApiOperation("购买 PC端支付")
@@ -56,7 +52,7 @@ public class BuyerPayController {
     @ResponseBody
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @AccessLimit(ip = true, time = 1, count = 1) // 防止重复下单
-    public void buyById(@ApiIgnore Principal principal, @PathVariable("id") Long id, HttpServletResponse response) {
+    public void buy(@ApiIgnore Principal principal, @PathVariable("id") Long id, HttpServletResponse response) {
         // 查找订单
         OrderMaster order = buyerOrderService.get(principal.getName(), id);
         // 调用接口
@@ -72,8 +68,8 @@ public class BuyerPayController {
         // 确认存在
         OrderMaster order = buyerOrderService.get(principal.getName(), id);
         // 检查状态
-        if (!order.getOrderStatus().equals(OrderStatusEnum.NEW.getCode()))
-            return Result.failure(Status.ORDER_NOT_NEW);
+        if (!order.getOrderStatus().equals(OrderStatusEnum.TO_BE_PAID.getCode()))
+            return Result.failure(Status.ORDER_NOT_TO_BE_PAID);
         // 修改订单状态
         orderService.addStockRedis(id);
         orderService.updateOrderStatus(id, OrderStatusEnum.CANCEL.getCode());
@@ -81,7 +77,7 @@ public class BuyerPayController {
     }
 
     @ApiOperation("买家订单确认收货")
-    @PostMapping(value = "/confirm/{id}")
+    @PostMapping(value = "/receive/{id}")
     @ResponseBody
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @AccessLimit(ip = true, time = 1, count = 1) // 防止重复完成订单
@@ -89,8 +85,8 @@ public class BuyerPayController {
         // 确认存在
         OrderMaster order = buyerOrderService.get(principal.getName(), id);
         // 检查状态
-        if (!order.getOrderStatus().equals(OrderStatusEnum.SHIP.getCode()))
-            return Result.failure(Status.ORDER_NOT_SHIP);
+        if (!order.getOrderStatus().equals(OrderStatusEnum.TO_BE_RECEIVED.getCode())) // 待收货
+            return Result.failure(Status.ORDER_NOT_TO_BE_RECEIVED);
         // 修改订单状态
         orderService.updateOrderStatus(id, OrderStatusEnum.FINISH.getCode());
         return Result.success();
@@ -105,8 +101,8 @@ public class BuyerPayController {
         // 确认存在
         OrderMaster order = buyerOrderService.get(principal.getName(), id);
         // 检查状态
-        if (!order.getOrderStatus().equals(OrderStatusEnum.PAY.getCode()))
-            return Result.failure(Status.ORDER_NOT_PAY);
+        if (!order.getOrderStatus().equals(OrderStatusEnum.TO_BE_SHIPPED.getCode())) // 待发货
+            return Result.failure(Status.ORDER_NOT_TO_BE_SHIPPED);
         // 修改订单状态
         orderService.updateOrderStatus(id, OrderStatusEnum.REFUND_REQUEST.getCode());
         return Result.success();

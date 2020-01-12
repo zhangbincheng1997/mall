@@ -41,7 +41,7 @@ public class PayController {
             // https://docs.open.alipay.com/270/105899/
             Long id = new Long(request.getParameter("out_trade_no")); // id
             orderService.decreaseStock(id); // MYSQL 真正写入数据库
-            int count = orderService.updateOrderStatus(id, OrderStatusEnum.PAY.getCode());
+            int count = orderService.updateOrderStatus(id, OrderStatusEnum.TO_BE_SHIPPED.getCode());
             if (count != 0) {
                 log.info("Notify 验证成功");
                 return "success";

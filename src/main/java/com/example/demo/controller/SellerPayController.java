@@ -61,27 +61,11 @@ public class SellerPayController {
         // 确认存在
         OrderMaster order = sellerOrderService.get(id);
         // 检查状态
-        if (!order.getOrderStatus().equals(OrderStatusEnum.NEW.getCode()))
-            return Result.failure(Status.ORDER_NOT_NEW);
+        if (!order.getOrderStatus().equals(OrderStatusEnum.TO_BE_PAID.getCode()))
+            return Result.failure(Status.ORDER_NOT_TO_BE_PAID);
         // 不管是否关闭成功，都更新状态，不同于其他方法
         orderService.addStockRedis(id);
         orderService.updateOrderStatus(id, OrderStatusEnum.CANCEL.getCode());
-        return Result.success();
-    }
-
-    @ApiOperation("卖家订单接单")
-    @PostMapping(value = "/order/{id}")
-    @ResponseBody
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
-    @AccessLimit(ip = true, time = 1, count = 1) // 防止重复完成订单
-    public Result<String> pay(@PathVariable("id") Long id) {
-        // 确认存在
-        OrderMaster order = sellerOrderService.get(id);
-        // 检查状态
-        if (!order.getOrderStatus().equals(OrderStatusEnum.PAY.getCode()))
-            return Result.failure(Status.ORDER_NOT_PAY);
-        // 修改订单状态
-        orderService.updateOrderStatus(id, OrderStatusEnum.ORDER.getCode());
         return Result.success();
     }
 
@@ -94,10 +78,10 @@ public class SellerPayController {
         // 确认存在
         OrderMaster order = sellerOrderService.get(id);
         // 检查状态
-        if (!order.getOrderStatus().equals(OrderStatusEnum.ORDER.getCode()))
-            return Result.failure(Status.ORDER_NOT_ORDER);
+        if (!order.getOrderStatus().equals(OrderStatusEnum.TO_BE_SHIPPED.getCode())) // 待发货
+            return Result.failure(Status.ORDER_NOT_TO_BE_SHIPPED);
         // 修改订单状态
-        orderService.updateOrderStatus(id, OrderStatusEnum.SHIP.getCode());
+        orderService.updateOrderStatus(id, OrderStatusEnum.TO_BE_RECEIVED.getCode());
         return Result.success();
     }
 }

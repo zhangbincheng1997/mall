@@ -97,17 +97,28 @@ public static final int PERMISSION_EXPIRE = 60 * 60; // 权限缓存过期时间
 ```
 
 ## 支付
-见
 >* https://github.com/littleredhat1997/pay-demo
 >* https://openhome.alipay.com/platform/appDaily.htm
 >* https://docs.open.alipay.com/284
 ```
 $ ssh -NR 8888:127.0.0.1:8080 root@www.littleredhat1997.com
+
+# 保持连接
+$ vim /etc/ssh/sshd_config
+ClientAliveInterval 60
+ClientAliveCountMax 10
 ```
 
 ## 细粒度锁
-Redis
-TODO
+[Redisson](https://github.com/redisson/redisson)分布式锁
+```
+@Autowired
+private RedisLocker redisLocker;
+
+RLock lock = redisLocker.lock(xxx)
+...... // 业务
+lock.unlock()
+```
 
 ## 测压
 JMeter

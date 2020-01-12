@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script type="text/javascript" src="include/user/title.js"></script>
+</head>
+<body>
+<script type="text/javascript" src="include/user/site-nav.js"></script>
+<script type="text/javascript" src="include/user/header.js"></script>
+<div class="content content-nav-base commodity-content">
+    <script type="text/javascript" src="include/user/main-nav.js"></script>
+    <div class="commod-cont-wrap">
+        <div class="commod-cont w1200 layui-clear">
+            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px">
+                <legend>购物车</legend>
+            </fieldset>
+            <table id="table" lay-filter="table"></table>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="include/user/footer.js"></script>
+<script type="text/html" id="toolbarTpl">
+    <div class="layui-inline">
+        <a class="layui-btn layui-btn-danger" lay-event="delete"><i class="layui-icon layui-icon-delete"></i>删除</a>
+        <a class="layui-btn layui-btn-success" lay-event="buy"><i class="layui-icon layui-icon-cart"></i>购买</a>
+    </div>
+</script>
+<script type="text/html" id="barTpl">
+    <div class="layui-btn-group">
+        <a class="layui-btn layui-btn-primary" lay-event="sub">-</a>
+        <a class="layui-btn layui-btn-primary">{{ d.quantity }}</a>
+        <a class="layui-btn layui-btn-primary" lay-event="add">+</a>
+    </div>
+</script>
+<script type="text/html" id="iconTpl">
+    <img src="{{ d.icon }}" width="50px" height="50px">
+</script>
+<script>
+    layui.use(['jquery', 'laytpl', 'laypage', 'form', 'table'], function () {
+        var $ = layui.$, form = layui.form, table = layui.table;
+
+        form.on('select(statusSearch)', function (data) {
+            table.reload('table', {
+                // url: 'seller/order/list',
+                where: {status: data.value}
+            });
+        });
+
+        table.render({
+            elem: '#table',
+            url: 'buyer/cart',
+            page: false,
+            size: 'lg',
+            toolbar: '#toolbarTpl', // 'default'
+            totalRow: true,
+            parseData: function (res) { // 添加小计行
+                $(res.data).each(function (i, d) {
+                    d.amount = (d.price * d.quantity).toFixed(2);
+                    d.LAY_CHECKED = d.checked;
+                });
+                return res;
+            },
+            cols: [[
+                {type: 'checkbox'},
+                {field: 'id', title: 'ID', width: 100, align: 'center', sort: true, edit: true, totalRowText: '合计'},
+                {field: 'icon', title: '图标', width: 100, align: 'center', templet: '#iconTpl'},
+                {field: 'name', title: '名称'},
+                {field: 'price', title: '价格', width: 100, align: 'center'},
+                {field: 'quantity', title: '数量', width: 200, align: 'center', templet: '#barTpl'},
+                {field: 'amount', title: '小计', width: 100, align: 'center', style: 'color:red', totalRow: true},
+            ]],
+            done: function (res, curr, count) {
+                updateCheckTotal();
+            }
+        });
+
+        //监听头工具栏事件
+        table.on('toolbar(table)', function (obj) {
+            var checkStatus = table.checkStatus(obj.config.id);
+            var data = checkStatus.data; // 获取选中的数据
+            switch (obj.event) {
+                case 'buy':
+                    if (data.length === 0) {
+                        layer.msg('请选择一行');
+                    } else {
+                        layer.confirm('确认购买？', function (index) {
+                            $.post('buyer/pay', function (res) {
+                                if (res.code === 0) {
+                                    layer.msg(res.data, {
+                                        time: 2000, end: function () {
+                                            window.location.reload();
+                                        }
+                                    })
+                                }
+                            });
+                        });
+                    }
+                    break;
+                case 'delete':
+                    if (data.length === 0) {
+                        layer.msg('请选择一行');
+                    } else {
+                        var ids = [];
+                        $(data).each(function (i, d) {
+                            ids.push(d.id);
+                        });
+                        layer.confirm('确认删除？', function (index) {
+                            $.delete('buyer/cart/' + ids.join(','), function (res) {
+                                if (res.code === 0) {
+                                    window.location.reload();
+                                }
+                            });
+                        });
+                    }
+                    break;
+            }
+        });
+
+        // 监听行工具事件
+        table.on('tool(table)', function (obj) {
+            var quantity = obj.data.quantity;
+            switch (obj.event) {
+                case 'sub':
+                    quantity -= 1;
+                    $.put('buyer/cart/', {id: obj.data.id, quantity: quantity}, function (res) {
+                        if (res.code === 0) {
+                            obj.update({quantity: quantity, amount: (obj.data.price * quantity).toFixed(2)});
+                            updateCheckTotal();
+                        }
+                    });
+                    break;
+                case 'add':
+                    quantity += 1;
+                    $.put('buyer/cart/', {id: obj.data.id, quantity: quantity}, function (res) {
+                        if (res.code === 0) {
+                            obj.update({quantity: quantity, amount: (obj.data.price * quantity).toFixed(2)});
+                            updateCheckTotal();
+                        }
+                    });
+                    break;
+            }
+        });
+
+        // 监听多选框
+        table.on('checkbox(table)', function (obj) {
+            updateCheckTotal();
+            if (obj.type === 'all') {
+                $.put('buyer/cart/check/0', {checked: obj.checked}, function (res) {
+                });
+            } else {
+                $.put('buyer/cart/check/' + obj.data.id, {checked: obj.checked}, function (res) {
+                });
+            }
+        });
+
+        function updateCheckTotal() {
+            var checkStatus = table.checkStatus('table');
+            var data = checkStatus.data;
+            var total = 0;
+            $(data).each(function (i, d) {
+                total += (d.price * d.quantity);
+            });
+            total = total.toFixed(2);
+            $('.layui-table-total' + ' td[data-field="amount"] div').html(total);
+        }
+
+        $('.inner-cont2 a').each(function (i, item) {
+            var url = window.location.pathname;
+            var href = $(item).attr('href');
+            if (url.search(href) !== -1) {
+                $(item).addClass('active');
+            }
+        });
+    });
+</script>
+</body>
+</html>

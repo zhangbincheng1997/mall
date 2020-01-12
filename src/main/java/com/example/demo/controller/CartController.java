@@ -2,11 +2,10 @@ package com.example.demo.controller;
 
 import cn.hutool.core.convert.Convert;
 import com.example.demo.base.Result;
-import com.example.demo.component.RedisService;
 import com.example.demo.dto.CartDto;
 import com.example.demo.model.Product;
+import com.example.demo.service.CartService;
 import com.example.demo.service.SellerProductService;
-import com.example.demo.utils.Constants;
 import com.example.demo.vo.CartVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -15,17 +14,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Api(tags = "购物车")
 @Controller
-@RequestMapping("/cart")
+@RequestMapping("/buyer/cart")
 public class CartController {
 
     @Autowired
-    private RedisService redisService;
+    private CartService cartService;
 
     @Autowired
     private SellerProductService productService;
@@ -34,47 +34,52 @@ public class CartController {
     @GetMapping("")
     @ResponseBody
     public Result<List<CartVo>> list(@ApiIgnore Principal principal) {
-        Set<String> keys = redisService.keys(Constants.REDIS_PRODUCT_CART + principal.getName());
-        List<CartVo> cartVoList = keys.stream()
-                .map(key -> (CartVo) redisService.get(key))
-                .collect(Collectors.toList());
+        List<CartDto> cartDtoList = cartService.list(principal.getName());
+        List<CartVo> cartVoList = cartDtoList.stream()
+                .map(cartDto -> {
+                    Product product = productService.get(cartDto.getId()); // 获取当前商品信息
+                    CartVo cartVo = Convert.convert(CartVo.class, product);
+                    cartVo.setQuantity(cartDto.getQuantity());
+                    cartVo.setChecked(cartDto.getChecked());
+                    return cartVo;
+                }).collect(Collectors.toList());
         return Result.success(cartVoList);
     }
 
     @ApiOperation("加入购物车")
     @PostMapping("")
     @ResponseBody
-    public Result<String> create(@ApiIgnore Principal principal, CartDto cartDto) {
-        Product product = productService.get(cartDto.getId());
-        CartVo cartVo = Convert.convert(CartVo.class, product);
-        cartVo.setQuantity(cartDto.getQuantity());
-        redisService.set(Constants.REDIS_PRODUCT_CART + principal.getName() + cartVo.getId(), cartVo);
+    public Result<String> create(@ApiIgnore Principal principal, @Valid CartDto cartDto) {
+        cartService.create(principal.getName(), cartDto);
         return Result.success();
     }
 
     @ApiOperation("更新购物车")
     @PutMapping("")
     @ResponseBody
-    public Result<String> sub(@ApiIgnore Principal principal, CartDto cartDto) {
-        CartVo cartVo = (CartVo) redisService.get(Constants.REDIS_PRODUCT_CART + principal.getName() + cartDto.getId());
-        cartVo.setQuantity(cartDto.getQuantity());
+    public Result<String> update(@ApiIgnore Principal principal, @Valid CartDto cartDto) {
+        cartService.update(principal.getName(), cartDto);
         return Result.success();
     }
 
     @ApiOperation("删除购物车")
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{ids}")
     @ResponseBody
-    public Result<String> delete(@ApiIgnore Principal principal, @PathVariable("id") Long id) {
-        redisService.delete(Constants.REDIS_PRODUCT_CART + principal.getName() + id);
+    public Result<String> delete(@ApiIgnore Principal principal, @PathVariable("ids") List<Long> ids) {
+        cartService.delete(principal.getName(), ids);
         return Result.success();
     }
 
-    @ApiOperation("清空购物车")
-    @DeleteMapping("")
+    @ApiOperation("更新选中购物车商品")
+    @PutMapping("/check/{id}")
     @ResponseBody
-    public Result<String> clear(@ApiIgnore Principal principal) {
-        Set<String> keys = redisService.keys(Constants.REDIS_PRODUCT_CART + principal.getName());
-        keys.forEach(key -> redisService.delete(key));
+    public Result<String> select(@ApiIgnore Principal principal, @PathVariable("id") Long id,
+                                 @RequestParam("checked") Boolean checked) {
+        if (Long.valueOf(0L).equals(id)) { // id = 0 全部选中
+            cartService.updateAllCheck(principal.getName(), checked);
+        } else { // 否则 选中单个
+            cartService.updateOneCheck(principal.getName(), id, checked);
+        }
         return Result.success();
     }
 }

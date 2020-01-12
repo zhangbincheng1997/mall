@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" type="text/css" href="css/main.css">
-    <script type="text/javascript" src="include/title.js"></script>
+    <script type="text/javascript" src="include/user/title.js"></script>
 </head>
 <body>
 <script type="text/javascript" src="include/user/site-nav.js"></script>
@@ -51,15 +51,15 @@
                         </div>
                         <div class="cont-list layui-clear">
                             {{# layui.each(d.data, function(index, item){ }}
-                            <div class="item">
-                                <div class="img">
+                            <div class="item" id="{{ item.id }}">
+                                <div class="img layui-anim" data-anim="layui-anim-scale">
                                     <a href="javascript:void(0);">
-                                        <img src="{{ item.icon }}" title="{{ item.description }}" width="280px"
-                                             height="280px">
+                                        <img src="{{ item.icon }}" title="{{ item.description }}"
+                                             width="280px" height="280px">
                                     </a>
                                 </div>
                                 <div class="text">
-                                    <p class="title">{{ item.name }}(id:{{ item.id }})</p>
+                                    <p class="title">{{ item.name }}</p>
                                     <p class="price">
                                         <span class="pri">￥{{ item.price }}</span>
                                         <span class="nub">{{ item.stock }}库存</span>
@@ -78,8 +78,8 @@
 </div>
 <script type="text/javascript" src="include/user/footer.js"></script>
 <script>
-    layui.use(['jquery', 'laytpl', 'laypage'], function () {
-        var $ = layui.$, laytpl = layui.laytpl, laypage = layui.laypage;
+    layui.use(['jquery', 'element', 'laytpl', 'laypage'], function () {
+        var $ = layui.$, laytpl = layui.laytpl, laypage = layui.laypage, element = layui.element;
 
         function addCart() {
             console.log(1111);
@@ -93,26 +93,38 @@
 
         var para = '&keyword=' + getQueryVariable('keyword') + '&category=' + getQueryVariable('category');
         $.get('buyer/product?limit=12&page=1' + para, function (res) {
-            laytpl(product.innerHTML).render(res, function (html) {
-                $('#productView').html(html);
-            });
-            // 分页
-            laypage.render({
+            init(res);
+            laypage.render({ // 分页
                 elem: 'page',
                 count: res.count,
                 limit: 12,
                 jump: function (obj, first) {
-                    // 首次不执行
-                    if (!first) {
+                    if (!first) { // 首次不执行
                         $.get('buyer/product?limit=12&page=' + obj.curr, function (res) {
-                            laytpl(product.innerHTML).render(res, function (html) {
-                                $('#productView').html(html);
-                            });
+                            init(res);
                         });
                     }
                 }
             });
         });
+
+        function init(res) {
+            laytpl(product.innerHTML).render(res, function (html) {
+                $('#productView').html(html);
+                $('.layui-anim').on('click', function () {
+                    var othis = $(this), anim = othis.data('anim');
+                    var id = othis.parents('.item').attr("id");
+                    $.post('buyer/cart', {id: id, quantity: 1}, function (res) {
+                        if (res.code === 0) { // 动画
+                            othis.removeClass(anim);
+                            setTimeout(function () {
+                                othis.addClass(anim);
+                            });
+                        }
+                    })
+                });
+            });
+        }
 
         function getQueryVariable(variable) {
             var query = window.location.search.substring(1);
@@ -125,6 +137,14 @@
             }
             return '';
         }
+
+        $('.inner-cont2 a').each(function (i, item) {
+            var url = window.location.pathname;
+            var href = $(item).attr('href');
+            if (url.search(href) !== -1) {
+                $(item).addClass('active');
+            }
+        });
     });
 </script>
 </body>

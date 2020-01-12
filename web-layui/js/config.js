@@ -1,7 +1,8 @@
 var API = "http://localhost:8080/";
 
-layui.use('jquery', function () {
+layui.use(['jquery', 'layer'], function () {
     var $ = layui.jquery;
+    var layer = layui.layer;
 
     // ajax全局配置
     $.ajaxSetup({

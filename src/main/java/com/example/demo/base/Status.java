@@ -55,12 +55,11 @@ public enum Status {
     PAY_CHECK_BUG(60001, "支付检查异常"),
 
     // 订单
-    ORDER_NOT_NEW(70000, "订单不属于新订单"),
-    ORDER_NOT_PAY(70001, "订单不属于已付款"),
-    ORDER_NOT_ORDER(70002, "订单不属于已接单"),
-    ORDER_NOT_SHIP(70003, "订单不属于已发货"),
-    ORDER_CANCEL(70004, "订单已取消"),
-    ORDER_FINISH(70005, "订单已完成"),
+    ORDER_NOT_TO_BE_PAID(70000, "订单不属于待付款"),
+    ORDER_NOT_TO_BE_SHIPPED(70001, "订单不属于待发货"),
+    ORDER_NOT_TO_BE_RECEIVED(70002, "订单不属于待收货"),
+    ORDER_CANCEL(70003, "订单已取消"),
+    ORDER_FINISH(70004, "订单已完成"),
     ORDER_NOT_REFUND_REQUEST(70006, "订单没有退款申请"),
     ORDER_REFUND_SUCCESS(70007, "订单退款成功");
 
