@@ -21,8 +21,9 @@ public class CartServiceImpl implements CartService {
     @Override
     public List<CartDto> list(String username) {
         Set<String> keys = redisService.keys(Constants.REDIS_PRODUCT_CART + username);
-        return keys.stream()
-                .map(key -> (CartDto) redisService.get(key))
+        List<Object> objects = redisService.multiGet(keys);
+        return objects.stream()
+                .map(object -> (CartDto) object)
                 .sorted(Comparator.comparing(CartDto::getId).reversed()) // 保证顺序
                 .collect(Collectors.toList());
     }
@@ -43,16 +44,8 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public void delete(String username, List<Long> ids) {
-        ids.forEach(id -> redisService.delete(getKey(username, id)));
-    }
-
-    @Override
-    public List<CartDto> listCheck(String username) {
-        Set<String> keys = redisService.keys(Constants.REDIS_PRODUCT_CART + username);
-        return keys.stream()
-                .map(key -> (CartDto) redisService.get(key))
-                .filter(CartDto::getChecked)
-                .collect(Collectors.toList());
+        List<String> keys = ids.stream().map(id -> getKey(username, id)).collect(Collectors.toList());
+        redisService.delete(keys);
     }
 
     @Override

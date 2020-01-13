@@ -7,7 +7,7 @@
     <result column="nickname" jdbcType="VARCHAR" property="nickname" />
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="amount" jdbcType="DECIMAL" property="amount" />
-    <result column="order_status" jdbcType="INTEGER" property="orderStatus" />
+    <result column="status" jdbcType="INTEGER" property="status" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
@@ -70,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, username, nickname, email, amount, order_status, create_time, update_time
+    id, username, nickname, email, amount, status, create_time, update_time
   </sql>
   <select id="selectByExample" parameterType="com.example.demo.model.OrderMasterExample" resultMap="BaseResultMap">
     select
@@ -104,10 +104,10 @@
   </delete>
   <insert id="insert" parameterType="com.example.demo.model.OrderMaster">
     insert into order_master (id, username, nickname, 
-      email, amount, order_status, 
+      email, amount, status, 
       create_time, update_time)
     values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
-      #{email,jdbcType=VARCHAR}, #{amount,jdbcType=DECIMAL}, #{orderStatus,jdbcType=INTEGER}, 
+      #{email,jdbcType=VARCHAR}, #{amount,jdbcType=DECIMAL}, #{status,jdbcType=INTEGER}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.example.demo.model.OrderMaster">
@@ -128,8 +128,8 @@
       <if test="amount != null">
         amount,
       </if>
-      <if test="orderStatus != null">
-        order_status,
+      <if test="status != null">
+        status,
       </if>
       <if test="createTime != null">
         create_time,
@@ -154,8 +154,8 @@
       <if test="amount != null">
         #{amount,jdbcType=DECIMAL},
       </if>
-      <if test="orderStatus != null">
-        #{orderStatus,jdbcType=INTEGER},
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -189,8 +189,8 @@
       <if test="record.amount != null">
         amount = #{record.amount,jdbcType=DECIMAL},
       </if>
-      <if test="record.orderStatus != null">
-        order_status = #{record.orderStatus,jdbcType=INTEGER},
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -210,7 +210,7 @@
       nickname = #{record.nickname,jdbcType=VARCHAR},
       email = #{record.email,jdbcType=VARCHAR},
       amount = #{record.amount,jdbcType=DECIMAL},
-      order_status = #{record.orderStatus,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
@@ -232,8 +232,8 @@
       <if test="amount != null">
         amount = #{amount,jdbcType=DECIMAL},
       </if>
-      <if test="orderStatus != null">
-        order_status = #{orderStatus,jdbcType=INTEGER},
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -250,7 +250,7 @@
       nickname = #{nickname,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       amount = #{amount,jdbcType=DECIMAL},
-      order_status = #{orderStatus,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}

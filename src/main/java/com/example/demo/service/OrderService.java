@@ -8,7 +8,7 @@ public interface OrderService {
 
     List<OrderDetail> getDetail(Long id);
 
-    int updateOrderStatus(Long id, Integer orderStatus);
+    int updateOrderStatus(Long id, Integer status);
 
     void increaseStock(Long id);
     void decreaseStock(Long id);

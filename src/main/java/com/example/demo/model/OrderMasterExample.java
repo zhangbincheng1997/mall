@@ -436,63 +436,63 @@ public class OrderMasterExample {
             return (Criteria) this;
         }
 
-        public Criteria andOrderStatusIsNull() {
-            addCriterion("order_status is null");
+        public Criteria andStatusIsNull() {
+            addCriterion("status is null");
             return (Criteria) this;
         }
 
-        public Criteria andOrderStatusIsNotNull() {
-            addCriterion("order_status is not null");
+        public Criteria andStatusIsNotNull() {
+            addCriterion("status is not null");
             return (Criteria) this;
         }
 
-        public Criteria andOrderStatusEqualTo(Integer value) {
-            addCriterion("order_status =", value, "orderStatus");
+        public Criteria andStatusEqualTo(Integer value) {
+            addCriterion("status =", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andOrderStatusNotEqualTo(Integer value) {
-            addCriterion("order_status <>", value, "orderStatus");
+        public Criteria andStatusNotEqualTo(Integer value) {
+            addCriterion("status <>", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andOrderStatusGreaterThan(Integer value) {
-            addCriterion("order_status >", value, "orderStatus");
+        public Criteria andStatusGreaterThan(Integer value) {
+            addCriterion("status >", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andOrderStatusGreaterThanOrEqualTo(Integer value) {
-            addCriterion("order_status >=", value, "orderStatus");
+        public Criteria andStatusGreaterThanOrEqualTo(Integer value) {
+            addCriterion("status >=", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andOrderStatusLessThan(Integer value) {
-            addCriterion("order_status <", value, "orderStatus");
+        public Criteria andStatusLessThan(Integer value) {
+            addCriterion("status <", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andOrderStatusLessThanOrEqualTo(Integer value) {
-            addCriterion("order_status <=", value, "orderStatus");
+        public Criteria andStatusLessThanOrEqualTo(Integer value) {
+            addCriterion("status <=", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andOrderStatusIn(List<Integer> values) {
-            addCriterion("order_status in", values, "orderStatus");
+        public Criteria andStatusIn(List<Integer> values) {
+            addCriterion("status in", values, "status");
             return (Criteria) this;
         }
 
-        public Criteria andOrderStatusNotIn(List<Integer> values) {
-            addCriterion("order_status not in", values, "orderStatus");
+        public Criteria andStatusNotIn(List<Integer> values) {
+            addCriterion("status not in", values, "status");
             return (Criteria) this;
         }
 
-        public Criteria andOrderStatusBetween(Integer value1, Integer value2) {
-            addCriterion("order_status between", value1, value2, "orderStatus");
+        public Criteria andStatusBetween(Integer value1, Integer value2) {
+            addCriterion("status between", value1, value2, "status");
             return (Criteria) this;
         }
 
-        public Criteria andOrderStatusNotBetween(Integer value1, Integer value2) {
-            addCriterion("order_status not between", value1, value2, "orderStatus");
+        public Criteria andStatusNotBetween(Integer value1, Integer value2) {
+            addCriterion("status not between", value1, value2, "status");
             return (Criteria) this;
         }
 

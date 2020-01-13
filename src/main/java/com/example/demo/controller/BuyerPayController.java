@@ -68,7 +68,7 @@ public class BuyerPayController {
         // 确认存在
         OrderMaster order = buyerOrderService.get(principal.getName(), id);
         // 检查状态
-        if (!order.getOrderStatus().equals(OrderStatusEnum.TO_BE_PAID.getCode()))
+        if (!order.getStatus().equals(OrderStatusEnum.TO_BE_PAID.getCode()))
             return Result.failure(Status.ORDER_NOT_TO_BE_PAID);
         // 修改订单状态
         orderService.addStockRedis(id);
@@ -85,7 +85,7 @@ public class BuyerPayController {
         // 确认存在
         OrderMaster order = buyerOrderService.get(principal.getName(), id);
         // 检查状态
-        if (!order.getOrderStatus().equals(OrderStatusEnum.TO_BE_RECEIVED.getCode())) // 待收货
+        if (!order.getStatus().equals(OrderStatusEnum.TO_BE_RECEIVED.getCode())) // 待收货
             return Result.failure(Status.ORDER_NOT_TO_BE_RECEIVED);
         // 修改订单状态
         orderService.updateOrderStatus(id, OrderStatusEnum.FINISH.getCode());
@@ -101,7 +101,7 @@ public class BuyerPayController {
         // 确认存在
         OrderMaster order = buyerOrderService.get(principal.getName(), id);
         // 检查状态
-        if (!order.getOrderStatus().equals(OrderStatusEnum.TO_BE_SHIPPED.getCode())) // 待发货
+        if (!order.getStatus().equals(OrderStatusEnum.TO_BE_SHIPPED.getCode())) // 待发货
             return Result.failure(Status.ORDER_NOT_TO_BE_SHIPPED);
         // 修改订单状态
         orderService.updateOrderStatus(id, OrderStatusEnum.REFUND_REQUEST.getCode());

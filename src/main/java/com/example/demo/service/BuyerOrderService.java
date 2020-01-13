@@ -3,6 +3,7 @@ package com.example.demo.service;
 import com.example.demo.dto.page.OrderPageRequest;
 import com.example.demo.model.OrderDetail;
 import com.example.demo.model.OrderMaster;
+import com.example.demo.model.OrderTimeline;
 import com.example.demo.model.User;
 import com.github.pagehelper.PageInfo;
 
@@ -13,6 +14,8 @@ public interface BuyerOrderService {
     OrderMaster get(String username, Long id);
 
     List<OrderDetail> getDetail(String username, Long id);
+
+    List<OrderTimeline> getTimeline(String username, Long id);
 
     PageInfo<OrderMaster> list(String username, OrderPageRequest pageRequest);
 

@@ -4,11 +4,9 @@ import com.example.demo.component.RedisLocker;
 import com.example.demo.component.RedisService;
 import com.example.demo.mapper.OrderDetailMapper;
 import com.example.demo.mapper.OrderMasterMapper;
+import com.example.demo.mapper.OrderTimelineMapper;
 import com.example.demo.mapper.ProductCustomMapper;
-import com.example.demo.model.OrderDetail;
-import com.example.demo.model.OrderDetailExample;
-import com.example.demo.model.OrderMaster;
-import com.example.demo.model.OrderMasterExample;
+import com.example.demo.model.*;
 import com.example.demo.service.OrderService;
 import com.example.demo.utils.Constants;
 import lombok.extern.slf4j.Slf4j;
@@ -37,6 +35,9 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderDetailMapper orderDetailMapper;
 
+    @Autowired
+    private OrderTimelineMapper orderTimelineMapper;
+
     @Override
     public List<OrderDetail> getDetail(Long id) {
         OrderDetailExample example = new OrderDetailExample();
@@ -45,15 +46,18 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public int updateOrderStatus(Long id, Integer orderStatus) {
+    public int updateOrderStatus(Long id, Integer status) {
         OrderMaster order = new OrderMaster();
-        order.setOrderStatus(orderStatus);
-        OrderMasterExample example = new OrderMasterExample();
-        example.createCriteria().andIdEqualTo(id);
-        return orderMasterMapper.updateByExampleSelective(order, example);
+        order.setId(id);
+        order.setStatus(status);
+        orderMasterMapper.updateByPrimaryKeySelective(order);
+
+        OrderTimeline orderTimeline = new OrderTimeline();
+        orderTimeline.setOrderId(id);
+        orderTimeline.setStatus(status);
+        return orderTimelineMapper.insertSelective(orderTimeline);
     }
 
-    // 修改数据库商品数量
     @Override
     @Transactional
     public void increaseStock(Long id) {

@@ -38,7 +38,7 @@ public class SellerPayController {
         // 确认存在
         OrderMaster order = sellerOrderService.get(id);
         // 检查状态
-        if (!order.getOrderStatus().equals(OrderStatusEnum.REFUND_REQUEST.getCode()))
+        if (!order.getStatus().equals(OrderStatusEnum.REFUND_REQUEST.getCode()))
             return Result.failure(Status.ORDER_NOT_REFUND_REQUEST);
         // 处理退款
         boolean isSuccess = payService.refund(order.getId(), order.getAmount());
@@ -61,7 +61,7 @@ public class SellerPayController {
         // 确认存在
         OrderMaster order = sellerOrderService.get(id);
         // 检查状态
-        if (!order.getOrderStatus().equals(OrderStatusEnum.TO_BE_PAID.getCode()))
+        if (!order.getStatus().equals(OrderStatusEnum.TO_BE_PAID.getCode()))
             return Result.failure(Status.ORDER_NOT_TO_BE_PAID);
         // 不管是否关闭成功，都更新状态，不同于其他方法
         orderService.addStockRedis(id);
@@ -78,7 +78,7 @@ public class SellerPayController {
         // 确认存在
         OrderMaster order = sellerOrderService.get(id);
         // 检查状态
-        if (!order.getOrderStatus().equals(OrderStatusEnum.TO_BE_SHIPPED.getCode())) // 待发货
+        if (!order.getStatus().equals(OrderStatusEnum.TO_BE_SHIPPED.getCode())) // 待发货
             return Result.failure(Status.ORDER_NOT_TO_BE_SHIPPED);
         // 修改订单状态
         orderService.updateOrderStatus(id, OrderStatusEnum.TO_BE_RECEIVED.getCode());

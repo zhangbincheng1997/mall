@@ -6,9 +6,11 @@ import com.example.demo.base.Result;
 import com.example.demo.dto.page.OrderPageRequest;
 import com.example.demo.model.OrderDetail;
 import com.example.demo.model.OrderMaster;
+import com.example.demo.model.OrderTimeline;
 import com.example.demo.service.BuyerOrderService;
 import com.example.demo.vo.OrderDetailVo;
 import com.example.demo.vo.OrderMasterVo;
+import com.example.demo.vo.OrderTimelineVo;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -20,7 +22,9 @@ import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Api(tags = "买家订单")
@@ -47,15 +51,25 @@ public class BuyerOrderController {
     }
 
     @ApiOperation("获取订单详情")
-    @GetMapping("/detail/{id}")
+    @GetMapping("/all/{id}")
     @ResponseBody
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
-    public Result<List<OrderDetailVo>> detail(@ApiIgnore Principal principal, @PathVariable("id") Long id) {
+    public Result<Map<String, Object>> all(@ApiIgnore Principal principal, @PathVariable("id") Long id) {
         List<OrderDetail> orderDetailList = buyerOrderService.getDetail(principal.getName(), id);
         List<OrderDetailVo> orderDetailVoList = orderDetailList
                 .stream()
                 .map(orderDetail -> Convert.convert(OrderDetailVo.class, orderDetail))
                 .collect(Collectors.toList());
-        return Result.success(orderDetailVoList);
+
+        List<OrderTimeline> orderTimelineList = buyerOrderService.getTimeline(principal.getName(), id);
+        List<OrderTimelineVo> orderTimelineVoList = orderTimelineList
+                .stream()
+                .map(orderTimeline -> Convert.convert(OrderTimelineVo.class, orderTimeline))
+                .collect(Collectors.toList());
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("detail", orderDetailVoList);
+        map.put("timeline",orderTimelineVoList);
+        return Result.success(map);
     }
 }

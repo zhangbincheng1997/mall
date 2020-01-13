@@ -18,6 +18,20 @@
     <div id="detailModal" style="display: none;">
         <div style="width: 500px; margin: 0 auto; padding: 20px;">
             <table id="table2" lay-filter="table2"></table>
+            <ul class="layui-timeline">
+                <script type="text/html" id="timeline">
+                    {{# layui.each(d, function(index, item){ }}
+                    <li class="layui-timeline-item">
+                        <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+                        <div class="layui-timeline-content layui-text">
+                            <strong class="layui-timeline-title">{{ item.status }}</strong>
+                            <p>{{ item.time }}</p>
+                        </div>
+                    </li>
+                    {{# }); }}
+                </script>
+                <div id="timelineView"></div>
+            </ul>
         </div>
     </div>
 </div>
@@ -41,19 +55,20 @@
 </script>
 <script type="text/html" id="barTpl">
     <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="detail">详情</a>
-    {{# if (d.orderStatus == '待付款') { }}
+    {{# if (d.status == '待付款') { }}
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="cancel">取消</a>
-    {{# } else if (d.orderStatus == '待发货') { }}
+    {{# } else if (d.status == '待发货') { }}
     <a class="layui-btn layui-btn-success layui-btn-xs" lay-event="ship">发货</a>
-    {{# } else if (d.orderStatus == '申请退款') { }}
+    {{# } else if (d.status == '申请退款') { }}
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="deal">退款</a>
     {{# } }}
 </script>
 <script>
-    layui.use(['jquery', 'element', 'form', 'table'], function () {
+    layui.use(['jquery', 'element', 'form', 'table', 'laytpl'], function () {
         var $ = layui.jquery;
         var form = layui.form;
         var table = layui.table;
+        var laytpl = layui.laytpl;
 
         form.on('select(statusSearch)', function (data) {
             table.reload('table', {
@@ -73,7 +88,7 @@
                 {field: 'nickname', title: '昵称'},
                 {field: 'email', title: '邮箱'},
                 {field: 'amount', title: '总金额'},
-                {field: 'orderStatus', title: '订单状态'},
+                {field: 'status', title: '订单状态'},
                 {field: 'createTime', title: '创建时间'},
                 {field: 'updateTime', title: '修改时间'},
                 {fixed: 'right', title: '操作', width: 120, toolbar: '#barTpl'}
@@ -84,17 +99,19 @@
         table.on('tool(table)', function (obj) {
             switch (obj.event) {
                 case 'detail':
-                    $.get('seller/order/detail/' + obj.data.id, function (res) {
+                    $.get('buyer/order/all/' + obj.data.id, function (res) {
+                        var detailData = res.data.detail;
+                        var timelineData = res.data.timeline;
                         layer.open({
                             type: 1, // 0：信息框，默认 1：页面层 2：iframe层 3：加载层 4：tips层
                             title: '订单详情',
                             content: $('#detailModal'),
-                            area: ['800px', 200 + 50 * res.data.length + 'px'],
+                            area: ['800px', 200 + 50 * (detailData.length + timelineData.length) + 'px'],
                             shadeClose: true,
                             success: function () {
                                 table.render({
                                     elem: '#table2',
-                                    data: res.data,
+                                    data: detailData,
                                     size: 'lg',
                                     cols: [[
                                         {field: 'id', title: 'ID', width: 100, align: 'center', sort: true, edit: true},
@@ -103,6 +120,9 @@
                                         {field: 'price', title: '价格'},
                                         {field: 'quantity', title: '数量'},
                                     ]]
+                                });
+                                laytpl(timeline.innerHTML).render(timelineData, function (html) {
+                                    $('#timelineView').html(html);
                                 });
                             }
                         });

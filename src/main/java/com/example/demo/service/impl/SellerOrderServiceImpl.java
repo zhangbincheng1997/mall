@@ -5,6 +5,7 @@ import com.example.demo.base.Status;
 import com.example.demo.dto.page.OrderPageRequest;
 import com.example.demo.mapper.OrderDetailMapper;
 import com.example.demo.mapper.OrderMasterMapper;
+import com.example.demo.mapper.OrderTimelineMapper;
 import com.example.demo.model.*;
 import com.example.demo.service.SellerOrderService;
 import com.github.pagehelper.PageHelper;
@@ -26,6 +27,9 @@ public class SellerOrderServiceImpl implements SellerOrderService {
     @Autowired
     private OrderDetailMapper orderDetailMapper;
 
+    @Autowired
+    private OrderTimelineMapper orderTimelineMapper;
+
     @Override
     public OrderMaster get(Long id) {
         OrderMaster orderMaster = orderMasterMapper.selectByPrimaryKey(id);
@@ -35,10 +39,18 @@ public class SellerOrderServiceImpl implements SellerOrderService {
 
     @Override
     public List<OrderDetail> getDetail(Long id) {
-        get(id);
+        get(id); // 保证存在
         OrderDetailExample example = new OrderDetailExample();
         example.createCriteria().andOrderIdEqualTo(id);
         return orderDetailMapper.selectByExample(example);
+    }
+
+    @Override
+    public List<OrderTimeline> getTimeline(Long id) {
+        get(id); // 保证存在
+        OrderTimelineExample example = new OrderTimelineExample();
+        example.createCriteria().andOrderIdEqualTo(id);
+        return orderTimelineMapper.selectByExample(example);
     }
 
     @Override
@@ -48,7 +60,7 @@ public class SellerOrderServiceImpl implements SellerOrderService {
 
         String status = pageRequest.getStatus();
         if (!StringUtils.isEmpty(status)) {
-            criteria.andOrderStatusEqualTo(new Integer(status));
+            criteria.andStatusEqualTo(new Integer(status));
         }
 
         PageHelper.startPage(pageRequest.getPage(), pageRequest.getLimit(), "update_time desc, id desc");

@@ -14,8 +14,6 @@ public interface CartService {
 
     void delete(String username, List<Long> ids);
 
-    List<CartDto> listCheck(String username);
-
     void updateAllCheck(String username, Boolean checked);
 
     void updateOneCheck(String username, Long id, Boolean checked);

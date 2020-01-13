@@ -15,7 +15,7 @@ public class OrderMaster implements Serializable {
 
     private BigDecimal amount;
 
-    private Integer orderStatus;
+    private Integer status;
 
     private Date createTime;
 
@@ -63,12 +63,12 @@ public class OrderMaster implements Serializable {
         this.amount = amount;
     }
 
-    public Integer getOrderStatus() {
-        return orderStatus;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setOrderStatus(Integer orderStatus) {
-        this.orderStatus = orderStatus;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public Date getCreateTime() {
@@ -98,7 +98,7 @@ public class OrderMaster implements Serializable {
         sb.append(", nickname=").append(nickname);
         sb.append(", email=").append(email);
         sb.append(", amount=").append(amount);
-        sb.append(", orderStatus=").append(orderStatus);
+        sb.append(", status=").append(status);
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);

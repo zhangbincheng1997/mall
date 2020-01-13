@@ -4,11 +4,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.example.demo.dto.CartDto;
 import com.example.demo.mapper.OrderDetailMapper;
 import com.example.demo.mapper.OrderMasterMapper;
+import com.example.demo.mapper.OrderTimelineMapper;
 import com.example.demo.mapper.ProductMapper;
-import com.example.demo.model.OrderDetail;
-import com.example.demo.model.OrderMaster;
-import com.example.demo.model.Product;
-import com.example.demo.model.User;
+import com.example.demo.model.*;
 import com.example.demo.utils.Constants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
@@ -31,6 +29,9 @@ public class RabbitReceiver {
 
     @Autowired
     private OrderDetailMapper orderDetailMapper;
+
+    @Autowired
+    private OrderTimelineMapper orderTimelineMapper;
 
     @Autowired
     private OrderMasterMapper orderMasterMapper;
@@ -73,8 +74,13 @@ public class RabbitReceiver {
         order.setEmail(user.getEmail());
         order.setId(orderId);
         order.setAmount(amount);
-        // 添加订单
         orderMasterMapper.insertSelective(order);
+
+        // 创建状态
+        OrderTimeline orderTimeline = new OrderTimeline();
+        orderTimeline.setOrderId(orderId);
+        orderTimelineMapper.insertSelective(orderTimeline);
+
         // 发送通知
         mailService.send(user.getEmail(), order);
     }
