@@ -22,6 +22,8 @@ public class Product implements Serializable {
 
     private Boolean status;
 
+    private String attribute;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -96,6 +98,14 @@ public class Product implements Serializable {
         this.status = status;
     }
 
+    public String getAttribute() {
+        return attribute;
+    }
+
+    public void setAttribute(String attribute) {
+        this.attribute = attribute;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -111,6 +121,7 @@ public class Product implements Serializable {
         sb.append(", sales=").append(sales);
         sb.append(", category=").append(category);
         sb.append(", status=").append(status);
+        sb.append(", attribute=").append(attribute);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

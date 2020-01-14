@@ -11,7 +11,7 @@ import com.example.demo.component.RedisService;
 import com.example.demo.dto.CartDto;
 import com.example.demo.dto.page.OrderPageRequest;
 import com.example.demo.mapper.OrderDetailMapper;
-import com.example.demo.mapper.OrderMasterMapper;
+import com.example.demo.mapper.OrderMapper;
 import com.example.demo.mapper.OrderTimelineMapper;
 import com.example.demo.model.*;
 import com.example.demo.service.BuyerOrderService;
@@ -25,7 +25,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,7 +45,7 @@ public class BuyerOrderServiceImpl implements BuyerOrderService {
     private RabbitSender rabbitSender;
 
     @Autowired
-    private OrderMasterMapper orderMasterMapper;
+    private OrderMapper orderMapper;
 
     @Autowired
     private OrderDetailMapper orderDetailMapper;
@@ -58,10 +57,10 @@ public class BuyerOrderServiceImpl implements BuyerOrderService {
     private CartService cartService;
 
     @Override
-    public OrderMaster get(String username, Long id) {
-        OrderMasterExample example = new OrderMasterExample();
+    public Order get(String username, Long id) {
+        OrderExample example = new OrderExample();
         example.createCriteria().andIdEqualTo(id).andUsernameEqualTo(username);
-        List<OrderMaster> orderList = orderMasterMapper.selectByExample(example);
+        List<Order> orderList = orderMapper.selectByExample(example);
         if (orderList.size() == 0) throw new GlobalException(Status.ORDER_NOT_EXIST);
         return orderList.get(0);
     }
@@ -83,9 +82,9 @@ public class BuyerOrderServiceImpl implements BuyerOrderService {
     }
 
     @Override
-    public PageInfo<OrderMaster> list(String username, OrderPageRequest pageRequest) {
-        OrderMasterExample example = new OrderMasterExample();
-        OrderMasterExample.Criteria criteria = example.createCriteria();
+    public PageInfo<Order> list(String username, OrderPageRequest pageRequest) {
+        OrderExample example = new OrderExample();
+        OrderExample.Criteria criteria = example.createCriteria();
         criteria.andUsernameEqualTo(username);
 
         String status = pageRequest.getStatus();
@@ -94,8 +93,8 @@ public class BuyerOrderServiceImpl implements BuyerOrderService {
         }
 
         PageHelper.startPage(pageRequest.getPage(), pageRequest.getLimit(), "update_time desc, id desc");
-        List<OrderMaster> orderList = orderMasterMapper.selectByExample(example);
-        return new PageInfo<OrderMaster>(orderList);
+        List<Order> orderList = orderMapper.selectByExample(example);
+        return new PageInfo<Order>(orderList);
     }
 
     /**

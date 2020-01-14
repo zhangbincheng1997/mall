@@ -4,12 +4,12 @@ import cn.hutool.core.convert.Convert;
 import com.example.demo.base.PageResult;
 import com.example.demo.base.Result;
 import com.example.demo.dto.page.OrderPageRequest;
+import com.example.demo.model.Order;
 import com.example.demo.model.OrderDetail;
-import com.example.demo.model.OrderMaster;
 import com.example.demo.model.OrderTimeline;
 import com.example.demo.service.SellerOrderService;
 import com.example.demo.vo.OrderDetailVo;
-import com.example.demo.vo.OrderMasterVo;
+import com.example.demo.vo.OrderVo;
 import com.example.demo.vo.OrderTimelineVo;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
@@ -37,15 +37,15 @@ public class SellerOrderController {
     @GetMapping("/list")
     @ResponseBody
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public PageResult<List<OrderMasterVo>> list(@Valid OrderPageRequest pageRequest) {
+    public PageResult<List<OrderVo>> list(@Valid OrderPageRequest pageRequest) {
         // page
-        PageInfo<OrderMaster> pageInfo = sellerOrderService.list(pageRequest);
+        PageInfo<Order> pageInfo = sellerOrderService.list(pageRequest);
         // convert
-        List<OrderMasterVo> orderMasterVoList = pageInfo.getList()
+        List<OrderVo> orderVoList = pageInfo.getList()
                 .stream()
-                .map(order -> Convert.convert(OrderMasterVo.class, order))
+                .map(order -> Convert.convert(OrderVo.class, order))
                 .collect(Collectors.toList());
-        return PageResult.success(orderMasterVoList, pageInfo.getTotal());
+        return PageResult.success(orderVoList, pageInfo.getTotal());
     }
 
     @ApiOperation("获取订单详情")

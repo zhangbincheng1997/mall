@@ -3,7 +3,7 @@ package com.example.demo.service.impl;
 import com.example.demo.component.RedisLocker;
 import com.example.demo.component.RedisService;
 import com.example.demo.mapper.OrderDetailMapper;
-import com.example.demo.mapper.OrderMasterMapper;
+import com.example.demo.mapper.OrderMapper;
 import com.example.demo.mapper.OrderTimelineMapper;
 import com.example.demo.mapper.ProductCustomMapper;
 import com.example.demo.model.*;
@@ -30,7 +30,7 @@ public class OrderServiceImpl implements OrderService {
     private ProductCustomMapper productCustomMapper;
 
     @Autowired
-    private OrderMasterMapper orderMasterMapper;
+    private OrderMapper orderMapper;
 
     @Autowired
     private OrderDetailMapper orderDetailMapper;
@@ -47,10 +47,10 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public int updateOrderStatus(Long id, Integer status) {
-        OrderMaster order = new OrderMaster();
+        Order order = new Order();
         order.setId(id);
         order.setStatus(status);
-        orderMasterMapper.updateByPrimaryKeySelective(order);
+        orderMapper.updateByPrimaryKeySelective(order);
 
         OrderTimeline orderTimeline = new OrderTimeline();
         orderTimeline.setOrderId(id);

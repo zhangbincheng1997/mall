@@ -674,6 +674,76 @@ public class ProductExample {
             addCriterion("status not between", value1, value2, "status");
             return (Criteria) this;
         }
+
+        public Criteria andAttributeIsNull() {
+            addCriterion("attribute is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttributeIsNotNull() {
+            addCriterion("attribute is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttributeEqualTo(String value) {
+            addCriterion("attribute =", value, "attribute");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttributeNotEqualTo(String value) {
+            addCriterion("attribute <>", value, "attribute");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttributeGreaterThan(String value) {
+            addCriterion("attribute >", value, "attribute");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttributeGreaterThanOrEqualTo(String value) {
+            addCriterion("attribute >=", value, "attribute");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttributeLessThan(String value) {
+            addCriterion("attribute <", value, "attribute");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttributeLessThanOrEqualTo(String value) {
+            addCriterion("attribute <=", value, "attribute");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttributeLike(String value) {
+            addCriterion("attribute like", value, "attribute");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttributeNotLike(String value) {
+            addCriterion("attribute not like", value, "attribute");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttributeIn(List<String> values) {
+            addCriterion("attribute in", values, "attribute");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttributeNotIn(List<String> values) {
+            addCriterion("attribute not in", values, "attribute");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttributeBetween(String value1, String value2) {
+            addCriterion("attribute between", value1, value2, "attribute");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttributeNotBetween(String value1, String value2) {
+            addCriterion("attribute not between", value1, value2, "attribute");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

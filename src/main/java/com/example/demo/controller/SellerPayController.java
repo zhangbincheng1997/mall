@@ -5,7 +5,7 @@ import com.example.demo.base.Result;
 import com.example.demo.base.Status;
 import com.example.demo.component.PayService;
 import com.example.demo.enums.OrderStatusEnum;
-import com.example.demo.model.OrderMaster;
+import com.example.demo.model.Order;
 import com.example.demo.service.OrderService;
 import com.example.demo.service.SellerOrderService;
 import io.swagger.annotations.ApiOperation;
@@ -36,7 +36,7 @@ public class SellerPayController {
     @AccessLimit(ip = true, time = 1, count = 1) // 防止重复处理退款
     public Result<String> deal(@PathVariable("id") Long id) {
         // 确认存在
-        OrderMaster order = sellerOrderService.get(id);
+        Order order = sellerOrderService.get(id);
         // 检查状态
         if (!order.getStatus().equals(OrderStatusEnum.REFUND_REQUEST.getCode()))
             return Result.failure(Status.ORDER_NOT_REFUND_REQUEST);
@@ -59,7 +59,7 @@ public class SellerPayController {
     @AccessLimit(ip = true, time = 1, count = 1) // 防止重复关闭订单
     public Result<String> cancel(@PathVariable("id") Long id) {
         // 确认存在
-        OrderMaster order = sellerOrderService.get(id);
+        Order order = sellerOrderService.get(id);
         // 检查状态
         if (!order.getStatus().equals(OrderStatusEnum.TO_BE_PAID.getCode()))
             return Result.failure(Status.ORDER_NOT_TO_BE_PAID);
@@ -76,7 +76,7 @@ public class SellerPayController {
     @AccessLimit(ip = true, time = 1, count = 1) // 防止重复完成订单
     public Result<String> ship(@PathVariable("id") Long id) {
         // 确认存在
-        OrderMaster order = sellerOrderService.get(id);
+        Order order = sellerOrderService.get(id);
         // 检查状态
         if (!order.getStatus().equals(OrderStatusEnum.TO_BE_SHIPPED.getCode())) // 待发货
             return Result.failure(Status.ORDER_NOT_TO_BE_SHIPPED);

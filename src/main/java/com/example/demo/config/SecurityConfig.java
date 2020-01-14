@@ -61,7 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll() // 跨域会请求OPTIONS
                 .antMatchers("/login", "/register", "/captcha").permitAll() // 登陆注册
                 .antMatchers("/return", "/notify").permitAll() // 支付回调
-                .antMatchers("/buyer/product").permitAll()
+                .antMatchers("/buyer/product", "/sku").permitAll()
                 .anyRequest().authenticated() // 其他全部需要认证
                 .and().formLogin().loginProcessingUrl("/login") // 处理登录请求
                 .successHandler(jwtAuthenticationSuccessHandler)

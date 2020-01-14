@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.demo.mapper.ProductMapper">
-  <resultMap id="BaseResultMap" type="com.example.demo.model.Product">
+<mapper namespace="com.example.demo.mapper.SkuMapper">
+  <resultMap id="BaseResultMap" type="com.example.demo.model.Sku">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="description" jdbcType="VARCHAR" property="description" />
-    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="product_id" jdbcType="BIGINT" property="productId" />
+    <result column="attribute" jdbcType="VARCHAR" property="attribute" />
     <result column="price" jdbcType="DECIMAL" property="price" />
     <result column="stock" jdbcType="INTEGER" property="stock" />
-    <result column="sales" jdbcType="INTEGER" property="sales" />
-    <result column="category" jdbcType="BIGINT" property="category" />
-    <result column="status" jdbcType="BIT" property="status" />
-    <result column="attribute" jdbcType="VARCHAR" property="attribute" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -72,15 +67,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, description, icon, price, stock, sales, category, status, attribute
+    id, product_id, attribute, price, stock
   </sql>
-  <select id="selectByExample" parameterType="com.example.demo.model.ProductExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.example.demo.model.SkuExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from product
+    from sku
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -91,46 +86,39 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from product
+    from sku
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from product
+    delete from sku
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.example.demo.model.ProductExample">
-    delete from product
+  <delete id="deleteByExample" parameterType="com.example.demo.model.SkuExample">
+    delete from sku
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.example.demo.model.Product">
+  <insert id="insert" parameterType="com.example.demo.model.Sku">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into product (name, description, icon, 
-      price, stock, sales, 
-      category, status, attribute
-      )
-    values (#{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, 
-      #{price,jdbcType=DECIMAL}, #{stock,jdbcType=INTEGER}, #{sales,jdbcType=INTEGER}, 
-      #{category,jdbcType=BIGINT}, #{status,jdbcType=BIT}, #{attribute,jdbcType=VARCHAR}
-      )
+    insert into sku (product_id, attribute, price, 
+      stock)
+    values (#{productId,jdbcType=BIGINT}, #{attribute,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
+      #{stock,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.example.demo.model.Product">
+  <insert id="insertSelective" parameterType="com.example.demo.model.Sku">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into product
+    insert into sku
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="name != null">
-        name,
+      <if test="productId != null">
+        product_id,
       </if>
-      <if test="description != null">
-        description,
-      </if>
-      <if test="icon != null">
-        icon,
+      <if test="attribute != null">
+        attribute,
       </if>
       <if test="price != null">
         price,
@@ -138,28 +126,13 @@
       <if test="stock != null">
         stock,
       </if>
-      <if test="sales != null">
-        sales,
-      </if>
-      <if test="category != null">
-        category,
-      </if>
-      <if test="status != null">
-        status,
-      </if>
-      <if test="attribute != null">
-        attribute,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
+      <if test="productId != null">
+        #{productId,jdbcType=BIGINT},
       </if>
-      <if test="description != null">
-        #{description,jdbcType=VARCHAR},
-      </if>
-      <if test="icon != null">
-        #{icon,jdbcType=VARCHAR},
+      <if test="attribute != null">
+        #{attribute,jdbcType=VARCHAR},
       </if>
       <if test="price != null">
         #{price,jdbcType=DECIMAL},
@@ -167,40 +140,25 @@
       <if test="stock != null">
         #{stock,jdbcType=INTEGER},
       </if>
-      <if test="sales != null">
-        #{sales,jdbcType=INTEGER},
-      </if>
-      <if test="category != null">
-        #{category,jdbcType=BIGINT},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=BIT},
-      </if>
-      <if test="attribute != null">
-        #{attribute,jdbcType=VARCHAR},
-      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.example.demo.model.ProductExample" resultType="java.lang.Long">
-    select count(*) from product
+  <select id="countByExample" parameterType="com.example.demo.model.SkuExample" resultType="java.lang.Long">
+    select count(*) from sku
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update product
+    update sku
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.name != null">
-        name = #{record.name,jdbcType=VARCHAR},
+      <if test="record.productId != null">
+        product_id = #{record.productId,jdbcType=BIGINT},
       </if>
-      <if test="record.description != null">
-        description = #{record.description,jdbcType=VARCHAR},
-      </if>
-      <if test="record.icon != null">
-        icon = #{record.icon,jdbcType=VARCHAR},
+      <if test="record.attribute != null">
+        attribute = #{record.attribute,jdbcType=VARCHAR},
       </if>
       <if test="record.price != null">
         price = #{record.price,jdbcType=DECIMAL},
@@ -208,50 +166,30 @@
       <if test="record.stock != null">
         stock = #{record.stock,jdbcType=INTEGER},
       </if>
-      <if test="record.sales != null">
-        sales = #{record.sales,jdbcType=INTEGER},
-      </if>
-      <if test="record.category != null">
-        category = #{record.category,jdbcType=BIGINT},
-      </if>
-      <if test="record.status != null">
-        status = #{record.status,jdbcType=BIT},
-      </if>
-      <if test="record.attribute != null">
-        attribute = #{record.attribute,jdbcType=VARCHAR},
-      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update product
+    update sku
     set id = #{record.id,jdbcType=BIGINT},
-      name = #{record.name,jdbcType=VARCHAR},
-      description = #{record.description,jdbcType=VARCHAR},
-      icon = #{record.icon,jdbcType=VARCHAR},
+      product_id = #{record.productId,jdbcType=BIGINT},
+      attribute = #{record.attribute,jdbcType=VARCHAR},
       price = #{record.price,jdbcType=DECIMAL},
-      stock = #{record.stock,jdbcType=INTEGER},
-      sales = #{record.sales,jdbcType=INTEGER},
-      category = #{record.category,jdbcType=BIGINT},
-      status = #{record.status,jdbcType=BIT},
-      attribute = #{record.attribute,jdbcType=VARCHAR}
+      stock = #{record.stock,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.model.Product">
-    update product
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.model.Sku">
+    update sku
     <set>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
+      <if test="productId != null">
+        product_id = #{productId,jdbcType=BIGINT},
       </if>
-      <if test="description != null">
-        description = #{description,jdbcType=VARCHAR},
-      </if>
-      <if test="icon != null">
-        icon = #{icon,jdbcType=VARCHAR},
+      <if test="attribute != null">
+        attribute = #{attribute,jdbcType=VARCHAR},
       </if>
       <if test="price != null">
         price = #{price,jdbcType=DECIMAL},
@@ -259,32 +197,15 @@
       <if test="stock != null">
         stock = #{stock,jdbcType=INTEGER},
       </if>
-      <if test="sales != null">
-        sales = #{sales,jdbcType=INTEGER},
-      </if>
-      <if test="category != null">
-        category = #{category,jdbcType=BIGINT},
-      </if>
-      <if test="status != null">
-        status = #{status,jdbcType=BIT},
-      </if>
-      <if test="attribute != null">
-        attribute = #{attribute,jdbcType=VARCHAR},
-      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.demo.model.Product">
-    update product
-    set name = #{name,jdbcType=VARCHAR},
-      description = #{description,jdbcType=VARCHAR},
-      icon = #{icon,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.model.Sku">
+    update sku
+    set product_id = #{productId,jdbcType=BIGINT},
+      attribute = #{attribute,jdbcType=VARCHAR},
       price = #{price,jdbcType=DECIMAL},
-      stock = #{stock,jdbcType=INTEGER},
-      sales = #{sales,jdbcType=INTEGER},
-      category = #{category,jdbcType=BIGINT},
-      status = #{status,jdbcType=BIT},
-      attribute = #{attribute,jdbcType=VARCHAR}
+      stock = #{stock,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

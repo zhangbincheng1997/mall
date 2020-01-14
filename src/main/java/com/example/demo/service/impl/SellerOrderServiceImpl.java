@@ -4,7 +4,7 @@ import com.example.demo.base.GlobalException;
 import com.example.demo.base.Status;
 import com.example.demo.dto.page.OrderPageRequest;
 import com.example.demo.mapper.OrderDetailMapper;
-import com.example.demo.mapper.OrderMasterMapper;
+import com.example.demo.mapper.OrderMapper;
 import com.example.demo.mapper.OrderTimelineMapper;
 import com.example.demo.model.*;
 import com.example.demo.service.SellerOrderService;
@@ -22,7 +22,7 @@ import java.util.List;
 public class SellerOrderServiceImpl implements SellerOrderService {
 
     @Autowired
-    private OrderMasterMapper orderMasterMapper;
+    private OrderMapper orderMapper;
 
     @Autowired
     private OrderDetailMapper orderDetailMapper;
@@ -31,8 +31,8 @@ public class SellerOrderServiceImpl implements SellerOrderService {
     private OrderTimelineMapper orderTimelineMapper;
 
     @Override
-    public OrderMaster get(Long id) {
-        OrderMaster orderMaster = orderMasterMapper.selectByPrimaryKey(id);
+    public Order get(Long id) {
+        Order orderMaster = orderMapper.selectByPrimaryKey(id);
         if (orderMaster == null) throw new GlobalException(Status.ORDER_NOT_EXIST);
         return orderMaster;
     }
@@ -54,9 +54,9 @@ public class SellerOrderServiceImpl implements SellerOrderService {
     }
 
     @Override
-    public PageInfo<OrderMaster> list(OrderPageRequest pageRequest) {
-        OrderMasterExample example = new OrderMasterExample();
-        OrderMasterExample.Criteria criteria = example.createCriteria();
+    public PageInfo<Order> list(OrderPageRequest pageRequest) {
+        OrderExample example = new OrderExample();
+        OrderExample.Criteria criteria = example.createCriteria();
 
         String status = pageRequest.getStatus();
         if (!StringUtils.isEmpty(status)) {
@@ -64,7 +64,7 @@ public class SellerOrderServiceImpl implements SellerOrderService {
         }
 
         PageHelper.startPage(pageRequest.getPage(), pageRequest.getLimit(), "update_time desc, id desc");
-        List<OrderMaster> orderList = orderMasterMapper.selectByExample(example);
-        return new PageInfo<OrderMaster>(orderList);
+        List<Order> orderList = orderMapper.selectByExample(example);
+        return new PageInfo<Order>(orderList);
     }
 }

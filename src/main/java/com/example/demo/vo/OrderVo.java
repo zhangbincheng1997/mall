@@ -8,7 +8,7 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class OrderMasterVo {
+public class OrderVo {
 
     private String id; // Long -> String
 

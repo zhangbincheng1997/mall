@@ -9,9 +9,11 @@
         <property name="beginningDelimiter" value="`"/>
         <property name="endingDelimiter" value="`"/>
         <property name="javaFileEncoding" value="UTF-8"/>
+
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
         <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
         <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
+
         <commentGenerator>
             <property name="suppressAllComments" value="true"/>
             <property name="suppressDate" value="true"/>
@@ -31,11 +33,11 @@
         <javaClientGenerator targetPackage="com.example.demo.mapper" targetProject="src\main\java" type="XMLMAPPER"/>
 
         <table tableName="%">
-            <!-- 主键自动生成 -->
+            <!-- 主键ID自动生成 -->
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
-        <table tableName="order_master">
-            <!-- 主键代码生成 -->
+        <table tableName="_order">
+            <!-- 主键ID代码生成 -->
         </table>
     </context>
 </generatorConfiguration>

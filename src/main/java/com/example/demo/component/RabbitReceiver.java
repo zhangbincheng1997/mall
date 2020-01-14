@@ -3,7 +3,7 @@ package com.example.demo.component;
 import com.alibaba.fastjson.JSONObject;
 import com.example.demo.dto.CartDto;
 import com.example.demo.mapper.OrderDetailMapper;
-import com.example.demo.mapper.OrderMasterMapper;
+import com.example.demo.mapper.OrderMapper;
 import com.example.demo.mapper.OrderTimelineMapper;
 import com.example.demo.mapper.ProductMapper;
 import com.example.demo.model.*;
@@ -34,7 +34,7 @@ public class RabbitReceiver {
     private OrderTimelineMapper orderTimelineMapper;
 
     @Autowired
-    private OrderMasterMapper orderMasterMapper;
+    private OrderMapper orderMapper;
 
     // 这里都是正常操作，不会超卖
     @RabbitHandler
@@ -68,13 +68,13 @@ public class RabbitReceiver {
             amount = amount.add(product.getPrice().multiply(new BigDecimal(productQuantity)));
         }
         // 创建订单
-        OrderMaster order = new OrderMaster();
+        Order order = new Order();
         order.setUsername(user.getUsername());
         order.setNickname(user.getNickname());
         order.setEmail(user.getEmail());
         order.setId(orderId);
         order.setAmount(amount);
-        orderMasterMapper.insertSelective(order);
+        orderMapper.insertSelective(order);
 
         // 创建状态
         OrderTimeline orderTimeline = new OrderTimeline();

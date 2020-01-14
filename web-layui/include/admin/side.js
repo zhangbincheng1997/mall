@@ -7,6 +7,7 @@ document.write("                <dl class=\"layui-nav-child\">");
 document.write("                    <dd><a href=\"product.html\">商品列表<\/a><\/dd>");
 document.write("                    <dd><a href=\"order.html\">订单列表<\/a><\/dd>");
 document.write("                    <dd><a href=\"category.html\">分类管理<\/a><\/dd>");
+document.write("                    <dd><a href=\"attr.html\">属性管理<\/a><\/dd>");
 document.write("                <\/dl>");
 document.write("            <\/li>");
 document.write("            <li class=\"layui-nav-item layui-nav-itemed\">");
