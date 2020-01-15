@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class CartVo {
 
-    private Long id; // Long -> String
+    private Long id;
 
     private String name;
 

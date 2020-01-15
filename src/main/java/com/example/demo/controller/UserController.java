@@ -1,20 +1,17 @@
 package com.example.demo.controller;
 
 import cn.hutool.core.convert.Convert;
-import com.example.demo.base.Result;
 import com.example.demo.component.RedisService;
-import com.example.demo.jwt.JwtUserDetails;
-import com.example.demo.model.User;
-import com.example.demo.service.UserService;
+import com.example.demo.common.base.Result;
+import com.example.demo.common.jwt.JwtUserDetails;
 import com.example.demo.dto.UserInfoDto;
 import com.example.demo.dto.RegisterDto;
-import com.example.demo.utils.Constants;
+import com.example.demo.service.UserService;
 import com.example.demo.vo.UserInfoVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -40,12 +37,8 @@ public class UserController {
     @PostMapping(value = "/register")
     @ResponseBody
     public Result<String> register(@Valid RegisterDto registerDto) {
-        int count = userService.register(registerDto);
-        if (count == 1) {
-            return Result.success();
-        } else {
-            return Result.failure();
-        }
+        userService.register(registerDto);
+        return Result.success();
     }
 
     @ApiOperation("获取信息")
@@ -61,13 +54,8 @@ public class UserController {
     @ResponseBody
     public Result<String> updateUserInfo(@ApiIgnore Principal principal, @Valid UserInfoDto userInfoDto) {
         String username = principal.getName(); // SecurityContextHolder上下文
-        int count = userService.updateUserInfoByUsername(username, userInfoDto);
-        if (count != 0) {
-            redisService.delete(Constants.USER_KEY + username); // 刷新缓存
-            return Result.success();
-        } else {
-            return Result.failure();
-        }
+        userService.updateUserInfoByUsername(username, userInfoDto);
+        return Result.success();
     }
 
     @ApiOperation("修改密码")
@@ -77,12 +65,7 @@ public class UserController {
                                          @RequestParam("password")
                                          @Size(min = 3, max = 12, message = "密码长度为3-12") String password) {
         String username = principal.getName(); // SecurityContextHolder上下文
-        int count = userService.updatePasswordByUsername(username, password);
-        if (count != 0) {
-            redisService.delete(Constants.USER_KEY + username); // 刷新缓存
-            return Result.success();
-        } else {
-            return Result.failure();
-        }
+        userService.updatePasswordByUsername(username, password);
+        return Result.success();
     }
 }

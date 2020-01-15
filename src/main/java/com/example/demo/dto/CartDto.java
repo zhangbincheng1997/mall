@@ -11,11 +11,11 @@ import javax.validation.constraints.NotNull;
 public class CartDto {
 
     @ApiModelProperty(value = "商品ID", required = true, example = "0")
-    @NotNull(message = "商品ID错误")
+    @NotNull(message = "商品ID不能为空")
     private Long id;
 
     @ApiModelProperty(value = "商品数量", required = true, example = "0")
-    @NotNull(message = "商品数量错误")
+    @NotNull(message = "商品数量不能为空")
     @Min(value = 1, message = "数量不低于1")
     @Max(value = 99, message = "数量不高于99")
     private Integer quantity;

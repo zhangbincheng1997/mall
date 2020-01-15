@@ -1,9 +1,9 @@
 package com.example.demo.controller;
 
-import com.example.demo.aop.AccessLimit;
-import com.example.demo.base.Result;
 import com.example.demo.component.RedisService;
-import com.example.demo.utils.Constants;
+import com.example.demo.common.aop.AccessLimit;
+import com.example.demo.common.base.Result;
+import com.example.demo.common.utils.Constants;
 import com.wf.captcha.GifCaptcha;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

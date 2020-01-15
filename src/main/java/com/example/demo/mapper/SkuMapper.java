@@ -1,30 +1,16 @@
 package com.example.demo.mapper;
 
-import com.example.demo.model.Sku;
-import com.example.demo.model.SkuExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
+import com.example.demo.entity.Sku;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
-public interface SkuMapper {
-    long countByExample(SkuExample example);
+/**
+ * <p>
+ *  Mapper 接口
+ * </p>
+ *
+ * @author zzz
+ * @since 2020-01-16
+ */
+public interface SkuMapper extends BaseMapper<Sku> {
 
-    int deleteByExample(SkuExample example);
-
-    int deleteByPrimaryKey(Long id);
-
-    int insert(Sku record);
-
-    int insertSelective(Sku record);
-
-    List<Sku> selectByExample(SkuExample example);
-
-    Sku selectByPrimaryKey(Long id);
-
-    int updateByExampleSelective(@Param("record") Sku record, @Param("example") SkuExample example);
-
-    int updateByExample(@Param("record") Sku record, @Param("example") SkuExample example);
-
-    int updateByPrimaryKeySelective(Sku record);
-
-    int updateByPrimaryKey(Sku record);
 }

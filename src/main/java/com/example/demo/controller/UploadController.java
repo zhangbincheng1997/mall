@@ -1,9 +1,9 @@
 package com.example.demo.controller;
 
-import com.example.demo.aop.AccessLimit;
-import com.example.demo.base.Result;
-import com.example.demo.base.Status;
 import com.example.demo.component.QiniuService;
+import com.example.demo.common.aop.AccessLimit;
+import com.example.demo.common.base.Result;
+import com.example.demo.common.base.Status;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

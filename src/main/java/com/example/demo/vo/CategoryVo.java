@@ -14,7 +14,7 @@ public class CategoryVo {
 
     private String name;
 
-    private List<CategoryVo> children = new ArrayList<>();
+    private List<CategoryVo> children = new ArrayList<>(); // 默认null
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createTime;

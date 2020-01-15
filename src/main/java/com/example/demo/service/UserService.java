@@ -1,20 +1,21 @@
 package com.example.demo.service;
 
-import com.example.demo.model.User;
-import com.example.demo.dto.UserInfoDto;
 import com.example.demo.dto.RegisterDto;
+import com.example.demo.dto.UserInfoDto;
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.example.demo.entity.User;
 
 import java.util.List;
 
-public interface UserService {
+public interface UserService extends IService<User> {
 
     User getUserByUsername(String username);
 
-    int register(RegisterDto registerDto);
+    void register(RegisterDto registerDto);
 
-    int updateUserInfoByUsername(String username, UserInfoDto userInfoDto);
+    void updateUserInfoByUsername(String username, UserInfoDto userInfoDto);
 
-    int updatePasswordByUsername(String username, String password);
+    void updatePasswordByUsername(String username, String password);
 
     List<String> getRoleList(Long id);
 

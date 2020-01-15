@@ -1,9 +1,9 @@
 package com.example.demo.controller;
 
 import cn.hutool.core.convert.Convert;
-import com.example.demo.base.Result;
+import com.example.demo.common.base.Result;
 import com.example.demo.dto.CategoryDto;
-import com.example.demo.model.Category;
+import com.example.demo.entity.Category;
 import com.example.demo.service.CategoryService;
 import com.example.demo.vo.CategoryVo;
 import io.swagger.annotations.Api;
@@ -41,26 +41,17 @@ public class CategoryController {
     @ResponseBody
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Result<String> add(@Valid CategoryDto categoryDto) {
-        int count = categoryService.create(categoryDto);
-        if (count == 1) {
-            return Result.success();
-        } else {
-            return Result.failure();
-        }
+        categoryService.add(categoryDto);
+        return Result.success();
     }
 
     @ApiOperation("修改分类")
     @PutMapping("/{id}")
     @ResponseBody
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public Result<String> update(@PathVariable("id") Long id,
-                         @Valid CategoryDto categoryDto) {
-        int count = categoryService.update(id, categoryDto);
-        if (count == 1) {
-            return Result.success();
-        } else {
-            return Result.failure();
-        }
+    public Result<String> update(@PathVariable("id") Long id, @Valid CategoryDto categoryDto) {
+        categoryService.update(id, categoryDto);
+        return Result.success();
     }
 
     @ApiOperation("删除分类")
@@ -68,18 +59,14 @@ public class CategoryController {
     @ResponseBody
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Result<String> delete(@PathVariable("id") Long id) {
-        int count = categoryService.delete(id);
-        if (count == 1) {
-            return Result.success();
-        } else {
-            return Result.failure();
-        }
+        categoryService.delete(id);
+        return Result.success();
     }
 
     // 递归调用
     public List<CategoryVo> get(List<Category> categoryList, Long id) {
         List<CategoryVo> categoryVoList = getByPid(categoryList, id);
-        categoryVoList.forEach(categoryVo -> categoryVo.setChildren(get(categoryList, categoryVo.getId())));
+        categoryVoList.forEach(categoryVo -> categoryVo.setChildren(get(categoryList, Long.valueOf(categoryVo.getId()))));
         return categoryVoList;
     }
 

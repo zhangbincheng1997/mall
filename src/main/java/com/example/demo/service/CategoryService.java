@@ -1,17 +1,18 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.CategoryDto;
-import com.example.demo.model.Category;
+import com.example.demo.entity.Category;
+import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
 
-public interface CategoryService {
+public interface CategoryService extends IService<Category> {
 
     List<Category> list(Long id);
 
-    int create(CategoryDto categoryDto);
+    void add(CategoryDto categoryDto);
 
-    int update(Long id, CategoryDto categoryDto);
+    void update(Long id, CategoryDto categoryDto);
 
-    int delete(Long id);
+    void delete(Long id);
 }

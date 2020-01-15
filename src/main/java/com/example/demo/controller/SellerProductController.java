@@ -1,14 +1,14 @@
 package com.example.demo.controller;
 
 import cn.hutool.core.convert.Convert;
-import com.example.demo.base.PageResult;
-import com.example.demo.base.Result;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.demo.common.base.PageResult;
+import com.example.demo.common.base.Result;
 import com.example.demo.dto.page.ProductPageRequest;
-import com.example.demo.model.Product;
-import com.example.demo.service.SellerProductService;
 import com.example.demo.dto.ProductDto;
+import com.example.demo.entity.Product;
+import com.example.demo.service.ProductService;
 import com.example.demo.vo.ProductVo;
-import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,14 +26,14 @@ import java.util.stream.Collectors;
 public class SellerProductController {
 
     @Autowired
-    private SellerProductService sellerProductService;
+    private ProductService productService;
 
     @ApiOperation("获取商品")
     @GetMapping("/{id}")
     @ResponseBody
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Result<ProductVo> get(@PathVariable("id") Long id) {
-        Product product = sellerProductService.get(id);
+        Product product = productService.get(id);
         return Result.success(Convert.convert(ProductVo.class, product));
     }
 
@@ -42,11 +42,11 @@ public class SellerProductController {
     @ResponseBody
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public PageResult<List<ProductVo>> list(@Valid ProductPageRequest pageRequest) {
-        PageInfo<Product> pageInfo = sellerProductService.list(pageRequest);
-        List<ProductVo> productVoList = pageInfo.getList().stream()
+        Page<Product> page = productService.list(pageRequest);
+        List<ProductVo> productVoList = page.getRecords().stream()
                 .map(product -> Convert.convert(ProductVo.class, product))
                 .collect(Collectors.toList());
-        return PageResult.success(productVoList, pageInfo.getTotal());
+        return PageResult.success(productVoList, page.getTotal());
     }
 
     @ApiOperation("添加商品")
@@ -54,12 +54,8 @@ public class SellerProductController {
     @ResponseBody
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Result<String> add(@Valid ProductDto productDto) {
-        int count = sellerProductService.create(productDto);
-        if (count == 1) {
-            return Result.success();
-        } else {
-            return Result.failure();
-        }
+        productService.add(productDto);
+        return Result.success();
     }
 
     @ApiOperation("修改商品")
@@ -68,12 +64,8 @@ public class SellerProductController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Result<String> update(@PathVariable("id") Long id,
                                  @Valid ProductDto productDto) {
-        int count = sellerProductService.update(id, productDto);
-        if (count == 1) {
-            return Result.success();
-        } else {
-            return Result.failure();
-        }
+        productService.update(id, productDto);
+        return Result.success();
     }
 
     @ApiOperation("删除商品")
@@ -81,11 +73,7 @@ public class SellerProductController {
     @ResponseBody
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Result<String> delete(@PathVariable("id") Long id) {
-        int count = sellerProductService.delete(id);
-        if (count == 1) {
-            return Result.success();
-        } else {
-            return Result.failure();
-        }
+        productService.delete(id);
+        return Result.success();
     }
 }

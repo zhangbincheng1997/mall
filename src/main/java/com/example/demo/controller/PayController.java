@@ -1,9 +1,9 @@
 package com.example.demo.controller;
 
 import com.example.demo.component.PayService;
-import com.example.demo.enums.OrderStatusEnum;
-import com.example.demo.service.OrderService;
-import com.example.demo.utils.Constants;
+import com.example.demo.common.enums.OrderStatusEnum;
+import com.example.demo.service.OrderMasterService;
+import com.example.demo.common.utils.Constants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +19,7 @@ public class PayController {
     private PayService payService;
 
     @Autowired
-    private OrderService orderService;
+    private OrderMasterService orderMasterService;
 
     @GetMapping(value = "/return") // 返回给客户端
     @ResponseBody
@@ -40,12 +40,10 @@ public class PayController {
         if (verifyResult) {
             // https://docs.open.alipay.com/270/105899/
             Long id = new Long(request.getParameter("out_trade_no")); // id
-            orderService.decreaseStock(id); // MYSQL 真正写入数据库
-            int count = orderService.updateOrderStatus(id, OrderStatusEnum.TO_BE_SHIPPED.getCode());
-            if (count != 0) {
-                log.info("Notify 验证成功");
-                return "success";
-            }
+            orderMasterService.decreaseStock(id); // MYSQL 真正写入数据库
+            orderMasterService.updateOrderStatus(id, OrderStatusEnum.TO_BE_SHIPPED.getCode());
+            log.info("Notify 验证成功");
+            return "success";
         }
         log.info("Notify 验证失败");
         return "failure";

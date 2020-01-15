@@ -1,30 +1,16 @@
 package com.example.demo.mapper;
 
-import com.example.demo.model.Category;
-import com.example.demo.model.CategoryExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
+import com.example.demo.entity.Category;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
-public interface CategoryMapper {
-    long countByExample(CategoryExample example);
+/**
+ * <p>
+ *  Mapper 接口
+ * </p>
+ *
+ * @author zzz
+ * @since 2020-01-16
+ */
+public interface CategoryMapper extends BaseMapper<Category> {
 
-    int deleteByExample(CategoryExample example);
-
-    int deleteByPrimaryKey(Long id);
-
-    int insert(Category record);
-
-    int insertSelective(Category record);
-
-    List<Category> selectByExample(CategoryExample example);
-
-    Category selectByPrimaryKey(Long id);
-
-    int updateByExampleSelective(@Param("record") Category record, @Param("example") CategoryExample example);
-
-    int updateByExample(@Param("record") Category record, @Param("example") CategoryExample example);
-
-    int updateByPrimaryKeySelective(Category record);
-
-    int updateByPrimaryKey(Category record);
 }

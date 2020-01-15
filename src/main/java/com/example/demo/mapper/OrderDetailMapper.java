@@ -1,30 +1,16 @@
 package com.example.demo.mapper;
 
-import com.example.demo.model.OrderDetail;
-import com.example.demo.model.OrderDetailExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
+import com.example.demo.entity.OrderDetail;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
-public interface OrderDetailMapper {
-    long countByExample(OrderDetailExample example);
+/**
+ * <p>
+ *  Mapper 接口
+ * </p>
+ *
+ * @author zzz
+ * @since 2020-01-16
+ */
+public interface OrderDetailMapper extends BaseMapper<OrderDetail> {
 
-    int deleteByExample(OrderDetailExample example);
-
-    int deleteByPrimaryKey(Long id);
-
-    int insert(OrderDetail record);
-
-    int insertSelective(OrderDetail record);
-
-    List<OrderDetail> selectByExample(OrderDetailExample example);
-
-    OrderDetail selectByPrimaryKey(Long id);
-
-    int updateByExampleSelective(@Param("record") OrderDetail record, @Param("example") OrderDetailExample example);
-
-    int updateByExample(@Param("record") OrderDetail record, @Param("example") OrderDetailExample example);
-
-    int updateByPrimaryKeySelective(OrderDetail record);
-
-    int updateByPrimaryKey(OrderDetail record);
 }

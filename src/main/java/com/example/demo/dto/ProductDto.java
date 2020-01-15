@@ -39,6 +39,6 @@ public class ProductDto {
     @NotNull(message = "分类不能为空")
     private Long category;
 
-    @ApiModelProperty(value = "状态", required = true, example = "0")
+    @ApiModelProperty(value = "状态", required = true)
     private Boolean status;
 }

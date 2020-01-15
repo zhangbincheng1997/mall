@@ -1,7 +1,5 @@
 package com.example.demo.dto;
 
-import cn.hutool.core.lang.PatternPool;
-import cn.hutool.core.lang.Validator;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.hibernate.validator.constraints.Range;
@@ -10,7 +8,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Past;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Date;
 

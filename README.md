@@ -45,13 +45,6 @@ http://localhost:8080/druid/index.html
 > * spring.datasource.druid.stat-view-servlet.login-username=druid
 > * spring.datasource.druid.stat-view-servlet.login-password=druid
 
-Swagger:
-http://localhost:8080/swagger-ui.html
->* [swagger2markup](https://swagger2markup.github.io/swagger2markup): json -> asciidoc
->>* swagger2markup:convertSwagger2markup
->* [asciidoctor](https://asciidoctor.org/docs/asciidoctor-maven-plugin/) asciidoc -> html/pdf
->>* asciidoctor:process-asciidoc
-
 ## Spring Security
 1. AOP 顺序
 ```

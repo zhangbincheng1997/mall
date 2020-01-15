@@ -1,7 +1,7 @@
 package com.example.demo.vo;
 
-import com.example.demo.enums.OrderStatusEnum;
-import com.example.demo.utils.EnumUtil;
+import com.example.demo.common.enums.OrderStatusEnum;
+import com.example.demo.common.utils.EnumUtil;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 

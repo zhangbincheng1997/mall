@@ -17,6 +17,20 @@ public class RedisService {
     private RedisTemplate<String, Object> redisTemplate;
 
     /**
+     * 获取
+     */
+    public Object get(String key) {
+        return redisTemplate.opsForValue().get(key);
+    }
+
+    /**
+     * 批量获取
+     */
+    public List<Object> multiGet(Collection<String> keys) {
+        return redisTemplate.opsForValue().multiGet(keys);
+    }
+
+    /**
      * 设置
      */
     public void set(String key, Object value) {
@@ -38,24 +52,10 @@ public class RedisService {
     }
 
     /**
-     * 批量获取
+     * 批量设置
      */
     public void multiSet(Map<String, Object> map) {
         redisTemplate.opsForValue().multiSet(map);
-    }
-
-    /**
-     * 获取
-     */
-    public Object get(String key) {
-        return redisTemplate.opsForValue().get(key);
-    }
-
-    /**
-     * 批量获取
-     */
-    public List<Object> multiGet(Collection<String> keys) {
-        return redisTemplate.opsForValue().multiGet(keys);
     }
 
     /**

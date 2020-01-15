@@ -1,24 +1,23 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.SkuDto;
-import com.example.demo.model.Attribute;
-import com.example.demo.model.AttributeValue;
-import com.example.demo.model.Sku;
+import com.example.demo.entity.Attribute;
+import com.example.demo.entity.AttributeValue;
+import com.example.demo.entity.Sku;
+import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
 
-public interface SkuService {
+public interface SkuService extends IService<Sku> {
 
     List<Attribute> getAttributeName(Long categoryId);
 
     List<AttributeValue> getAttributeValue(Long attributeId);
 
-    int addAttributeName(Long categoryId, String name);
-    int addAttributeValue(Long attributeId, String value);
-    int deleteAttributeName(Long id);
-    int deleteAttributeValue(Long id);
-
-//    int updateAttributeListToProduct(Long productId, String attributeList);
+    Attribute addAttributeName(Long categoryId, String name);
+    AttributeValue addAttributeValue(Long attributeId, String value);
+    void deleteAttributeName(Long id);
+    void deleteAttributeValue(Long id);
 
     Sku getSku(Long productId, String attribute);
 

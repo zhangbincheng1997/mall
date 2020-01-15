@@ -1,8 +1,8 @@
 package com.example.demo.component;
 
 import com.alibaba.fastjson.JSONObject;
-import com.example.demo.config.QiniuConfig;
-import com.example.demo.utils.Constants;
+import com.example.demo.common.config.QiniuConfig;
+import com.example.demo.common.utils.Constants;
 import com.qiniu.common.QiniuException;
 import com.qiniu.http.Response;
 import com.qiniu.storage.BucketManager;

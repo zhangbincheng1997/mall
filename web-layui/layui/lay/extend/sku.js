@@ -23,13 +23,11 @@
         },
         x:function (d,a,h) {
             // update
-            return '<div class="layui-form-item" pane><label class="layui-form-label">'+ '<i class="layui-icon layui-icon-delete" name="deleteValue" data-id="' + d.id + '"></i>' + d.name+'</label><div class="layui-input-block" data-id="'+d.id+'">'+this.y(d.id,d.sub,a,'')+'</div></div>';
+            return '<div class="layui-form-item" pane><label class="layui-form-label">'+ '<i class="layui-icon layui-icon-delete" name="deleteName" data-id="' + d.id + '"></i>' + d.name+'</label><div class="layui-input-block" data-id="'+d.id+'">'+this.y(d.id,d.sub,a,'')+'</div></div>';
         },
         w:function (d,a,h) {
             // update
-            if(d.length > 0){
-                h += '<i class="layui-icon layui-icon-add-circle" name="addName"></i>';
-            }
+            h += '<i class="layui-icon layui-icon-add-circle" name="addName"></i>';
             for(var i=0;i<d.length;i++){ h += this.x(d[i],a,''); } return h;
         },
         st:function () {
@@ -252,7 +250,8 @@
             this.listenInput();
         },
         l:function () {
-            $('#'+this.c.sv).append('<div id="'+this.c.iv+'">'+this.w(this.c.item,this.c.itemed,'')+'</div>');
+            // update
+            $('#'+this.c.sv).html('<div id="'+this.c.iv+'">'+this.w(this.c.item,this.c.itemed,'')+'</div>');
             $('#'+this.c.sv).append('<div class="layui-form-item" pane><label class="layui-form-label">SKU商品</label><div class="layui-input-block" id="'+this.c.tv+'">'+this.st()+'</div></div></div>');
             form.render('checkbox');this.listen();
         },

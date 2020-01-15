@@ -1,13 +1,12 @@
 package com.example.demo.controller;
 
-import com.example.demo.aop.AccessLimit;
-import com.example.demo.base.Result;
-import com.example.demo.base.Status;
 import com.example.demo.component.PayService;
-import com.example.demo.enums.OrderStatusEnum;
-import com.example.demo.model.Order;
-import com.example.demo.service.OrderService;
-import com.example.demo.service.SellerOrderService;
+import com.example.demo.common.aop.AccessLimit;
+import com.example.demo.common.base.Result;
+import com.example.demo.common.base.Status;
+import com.example.demo.entity.OrderMaster;
+import com.example.demo.common.enums.OrderStatusEnum;
+import com.example.demo.service.OrderMasterService;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +23,7 @@ public class SellerPayController {
     private PayService payService;
 
     @Autowired
-    private SellerOrderService sellerOrderService;
-
-    @Autowired
-    private OrderService orderService;
+    private OrderMasterService orderMasterService;
 
     @ApiOperation("卖家处理买家退款")
     @PostMapping(value = "/deal/{id}")
@@ -36,17 +32,17 @@ public class SellerPayController {
     @AccessLimit(ip = true, time = 1, count = 1) // 防止重复处理退款
     public Result<String> deal(@PathVariable("id") Long id) {
         // 确认存在
-        Order order = sellerOrderService.get(id);
+        OrderMaster orderMaster = orderMasterService.get(id);
         // 检查状态
-        if (!order.getStatus().equals(OrderStatusEnum.REFUND_REQUEST.getCode()))
+        if (!orderMaster.getStatus().equals(OrderStatusEnum.REFUND_REQUEST.getCode()))
             return Result.failure(Status.ORDER_NOT_REFUND_REQUEST);
         // 处理退款
-        boolean isSuccess = payService.refund(order.getId(), order.getAmount());
+        boolean isSuccess = payService.refund(orderMaster.getId(), orderMaster.getAmount());
         if (isSuccess) { // 退款成功，更新状态
             // 修改商品数量
-            orderService.increaseStock(id); // MYSQL
-            orderService.addStockRedis(id); // REDIS
-            orderService.updateOrderStatus(id, OrderStatusEnum.REFUND_SUCCESS.getCode());
+            orderMasterService.increaseStock(id); // MYSQL
+            orderMasterService.addStockRedis(id); // REDIS
+            orderMasterService.updateOrderStatus(id, OrderStatusEnum.REFUND_SUCCESS.getCode());
             return Result.success();
         }
         return Result.failure();
@@ -59,13 +55,13 @@ public class SellerPayController {
     @AccessLimit(ip = true, time = 1, count = 1) // 防止重复关闭订单
     public Result<String> cancel(@PathVariable("id") Long id) {
         // 确认存在
-        Order order = sellerOrderService.get(id);
+        OrderMaster orderMaster = orderMasterService.get(id);
         // 检查状态
-        if (!order.getStatus().equals(OrderStatusEnum.TO_BE_PAID.getCode()))
+        if (!orderMaster.getStatus().equals(OrderStatusEnum.TO_BE_PAID.getCode()))
             return Result.failure(Status.ORDER_NOT_TO_BE_PAID);
         // 不管是否关闭成功，都更新状态，不同于其他方法
-        orderService.addStockRedis(id);
-        orderService.updateOrderStatus(id, OrderStatusEnum.CANCEL.getCode());
+        orderMasterService.addStockRedis(id);
+        orderMasterService.updateOrderStatus(id, OrderStatusEnum.CANCEL.getCode());
         return Result.success();
     }
 
@@ -76,12 +72,12 @@ public class SellerPayController {
     @AccessLimit(ip = true, time = 1, count = 1) // 防止重复完成订单
     public Result<String> ship(@PathVariable("id") Long id) {
         // 确认存在
-        Order order = sellerOrderService.get(id);
+        OrderMaster orderMaster = orderMasterService.get(id);
         // 检查状态
-        if (!order.getStatus().equals(OrderStatusEnum.TO_BE_SHIPPED.getCode())) // 待发货
+        if (!orderMaster.getStatus().equals(OrderStatusEnum.TO_BE_SHIPPED.getCode())) // 待发货
             return Result.failure(Status.ORDER_NOT_TO_BE_SHIPPED);
         // 修改订单状态
-        orderService.updateOrderStatus(id, OrderStatusEnum.TO_BE_RECEIVED.getCode());
+        orderMasterService.updateOrderStatus(id, OrderStatusEnum.TO_BE_RECEIVED.getCode());
         return Result.success();
     }
 }

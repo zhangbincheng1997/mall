@@ -1,11 +1,11 @@
 package com.example.demo.controller;
 
 import cn.hutool.core.convert.Convert;
-import com.example.demo.base.Result;
+import com.example.demo.component.CartService;
+import com.example.demo.common.base.Result;
 import com.example.demo.dto.CartDto;
-import com.example.demo.model.Product;
-import com.example.demo.service.CartService;
-import com.example.demo.service.SellerProductService;
+import com.example.demo.entity.Product;
+import com.example.demo.service.ProductService;
 import com.example.demo.vo.CartVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -28,7 +28,7 @@ public class CartController {
     private CartService cartService;
 
     @Autowired
-    private SellerProductService productService;
+    private ProductService productService;
 
     @ApiOperation("获取购物车")
     @GetMapping("")

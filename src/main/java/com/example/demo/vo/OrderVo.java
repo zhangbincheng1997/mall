@@ -1,7 +1,7 @@
 package com.example.demo.vo;
 
-import com.example.demo.enums.OrderStatusEnum;
-import com.example.demo.utils.EnumUtil;
+import com.example.demo.common.enums.OrderStatusEnum;
+import com.example.demo.common.utils.EnumUtil;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
@@ -10,7 +10,7 @@ import java.util.Date;
 @Data
 public class OrderVo {
 
-    private String id; // Long -> String
+    private Long id;
 
     private String nickname;
 

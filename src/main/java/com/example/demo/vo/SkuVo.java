@@ -5,7 +5,9 @@ import lombok.Data;
 @Data
 public class SkuVo {
 
-    private String skuId; // SKU ID
+    // TODO
+
+    private Long skuId; // SKU ID
 
     private String price; // BigDecimal -> String
 

@@ -1,17 +1,18 @@
 package com.example.demo.controller;
 
 import cn.hutool.core.convert.Convert;
-import com.example.demo.base.PageResult;
-import com.example.demo.base.Result;
+import cn.hutool.core.lang.TypeReference;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.demo.common.base.PageResult;
+import com.example.demo.common.base.Result;
 import com.example.demo.dto.page.OrderPageRequest;
-import com.example.demo.model.Order;
-import com.example.demo.model.OrderDetail;
-import com.example.demo.model.OrderTimeline;
-import com.example.demo.service.BuyerOrderService;
+import com.example.demo.entity.OrderMaster;
+import com.example.demo.entity.OrderDetail;
+import com.example.demo.entity.OrderTimeline;
+import com.example.demo.service.OrderMasterService;
 import com.example.demo.vo.OrderDetailVo;
 import com.example.demo.vo.OrderVo;
 import com.example.demo.vo.OrderTimelineVo;
-import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,6 @@ import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Api(tags = "买家订单")
 @Controller
@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
 public class BuyerOrderController {
 
     @Autowired
-    private BuyerOrderService buyerOrderService;
+    private OrderMasterService orderMasterService;
 
     @ApiOperation("获取订单列表")
     @GetMapping("/list")
@@ -41,13 +41,11 @@ public class BuyerOrderController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     public PageResult<List<OrderVo>> list(@ApiIgnore Principal principal, @Valid OrderPageRequest pageRequest) {
         // page
-        PageInfo<Order> pageInfo = buyerOrderService.list(principal.getName(), pageRequest);
+        Page<OrderMaster> page = orderMasterService.list(principal.getName(), pageRequest);
         // convert
-        List<OrderVo> orderVoList = pageInfo.getList()
-                .stream()
-                .map(order -> Convert.convert(OrderVo.class, order))
-                .collect(Collectors.toList());
-        return PageResult.success(orderVoList, pageInfo.getTotal());
+        List<OrderVo> orderVoList = Convert.convert(new TypeReference<List<OrderVo>>() {
+        }, page.getRecords());
+        return PageResult.success(orderVoList, page.getTotal());
     }
 
     @ApiOperation("获取订单详情")
@@ -55,17 +53,13 @@ public class BuyerOrderController {
     @ResponseBody
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     public Result<Map<String, Object>> all(@ApiIgnore Principal principal, @PathVariable("id") Long id) {
-        List<OrderDetail> orderDetailList = buyerOrderService.getDetail(principal.getName(), id);
-        List<OrderDetailVo> orderDetailVoList = orderDetailList
-                .stream()
-                .map(orderDetail -> Convert.convert(OrderDetailVo.class, orderDetail))
-                .collect(Collectors.toList());
+        List<OrderDetail> orderDetailList = orderMasterService.getDetail(principal.getName(), id);
+        List<OrderTimeline> orderTimelineList = orderMasterService.getTimeline(principal.getName(), id);
 
-        List<OrderTimeline> orderTimelineList = buyerOrderService.getTimeline(principal.getName(), id);
-        List<OrderTimelineVo> orderTimelineVoList = orderTimelineList
-                .stream()
-                .map(orderTimeline -> Convert.convert(OrderTimelineVo.class, orderTimeline))
-                .collect(Collectors.toList());
+        List<OrderDetailVo> orderDetailVoList = Convert.convert(new TypeReference<List<OrderDetailVo>>() {
+        }, orderDetailList);
+        List<OrderTimelineVo> orderTimelineVoList = Convert.convert(new TypeReference<List<OrderTimelineVo>>() {
+        }, orderTimelineList);
 
         Map<String, Object> map = new HashMap<>();
         map.put("detail", orderDetailVoList);

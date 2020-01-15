@@ -1,14 +1,13 @@
 package com.example.demo.controller;
 
-import com.example.demo.aop.AccessLimit;
-import com.example.demo.base.Result;
-import com.example.demo.base.Status;
 import com.example.demo.component.PayService;
-import com.example.demo.enums.OrderStatusEnum;
-import com.example.demo.jwt.JwtUserDetails;
-import com.example.demo.model.Order;
-import com.example.demo.service.BuyerOrderService;
-import com.example.demo.service.OrderService;
+import com.example.demo.common.aop.AccessLimit;
+import com.example.demo.common.base.Result;
+import com.example.demo.common.base.Status;
+import com.example.demo.entity.OrderMaster;
+import com.example.demo.common.enums.OrderStatusEnum;
+import com.example.demo.common.jwt.JwtUserDetails;
+import com.example.demo.service.OrderMasterService;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +29,7 @@ public class BuyerPayController {
     private PayService payService;
 
     @Autowired
-    private BuyerOrderService buyerOrderService;
-
-    @Autowired
-    private OrderService orderService;
+    private OrderMasterService orderMasterService;
 
     @ApiOperation("购买 创建订单")
     @PostMapping("")
@@ -43,7 +39,7 @@ public class BuyerPayController {
     public Result<String> create(@ApiIgnore Authentication authentication) {
         // 创建订单
         JwtUserDetails userDetails = (JwtUserDetails) authentication.getPrincipal();
-        String orderId = buyerOrderService.buy(userDetails.getUser());
+        String orderId = orderMasterService.buy(userDetails.getUser());
         return Result.success(orderId);
     }
 
@@ -54,9 +50,9 @@ public class BuyerPayController {
     @AccessLimit(ip = true, time = 1, count = 1) // 防止重复下单
     public void buy(@ApiIgnore Principal principal, @PathVariable("id") Long id, HttpServletResponse response) {
         // 查找订单
-        Order order = buyerOrderService.get(principal.getName(), id);
+        OrderMaster orderMaster = orderMasterService.get(principal.getName(), id);
         // 调用接口
-        payService.pay(order.getId(), order.getAmount(), response);
+        payService.pay(orderMaster.getId(), orderMaster.getAmount(), response);
     }
 
     @ApiOperation("买家取消订单")
@@ -66,13 +62,13 @@ public class BuyerPayController {
     @AccessLimit(ip = true, time = 1, count = 1) // 防止重复关闭订单
     public Result<String> close(@ApiIgnore Principal principal, @PathVariable("id") Long id) {
         // 确认存在
-        Order order = buyerOrderService.get(principal.getName(), id);
+        OrderMaster orderMaster = orderMasterService.get(principal.getName(), id);
         // 检查状态
-        if (!order.getStatus().equals(OrderStatusEnum.TO_BE_PAID.getCode()))
+        if (!orderMaster.getStatus().equals(OrderStatusEnum.TO_BE_PAID.getCode()))
             return Result.failure(Status.ORDER_NOT_TO_BE_PAID);
         // 修改订单状态
-        orderService.addStockRedis(id);
-        orderService.updateOrderStatus(id, OrderStatusEnum.CANCEL.getCode());
+        orderMasterService.addStockRedis(id);
+        orderMasterService.updateOrderStatus(id, OrderStatusEnum.CANCEL.getCode());
         return Result.success();
     }
 
@@ -83,12 +79,12 @@ public class BuyerPayController {
     @AccessLimit(ip = true, time = 1, count = 1) // 防止重复完成订单
     public Result<String> confirm(@ApiIgnore Principal principal, @PathVariable("id") Long id) {
         // 确认存在
-        Order order = buyerOrderService.get(principal.getName(), id);
+        OrderMaster orderMaster = orderMasterService.get(principal.getName(), id);
         // 检查状态
-        if (!order.getStatus().equals(OrderStatusEnum.TO_BE_RECEIVED.getCode())) // 待收货
+        if (!orderMaster.getStatus().equals(OrderStatusEnum.TO_BE_RECEIVED.getCode())) // 待收货
             return Result.failure(Status.ORDER_NOT_TO_BE_RECEIVED);
         // 修改订单状态
-        orderService.updateOrderStatus(id, OrderStatusEnum.FINISH.getCode());
+        orderMasterService.updateOrderStatus(id, OrderStatusEnum.FINISH.getCode());
         return Result.success();
     }
 
@@ -99,12 +95,12 @@ public class BuyerPayController {
     @AccessLimit(ip = true, time = 1, count = 1) // 防止重复申请退款
     public Result<String> refund(@ApiIgnore Principal principal, @PathVariable("id") Long id) {
         // 确认存在
-        Order order = buyerOrderService.get(principal.getName(), id);
+        OrderMaster orderMaster = orderMasterService.get(principal.getName(), id);
         // 检查状态
-        if (!order.getStatus().equals(OrderStatusEnum.TO_BE_SHIPPED.getCode())) // 待发货
+        if (!orderMaster.getStatus().equals(OrderStatusEnum.TO_BE_SHIPPED.getCode())) // 待发货
             return Result.failure(Status.ORDER_NOT_TO_BE_SHIPPED);
         // 修改订单状态
-        orderService.updateOrderStatus(id, OrderStatusEnum.REFUND_REQUEST.getCode());
+        orderMasterService.updateOrderStatus(id, OrderStatusEnum.REFUND_REQUEST.getCode());
         return Result.success();
     }
 }

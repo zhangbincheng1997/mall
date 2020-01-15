@@ -54,13 +54,8 @@
     }).use(['jquery', 'element', 'xmSelect', 'sku'], function () {
         var $ = layui.jquery, xmSelect = layui.xmSelect, sku = layui.sku;
 
-        var SKU = sku.init({id: '', item: '', data: []});
-
-        $('#test').click(function () {
-            $('#content').val(JSON.stringify(SKU.getData()) + '\n' + JSON.stringify(SKU.getItem()));
-        });
-
         var categoryId;
+        var skuData;
         $.get('category/list', function (res) {
             xmSelect.render({
                 el: '#category',
@@ -78,57 +73,103 @@
                 data: res.data,
                 prop: {value: 'id'},
                 on: function (data) {
+                    if (!data.isAdd) return;
                     categoryId = data.change[0].id;
                     $.get('sku/' + categoryId, function (res) {
-                        $('#sku').html(''); // 清空
-                        $('#content').html(''); // 清空
-                        SKU = sku.init({id: 'sku', item: res.data, data: []});
-
-                        $('i[name="addName"]').click(function () {
-                            layer.prompt({
-                                formType: 0, // 0（文本）默认1（密码）2（多行文本）
-                                value: 'name',
-                                title: '请输入属性名',
-                                area: ['800px', '400px']
-                            }, function (value, index, elem) {
-                                layer.msg(categoryId + ' ' + value);
-                            });
-                        });
-
-                        $('i[name="addValue"]').click(function (e) {
-                            layer.prompt({
-                                formType: 0, // 0（文本）默认1（密码）2（多行文本）
-                                value: 'value',
-                                title: '请输入属性值',
-                                area: ['800px', '400px']
-                            }, function (value, index, elem) {
-                                var attributeId = $(e.currentTarget).data('id');
-                                layer.msg(attributeId + ' ' + value);
-                            });
-                        });
-
-                        $('i[name="deleteName"]').click(function (e) {
-                            layer.confirm('确认删除？', function (index) {
-                                var attributeId = $(e.currentTarget).data('id');
-                                layer.msg(attributeId);
-                            });
-                        });
-
-                        $('i[name="deleteValue"]').click(function (e) {
-                            layer.confirm('确认删除？', function (index) {
-                                var attributeId = $(e.currentTarget).data('id');
-                                layer.msg(attributeId);
-                                // $.delete('seller/product/' + obj.data.id, function (res) {
-                                //     if (res.code === 0) {
-                                //         obj.del();
-                                //     }
-                                // });
-                            });
-                        });
+                        skuData = res.data;
+                        initOp(); // 初始化
                     });
                 },
             });
         });
+
+        function initOp() {
+            var SKU = sku.init({id: 'sku', item: skuData, data: []});
+
+            $('#test').click(function () {
+                $('#content').val(JSON.stringify(SKU.getData()) + '\n' + JSON.stringify(SKU.getItem()));
+            });
+
+            $('i[name="addName"]').click(function () {
+                layer.prompt({
+                    formType: 0, // 0（文本）默认1（密码）2（多行文本）
+                    value: 'name',
+                    title: '请输入属性名',
+                    area: ['800px', '400px']
+                }, function (value, index, elem) {
+                    $.post('sku/name/' + categoryId, {name: value}, function (res) { // name
+                        if (res.code === 0) {
+                            skuData.push(res.data); // add
+                            initOp();
+                        }
+                        layer.close(index);
+                    });
+                });
+            });
+
+            $('i[name="addValue"]').click(function (e) {
+                layer.prompt({
+                    formType: 0, // 0（文本）默认1（密码）2（多行文本）
+                    value: 'value',
+                    title: '请输入属性值',
+                    area: ['800px', '400px']
+                }, function (value, index, elem) {
+                    var attributeId = $(e.currentTarget).data('id');
+                    $.post('sku/value/' + attributeId, {value: value}, function (res) { // value
+                        if (res.code === 0) {
+                            $.each(skuData, function (i, item) {
+                                if (item.id === attributeId) {
+                                    skuData[i].sub.push(res.data); // add
+                                    return false;
+                                }
+                            });
+                            initOp();
+                        }
+                        layer.close(index);
+                    });
+                });
+            });
+
+            $('i[name="deleteName"]').click(function (e) {
+                layer.confirm('确认删除属性名？', function (index) {
+                    var nameId = $(e.currentTarget).data('id');
+                    $.delete('sku/name/' + nameId, function (res) {
+                        if (res.code === 0) {
+                            $.each(skuData, function (i, item) {
+                                if (item.id === nameId) {
+                                    skuData.splice(i, 1); // delete
+                                    return false;
+                                }
+                            });
+                            initOp();
+                        }
+                        layer.close(index);
+                    });
+                });
+            });
+
+            $('i[name="deleteValue"]').click(function (e) {
+                layer.confirm('确认删除属性值？', function (index) {
+                    var valueId = $(e.currentTarget).data('id');
+                    $.delete('sku/value/' + valueId, function (res) {
+                        if (res.code === 0) {
+                            $.each(skuData, function (i, item) {
+                                $.each(item.sub, function (i2, item2) {
+                                    if (item2.id === valueId) {
+                                        skuData[i].sub.splice(i2, 1); // delete
+                                        return false;
+                                    }
+                                });
+                            });
+                            initOp();
+                        }
+                        layer.close(index);
+                    });
+                });
+            });
+        }
+
+        // TODO
     });
 </script>
 </body>

@@ -1,30 +1,16 @@
 package com.example.demo.mapper;
 
-import com.example.demo.model.UserRole;
-import com.example.demo.model.UserRoleExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
+import com.example.demo.entity.UserRole;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
-public interface UserRoleMapper {
-    long countByExample(UserRoleExample example);
+/**
+ * <p>
+ *  Mapper 接口
+ * </p>
+ *
+ * @author zzz
+ * @since 2020-01-16
+ */
+public interface UserRoleMapper extends BaseMapper<UserRole> {
 
-    int deleteByExample(UserRoleExample example);
-
-    int deleteByPrimaryKey(Long id);
-
-    int insert(UserRole record);
-
-    int insertSelective(UserRole record);
-
-    List<UserRole> selectByExample(UserRoleExample example);
-
-    UserRole selectByPrimaryKey(Long id);
-
-    int updateByExampleSelective(@Param("record") UserRole record, @Param("example") UserRoleExample example);
-
-    int updateByExample(@Param("record") UserRole record, @Param("example") UserRoleExample example);
-
-    int updateByPrimaryKeySelective(UserRole record);
-
-    int updateByPrimaryKey(UserRole record);
 }

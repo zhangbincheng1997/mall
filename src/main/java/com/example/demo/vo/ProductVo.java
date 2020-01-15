@@ -13,7 +13,7 @@ public class ProductVo {
 
     private String description;
 
-    private String price; // Product: BigDecimal -> ProductVo: String
+    private String price; // BigDecimal -> String
 
     private Integer stock;
 

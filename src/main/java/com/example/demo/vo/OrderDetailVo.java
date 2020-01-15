@@ -7,7 +7,7 @@ import lombok.Data;
 public class OrderDetailVo {
 
     @JsonProperty(value = "id")
-    private String productId; // Long -> String
+    private Long productId;
 
     @JsonProperty(value = "name")
     private String productName;

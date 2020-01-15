@@ -2,12 +2,12 @@ package com.example.demo.component;
 
 import com.alibaba.fastjson.JSONObject;
 import com.example.demo.dto.CartDto;
-import com.example.demo.mapper.OrderDetailMapper;
-import com.example.demo.mapper.OrderMapper;
-import com.example.demo.mapper.OrderTimelineMapper;
-import com.example.demo.mapper.ProductMapper;
-import com.example.demo.model.*;
-import com.example.demo.utils.Constants;
+import com.example.demo.entity.*;
+import com.example.demo.service.OrderDetailService;
+import com.example.demo.service.OrderMasterService;
+import com.example.demo.service.OrderTimelineService;
+import com.example.demo.service.ProductService;
+import com.example.demo.common.utils.Constants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -25,16 +25,16 @@ public class RabbitReceiver {
     private MailService mailService;
 
     @Autowired
-    private ProductMapper productMapper;
+    private ProductService productService;
 
     @Autowired
-    private OrderDetailMapper orderDetailMapper;
+    private OrderMasterService orderMasterService;
 
     @Autowired
-    private OrderTimelineMapper orderTimelineMapper;
+    private OrderDetailService orderDetailService;
 
     @Autowired
-    private OrderMapper orderMapper;
+    private OrderTimelineService orderTimelineService;
 
     // 这里都是正常操作，不会超卖
     @RabbitHandler
@@ -51,37 +51,38 @@ public class RabbitReceiver {
             Long productId = cartDto.getId();
             Integer productQuantity = cartDto.getQuantity();
 
+            // 获取信息
+            Product product = productService.get(productId);
+
             // 创建订单详情
             OrderDetail orderDetail = new OrderDetail();
             orderDetail.setOrderId(orderId);
             orderDetail.setProductId(productId);
             orderDetail.setProductQuantity(productQuantity);
-            // 获取信息
-            Product product = productMapper.selectByPrimaryKey(productId);
             orderDetail.setProductIcon(product.getIcon());
             orderDetail.setProductName(product.getName());
             orderDetail.setProductPrice(product.getPrice());
 
             // 添加订单详情
-            orderDetailMapper.insertSelective(orderDetail);
+            orderDetailService.save(orderDetail);
             // 累加价格
             amount = amount.add(product.getPrice().multiply(new BigDecimal(productQuantity)));
         }
         // 创建订单
-        Order order = new Order();
-        order.setUsername(user.getUsername());
-        order.setNickname(user.getNickname());
-        order.setEmail(user.getEmail());
-        order.setId(orderId);
-        order.setAmount(amount);
-        orderMapper.insertSelective(order);
+        OrderMaster orderMaster = new OrderMaster();
+        orderMaster.setId(orderId);
+        orderMaster.setAmount(amount);
+        orderMaster.setUsername(user.getUsername());
+        orderMaster.setNickname(user.getNickname());
+        orderMaster.setEmail(user.getEmail());
+        orderMasterService.save(orderMaster);
 
         // 创建状态
         OrderTimeline orderTimeline = new OrderTimeline();
         orderTimeline.setOrderId(orderId);
-        orderTimelineMapper.insertSelective(orderTimeline);
+        orderTimelineService.save(orderTimeline);
 
         // 发送通知
-        mailService.send(user.getEmail(), order);
+        mailService.send(user.getEmail(), orderMaster);
     }
 }
