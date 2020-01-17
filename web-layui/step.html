@@ -64,13 +64,11 @@
         });
 
         var SKU;
-        if (layui.url().search.hasOwnProperty('id') &&
-            layui.url().search.hasOwnProperty('category')) { // update
+        if (layui.url().search.hasOwnProperty('id')) { // update
             var productId = layui.url().search.id;
-            var categoryId = layui.url().search.category;
-            console.log(productId + ' ' + categoryId);
+            console.log(productId);
 
-            $.get('sku/attr/' + categoryId, function (res1) {
+            $.get('sku/product/attr/' + productId, function (res1) {
                 $.get('sku/product/' + productId, function (res2) {
                     console.log(res1.data);
                     console.log(res2.data);

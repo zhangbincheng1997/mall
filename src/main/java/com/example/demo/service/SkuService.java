@@ -26,5 +26,7 @@ public interface SkuService extends IService<Sku> {
 
     Sku getSku(Long productId, String attribute);
 
+    Sku getBySku(Long productId, String sku);
+
     void saveOrUpdateSku(Long productId, List<SkuDto> skuDtoList);
 }

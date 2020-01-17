@@ -20,6 +20,9 @@ public class CartDto {
     @Max(value = 99, message = "数量不高于99")
     private Integer quantity;
 
+    @ApiModelProperty(value = "SKU货号")
+    private String sku = "";
+
     @ApiModelProperty(value = "是否选中")
     private Boolean checked = true;
 }

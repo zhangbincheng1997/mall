@@ -1,16 +1,20 @@
 package com.example.demo.controller;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.convert.Convert;
 import com.example.demo.component.CartService;
 import com.example.demo.common.base.Result;
 import com.example.demo.dto.CartDto;
 import com.example.demo.entity.Product;
+import com.example.demo.entity.Sku;
 import com.example.demo.service.ProductService;
+import com.example.demo.service.SkuService;
 import com.example.demo.vo.CartVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
@@ -30,6 +34,9 @@ public class CartController {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private SkuService skuService;
+
     @ApiOperation("获取购物车")
     @GetMapping("")
     @ResponseBody
@@ -37,8 +44,21 @@ public class CartController {
         List<CartDto> cartDtoList = cartService.list(principal.getName());
         List<CartVo> cartVoList = cartDtoList.stream()
                 .map(cartDto -> {
-                    Product product = productService.get(cartDto.getId()); // 获取当前商品信息
-                    CartVo cartVo = Convert.convert(CartVo.class, product);
+                    String huohao = cartDto.getSku();
+                    CartVo cartVo;
+                    if (StringUtils.isEmpty(huohao)) {
+                        Product product = productService.get(cartDto.getId()); // 获取当前商品信息
+                        cartVo = Convert.convert(CartVo.class, product);
+                        cartVo.setSku("无"); // TODO
+                    } else {
+                        Product product = productService.get(cartDto.getId()); // 获取当前商品信息
+                        cartVo = Convert.convert(CartVo.class, product);
+
+                        Sku sku = skuService.getBySku(cartDto.getId(), huohao); // 具体SKU
+                        BeanUtil.copyProperties(sku, cartVo);
+
+                        cartVo.setSku(huohao); // TODO
+                    }
                     cartVo.setQuantity(cartDto.getQuantity());
                     cartVo.setChecked(cartDto.getChecked());
                     return cartVo;

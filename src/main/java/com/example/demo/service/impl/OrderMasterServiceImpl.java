@@ -132,6 +132,9 @@ public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, Order
         for (CartDto cartDto : cartDtoList) {
             Long productId = cartDto.getId();
             Integer productQuantity = cartDto.getQuantity();
+            if(StringUtils.isEmpty(cartDto.getSku())) {
+                // TODO
+            }
             Integer stock = (Integer) redisService.get(Constants.PRODUCT_STOCK + productId);
             // 商品不存在
             if (stock == null) throw new GlobalException(Status.PRODUCT_NOT_EXIST);

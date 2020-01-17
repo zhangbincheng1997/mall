@@ -20,4 +20,6 @@ public class ProductVo {
     private Integer category;
 
     private Boolean status;
+
+    private Boolean sku;
 }

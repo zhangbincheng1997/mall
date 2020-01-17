@@ -54,7 +54,7 @@
                     <div id="modal" style="display: none; ">
                         <script type="text/html" id="sku">
                             {{# layui.each(d, function(index, item){ }}
-                            <div data-id="{{ item.id }}" style="margin-left:50px; margin-top: 15px;">
+                            <div class="attrName" data-id="{{ item.id }}" style="margin-left:50px; margin-top: 15px;">
                                 <span>{{ item.name }}</span></br></br>
                                 {{# layui.each(item.sub, function(index2, item2){ }}
                                 <input type="button" class="layui-btn layui-btn-sm layui-btn-primary sku"
@@ -64,10 +64,10 @@
                             {{# }); }}
                         </script>
                         <div id="skuView"></div>
-                        <div style="margin-left:50px; margin-top: 15px;color: red;">
-                            ￥<span id="price"></span>
-                            <span id="stock"></span>
-                            <span id="skunum"></span>
+                        <div style="margin-left:50px; margin-top: 15px;">
+                            <p id="price" style="color: red"></p>
+                            <span id="stock" style="color: #999999"></span>
+                            <span id="skunum" style="color: #999999" data-id=""></span>
                         </div>
                     </div>
 
@@ -78,7 +78,7 @@
                         </div>
                         <div class="cont-list layui-clear">
                             {{# layui.each(d.data, function(index, item){ }}
-                            <div class="item" id="{{ item.id }}">
+                            <div class="item" data-id="{{ item.id }}" data-sku="{{ item.sku }}">
                                 <div class="img layui-anim" data-anim="layui-anim-scale">
                                     <a href="javascript:void(0);">
                                         <img src="{{ item.icon }}" title="{{ item.description }}"
@@ -135,72 +135,88 @@
             laytpl(product.innerHTML).render(res, function (html) {
                 $('#productView').html(html);
                 $('.layui-anim').on('click', function () {
-                    // var othis = $(this), anim = othis.data('anim');
-                    // var id = othis.parents('.item').attr("id");
-                    // $.post('buyer/cart', {id: id, quantity: 1}, function (res) {
-                    //     if (res.code === 0) { // 动画
-                    //         othis.removeClass(anim);
-                    //         setTimeout(function () {
-                    //             othis.addClass(anim);
-                    //         });
-                    //     }
-                    // })
-                    // TODO
-                    var id = $(this).parents('.item').attr("id");
-                    $.get('sku/attr/2', function (res) {
-                        laytpl(sku.innerHTML).render(res.data, function (html) {
-                            $('#skuView').html(html);
+                    var othis = $(this), anim = othis.data('anim');
+                    othis.removeClass(anim);
+                    setTimeout(function () {
+                        othis.addClass(anim);
+                    });
 
-                            //选中自己，兄弟节点取消选中
-                            $('.sku').click(function () {
-                                $(this).toggleClass('selected').siblings().removeClass('selected');
+                    var id = $(this).parents('.item').attr("data-id");
+                    var sku = $(this).parents('.item').attr("data-sku");
+                    if (eval(sku)) showSku(id);
+                    else addCart({id: id, quantity: 1});
+                });
+            });
+        }
 
-                                // 获取sku
-                                var selected = $('.selected');
-                                if (selected.length === 3) {
-                                    var selectData = []; // [{"1":"1"},{"2":"4"},{"4":"8"}]
-                                    $.each(selected, function (i, item) {
-                                        var tmp = {};
-                                        tmp[$(item).parent().attr('data-id')] = $(item).attr('data-id');
-                                        selectData.push(tmp);
-                                    });
-                                    console.log(selectData);
-                                    $.get('sku/'+id, {attribute: selectData}, function (res) {
-                                        if(res.hasOwnProperty('data')){
-                                            $('#price').html(res.data.price);
-                                            $('#stock').html(res.data.stock);
-                                            $('#skunum').html(res.data.sku);
-                                        }else { // 没有这个货
-                                            $('#price').html('???');
-                                            $('#stock').html('');
-                                            $('#skunum').html('');
-                                        }
-                                    });
+        function addCart(data) {
+            $.post('buyer/cart', data, function (res) {
+                if (res.code === 0) {
+                    // ok
+                }
+            });
+        }
+
+        function showSku(id) {
+            $.get('sku/product/attr/' + id, function (res) {
+                laytpl(sku.innerHTML).render(res.data, function (html) {
+                    $('#skuView').html(html);
+
+                    //选中自己，兄弟节点取消选中
+                    $('.sku').click(function () {
+                        $(this).toggleClass('selected').siblings().removeClass('selected');
+
+                        // 获取sku
+                        var selected = $('.selected');
+                        if (selected.length === 3) {
+                            var selectData = []; // [{"1":"1"},{"2":"4"},{"4":"8"}]
+                            $.each(selected, function (i, item) {
+                                var tmp = {};
+                                tmp[$(item).parent().attr('data-id')] = $(item).attr('data-id');
+                                selectData.push(tmp);
+                            });
+                            console.log(selectData);
+                            $.get('sku/' + id, {attribute: JSON.stringify(selectData)}, function (res) {
+                                if (res.hasOwnProperty('data')) {
+                                    $('#price').html('￥' + res.data.price);
+                                    $('#stock').html(res.data.stock + '库存');
+                                    $('#skunum').html('(' + res.data.sku + ')');
+                                    $('#skunum').attr('data-id', res.data.sku);
+                                } else { // 没有这个货
+                                    $('#price').html('???');
+                                    $('#stock').html('???');
+                                    $('#skunum').html('???');
+                                    $('#skunum').attr('data-id', '');
                                 }
                             });
+                        }
+                    });
 
-                            layer.open({
-                                type: 1, // 0：信息框，默认 1：页面层 2：iframe层 3：加载层 4：tips层
-                                title: '选择参数',
-                                content: $('#modal'),
-                                area: ['400px', '400px'],
-                                shadeClose: true,
-                                btn: ['立即购买', '残忍拒绝'],
-                                btnAlign: 'c',
-                                yes: function (index, layero) {
-                                    var selected = $('.selected');
-                                    if (selected.length === 3) {
-                                        console.log('购买成功');
-                                        layer.close(index);
-                                    } else {
-                                        console.log('购买失败');
-                                    }
-                                },
-                                end: function () {
-                                    $('.sku').removeClass('selected');
-                                }
-                            });
-                        });
+                    layer.open({
+                        type: 1, // 0：信息框，默认 1：页面层 2：iframe层 3：加载层 4：tips层
+                        title: '选择参数',
+                        content: $('#modal'),
+                        area: ['400px', '400px'],
+                        shadeClose: true,
+                        btn: ['加入购物车', '残忍拒绝'],
+                        btnAlign: 'c',
+                        yes: function (index, layero) {
+                            var selected = $('.selected');
+                            var attrName = $('.attrName');
+                            var sku = $('#skunum').attr('data-id');
+                            if (selected.length === attrName.length && sku !== '') {
+                                addCart({id: id, quantity: 1, sku: sku}); // 加入购物车
+                                layer.close(index);
+                            } else {
+                                layer.msg('属性没选择满!');
+                            }
+                        },
+                        end: function () {
+                            $('.sku').removeClass('selected');
+                            $('#price').html('');
+                            $('#stock').html('');
+                            $('#skunum').html('');
+                        }
                     });
                 });
             });

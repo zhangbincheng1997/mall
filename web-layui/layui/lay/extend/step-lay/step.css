@@ -3,7 +3,7 @@
     width: 400px;
     margin: 0 auto;
     max-width: 100%;
-    padding-left: 200px;
+    /*padding-left: 200px;*/
 }
 
 .step-item {
@@ -11,6 +11,7 @@
     line-height: 26px;
     position: relative;
     font-size: 14px;
+    text-align: center; /*add*/
 }
 
 .step-item-tail {
@@ -28,6 +29,7 @@
     vertical-align: top;
     background: #c2c2c2;
     position: relative;
+    margin-left: 50%; /*add*/
 }
 
 .step-item-tail .step-item-tail-done {
@@ -55,9 +57,9 @@
 .step-item-main {
     display: block;
     position: relative;
-    margin-left: -50%;
-    margin-right: 50%;
-    padding-left: 26px;
+    /*margin-left: -50%;*/
+    /*margin-right: 50%;*/
+    /*padding-left: 26px;*/
     text-align: center;
 }
 
@@ -77,10 +79,11 @@
 .lay-step + [carousel-item] > * {
     background-color: transparent;
 }
-/*update*/
+/*add*/
 .layui-carousel>[carousel-item]{
     overflow: visible;
 }
+/*add*/
 .layui-carousel>[carousel-item]>*{
     height: auto;
 }

@@ -14,7 +14,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author zzz
- * @since 2020-01-16
+ * @since 2020-01-17
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -70,9 +70,9 @@ public class Product implements Serializable {
     private Boolean status;
 
     /**
-     * 属性，可空
+     * 是否存在SKU：0不存在，1存在，默认0
      */
-    private String attribute;
+    private Boolean sku;
 
 
 }

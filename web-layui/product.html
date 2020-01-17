@@ -253,7 +253,7 @@
         table.on('tool(table)', function (obj) {
             switch (obj.event) {
                 case 'sku':
-                    window.location.href = 'step.html?id=' + obj.data.id + '&category=' + obj.data.category;
+                    window.location.href = 'step.html?id=' + obj.data.id;
                     break;
                 case 'delete':
                     layer.confirm('确认删除？', function (index) {

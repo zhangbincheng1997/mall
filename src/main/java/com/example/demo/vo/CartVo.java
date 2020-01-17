@@ -15,5 +15,7 @@ public class CartVo {
 
     private Integer quantity;
 
+    private String sku; // 货号
+
     private Boolean checked;
 }

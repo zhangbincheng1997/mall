@@ -81,6 +81,14 @@ public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuSe
                 .eq(Sku::getIds, attribute));
     }
 
+    // TODO 这里起名已经混乱，未来修改
+    @Override
+    public Sku getBySku(Long productId, String sku) {
+        return baseMapper.selectOne(Wrappers.<Sku>lambdaQuery()
+                .eq(Sku::getProductId, productId)
+                .eq(Sku::getSku, sku));
+    }
+
     @Override
     public void saveOrUpdateSku(Long productId, List<SkuDto> skuDtoList) {
         // 删除原有的

@@ -25,7 +25,7 @@ public class CartService {
                 .collect(Collectors.toList());
     }
 
-    public void create(String username, CartDto cartDto) {
+    public void create(String username, CartDto cartDto) { // TODO 其实不同货号也要区分
         String key = getKey(username, cartDto.getId());
         redisService.set(key, cartDto);
     }

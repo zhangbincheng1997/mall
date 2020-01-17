@@ -8,7 +8,9 @@ import com.example.demo.common.base.Result;
 import com.example.demo.dto.SkuDto;
 import com.example.demo.entity.Attribute;
 import com.example.demo.entity.AttributeValue;
+import com.example.demo.entity.Product;
 import com.example.demo.entity.Sku;
+import com.example.demo.service.ProductService;
 import com.example.demo.service.SkuService;
 import com.example.demo.vo.AttributeValueVo;
 import com.example.demo.vo.AttributeVo;
@@ -33,10 +35,10 @@ public class SkuController {
     @Autowired
     private SkuService skuService;
 
-    @ApiOperation("根据分类ID获取属性")
-    @GetMapping("/attr/{id}")
-    @ResponseBody
-    public Result<List<AttributeVo>> list(@PathVariable("id") Long id) {
+    @Autowired
+    private ProductService productService;
+
+    private List<AttributeVo> listByCategory(Long id) {
         List<Attribute> attributeList = skuService.getAttributeName(id);
 
         List<AttributeVo> attributeVoList = attributeList.stream().map(attr -> {
@@ -49,6 +51,23 @@ public class SkuController {
 
             return attributeVo;
         }).collect(Collectors.toList());
+        return attributeVoList;
+    }
+
+    @ApiOperation("根据分类ID获取属性")
+    @GetMapping("/attr/{id}")
+    @ResponseBody
+    public Result<List<AttributeVo>> list(@PathVariable("id") Long id) {
+        List<AttributeVo> attributeVoList = listByCategory(id);
+        return Result.success(attributeVoList);
+    }
+
+    @ApiOperation("根据商品ID获取属性")
+    @GetMapping("/product/attr/{id}")
+    @ResponseBody
+    public Result<List<AttributeVo>> listByProduct(@PathVariable("id") Long id) {
+        Product product = productService.getBuyer(id);
+        List<AttributeVo> attributeVoList = listByCategory(product.getCategory());
         return Result.success(attributeVoList);
     }
 
@@ -107,9 +126,7 @@ public class SkuController {
     @PostMapping("/product/{id}")
     @ResponseBody
     public Result<String> addSku(@PathVariable("id") Long id, @RequestParam String json) {
-        System.out.println(json);
         List<SkuDto> skuList = JSONObject.parseArray(json, SkuDto.class);
-        System.out.println(skuList.get(0).getIds());
         skuService.saveOrUpdateSku(id, skuList);
         return Result.success();
     }
