@@ -84,6 +84,7 @@
            lay-filter="status" {{ d.status==1 ? 'checked' : '' }}>
 </script>
 <script type="text/html" id="barTpl">
+    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="sku">SKU</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
 </script>
 <script>
@@ -119,7 +120,7 @@
                     }
                 },
                 {field: 'status', title: '状态', width: 100, templet: '#switchTpl'},
-                {title: '操作', width: 100, align: 'center', toolbar: '#barTpl'}
+                {title: '操作', width: 120, align: 'center', toolbar: '#barTpl'}
             ]],
             done: function (res, curr, count) {
                 // 修改一些css样式, 这里虽然能够使用, 但是还是不太友好, 努力中...
@@ -251,6 +252,9 @@
         // 监听行工具事件
         table.on('tool(table)', function (obj) {
             switch (obj.event) {
+                case 'sku':
+                    window.location.href = 'step.html?id=' + obj.data.id + '&category=' + obj.data.category;
+                    break;
                 case 'delete':
                     layer.confirm('确认删除？', function (index) {
                         $.delete('seller/product/' + obj.data.id, function (res) {
@@ -282,7 +286,7 @@
             var rowData = table.cache['table'][index];
             rowData['status'] = data.elem.checked; // 更新缓存
             $.put('seller/product/' + rowData.id, rowData, function (res) {
-                if(res.code !== 0) {
+                if (res.code !== 0) {
                     // 修改回来
                     // TODO
                 }

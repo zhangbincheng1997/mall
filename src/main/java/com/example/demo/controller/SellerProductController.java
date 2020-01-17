@@ -8,6 +8,7 @@ import com.example.demo.dto.page.ProductPageRequest;
 import com.example.demo.dto.ProductDto;
 import com.example.demo.entity.Product;
 import com.example.demo.service.ProductService;
+import com.example.demo.service.SkuService;
 import com.example.demo.vo.ProductVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -53,9 +54,9 @@ public class SellerProductController {
     @PostMapping("")
     @ResponseBody
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public Result<String> add(@Valid ProductDto productDto) {
-        productService.add(productDto);
-        return Result.success();
+    public Result<Long> add(@Valid ProductDto productDto) {
+        Long productId = productService.add(productDto);
+        return Result.success(productId);
     }
 
     @ApiOperation("修改商品")

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script type="text/javascript" src="include/admin/title.js"></script>
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <script type="text/javascript" src="include/admin/side.js"></script>
+    <script type="text/javascript" src="include/admin/header.js"></script>
+    <script type="text/javascript" src="include/admin/footer.js"></script>
+
+    <div class="layui-body">
+        <div class="layui-carousel" id="stepForm" lay-filter="stepForm" style="padding-top: 40px;">
+            <div carousel-item>
+                <div>
+                    <form class="layui-form layui-form-pane" style="width: 800px; margin: 0 auto; padding: 20px;">
+                        <div id="sku"></div>
+
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" lay-submit lay-filter="confirm">确认</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div>
+                    <div style="text-align: center;margin-top: 100px;">
+                        <i class="layui-icon layui-circle"
+                           style="color: white;font-size:30px;font-weight:bold;background: #52C41A;
+                           padding: 20px;line-height: 80px;">&#xe605;</i>
+                        <div style="font-size: 24px;color: #333;font-weight: 500;margin-top: 30px;">
+                            上传成功
+                        </div>
+                        <div style="font-size: 14px;color: #666;margin-top: 20px;">感谢您的支持！</div>
+                    </div>
+                    <div style="text-align: center;margin-top: 50px;">
+                        <button type="button" class="layui-btn layui-btn-primary pre">上一步</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    layui.config({
+        base: 'layui/lay/extend/'
+    }).extend({
+        step: 'step-lay/step'
+    }).use(['element', 'form', 'step', 'sku'], function () {
+        var $ = layui.$, form = layui.form, step = layui.step, sku = layui.sku;
+
+        step.render({
+            elem: '#stepForm',
+            filter: 'stepForm',
+            stepWidth: '800px',
+            width: '100%', //设置容器宽度
+            stepItems: [{
+                title: 'SKU信息'
+            }, {
+                title: '完成'
+            }]
+        });
+
+        var SKU;
+        if (layui.url().search.hasOwnProperty('id') &&
+            layui.url().search.hasOwnProperty('category')) { // update
+            var productId = layui.url().search.id;
+            var categoryId = layui.url().search.category;
+            console.log(productId + ' ' + categoryId);
+
+            $.get('sku/attr/' + categoryId, function (res1) {
+                $.get('sku/product/' + productId, function (res2) {
+                    console.log(res1.data);
+                    console.log(res2.data);
+                    SKU = sku.init({id: 'sku', item: res1.data, data: res2.data});
+                })
+            });
+
+            // 更新SKU
+            form.on('submit(confirm)', function (data) {
+                console.log(SKU.getData());
+                $.post('sku/product/' + productId, {json: JSON.stringify(SKU.getData())}, function (res) {
+                    if (res.code === 0) {
+                        step.next('#stepForm');
+                    }
+                });
+                return false; // require
+            });
+        }
+
+        $('.pre').click(function () {
+            step.pre('#stepForm');
+        });
+    })
+</script>
+</body>
+</html>

@@ -37,7 +37,7 @@ public class Sku implements Serializable {
     /**
      * 属性
      */
-    private String attribute;
+    private String ids;
 
     /**
      * 价格

@@ -29,7 +29,7 @@ public class BuyerProductController {
     @GetMapping("")
     @ResponseBody
     public PageResult<List<ProductVo>> list(@Valid ProductPageRequest pageRequest) {
-        Page<Product> pageInfo = productService.list(pageRequest);
+        Page<Product> pageInfo = productService.listBuyer(pageRequest);
         List<ProductVo> productVoList = pageInfo.getRecords().stream()
                 .map(product -> Convert.convert(ProductVo.class, product))
                 .collect(Collectors.toList());

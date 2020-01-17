@@ -18,7 +18,7 @@
             // update
             for(var i=0;i<d.length;i++){ h += '<i class="layui-icon layui-icon-delete" name="deleteValue" data-id="' + d[i].id + '"></i>' + '<input type="checkbox" data-id="'+s+'_'+d[i].id+'" title="'+d[i].value+'" lay-skin="primary" lay-filter="item"'+ this.z(s,d[i].id,a) +'>';}
             // update
-            h += '<i class="layui-icon layui-icon-add-circle" name="addValue" data-id="' + s + '"></i>';
+            h += '<i class="layui-icon layui-icon-addition" name="addValue" data-id="' + s + '"></i>';
             return h;
         },
         x:function (d,a,h) {
@@ -27,7 +27,7 @@
         },
         w:function (d,a,h) {
             // update
-            h += '<i class="layui-icon layui-icon-add-circle" name="addName"></i>';
+            h += '<i class="layui-icon layui-icon-addition" name="addName"></i>';
             for(var i=0;i<d.length;i++){ h += this.x(d[i],a,''); } return h;
         },
         st:function () {

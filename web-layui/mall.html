@@ -6,6 +6,11 @@
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <script type="text/javascript" src="include/user/title.js"></script>
 </head>
+<style type="text/css">
+    .selected {
+        color: red;
+    }
+</style>
 <body>
 <script type="text/javascript" src="include/user/site-nav.js"></script>
 <script type="text/javascript" src="include/user/header.js"></script>
@@ -44,6 +49,28 @@
                         <a href="javascript:void(0);" event='newprod'>新品</a>
                         <a href="javascript:void(0);" event='collection'>收藏</a>
                     </div>
+
+                    <!-- 模版导入 -->
+                    <div id="modal" style="display: none; ">
+                        <script type="text/html" id="sku">
+                            {{# layui.each(d, function(index, item){ }}
+                            <div data-id="{{ item.id }}" style="margin-left:50px; margin-top: 15px;">
+                                <span>{{ item.name }}</span></br></br>
+                                {{# layui.each(item.sub, function(index2, item2){ }}
+                                <input type="button" class="layui-btn layui-btn-sm layui-btn-primary sku"
+                                       data-id="{{ item2.id }}" value="{{ item2.value }}"/>
+                                {{# }); }}
+                            </div>
+                            {{# }); }}
+                        </script>
+                        <div id="skuView"></div>
+                        <div style="margin-left:50px; margin-top: 15px;color: red;">
+                            ￥<span id="price"></span>
+                            <span id="stock"></span>
+                            <span id="skunum"></span>
+                        </div>
+                    </div>
+
                     <!-- 模版导入 -->
                     <script type="text/html" id="product">
                         <div class="prod-number">
@@ -81,10 +108,6 @@
     layui.use(['jquery', 'element', 'laytpl', 'laypage'], function () {
         var $ = layui.$, laytpl = layui.laytpl, laypage = layui.laypage, element = layui.element;
 
-        function addCart() {
-            console.log(1111);
-        }
-
         $.get('category/list', function (res) {
             laytpl(category.innerHTML).render(res.data, function (html) {
                 $('#categoryView').html(html);
@@ -112,30 +135,81 @@
             laytpl(product.innerHTML).render(res, function (html) {
                 $('#productView').html(html);
                 $('.layui-anim').on('click', function () {
-                    var othis = $(this), anim = othis.data('anim');
-                    var id = othis.parents('.item').attr("id");
-                    $.post('buyer/cart', {id: id, quantity: 1}, function (res) {
-                        if (res.code === 0) { // 动画
-                            othis.removeClass(anim);
-                            setTimeout(function () {
-                                othis.addClass(anim);
+                    // var othis = $(this), anim = othis.data('anim');
+                    // var id = othis.parents('.item').attr("id");
+                    // $.post('buyer/cart', {id: id, quantity: 1}, function (res) {
+                    //     if (res.code === 0) { // 动画
+                    //         othis.removeClass(anim);
+                    //         setTimeout(function () {
+                    //             othis.addClass(anim);
+                    //         });
+                    //     }
+                    // })
+                    // TODO
+                    var id = $(this).parents('.item').attr("id");
+                    $.get('sku/attr/2', function (res) {
+                        laytpl(sku.innerHTML).render(res.data, function (html) {
+                            $('#skuView').html(html);
+
+                            //选中自己，兄弟节点取消选中
+                            $('.sku').click(function () {
+                                $(this).toggleClass('selected').siblings().removeClass('selected');
+
+                                // 获取sku
+                                var selected = $('.selected');
+                                if (selected.length === 3) {
+                                    var selectData = []; // [{"1":"1"},{"2":"4"},{"4":"8"}]
+                                    $.each(selected, function (i, item) {
+                                        var tmp = {};
+                                        tmp[$(item).parent().attr('data-id')] = $(item).attr('data-id');
+                                        selectData.push(tmp);
+                                    });
+                                    console.log(selectData);
+                                    $.get('sku/'+id, {attribute: selectData}, function (res) {
+                                        if(res.hasOwnProperty('data')){
+                                            $('#price').html(res.data.price);
+                                            $('#stock').html(res.data.stock);
+                                            $('#skunum').html(res.data.sku);
+                                        }else { // 没有这个货
+                                            $('#price').html('???');
+                                            $('#stock').html('');
+                                            $('#skunum').html('');
+                                        }
+                                    });
+                                }
                             });
-                        }
-                    })
+
+                            layer.open({
+                                type: 1, // 0：信息框，默认 1：页面层 2：iframe层 3：加载层 4：tips层
+                                title: '选择参数',
+                                content: $('#modal'),
+                                area: ['400px', '400px'],
+                                shadeClose: true,
+                                btn: ['立即购买', '残忍拒绝'],
+                                btnAlign: 'c',
+                                yes: function (index, layero) {
+                                    var selected = $('.selected');
+                                    if (selected.length === 3) {
+                                        console.log('购买成功');
+                                        layer.close(index);
+                                    } else {
+                                        console.log('购买失败');
+                                    }
+                                },
+                                end: function () {
+                                    $('.sku').removeClass('selected');
+                                }
+                            });
+                        });
+                    });
                 });
             });
         }
 
         function getQueryVariable(variable) {
-            var query = window.location.search.substring(1);
-            var vars = query.split("&");
-            for (var i = 0; i < vars.length; i++) {
-                var pair = vars[i].split("=");
-                if (pair[0] === variable) {
-                    return pair[1];
-                }
-            }
-            return '';
+            var search = layui.url().search;
+            if (search.hasOwnProperty(variable)) return search[variable];
+            else return '';
         }
 
         $('.inner-cont2 a').each(function (i, item) {

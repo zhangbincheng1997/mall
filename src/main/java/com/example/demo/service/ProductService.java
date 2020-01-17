@@ -16,7 +16,7 @@ public interface ProductService extends IService<Product> {
 
     Page<Product> listBuyer(ProductPageRequest pageRequest);
 
-    void add(ProductDto productDto);
+    Long add(ProductDto productDto);
 
     void update(Long id, ProductDto productDto);
 

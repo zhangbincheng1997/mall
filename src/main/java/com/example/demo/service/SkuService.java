@@ -15,13 +15,16 @@ public interface SkuService extends IService<Sku> {
     List<AttributeValue> getAttributeValue(Long attributeId);
 
     Attribute addAttributeName(Long categoryId, String name);
+
     AttributeValue addAttributeValue(Long attributeId, String value);
+
     void deleteAttributeName(Long id);
+
     void deleteAttributeValue(Long id);
+
+    List<Sku> getAllSku(Long productId);
 
     Sku getSku(Long productId, String attribute);
 
-    int addSku(SkuDto skuDto);
-
-    int updateSku(Long id, SkuDto skuDto);
+    void saveOrUpdateSku(Long productId, List<SkuDto> skuDtoList);
 }

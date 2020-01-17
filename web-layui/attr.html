@@ -16,7 +16,6 @@
             <legend>上传属性</legend>
         </fieldset>
         <div style="width: 1000px; margin: 0 auto;">
-
             <form id="form" class="layui-form layui-form-pane" autocomplete="off">
                 <div class="layui-form-item">
                     <label class="layui-form-label">选择分类</label>
@@ -75,7 +74,7 @@
                 on: function (data) {
                     if (!data.isAdd) return;
                     categoryId = data.change[0].id;
-                    $.get('sku/' + categoryId, function (res) {
+                    $.get('sku/attr/' + categoryId, function (res) {
                         skuData = res.data;
                         initOp(); // 初始化
                     });
@@ -87,6 +86,7 @@
             var SKU = sku.init({id: 'sku', item: skuData, data: []});
 
             $('#test').click(function () {
+                console.log(SKU.getData());
                 $('#content').val(JSON.stringify(SKU.getData()) + '\n' + JSON.stringify(SKU.getItem()));
             });
 
@@ -114,7 +114,7 @@
                     title: '请输入属性值',
                     area: ['800px', '400px']
                 }, function (value, index, elem) {
-                    var attributeId = $(e.currentTarget).data('id');
+                    var attributeId = $(e.currentTarget).attr('data-id');
                     $.post('sku/value/' + attributeId, {value: value}, function (res) { // value
                         if (res.code === 0) {
                             $.each(skuData, function (i, item) {
@@ -132,7 +132,7 @@
 
             $('i[name="deleteName"]').click(function (e) {
                 layer.confirm('确认删除属性名？', function (index) {
-                    var nameId = $(e.currentTarget).data('id');
+                    var nameId = $(e.currentTarget).attr('data-id');
                     $.delete('sku/name/' + nameId, function (res) {
                         if (res.code === 0) {
                             $.each(skuData, function (i, item) {
@@ -150,7 +150,7 @@
 
             $('i[name="deleteValue"]').click(function (e) {
                 layer.confirm('确认删除属性值？', function (index) {
-                    var valueId = $(e.currentTarget).data('id');
+                    var valueId = $(e.currentTarget).attr('data-id');
                     $.delete('sku/value/' + valueId, function (res) {
                         if (res.code === 0) {
                             $.each(skuData, function (i, item) {
@@ -168,8 +168,6 @@
                 });
             });
         }
-
-        // TODO
     });
 </script>
 </body>

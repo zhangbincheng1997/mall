@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuService {
@@ -68,22 +69,31 @@ public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuSe
     }
 
     @Override
+    public List<Sku> getAllSku(Long productId) {
+        return baseMapper.selectList(Wrappers.<Sku>lambdaQuery()
+                .eq(Sku::getProductId, productId));
+    }
+
+    @Override
     public Sku getSku(Long productId, String attribute) {
         return baseMapper.selectOne(Wrappers.<Sku>lambdaQuery()
                 .eq(Sku::getProductId, productId)
-                .eq(Sku::getAttribute, attribute));
+                .eq(Sku::getIds, attribute));
     }
 
     @Override
-    public int addSku(SkuDto skuDto) {
-        Sku sku = Convert.convert(Sku.class, skuDto);
-        return baseMapper.insert(sku);
-    }
+    public void saveOrUpdateSku(Long productId, List<SkuDto> skuDtoList) {
+        // 删除原有的
+        baseMapper.delete(Wrappers.<Sku>lambdaUpdate()
+                .eq(Sku::getProductId, productId));
 
-    @Override
-    public int updateSku(Long skuId, SkuDto skuDto) {
-        Sku sku = Convert.convert(Sku.class, skuDto)
-                .setId(skuId);
-        return baseMapper.updateById(sku);
+        skuDtoList.forEach(skuDto -> {
+            Sku sku = Convert.convert(Sku.class, skuDto).setProductId(productId);
+            // 如果数据库存在相同的productId和Ids，则更新
+            // 否则添加
+            saveOrUpdate(sku, Wrappers.<Sku>lambdaUpdate()
+                    .eq(Sku::getProductId, productId)
+                    .eq(Sku::getIds, sku.getIds()));
+        });
     }
 }
