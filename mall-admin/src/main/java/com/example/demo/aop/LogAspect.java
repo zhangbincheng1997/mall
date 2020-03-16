@@ -29,7 +29,6 @@ public class LogAspect {
         ServletRequestAttributes sra = (ServletRequestAttributes) ra;
         HttpServletRequest request = sra.getRequest();
 
-        // String ip = IpUtil.getClientIP(request);
         String uri = request.getRequestURI();
         String method = request.getMethod();
         String params = JSON.toJSONString(request.getParameterMap());

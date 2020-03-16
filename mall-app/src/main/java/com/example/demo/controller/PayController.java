@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import com.example.demo.aop.AccessLimit;
 import com.example.demo.base.Result;
 import com.example.demo.base.Status;
 import com.example.demo.enums.OrderStatusEnum;
@@ -25,7 +24,7 @@ import java.security.Principal;
 
 @Slf4j
 @Controller
-@RequestMapping("/buyer/pay")
+@RequestMapping("/pay")
 public class PayController {
 
     @Autowired
@@ -38,7 +37,7 @@ public class PayController {
     @PostMapping("")
     @ResponseBody
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')") // RequestBody JSON
-    @AccessLimit(ip = true, time = 1, count = 1) // 防止重复下单
+    // 防止重复下单
     public Result<String> create(@ApiIgnore Authentication authentication) {
         // 创建订单
         JwtUserDetails userDetails = (JwtUserDetails) authentication.getPrincipal();
@@ -50,7 +49,7 @@ public class PayController {
     @PostMapping("/{id}")
     @ResponseBody
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
-    @AccessLimit(ip = true, time = 1, count = 1) // 防止重复下单
+    // 防止重复下单
     public void buy(@ApiIgnore Principal principal, @PathVariable("id") Long id, HttpServletResponse response) {
         // 查找订单
         OrderMaster orderMaster = orderMasterService.get(principal.getName(), id);
@@ -62,7 +61,7 @@ public class PayController {
     @PostMapping(value = "/cancel/{id}")
     @ResponseBody
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
-    @AccessLimit(ip = true, time = 1, count = 1) // 防止重复关闭订单
+    // 防止重复关闭订单
     public Result<String> close(@ApiIgnore Principal principal, @PathVariable("id") Long id) {
         // 确认存在
         OrderMaster orderMaster = orderMasterService.get(principal.getName(), id);
@@ -79,7 +78,7 @@ public class PayController {
     @PostMapping(value = "/receive/{id}")
     @ResponseBody
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
-    @AccessLimit(ip = true, time = 1, count = 1) // 防止重复完成订单
+    // 防止重复完成订单
     public Result<String> confirm(@ApiIgnore Principal principal, @PathVariable("id") Long id) {
         // 确认存在
         OrderMaster orderMaster = orderMasterService.get(principal.getName(), id);
@@ -95,7 +94,7 @@ public class PayController {
     @PostMapping(value = "/refund/{id}")
     @ResponseBody
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
-    @AccessLimit(ip = true, time = 1, count = 1) // 防止重复申请退款
+    // 防止重复申请退款
     public Result<String> refund(@ApiIgnore Principal principal, @PathVariable("id") Long id) {
         // 确认存在
         OrderMaster orderMaster = orderMasterService.get(principal.getName(), id);

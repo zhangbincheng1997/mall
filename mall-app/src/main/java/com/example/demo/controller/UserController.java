@@ -1,8 +1,8 @@
 package com.example.demo.controller;
 
 import cn.hutool.core.convert.Convert;
-import com.example.demo.common.base.Result;
-import com.example.demo.common.jwt.JwtUserDetails;
+import com.example.demo.base.Result;
+import com.example.demo.jwt.JwtUserDetails;
 import com.example.demo.component.RedisService;
 import com.example.demo.dto.RegisterDto;
 import com.example.demo.dto.UserInfoDto;

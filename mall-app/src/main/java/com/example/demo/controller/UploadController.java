@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import com.example.demo.aop.AccessLimit;
 import com.example.demo.base.Result;
 import com.example.demo.base.Status;
 import com.example.demo.component.QiniuService;
@@ -27,7 +26,6 @@ public class UploadController {
     @ApiOperation("上传文件 限制ip:3次/分钟")
     @PostMapping("")
     @ResponseBody
-    @AccessLimit(ip = true, time = 60, count = 3)
     public Result<String> uploadIcon(@RequestParam("file") MultipartFile file) {
         if (!file.isEmpty()) {
             try {

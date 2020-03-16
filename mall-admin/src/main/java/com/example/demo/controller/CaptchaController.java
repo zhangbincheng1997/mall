@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import com.example.demo.aop.AccessLimit;
 import com.example.demo.base.Result;
 import com.example.demo.utils.Constants;
 import com.example.demo.component.RedisService;
@@ -28,7 +27,6 @@ public class CaptchaController {
     @ApiOperation("获取验证码")
     @GetMapping("")
     @ResponseBody
-    @AccessLimit(ip = true, time = 60, count = 3)
     public Result<Map<String, String>> captcha() {
         // 使用静态验证码
         // SpecCaptcha specCaptcha = new SpecCaptcha(Constants.CODE_WIDTH, Constants.CODE_HEIGHT, Constants.CODE_LENGTH);

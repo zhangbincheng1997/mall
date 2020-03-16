@@ -10,11 +10,7 @@ public interface ProductService extends IService<Product> {
 
     Product get(Long id);
 
-    Product getBuyer(Long id);
-
     Page<Product> list(ProductPageRequest pageRequest);
-
-    Page<Product> listBuyer(ProductPageRequest pageRequest);
 
     Long add(ProductDto productDto);
 

@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 
 @Api(tags = "卖家商品")
 @Controller
-@RequestMapping("/seller/product")
+@RequestMapping("/product")
 public class ProductController {
 
     @Autowired

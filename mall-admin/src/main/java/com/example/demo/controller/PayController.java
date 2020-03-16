@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import com.example.demo.aop.AccessLimit;
 import com.example.demo.base.Result;
 import com.example.demo.base.Status;
 import com.example.demo.enums.OrderStatusEnum;
@@ -32,7 +31,7 @@ public class PayController {
     @PostMapping(value = "/deal/{id}")
     @ResponseBody
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
-    @AccessLimit(ip = true, time = 1, count = 1) // 防止重复处理退款
+    // 防止重复处理退款
     public Result<String> deal(@PathVariable("id") Long id) {
         // 确认存在
         OrderMaster orderMaster = orderMasterService.get(id);
@@ -55,7 +54,7 @@ public class PayController {
     @PostMapping(value = "/cancel/{id}")
     @ResponseBody
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
-    @AccessLimit(ip = true, time = 1, count = 1) // 防止重复关闭订单
+    // 防止重复关闭订单
     public Result<String> cancel(@PathVariable("id") Long id) {
         // 确认存在
         OrderMaster orderMaster = orderMasterService.get(id);
@@ -72,7 +71,7 @@ public class PayController {
     @PostMapping(value = "/ship/{id}")
     @ResponseBody
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
-    @AccessLimit(ip = true, time = 1, count = 1) // 防止重复完成订单
+    // 防止重复完成订单
     public Result<String> ship(@PathVariable("id") Long id) {
         // 确认存在
         OrderMaster orderMaster = orderMasterService.get(id);

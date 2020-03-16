@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script type="text/javascript" src="include/title.js"></script>
+</head>
+<body>
+<script type="text/javascript" src="include/site-nav.js"></script>
+<script type="text/javascript" src="include/header.js"></script>
+<div class="content content-nav-base commodity-content">
+    <script type="text/javascript" src="include/main-nav.js"></script>
+    <div class="commod-cont-wrap">
+        <div class="commod-cont w1200 layui-clear">
+            <div class="left-nav">
+                <div class="title">所有商品</div>
+                <!-- 模版导入 -->
+                <script type="text/html" id="category">
+                    <div class="list-box">
+                        {{# layui.each(d, function(index, item){ }}
+                        <dl>
+                            <dt>
+                                {{ item.name }}<!-- 一级分类 -->
+                            </dt>
+                            {{# layui.each(item.children, function(index2, item2){ }}
+                            <dd>
+                                <a href="javascript:window.location.href='mall.html?category={{ item2.id }}';">
+                                    {{ item2.name }}<!-- 二级分类 -->
+                                </a>
+                            </dd>
+                            {{# }); }}
+                        </dl>
+                        {{# }); }}
+                    </div>
+                </script>
+                <div id="categoryView"></div>
+            </div>
+            <div class="right-cont-wrap">
+                <div class="right-cont">
+                    <div class="sort layui-clear">
+                        <a class="active" href="javascript:void(0);" event='volume'>销量</a>
+                        <a href="javascript:void(0);" event='price'>价格</a>
+                        <a href="javascript:void(0);" event='newprod'>新品</a>
+                        <a href="javascript:void(0);" event='collection'>收藏</a>
+                    </div>
+
+                    <!-- 模版导入 -->
+                    <script type="text/html" id="product">
+                        <div class="prod-number">
+                            <span>{{ d.count }}个</span>
+                        </div>
+                        <div class="cont-list layui-clear">
+                            {{# layui.each(d.data, function(index, item){ }}
+                            <div class="item" data-id="{{ item.id }}">
+                                <div class="img layui-anim" data-anim="layui-anim-scale">
+                                    <a href="javascript:void(0);">
+                                        <img src="{{ item.icon }}" title="{{ item.description }}"
+                                             width="280px" height="280px">
+                                    </a>
+                                </div>
+                                <div class="text">
+                                    <p class="title">{{ item.name }}</p>
+                                    <p class="price">
+                                        <span class="pri">￥{{ item.price }}</span>
+                                        <span class="nub">{{ item.stock }}库存</span>
+                                    </p>
+                                </div>
+                            </div>
+                            {{# }); }}
+                        </div>
+                    </script>
+                    <div id="productView"></div>
+                    <div id="page" style="text-align: center;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="include/footer.js"></script>
+<script>
+    layui.use(['jquery', 'element', 'laytpl', 'laypage'], function () {
+        var $ = layui.$, laytpl = layui.laytpl, laypage = layui.laypage, element = layui.element;
+
+        $.get('category/list', function (res) {
+            laytpl(category.innerHTML).render(res.data, function (html) {
+                $('#categoryView').html(html);
+            });
+        });
+
+        var para = '&keyword=' + getQueryVariable('keyword') + '&category=' + getQueryVariable('category');
+        $.get('product?limit=12&page=1' + para, function (res) {
+            console.log("111");
+            init(res);
+            laypage.render({ // 分页
+                elem: 'page',
+                count: res.count,
+                limit: 12,
+                jump: function (obj, first) {
+                    if (!first) { // 首次不执行
+                        $.get('product?limit=12&page=' + obj.curr, function (res) {
+                            init(res);
+                        });
+                    }
+                }
+            });
+        });
+
+        function init(res) {
+            laytpl(product.innerHTML).render(res, function (html) {
+                $('#productView').html(html);
+                $('.layui-anim').on('click', function () {
+                    var othis = $(this), anim = othis.data('anim');
+                    othis.removeClass(anim);
+                    setTimeout(function () {
+                        othis.addClass(anim);
+                    });
+
+                    var id = $(this).parents('.item').attr("data-id");
+                    addCart({id: id, quantity: 1});
+                });
+            });
+        }
+
+        function addCart(data) {
+            $.post('cart', data, function (res) {
+                if (res.code === 0) {
+                    // ok
+                }
+            });
+        }
+
+        function getQueryVariable(variable) {
+            var search = layui.url().search;
+            if (search.hasOwnProperty(variable)) return search[variable];
+            else return '';
+        }
+
+        $('.inner-cont2 a').each(function (i, item) {
+            var url = window.location.pathname;
+            var href = $(item).attr('href');
+            if (url.search(href) !== -1) {
+                $(item).addClass('active');
+            }
+        });
+    });
+</script>
+</body>
+</html>

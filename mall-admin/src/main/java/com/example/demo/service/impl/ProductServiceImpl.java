@@ -33,28 +33,10 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     }
 
     @Override
-    public Product getBuyer(Long id) {
-        return baseMapper.selectOne(Wrappers.<Product>lambdaQuery()
-                .eq(Product::getId, id)
-                .eq(Product::getStatus, true));
-    }
-
-    @Override
     public Page<Product> list(ProductPageRequest pageRequest) {
         Page<Product> page = new Page<>(pageRequest.getPage(), pageRequest.getLimit());
         return baseMapper.selectPage(page,
                 Wrappers.<Product>lambdaQuery()
-                        .like(Product::getName, pageRequest.getKeyword())
-                        .like(Product::getCategory, pageRequest.getCategory())
-                        .orderByDesc(Product::getId));
-    }
-
-    @Override
-    public Page<Product> listBuyer(ProductPageRequest pageRequest) {
-        Page<Product> page = new Page<>(pageRequest.getPage(), pageRequest.getLimit());
-        return baseMapper.selectPage(page,
-                Wrappers.<Product>lambdaQuery()
-                        .eq(Product::getStatus, true)
                         .like(Product::getName, pageRequest.getKeyword())
                         .like(Product::getCategory, pageRequest.getCategory())
                         .orderByDesc(Product::getId));

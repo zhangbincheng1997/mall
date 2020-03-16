@@ -10,9 +10,4 @@ public interface CategoryService extends IService<Category> {
 
     List<Category> list(Long id);
 
-    void add(CategoryDto categoryDto);
-
-    void update(Long id, CategoryDto categoryDto);
-
-    void delete(Long id);
 }

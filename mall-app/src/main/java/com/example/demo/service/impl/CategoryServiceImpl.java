@@ -27,32 +27,4 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
         return list();
     }
 
-    @Override
-    @CacheEvict(value = "category", allEntries = true) // 清除缓存
-    public void add(CategoryDto categoryDto) {
-        Category category = Convert.convert(Category.class, categoryDto);
-        baseMapper.insert(category);
-    }
-
-    @Override
-    @CacheEvict(value = "category", allEntries = true) // 清除缓存
-    public void update(Long id, CategoryDto categoryDto) {
-        Category category = Convert.convert(Category.class, categoryDto)
-                .setId(id);
-        baseMapper.updateById(category);
-    }
-
-    @Override
-    @CacheEvict(value = "category", allEntries = true) // 清除缓存
-    public void delete(Long id) {
-        try {
-            Category category = getOne(Wrappers.<Category>lambdaQuery()
-                    .eq(Category::getPid, id));
-            // 不能删除非叶子节点
-            if (category != null) throw new GlobalException(Status.CATEGORY_NOT_DELETE);
-            removeById(id);
-        } catch (DataIntegrityViolationException e) {
-            throw new GlobalException(Status.CATEGORY_EXIST); // 外键
-        }
-    }
 }

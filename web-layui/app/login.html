@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script type="text/javascript" src="include/title.js"></script>
+</head>
+<body>
+<script type="text/javascript" src="include/site-nav.js"></script>
+<script type="text/javascript" src="include/header.js"></script>
+<div class="content content-nav-base login-content">
+    <script type="text/javascript" src="include/main-nav.js"></script>
+    <div class="login-bg">
+        <div class="login-cont w1200">
+            <div class="form-box">
+                <form class="layui-form" autocomplete="off">
+                    <legend>用户登录</legend>
+                    <div class="layui-form-item">
+                        <div class="layui-inline iphone">
+                            <div class="layui-input-inline">
+                                <i class="layui-icon layui-icon-username iphone-icon"></i>
+                                <input type="text" name="username" placeholder="请输入用户名" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline iphone">
+                            <div class="layui-input-inline">
+                                <i class="layui-icon layui-icon-cellphone iphone-icon"></i>
+                                <input type="password" name="password" placeholder="请输入密码" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline veri-code">
+                            <div class="layui-input-inline">
+                                <div class="layui-input-inline">
+                                    <input type="text" name="key" id="key" hidden>
+                                    <input type="text" name="captcha" placeholder="请输入验证码" class="layui-input">
+                                    <img id="captcha">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item login-btn">
+                        <div class="layui-input-block">
+                            <button class="layui-btn" lay-submit lay-filter="login">登录</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="include/footer.js"></script>
+<script>
+    layui.use(['jquery', 'element', 'form'], function () {
+        var $ = layui.jquery;
+        var form = layui.form;
+
+        $.get('captcha', function (res) {
+            $('#key').val(res.data.key);
+            $('#captcha').attr('src', res.data.image);
+        });
+
+        $('#captcha').click(function () {
+            $.get('captcha', function (res) {
+                $('#key').val(res.data.key);
+                $('#captcha').attr('src', res.data.image);
+            });
+        });
+
+        form.on('submit(login)', function (data) {
+            $.post('login', data.field, function (res) {
+                if (res.code === 0) {
+                    // local storage
+                    layui.data('token', {key: 'Authorization', value: res.data.token});
+                    layui.data('user', {key: 'info', value: res.data});
+                    layer.msg(res.msg, {time: 1000}, function () {
+                        window.location.href = 'index.html';
+                    });
+                }
+            });
+            return false; // require
+        });
+    });
+</script>
+</body>
+</html>

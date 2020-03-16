@@ -2,7 +2,6 @@ package com.example.demo.controller;
 
 import cn.hutool.core.convert.Convert;
 import com.example.demo.base.Result;
-import com.example.demo.dto.CategoryDto;
 import com.example.demo.entity.Category;
 import com.example.demo.service.CategoryService;
 import com.example.demo.vo.CategoryVo;
@@ -13,7 +12,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,33 +32,6 @@ public class CategoryController {
         List<Category> categoryList = categoryService.list(id);
         List<CategoryVo> categoryVoList = get(categoryList, id);
         return Result.success(categoryVoList);
-    }
-
-    @ApiOperation("添加分类")
-    @PostMapping("")
-    @ResponseBody
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public Result<String> add(@Valid CategoryDto categoryDto) {
-        categoryService.add(categoryDto);
-        return Result.success();
-    }
-
-    @ApiOperation("修改分类")
-    @PutMapping("/{id}")
-    @ResponseBody
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public Result<String> update(@PathVariable("id") Long id, @Valid CategoryDto categoryDto) {
-        categoryService.update(id, categoryDto);
-        return Result.success();
-    }
-
-    @ApiOperation("删除分类")
-    @DeleteMapping("/{id}")
-    @ResponseBody
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public Result<String> delete(@PathVariable("id") Long id) {
-        categoryService.delete(id);
-        return Result.success();
     }
 
     // 递归调用

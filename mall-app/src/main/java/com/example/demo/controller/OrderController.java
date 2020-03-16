@@ -32,7 +32,7 @@ import java.util.Map;
 
 @Api(tags = "买家订单")
 @Controller
-@RequestMapping("/buyer/order")
+@RequestMapping("/order")
 public class OrderController {
 
     @Autowired

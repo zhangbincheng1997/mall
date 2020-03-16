@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 
 @Api(tags = "买家商品")
 @Controller
-@RequestMapping("/buyer/product")
+@RequestMapping("/product")
 public class ProductController {
 
     @Autowired
@@ -31,7 +31,7 @@ public class ProductController {
     @GetMapping("")
     @ResponseBody
     public PageResult<List<ProductVo>> list(@Valid ProductPageRequest pageRequest) {
-        Page<Product> pageInfo = productService.listBuyer(pageRequest);
+        Page<Product> pageInfo = productService.list(pageRequest);
         List<ProductVo> productVoList = pageInfo.getRecords().stream()
                 .map(product -> Convert.convert(ProductVo.class, product))
                 .collect(Collectors.toList());

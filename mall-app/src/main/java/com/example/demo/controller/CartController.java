@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.convert.Convert;
 import com.example.demo.base.Result;
 import com.example.demo.component.CartService;
@@ -12,7 +11,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
@@ -23,7 +21,7 @@ import java.util.stream.Collectors;
 
 @Api(tags = "购物车")
 @Controller
-@RequestMapping("/buyer/cart")
+@RequestMapping("/cart")
 public class CartController {
 
     @Autowired

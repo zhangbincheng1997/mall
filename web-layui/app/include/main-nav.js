@@ -1,0 +1,11 @@
+document.write("<div class=\"main-nav\">");
+document.write("        <div class=\"inner-cont0\">");
+document.write("            <div class=\"inner-cont1 w1200\">");
+document.write("                <div class=\"inner-cont2\">");
+document.write("                    <a href=\"index.html\">商店主页<\/a>");
+document.write("                    <a href=\"cart.html\">购物车<\/a>");
+document.write("                    <a href=\"order.html\">我的订单<\/a>");
+document.write("                <\/div>");
+document.write("            <\/div>");
+document.write("        <\/div>");
+document.write("<\/div>");

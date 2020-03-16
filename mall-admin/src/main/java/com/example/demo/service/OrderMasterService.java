@@ -14,27 +14,15 @@ public interface OrderMasterService extends IService<OrderMaster> {
 
     OrderMaster get(Long id);
 
-    OrderMaster get(String username, Long id);
-
     List<OrderDetail> getDetail(Long id);
-
-    List<OrderDetail> getDetail(String username, Long id);
 
     List<OrderTimeline> getTimeline(Long id);
 
-    List<OrderTimeline> getTimeline(String username, Long id);
-
     Page<OrderMaster> list(OrderPageRequest pageRequest);
-
-    Page<OrderMaster> list(String username, OrderPageRequest pageRequest);
 
     void updateOrderStatus(Long id, Integer status);
 
     void increaseStock(Long id);
 
-    void decreaseStock(Long id);
-
     void addStockRedis(Long id);
-
-    String buy(User user);
 }
