@@ -1,4 +1,4 @@
-package com.example.demo.config;
+package com.example.demo.component.redis;
 
 import com.example.demo.utils.Constants;
 import org.springframework.cache.CacheManager;

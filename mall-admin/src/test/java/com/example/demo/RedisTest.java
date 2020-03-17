@@ -1,6 +1,6 @@
 package com.example.demo;
 
-import com.example.demo.component.RedisService;
+import com.example.demo.component.redis.RedisService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

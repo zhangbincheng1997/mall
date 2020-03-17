@@ -6,31 +6,22 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.demo.base.GlobalException;
 import com.example.demo.base.Status;
+import com.example.demo.component.redis.RedisService;
+import com.example.demo.service.UserRoleService;
+import com.example.demo.service.UserService;
 import com.example.demo.utils.Constants;
-import com.example.demo.component.RedisService;
-import com.example.demo.dao.UserRolePermissionDao;
 import com.example.demo.dto.RegisterDto;
 import com.example.demo.dto.UserInfoDto;
-import com.example.demo.entity.Permission;
-import com.example.demo.entity.Role;
 import com.example.demo.entity.User;
 import com.example.demo.entity.UserRole;
 import com.example.demo.mapper.UserMapper;
-import com.example.demo.service.UserRoleService;
-import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
-
-    @Autowired
-    private UserRolePermissionDao userRolePermissionDao;
 
     @Autowired
     private RedisService redisService;
@@ -81,23 +72,5 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
                 .eq(User::getUsername, username));
 
         redisService.delete(Constants.USER_KEY + username); // 刷新缓存
-    }
-
-    @Override
-    public List<String> getRoleList(Long id) {
-        // user_id -> role_id
-        // 用户表 -> 角色表
-        return userRolePermissionDao.getRoleList(id).stream()
-                .map(Role::getName)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public List<String> getPermissionList(Long id) {
-        // user_id -> role_id -> permission_id
-        // 用户表 -> 角色表 -> 权限表
-        return userRolePermissionDao.getPermissionList(id).stream()
-                .map(Permission::getName)
-                .collect(Collectors.toList());
     }
 }

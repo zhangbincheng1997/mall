@@ -2,7 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.base.Result;
 import com.example.demo.base.Status;
-import com.example.demo.component.QiniuService;
+import com.example.demo.component.qiniu.QiniuService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +23,10 @@ public class UploadController {
     @Autowired
     private QiniuService qiniuService;
 
-    @ApiOperation("上传文件 限制ip:3次/分钟")
+    @ApiOperation("上传文件")
     @PostMapping("")
     @ResponseBody
-    public Result<String> uploadIcon(@RequestParam("file") MultipartFile file) {
+    public Result<String> upload(@RequestParam("file") MultipartFile file) {
         if (!file.isEmpty()) {
             try {
                 String path = qiniuService.upload(file.getBytes());

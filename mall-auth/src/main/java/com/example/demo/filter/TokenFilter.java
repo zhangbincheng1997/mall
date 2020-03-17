@@ -22,7 +22,7 @@ import java.io.IOException;
 
 @Slf4j
 @PropertySource({"classpath:jwt.properties"})
-//@Component
+@Component
 public class TokenFilter extends OncePerRequestFilter {
 
     @Autowired

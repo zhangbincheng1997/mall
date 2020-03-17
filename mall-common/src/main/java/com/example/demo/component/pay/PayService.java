@@ -1,4 +1,4 @@
-package com.example.demo.component;
+package com.example.demo.component.pay;
 
 import com.alibaba.fastjson.JSON;
 import com.alipay.api.AlipayApiException;
@@ -9,7 +9,6 @@ import com.alipay.api.request.AlipayTradeRefundRequest;
 import com.alipay.api.response.AlipayTradeRefundResponse;
 import com.example.demo.base.GlobalException;
 import com.example.demo.base.Status;
-import com.example.demo.config.PayConfig;
 import com.example.demo.utils.Constants;
 import com.example.demo.utils.RenderUtil;
 import lombok.extern.slf4j.Slf4j;

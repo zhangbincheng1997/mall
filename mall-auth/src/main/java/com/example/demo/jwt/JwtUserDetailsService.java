@@ -1,26 +1,26 @@
-package com.example.demo.aop;
+package com.example.demo.jwt;
 
 import com.alibaba.fastjson.JSON;
-import com.example.demo.component.RedisService;
+import com.example.demo.component.redis.RedisService;
 import com.example.demo.entity.User;
 import com.example.demo.jwt.JwtUserDetails;
-import com.example.demo.service.UserService;
+import com.example.demo.service.JwtUserService;
 import com.example.demo.utils.Constants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Slf4j
-@Configuration
+@Service
 public class JwtUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private UserService userService;
+    private JwtUserService userService;
 
     @Autowired
     private RedisService redisService;

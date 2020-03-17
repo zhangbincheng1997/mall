@@ -1,4 +1,4 @@
-package com.example.demo.config;
+package com.example.demo.component.pay;
 
 import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 @Data
-@PropertySource({"classpath:config/alipay.properties"})
+@PropertySource({"classpath:alipay.properties"})
 @Configuration
 public class PayConfig {
 

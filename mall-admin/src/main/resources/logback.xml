@@ -4,10 +4,10 @@
     <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
 
     <!--应用名称-->
-    <property name="APP_NAME" value="demo"/>
+    <property name="APP_NAME" value="admin"/>
 
     <!--保存路径-->
-    <property name="LOG_FILE_PATH" value="./logs}"/>
+    <property name="LOG_FILE_PATH" value="mall-admin/logs}"/>
 
     <contextName>${APP_NAME}</contextName>
 

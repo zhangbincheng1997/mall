@@ -52,7 +52,7 @@ public class OrderController {
     }
 
     @ApiOperation("获取订单详情")
-    @GetMapping("/all/{id}")
+    @GetMapping("/{id}")
     @ResponseBody
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     public Result<Map<String, Object>> all(@ApiIgnore Principal principal, @PathVariable("id") Long id) {

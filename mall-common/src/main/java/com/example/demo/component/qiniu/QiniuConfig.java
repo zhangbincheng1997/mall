@@ -1,4 +1,4 @@
-package com.example.demo.config;
+package com.example.demo.component.qiniu;
 
 import com.qiniu.storage.BucketManager;
 import com.qiniu.storage.Region;
@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 @Data
-@PropertySource({"classpath:config/qiniu.properties"})
+@PropertySource({"classpath:qiniu.properties"})
 @Configuration
 public class QiniuConfig {
 

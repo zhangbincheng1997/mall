@@ -3,64 +3,91 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <script type="text/javascript" src="include/admin/title.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script type="text/javascript" src="include/title.js"></script>
 </head>
-<body class="layui-layout-body">
-<div class="layui-layout layui-layout-admin">
-    <script type="text/javascript" src="include/admin/side.js"></script>
-    <script type="text/javascript" src="include/admin/header.js"></script>
-    <script type="text/javascript" src="include/admin/footer.js"></script>
+<body>
+<script type="text/javascript" src="include/site-nav.js"></script>
+<script type="text/javascript" src="include/header.js"></script>
+<div class="content content-nav-base commodity-content">
+    <script type="text/javascript" src="include/main-nav.js"></script>
+    <div class="commod-cont-wrap">
+        <div class="commod-cont w1200 layui-clear">
+            <fieldset class="layui-elem-field" style="width: 500px; margin: 0 auto;">
+                <legend>基本信息</legend>
+                <div class="layui-field-box">
+                    <form class="layui-form layui-form-pane" autocomplete="off">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label layui-icon layui-icon-username">头像</label>
+                            <div class="layui-input-block">
+                                <a id="upload">
+                                    <img id="avatar" width="100px" height="100px">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label layui-icon layui-icon-username">昵称</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="nickname" id="nickname" placeholder="请输入昵称"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label layui-icon layui-icon-username">邮箱</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="email" id="email" placeholder="请输入邮箱" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item" pane>
+                            <label class="layui-form-label layui-icon layui-icon-username">性别</label>
+                            <div class="layui-input-block">
+                                <input type="radio" name="gender" value="0" title="保密" checked>
+                                <input type="radio" name="gender" value="1" title="男性">
+                                <input type="radio" name="gender" value="2" title="女性">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label layui-icon layui-icon-username">生日</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="birthday" id="birthday" placeholder="请输入生日"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" lay-submit lay-filter="confirm">立即提交</button>
+                                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </fieldset>
 
-    <div class="layui-body">
-        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px">
-            <legend>基本信息</legend>
-        </fieldset>
-        <div style="width: 500px; margin: 0 auto;">
-            <form class="layui-form layui-form-pane" autocomplete="off">
-                <div class="layui-form-item">
-                    <label class="layui-form-label layui-icon layui-icon-username">头像</label>
-                    <div class="layui-input-block">
-                        <a id="upload">
-                            <img id="avatar" width="100px" height="100px">
-                        </a>
-                    </div>
+            <hr class="layui-bg-gray">
+
+            <fieldset class="layui-elem-field" style="width: 500px; margin: 0 auto;">
+                <legend>修改密码</legend>
+                <div class="layui-field-box">
+                    <form class="layui-form layui-form-pane" autocomplete="off">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label layui-icon layui-icon-password">新密码</label>
+                            <div class="layui-input-block">
+                                <input type="password" name="password" placeholder="请输入新密码" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" lay-submit lay-filter="confirm2">立即提交</button>
+                                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label layui-icon layui-icon-username">昵称</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="nickname" id="nickname" placeholder="请输入昵称" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label layui-icon layui-icon-username">邮箱</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="email" id="email" placeholder="请输入邮箱" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-form-item" pane>
-                    <label class="layui-form-label layui-icon layui-icon-username">性别</label>
-                    <div class="layui-input-block">
-                        <input type="radio" name="gender" value="0" title="保密" checked>
-                        <input type="radio" name="gender" value="1" title="男性">
-                        <input type="radio" name="gender" value="2" title="女性">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label layui-icon layui-icon-username">生日</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="birthday" id="birthday" placeholder="请输入生日" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <div class="layui-input-block">
-                        <button class="layui-btn" lay-submit lay-filter="confirm">立即提交</button>
-                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                    </div>
-                </div>
-            </form>
+            </fieldset>
         </div>
     </div>
 </div>
+<script type="text/javascript" src="include/footer.js"></script>
 <script>
     layui.use(['jquery', 'element', 'form', 'upload', 'laydate'], function () {
         var $ = layui.jquery;
@@ -74,7 +101,7 @@
                 $('#nickname').val(res.data.nickname);
                 $('#email').val(res.data.email);
                 $('input[name="gender"]').each(function (i, element) {
-                    if (element.value === res.data.sex.toString()) {
+                    if (element.value === res.data.gender.toString()) {
                         $(element).prop('checked', true);
                     }
                 });
@@ -109,6 +136,15 @@
 
         laydate.render({
             elem: '#birthday'
+        });
+
+        form.on('submit(confirm2)', function (data) {
+            $.post('user/password', data.field, function (res) {
+                if (res.code === 0) {
+                    layer.msg(res.msg);
+                }
+            });
+            return false; // require
         });
     });
 </script>

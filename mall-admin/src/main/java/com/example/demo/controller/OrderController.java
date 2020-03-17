@@ -50,7 +50,7 @@ public class OrderController {
     }
 
     @ApiOperation("获取订单详情")
-    @GetMapping("/all/{id}")
+    @GetMapping("/{id}")
     @ResponseBody
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Result<Map<String, Object>> all(@PathVariable("id") Long id) {

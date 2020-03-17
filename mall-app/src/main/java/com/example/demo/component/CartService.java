@@ -1,5 +1,6 @@
 package com.example.demo.component;
 
+import com.example.demo.component.redis.RedisService;
 import com.example.demo.utils.Constants;
 import com.example.demo.dto.CartDto;
 import org.springframework.beans.factory.annotation.Autowired;

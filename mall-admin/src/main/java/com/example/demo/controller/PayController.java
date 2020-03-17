@@ -2,8 +2,8 @@ package com.example.demo.controller;
 
 import com.example.demo.base.Result;
 import com.example.demo.base.Status;
+import com.example.demo.component.pay.PayService;
 import com.example.demo.enums.OrderStatusEnum;
-import com.example.demo.component.PayService;
 import com.example.demo.entity.OrderMaster;
 import com.example.demo.service.OrderMasterService;
 import io.swagger.annotations.ApiOperation;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Slf4j
 @Controller
-@RequestMapping("/seller/pay")
+@RequestMapping("/pay")
 public class PayController {
 
     @Autowired

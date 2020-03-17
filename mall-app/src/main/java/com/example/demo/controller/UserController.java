@@ -3,7 +3,6 @@ package com.example.demo.controller;
 import cn.hutool.core.convert.Convert;
 import com.example.demo.base.Result;
 import com.example.demo.jwt.JwtUserDetails;
-import com.example.demo.component.RedisService;
 import com.example.demo.dto.RegisterDto;
 import com.example.demo.dto.UserInfoDto;
 import com.example.demo.service.UserService;
@@ -29,9 +28,6 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private RedisService redisService;
 
     @ApiOperation("注册")
     @PostMapping(value = "/register")

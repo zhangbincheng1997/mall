@@ -17,7 +17,4 @@ public interface UserService extends IService<User> {
 
     void updatePasswordByUsername(String username, String password);
 
-    List<String> getRoleList(Long id);
-
-    List<String> getPermissionList(Long id);
 }

@@ -1,7 +1,6 @@
-package com.example.demo.component;
+package com.example.demo.component.qiniu;
 
 import com.alibaba.fastjson.JSONObject;
-import com.example.demo.config.QiniuConfig;
 import com.example.demo.utils.Constants;
 import com.qiniu.common.QiniuException;
 import com.qiniu.http.Response;

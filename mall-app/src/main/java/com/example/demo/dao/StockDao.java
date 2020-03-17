@@ -7,6 +7,4 @@ public interface StockDao {
     @Update("UPDATE product SET stock=stock-#{count} WHERE id =#{id}")
     int decreaseStock(Long id, int count);
 
-    @Update("UPDATE product SET stock=stock+#{count} WHERE id =#{id}")
-    int increaseStock(Long id, int count);
 }

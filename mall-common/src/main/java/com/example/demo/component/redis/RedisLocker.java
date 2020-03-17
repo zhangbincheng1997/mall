@@ -1,4 +1,4 @@
-package com.example.demo.component;
+package com.example.demo.component.redis;
 
 import org.redisson.RedissonMultiLock;
 import org.redisson.api.RLock;
