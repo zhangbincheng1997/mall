@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import cn.hutool.core.convert.Convert;
+import cn.hutool.core.lang.TypeReference;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.demo.base.PageResult;
 import com.example.demo.base.Result;
@@ -18,9 +19,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.stream.Collectors;
 
-@Api(tags = "卖家商品")
+@Api(tags = "商品")
 @Controller
 @RequestMapping("/product")
 public class ProductController {
@@ -43,9 +43,8 @@ public class ProductController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public PageResult<List<ProductVo>> list(@Valid ProductPageRequest pageRequest) {
         Page<Product> page = productService.list(pageRequest);
-        List<ProductVo> productVoList = page.getRecords().stream()
-                .map(product -> Convert.convert(ProductVo.class, product))
-                .collect(Collectors.toList());
+        List<ProductVo> productVoList = Convert.convert(new TypeReference<List<ProductVo>>() {
+        }, page.getRecords());
         return PageResult.success(productVoList, page.getTotal());
     }
 
@@ -54,8 +53,8 @@ public class ProductController {
     @ResponseBody
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Result<Long> add(@Valid ProductDto productDto) {
-        Long productId = productService.add(productDto);
-        return Result.success(productId);
+        productService.add(productDto);
+        return Result.success();
     }
 
     @ApiOperation("修改商品")

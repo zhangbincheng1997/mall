@@ -12,7 +12,7 @@ public interface ProductService extends IService<Product> {
 
     Page<Product> list(ProductPageRequest pageRequest);
 
-    Long add(ProductDto productDto);
+    void add(ProductDto productDto);
 
     void update(Long id, ProductDto productDto);
 

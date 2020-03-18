@@ -49,8 +49,8 @@ public class CartController {
     @ApiOperation("加入购物车")
     @PostMapping("")
     @ResponseBody
-    public Result<String> create(@ApiIgnore Principal principal, @Valid CartDto cartDto) {
-        cartService.create(principal.getName(), cartDto);
+    public Result<String> add(@ApiIgnore Principal principal, @Valid CartDto cartDto) {
+        cartService.add(principal.getName(), cartDto);
         return Result.success();
     }
 

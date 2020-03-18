@@ -7,12 +7,18 @@ import org.hibernate.validator.constraints.URL;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Data
 public class UserInfoDto {
+
+    @ApiModelProperty(value = "头像")
+    @NotEmpty(message = "头像不能为空")
+    @URL(message = "头像不符合规范")
+    private String avatar;
 
     @ApiModelProperty(value = "昵称")
     @Size(min = 3, max = 12, message = "昵称长度为3-12")

@@ -49,10 +49,10 @@ public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, Order
     private RabbitSender rabbitSender;
 
     @Autowired
-    private Snowflake snowflake;
+    private CartService cartService;
 
     @Autowired
-    private CartService cartService;
+    private Snowflake snowflake;
 
     @Autowired
     private StockDao stockDao;
@@ -101,23 +101,13 @@ public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, Order
     }
 
     @Override
-    public void updateOrderStatus(Long id, Integer status) {
-        OrderMaster orderMaster = new OrderMaster()
-                .setId(id)
-                .setStatus(status);
-        baseMapper.updateById(orderMaster);
-
-        OrderTimeline orderTimeline = new OrderTimeline()
-                .setOrderId(id)
-                .setStatus(status);
-        orderTimelineService.save(orderTimeline);
-    }
-
-    // 预减库存
-    @Override
     public String buy(User user) {
+        // 购物车
         List<CartDto> cartDtoList = cartService.list(user.getUsername()).stream()
                 .filter(CartDto::getChecked).collect(Collectors.toList()); // 下单部分
+        if (cartDtoList.size() == 0) throw new GlobalException(Status.CART_EMPTY);
+
+        // 多重锁
         List<String> lockKey = cartDtoList.stream()
                 .map(cartDto -> Constants.PRODUCT_REDIS_LOCK + cartDto.getId())
                 .collect(Collectors.toList());
@@ -128,7 +118,6 @@ public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, Order
         for (CartDto cartDto : cartDtoList) {
             Long productId = cartDto.getId();
             Integer productQuantity = cartDto.getQuantity();
-
             Integer stock = (Integer) redisService.get(Constants.PRODUCT_STOCK + productId);
             // 商品不存在
             if (stock == null) throw new GlobalException(Status.PRODUCT_NOT_EXIST);
@@ -155,6 +144,19 @@ public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, Order
         jsonStr.put("cartDtoList", cartDtoList);
         rabbitSender.send(Constants.ORDER_TOPIC, jsonStr.toJSONString()); // 发送消息队列
         return String.valueOf(orderId);
+    }
+
+    @Override
+    public void updateOrderStatus(Long id, Integer status) {
+        OrderMaster orderMaster = new OrderMaster()
+                .setId(id)
+                .setStatus(status);
+        baseMapper.updateById(orderMaster);
+
+        OrderTimeline orderTimeline = new OrderTimeline()
+                .setOrderId(id)
+                .setStatus(status);
+        orderTimelineService.save(orderTimeline);
     }
 
     @Override

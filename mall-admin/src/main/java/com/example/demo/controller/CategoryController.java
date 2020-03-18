@@ -26,9 +26,9 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @ApiOperation("获取分类列表")
-    @GetMapping("/list")
+    @GetMapping("")
     @ResponseBody
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public Result<List<CategoryVo>> list(@RequestParam(name = "id", defaultValue = "0") Long id) {
         // 全部读出 加速搜索
         List<Category> categoryList = categoryService.list(id);
@@ -66,7 +66,7 @@ public class CategoryController {
     // 递归调用
     public List<CategoryVo> get(List<Category> categoryList, Long id) {
         List<CategoryVo> categoryVoList = getByPid(categoryList, id);
-        categoryVoList.forEach(categoryVo -> categoryVo.setChildren(get(categoryList, Long.valueOf(categoryVo.getId()))));
+        categoryVoList.forEach(categoryVo -> categoryVo.setChildren(get(categoryList, categoryVo.getId())));
         return categoryVoList;
     }
 

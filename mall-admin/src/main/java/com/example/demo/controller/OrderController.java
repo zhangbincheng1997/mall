@@ -28,7 +28,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Api(tags = "商家订单")
+@Api(tags = "订单")
 @Controller
 @RequestMapping("/order")
 public class OrderController {

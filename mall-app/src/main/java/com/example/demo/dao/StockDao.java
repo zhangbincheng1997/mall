@@ -5,6 +5,5 @@ import org.apache.ibatis.annotations.Update;
 public interface StockDao {
 
     @Update("UPDATE product SET stock=stock-#{count} WHERE id =#{id}")
-    int decreaseStock(Long id, int count);
-
+    void decreaseStock(Long id, int count);
 }

@@ -35,13 +35,13 @@ public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, Order
     private RedisLocker redisLocker;
 
     @Autowired
+    private StockDao stockDao;
+
+    @Autowired
     private OrderDetailService orderDetailService;
 
     @Autowired
     private OrderTimelineService orderTimelineService;
-
-    @Autowired
-    private StockDao stockDao;
 
     @Override
     public OrderMaster get(Long id) {

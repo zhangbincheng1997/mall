@@ -33,8 +33,8 @@
                     <label class="layui-form-label layui-icon layui-icon-vercode">验证码</label>
                     <div class="layui-input-block">
                         <input type="text" name="key" id="key" hidden>
-                        <input type="text" name="captcha" placeholder="请输入验证码" class="layui-input">
-                        <img id="captcha" width="120px" height="38px">
+                        <input type="text" name="code" placeholder="请输入验证码" class="layui-input">
+                        <img id="captcha">
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -49,8 +49,7 @@
 </div>
 <script>
     layui.use(['jquery', 'element', 'form'], function () {
-        var $ = layui.jquery;
-        var form = layui.form;
+        var $ = layui.jquery, form = layui.form;
 
         $.get('captcha', function (res) {
             $('#key').val(res.data.key);

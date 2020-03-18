@@ -26,7 +26,7 @@
                         </div>
                         <div class="layui-inline iphone">
                             <div class="layui-input-inline">
-                                <i class="layui-icon layui-icon-cellphone iphone-icon"></i>
+                                <i class="layui-icon layui-icon-password iphone-icon"></i>
                                 <input type="password" name="password" placeholder="请输入密码" class="layui-input">
                             </div>
                         </div>
@@ -34,7 +34,7 @@
                             <div class="layui-input-inline">
                                 <div class="layui-input-inline">
                                     <input type="text" name="key" id="key" hidden>
-                                    <input type="text" name="captcha" placeholder="请输入验证码" class="layui-input">
+                                    <input type="text" name="code" placeholder="请输入验证码" class="layui-input">
                                     <img id="captcha">
                                 </div>
                             </div>
@@ -53,8 +53,7 @@
 <script type="text/javascript" src="include/footer.js"></script>
 <script>
     layui.use(['jquery', 'element', 'form'], function () {
-        var $ = layui.jquery;
-        var form = layui.form;
+        var $ = layui.jquery, form = layui.form;
 
         $.get('captcha', function (res) {
             $('#key').val(res.data.key);

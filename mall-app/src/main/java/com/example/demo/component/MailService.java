@@ -25,9 +25,7 @@ public class MailService {
         message.setTo(to);
         message.setSubject("下单成功");
         message.setText(JSON.toJSONString(orderMaster));
-
         try {
-            // 发送邮件
             mailSender.send(message);
             log.info(message.toString());
         } catch (Exception e) {

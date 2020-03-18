@@ -15,7 +15,7 @@
         <table id="table" lay-filter="table"></table>
     </div>
 
-    <div id="detailModal" style="display: none;">
+    <div id="modal" style="display: none;">
         <div style="width: 500px; margin: 0 auto; padding: 20px;">
             <table id="table2" lay-filter="table2"></table>
             <ul class="layui-timeline">
@@ -64,10 +64,7 @@
 </script>
 <script>
     layui.use(['jquery', 'element', 'form', 'table', 'laytpl'], function () {
-        var $ = layui.jquery;
-        var form = layui.form;
-        var table = layui.table;
-        var laytpl = layui.laytpl;
+        var $ = layui.jquery, form = layui.form, table = layui.table, laytpl = layui.laytpl;
 
         form.on('select(statusSearch)', function (data) {
             table.reload('table', {
@@ -98,13 +95,13 @@
         table.on('tool(table)', function (obj) {
             switch (obj.event) {
                 case 'detail':
-                    $.get('buyer/order/all/' + obj.data.id, function (res) {
+                    $.get('order/' + obj.data.id, function (res) {
                         var detailData = res.data.detail;
                         var timelineData = res.data.timeline;
                         layer.open({
                             type: 1, // 0：信息框，默认 1：页面层 2：iframe层 3：加载层 4：tips层
                             title: '订单详情',
-                            content: $('#detailModal'),
+                            content: $('#modal'),
                             area: ['800px', 200 + 50 * (detailData.length + timelineData.length) + 'px'],
                             shadeClose: true,
                             success: function () {

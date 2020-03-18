@@ -9,5 +9,4 @@ import java.util.List;
 public interface CategoryService extends IService<Category> {
 
     List<Category> list(Long id);
-
 }

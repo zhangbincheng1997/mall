@@ -8,7 +8,6 @@ import com.example.demo.vo.CategoryVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,9 +23,8 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @ApiOperation("获取分类列表")
-    @GetMapping("/list")
+    @GetMapping("")
     @ResponseBody
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     public Result<List<CategoryVo>> list(@RequestParam(name = "id", defaultValue = "0") Long id) {
         // 全部读出 加速搜索
         List<Category> categoryList = categoryService.list(id);
@@ -37,7 +35,7 @@ public class CategoryController {
     // 递归调用
     public List<CategoryVo> get(List<Category> categoryList, Long id) {
         List<CategoryVo> categoryVoList = getByPid(categoryList, id);
-        categoryVoList.forEach(categoryVo -> categoryVo.setChildren(get(categoryList, Long.valueOf(categoryVo.getId()))));
+        categoryVoList.forEach(categoryVo -> categoryVo.setChildren(get(categoryList, categoryVo.getId())));
         return categoryVoList;
     }
 

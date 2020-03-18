@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import cn.hutool.core.convert.Convert;
+import cn.hutool.core.lang.TypeReference;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.demo.base.PageResult;
 import com.example.demo.dto.page.ProductPageRequest;
@@ -17,9 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.stream.Collectors;
 
-@Api(tags = "买家商品")
+@Api(tags = "商品")
 @Controller
 @RequestMapping("/product")
 public class ProductController {
@@ -31,10 +31,9 @@ public class ProductController {
     @GetMapping("")
     @ResponseBody
     public PageResult<List<ProductVo>> list(@Valid ProductPageRequest pageRequest) {
-        Page<Product> pageInfo = productService.list(pageRequest);
-        List<ProductVo> productVoList = pageInfo.getRecords().stream()
-                .map(product -> Convert.convert(ProductVo.class, product))
-                .collect(Collectors.toList());
-        return PageResult.success(productVoList, pageInfo.getTotal());
+        Page<Product> page = productService.list(pageRequest);
+        List<ProductVo> productVoList = Convert.convert(new TypeReference<List<ProductVo>>() {
+        }, page.getRecords());
+        return PageResult.success(productVoList, page.getTotal());
     }
 }

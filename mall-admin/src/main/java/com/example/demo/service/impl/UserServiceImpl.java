@@ -1,6 +1,6 @@
 package com.example.demo.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.demo.entity.User;
 import com.example.demo.mapper.UserMapper;
@@ -12,9 +12,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public User getUserByUsername(String username) {
-        QueryWrapper<User> wrapper = new QueryWrapper<User>()
-                .eq("username", username);
-        return baseMapper.selectOne(wrapper);
+        return baseMapper.selectOne(Wrappers.<User>lambdaQuery()
+                .eq(User::getUsername, username));
     }
-
 }

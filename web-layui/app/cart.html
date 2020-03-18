@@ -35,7 +35,7 @@
     <img src="{{ d.icon }}" width="50px" height="50px">
 </script>
 <script>
-    layui.use(['jquery', 'laytpl', 'laypage', 'form', 'table'], function () {
+    layui.use(['jquery', 'form', 'table'], function () {
         var $ = layui.$, form = layui.form, table = layui.table;
 
         form.on('select(statusSearch)', function (data) {
@@ -64,7 +64,6 @@
                 {field: 'id', title: 'ID', width: 100, align: 'center', sort: true, totalRowText: '合计'},
                 {field: 'icon', title: '图标', width: 100, align: 'center', templet: '#iconTpl'},
                 {field: 'name', title: '名称'},
-                {field: 'sku', title: '货号'}, // TODO
                 {field: 'price', title: '价格', width: 100, align: 'center'},
                 {field: 'quantity', title: '数量', width: 200, align: 'center', templet: '#barTpl'},
                 {field: 'amount', title: '小计', width: 100, align: 'center', style: 'color:red', totalRow: true},
@@ -74,7 +73,7 @@
             }
         });
 
-        //监听头工具栏事件
+        // 监听头工具栏事件
         table.on('toolbar(table)', function (obj) {
             var checkStatus = table.checkStatus(obj.config.id);
             var data = checkStatus.data; // 获取选中的数据

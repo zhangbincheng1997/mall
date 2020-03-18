@@ -43,14 +43,13 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     }
 
     @Override
-    public Long add(ProductDto productDto) {
+    public void add(ProductDto productDto) {
         try {
             Product product = Convert.convert(Product.class, productDto);
             baseMapper.insert(product);
             addToRedis(product);
-            return product.getId();
         } catch (DataIntegrityViolationException e) {
-            throw new GlobalException(Status.CATEGORY_NOT_EXIST);
+            throw new GlobalException(Status.CATEGORY_NOT_EXIST); // FOREIGN KEY
         }
     }
 

@@ -41,7 +41,7 @@ public class RabbitReceiver {
     @RabbitListener(queues = Constants.ORDER_TOPIC)
     public void process(String message) {
         JSONObject jsonObject = JSONObject.parseObject(message);
-        Long orderId = (Long) jsonObject.get("orderId");
+        Long orderId = jsonObject.getLong("orderId");
         User user = JSONObject.parseObject(jsonObject.getString("user"), User.class);
         List<CartDto> cartDtoList = JSONObject.parseArray(jsonObject.getString("cartDtoList"), CartDto.class);
 
@@ -50,8 +50,6 @@ public class RabbitReceiver {
         for (CartDto cartDto : cartDtoList) {
             Long productId = cartDto.getId();
             Integer productQuantity = cartDto.getQuantity();
-
-            // 获取信息
             Product product = productService.get(productId);
 
             // 创建订单详情
@@ -62,9 +60,8 @@ public class RabbitReceiver {
             orderDetail.setProductIcon(product.getIcon());
             orderDetail.setProductName(product.getName());
             orderDetail.setProductPrice(product.getPrice());
-
-            // 添加订单详情
             orderDetailService.save(orderDetail);
+
             // 累加价格
             amount = amount.add(product.getPrice().multiply(new BigDecimal(productQuantity)));
         }
@@ -76,12 +73,10 @@ public class RabbitReceiver {
         orderMaster.setNickname(user.getNickname());
         orderMaster.setEmail(user.getEmail());
         orderMasterService.save(orderMaster);
-
-        // 创建状态
+        // 创建订单状态
         OrderTimeline orderTimeline = new OrderTimeline();
         orderTimeline.setOrderId(orderId);
         orderTimelineService.save(orderTimeline);
-
         // 发送通知
         mailService.send(user.getEmail(), orderMaster);
     }

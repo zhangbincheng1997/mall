@@ -16,7 +16,7 @@ document.write("            <a href=\"javascript:void(0);\">帮助中心<\/a>");
 document.write("            <span>|<\/span>");
 document.write("            <a href=\"javascript:void(0);\">售后服务<\/a>");
 document.write("            <span>|<\/span>");
-document.write("            <a href=\"javascript:void(0);\">母婴资讯<\/a>");
+document.write("            <a href=\"javascript:void(0);\">商品资讯<\/a>");
 document.write("            <span>|<\/span>");
 document.write("            <a href=\"javascript:void(0);\">关于货源<\/a>");
 document.write("        <\/p>");

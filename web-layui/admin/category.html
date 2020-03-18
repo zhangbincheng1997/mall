@@ -60,7 +60,7 @@
             reqData: function (data, callback) {
                 // 通过callback方法回调数据
                 var id = data ? data.id : '';
-                $.get('category/list?id=' + id, data, function (res) {
+                $.get('category?id=' + id, data, function (res) {
                     callback(res.data);
                 });
             }

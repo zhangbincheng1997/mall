@@ -6,6 +6,7 @@ import com.example.demo.component.pay.PayService;
 import com.example.demo.enums.OrderStatusEnum;
 import com.example.demo.entity.OrderMaster;
 import com.example.demo.service.OrderMasterService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Slf4j
+@Api(tags = "支付")
 @Controller
 @RequestMapping("/pay")
 public class PayController {
@@ -27,21 +29,19 @@ public class PayController {
     @Autowired
     private OrderMasterService orderMasterService;
 
-    @ApiOperation("卖家处理买家退款")
+    @ApiOperation("订单退款")
     @PostMapping(value = "/deal/{id}")
     @ResponseBody
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
-    // 防止重复处理退款
     public Result<String> deal(@PathVariable("id") Long id) {
         // 确认存在
         OrderMaster orderMaster = orderMasterService.get(id);
         // 检查状态
-        if (!orderMaster.getStatus().equals(OrderStatusEnum.REFUND_REQUEST.getCode()))
+        if (!orderMaster.getStatus().equals(OrderStatusEnum.REFUND_REQUEST.getCode())) // 退款请求
             return Result.failure(Status.ORDER_NOT_REFUND_REQUEST);
-        // 处理退款
+        // 订单退款
         boolean isSuccess = payService.refund(orderMaster.getId(), orderMaster.getAmount());
-        if (isSuccess) { // 退款成功，更新状态
-            // 修改商品数量
+        if (isSuccess) {
             orderMasterService.increaseStock(id); // MYSQL
             orderMasterService.addStockRedis(id); // REDIS
             orderMasterService.updateOrderStatus(id, OrderStatusEnum.REFUND_SUCCESS.getCode());
@@ -50,35 +50,33 @@ public class PayController {
         return Result.failure();
     }
 
-    @ApiOperation("卖家取消订单 太久未支付")
+    @ApiOperation("订单取消")
     @PostMapping(value = "/cancel/{id}")
     @ResponseBody
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
-    // 防止重复关闭订单
     public Result<String> cancel(@PathVariable("id") Long id) {
         // 确认存在
         OrderMaster orderMaster = orderMasterService.get(id);
         // 检查状态
-        if (!orderMaster.getStatus().equals(OrderStatusEnum.TO_BE_PAID.getCode()))
+        if (!orderMaster.getStatus().equals(OrderStatusEnum.TO_BE_PAID.getCode())) // 待付款
             return Result.failure(Status.ORDER_NOT_TO_BE_PAID);
-        // 不管是否关闭成功，都更新状态，不同于其他方法
+        // 订单取消
         orderMasterService.addStockRedis(id);
         orderMasterService.updateOrderStatus(id, OrderStatusEnum.CANCEL.getCode());
         return Result.success();
     }
 
-    @ApiOperation("卖家订单发货")
+    @ApiOperation("订单发货")
     @PostMapping(value = "/ship/{id}")
     @ResponseBody
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
-    // 防止重复完成订单
     public Result<String> ship(@PathVariable("id") Long id) {
         // 确认存在
         OrderMaster orderMaster = orderMasterService.get(id);
         // 检查状态
         if (!orderMaster.getStatus().equals(OrderStatusEnum.TO_BE_SHIPPED.getCode())) // 待发货
             return Result.failure(Status.ORDER_NOT_TO_BE_SHIPPED);
-        // 修改订单状态
+        // 订单发货
         orderMasterService.updateOrderStatus(id, OrderStatusEnum.TO_BE_RECEIVED.getCode());
         return Result.success();
     }

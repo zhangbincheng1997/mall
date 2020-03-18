@@ -44,7 +44,6 @@
                         <a href="javascript:void(0);" event='newprod'>新品</a>
                         <a href="javascript:void(0);" event='collection'>收藏</a>
                     </div>
-
                     <!-- 模版导入 -->
                     <script type="text/html" id="product">
                         <div class="prod-number">
@@ -80,9 +79,9 @@
 <script type="text/javascript" src="include/footer.js"></script>
 <script>
     layui.use(['jquery', 'element', 'laytpl', 'laypage'], function () {
-        var $ = layui.$, laytpl = layui.laytpl, laypage = layui.laypage, element = layui.element;
+        var $ = layui.$, laytpl = layui.laytpl, laypage = layui.laypage;
 
-        $.get('category/list', function (res) {
+        $.get('category', function (res) {
             laytpl(category.innerHTML).render(res.data, function (html) {
                 $('#categoryView').html(html);
             });
@@ -115,18 +114,13 @@
                     setTimeout(function () {
                         othis.addClass(anim);
                     });
-
                     var id = $(this).parents('.item').attr("data-id");
-                    addCart({id: id, quantity: 1});
+                    $.post('cart', {id: id, quantity: 1}, function (res) {
+                        if (res.code === 0) {
+                            // ok
+                        }
+                    });
                 });
-            });
-        }
-
-        function addCart(data) {
-            $.post('cart', data, function (res) {
-                if (res.code === 0) {
-                    // ok
-                }
             });
         }
 

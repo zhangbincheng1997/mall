@@ -7,7 +7,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.demo.base.GlobalException;
 import com.example.demo.base.Status;
 import com.example.demo.component.redis.RedisService;
-import com.example.demo.service.UserRoleService;
+import com.example.demo.enums.UserRoleEnum;
+import com.example.demo.mapper.UserRoleMapper;
 import com.example.demo.service.UserService;
 import com.example.demo.utils.Constants;
 import com.example.demo.dto.RegisterDto;
@@ -27,7 +28,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     private RedisService redisService;
 
     @Autowired
-    private UserRoleService userRoleService;
+    private UserRoleMapper userRoleMapper;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -48,10 +49,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             baseMapper.insert(user);
             UserRole userRole = new UserRole()
                     .setUserId(user.getId())
-                    .setRoleId(2L); // 默认为ROLE_USER
-            userRoleService.save(userRole);
+                    .setRoleId(UserRoleEnum.USER.getCode().longValue());
+            userRoleMapper.insert(userRole);
         } catch (DuplicateKeyException e) {
-            throw new GlobalException(Status.USERNAME_EXIST);
+            throw new GlobalException(Status.USERNAME_EXIST); // FOREIGN KEY
         }
     }
 
@@ -60,7 +61,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         User user = Convert.convert(User.class, userInfoDto);
         baseMapper.update(user, Wrappers.<User>lambdaUpdate()
                 .eq(User::getUsername, username));
-
         redisService.delete(Constants.USER_KEY + username); // 刷新缓存
     }
 
@@ -70,7 +70,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
                 .setPassword(passwordEncoder.encode(password));
         baseMapper.update(user, Wrappers.<User>lambdaUpdate()
                 .eq(User::getUsername, username));
-
         redisService.delete(Constants.USER_KEY + username); // 刷新缓存
     }
 }

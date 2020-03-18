@@ -49,7 +49,7 @@ public enum Status {
     CATEGORY_NOT_EXIST(50012, "分类不存在"),
     CATEGORY_NOT_DELETE(50013, "分类不允许删除"),
     ORDER_NOT_EXIST(50020, "订单不存在"),
-    SKU_NOT_EXIST(50030, "SKU不存在"),
+    CART_EMPTY(50030, "购物车为空"),
 
     // 支付相关
     PAY_BUG(60000, "支付异常"),

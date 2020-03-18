@@ -1,5 +1,6 @@
 package com.example.demo.config;
 
+import com.example.demo.filter.CaptchaFilter;
 import com.example.demo.filter.TokenFilter;
 import com.example.demo.jwt.JwtAccessDeniedHandler;
 import com.example.demo.jwt.JwtAuthenticationEntryPoint;
@@ -20,6 +21,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private CaptchaFilter captchaFilter;
 
     @Autowired
     private TokenFilter tokenFilter;
@@ -56,7 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll() // 跨域会请求OPTIONS
                 .antMatchers("/login", "/register", "/captcha").permitAll() // 登陆注册
                 .antMatchers("/return", "/notify").permitAll() // 支付回调
-                .antMatchers("/buyer/product").permitAll()
+                .antMatchers("/product", "/category").permitAll()
                 .anyRequest().authenticated() // 其他全部需要认证
                 .and().formLogin().loginProcessingUrl("/login") // 处理登录请求
                 .successHandler(jwtAuthenticationSuccessHandler)
@@ -64,7 +68,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().exceptionHandling() // 处理异常
                 .authenticationEntryPoint(jwtAuthenticationEntryPoint)
                 .accessDeniedHandler(jwtAccessDeniedHandler);
-        // 请求顺序 CaptchaFilter -> UsernamePasswordAuthenticationFilter
+        // 请求顺序 CaptchaFilter -> TokenFilter -> UsernamePasswordAuthenticationFilter
+        http.addFilterBefore(captchaFilter, UsernamePasswordAuthenticationFilter.class);
         http.addFilterBefore(tokenFilter, UsernamePasswordAuthenticationFilter.class);
         // 禁用缓存
         http.headers().cacheControl();

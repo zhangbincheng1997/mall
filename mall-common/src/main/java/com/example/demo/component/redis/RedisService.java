@@ -75,15 +75,15 @@ public class RedisService {
     /**
      * value + delta
      */
-    public Long increment(String key, int delta) {
-        return redisTemplate.opsForValue().increment(key, delta);
+    public void increment(String key, int delta) {
+        redisTemplate.opsForValue().increment(key, delta);
     }
 
     /**
      * value - delta
      */
-    public Long decrement(String key, int delta) {
-        return redisTemplate.opsForValue().decrement(key, delta);
+    public void decrement(String key, int delta) {
+        redisTemplate.opsForValue().decrement(key, delta);
     }
 
 

@@ -20,9 +20,9 @@ public interface OrderMasterService extends IService<OrderMaster> {
 
     Page<OrderMaster> list(String username, OrderPageRequest pageRequest);
 
-    void updateOrderStatus(Long id, Integer status);
-
     String buy(User user);
+
+    void updateOrderStatus(Long id, Integer status);
 
     void decreaseStock(Long id);
 

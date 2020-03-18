@@ -7,6 +7,7 @@ import com.example.demo.enums.OrderStatusEnum;
 import com.example.demo.jwt.JwtUserDetails;
 import com.example.demo.entity.OrderMaster;
 import com.example.demo.service.OrderMasterService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.security.Principal;
 
 @Slf4j
+@Api(tags = "支付")
 @Controller
 @RequestMapping("/pay")
 public class PayController {
@@ -37,9 +39,7 @@ public class PayController {
     @PostMapping("")
     @ResponseBody
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')") // RequestBody JSON
-    // 防止重复下单
     public Result<String> create(@ApiIgnore Authentication authentication) {
-        // 创建订单
         JwtUserDetails userDetails = (JwtUserDetails) authentication.getPrincipal();
         String orderId = orderMasterService.buy(userDetails.getUser());
         return Result.success(orderId);
@@ -49,59 +49,53 @@ public class PayController {
     @PostMapping("/{id}")
     @ResponseBody
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
-    // 防止重复下单
     public void buy(@ApiIgnore Principal principal, @PathVariable("id") Long id, HttpServletResponse response) {
-        // 查找订单
         OrderMaster orderMaster = orderMasterService.get(principal.getName(), id);
-        // 调用接口
         payService.pay(orderMaster.getId(), orderMaster.getAmount(), response);
     }
 
-    @ApiOperation("买家取消订单")
+    @ApiOperation("订单取消")
     @PostMapping(value = "/cancel/{id}")
     @ResponseBody
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
-    // 防止重复关闭订单
     public Result<String> close(@ApiIgnore Principal principal, @PathVariable("id") Long id) {
         // 确认存在
         OrderMaster orderMaster = orderMasterService.get(principal.getName(), id);
         // 检查状态
-        if (!orderMaster.getStatus().equals(OrderStatusEnum.TO_BE_PAID.getCode()))
+        if (!orderMaster.getStatus().equals(OrderStatusEnum.TO_BE_PAID.getCode())) // 待付款
             return Result.failure(Status.ORDER_NOT_TO_BE_PAID);
-        // 修改订单状态
+        // 订单取消
         orderMasterService.addStockRedis(id);
         orderMasterService.updateOrderStatus(id, OrderStatusEnum.CANCEL.getCode());
         return Result.success();
     }
 
-    @ApiOperation("买家订单确认收货")
+    @ApiOperation("订单完成")
     @PostMapping(value = "/receive/{id}")
     @ResponseBody
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
-    // 防止重复完成订单
     public Result<String> confirm(@ApiIgnore Principal principal, @PathVariable("id") Long id) {
         // 确认存在
         OrderMaster orderMaster = orderMasterService.get(principal.getName(), id);
         // 检查状态
         if (!orderMaster.getStatus().equals(OrderStatusEnum.TO_BE_RECEIVED.getCode())) // 待收货
             return Result.failure(Status.ORDER_NOT_TO_BE_RECEIVED);
-        // 修改订单状态
+        // 订单完成
         orderMasterService.updateOrderStatus(id, OrderStatusEnum.FINISH.getCode());
         return Result.success();
     }
 
-    @ApiOperation("买家申请退款")
+    @ApiOperation("订单退款")
     @PostMapping(value = "/refund/{id}")
     @ResponseBody
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
-    // 防止重复申请退款
     public Result<String> refund(@ApiIgnore Principal principal, @PathVariable("id") Long id) {
         // 确认存在
         OrderMaster orderMaster = orderMasterService.get(principal.getName(), id);
         // 检查状态
         if (!orderMaster.getStatus().equals(OrderStatusEnum.TO_BE_SHIPPED.getCode())) // 待发货
             return Result.failure(Status.ORDER_NOT_TO_BE_SHIPPED);
-        // 修改订单状态
+        // 订单退款
         orderMasterService.updateOrderStatus(id, OrderStatusEnum.REFUND_REQUEST.getCode());
         return Result.success();
     }
