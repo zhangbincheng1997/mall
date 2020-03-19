@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public enum OrderStatusEnum implements CodeEnum {
 
-    TO_BE_PAID(0, "待付款"), //  默认
+    TO_BE_PAID(0, "待付款"),
     TO_BE_SHIPPED(1, "待发货"),
     TO_BE_RECEIVED(2, "待收货"),
     CANCEL(3, "已取消"),

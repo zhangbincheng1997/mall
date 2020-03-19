@@ -11,6 +11,7 @@ import com.example.demo.service.JwtUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,8 +41,9 @@ public class JwtUserServiceImpl extends ServiceImpl<UserMapper, User> implements
     public List<String> getPermissionList(Long id) {
         // user_id -> role_id -> permission_id
         // 用户表 -> 角色表 -> 权限表
-        return userRolePermissionDao.getPermissionList(id).stream()
-                .map(Permission::getName)
-                .collect(Collectors.toList());
+//        return userRolePermissionDao.getPermissionList(id).stream()
+//                .map(Permission::getName)
+//                .collect(Collectors.toList());
+        return new ArrayList<>();
     }
 }

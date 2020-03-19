@@ -12,7 +12,7 @@ document.write("            <\/li>");
 document.write("            <li class=\"layui-nav-item layui-nav-itemed\">");
 document.write("                <a href=\"javascript:void(0);\">BOARD<\/a>");
 document.write("                <dl class=\"layui-nav-child\">");
-document.write("                    <dd><a href=\"" + API + "druid\/login.html\">Druid<\/a><\/dd>");
+document.write("                    <dd><a href=\"" + API + "druid\/index.html\">Druid<\/a><\/dd>");
 document.write("                    <dd><a href=\"" + API + "swagger-ui.html\">Swagger<\/a><\/dd>");
 document.write("                <\/dl>");
 document.write("            <\/li>");

@@ -35,7 +35,8 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
     @Override
     @CacheEvict(value = "category", allEntries = true) // clear cache
     public void update(Long id, CategoryDto categoryDto) {
-        Category category = Convert.convert(Category.class, categoryDto)
+        Category category = new Category()
+                .setName(categoryDto.getName())
                 .setId(id);
         baseMapper.updateById(category);
     }
@@ -47,10 +48,10 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
             Category category = getOne(Wrappers.<Category>lambdaQuery()
                     .eq(Category::getPid, id));
             // 不能删除非叶子节点
-            if (category != null) throw new GlobalException(Status.CATEGORY_NOT_DELETE);
+            if (category != null) throw new GlobalException(Status.CATEGORY_NOT_LEAF);
             baseMapper.deleteById(id);
         } catch (DataIntegrityViolationException e) {
-            throw new GlobalException(Status.CATEGORY_EXIST); // FOREIGN KEY
+            throw new GlobalException(Status.CATEGORY_REFERENCES); // FOREIGN KEY
         }
     }
 }

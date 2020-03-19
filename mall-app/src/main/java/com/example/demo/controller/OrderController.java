@@ -43,9 +43,7 @@ public class OrderController {
     @ResponseBody
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     public PageResult<List<OrderVo>> list(@ApiIgnore Principal principal, @Valid OrderPageRequest pageRequest) {
-        // page
         Page<OrderMaster> page = orderMasterService.list(principal.getName(), pageRequest);
-        // convert
         List<OrderVo> orderVoList = Convert.convert(new TypeReference<List<OrderVo>>() {
         }, page.getRecords());
         return PageResult.success(orderVoList, page.getTotal());

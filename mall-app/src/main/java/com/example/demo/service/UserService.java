@@ -7,8 +7,6 @@ import com.example.demo.entity.User;
 
 public interface UserService extends IService<User> {
 
-    User getUserByUsername(String username);
-
     void register(RegisterDto registerDto);
 
     void updateUserInfoByUsername(String username, UserInfoDto userInfoDto);

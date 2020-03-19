@@ -12,13 +12,17 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true) // 允许 @PreAuthorize("hasAuthority/hasRole('xxxx')")
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -60,7 +64,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll() // 跨域会请求OPTIONS
                 .antMatchers("/login", "/register", "/captcha").permitAll() // 登陆注册
                 .antMatchers("/return", "/notify").permitAll() // 支付回调
-                .antMatchers("/product", "/category").permitAll()
+                .antMatchers(HttpMethod.GET, "/product", "/category").permitAll()
                 .anyRequest().authenticated() // 其他全部需要认证
                 .and().formLogin().loginProcessingUrl("/login") // 处理登录请求
                 .successHandler(jwtAuthenticationSuccessHandler)
@@ -88,5 +92,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         provider.setPasswordEncoder(passwordEncoder);
         return provider;
     }
-
 }

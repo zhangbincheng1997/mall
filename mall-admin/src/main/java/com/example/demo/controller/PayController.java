@@ -61,7 +61,7 @@ public class PayController {
         if (!orderMaster.getStatus().equals(OrderStatusEnum.TO_BE_PAID.getCode())) // 待付款
             return Result.failure(Status.ORDER_NOT_TO_BE_PAID);
         // 订单取消
-        orderMasterService.addStockRedis(id);
+        orderMasterService.addStockRedis(id); // REDIS
         orderMasterService.updateOrderStatus(id, OrderStatusEnum.CANCEL.getCode());
         return Result.success();
     }

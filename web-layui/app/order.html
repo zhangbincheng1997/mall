@@ -100,14 +100,14 @@
         table.on('tool(table)', function (obj) {
             switch (obj.event) {
                 case 'detail':
-                    $.get('order/all/' + obj.data.id, function (res) {
+                    $.get('order/' + obj.data.id, function (res) {
                         var detailData = res.data.detail;
                         var timelineData = res.data.timeline;
                         layer.open({
                             type: 1, // 0：信息框，默认 1：页面层 2：iframe层 3：加载层 4：tips层
                             title: '订单详情',
                             content: $('#modal'),
-                            area: ['800px', 200 + 50 * (detailData.length + timelineData.length) + 'px'],
+                            area: ['800px', 200 + 55 * (detailData.length + timelineData.length) + 'px'],
                             shadeClose: true,
                             success: function () {
                                 table.render({
@@ -145,7 +145,7 @@
                     break;
                 case 'receive':
                     layer.confirm('是否确认收货？', function (index) {
-                        $.post('receive/' + obj.data.id, function (res) {
+                        $.post('pay/receive/' + obj.data.id, function (res) {
                             if (res.code === 0) {
                                 table.reload('table', {page: {curr: $(".layui-laypage-em").next().html()}});
                             }

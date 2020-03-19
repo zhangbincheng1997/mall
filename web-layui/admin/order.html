@@ -58,7 +58,7 @@
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="cancel">取消</a>
     {{# } else if (d.status == '待发货') { }}
     <a class="layui-btn layui-btn-success layui-btn-xs" lay-event="ship">发货</a>
-    {{# } else if (d.status == '申请退款') { }}
+    {{# } else if (d.status == '退款申请') { }}
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="deal">退款</a>
     {{# } }}
 </script>
@@ -102,7 +102,7 @@
                             type: 1, // 0：信息框，默认 1：页面层 2：iframe层 3：加载层 4：tips层
                             title: '订单详情',
                             content: $('#modal'),
-                            area: ['800px', 200 + 50 * (detailData.length + timelineData.length) + 'px'],
+                            area: ['800px', 200 + 55 * (detailData.length + timelineData.length) + 'px'],
                             shadeClose: true,
                             success: function () {
                                 table.render({

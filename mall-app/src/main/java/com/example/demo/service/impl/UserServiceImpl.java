@@ -34,13 +34,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public User getUserByUsername(String username) {
-        QueryWrapper<User> wrapper = new QueryWrapper<User>()
-                .eq("username", username);
-        return baseMapper.selectOne(wrapper);
-    }
-
-    @Override
     public void register(RegisterDto registerDto) {
         try {
             User user = new User()

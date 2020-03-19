@@ -17,8 +17,8 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import java.time.Duration;
 
-@Configuration
 @EnableCaching // 开启注解缓存功能
+@Configuration
 public class RedisConfig extends CachingConfigurerSupport {
 
     @Bean

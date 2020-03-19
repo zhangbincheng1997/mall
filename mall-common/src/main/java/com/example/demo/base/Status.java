@@ -42,12 +42,9 @@ public enum Status {
 
     // 商品相关
     PRODUCT_NOT_EXIST(50000, "商品不存在"),
-    PRODUCT_STATUS_NOT_ON(50001, "商品下架"),
-    PRODUCT_STOCK_NOT_ENOUGH(50002, "商品库存不足"),
-    CATEGORY_EXIST(50010, "分类已经存在"),
-    CATEGORY_ROOT_NOT_EXIST(50012, "分类父类不存在"),
-    CATEGORY_NOT_EXIST(50012, "分类不存在"),
-    CATEGORY_NOT_DELETE(50013, "分类不允许删除"),
+    PRODUCT_STOCK_NOT_ENOUGH(50001, "商品库存不足"),
+    CATEGORY_REFERENCES(50010, "分类存在引用"),
+    CATEGORY_NOT_LEAF(50011, "分类非叶节点"),
     ORDER_NOT_EXIST(50020, "订单不存在"),
     CART_EMPTY(50030, "购物车为空"),
 

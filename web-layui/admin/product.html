@@ -129,7 +129,8 @@
                     cells[i].style.height = 'auto';
                 }
                 // 重新渲染
-                $.get('category/list', function (result) {
+                $.get('category', function (result) {
+                    if (!result.data) return;
                     var categoryData = result.data;
                     res.data.forEach((item, index) => {
                         xmSelect.render({

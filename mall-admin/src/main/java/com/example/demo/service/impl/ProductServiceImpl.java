@@ -44,13 +44,9 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
 
     @Override
     public void add(ProductDto productDto) {
-        try {
-            Product product = Convert.convert(Product.class, productDto);
-            baseMapper.insert(product);
-            addToRedis(product);
-        } catch (DataIntegrityViolationException e) {
-            throw new GlobalException(Status.CATEGORY_NOT_EXIST); // FOREIGN KEY
-        }
+        Product product = Convert.convert(Product.class, productDto);
+        baseMapper.insert(product);
+        addToRedis(product);
     }
 
     @Override
