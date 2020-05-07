@@ -2,6 +2,7 @@ package com.example.demo.component.redis;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.script.RedisScript;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
@@ -75,15 +76,15 @@ public class RedisService {
     /**
      * value + delta
      */
-    public void increment(String key, int delta) {
-        redisTemplate.opsForValue().increment(key, delta);
+    public Long increment(String key, int delta) {
+        return redisTemplate.opsForValue().increment(key, delta);
     }
 
     /**
      * value - delta
      */
-    public void decrement(String key, int delta) {
-        redisTemplate.opsForValue().decrement(key, delta);
+    public Long decrement(String key, int delta) {
+        return redisTemplate.opsForValue().decrement(key, delta);
     }
 
 
@@ -92,5 +93,12 @@ public class RedisService {
      */
     public Set<String> keys(String key) {
         return redisTemplate.keys(key + "*");
+    }
+
+    /**
+     * LUA
+     */
+    public <T> T execute(RedisScript<T> redisScript, List<String> keys, Object... args) {
+        return redisTemplate.execute(redisScript, keys, args);
     }
 }

@@ -89,7 +89,6 @@
 
         var para = '&keyword=' + getQueryVariable('keyword') + '&category=' + getQueryVariable('category');
         $.get('product?limit=12&page=1' + para, function (res) {
-            console.log("111");
             init(res);
             laypage.render({ // 分页
                 elem: 'page',

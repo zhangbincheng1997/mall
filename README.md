@@ -20,8 +20,8 @@
 | [MyBatis](https://github.com/mybatis/mybatis-3) | 数据库框架  |
 | [MyBatis Generator](https://github.com/mybatis/generator) | MyBatis生成插件 |
 | [MyBatis PageHelper](https://github.com/pagehelper/Mybatis-PageHelper) | MyBatis分页插件 |
-| [Redis](https://github.com/antirez/redis) | key-value数据库 |
-| [Redisson](https://github.com/redisson/redisson) | 分布式锁 |
+| [MySQL](https://github.com/mysql/mysql-server) | 关系型数据库 |
+| [Redis](https://github.com/antirez/redis) | key-value型数据库 |
 | [RabbitMQ](https://github.com/rabbitmq/rabbitmq-server) | 消息队列 |
 | [QiNiu](https://github.com/qiniu/java-sdk) | 对象存储 |
 | [Druid](https://github.com/alibaba/druid/) | 数据库连接池 |
@@ -29,7 +29,7 @@
 | [LogStash](https://github.com/elastic/logstash) | 日志收集 |
 | [Lombok](https://github.com/rzwitserloot/lombok) | 简化对象封装工具（需要安装IDEA插件） |
 | [Hutool](https://github.com/looly/hutool) | Java工具类库 |
-| [EasyCaptcha](https://github.com/whvcse/EasyCaptcha) | 验证码
+| [EasyCaptcha](https://github.com/whvcse/EasyCaptcha) | 验证码 |
 
 ## 结构
 mall:  
@@ -210,6 +210,20 @@ public static final String ROLE_KEY = "role:"; // 角色缓存
 public static final int ROLE_EXPIRE = 60 * 60; // 角色缓存过期时间 60*60s
 public static final String PERMISSION_KEY = "permission:"; // 权限缓存
 public static final int PERMISSION_EXPIRE = 60 * 60; // 权限缓存过期时间 60*60s
+```
+
+## 测压QPS=2000
+1. http://localhost:8081/test/init?num=10001
+2. http://localhost:8081/test/result
+3. ab -n 10000 -c 10000 http://localhost:8081/test/buy  
+>* -n 并发用户
+>* -c 请求数量
+```
+{
+  "code": 0,
+  "msg": "SUCCESS",
+  "data": 1
+}
 ```
 
 ## 参考链接

@@ -8,8 +8,6 @@ public class Constants {
     public static final String ROLE_KEY = "role:"; // 角色缓存
     public static final String PERMISSION_KEY = "permission:"; // 权限缓存
 
-    public static final String PRODUCT_REDIS_LOCK = "product:redis:lock:"; // 商品加锁redis
-    public static final String PRODUCT_MYSQL_LOCK = "product:mysql:lock:"; // 商品加锁mysql
     public static final String PRODUCT_STOCK = "product:stock:"; // 库存
     public static final String PRODUCT_CART = "product:cart:"; // 购物车
 
@@ -18,7 +16,22 @@ public class Constants {
     public static final Integer ROLE_EXPIRE = 60 * 60; // 角色缓存过期时间 60*60s
     public static final Integer PERMISSION_EXPIRE = 60 * 60; // 权限缓存过期时间 60*60s
 
+    public static final String LUA_SCRIPT =
+            "if redis.call('get', KEYS[1]) >= ARGV[1] "
+                    + "then "
+                    + "return redis.call('decrby', KEYS[1], ARGV[1]) "
+                    + "else "
+                    + "return -1 "
+                    + "end";
+
     public static final String ORDER_TOPIC = "order";
+    public static final String ORDER_TTL_EXCHANGE = "order_ttl_exchange";
+    public static final String ORDER_TTL_QUEUE = "order_ttl_queue";
+    public static final String ORDER_TTL_KEY = "order_ttl_key";
+    public static final String ORDER_TTL = String.valueOf(5 * 60 * 1000); // 5min
+    public static final String ORDER_CANCEL_QUEUE = "order_cancel_queue";
+    public static final String ORDER_CANCEL_EXCHANGE = "order_cancel_exchange";
+    public static final String ORDER_CANCEL_KEY = "order_cancel_key";
 
     public static final Integer UPLOAD_RETRY = 3; // 重传次数
     public static final Integer EXPIRE_SECONDS = 60 * 60; // 过期时间

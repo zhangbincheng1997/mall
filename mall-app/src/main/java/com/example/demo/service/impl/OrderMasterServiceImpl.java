@@ -1,6 +1,5 @@
 package com.example.demo.service.impl;
 
-import cn.hutool.core.convert.Convert;
 import cn.hutool.core.lang.Snowflake;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -10,7 +9,6 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.demo.base.GlobalException;
 import com.example.demo.base.Status;
 import com.example.demo.component.RabbitSender;
-import com.example.demo.component.redis.RedisLocker;
 import com.example.demo.component.redis.RedisService;
 import com.example.demo.dao.StockDao;
 import com.example.demo.dto.CartDto;
@@ -26,13 +24,16 @@ import com.example.demo.service.OrderMasterService;
 import com.example.demo.service.OrderTimelineService;
 import com.example.demo.utils.Constants;
 import lombok.extern.slf4j.Slf4j;
-import org.redisson.RedissonMultiLock;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -41,9 +42,6 @@ public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, Order
 
     @Autowired
     private RedisService redisService;
-
-    @Autowired
-    private RedisLocker redisLocker;
 
     @Autowired
     private RabbitSender rabbitSender;
@@ -62,6 +60,8 @@ public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, Order
 
     @Autowired
     private OrderTimelineService orderTimelineService;
+
+    private DefaultRedisScript<Long> redisScript = new DefaultRedisScript<>(Constants.LUA_SCRIPT, Long.class);
 
     @Override
     public OrderMaster get(String username, Long id) {
@@ -107,31 +107,26 @@ public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, Order
                 .filter(CartDto::getChecked).collect(Collectors.toList()); // 下单部分
         if (cartDtoList.size() == 0) throw new GlobalException(Status.CART_EMPTY);
 
-        // 多重锁
-        List<String> lockKey = cartDtoList.stream()
-                .map(cartDto -> Constants.PRODUCT_REDIS_LOCK + cartDto.getId())
-                .collect(Collectors.toList());
-
-        // lock
-        RedissonMultiLock multiLock = redisLocker.multiLock(Convert.toStrArray(lockKey));
+        // 记录购物ID和数量
+        Map<String, Integer> map = new HashMap<>();
         // 检查数量
         for (CartDto cartDto : cartDtoList) {
             Long productId = cartDto.getId();
             Integer productQuantity = cartDto.getQuantity();
-            Integer stock = (Integer) redisService.get(Constants.PRODUCT_STOCK + productId);
-            // 商品不存在
-            if (stock == null) throw new GlobalException(Status.PRODUCT_NOT_EXIST);
-            // 库存不足
-            if (stock < productQuantity) throw new GlobalException(Status.PRODUCT_STOCK_NOT_ENOUGH);
+            // 预减库存
+            Long result = redisService.execute(redisScript,
+                    Collections.singletonList(Constants.PRODUCT_STOCK + productId),
+                    productQuantity);
+            if (result == -1) {
+                // 恢复库存
+                for (Map.Entry<String, Integer> entry : map.entrySet()) {
+                    redisService.increment(Constants.PRODUCT_STOCK + entry.getKey(), entry.getValue());
+                }
+                // 库存不足
+                throw new GlobalException(Status.PRODUCT_STOCK_NOT_ENOUGH);
+            }
+            map.put(productId.toString(), productQuantity);
         }
-        // 预减库存
-        for (CartDto cartDto : cartDtoList) {
-            Long productId = cartDto.getId();
-            Integer productQuantity = cartDto.getQuantity();
-            redisService.decrement(Constants.PRODUCT_STOCK + productId, productQuantity);
-        }
-        // unlock
-        multiLock.unlock();
 
         // 清空购物车
         List<Long> ids = cartDtoList.stream().map(CartDto::getId).collect(Collectors.toList());
@@ -141,7 +136,7 @@ public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, Order
         Long orderId = snowflake.nextId(); // 雪花算法 生成全局唯一ID
         jsonStr.put("orderId", orderId);
         jsonStr.put("user", user);
-        jsonStr.put("cartDtoList", cartDtoList);
+        jsonStr.put("map", map);
         rabbitSender.send(Constants.ORDER_TOPIC, jsonStr.toJSONString()); // 发送消息队列
         return String.valueOf(orderId);
     }
@@ -163,12 +158,8 @@ public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, Order
     @Transactional
     public void decreaseStock(Long id) {
         List<OrderDetail> orderDetailList = getDetail(id);
-        // lock
         orderDetailList.forEach(orderDetail -> {
-            Long productId = orderDetail.getProductId();
-            redisLocker.lock(Constants.PRODUCT_MYSQL_LOCK + productId);
-            stockDao.decreaseStock(productId, orderDetail.getProductQuantity());
-            redisLocker.unlock(Constants.PRODUCT_MYSQL_LOCK + productId);
+            stockDao.decreaseStock(orderDetail.getProductId(), orderDetail.getProductQuantity());
         });
     }
 
@@ -176,12 +167,9 @@ public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, Order
     @Transactional
     public void addStockRedis(Long id) {
         List<OrderDetail> orderDetailList = getDetail(id);
-        // lock
         orderDetailList.forEach(orderDetail -> {
-            redisLocker.lock(Constants.PRODUCT_REDIS_LOCK + orderDetail.getProductId());
             redisService.increment(Constants.PRODUCT_STOCK + orderDetail.getProductId(),
                     orderDetail.getProductQuantity());
-            redisLocker.unlock(Constants.PRODUCT_REDIS_LOCK + orderDetail.getProductId());
         });
     }
 }

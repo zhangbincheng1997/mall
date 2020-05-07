@@ -1,7 +1,5 @@
 package com.example.demo.component;
 
-import com.alibaba.fastjson.JSON;
-import com.example.demo.entity.OrderMaster;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,12 +17,12 @@ public class MailService {
     @Autowired
     private JavaMailSender mailSender;
 
-    public void send(String to, OrderMaster orderMaster) {
+    public void send(String to, String content) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(from);
         message.setTo(to);
         message.setSubject("下单成功");
-        message.setText(JSON.toJSONString(orderMaster));
+        message.setText(content);
         try {
             mailSender.send(message);
             log.info(message.toString());
