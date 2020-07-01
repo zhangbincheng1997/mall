@@ -35,6 +35,18 @@ public class PayController {
     @Autowired
     private OrderMasterService orderMasterService;
 
+    // Mysql方案
+    @ApiOperation("购买 创建订单")
+    @PostMapping("")
+    @ResponseBody
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')") // RequestBody JSON
+    public Result<String> create0(@ApiIgnore Authentication authentication) {
+        JwtUserDetails userDetails = (JwtUserDetails) authentication.getPrincipal();
+        String orderId = orderMasterService.buy0(userDetails.getUser());
+        return Result.success(orderId);
+    }
+
+    // Redis方案
     @ApiOperation("购买 创建订单")
     @PostMapping("")
     @ResponseBody
