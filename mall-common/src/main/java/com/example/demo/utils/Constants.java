@@ -16,13 +16,25 @@ public class Constants {
     public static final Integer ROLE_EXPIRE = 60 * 60; // 角色缓存过期时间 60*60s
     public static final Integer PERMISSION_EXPIRE = 60 * 60; // 权限缓存过期时间 60*60s
 
+//    public static final String LUA_SCRIPT =
+//            ""
+//                    + "if redis.call('get', KEYS[1]) >= ARGV[1] then\n"
+//                    + "  return redis.call('decrby', KEYS[1], ARGV[1])\n"
+//                    + "else\n"
+//                    + "  return -1;\n"
+//                    + "end\n";
     public static final String LUA_SCRIPT =
-            "if redis.call('get', KEYS[1]) >= ARGV[1] "
-                    + "then "
-                    + "return redis.call('decrby', KEYS[1], ARGV[1]) "
-                    + "else "
-                    + "return -1 "
-                    + "end";
+            ""
+                    + "for goodsIndex = 1, #KEYS do\n"
+                    + "  local goodStock = redis.call('get', KEYS[goodsIndex])\n"
+                    + "  if tonumber(goodStock) < tonumber(ARGV[goodsIndex]) then\n"
+                    + "    return 0;\n"
+                    + "  end\n"
+                    + "end\n"
+                    + "for goodsIndex = 1, #KEYS do\n"
+                    + "  redis.call('decrby', KEYS[goodsIndex], ARGV[goodsIndex])\n"
+                    + "end\n"
+                    + "return 1;\n";
 
     public static final String ORDER_TOPIC = "order";
     public static final String ORDER_TTL_EXCHANGE = "order_ttl_exchange";

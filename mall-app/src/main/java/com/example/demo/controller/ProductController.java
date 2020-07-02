@@ -4,9 +4,11 @@ import cn.hutool.core.convert.Convert;
 import cn.hutool.core.lang.TypeReference;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.demo.base.PageResult;
+import com.example.demo.component.redis.RedisService;
 import com.example.demo.dto.page.ProductPageRequest;
 import com.example.demo.entity.Product;
 import com.example.demo.service.ProductService;
+import com.example.demo.utils.Constants;
 import com.example.demo.vo.ProductVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -27,6 +29,9 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private RedisService redisService;
+
     @ApiOperation("获取商品列表")
     @GetMapping("")
     @ResponseBody
@@ -34,6 +39,10 @@ public class ProductController {
         Page<Product> page = productService.list(pageRequest);
         List<ProductVo> productVoList = Convert.convert(new TypeReference<List<ProductVo>>() {
         }, page.getRecords());
+        productVoList.forEach(productVo -> {
+            Integer stock = (Integer) redisService.get(Constants.PRODUCT_STOCK + productVo.getId());
+            productVo.setStock(stock);
+        });
         return PageResult.success(productVoList, page.getTotal());
     }
 }

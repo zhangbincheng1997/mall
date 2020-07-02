@@ -20,13 +20,15 @@ public interface OrderMasterService extends IService<OrderMaster> {
 
     Page<OrderMaster> list(String username, OrderPageRequest pageRequest);
 
-    String buy0(User user);
-
     String buy(User user);
 
     void updateOrderStatus(Long id, Integer status);
 
     void decreaseStock(Long id);
 
+    void increaseStock(Long id);
+
     void addStockRedis(Long id);
+
+    void reduceStockRedis(Long id);
 }

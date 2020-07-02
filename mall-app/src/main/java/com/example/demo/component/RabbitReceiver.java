@@ -91,7 +91,7 @@ public class RabbitReceiver {
             orderTimeline.setOrderId(orderId);
             orderTimelineService.save(orderTimeline);
             // 发送通知
-            mailService.send(user.getEmail(), sb.toString());
+            // mailService.send(user.getEmail(), sb.toString());
             // 订单超时
             rabbitSender.send(Constants.ORDER_TTL_EXCHANGE,
                     Constants.ORDER_TTL_KEY,
@@ -116,6 +116,7 @@ public class RabbitReceiver {
         try {
             // 未支付，取消订单
             if (orderMasterService.getById(id).getStatus().equals(OrderStatusEnum.TO_BE_PAID.getCode())) {
+                orderMasterService.addStockRedis(id); // 恢复预减库存
                 orderMasterService.updateOrderStatus(id, OrderStatusEnum.CANCEL.getCode());
             }
             // 手动ACK
