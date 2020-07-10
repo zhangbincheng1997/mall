@@ -45,7 +45,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
     @CacheEvict(value = "category", allEntries = true) // clear cache
     public void delete(Long id) {
         try {
-            Category category = getOne(Wrappers.<Category>lambdaQuery()
+            Category category = baseMapper.selectOne(Wrappers.<Category>lambdaQuery()
                     .eq(Category::getPid, id));
             // 不能删除非叶子节点
             if (category != null) throw new GlobalException(Status.CATEGORY_NOT_LEAF);

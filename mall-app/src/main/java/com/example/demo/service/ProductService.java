@@ -10,4 +10,8 @@ public interface ProductService extends IService<Product> {
     Product get(Long id);
 
     Page<Product> list(ProductPageRequest pageRequest);
+
+    boolean addStock(Long id, int count);
+
+    boolean subStock(Long id, int count);
 }

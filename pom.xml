@@ -5,7 +5,7 @@
     <modules>
         <module>mall-common</module>
         <module>mall-mbg</module>
-        <module>mall-auth</module>
+        <module>mall-security</module>
         <module>mall-admin</module>
         <module>mall-app</module>
     </modules>

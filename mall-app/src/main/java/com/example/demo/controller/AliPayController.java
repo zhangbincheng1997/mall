@@ -42,7 +42,7 @@ public class AliPayController {
         if (verifyResult) {
             // https://docs.open.alipay.com/270/105899/
             Long id = new Long(request.getParameter("out_trade_no")); // id
-            orderMasterService.decreaseStock(id); // MYSQL 真正写入数据库
+            orderMasterService.subStockMySQL(id); // MYSQL 真正写入数据库
             orderMasterService.updateOrderStatus(id, OrderStatusEnum.TO_BE_SHIPPED.getCode());
             log.info("Notify 验证成功");
             return "success";

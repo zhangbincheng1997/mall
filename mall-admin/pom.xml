@@ -28,7 +28,7 @@
 
         <dependency>
             <groupId>com.example</groupId>
-            <artifactId>mall-auth</artifactId>
+            <artifactId>mall-security</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>

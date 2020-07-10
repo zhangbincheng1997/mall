@@ -10,7 +10,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @SpringBootApplication
 @MapperScan({"com.example.demo.mapper", "com.example.demo.dao"}) // 扫描Mapper
@@ -29,9 +31,8 @@ public class AdminApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         List<Product> productList = productMapper.selectList(null);
-        // 初始化
-        productList.forEach(product -> {
-            redisService.set(Constants.PRODUCT_STOCK + product.getId(), product.getStock());
-        });
+        Map<String, Object> stockMap = new HashMap<>();
+        productList.forEach(product -> stockMap.put(Constants.PRODUCT_STOCK + product.getId(), product.getStock()));
+        redisService.multiSet(stockMap);
     }
 }

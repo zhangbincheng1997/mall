@@ -87,7 +87,6 @@ public class RedisService {
         return redisTemplate.opsForValue().decrement(key, delta);
     }
 
-
     /**
      * keys
      */

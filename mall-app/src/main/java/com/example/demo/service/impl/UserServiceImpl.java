@@ -1,7 +1,6 @@
 package com.example.demo.service.impl;
 
 import cn.hutool.core.convert.Convert;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.demo.base.GlobalException;

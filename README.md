@@ -213,17 +213,24 @@ public static final int PERMISSION_EXPIRE = 60 * 60; // 权限缓存过期时间
 ```
 
 ## 测压QPS=2000
-1. http://localhost:8081/test/init?num=10001
-2. http://localhost:8081/test/result
-3. ab -n 10000 -c 10000 http://localhost:8081/test/buy  
->* -n 并发用户
->* -c 请求数量
+[JMeter](https://jmeter.apache.org/download_jmeter.cgi)
+
+$ vim /etc/profile
 ```
-{
-  "code": 0,
-  "msg": "SUCCESS",
-  "data": 1
-}
+export JMETER_HOME=/usr/local/apache-jmeter-5.3
+export CLASSPATH=$JMETER_HOME/lib/ext/ApacheJMeter_core.jar:$JMETER_HOME/lib/jorphan.jar:$CLASSPATH
+export PATH=$JMETER_HOME/bin:$PATH
+```
+$ source /etc/profile
+
+1. http://localhost:8080/test/init?num=1000
+2. http://localhost:8080/test/mysql
+3. http://localhost:8080/test/redis
+4. jmeter -n -t test.jmx -l result.jmx
+```
+-n 非GUI模式
+-t 测试文件
+-l 日志文件
 ```
 
 ## 参考链接

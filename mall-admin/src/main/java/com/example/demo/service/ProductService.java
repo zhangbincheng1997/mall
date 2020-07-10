@@ -17,4 +17,6 @@ public interface ProductService extends IService<Product> {
     void update(Long id, ProductDto productDto);
 
     void delete(Long id);
+
+    boolean addStock(Long id, int count);
 }

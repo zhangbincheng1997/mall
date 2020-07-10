@@ -42,7 +42,7 @@ public class ProductController {
         productVoList.forEach(productVo -> {
             Integer stock = (Integer) redisService.get(Constants.PRODUCT_STOCK + productVo.getId());
             productVo.setStock(stock);
-        });
+        }); // 显示预减库存
         return PageResult.success(productVoList, page.getTotal());
     }
 }

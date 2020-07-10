@@ -1,5 +1,6 @@
 package com.example.demo.config;
 
+import cn.hutool.core.util.ArrayUtil;
 import com.example.demo.filter.CaptchaFilter;
 import com.example.demo.filter.TokenFilter;
 import com.example.demo.jwt.JwtAccessDeniedHandler;
@@ -39,6 +40,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private UserDetailsService userDetailsService;
 
     @Autowired
+    private IgnoreUrlsConfig ignoreUrlsConfig;
+
+    @Autowired
     private JwtAuthenticationSuccessHandler jwtAuthenticationSuccessHandler; // 认证成功
     @Autowired
     private JwtAuthenticationFailureHandler jwtAuthenticationFailureHandler; // 认证失败
@@ -47,13 +51,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private JwtAccessDeniedHandler jwtAccessDeniedHandler; // 权限不足 拒绝访问
 
-    private String[] ignoreUrls = {"/", "/csrf", "/favicon.ico", "/**/*.css", "/**/*.js", "/layui/**",
-            "/swagger-ui.html", "/swagger-resources/**", "/v2/**", "/webjars/**", "/druid/**", "/test/**"};
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // 白名单
-        for (String url : ignoreUrls) {
+        for (String url : ArrayUtil.toArray(ignoreUrlsConfig.getUrls(), String.class)) {
             http.authorizeRequests().antMatchers(url).permitAll();
         }
         // 配置参数

@@ -61,8 +61,7 @@ public class ProductController {
     @PutMapping("/{id}")
     @ResponseBody
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public Result<String> update(@PathVariable("id") Long id,
-                                 @Valid ProductDto productDto) {
+    public Result<String> update(@PathVariable("id") Long id, @Valid ProductDto productDto) {
         productService.update(id, productDto);
         return Result.success();
     }

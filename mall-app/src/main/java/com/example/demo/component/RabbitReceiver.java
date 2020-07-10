@@ -26,12 +26,6 @@ import java.util.Map;
 public class RabbitReceiver {
 
     @Autowired
-    private MailService mailService;
-
-    @Autowired
-    private RabbitSender rabbitSender;
-
-    @Autowired
     private ProductService productService;
 
     @Autowired
@@ -42,6 +36,12 @@ public class RabbitReceiver {
 
     @Autowired
     private OrderTimelineService orderTimelineService;
+
+    @Autowired
+    private MailService mailService;
+
+    @Autowired
+    private RabbitSender rabbitSender;
 
     // 这里都是正常操作，不会超卖
     @RabbitHandler
@@ -85,13 +85,13 @@ public class RabbitReceiver {
             orderMaster.setNickname(user.getNickname());
             orderMaster.setEmail(user.getEmail());
             orderMasterService.save(orderMaster);
-            sb.append("总价：").append(amount).append("\n");
             // 创建订单状态
             OrderTimeline orderTimeline = new OrderTimeline();
             orderTimeline.setOrderId(orderId);
             orderTimelineService.save(orderTimeline);
             // 发送通知
-            // mailService.send(user.getEmail(), sb.toString());
+            sb.append("总价：").append(amount).append("\n");
+            mailService.send(user.getEmail(), sb.toString());
             // 订单超时
             rabbitSender.send(Constants.ORDER_TTL_EXCHANGE,
                     Constants.ORDER_TTL_KEY,
@@ -100,8 +100,7 @@ public class RabbitReceiver {
                         msg.getMessageProperties().setExpiration(Constants.ORDER_TTL); // 超时时间
                         return msg;
                     });
-            // 手动ACK
-            channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
+            channel.basicAck(message.getMessageProperties().getDeliveryTag(), false); // 手动ACK
             log.info("创建订单成功");
         } catch (Exception e) {
             channel.basicReject(message.getMessageProperties().getDeliveryTag(), false);
@@ -119,9 +118,8 @@ public class RabbitReceiver {
                 orderMasterService.addStockRedis(id); // 恢复预减库存
                 orderMasterService.updateOrderStatus(id, OrderStatusEnum.CANCEL.getCode());
             }
-            // 手动ACK
-            channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
             log.info("取消订单成功");
+            channel.basicAck(message.getMessageProperties().getDeliveryTag(), false); // 手动ACK
         } catch (Exception e) {
             channel.basicReject(message.getMessageProperties().getDeliveryTag(), false);
             log.info("取消订单失败");

@@ -85,7 +85,7 @@ public class PayController {
         return Result.success();
     }
 
-    @ApiOperation("订单退款")
+    @ApiOperation("订单申请退款")
     @PostMapping(value = "/refund/{id}")
     @ResponseBody
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
@@ -95,7 +95,7 @@ public class PayController {
         // 检查状态
         if (!orderMaster.getStatus().equals(OrderStatusEnum.TO_BE_SHIPPED.getCode())) // 待发货
             return Result.failure(Status.ORDER_NOT_TO_BE_SHIPPED);
-        // 订单退款
+        // 订单申请退款
         orderMasterService.updateOrderStatus(id, OrderStatusEnum.REFUND_REQUEST.getCode());
         return Result.success();
     }

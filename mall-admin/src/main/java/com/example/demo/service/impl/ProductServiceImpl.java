@@ -1,6 +1,7 @@
 package com.example.demo.service.impl;
 
 import cn.hutool.core.convert.Convert;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -39,7 +40,9 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     public void add(ProductDto productDto) {
         Product product = Convert.convert(Product.class, productDto);
         baseMapper.insert(product);
-        addToRedis(product);
+        if (product.getStatus() != null && product.getStatus()) {
+            redisService.set(Constants.PRODUCT_STOCK + product.getId(), product.getStock());
+        }
     }
 
     @Override
@@ -47,21 +50,22 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         Product product = Convert.convert(Product.class, productDto)
                 .setId(id);
         baseMapper.updateById(product);
-        addToRedis(product);
+        if (product.getStatus() != null && product.getStatus()) {
+            redisService.set(Constants.PRODUCT_STOCK + product.getId(), product.getStock());
+        }
     }
 
     @Override
     public void delete(Long id) {
         baseMapper.deleteById(id);
-        deleteFromRedis(id);
-    }
-
-    private void addToRedis(Product product) {
-        if (product.getStatus() != null && !product.getStatus()) return;
-        redisService.set(Constants.PRODUCT_STOCK + product.getId(), product.getStock());
-    }
-
-    private void deleteFromRedis(Long id) {
         redisService.delete(Constants.PRODUCT_STOCK + id);
+    }
+
+    @Override
+    public boolean addStock(Long id, int count) {
+        UpdateWrapper<Product> wrapper = new UpdateWrapper<>();
+        wrapper.eq("id", id);
+        wrapper.setSql("stock = stock + " + count);
+        return update(wrapper);
     }
 }

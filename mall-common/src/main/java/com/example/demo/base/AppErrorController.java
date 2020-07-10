@@ -30,7 +30,7 @@ public class AppErrorController implements ErrorController {
 
     @RequestMapping(value = ERROR_PATH)
     @ResponseBody
-    public Result errorApiHandler(HttpServletRequest request, HttpServletResponse response) {
+    public Result<String> errorApiHandler(HttpServletRequest request, HttpServletResponse response) {
         int status = response.getStatus();
         WebRequest webRequest = new ServletWebRequest(request);
         Map<String, Object> attr = this.errorAttributes.getErrorAttributes(webRequest, false);

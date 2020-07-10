@@ -24,11 +24,11 @@ public interface OrderMasterService extends IService<OrderMaster> {
 
     void updateOrderStatus(Long id, Integer status);
 
-    void decreaseStock(Long id);
+    void subStockMySQL(Long id);
 
-    void increaseStock(Long id);
+    void addStockMySQL(Long id);
 
     void addStockRedis(Long id);
 
-    void reduceStockRedis(Long id);
+    void subStockRedis(Long id);
 }

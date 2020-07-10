@@ -8,14 +8,13 @@ import com.example.demo.component.redis.RedisService;
 import com.example.demo.entity.OrderDetail;
 import com.example.demo.entity.OrderMaster;
 import com.example.demo.entity.OrderTimeline;
+import com.example.demo.service.ProductService;
 import com.example.demo.utils.Constants;
-import com.example.demo.dao.StockDao;
 import com.example.demo.dto.page.OrderPageRequest;
 import com.example.demo.mapper.OrderMasterMapper;
 import com.example.demo.service.OrderDetailService;
 import com.example.demo.service.OrderMasterService;
 import com.example.demo.service.OrderTimelineService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,21 +22,20 @@ import org.springframework.util.StringUtils;
 
 import java.util.List;
 
-@Slf4j
 @Service
 public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, OrderMaster> implements OrderMasterService {
 
     @Autowired
-    private RedisService redisService;
-
-    @Autowired
-    private StockDao stockDao;
+    private ProductService productService;
 
     @Autowired
     private OrderDetailService orderDetailService;
 
     @Autowired
     private OrderTimelineService orderTimelineService;
+
+    @Autowired
+    private RedisService redisService;
 
     @Override
     public OrderMaster get(Long id) {
@@ -66,7 +64,6 @@ public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, Order
         return baseMapper.selectPage(page, wrappers);
     }
 
-
     @Override
     public void updateOrderStatus(Long id, Integer status) {
         OrderMaster orderMaster = new OrderMaster()
@@ -82,21 +79,14 @@ public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, Order
 
     @Override
     @Transactional
-    public void increaseStock(Long id) {
+    public void addStockMySQL(Long id) {
         List<OrderDetail> orderDetailList = getDetail(id);
-        orderDetailList.forEach(orderDetail -> {
-            Long productId = orderDetail.getProductId();
-            stockDao.increaseStock(productId, orderDetail.getProductQuantity());
-        });
+        orderDetailList.forEach(orderDetail -> productService.addStock(orderDetail.getProductId(), orderDetail.getProductQuantity()));
     }
 
     @Override
-    @Transactional
     public void addStockRedis(Long id) {
         List<OrderDetail> orderDetailList = getDetail(id);
-        orderDetailList.forEach(orderDetail -> {
-            redisService.increment(Constants.PRODUCT_STOCK + orderDetail.getProductId(),
-                    orderDetail.getProductQuantity());
-        });
+        orderDetailList.forEach(orderDetail -> redisService.increment(Constants.PRODUCT_STOCK + orderDetail.getProductId(), orderDetail.getProductQuantity()));
     }
 }

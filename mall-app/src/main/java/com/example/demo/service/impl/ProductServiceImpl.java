@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -28,5 +29,22 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
                         .like(Product::getName, pageRequest.getKeyword())
                         .like(Product::getCategory, pageRequest.getCategory())
                         .orderByDesc(Product::getId));
+    }
+
+    @Override
+    public boolean addStock(Long id, int count) {
+        UpdateWrapper<Product> wrapper = new UpdateWrapper<>();
+        wrapper.eq("id", id);
+        wrapper.setSql("stock = stock + " + count);
+        return update(wrapper);
+    }
+
+    @Override
+    public boolean subStock(Long id, int count) {
+        UpdateWrapper<Product> wrapper = new UpdateWrapper<>();
+        wrapper.eq("id", id);
+        wrapper.ge("stock - " + count, 0);
+        wrapper.setSql("stock = stock - " + count);
+        return update(wrapper);
     }
 }

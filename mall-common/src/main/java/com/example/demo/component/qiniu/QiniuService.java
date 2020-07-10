@@ -33,10 +33,6 @@ public class QiniuService {
 
     /**
      * 上传文件 普通上传
-     *
-     * @param file
-     * @return
-     * @throws QiniuException
      */
     public String upload(byte[] file) throws QiniuException {
         return upload(file, null);
@@ -44,11 +40,6 @@ public class QiniuService {
 
     /**
      * 上传文件 覆盖上传
-     *
-     * @param file
-     * @param fileKey
-     * @return
-     * @throws QiniuException
      */
     public String upload(byte[] file, String fileKey) throws QiniuException {
         Response response = uploadManager.put(file, fileKey, getUploadToken(fileKey));
@@ -59,16 +50,11 @@ public class QiniuService {
             retry++;
         }
         DefaultPutRet ret = JSONObject.parseObject(response.bodyString(), DefaultPutRet.class);
-        String path = qiniuConfig.getDomainName() + ret.key;
-        return path; // return response.bodyString();
+        return qiniuConfig.getDomainName() + ret.key;
     }
 
     /**
      * 删除文件
-     *
-     * @param fileKey
-     * @return
-     * @throws QiniuException
      */
     public Response delete(String fileKey) throws QiniuException {
         Response response = bucketManager.delete(qiniuConfig.getBucketName(), fileKey);

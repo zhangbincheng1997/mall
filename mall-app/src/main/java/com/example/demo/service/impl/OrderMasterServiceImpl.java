@@ -10,7 +10,6 @@ import com.example.demo.base.GlobalException;
 import com.example.demo.base.Status;
 import com.example.demo.component.RabbitSender;
 import com.example.demo.component.redis.RedisService;
-import com.example.demo.dao.StockDao;
 import com.example.demo.dto.CartDto;
 import com.example.demo.entity.*;
 import com.example.demo.component.CartService;
@@ -19,6 +18,7 @@ import com.example.demo.mapper.OrderMasterMapper;
 import com.example.demo.service.OrderDetailService;
 import com.example.demo.service.OrderMasterService;
 import com.example.demo.service.OrderTimelineService;
+import com.example.demo.service.ProductService;
 import com.example.demo.utils.Constants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,24 +30,17 @@ import org.springframework.util.StringUtils;
 import java.util.*;
 import java.util.stream.Collectors;
 
-@Slf4j
 @Service
 public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, OrderMaster> implements OrderMasterService {
-
-    @Autowired
-    private RedisService redisService;
-
-    @Autowired
-    private RabbitSender rabbitSender;
-
-    @Autowired
-    private CartService cartService;
 
     @Autowired
     private Snowflake snowflake;
 
     @Autowired
-    private StockDao stockDao;
+    private CartService cartService;
+
+    @Autowired
+    private ProductService productService;
 
     @Autowired
     private OrderDetailService orderDetailService;
@@ -55,13 +48,18 @@ public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, Order
     @Autowired
     private OrderTimelineService orderTimelineService;
 
+    @Autowired
+    private RedisService redisService;
+
+    @Autowired
+    private RabbitSender rabbitSender;
+
     private final DefaultRedisScript<Long> redisScript = new DefaultRedisScript<>(Constants.LUA_SCRIPT, Long.class);
 
     @Override
     public OrderMaster get(String username, Long id) {
         OrderMaster orderMaster = baseMapper.selectById(id);
-        if (orderMaster != null && orderMaster.getUsername().equals(username))
-            return orderMaster;
+        if (orderMaster != null && orderMaster.getUsername().equals(username)) return orderMaster;
         throw new GlobalException(Status.ORDER_NOT_EXIST);
     }
 
@@ -114,7 +112,8 @@ public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, Order
         if (result == 0) throw new GlobalException(Status.PRODUCT_STOCK_NOT_ENOUGH);
 
         // 清空购物车
-        List<Long> ids = cartDtoList.stream().filter(CartDto::getChecked)
+        List<Long> ids = cartDtoList.stream()
+                .filter(CartDto::getChecked)
                 .map(CartDto::getId).collect(Collectors.toList());
         cartService.delete(user.getUsername(), ids);
 
@@ -142,40 +141,27 @@ public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, Order
 
     @Override
     @Transactional
-    public void decreaseStock(Long id) {
+    public void subStockMySQL(Long id) {
         List<OrderDetail> orderDetailList = getDetail(id);
-        orderDetailList.forEach(orderDetail -> {
-            stockDao.decreaseStock(orderDetail.getProductId(), orderDetail.getProductQuantity());
-        });
+        orderDetailList.forEach(orderDetail -> productService.subStock(orderDetail.getProductId(), orderDetail.getProductQuantity()));
     }
 
     @Override
     @Transactional
-    public void increaseStock(Long id) {
+    public void addStockMySQL(Long id) {
         List<OrderDetail> orderDetailList = getDetail(id);
-        orderDetailList.forEach(orderDetail -> {
-            Long productId = orderDetail.getProductId();
-            stockDao.increaseStock(productId, orderDetail.getProductQuantity());
-        });
+        orderDetailList.forEach(orderDetail -> productService.addStock(orderDetail.getProductId(), orderDetail.getProductQuantity()));
     }
 
     @Override
-    @Transactional
     public void addStockRedis(Long id) {
         List<OrderDetail> orderDetailList = getDetail(id);
-        orderDetailList.forEach(orderDetail -> {
-            redisService.increment(Constants.PRODUCT_STOCK + orderDetail.getProductId(),
-                    orderDetail.getProductQuantity());
-        });
+        orderDetailList.forEach(orderDetail -> redisService.increment(Constants.PRODUCT_STOCK + orderDetail.getProductId(), orderDetail.getProductQuantity()));
     }
 
     @Override
-    @Transactional
-    public void reduceStockRedis(Long id) {
+    public void subStockRedis(Long id) {
         List<OrderDetail> orderDetailList = getDetail(id);
-        orderDetailList.forEach(orderDetail -> {
-            redisService.decrement(Constants.PRODUCT_STOCK + orderDetail.getProductId(),
-                    orderDetail.getProductQuantity());
-        });
+        orderDetailList.forEach(orderDetail -> redisService.decrement(Constants.PRODUCT_STOCK + orderDetail.getProductId(), orderDetail.getProductQuantity()));
     }
 }
