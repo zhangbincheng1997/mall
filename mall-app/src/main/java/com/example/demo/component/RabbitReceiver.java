@@ -16,6 +16,7 @@ import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -46,6 +47,7 @@ public class RabbitReceiver {
     // 这里都是正常操作，不会超卖
     @RabbitHandler
     @RabbitListener(queues = Constants.ORDER_TOPIC)
+    @Transactional
     public void process(Message message, Channel channel) throws IOException {
         try {
             JSONObject jsonObject = JSONObject.parseObject(new String(message.getBody()));
@@ -110,6 +112,7 @@ public class RabbitReceiver {
 
     @RabbitHandler
     @RabbitListener(queues = Constants.ORDER_CANCEL_QUEUE)
+    @Transactional
     public void processCancel(Message message, Channel channel) throws IOException {
         Long id = Long.valueOf(new String(message.getBody()));
         try {

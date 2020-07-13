@@ -20,7 +20,6 @@ import com.example.demo.service.OrderMasterService;
 import com.example.demo.service.OrderTimelineService;
 import com.example.demo.service.ProductService;
 import com.example.demo.utils.Constants;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.stereotype.Service;
@@ -147,21 +146,8 @@ public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, Order
     }
 
     @Override
-    @Transactional
-    public void addStockMySQL(Long id) {
-        List<OrderDetail> orderDetailList = getDetail(id);
-        orderDetailList.forEach(orderDetail -> productService.addStock(orderDetail.getProductId(), orderDetail.getProductQuantity()));
-    }
-
-    @Override
     public void addStockRedis(Long id) {
         List<OrderDetail> orderDetailList = getDetail(id);
         orderDetailList.forEach(orderDetail -> redisService.increment(Constants.PRODUCT_STOCK + orderDetail.getProductId(), orderDetail.getProductQuantity()));
-    }
-
-    @Override
-    public void subStockRedis(Long id) {
-        List<OrderDetail> orderDetailList = getDetail(id);
-        orderDetailList.forEach(orderDetail -> redisService.decrement(Constants.PRODUCT_STOCK + orderDetail.getProductId(), orderDetail.getProductQuantity()));
     }
 }

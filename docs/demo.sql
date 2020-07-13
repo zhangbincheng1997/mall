@@ -50,7 +50,7 @@ CREATE TABLE `order_detail`  (
   `product_icon` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '（当前）商品图标',
   `product_price` decimal(8, 2) NOT NULL COMMENT '（当前）商品价格',
   `product_quantity` int(11) NOT NULL COMMENT '商品数量',
-  PRIMARY KEY (`id`) USING BTREE,
+  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 0 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------

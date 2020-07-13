@@ -37,29 +37,29 @@ public enum Status {
     FILE_UPLOAD_ERROR(30001, "咋回事，文件有毒？"),
 
     // 账号相关
-    USERNAME_EXIST(40010, "账号已经存在"),
-    USERNAME_NOT_EXIST(40011, "账号不存在"),
+    USERNAME_EXIST(40000, "账号已经存在"),
+    USERNAME_NOT_EXIST(40001, "账号不存在"),
 
     // 商品相关
-    PRODUCT_NOT_EXIST(50000, "商品不存在"),
-    PRODUCT_STOCK_NOT_ENOUGH(50001, "商品库存不足"),
-    CATEGORY_REFERENCES(50010, "分类存在引用"),
-    CATEGORY_NOT_LEAF(50011, "分类非叶节点"),
-    ORDER_NOT_EXIST(50020, "订单不存在"),
-    CART_EMPTY(50030, "购物车为空"),
+    CART_EMPTY(50000, "购物车为空"),
+    PRODUCT_NOT_EXIST(50010, "商品不存在"),
+    PRODUCT_STOCK_NOT_ENOUGH(50011, "商品库存不足"),
+    CATEGORY_REFERENCES(50020, "分类存在引用"),
+    CATEGORY_NOT_LEAF(50021, "分类非叶节点"),
+
+    // 订单相关
+    ORDER_NOT_EXIST(60000, "订单不存在"),
+    ORDER_NOT_TO_BE_PAID(60001, "订单不属于待付款"),
+    ORDER_NOT_TO_BE_SHIPPED(60002, "订单不属于待发货"),
+    ORDER_NOT_TO_BE_RECEIVED(60003, "订单不属于待收货"),
+    ORDER_CANCEL(60004, "订单已取消"),
+    ORDER_FINISH(60005, "订单已完成"),
+    ORDER_NOT_REFUND_REQUEST(60006, "订单没有退款申请"),
+    ORDER_REFUND_SUCCESS(60007, "订单退款成功"),
 
     // 支付相关
-    PAY_BUG(60000, "支付异常"),
-    PAY_CHECK_BUG(60001, "支付检查异常"),
-
-    // 订单
-    ORDER_NOT_TO_BE_PAID(70000, "订单不属于待付款"),
-    ORDER_NOT_TO_BE_SHIPPED(70001, "订单不属于待发货"),
-    ORDER_NOT_TO_BE_RECEIVED(70002, "订单不属于待收货"),
-    ORDER_CANCEL(70003, "订单已取消"),
-    ORDER_FINISH(70004, "订单已完成"),
-    ORDER_NOT_REFUND_REQUEST(70006, "订单没有退款申请"),
-    ORDER_REFUND_SUCCESS(70007, "订单退款成功");
+    PAY_BUG(70000, "支付异常"),
+    PAY_CHECK_BUG(70001, "支付检查异常");
 
     private Integer code;
     private String msg;

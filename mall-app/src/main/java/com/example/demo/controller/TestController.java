@@ -105,7 +105,7 @@ public class TestController {
             Long productId = entry.getKey();
             Integer productQuantity = entry.getValue();
             boolean result = productService.subStock(productId, productQuantity); // 减库存
-            if (result) throw new GlobalException(Status.PRODUCT_STOCK_NOT_ENOUGH); // 回滚
+            if (!result) throw new GlobalException(Status.PRODUCT_STOCK_NOT_ENOUGH); // 回滚
             Product product = productService.get(productId);
             amount = amount.add(product.getPrice().multiply(new BigDecimal(productQuantity)));
             // 创建订单详情
@@ -141,17 +141,6 @@ public class TestController {
         }
         Long result = redisService.execute(redisScript, keys, values.toArray());
         if (result == 0) throw new GlobalException(Status.PRODUCT_STOCK_NOT_ENOUGH);
-        Long orderId = snowflake.nextId();
-        return String.valueOf(orderId);
-    }
-
-    @ApiOperation("创建订单 Redis简化版本")
-    @RequestMapping("/redis2")
-    @ResponseBody
-    public String buy2() {
-        for (Map.Entry<Long, Integer> entry : cart.entrySet()) {
-            redisService.decrement(entry.getKey().toString(), entry.getValue());
-        }
         Long orderId = snowflake.nextId();
         return String.valueOf(orderId);
     }

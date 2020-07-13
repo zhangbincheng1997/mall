@@ -18,8 +18,7 @@
 | [Spring Security](https://github.com/spring-projects/spring-security) | 安全框架 |
 | [JWT](https://github.com/jwtk/jjwt) | 单点登录 |
 | [MyBatis](https://github.com/mybatis/mybatis-3) | 数据库框架  |
-| [MyBatis Generator](https://github.com/mybatis/generator) | MyBatis生成插件 |
-| [MyBatis PageHelper](https://github.com/pagehelper/Mybatis-PageHelper) | MyBatis分页插件 |
+| [MyBatis Plus](https://github.com/baomidou/mybatis-plus) | 数据库增强框架 |
 | [MySQL](https://github.com/mysql/mysql-server) | 关系型数据库 |
 | [Redis](https://github.com/antirez/redis) | key-value型数据库 |
 | [RabbitMQ](https://github.com/rabbitmq/rabbitmq-server) | 消息队列 |
@@ -33,18 +32,13 @@
 
 ## 结构
 mall:  
-----mall-mbg: MyBatis Generator  
+----mall-mbg: 数据库生成  
 ----mall-common: 基础模块  
-----mall-auth: 用户认证  
+----mall-security: 用户认证  
 ----mall-admin: 管理后端开发  
 ----mall-app: 商城后端开发
 
 ## 启动
-MyBatis Generator:
->* 数据库建表 demo.sql -> 生成MBG Generator.java
->* MySQL5.7 支持双timestamp
->* OrderMaster表主键不自增，由Snowflake雪花算法生成
-
 mall-admin: Run AdminApplication.java http://localhost:8081/
 
 mall-app: Run AppApplication.java http://localhost:8080/
@@ -212,26 +206,37 @@ public static final String PERMISSION_KEY = "permission:"; // 权限缓存
 public static final int PERMISSION_EXPIRE = 60 * 60; // 权限缓存过期时间 60*60s
 ```
 
-## 测压QPS=2000
+## 压力测试
 [JMeter](https://jmeter.apache.org/download_jmeter.cgi)
-
-$ vim /etc/profile
 ```
+$ vim /etc/profile
+
 export JMETER_HOME=/usr/local/apache-jmeter-5.3
 export CLASSPATH=$JMETER_HOME/lib/ext/ApacheJMeter_core.jar:$JMETER_HOME/lib/jorphan.jar:$CLASSPATH
 export PATH=$JMETER_HOME/bin:$PATH
-```
-$ source /etc/profile
 
-1. http://localhost:8080/test/init?num=1000
-2. http://localhost:8080/test/mysql
-3. http://localhost:8080/test/redis
-4. jmeter -n -t test.jmx -l result.jmx
+$ source /etc/profile
+```
+
+>* http://localhost:8080/test/init?type=1&stock=1000
+>* http://localhost:8080/test/init?type=2&stock=1000
+>* http://localhost:8080/test/init?type=3&stock=1000
+>* http://localhost:8080/test/result
+>* http://localhost:8080/test/mysql
+>* http://localhost:8080/test/redis
+
+>* jmeter -n -t test.jmx -l result.jmx
 ```
 -n 非GUI模式
 -t 测试文件
 -l 日志文件
 ```
+
+| 项目 | QPS | Time |
+| :----: | :----: | :----: |
+| MySQL | 200 | ≈2s |
+| Redis | 5000 | <10ms |
+| 其他说明 | CPU4核 | 内存64G |
 
 ## 参考链接
 >* Spring Boot博客：https://github.com/ityouknow/spring-boot-examples
