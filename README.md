@@ -236,7 +236,7 @@ $ source /etc/profile
 | :----: | :----: | :----: |
 | MySQL | 200 | ≈2s |
 | Redis | 5000 | <10ms |
-| 其他说明 | CPU4核 | 内存64G |
+| 其他说明 | CPU8核 | 内存32G |
 
 ## 参考链接
 >* Spring Boot博客：https://github.com/ityouknow/spring-boot-examples
