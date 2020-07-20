@@ -232,10 +232,10 @@ $ source /etc/profile
 -l 日志文件
 ```
 
-| 项目 | QPS | Time |
+| 项目 | MySQL | Redis |
 | :----: | :----: | :----: |
-| MySQL | 200 | ≈2s |
-| Redis | 5000 | <10ms |
+| QPS | 200 | 5000 |
+| Time | ≈2s | <10ms |
 | 其他说明 | CPU8核 | 内存32G |
 
 ## 参考链接
