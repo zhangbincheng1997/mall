@@ -23,7 +23,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true) // 允许 @PreAuthorize("hasAuthority/hasRole('xxxx')")
+@EnableGlobalMethodSecurity(prePostEnabled = true) // 权限控制 @PreAuthorize("hasAuthority/hasRole('xxxx')")
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 

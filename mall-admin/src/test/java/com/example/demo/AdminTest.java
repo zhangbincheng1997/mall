@@ -1,10 +1,10 @@
 //package com.example.demo;
 //
-//import com.example.demo.entity.User;
-//import com.example.demo.entity.UserRole;
+//import com.example.mbg.entity.User;
+//import com.example.mbg.entity.UserRole;
 //import com.example.demo.enums.UserRoleEnum;
-//import com.example.demo.mapper.UserMapper;
-//import com.example.demo.mapper.UserRoleMapper;
+//import com.example.mbg.mapper.UserMapper;
+//import com.example.mbg.mapper.UserRoleMapper;
 //import org.junit.Assert;
 //import org.junit.Test;
 //import org.junit.runner.RunWith;

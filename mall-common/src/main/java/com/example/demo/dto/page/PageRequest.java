@@ -7,8 +7,8 @@ import lombok.Data;
 public class PageRequest {
 
     @ApiModelProperty(value = "页面", example = "0")
-    Integer page = 1;
+    private Integer page = 1;
 
     @ApiModelProperty(value = "大小", example = "0")
-    Integer limit = 10;
+    private Integer limit = 10;
 }

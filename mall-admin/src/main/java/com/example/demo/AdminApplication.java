@@ -1,9 +1,9 @@
 package com.example.demo;
 
 import com.example.demo.component.redis.RedisService;
-import com.example.demo.utils.Constants;
 import com.example.demo.entity.Product;
 import com.example.demo.mapper.ProductMapper;
+import com.example.demo.utils.Constants;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;

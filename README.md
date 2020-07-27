@@ -232,11 +232,11 @@ $ source /etc/profile
 -l 日志文件
 ```
 
-| 项目 | MySQL | Redis |
+| 项目 | QPS | Time |
 | :----: | :----: | :----: |
-| QPS | 200 | 5000 |
-| Time | ≈2s | <10ms |
-| 其他说明 | CPU8核 | 内存32G |
+| MySQL | 200 | ≈2s |
+| Redis | 5000 | <10ms |
+| 其他说明 | CPU4核 | 内存64G |
 
 ## 参考链接
 >* Spring Boot博客：https://github.com/ityouknow/spring-boot-examples

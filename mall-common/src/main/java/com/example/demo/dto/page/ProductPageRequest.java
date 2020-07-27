@@ -9,8 +9,8 @@ import lombok.EqualsAndHashCode;
 public class ProductPageRequest extends PageRequest {
 
     @ApiModelProperty(value = "关键词")
-    String keyword = "";
+    private String keyword = "";
 
     @ApiModelProperty(value = "分类")
-    String category = "";
+    private String category = "";
 }

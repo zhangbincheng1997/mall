@@ -2,13 +2,13 @@ package com.example.demo.component;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.example.demo.entity.*;
 import com.example.demo.enums.OrderStatusEnum;
 import com.example.demo.service.OrderDetailService;
 import com.example.demo.service.OrderMasterService;
 import com.example.demo.service.OrderTimelineService;
 import com.example.demo.service.ProductService;
 import com.example.demo.utils.Constants;
+import com.example.demo.entity.*;
 import com.rabbitmq.client.Channel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
@@ -64,6 +64,9 @@ public class RabbitReceiver {
                 Long productId = Long.valueOf(entry.getKey());
                 Integer productQuantity = entry.getValue();
                 Product product = productService.get(productId);
+                // 累加价格
+                amount = amount.add(product.getPrice().multiply(new BigDecimal(productQuantity)));
+                sb.append("总价：").append(amount).append("\n");
 
                 // 创建订单详情
                 OrderDetail orderDetail = new OrderDetail();
@@ -75,9 +78,6 @@ public class RabbitReceiver {
                 orderDetail.setProductPrice(product.getPrice());
                 orderDetailService.save(orderDetail);
                 sb.append(JSON.toJSONString(orderDetail)).append("\n");
-
-                // 累加价格
-                amount = amount.add(product.getPrice().multiply(new BigDecimal(productQuantity)));
             }
             // 创建订单
             OrderMaster orderMaster = new OrderMaster();
@@ -92,7 +92,6 @@ public class RabbitReceiver {
             orderTimeline.setOrderId(orderId);
             orderTimelineService.save(orderTimeline);
             // 发送通知
-            sb.append("总价：").append(amount).append("\n");
             mailService.send(user.getEmail(), sb.toString());
             // 订单超时
             rabbitSender.send(Constants.ORDER_TTL_EXCHANGE,
@@ -121,8 +120,8 @@ public class RabbitReceiver {
                 orderMasterService.addStockRedis(id); // 恢复预减库存
                 orderMasterService.updateOrderStatus(id, OrderStatusEnum.CANCEL.getCode());
             }
-            log.info("取消订单成功");
             channel.basicAck(message.getMessageProperties().getDeliveryTag(), false); // 手动ACK
+            log.info("取消订单成功");
         } catch (Exception e) {
             channel.basicReject(message.getMessageProperties().getDeliveryTag(), false);
             log.info("取消订单失败");

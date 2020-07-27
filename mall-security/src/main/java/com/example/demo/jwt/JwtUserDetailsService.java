@@ -3,7 +3,6 @@ package com.example.demo.jwt;
 import com.alibaba.fastjson.JSON;
 import com.example.demo.component.redis.RedisService;
 import com.example.demo.entity.User;
-import com.example.demo.jwt.JwtUserDetails;
 import com.example.demo.service.JwtUserService;
 import com.example.demo.utils.Constants;
 import lombok.extern.slf4j.Slf4j;

@@ -6,11 +6,13 @@ import com.example.demo.base.GlobalException;
 import com.example.demo.base.Result;
 import com.example.demo.base.Status;
 import com.example.demo.component.redis.RedisService;
-import com.example.demo.entity.*;
 import com.example.demo.service.OrderDetailService;
 import com.example.demo.service.OrderMasterService;
 import com.example.demo.service.ProductService;
 import com.example.demo.utils.Constants;
+import com.example.demo.entity.OrderDetail;
+import com.example.demo.entity.OrderMaster;
+import com.example.demo.entity.Product;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -107,7 +109,9 @@ public class TestController {
             boolean result = productService.subStock(productId, productQuantity); // 减库存
             if (!result) throw new GlobalException(Status.PRODUCT_STOCK_NOT_ENOUGH); // 回滚
             Product product = productService.get(productId);
+            // 累加价格
             amount = amount.add(product.getPrice().multiply(new BigDecimal(productQuantity)));
+
             // 创建订单详情
             OrderDetail orderDetail = new OrderDetail();
             orderDetail.setOrderId(orderId);

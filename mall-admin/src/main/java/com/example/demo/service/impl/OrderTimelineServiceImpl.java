@@ -5,8 +5,10 @@ import com.example.demo.entity.OrderTimeline;
 import com.example.demo.mapper.OrderTimelineMapper;
 import com.example.demo.service.OrderTimelineService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class OrderTimelineServiceImpl extends ServiceImpl<OrderTimelineMapper, OrderTimeline> implements OrderTimelineService {
 
 }

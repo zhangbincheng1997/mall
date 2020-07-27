@@ -9,5 +9,5 @@ import lombok.EqualsAndHashCode;
 public class OrderPageRequest extends PageRequest {
 
     @ApiModelProperty(value = "状态")
-    String status = "";
+    private String status = "";
 }

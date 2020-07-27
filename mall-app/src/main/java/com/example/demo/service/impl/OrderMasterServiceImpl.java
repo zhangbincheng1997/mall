@@ -11,7 +11,6 @@ import com.example.demo.base.Status;
 import com.example.demo.component.RabbitSender;
 import com.example.demo.component.redis.RedisService;
 import com.example.demo.dto.CartDto;
-import com.example.demo.entity.*;
 import com.example.demo.component.CartService;
 import com.example.demo.dto.page.OrderPageRequest;
 import com.example.demo.mapper.OrderMasterMapper;
@@ -20,6 +19,10 @@ import com.example.demo.service.OrderMasterService;
 import com.example.demo.service.OrderTimelineService;
 import com.example.demo.service.ProductService;
 import com.example.demo.utils.Constants;
+import com.example.demo.entity.OrderDetail;
+import com.example.demo.entity.OrderMaster;
+import com.example.demo.entity.OrderTimeline;
+import com.example.demo.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.stereotype.Service;
@@ -30,6 +33,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, OrderMaster> implements OrderMasterService {
 
     @Autowired
@@ -67,6 +71,11 @@ public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, Order
                 .eq(OrderDetail::getOrderId, id));
     }
 
+    private List<OrderTimeline> getTimeline(Long id) {
+        return orderTimelineService.list(Wrappers.<OrderTimeline>lambdaQuery()
+                .eq(OrderTimeline::getOrderId, id));
+    }
+
     @Override
     public List<OrderDetail> getDetail(String username, Long id) {
         get(username, id); // 保证存在
@@ -76,8 +85,7 @@ public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, Order
     @Override
     public List<OrderTimeline> getTimeline(String username, Long id) {
         get(username, id); // 保证存在
-        return orderTimelineService.list(Wrappers.<OrderTimeline>lambdaQuery()
-                .eq(OrderTimeline::getOrderId, id));
+        return getTimeline(id);
     }
 
     @Override
@@ -139,7 +147,6 @@ public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, Order
     }
 
     @Override
-    @Transactional
     public void subStockMySQL(Long id) {
         List<OrderDetail> orderDetailList = getDetail(id);
         orderDetailList.forEach(orderDetail -> productService.subStock(orderDetail.getProductId(), orderDetail.getProductQuantity()));

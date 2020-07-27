@@ -23,6 +23,7 @@ import org.springframework.util.StringUtils;
 import java.util.List;
 
 @Service
+@Transactional
 public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, OrderMaster> implements OrderMasterService {
 
     @Autowired
