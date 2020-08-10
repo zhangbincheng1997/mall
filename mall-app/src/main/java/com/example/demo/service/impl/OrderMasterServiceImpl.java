@@ -1,14 +1,13 @@
 package com.example.demo.service.impl;
 
 import cn.hutool.core.lang.Snowflake;
-import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.demo.base.GlobalException;
 import com.example.demo.base.Status;
-import com.example.demo.component.RabbitSender;
+import com.example.demo.component.OrderMessage;
 import com.example.demo.component.redis.RedisService;
 import com.example.demo.dto.CartDto;
 import com.example.demo.component.CartService;
@@ -23,6 +22,7 @@ import com.example.demo.entity.OrderDetail;
 import com.example.demo.entity.OrderMaster;
 import com.example.demo.entity.OrderTimeline;
 import com.example.demo.entity.User;
+import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.stereotype.Service;
@@ -55,7 +55,7 @@ public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, Order
     private RedisService redisService;
 
     @Autowired
-    private RabbitSender rabbitSender;
+    private RocketMQTemplate rocketMQTemplate;
 
     private final DefaultRedisScript<Long> redisScript = new DefaultRedisScript<>(Constants.LUA_SCRIPT, Long.class);
 
@@ -107,15 +107,15 @@ public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, Order
         if (cartDtoList.size() == 0) throw new GlobalException(Status.CART_EMPTY);
 
         // 记录购物ID和数量
-        Map<String, Integer> map = new HashMap<>();
+        Map<String, Integer> cart = new HashMap<>();
         List<String> keys = new ArrayList<>();
         List<Integer> values = new ArrayList<>();
         for (CartDto cartDto : cartDtoList) {
-            map.put(cartDto.getId().toString(), cartDto.getQuantity());
+            cart.put(cartDto.getId().toString(), cartDto.getQuantity());
             keys.add(Constants.PRODUCT_STOCK + cartDto.getId());
             values.add(cartDto.getQuantity());
         }
-        Long result = redisService.execute(redisScript, keys, values.toArray());
+        Long result = redisService.execute(redisScript, keys, values.toArray()); // 预减库存
         if (result == 0) throw new GlobalException(Status.PRODUCT_STOCK_NOT_ENOUGH);
 
         // 清空购物车
@@ -124,12 +124,12 @@ public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, Order
                 .map(CartDto::getId).collect(Collectors.toList());
         cartService.delete(user.getUsername(), ids);
 
-        JSONObject jsonStr = new JSONObject();
         Long orderId = snowflake.nextId(); // 雪花算法 生成全局唯一ID
-        jsonStr.put("orderId", orderId);
-        jsonStr.put("user", user);
-        jsonStr.put("map", map);
-        rabbitSender.send(Constants.ORDER_TOPIC, jsonStr.toJSONString()); // 发送消息队列
+        OrderMessage orderMessage = new OrderMessage();
+        orderMessage.setOrderId(orderId);
+        orderMessage.setUser(user);
+        orderMessage.setCart(cart);
+        rocketMQTemplate.syncSend(OrderMessage.TOPIC, orderMessage); // 发送消息队列
         return String.valueOf(orderId);
     }
 
@@ -147,9 +147,9 @@ public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, Order
     }
 
     @Override
-    public void subStockMySQL(Long id) {
+    public void addStockMySQL(Long id) {
         List<OrderDetail> orderDetailList = getDetail(id);
-        orderDetailList.forEach(orderDetail -> productService.subStock(orderDetail.getProductId(), orderDetail.getProductQuantity()));
+        orderDetailList.forEach(orderDetail -> productService.addStock(orderDetail.getProductId(), orderDetail.getProductQuantity()));
     }
 
     @Override

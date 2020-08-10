@@ -20,8 +20,8 @@
 | [MyBatis](https://github.com/mybatis/mybatis-3) | 数据库框架  |
 | [MyBatis Plus](https://github.com/baomidou/mybatis-plus) | 数据库增强框架 |
 | [MySQL](https://github.com/mysql/mysql-server) | 关系型数据库 |
-| [Redis](https://github.com/antirez/redis) | key-value型数据库 |
-| [RabbitMQ](https://github.com/rabbitmq/rabbitmq-server) | 消息队列 |
+| [Redis](https://github.com/antirez/redis) | 缓存型数据库 |
+| [RocketMQ](https://github.com/apache/rocketmq) | 消息队列 |
 | [QiNiu](https://github.com/qiniu/java-sdk) | 对象存储 |
 | [Druid](https://github.com/alibaba/druid/) | 数据库连接池 |
 | [Swagger](https://github.com/swagger-api/swagger-ui) | 文档接口 |
@@ -108,32 +108,49 @@ $ redis-server 或者 ($ redis-server /etc/redis.conf)
 $ redis-cli shutdown
 ```
 
-## RabbitMQ
+## RocketMQ
 1. 安装
 ```
-$ wget https://www.rabbitmq.com/releases/erlang/erlang-19.0.4-1.el7.centos.x86_64.rpm
-$ wget https://www.rabbitmq.com/releases/rabbitmq-server/v3.6.15/rabbitmq-server-3.6.15-1.el7.noarch.rpm
-$ rpm -ivh erlang-19.0.4-1.el7.centos.x86_64.rpm
-$ rpm -ivh rabbitmq-server-3.6.15-1.el7.noarch.rpm
-$ yum install socat
+$ https://archive.apache.org/dist/rocketmq/4.7.0/rocketmq-all-4.7.0-bin-release.zip
+$ unzip rocketmq-all-4.7.0-bin-release.zip
+$ mv rocketmq-all-4.7.0-bin-release rocketmq
+$ mv rocketmq /usr/local
+
+$ vim /etc/profile
++ export PATH=$PATH:/usr/local/rocketmq/bin
++ export NAMESRV_ADDR=localhost:9876
+$ source /etc/profile
 ```
 
 2. 启动/关闭
 ```
-$ service rabbitmq-server start
-$ service rabbitmq-server stop
-```
+$ mqnamesrv &
+$ mqbroker -n localhost:9876 &
 
-3. 开启web插件
-```
-$ rabbitmq-plugins enable rabbitmq_management
+$ mqshutdown broker
+$ mqshutdown namesrv
 
-localhost:15672
-
-# 创建用户
-Admin ----> Add a user ----> Username , Password and Tags(Admin)
 # 外网访问
-Admin ----> All users ----> Set permission
+$ vim /usr/local/rocketmq/conf/broker.conf
++ namesrvAddr=www.littleredhat1997.com:9876
++ brokerIP1=www.littleredhat1997.com
+
+# 后台运行
+$ nohup mqnamesrv &
+$ nohup mqbroker -c /usr/local/rocketmq/conf/broker.conf &
+```
+
+3. 报错解决
+```
+OpenJDK 64-Bit Server VM warning: INFO: os::commit_memory(0x00000005c0000000, 8589934592, 0) failed; error='Cannot allocate memory' (errno=12)
+
+$ cd /usr/local/rocketmq/bin/
+$ vim runserver.sh
+- JAVA_OPT="${JAVA_OPT} -server -Xms4g -Xmx4g -Xmn2g -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=320m"
++ JAVA_OPT="${JAVA_OPT} -server -Xms128m -Xmx128m -Xmn128m -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=128m"
+$ vim runbroker.sh
+- JAVA_OPT="${JAVA_OPT} -server -Xms8g -Xmx8g -Xmn4g"
++ JAVA_OPT="${JAVA_OPT} -server -Xms128m -Xmx128m -Xmn128m"
 ```
 
 ## Tomcat
@@ -141,7 +158,7 @@ Admin ----> All users ----> Set permission
 ```
 $ wget http://mirrors.tuna.tsinghua.edu.cn/apache/tomcat/tomcat-9/v9.0.30/bin/apache-tomcat-9.0.30.tar.gz
 $ tar -zxvf apache-tomcat-9.0.30.tar.gz
-$ mv apache-tomcat-9.0.30.tar.gz tomcat
+$ mv apache-tomcat-9.0.30 tomcat
 $ mv tomcat /usr/local
 ```
 
@@ -208,16 +225,6 @@ public static final int PERMISSION_EXPIRE = 60 * 60; // 权限缓存过期时间
 
 ## 压力测试
 [JMeter](https://jmeter.apache.org/download_jmeter.cgi)
-```
-$ vim /etc/profile
-
-export JMETER_HOME=/usr/local/apache-jmeter-5.3
-export CLASSPATH=$JMETER_HOME/lib/ext/ApacheJMeter_core.jar:$JMETER_HOME/lib/jorphan.jar:$CLASSPATH
-export PATH=$JMETER_HOME/bin:$PATH
-
-$ source /etc/profile
-```
-
 >* http://localhost:8080/test/init?type=1&stock=1000
 >* http://localhost:8080/test/init?type=2&stock=1000
 >* http://localhost:8080/test/init?type=3&stock=1000
@@ -225,18 +232,11 @@ $ source /etc/profile
 >* http://localhost:8080/test/mysql
 >* http://localhost:8080/test/redis
 
->* jmeter -n -t test.jmx -l result.jmx
-```
--n 非GUI模式
--t 测试文件
--l 日志文件
-```
-
 | 项目 | QPS | Time |
 | :----: | :----: | :----: |
 | MySQL | 200 | ≈2s |
 | Redis | 5000 | <10ms |
-| 其他说明 | CPU4核 | 内存64G |
+| 其他说明 | CPU8核16线程 | 内存16G*2 |
 
 ## 参考链接
 >* Spring Boot博客：https://github.com/ityouknow/spring-boot-examples

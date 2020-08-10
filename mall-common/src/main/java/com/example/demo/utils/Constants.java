@@ -29,15 +29,6 @@ public class Constants {
                     + "end\n"
                     + "return 1;\n";
 
-    public static final String ORDER_TOPIC = "order";
-    public static final String ORDER_TTL_EXCHANGE = "order_ttl_exchange";
-    public static final String ORDER_TTL_QUEUE = "order_ttl_queue";
-    public static final String ORDER_TTL_KEY = "order_ttl_key";
-    public static final String ORDER_TTL = String.valueOf(5 * 60 * 1000); // 5min
-    public static final String ORDER_CANCEL_QUEUE = "order_cancel_queue";
-    public static final String ORDER_CANCEL_EXCHANGE = "order_cancel_exchange";
-    public static final String ORDER_CANCEL_KEY = "order_cancel_key";
-
     public static final Integer UPLOAD_RETRY = 3; // 重传次数
     public static final Integer EXPIRE_SECONDS = 60 * 60; // 过期时间
     public static final StringMap PUT_POLICY = new StringMap().put("returnBody", // 返回格式
