@@ -27,6 +27,8 @@ public class Generator {
         globalConfig.setAuthor("zzz");
         globalConfig.setOpen(false);
         globalConfig.setFileOverride(true);
+        globalConfig.setServiceName("%sService");
+        globalConfig.setServiceImplName("%sServiceImpl");
         globalConfig.setDateType(DateType.ONLY_DATE); // mybatis-plus druid LocalDate冲突
         mpg.setGlobalConfig(globalConfig);
 
@@ -46,8 +48,8 @@ public class Generator {
         // template配置
         TemplateConfig templateConfig = new TemplateConfig();
         templateConfig.setXml(null);
-        templateConfig.setService(null);
-        templateConfig.setServiceImpl(null);
+        // templateConfig.setService(null);
+        // templateConfig.setServiceImpl(null);
         templateConfig.setController(null);
         mpg.setTemplate(templateConfig);
 

@@ -1,9 +1,8 @@
-package com.example.demo.service.impl;
+package com.example.demo.facade;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.demo.entity.Category;
-import com.example.demo.mapper.CategoryMapper;
 import com.example.demo.service.CategoryService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,11 +11,13 @@ import java.util.List;
 
 @Service
 @Transactional
-public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> implements CategoryService {
+public class CategoryFacade {
 
-    @Override
+    @Autowired
+    private CategoryService categoryService;
+
     @Cacheable(value = "category") // EnableCaching
     public List<Category> list(Long id) {
-        return list();
+        return categoryService.list();
     }
 }

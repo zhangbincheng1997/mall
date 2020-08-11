@@ -6,6 +6,7 @@ import com.example.demo.base.GlobalException;
 import com.example.demo.base.Result;
 import com.example.demo.base.Status;
 import com.example.demo.component.redis.RedisService;
+import com.example.demo.facade.ProductFacade;
 import com.example.demo.service.OrderDetailService;
 import com.example.demo.service.OrderMasterService;
 import com.example.demo.service.ProductService;
@@ -18,11 +19,11 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
-import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ import java.util.Map;
 
 @Slf4j
 @Api(tags = "测试")
-@Controller
+@RestController
 @RequestMapping("/test")
 public class TestController {
 
@@ -41,6 +42,9 @@ public class TestController {
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private ProductFacade productFacade;
 
     @Autowired
     private OrderMasterService orderMasterService;
@@ -87,11 +91,11 @@ public class TestController {
     public Result<JSONObject> result() {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("Redis_7", redisService.get(Constants.PRODUCT_STOCK + "7"));
-        jsonObject.put("MySQL_7", productService.get(7L).getStock());
+        jsonObject.put("MySQL_7", productService.getById(7L).getStock());
         jsonObject.put("Redis_8", redisService.get(Constants.PRODUCT_STOCK + "8"));
-        jsonObject.put("MySQL_8", productService.get(8L).getStock());
+        jsonObject.put("MySQL_8", productService.getById(8L).getStock());
         jsonObject.put("Redis_9", redisService.get(Constants.PRODUCT_STOCK + "9"));
-        jsonObject.put("MySQL_9", productService.get(9L).getStock());
+        jsonObject.put("MySQL_9", productService.getById(9L).getStock());
         return Result.success(jsonObject);
     }
 
@@ -106,9 +110,9 @@ public class TestController {
         for (Map.Entry<Long, Integer> entry : cart.entrySet()) {
             Long productId = entry.getKey();
             Integer productQuantity = entry.getValue();
-            boolean result = productService.subStock(productId, productQuantity); // 减库存
+            boolean result = productFacade.subStock(productId, productQuantity); // 减库存
             if (!result) throw new GlobalException(Status.PRODUCT_STOCK_NOT_ENOUGH); // 回滚
-            Product product = productService.get(productId);
+            Product product = productService.getById(productId);
             // 累加价格
             amount = amount.add(product.getPrice().multiply(new BigDecimal(productQuantity)));
 

@@ -1,11 +1,13 @@
 package com.example.demo.component;
 
 import com.alibaba.fastjson.JSON;
+import com.example.demo.base.GlobalException;
+import com.example.demo.base.Status;
+import com.example.demo.entity.*;
+import com.example.demo.facade.ProductFacade;
 import com.example.demo.service.OrderDetailService;
 import com.example.demo.service.OrderMasterService;
 import com.example.demo.service.OrderTimelineService;
-import com.example.demo.service.ProductService;
-import com.example.demo.entity.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.core.RocketMQListener;
@@ -21,10 +23,10 @@ import java.util.Map;
 @Slf4j
 @Component
 @RocketMQMessageListener(consumerGroup = OrderMessage.TOPIC + "-group", topic = OrderMessage.TOPIC)
-public class OrderConsumer implements RocketMQListener<OrderMessage>  {
+public class OrderConsumer implements RocketMQListener<OrderMessage> {
 
     @Autowired
-    private ProductService productService;
+    private ProductFacade productFacade;
 
     @Autowired
     private OrderMasterService orderMasterService;
@@ -57,9 +59,9 @@ public class OrderConsumer implements RocketMQListener<OrderMessage>  {
             for (Map.Entry<String, Integer> entry : cart.entrySet()) {
                 Long productId = Long.valueOf(entry.getKey());
                 Integer productQuantity = entry.getValue();
-                productService.subStock(productId, productQuantity); // 真正减库存
+                productFacade.subStock(productId, productQuantity); // 真正减库存
                 // 累加价格
-                Product product = productService.get(productId);
+                Product product = productFacade.get(productId);
                 amount = amount.add(product.getPrice().multiply(new BigDecimal(productQuantity)));
                 sb.append("总价：").append(amount).append("\n");
 
@@ -87,7 +89,7 @@ public class OrderConsumer implements RocketMQListener<OrderMessage>  {
             orderTimeline.setOrderId(orderId);
             orderTimelineService.save(orderTimeline);
             // 发送通知
-            mailService.send(user.getEmail(), sb.toString());
+            // mailService.send(user.getEmail(), sb.toString());
             // 订单超时
             // 5 - 1min
             // 9 - 5min
@@ -98,6 +100,7 @@ public class OrderConsumer implements RocketMQListener<OrderMessage>  {
             log.info("创建订单成功");
         } catch (Exception e) {
             log.info("创建订单失败");
+            throw new GlobalException(Status.FAILURE); // RocketMQ自动重试16次
         }
     }
 }

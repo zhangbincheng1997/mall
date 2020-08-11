@@ -9,7 +9,7 @@ import com.example.demo.dto.page.OrderPageRequest;
 import com.example.demo.entity.OrderDetail;
 import com.example.demo.entity.OrderMaster;
 import com.example.demo.entity.OrderTimeline;
-import com.example.demo.service.OrderMasterService;
+import com.example.demo.facade.OrderMasterFacade;
 import com.example.demo.vo.OrderDetailVo;
 import com.example.demo.vo.OrderTimelineVo;
 import com.example.demo.vo.OrderVo;
@@ -17,11 +17,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
@@ -31,19 +27,18 @@ import java.util.List;
 import java.util.Map;
 
 @Api(tags = "订单")
-@Controller
+@RestController
 @RequestMapping("/order")
+@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
 public class OrderController {
 
     @Autowired
-    private OrderMasterService orderMasterService;
+    private OrderMasterFacade orderMasterFacade;
 
     @ApiOperation("获取订单列表")
     @GetMapping("/list")
-    @ResponseBody
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     public PageResult<List<OrderVo>> list(@ApiIgnore Principal principal, @Valid OrderPageRequest pageRequest) {
-        Page<OrderMaster> page = orderMasterService.list(principal.getName(), pageRequest);
+        Page<OrderMaster> page = orderMasterFacade.list(principal.getName(), pageRequest);
         List<OrderVo> orderVoList = Convert.convert(new TypeReference<List<OrderVo>>() {
         }, page.getRecords());
         return PageResult.success(orderVoList, page.getTotal());
@@ -51,11 +46,9 @@ public class OrderController {
 
     @ApiOperation("获取订单详情")
     @GetMapping("/{id}")
-    @ResponseBody
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     public Result<Map<String, Object>> all(@ApiIgnore Principal principal, @PathVariable("id") Long id) {
-        List<OrderDetail> orderDetailList = orderMasterService.getDetail(principal.getName(), id);
-        List<OrderTimeline> orderTimelineList = orderMasterService.getTimeline(principal.getName(), id);
+        List<OrderDetail> orderDetailList = orderMasterFacade.getDetail(principal.getName(), id);
+        List<OrderTimeline> orderTimelineList = orderMasterFacade.getTimeline(principal.getName(), id);
 
         List<OrderDetailVo> orderDetailVoList = Convert.convert(new TypeReference<List<OrderDetailVo>>() {
         }, orderDetailList);

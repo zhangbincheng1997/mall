@@ -88,6 +88,13 @@ public class RedisService {
     }
 
     /**
+     * hasKey
+     */
+    public Boolean hasKey(String key) {
+        return redisTemplate.hasKey(key);
+    }
+
+    /**
      * keys
      */
     public Set<String> keys(String key) {

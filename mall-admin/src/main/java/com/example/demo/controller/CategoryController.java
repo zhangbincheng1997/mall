@@ -4,13 +4,12 @@ import cn.hutool.core.convert.Convert;
 import com.example.demo.base.Result;
 import com.example.demo.dto.CategoryDto;
 import com.example.demo.entity.Category;
-import com.example.demo.service.CategoryService;
+import com.example.demo.facade.CategoryFacade;
 import com.example.demo.vo.CategoryVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -18,48 +17,41 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Api(tags = "分类")
-@Controller
+@RestController
 @RequestMapping("/category")
+@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
 public class CategoryController {
 
     @Autowired
-    private CategoryService categoryService;
+    private CategoryFacade categoryFacade;
 
     @ApiOperation("获取分类列表")
     @GetMapping("")
-    @ResponseBody
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public Result<List<CategoryVo>> list(@RequestParam(name = "id", defaultValue = "0") Long id) {
         // 全部读出 加速搜索
-        List<Category> categoryList = categoryService.list(id);
+        List<Category> categoryList = categoryFacade.list(id);
         List<CategoryVo> categoryVoList = get(categoryList, id);
         return Result.success(categoryVoList);
     }
 
     @ApiOperation("添加分类")
     @PostMapping("")
-    @ResponseBody
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public Result<String> add(@Valid CategoryDto categoryDto) {
-        categoryService.add(categoryDto);
+    public Result<String> save(@Valid CategoryDto categoryDto) {
+        categoryFacade.save(categoryDto);
         return Result.success();
     }
 
     @ApiOperation("修改分类")
     @PutMapping("/{id}")
-    @ResponseBody
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Result<String> update(@PathVariable("id") Long id, @Valid CategoryDto categoryDto) {
-        categoryService.update(id, categoryDto);
+        categoryFacade.update(id, categoryDto);
         return Result.success();
     }
 
     @ApiOperation("删除分类")
     @DeleteMapping("/{id}")
-    @ResponseBody
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Result<String> delete(@PathVariable("id") Long id) {
-        categoryService.delete(id);
+        categoryFacade.delete(id);
         return Result.success();
     }
 

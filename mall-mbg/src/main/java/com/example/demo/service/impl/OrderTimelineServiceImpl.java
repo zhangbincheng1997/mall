@@ -1,14 +1,20 @@
 package com.example.demo.service.impl;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.demo.entity.OrderTimeline;
 import com.example.demo.mapper.OrderTimelineMapper;
 import com.example.demo.service.OrderTimelineService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * <p>
+ *  服务实现类
+ * </p>
+ *
+ * @author zzz
+ * @since 2020-08-11
+ */
 @Service
-@Transactional
 public class OrderTimelineServiceImpl extends ServiceImpl<OrderTimelineMapper, OrderTimeline> implements OrderTimelineService {
 
 }

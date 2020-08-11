@@ -1,8 +1,7 @@
-package com.example.demo.service.impl;
+package com.example.demo.facade;
 
 import cn.hutool.core.convert.Convert;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.demo.base.GlobalException;
 import com.example.demo.base.Status;
 import com.example.demo.component.redis.RedisService;
@@ -14,7 +13,6 @@ import com.example.demo.dto.RegisterDto;
 import com.example.demo.dto.UserInfoDto;
 import com.example.demo.entity.User;
 import com.example.demo.entity.UserRole;
-import com.example.demo.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,7 +21,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
+public class UserFacade {
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private RedisService redisService;
@@ -34,13 +35,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Override
     public void register(RegisterDto registerDto) {
         try {
             User user = new User()
                     .setUsername(registerDto.getUsername())
                     .setPassword(passwordEncoder.encode(registerDto.getPassword()));
-            baseMapper.insert(user);
+            userService.save(user);
             UserRole userRole = new UserRole()
                     .setUserId(user.getId())
                     .setRoleId(UserRoleEnum.USER.getCode().longValue());
@@ -50,19 +50,17 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
     }
 
-    @Override
     public void updateUserInfoByUsername(String username, UserInfoDto userInfoDto) {
         User user = Convert.convert(User.class, userInfoDto);
-        baseMapper.update(user, Wrappers.<User>lambdaUpdate()
+        userService.update(user, Wrappers.<User>lambdaUpdate()
                 .eq(User::getUsername, username));
         redisService.delete(Constants.USER_KEY + username); // 刷新缓存
     }
 
-    @Override
     public void updatePasswordByUsername(String username, String password) {
         User user = new User()
                 .setPassword(passwordEncoder.encode(password));
-        baseMapper.update(user, Wrappers.<User>lambdaUpdate()
+        userService.update(user, Wrappers.<User>lambdaUpdate()
                 .eq(User::getUsername, username));
         redisService.delete(Constants.USER_KEY + username); // 刷新缓存
     }

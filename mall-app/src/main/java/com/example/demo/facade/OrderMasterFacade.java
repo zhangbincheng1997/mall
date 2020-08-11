@@ -1,10 +1,10 @@
-package com.example.demo.service.impl;
+package com.example.demo.facade;
 
 import cn.hutool.core.lang.Snowflake;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.demo.base.GlobalException;
 import com.example.demo.base.Status;
 import com.example.demo.component.OrderMessage;
@@ -12,16 +12,12 @@ import com.example.demo.component.redis.RedisService;
 import com.example.demo.dto.CartDto;
 import com.example.demo.component.CartService;
 import com.example.demo.dto.page.OrderPageRequest;
-import com.example.demo.mapper.OrderMasterMapper;
+import com.example.demo.entity.*;
 import com.example.demo.service.OrderDetailService;
 import com.example.demo.service.OrderMasterService;
 import com.example.demo.service.OrderTimelineService;
 import com.example.demo.service.ProductService;
 import com.example.demo.utils.Constants;
-import com.example.demo.entity.OrderDetail;
-import com.example.demo.entity.OrderMaster;
-import com.example.demo.entity.OrderTimeline;
-import com.example.demo.entity.User;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
@@ -34,7 +30,7 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
-public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, OrderMaster> implements OrderMasterService {
+public class OrderMasterFacade {
 
     @Autowired
     private Snowflake snowflake;
@@ -44,6 +40,9 @@ public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, Order
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private OrderMasterService orderMasterService;
 
     @Autowired
     private OrderDetailService orderDetailService;
@@ -59,9 +58,12 @@ public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, Order
 
     private final DefaultRedisScript<Long> redisScript = new DefaultRedisScript<>(Constants.LUA_SCRIPT, Long.class);
 
-    @Override
+    public OrderMaster get(Long id) {
+        return orderMasterService.getById(id);
+    }
+
     public OrderMaster get(String username, Long id) {
-        OrderMaster orderMaster = baseMapper.selectById(id);
+        OrderMaster orderMaster = orderMasterService.getById(id);
         if (orderMaster != null && orderMaster.getUsername().equals(username)) return orderMaster;
         throw new GlobalException(Status.ORDER_NOT_EXIST);
     }
@@ -76,19 +78,16 @@ public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, Order
                 .eq(OrderTimeline::getOrderId, id));
     }
 
-    @Override
     public List<OrderDetail> getDetail(String username, Long id) {
         get(username, id); // 保证存在
         return getDetail(id);
     }
 
-    @Override
     public List<OrderTimeline> getTimeline(String username, Long id) {
         get(username, id); // 保证存在
         return getTimeline(id);
     }
 
-    @Override
     public Page<OrderMaster> list(String username, OrderPageRequest pageRequest) {
         Page<OrderMaster> page = new Page<>(pageRequest.getPage(), pageRequest.getLimit());
         QueryWrapper<OrderMaster> wrappers = new QueryWrapper<OrderMaster>()
@@ -96,10 +95,9 @@ public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, Order
         if (!StringUtils.isEmpty(pageRequest.getStatus()))
             wrappers.eq("status", pageRequest.getStatus());
         wrappers.orderByDesc("update_time", "id");
-        return baseMapper.selectPage(page, wrappers);
+        return orderMasterService.page(page, wrappers);
     }
 
-    @Override
     public String buy(User user) {
         // 购物车
         List<CartDto> cartDtoList = cartService.list(user.getUsername()).stream()
@@ -129,16 +127,21 @@ public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, Order
         orderMessage.setOrderId(orderId);
         orderMessage.setUser(user);
         orderMessage.setCart(cart);
-        rocketMQTemplate.syncSend(OrderMessage.TOPIC, orderMessage); // 发送消息队列
+
+        // 同步
+        rocketMQTemplate.syncSend(OrderMessage.TOPIC, orderMessage);
+
+        // 事务
+        // rocketMQTemplate.sendMessageInTransaction(OrderMessage.TOPIC, MessageBuilder.withPayload(orderMessage).build(), null);
+
         return String.valueOf(orderId);
     }
 
-    @Override
     public void updateOrderStatus(Long id, Integer status) {
         OrderMaster orderMaster = new OrderMaster()
                 .setId(id)
                 .setStatus(status);
-        baseMapper.updateById(orderMaster);
+        orderMasterService.updateById(orderMaster);
 
         OrderTimeline orderTimeline = new OrderTimeline()
                 .setOrderId(id)
@@ -146,15 +149,20 @@ public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, Order
         orderTimelineService.save(orderTimeline);
     }
 
-    @Override
     public void addStockMySQL(Long id) {
         List<OrderDetail> orderDetailList = getDetail(id);
-        orderDetailList.forEach(orderDetail -> productService.addStock(orderDetail.getProductId(), orderDetail.getProductQuantity()));
+        orderDetailList.forEach(orderDetail -> addStock(orderDetail.getProductId(), orderDetail.getProductQuantity()));
     }
 
-    @Override
     public void addStockRedis(Long id) {
         List<OrderDetail> orderDetailList = getDetail(id);
         orderDetailList.forEach(orderDetail -> redisService.increment(Constants.PRODUCT_STOCK + orderDetail.getProductId(), orderDetail.getProductQuantity()));
+    }
+
+    public boolean addStock(Long id, int count) {
+        UpdateWrapper<Product> wrapper = new UpdateWrapper<>();
+        wrapper.eq("id", id);
+        wrapper.setSql("stock = stock + " + count);
+        return productService.update(wrapper);
     }
 }

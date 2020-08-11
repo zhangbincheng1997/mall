@@ -1,14 +1,13 @@
-package com.example.demo.service.impl;
+package com.example.demo.facade;
 
 import cn.hutool.core.convert.Convert;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.demo.base.GlobalException;
 import com.example.demo.base.Status;
 import com.example.demo.dto.CategoryDto;
 import com.example.demo.entity.Category;
-import com.example.demo.mapper.CategoryMapper;
 import com.example.demo.service.CategoryService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -19,39 +18,38 @@ import java.util.List;
 
 @Service
 @Transactional
-public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> implements CategoryService {
+public class CategoryFacade {
 
-    @Override
+    @Autowired
+    private CategoryService categoryService;
+
     @Cacheable(value = "category") // EnableCaching
     public List<Category> list(Long id) {
-        return list();
+        return categoryService.list();
     }
 
-    @Override
     @CacheEvict(value = "category", allEntries = true) // clear cache
-    public void add(CategoryDto categoryDto) {
+    public void save(CategoryDto categoryDto) {
         Category category = Convert.convert(Category.class, categoryDto);
-        baseMapper.insert(category);
+        categoryService.save(category);
     }
 
-    @Override
     @CacheEvict(value = "category", allEntries = true) // clear cache
     public void update(Long id, CategoryDto categoryDto) {
         Category category = new Category()
                 .setName(categoryDto.getName())
                 .setId(id);
-        baseMapper.updateById(category);
+        categoryService.updateById(category);
     }
 
-    @Override
     @CacheEvict(value = "category", allEntries = true) // clear cache
     public void delete(Long id) {
         try {
-            Category category = baseMapper.selectOne(Wrappers.<Category>lambdaQuery()
+            Category category = categoryService.getOne(Wrappers.<Category>lambdaQuery()
                     .eq(Category::getPid, id));
             // 不能删除非叶子节点
             if (category != null) throw new GlobalException(Status.CATEGORY_NOT_LEAF);
-            baseMapper.deleteById(id);
+            categoryService.removeById(id);
         } catch (DataIntegrityViolationException e) {
             throw new GlobalException(Status.CATEGORY_REFERENCES); // FOREIGN KEY
         }

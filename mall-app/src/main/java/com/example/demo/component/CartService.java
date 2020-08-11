@@ -26,7 +26,7 @@ public class CartService {
                 .collect(Collectors.toList());
     }
 
-    public void add(String username, CartDto cartDto) {
+    public void save(String username, CartDto cartDto) {
         String key = getKey(username, cartDto.getId());
         redisService.set(key, cartDto);
     }
