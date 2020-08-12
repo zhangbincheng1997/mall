@@ -8,7 +8,6 @@ import com.example.demo.base.Result;
 import com.example.demo.dto.page.OrderPageRequest;
 import com.example.demo.entity.OrderDetail;
 import com.example.demo.entity.OrderMaster;
-import com.example.demo.entity.OrderTimeline;
 import com.example.demo.facade.OrderMasterFacade;
 import com.example.demo.vo.OrderDetailVo;
 import com.example.demo.vo.OrderTimelineVo;
@@ -44,18 +43,10 @@ public class OrderController {
 
     @ApiOperation("获取订单详情")
     @GetMapping("/{id}")
-    public Result<Map<String, Object>> all(@PathVariable("id") Long id) {
+    public Result<List<OrderDetailVo>> all(@PathVariable("id") Long id) {
         List<OrderDetail> orderDetailList = orderMasterFacade.getDetail(id);
-        List<OrderTimeline> orderTimelineList = orderMasterFacade.getTimeline(id);
-
         List<OrderDetailVo> orderDetailVoList = Convert.convert(new TypeReference<List<OrderDetailVo>>() {
         }, orderDetailList);
-        List<OrderTimelineVo> orderTimelineVoList = Convert.convert(new TypeReference<List<OrderTimelineVo>>() {
-        }, orderTimelineList);
-
-        Map<String, Object> map = new HashMap<>();
-        map.put("detail", orderDetailVoList);
-        map.put("timeline", orderTimelineVoList);
-        return Result.success(map);
+        return Result.success(orderDetailVoList);
     }
 }

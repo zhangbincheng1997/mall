@@ -6,9 +6,9 @@
 2. [模板](https://fly.layui.com/store/layuiMaternalBabyMall/)
 3. :smile: ! 注意config.js文件，全局配置
 
-![alt text](docs/商城前端.png)
+![alt text](docs/前台.png)
 
-![alt text](docs/管理前端.png)
+![alt text](docs/后台.png)
 
 ## 后端技术
 | 技术 | 说明 |
@@ -52,7 +52,7 @@ Swagger: http://localhost:808x/swagger-ui.html
 >* https://openhome.alipay.com/platform/appDaily.htm
 >* https://docs.open.alipay.com/284
 
-![alt text](docs/支付测试.png)
+![alt text](docs/支付.png)
 
 ```
 $ ssh -NR 8888:127.0.0.1:8080 root@www.littleredhat1997.com

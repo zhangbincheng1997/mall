@@ -3,11 +3,11 @@ package com.example.demo.component;
 import com.alibaba.fastjson.JSON;
 import com.example.demo.base.GlobalException;
 import com.example.demo.base.Status;
+import com.example.demo.dao.StockDao;
 import com.example.demo.entity.*;
-import com.example.demo.facade.ProductFacade;
 import com.example.demo.service.OrderDetailService;
 import com.example.demo.service.OrderMasterService;
-import com.example.demo.service.OrderTimelineService;
+import com.example.demo.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.core.RocketMQListener;
@@ -26,16 +26,16 @@ import java.util.Map;
 public class OrderConsumer implements RocketMQListener<OrderMessage> {
 
     @Autowired
-    private ProductFacade productFacade;
+    private StockDao stockDao;
+
+    @Autowired
+    private ProductService productService;
 
     @Autowired
     private OrderMasterService orderMasterService;
 
     @Autowired
     private OrderDetailService orderDetailService;
-
-    @Autowired
-    private OrderTimelineService orderTimelineService;
 
     @Autowired
     private MailService mailService;
@@ -59,9 +59,9 @@ public class OrderConsumer implements RocketMQListener<OrderMessage> {
             for (Map.Entry<String, Integer> entry : cart.entrySet()) {
                 Long productId = Long.valueOf(entry.getKey());
                 Integer productQuantity = entry.getValue();
-                productFacade.subStock(productId, productQuantity); // 真正减库存
+                stockDao.subStock(productId, productQuantity); // 真正减库存
                 // 累加价格
-                Product product = productFacade.get(productId);
+                Product product = productService.getById(productId);
                 amount = amount.add(product.getPrice().multiply(new BigDecimal(productQuantity)));
                 sb.append("总价：").append(amount).append("\n");
 
@@ -84,23 +84,19 @@ public class OrderConsumer implements RocketMQListener<OrderMessage> {
             orderMaster.setNickname(user.getNickname());
             orderMaster.setEmail(user.getEmail());
             orderMasterService.save(orderMaster);
-            // 创建订单状态
-            OrderTimeline orderTimeline = new OrderTimeline();
-            orderTimeline.setOrderId(orderId);
-            orderTimelineService.save(orderTimeline);
             // 发送通知
             // mailService.send(user.getEmail(), sb.toString());
             // 订单超时
-            // 5 - 1min
-            // 9 - 5min
-            // 14 - 10min
-            rocketMQTemplate.syncSend(DelayMessage.TOPIC,
-                    MessageBuilder.withPayload(orderMessage).build(),
-                    30 * 1000, 5);
+            rocketMQTemplate.syncSend(DelayMessage.TOPIC, MessageBuilder.withPayload(orderMessage).build(), TIME_OUT, ONE_MIN);
             log.info("创建订单成功");
         } catch (Exception e) {
             log.info("创建订单失败");
             throw new GlobalException(Status.FAILURE); // RocketMQ自动重试16次
         }
     }
+
+    private static final long TIME_OUT = 30 * 1000; // 30s
+    private static final int ONE_MIN = 5; // 1min
+    private static final int FIVE_MIN = 9; // 5min
+    private static final int TEN_MIN = 14; // 10min
 }

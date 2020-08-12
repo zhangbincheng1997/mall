@@ -56,8 +56,7 @@ public class PayController {
         if (!orderMaster.getStatus().equals(OrderStatusEnum.TO_BE_PAID.getCode())) // 待付款
             return Result.failure(Status.ORDER_NOT_TO_BE_PAID);
         // 订单取消
-        orderMasterFacade.addStockMySQL(id); // MYSQL
-        orderMasterFacade.addStockRedis(id); // REDIS
+        orderMasterFacade.returnStock(id);
         orderMasterFacade.updateOrderStatus(id, OrderStatusEnum.CANCEL.getCode());
         return Result.success();
     }

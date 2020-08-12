@@ -35,8 +35,7 @@ public class PayController {
         // 订单处理退款
         boolean isSuccess = payService.refund(orderMaster.getId(), orderMaster.getAmount());
         if (isSuccess) {
-            orderMasterFacade.addStockMySQL(id); // MYSQL
-            orderMasterFacade.addStockRedis(id); // REDIS
+            orderMasterFacade.returnStock(id);
             orderMasterFacade.updateOrderStatus(id, OrderStatusEnum.REFUND_SUCCESS.getCode());
             return Result.success();
         }
@@ -52,8 +51,7 @@ public class PayController {
         if (!orderMaster.getStatus().equals(OrderStatusEnum.TO_BE_PAID.getCode())) // 待付款
             return Result.failure(Status.ORDER_NOT_TO_BE_PAID);
         // 订单取消
-        orderMasterFacade.addStockMySQL(id); // MYSQL
-        orderMasterFacade.addStockRedis(id); // REDIS
+        orderMasterFacade.returnStock(id);
         orderMasterFacade.updateOrderStatus(id, OrderStatusEnum.CANCEL.getCode());
         return Result.success();
     }

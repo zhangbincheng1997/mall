@@ -20,20 +20,6 @@
         <div id="modal" style="display: none;">
             <div style="width: 500px; margin: 0 auto; padding: 20px;">
                 <table id="table2" lay-filter="table2"></table>
-                <ul class="layui-timeline">
-                    <script type="text/html" id="timeline">
-                        {{# layui.each(d, function(index, item){ }}
-                        <li class="layui-timeline-item">
-                            <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
-                            <div class="layui-timeline-content layui-text">
-                                <strong class="layui-timeline-title">{{ item.status }}</strong>
-                                <p>{{ item.time }}</p>
-                            </div>
-                        </li>
-                        {{# }); }}
-                    </script>
-                    <div id="timelineView"></div>
-                </ul>
             </div>
         </div>
     </div>
@@ -101,18 +87,16 @@
             switch (obj.event) {
                 case 'detail':
                     $.get('order/' + obj.data.id, function (res) {
-                        var detailData = res.data.detail;
-                        var timelineData = res.data.timeline;
                         layer.open({
                             type: 1, // 0：信息框，默认 1：页面层 2：iframe层 3：加载层 4：tips层
                             title: '订单详情',
                             content: $('#modal'),
-                            area: ['800px', 200 + 55 * (detailData.length + timelineData.length) + 'px'],
+                            area: ['800px', 200 + 50 * (res.data.length) + 'px'],
                             shadeClose: true,
                             success: function () {
                                 table.render({
                                     elem: '#table2',
-                                    data: detailData,
+                                    data: res.data,
                                     size: 'lg',
                                     cols: [[
                                         {field: 'id', title: 'ID', width: 100, align: 'center', sort: true, edit: true},
@@ -121,9 +105,6 @@
                                         {field: 'price', title: '价格'},
                                         {field: 'quantity', title: '数量'},
                                     ]]
-                                });
-                                laytpl(timeline.innerHTML).render(timelineData, function (html) {
-                                    $('#timelineView').html(html);
                                 });
                             }
                         });

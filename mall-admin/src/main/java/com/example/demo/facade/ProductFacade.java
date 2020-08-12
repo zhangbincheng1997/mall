@@ -1,6 +1,7 @@
 package com.example.demo.facade;
 
 import cn.hutool.core.convert.Convert;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.demo.component.redis.RedisService;
@@ -56,5 +57,12 @@ public class ProductFacade {
     public void delete(Long id) {
         productService.removeById(id);
         redisService.delete(Constants.PRODUCT_STOCK + id);
+    }
+
+    public boolean addStock(Long id, int count) {
+        UpdateWrapper<Product> wrapper = new UpdateWrapper<>();
+        wrapper.eq("id", id);
+        wrapper.setSql("stock = stock + " + count);
+        return productService.update(wrapper);
     }
 }

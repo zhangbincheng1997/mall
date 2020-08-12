@@ -6,6 +6,7 @@ import com.example.demo.base.GlobalException;
 import com.example.demo.base.Result;
 import com.example.demo.base.Status;
 import com.example.demo.component.redis.RedisService;
+import com.example.demo.dao.StockDao;
 import com.example.demo.facade.ProductFacade;
 import com.example.demo.service.OrderDetailService;
 import com.example.demo.service.OrderMasterService;
@@ -44,7 +45,7 @@ public class TestController {
     private ProductService productService;
 
     @Autowired
-    private ProductFacade productFacade;
+    private StockDao stockDao;
 
     @Autowired
     private OrderMasterService orderMasterService;
@@ -110,7 +111,7 @@ public class TestController {
         for (Map.Entry<Long, Integer> entry : cart.entrySet()) {
             Long productId = entry.getKey();
             Integer productQuantity = entry.getValue();
-            boolean result = productFacade.subStock(productId, productQuantity); // 减库存
+            boolean result = stockDao.subStock(productId, productQuantity); // 减库存
             if (!result) throw new GlobalException(Status.PRODUCT_STOCK_NOT_ENOUGH); // 回滚
             Product product = productService.getById(productId);
             // 累加价格

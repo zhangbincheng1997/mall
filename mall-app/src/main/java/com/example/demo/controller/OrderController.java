@@ -8,10 +8,8 @@ import com.example.demo.base.Result;
 import com.example.demo.dto.page.OrderPageRequest;
 import com.example.demo.entity.OrderDetail;
 import com.example.demo.entity.OrderMaster;
-import com.example.demo.entity.OrderTimeline;
 import com.example.demo.facade.OrderMasterFacade;
 import com.example.demo.vo.OrderDetailVo;
-import com.example.demo.vo.OrderTimelineVo;
 import com.example.demo.vo.OrderVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -22,9 +20,7 @@ import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Api(tags = "订单")
 @RestController
@@ -46,18 +42,10 @@ public class OrderController {
 
     @ApiOperation("获取订单详情")
     @GetMapping("/{id}")
-    public Result<Map<String, Object>> all(@ApiIgnore Principal principal, @PathVariable("id") Long id) {
+    public Result<List<OrderDetailVo>> all(@ApiIgnore Principal principal, @PathVariable("id") Long id) {
         List<OrderDetail> orderDetailList = orderMasterFacade.getDetail(principal.getName(), id);
-        List<OrderTimeline> orderTimelineList = orderMasterFacade.getTimeline(principal.getName(), id);
-
         List<OrderDetailVo> orderDetailVoList = Convert.convert(new TypeReference<List<OrderDetailVo>>() {
         }, orderDetailList);
-        List<OrderTimelineVo> orderTimelineVoList = Convert.convert(new TypeReference<List<OrderTimelineVo>>() {
-        }, orderTimelineList);
-
-        Map<String, Object> map = new HashMap<>();
-        map.put("detail", orderDetailVoList);
-        map.put("timeline", orderTimelineVoList);
-        return Result.success(map);
+        return Result.success(orderDetailVoList);
     }
 }
