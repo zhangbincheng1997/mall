@@ -110,7 +110,7 @@
         form.on('submit(confirm)', function (data) {
             delete data.field.file; // 删除file
             data.field.avatar = $('#avatar')[0].src; // 添加avatar
-            $.post('user', data.field, function (res) {
+            $.post('user/info', data.field, function (res) {
                 if (res.code === 0) {
                     $('#header-nickname').text(data.field.nickname);
                     $('#header-avatar').attr('src', data.field.avatar);

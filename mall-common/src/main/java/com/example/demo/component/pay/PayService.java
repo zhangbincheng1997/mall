@@ -4,8 +4,10 @@ import com.alibaba.fastjson.JSON;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.internal.util.AlipaySignature;
+import com.alipay.api.request.AlipayTradeCloseRequest;
 import com.alipay.api.request.AlipayTradePagePayRequest;
 import com.alipay.api.request.AlipayTradeRefundRequest;
+import com.alipay.api.response.AlipayTradeCloseResponse;
 import com.alipay.api.response.AlipayTradeRefundResponse;
 import com.example.demo.base.GlobalException;
 import com.example.demo.base.Status;
@@ -32,7 +34,7 @@ public class PayService {
     @Autowired
     private AlipayClient alipayClient;
 
-    // https://docs.open.alipay.com/api_1/alipay.trade.pay/
+    // https://opendocs.alipay.com/apis/api_1/alipay.trade.page.pay
     public void pay(Long id, BigDecimal amount, HttpServletResponse response) {
         AlipayTradePagePayRequest request = new AlipayTradePagePayRequest();
         request.setReturnUrl(payConfig.getReturnUrl()); // 沙箱设置授权回调地址
@@ -55,16 +57,31 @@ public class PayService {
         }
     }
 
-    // https://docs.open.alipay.com/api_1/alipay.trade.refund/
+    // https://opendocs.alipay.com/apis/api_1/alipay.trade.refund/
     public boolean refund(Long id, BigDecimal amount) {
         AlipayTradeRefundRequest request = new AlipayTradeRefundRequest();
         Map<String, Object> biz = new HashMap<>();
         biz.put("out_trade_no", id);
-        biz.put("refund_amount", amount); // 必选
+        biz.put("refund_amount", amount); // 必填项
         log.info(JSON.toJSONString(biz));
         request.setBizContent(JSON.toJSONString(biz));
         try {
             AlipayTradeRefundResponse response = alipayClient.execute(request);
+            return response.isSuccess();
+        } catch (AlipayApiException e) {
+            throw new GlobalException(Status.PAY_BUG);
+        }
+    }
+
+    // https://opendocs.alipay.com/apis/api_1/alipay.trade.close/
+    public boolean close(Long id) {
+        AlipayTradeCloseRequest request = new AlipayTradeCloseRequest();
+        Map<String, Object> biz = new HashMap<>();
+        biz.put("out_trade_no", id);
+        log.info(JSON.toJSONString(biz));
+        request.setBizContent(JSON.toJSONString(biz));
+        try {
+            AlipayTradeCloseResponse response = alipayClient.execute(request);
             return response.isSuccess();
         } catch (AlipayApiException e) {
             throw new GlobalException(Status.PAY_BUG);
@@ -76,8 +93,7 @@ public class PayService {
         Map<String, String> map = requestToMap(request);
         try {
             log.info(JSON.toJSONString(map));
-            return AlipaySignature.rsaCheckV1(map,
-                    payConfig.getPublicKey(), payConfig.getCharset(), payConfig.getSignType());
+            return AlipaySignature.rsaCheckV1(map, payConfig.getPublicKey(), payConfig.getCharset(), payConfig.getSignType());
         } catch (AlipayApiException e) {
             throw new GlobalException(Status.PAY_CHECK_BUG);
         }

@@ -29,7 +29,7 @@ public class CategoryController {
     @GetMapping("")
     public Result<List<CategoryVo>> list(@RequestParam(name = "id", defaultValue = "0") Long id) {
         // 全部读出 加速搜索
-        List<Category> categoryList = categoryFacade.list(id);
+        List<Category> categoryList = categoryFacade.list();
         List<CategoryVo> categoryVoList = get(categoryList, id);
         return Result.success(categoryVoList);
     }

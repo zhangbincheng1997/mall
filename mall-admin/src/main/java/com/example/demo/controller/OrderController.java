@@ -10,7 +10,6 @@ import com.example.demo.entity.OrderDetail;
 import com.example.demo.entity.OrderMaster;
 import com.example.demo.facade.OrderMasterFacade;
 import com.example.demo.vo.OrderDetailVo;
-import com.example.demo.vo.OrderTimelineVo;
 import com.example.demo.vo.OrderVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -19,9 +18,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Api(tags = "订单")
 @RestController
@@ -43,7 +40,7 @@ public class OrderController {
 
     @ApiOperation("获取订单详情")
     @GetMapping("/{id}")
-    public Result<List<OrderDetailVo>> all(@PathVariable("id") Long id) {
+    public Result<List<OrderDetailVo>> detail(@PathVariable("id") Long id) {
         List<OrderDetail> orderDetailList = orderMasterFacade.getDetail(id);
         List<OrderDetailVo> orderDetailVoList = Convert.convert(new TypeReference<List<OrderDetailVo>>() {
         }, orderDetailList);

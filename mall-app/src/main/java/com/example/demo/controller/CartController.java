@@ -5,11 +5,12 @@ import com.example.demo.base.Result;
 import com.example.demo.component.CartService;
 import com.example.demo.dto.CartDto;
 import com.example.demo.entity.Product;
-import com.example.demo.facade.ProductFacade;
+import com.example.demo.service.ProductService;
 import com.example.demo.vo.CartVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
@@ -21,13 +22,14 @@ import java.util.stream.Collectors;
 @Api(tags = "购物车")
 @RestController
 @RequestMapping("/cart")
+@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
 public class CartController {
 
     @Autowired
     private CartService cartService;
 
     @Autowired
-    private ProductFacade productFacade;
+    private ProductService productService;
 
     @ApiOperation("获取购物车")
     @GetMapping("")
@@ -35,7 +37,7 @@ public class CartController {
         List<CartDto> cartDtoList = cartService.list(principal.getName());
         List<CartVo> cartVoList = cartDtoList.stream()
                 .map(cartDto -> {
-                    Product product = productFacade.get(cartDto.getId()); // 获取当前商品信息
+                    Product product = productService.getById(cartDto.getId()); // 获取当前商品信息
                     CartVo cartVo = Convert.convert(CartVo.class, product);
                     cartVo.setQuantity(cartDto.getQuantity());
                     cartVo.setChecked(cartDto.getChecked());

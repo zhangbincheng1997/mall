@@ -34,9 +34,6 @@ public class OrderMasterFacade {
     private Snowflake snowflake;
 
     @Autowired
-    private CartService cartService;
-
-    @Autowired
     private StockDao stockDao;
 
     @Autowired
@@ -44,6 +41,9 @@ public class OrderMasterFacade {
 
     @Autowired
     private OrderDetailService orderDetailService;
+
+    @Autowired
+    private CartService cartService;
 
     @Autowired
     private RedisService redisService;
@@ -64,8 +64,7 @@ public class OrderMasterFacade {
     }
 
     public List<OrderDetail> getDetail(Long id) {
-        return orderDetailService.list(Wrappers.<OrderDetail>lambdaQuery()
-                .eq(OrderDetail::getOrderId, id));
+        return orderDetailService.list(Wrappers.<OrderDetail>lambdaQuery().eq(OrderDetail::getOrderId, id));
     }
 
     public List<OrderDetail> getDetail(String username, Long id) {
@@ -75,26 +74,26 @@ public class OrderMasterFacade {
 
     public Page<OrderMaster> list(String username, OrderPageRequest pageRequest) {
         Page<OrderMaster> page = new Page<>(pageRequest.getPage(), pageRequest.getLimit());
-        QueryWrapper<OrderMaster> wrappers = new QueryWrapper<OrderMaster>()
-                .eq("username", username);
+        QueryWrapper<OrderMaster> wrapper = new QueryWrapper<>();
         if (!StringUtils.isEmpty(pageRequest.getStatus()))
-            wrappers.eq("status", pageRequest.getStatus());
-        wrappers.orderByDesc("update_time", "id");
-        return orderMasterService.page(page, wrappers);
+            wrapper.lambda().eq(OrderMaster::getStatus, pageRequest.getStatus());
+        wrapper.lambda().eq(OrderMaster::getUsername, username);
+        wrapper.lambda().orderByDesc(OrderMaster::getUpdateTime);
+        return orderMasterService.page(page, wrapper);
     }
 
-    public String buy(User user) {
+    public String create(User user) {
         // 购物车
         List<CartDto> cartDtoList = cartService.list(user.getUsername()).stream()
                 .filter(CartDto::getChecked).collect(Collectors.toList()); // 下单部分
         if (cartDtoList.size() == 0) throw new GlobalException(Status.CART_EMPTY);
 
         // 记录购物ID和数量
-        Map<String, Integer> cart = new HashMap<>();
+        Map<Long, Integer> cart = new HashMap<>();
         List<String> keys = new ArrayList<>();
         List<Integer> values = new ArrayList<>();
         for (CartDto cartDto : cartDtoList) {
-            cart.put(cartDto.getId().toString(), cartDto.getQuantity());
+            cart.put(cartDto.getId(), cartDto.getQuantity());
             keys.add(Constants.PRODUCT_STOCK + cartDto.getId());
             values.add(cartDto.getQuantity());
         }

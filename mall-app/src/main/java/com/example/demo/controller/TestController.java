@@ -5,9 +5,10 @@ import com.alibaba.fastjson.JSONObject;
 import com.example.demo.base.GlobalException;
 import com.example.demo.base.Result;
 import com.example.demo.base.Status;
+import com.example.demo.component.OrderMessage;
 import com.example.demo.component.redis.RedisService;
 import com.example.demo.dao.StockDao;
-import com.example.demo.facade.ProductFacade;
+import com.example.demo.entity.User;
 import com.example.demo.service.OrderDetailService;
 import com.example.demo.service.OrderMasterService;
 import com.example.demo.service.ProductService;
@@ -18,6 +19,7 @@ import com.example.demo.entity.Product;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,16 +38,17 @@ import java.util.Map;
 @Api(tags = "测试")
 @RestController
 @RequestMapping("/test")
+@Transactional
 public class TestController {
 
     @Autowired
     private Snowflake snowflake;
 
     @Autowired
-    private ProductService productService;
+    private StockDao stockDao;
 
     @Autowired
-    private StockDao stockDao;
+    private ProductService productService;
 
     @Autowired
     private OrderMasterService orderMasterService;
@@ -55,6 +58,9 @@ public class TestController {
 
     @Autowired
     private RedisService redisService;
+
+    @Autowired
+    private RocketMQTemplate rocketMQTemplate;
 
     private final DefaultRedisScript<Long> redisScript = new DefaultRedisScript<>(Constants.LUA_SCRIPT, Long.class);
 
@@ -103,7 +109,6 @@ public class TestController {
     @ApiOperation("创建订单 MySQL简化版本")
     @RequestMapping("/mysql")
     @ResponseBody
-    @Transactional
     public String buy0() {
         Long orderId = snowflake.nextId();
         // 计算价格
@@ -113,10 +118,9 @@ public class TestController {
             Integer productQuantity = entry.getValue();
             boolean result = stockDao.subStock(productId, productQuantity); // 减库存
             if (!result) throw new GlobalException(Status.PRODUCT_STOCK_NOT_ENOUGH); // 回滚
-            Product product = productService.getById(productId);
             // 累加价格
+            Product product = productService.getById(productId);
             amount = amount.add(product.getPrice().multiply(new BigDecimal(productQuantity)));
-
             // 创建订单详情
             OrderDetail orderDetail = new OrderDetail();
             orderDetail.setOrderId(orderId);
@@ -150,7 +154,16 @@ public class TestController {
         }
         Long result = redisService.execute(redisScript, keys, values.toArray());
         if (result == 0) throw new GlobalException(Status.PRODUCT_STOCK_NOT_ENOUGH);
-        Long orderId = snowflake.nextId();
+
+        Long orderId = snowflake.nextId(); // 雪花算法 生成全局唯一ID
+        OrderMessage orderMessage = new OrderMessage();
+        orderMessage.setOrderId(orderId);
+        orderMessage.setUser(new User().setUsername("admin").setNickname("admin").setEmail("1656704949@qq.com"));
+        orderMessage.setCart(cart);
+
+        // 同步
+        rocketMQTemplate.syncSend(OrderMessage.TOPIC, orderMessage);
+
         return String.valueOf(orderId);
     }
 }

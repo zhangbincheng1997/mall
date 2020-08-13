@@ -50,21 +50,19 @@ public class OrderConsumer implements RocketMQListener<OrderMessage> {
         try {
             Long orderId = orderMessage.getOrderId();
             User user = orderMessage.getUser();
-            Map<String, Integer> cart = orderMessage.getCart();
+            Map<Long, Integer> cart = orderMessage.getCart();
 
             StringBuilder sb = new StringBuilder();
             sb.append("订单号：").append(orderId).append("\n");
             // 计算价格
             BigDecimal amount = new BigDecimal(0);
-            for (Map.Entry<String, Integer> entry : cart.entrySet()) {
-                Long productId = Long.valueOf(entry.getKey());
+            for (Map.Entry<Long, Integer> entry : cart.entrySet()) {
+                Long productId = entry.getKey();
                 Integer productQuantity = entry.getValue();
                 stockDao.subStock(productId, productQuantity); // 真正减库存
                 // 累加价格
                 Product product = productService.getById(productId);
                 amount = amount.add(product.getPrice().multiply(new BigDecimal(productQuantity)));
-                sb.append("总价：").append(amount).append("\n");
-
                 // 创建订单详情
                 OrderDetail orderDetail = new OrderDetail();
                 orderDetail.setOrderId(orderId);
@@ -76,6 +74,7 @@ public class OrderConsumer implements RocketMQListener<OrderMessage> {
                 orderDetailService.save(orderDetail);
                 sb.append(JSON.toJSONString(orderDetail)).append("\n");
             }
+            sb.append("总价：").append(amount).append("\n");
             // 创建订单
             OrderMaster orderMaster = new OrderMaster();
             orderMaster.setId(orderId);
@@ -85,8 +84,8 @@ public class OrderConsumer implements RocketMQListener<OrderMessage> {
             orderMaster.setEmail(user.getEmail());
             orderMasterService.save(orderMaster);
             // 发送通知
-            // mailService.send(user.getEmail(), sb.toString());
-            // 订单超时
+            mailService.send(user.getEmail(), sb.toString());
+            // 超时取消
             rocketMQTemplate.syncSend(DelayMessage.TOPIC, MessageBuilder.withPayload(orderMessage).build(), TIME_OUT, ONE_MIN);
             log.info("创建订单成功");
         } catch (Exception e) {

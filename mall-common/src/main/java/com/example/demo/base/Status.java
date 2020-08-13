@@ -59,7 +59,9 @@ public enum Status {
 
     // 支付相关
     PAY_BUG(70000, "支付异常"),
-    PAY_CHECK_BUG(70001, "支付检查异常");
+    PAY_CHECK_BUG(70001, "支付检查异常"),
+    REFUND_BUG(70002, "订单退款异常"),
+    CLOSE_BUG(70003, "订单关闭异常");
 
     private Integer code;
     private String msg;

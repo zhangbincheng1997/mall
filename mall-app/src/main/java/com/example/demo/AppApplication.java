@@ -2,7 +2,7 @@ package com.example.demo;
 
 import com.example.demo.component.redis.RedisService;
 import com.example.demo.entity.Product;
-import com.example.demo.mapper.ProductMapper;
+import com.example.demo.service.ProductService;
 import com.example.demo.utils.Constants;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ import java.util.Map;
 public class AppApplication implements CommandLineRunner {
 
     @Autowired
-    private ProductMapper productMapper;
+    private ProductService productService;
 
     @Autowired
     private RedisService redisService;
@@ -30,7 +30,7 @@ public class AppApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        List<Product> productList = productMapper.selectList(null);
+        List<Product> productList = productService.list();
         Map<String, Object> stockMap = new HashMap<>();
         productList.forEach(product -> stockMap.put(Constants.PRODUCT_STOCK + product.getId(), product.getStock()));
         redisService.multiSet(stockMap);

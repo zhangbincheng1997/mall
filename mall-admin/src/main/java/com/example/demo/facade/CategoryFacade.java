@@ -24,7 +24,7 @@ public class CategoryFacade {
     private CategoryService categoryService;
 
     @Cacheable(value = "category") // EnableCaching
-    public List<Category> list(Long id) {
+    public List<Category> list() {
         return categoryService.list();
     }
 
@@ -37,18 +37,16 @@ public class CategoryFacade {
     @CacheEvict(value = "category", allEntries = true) // clear cache
     public void update(Long id, CategoryDto categoryDto) {
         Category category = new Category()
-                .setName(categoryDto.getName())
-                .setId(id);
+                .setId(id)
+                .setName(categoryDto.getName());
         categoryService.updateById(category);
     }
 
     @CacheEvict(value = "category", allEntries = true) // clear cache
     public void delete(Long id) {
         try {
-            Category category = categoryService.getOne(Wrappers.<Category>lambdaQuery()
-                    .eq(Category::getPid, id));
-            // 不能删除非叶子节点
-            if (category != null) throw new GlobalException(Status.CATEGORY_NOT_LEAF);
+            Category category = categoryService.getOne(Wrappers.<Category>lambdaQuery().eq(Category::getPid, id));
+            if (category != null) throw new GlobalException(Status.CATEGORY_NOT_LEAF); // 不能删除非叶子节点
             categoryService.removeById(id);
         } catch (DataIntegrityViolationException e) {
             throw new GlobalException(Status.CATEGORY_REFERENCES); // FOREIGN KEY

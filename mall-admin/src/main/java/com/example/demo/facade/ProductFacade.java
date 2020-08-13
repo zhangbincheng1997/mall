@@ -1,8 +1,7 @@
 package com.example.demo.facade;
 
 import cn.hutool.core.convert.Convert;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.demo.component.redis.RedisService;
 import com.example.demo.dto.ProductDto;
@@ -13,6 +12,7 @@ import com.example.demo.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 @Service
 @Transactional
@@ -30,18 +30,20 @@ public class ProductFacade {
 
     public Page<Product> list(ProductPageRequest pageRequest) {
         Page<Product> page = new Page<>(pageRequest.getPage(), pageRequest.getLimit());
-        return productService.page(page,
-                Wrappers.<Product>lambdaQuery()
-                        .like(Product::getName, pageRequest.getKeyword())
-                        .like(Product::getCategory, pageRequest.getCategory())
-                        .orderByDesc(Product::getId));
+        QueryWrapper<Product> wrapper = new QueryWrapper<>();
+        if (!StringUtils.isEmpty(pageRequest.getKeyword()))
+            wrapper.lambda().like(Product::getName, pageRequest.getKeyword());
+        if (!StringUtils.isEmpty(pageRequest.getCategory()))
+            wrapper.lambda().eq(Product::getCategory, pageRequest.getCategory());
+        wrapper.lambda().orderByDesc(Product::getId);
+        return productService.page(page, wrapper);
     }
 
     public void save(ProductDto productDto) {
         Product product = Convert.convert(Product.class, productDto);
         productService.save(product);
         if (product.getStatus() != null && product.getStatus()) {
-            redisService.set(Constants.PRODUCT_STOCK + product.getId(), product.getStock());
+            redisService.set(Constants.PRODUCT_STOCK + product.getId(), product.getStock()); // 加入预减库存
         }
     }
 
@@ -50,19 +52,12 @@ public class ProductFacade {
                 .setId(id);
         productService.updateById(product);
         if (product.getStatus() != null && product.getStatus()) {
-            redisService.set(Constants.PRODUCT_STOCK + product.getId(), product.getStock());
+            redisService.set(Constants.PRODUCT_STOCK + product.getId(), product.getStock()); // 加入预减库存
         }
     }
 
     public void delete(Long id) {
         productService.removeById(id);
         redisService.delete(Constants.PRODUCT_STOCK + id);
-    }
-
-    public boolean addStock(Long id, int count) {
-        UpdateWrapper<Product> wrapper = new UpdateWrapper<>();
-        wrapper.eq("id", id);
-        wrapper.setSql("stock = stock + " + count);
-        return productService.update(wrapper);
     }
 }

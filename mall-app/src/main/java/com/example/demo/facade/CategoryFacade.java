@@ -17,7 +17,7 @@ public class CategoryFacade {
     private CategoryService categoryService;
 
     @Cacheable(value = "category") // EnableCaching
-    public List<Category> list(Long id) {
+    public List<Category> list() {
         return categoryService.list();
     }
 }

@@ -39,17 +39,16 @@ public class OrderMasterFacade {
     }
 
     public List<OrderDetail> getDetail(Long id) {
-        return orderDetailService.list(Wrappers.<OrderDetail>lambdaQuery()
-                .eq(OrderDetail::getOrderId, id));
+        return orderDetailService.list(Wrappers.<OrderDetail>lambdaQuery().eq(OrderDetail::getOrderId, id));
     }
 
     public Page<OrderMaster> list(OrderPageRequest pageRequest) {
         Page<OrderMaster> page = new Page<>(pageRequest.getPage(), pageRequest.getLimit());
-        QueryWrapper<OrderMaster> wrappers = new QueryWrapper<OrderMaster>();
+        QueryWrapper<OrderMaster> wrapper = new QueryWrapper<>();
         if (!StringUtils.isEmpty(pageRequest.getStatus()))
-            wrappers.eq("status", pageRequest.getStatus());
-        wrappers.orderByDesc("update_time", "id");
-        return orderMasterService.page(page, wrappers);
+            wrapper.lambda().eq(OrderMaster::getStatus, pageRequest.getStatus());
+        wrapper.lambda().orderByDesc(OrderMaster::getUpdateTime);
+        return orderMasterService.page(page, wrapper);
     }
 
     public void updateOrderStatus(Long id, Integer status) {

@@ -14,5 +14,5 @@ public class OrderMessage {
 
     private User user;
 
-    private Map<String, Integer> cart;
+    private Map<Long, Integer> cart;
 }

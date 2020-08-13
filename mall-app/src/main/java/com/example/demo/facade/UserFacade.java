@@ -6,7 +6,7 @@ import com.example.demo.base.GlobalException;
 import com.example.demo.base.Status;
 import com.example.demo.component.redis.RedisService;
 import com.example.demo.enums.UserRoleEnum;
-import com.example.demo.mapper.UserRoleMapper;
+import com.example.demo.service.UserRoleService;
 import com.example.demo.service.UserService;
 import com.example.demo.utils.Constants;
 import com.example.demo.dto.RegisterDto;
@@ -27,10 +27,10 @@ public class UserFacade {
     private UserService userService;
 
     @Autowired
-    private RedisService redisService;
+    private UserRoleService userRoleService;
 
     @Autowired
-    private UserRoleMapper userRoleMapper;
+    private RedisService redisService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -44,7 +44,7 @@ public class UserFacade {
             UserRole userRole = new UserRole()
                     .setUserId(user.getId())
                     .setRoleId(UserRoleEnum.USER.getCode().longValue());
-            userRoleMapper.insert(userRole);
+            userRoleService.save(userRole);
         } catch (DuplicateKeyException e) {
             throw new GlobalException(Status.USERNAME_EXIST); // FOREIGN KEY
         }
@@ -52,16 +52,13 @@ public class UserFacade {
 
     public void updateUserInfoByUsername(String username, UserInfoDto userInfoDto) {
         User user = Convert.convert(User.class, userInfoDto);
-        userService.update(user, Wrappers.<User>lambdaUpdate()
-                .eq(User::getUsername, username));
+        userService.update(user, Wrappers.<User>lambdaUpdate().eq(User::getUsername, username));
         redisService.delete(Constants.USER_KEY + username); // 刷新缓存
     }
 
     public void updatePasswordByUsername(String username, String password) {
-        User user = new User()
-                .setPassword(passwordEncoder.encode(password));
-        userService.update(user, Wrappers.<User>lambdaUpdate()
-                .eq(User::getUsername, username));
+        User user = new User().setPassword(passwordEncoder.encode(password));
+        userService.update(user, Wrappers.<User>lambdaUpdate().eq(User::getUsername, username));
         redisService.delete(Constants.USER_KEY + username); // 刷新缓存
     }
 }

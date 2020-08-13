@@ -1,5 +1,7 @@
 package com.example.demo.component;
 
+import com.example.demo.base.GlobalException;
+import com.example.demo.base.Status;
 import com.example.demo.enums.OrderStatusEnum;
 import com.example.demo.facade.OrderMasterFacade;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +32,7 @@ public class DelayConsumer implements RocketMQListener<DelayMessage> {
             log.info("取消订单成功");
         } catch (Exception e) {
             log.info("取消订单失败");
+            throw new GlobalException(Status.FAILURE); // RocketMQ自动重试16次
         }
     }
 }

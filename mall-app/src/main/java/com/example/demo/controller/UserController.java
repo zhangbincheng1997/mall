@@ -43,8 +43,9 @@ public class UserController {
     }
 
     @ApiOperation("修改信息")
-    @PostMapping("/user")
-    public Result<String> updateUserInfo(@ApiIgnore Principal principal, @Valid UserInfoDto userInfoDto) {
+    @PostMapping("/user/info")
+    public Result<String> updateUserInfo(@ApiIgnore Principal principal,
+                                         @Valid UserInfoDto userInfoDto) {
         String username = principal.getName(); // SecurityContextHolder上下文
         userFacade.updateUserInfoByUsername(username, userInfoDto);
         return Result.success();
