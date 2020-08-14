@@ -11,8 +11,6 @@ public enum Status {
     FORBIDDEN(403, "拒绝执行"),
     NOT_FOUND(404, "请求失败"),
     BIND_EXCEPTION(1000, "参数错误"),
-    CONSTRAINT_VIOLATION_EXCEPTION(1001, "参数错误2"),
-    HTTP_MESSAGE_NOT_READABLE_EXCEPTION(1002, "参数错误3"),
 
     // 认证权限
     ACCESS_DENIED(1001, "权限不足:拒绝访问"),
@@ -44,8 +42,6 @@ public enum Status {
     CART_EMPTY(50000, "购物车为空"),
     PRODUCT_NOT_EXIST(50010, "商品不存在"),
     PRODUCT_STOCK_NOT_ENOUGH(50011, "商品库存不足"),
-    CATEGORY_REFERENCES(50020, "分类存在引用"),
-    CATEGORY_NOT_LEAF(50021, "分类非叶节点"),
 
     // 订单相关
     ORDER_NOT_EXIST(60000, "订单不存在"),
@@ -61,7 +57,8 @@ public enum Status {
     PAY_BUG(70000, "支付异常"),
     PAY_CHECK_BUG(70001, "支付检查异常"),
     REFUND_BUG(70002, "订单退款异常"),
-    CLOSE_BUG(70003, "订单关闭异常");
+    CLOSE_BUG(70003, "订单关闭异常"),
+    CANCEL_BUG(70004, "订单撤销异常");
 
     private Integer code;
     private String msg;

@@ -32,7 +32,8 @@ public class ProductController {
     @GetMapping("/{id}")
     public Result<ProductVo> get(@PathVariable("id") Long id) {
         Product product = productFacade.get(id);
-        return Result.success(Convert.convert(ProductVo.class, product));
+        ProductVo productVo = Convert.convert(ProductVo.class, product);
+        return Result.success(productVo);
     }
 
     @ApiOperation("获取商品列表")

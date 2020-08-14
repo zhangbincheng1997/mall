@@ -13,7 +13,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author zzz
- * @since 2020-08-11
+ * @since 2020-08-14
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -61,6 +61,11 @@ public class OrderMaster implements Serializable {
      * 修改时间
      */
     private Date updateTime;
+
+    /**
+     * 逻辑删除
+     */
+    private Boolean delFlag;
 
 
 }

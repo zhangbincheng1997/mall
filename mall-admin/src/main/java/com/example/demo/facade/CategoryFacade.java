@@ -1,16 +1,12 @@
 package com.example.demo.facade;
 
 import cn.hutool.core.convert.Convert;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.example.demo.base.GlobalException;
-import com.example.demo.base.Status;
 import com.example.demo.dto.CategoryDto;
 import com.example.demo.entity.Category;
 import com.example.demo.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,12 +40,6 @@ public class CategoryFacade {
 
     @CacheEvict(value = "category", allEntries = true) // clear cache
     public void delete(Long id) {
-        try {
-            Category category = categoryService.getOne(Wrappers.<Category>lambdaQuery().eq(Category::getPid, id));
-            if (category != null) throw new GlobalException(Status.CATEGORY_NOT_LEAF); // 不能删除非叶子节点
-            categoryService.removeById(id);
-        } catch (DataIntegrityViolationException e) {
-            throw new GlobalException(Status.CATEGORY_REFERENCES); // FOREIGN KEY
-        }
+        categoryService.removeById(id);
     }
 }

@@ -7,17 +7,16 @@ import com.wf.captcha.GifCaptcha;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
 @Api(tags = "验证码")
-@Controller
+@RestController
 @RequestMapping("/captcha")
 public class CaptchaController {
 
@@ -26,7 +25,6 @@ public class CaptchaController {
 
     @ApiOperation("获取验证码")
     @GetMapping("")
-    @ResponseBody
     public Result<Map<String, String>> captcha() {
         // 使用静态验证码
         // SpecCaptcha specCaptcha = new SpecCaptcha(Constants.CODE_WIDTH, Constants.CODE_HEIGHT, Constants.CODE_LENGTH);

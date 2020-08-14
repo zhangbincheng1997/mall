@@ -47,7 +47,7 @@ public class PayFacade {
         }
         // 订单取消
         orderMasterFacade.returnStock(id);
-        orderMasterFacade.updateOrderStatus(id, OrderStatusEnum.CANCEL.getCode());
+        orderMasterFacade.updateOrderStatus(id, OrderStatusEnum.CLOSE.getCode());
     }
 
     public void ship(Long id) {

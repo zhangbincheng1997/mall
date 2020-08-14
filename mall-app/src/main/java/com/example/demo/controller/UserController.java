@@ -39,7 +39,8 @@ public class UserController {
     @GetMapping("/user")
     public Result<UserInfoVo> getUserInfo(@ApiIgnore Authentication authentication) {
         JwtUserDetails userDetails = (JwtUserDetails) authentication.getPrincipal();
-        return Result.success(Convert.convert(UserInfoVo.class, userDetails.getUser()));
+        UserInfoVo userInfoVo = Convert.convert(UserInfoVo.class, userDetails.getUser());
+        return Result.success(userInfoVo);
     }
 
     @ApiOperation("修改信息")

@@ -14,7 +14,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author zzz
- * @since 2020-08-11
+ * @since 2020-08-14
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -58,6 +58,11 @@ public class OrderDetail implements Serializable {
      * 商品数量
      */
     private Integer productQuantity;
+
+    /**
+     * 逻辑删除
+     */
+    private Boolean delFlag;
 
 
 }

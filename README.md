@@ -111,7 +111,7 @@ $ redis-cli shutdown
 ## RocketMQ
 1. 安装
 ```
-$ https://archive.apache.org/dist/rocketmq/4.7.0/rocketmq-all-4.7.0-bin-release.zip
+$ wget https://archive.apache.org/dist/rocketmq/4.7.0/rocketmq-all-4.7.0-bin-release.zip
 $ unzip rocketmq-all-4.7.0-bin-release.zip
 $ mv rocketmq-all-4.7.0-bin-release rocketmq
 $ mv rocketmq /usr/local

@@ -2,6 +2,7 @@ package com.example.demo.component;
 
 import com.example.demo.base.GlobalException;
 import com.example.demo.base.Status;
+import com.example.demo.component.pay.PayService;
 import com.example.demo.enums.OrderStatusEnum;
 import com.example.demo.facade.OrderMasterFacade;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +18,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class DelayConsumer implements RocketMQListener<DelayMessage> {
 
     @Autowired
+    private PayService payService;
+
+    @Autowired
     private OrderMasterFacade orderMasterFacade;
 
     @Transactional
@@ -26,8 +30,13 @@ public class DelayConsumer implements RocketMQListener<DelayMessage> {
         try {
             // 未支付，取消订单
             if (orderMasterFacade.get(id).getStatus().equals(OrderStatusEnum.TO_BE_PAID.getCode())) {
+                // 订单取消
+                boolean isSuccess = payService.cancel(id);
+                if (!isSuccess) {
+                    throw new GlobalException(Status.CANCEL_BUG);
+                }
                 orderMasterFacade.returnStock(id);
-                orderMasterFacade.updateOrderStatus(id, OrderStatusEnum.CANCEL.getCode());
+                orderMasterFacade.updateOrderStatus(id, OrderStatusEnum.CLOSE.getCode());
             }
             log.info("取消订单成功");
         } catch (Exception e) {

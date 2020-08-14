@@ -5,7 +5,6 @@ import com.example.demo.facade.PayFacade;
 import com.example.demo.jwt.JwtUserDetails;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -15,7 +14,6 @@ import springfox.documentation.annotations.ApiIgnore;
 import javax.servlet.http.HttpServletResponse;
 import java.security.Principal;
 
-@Slf4j
 @Api(tags = "支付")
 @RestController
 @RequestMapping("/pay")
@@ -58,5 +56,12 @@ public class PayController {
     public Result<String> refund(@ApiIgnore Principal principal, @PathVariable("id") Long id) {
         payFacade.refund(principal.getName(), id);
         return Result.success();
+    }
+
+    @ApiOperation("订单查询")
+    @PostMapping(value = "/query/{id}")
+    public Result<String> query(@ApiIgnore Principal principal, @PathVariable("id") Long id) {
+        String result = payFacade.query(principal.getName(), id);
+        return Result.success(result);
     }
 }

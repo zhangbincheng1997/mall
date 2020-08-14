@@ -23,11 +23,14 @@ public class PayFacade {
     private OrderMasterFacade orderMasterFacade;
 
     public String create(User user) {
+        // 订单创建
         return orderMasterFacade.create(user);
     }
 
     public void pay(String username, Long id, HttpServletResponse response) {
+        // 确认存在
         OrderMaster orderMaster = orderMasterFacade.get(username, id);
+        // 订单支付
         payService.pay(orderMaster.getId(), orderMaster.getAmount(), response);
     }
 
@@ -44,7 +47,7 @@ public class PayFacade {
         }
         // 订单取消
         orderMasterFacade.returnStock(id);
-        orderMasterFacade.updateOrderStatus(id, OrderStatusEnum.CANCEL.getCode());
+        orderMasterFacade.updateOrderStatus(id, OrderStatusEnum.CLOSE.getCode());
     }
 
     public void receive(String username, Long id) {
@@ -65,5 +68,11 @@ public class PayFacade {
             throw new GlobalException(Status.ORDER_NOT_TO_BE_SHIPPED);
         // 订单申请退款
         orderMasterFacade.updateOrderStatus(id, OrderStatusEnum.REFUND_REQUEST.getCode());
+    }
+
+    public String query(String username, Long id) {
+        // 确认存在
+        OrderMaster orderMaster = orderMasterFacade.get(username, id);
+        return payService.query(orderMaster.getId());
     }
 }

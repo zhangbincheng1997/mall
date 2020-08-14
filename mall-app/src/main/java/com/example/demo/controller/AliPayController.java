@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
+// https://docs.open.alipay.com/270/105899/
 @Slf4j
 @RestController
 public class AliPayController {
@@ -37,7 +38,6 @@ public class AliPayController {
     public String Notify(HttpServletRequest request) {
         boolean verifyResult = payService.check(request);
         if (verifyResult) {
-            // https://docs.open.alipay.com/270/105899/
             Long id = new Long(request.getParameter("out_trade_no")); // id
             orderMasterFacade.updateOrderStatus(id, OrderStatusEnum.TO_BE_SHIPPED.getCode());
             log.info("Notify 验证成功");

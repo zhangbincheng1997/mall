@@ -69,8 +69,7 @@ public class CartController {
 
     @ApiOperation("更新选中购物车商品")
     @PutMapping("/check/{id}")
-    public Result<String> select(@ApiIgnore Principal principal, @PathVariable("id") Long id,
-                                 @RequestParam("checked") Boolean checked) {
+    public Result<String> select(@ApiIgnore Principal principal, @PathVariable("id") Long id, @RequestParam("checked") Boolean checked) {
         if (Long.valueOf(0L).equals(id)) { // id = 0 全部选中
             cartService.updateAllCheck(principal.getName(), checked);
         } else { // 否则 选中单个

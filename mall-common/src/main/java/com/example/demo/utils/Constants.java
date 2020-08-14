@@ -4,6 +4,11 @@ import com.qiniu.util.StringMap;
 
 public class Constants {
 
+    public static final Integer CODE_WIDTH = 120; // 验证码宽度
+    public static final Integer CODE_HEIGHT = 38; // 验证码高度
+    public static final Integer CODE_LENGTH = 4; //验证码字符长度
+    public static final Integer CODE_EXPIRE = 60; // 验证码过期时间 60s
+
     public static final String USER_KEY = "user:"; // 用户缓存
     public static final String ROLE_KEY = "role:"; // 角色缓存
     public static final String PERMISSION_KEY = "permission:"; // 权限缓存
@@ -51,9 +56,4 @@ public class Constants {
             "<body onload='alert(\"支付失败\");window.history.go(-3);'>" +
             "</body>" +
             "</html>"; // 回退历史-3
-
-    public static final Integer CODE_WIDTH = 120; // 验证码宽度
-    public static final Integer CODE_HEIGHT = 38; // 验证码高度
-    public static final Integer CODE_LENGTH = 4; //验证码字符长度
-    public static final Integer CODE_EXPIRE = 60; // 验证码过期时间 60s
 }

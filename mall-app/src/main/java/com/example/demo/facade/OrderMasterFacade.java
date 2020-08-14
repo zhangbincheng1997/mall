@@ -51,6 +51,7 @@ public class OrderMasterFacade {
     @Autowired
     private RocketMQTemplate rocketMQTemplate;
 
+    // Lua脚本
     private final DefaultRedisScript<Long> redisScript = new DefaultRedisScript<>(Constants.LUA_SCRIPT, Long.class);
 
     public OrderMaster get(Long id) {

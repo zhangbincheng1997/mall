@@ -4,10 +4,10 @@ import com.alibaba.fastjson.JSON;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.internal.util.AlipaySignature;
-import com.alipay.api.request.AlipayTradeCloseRequest;
-import com.alipay.api.request.AlipayTradePagePayRequest;
-import com.alipay.api.request.AlipayTradeRefundRequest;
+import com.alipay.api.request.*;
+import com.alipay.api.response.AlipayTradeCancelResponse;
 import com.alipay.api.response.AlipayTradeCloseResponse;
+import com.alipay.api.response.AlipayTradeQueryResponse;
 import com.alipay.api.response.AlipayTradeRefundResponse;
 import com.example.demo.base.GlobalException;
 import com.example.demo.base.Status;
@@ -57,7 +57,7 @@ public class PayService {
         }
     }
 
-    // https://opendocs.alipay.com/apis/api_1/alipay.trade.refund/
+    // https://opendocs.alipay.com/apis/api_1/alipay.trade.refund
     public boolean refund(Long id, BigDecimal amount) {
         AlipayTradeRefundRequest request = new AlipayTradeRefundRequest();
         Map<String, Object> biz = new HashMap<>();
@@ -73,7 +73,7 @@ public class PayService {
         }
     }
 
-    // https://opendocs.alipay.com/apis/api_1/alipay.trade.close/
+    // https://opendocs.alipay.com/apis/api_1/alipay.trade.close
     public boolean close(Long id) {
         AlipayTradeCloseRequest request = new AlipayTradeCloseRequest();
         Map<String, Object> biz = new HashMap<>();
@@ -83,6 +83,36 @@ public class PayService {
         try {
             AlipayTradeCloseResponse response = alipayClient.execute(request);
             return response.isSuccess();
+        } catch (AlipayApiException e) {
+            throw new GlobalException(Status.PAY_BUG);
+        }
+    }
+
+    // https://opendocs.alipay.com/apis/api_1/alipay.trade.cancel
+    public boolean cancel(Long id) {
+        AlipayTradeCancelRequest request = new AlipayTradeCancelRequest();
+        Map<String, Object> biz = new HashMap<>();
+        biz.put("out_trade_no", id);
+        log.info(JSON.toJSONString(biz));
+        request.setBizContent(JSON.toJSONString(biz));
+        try {
+            AlipayTradeCancelResponse response = alipayClient.execute(request);
+            return response.isSuccess();
+        } catch (AlipayApiException e) {
+            throw new GlobalException(Status.PAY_BUG);
+        }
+    }
+
+    // https://opendocs.alipay.com/apis/api_1/alipay.trade.query
+    public String query(Long id) {
+        AlipayTradeQueryRequest request = new AlipayTradeQueryRequest();
+        Map<String, Object> biz = new HashMap<>();
+        biz.put("out_trade_no", id);
+        log.info(JSON.toJSONString(biz));
+        request.setBizContent(JSON.toJSONString(biz));
+        try {
+            AlipayTradeQueryResponse response = alipayClient.execute(request);
+            return JSON.toJSONString(response);
         } catch (AlipayApiException e) {
             throw new GlobalException(Status.PAY_BUG);
         }

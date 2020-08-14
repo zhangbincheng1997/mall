@@ -23,10 +23,7 @@ import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -34,7 +31,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Slf4j
 @Api(tags = "测试")
 @RestController
 @RequestMapping("/test")
@@ -62,53 +58,51 @@ public class TestController {
     @Autowired
     private RocketMQTemplate rocketMQTemplate;
 
+    // Lua脚本
     private final DefaultRedisScript<Long> redisScript = new DefaultRedisScript<>(Constants.LUA_SCRIPT, Long.class);
 
     // 模拟购物车
     private static final Map<Long, Integer> cart = new HashMap<>();
 
     @ApiOperation("初始化")
-    @RequestMapping("/init")
-    @ResponseBody
+    @GetMapping("/init")
     public Result<Map<Long, Integer>> init(
             @RequestParam(name = "type", defaultValue = "1") Integer type,
             @RequestParam(name = "stock", defaultValue = "1000") Integer stock) {
         cart.clear();
         if (type >= 1) {
-            cart.put(7L, 1);
-            redisService.set(Constants.PRODUCT_STOCK + "7", stock);
-            productService.saveOrUpdate(new Product().setId(7L).setStock(stock));
+            cart.put(1L, 1);
+            redisService.set(Constants.PRODUCT_STOCK + "1", stock);
+            productService.saveOrUpdate(new Product().setId(1L).setStock(stock));
         }
         if (type >= 2) {
-            cart.put(8L, 1);
-            redisService.set(Constants.PRODUCT_STOCK + "8", stock);
-            productService.saveOrUpdate(new Product().setId(8L).setStock(stock));
+            cart.put(2L, 1);
+            redisService.set(Constants.PRODUCT_STOCK + "2", stock);
+            productService.saveOrUpdate(new Product().setId(2L).setStock(stock));
         }
         if (type >= 3) {
-            cart.put(9L, 1);
-            redisService.set(Constants.PRODUCT_STOCK + "9", stock);
-            productService.saveOrUpdate(new Product().setId(9L).setStock(stock));
+            cart.put(3L, 1);
+            redisService.set(Constants.PRODUCT_STOCK + "3", stock);
+            productService.saveOrUpdate(new Product().setId(3L).setStock(stock));
         }
         return Result.success(cart);
     }
 
     @ApiOperation("查询结果")
-    @RequestMapping("/result")
-    @ResponseBody
+    @GetMapping("/result")
     public Result<JSONObject> result() {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("Redis_7", redisService.get(Constants.PRODUCT_STOCK + "7"));
-        jsonObject.put("MySQL_7", productService.getById(7L).getStock());
-        jsonObject.put("Redis_8", redisService.get(Constants.PRODUCT_STOCK + "8"));
-        jsonObject.put("MySQL_8", productService.getById(8L).getStock());
-        jsonObject.put("Redis_9", redisService.get(Constants.PRODUCT_STOCK + "9"));
-        jsonObject.put("MySQL_9", productService.getById(9L).getStock());
+        jsonObject.put("Redis_7", redisService.get(Constants.PRODUCT_STOCK + "1"));
+        jsonObject.put("MySQL_7", productService.getById(1L).getStock());
+        jsonObject.put("Redis_8", redisService.get(Constants.PRODUCT_STOCK + "2"));
+        jsonObject.put("MySQL_8", productService.getById(2L).getStock());
+        jsonObject.put("Redis_9", redisService.get(Constants.PRODUCT_STOCK + "3"));
+        jsonObject.put("MySQL_9", productService.getById(3L).getStock());
         return Result.success(jsonObject);
     }
 
     @ApiOperation("创建订单 MySQL简化版本")
-    @RequestMapping("/mysql")
-    @ResponseBody
+    @GetMapping("/mysql")
     public String buy0() {
         Long orderId = snowflake.nextId();
         // 计算价格
@@ -143,8 +137,7 @@ public class TestController {
     }
 
     @ApiOperation("创建订单 Redis简化版本")
-    @RequestMapping("/redis")
-    @ResponseBody
+    @GetMapping("/redis")
     public String buy1() {
         List<String> keys = new ArrayList<>();
         List<Integer> values = new ArrayList<>();
