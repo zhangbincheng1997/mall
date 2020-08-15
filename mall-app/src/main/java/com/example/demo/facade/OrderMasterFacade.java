@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.demo.base.GlobalException;
 import com.example.demo.base.Status;
-import com.example.demo.component.OrderMessage;
+import com.example.demo.component.mq.OrderMessage;
 import com.example.demo.component.redis.RedisService;
 import com.example.demo.dao.StockDao;
 import com.example.demo.dto.CartDto;
@@ -16,6 +16,7 @@ import com.example.demo.entity.*;
 import com.example.demo.service.OrderDetailService;
 import com.example.demo.service.OrderMasterService;
 import com.example.demo.utils.Constants;
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
@@ -138,5 +139,12 @@ public class OrderMasterFacade {
             redisService.increment(Constants.PRODUCT_STOCK + orderDetail.getProductId(),
                     orderDetail.getProductQuantity());
         });
+    }
+
+    public List<OrderMaster> payList(long delta) {
+        String date = DateFormatUtils.format(new Date().getTime() - delta, "yyyy-MM-dd HH:mm:ss");
+        return orderMasterService.list(Wrappers.<OrderMaster>lambdaQuery()
+                .select(OrderMaster::getId)
+                .apply("UNIX_TIMESTAMP(update_time) >= UNIX_TIMESTAMP('" + date + "')"));
     }
 }

@@ -28,10 +28,12 @@
             <option value="0">待付款</option>
             <option value="1">待发货</option>
             <option value="2">待收货</option>
-            <option value="3">已取消</option>
-            <option value="4">已完成</option>
-            <option value="5">退款申请</option>
-            <option value="6">退款成功</option>
+            <option value="3">USER关闭</option>
+            <option value="7">GM关闭</option>
+            <option value="4">订单取消</option>
+            <option value="5">订单完成</option>
+            <option value="6">退款申请</option>
+            <option value="7">退款成功</option>
         </select>
     </div>
 </script>
@@ -41,7 +43,7 @@
 <script type="text/html" id="barTpl">
     <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="detail">详情</a>
     {{# if (d.status == '待付款') { }}
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="cancel">取消</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="close">关闭</a>
     {{# } else if (d.status == '待发货') { }}
     <a class="layui-btn layui-btn-success layui-btn-xs" lay-event="ship">发货</a>
     {{# } else if (d.status == '退款申请') { }}
@@ -105,9 +107,9 @@
                         });
                     });
                     break;
-                case 'cancel':
-                    layer.confirm('确认取消订单？', function (index) {
-                        $.post('pay/cancel/' + obj.data.id, function (res) {
+                case 'close':
+                    layer.confirm('确认关闭订单？', function (index) {
+                        $.post('pay/close/' + obj.data.id, function (res) {
                             if (res.code === 0) {
                                 table.reload('table', {page: {curr: $(".layui-laypage-em").next().html()}});
                             }

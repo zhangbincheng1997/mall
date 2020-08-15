@@ -1,4 +1,4 @@
-package com.example.demo.component;
+package com.example.demo.component.mq;
 
 import com.alibaba.fastjson.JSON;
 import com.example.demo.component.redis.RedisService;

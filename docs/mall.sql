@@ -65,7 +65,7 @@ CREATE TABLE `order_master`  (
   `nickname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '昵称',
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '邮箱',
   `amount` decimal(8, 2) NOT NULL COMMENT '总金额',
-  `status` smallint(3) NOT NULL DEFAULT 0 COMMENT '订单状态：0-6，默认0',
+  `status` tinyint(3) NOT NULL DEFAULT 0 COMMENT '订单状态：0-8，默认0',
   `create_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   `update_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '修改时间',
   `del_flag` tinyint(1) NOT NULL DEFAULT 0 COMMENT '逻辑删除',

@@ -69,7 +69,7 @@ public class PayService {
             AlipayTradeRefundResponse response = alipayClient.execute(request);
             return response.isSuccess();
         } catch (AlipayApiException e) {
-            throw new GlobalException(Status.PAY_BUG);
+            throw new GlobalException(Status.REFUND_BUG);
         }
     }
 
@@ -84,7 +84,7 @@ public class PayService {
             AlipayTradeCloseResponse response = alipayClient.execute(request);
             return response.isSuccess();
         } catch (AlipayApiException e) {
-            throw new GlobalException(Status.PAY_BUG);
+            throw new GlobalException(Status.CLOSE_BUG);
         }
     }
 
@@ -99,12 +99,12 @@ public class PayService {
             AlipayTradeCancelResponse response = alipayClient.execute(request);
             return response.isSuccess();
         } catch (AlipayApiException e) {
-            throw new GlobalException(Status.PAY_BUG);
+            throw new GlobalException(Status.CANCEL_BUG);
         }
     }
 
     // https://opendocs.alipay.com/apis/api_1/alipay.trade.query
-    public String query(Long id) {
+    public boolean query(Long id) {
         AlipayTradeQueryRequest request = new AlipayTradeQueryRequest();
         Map<String, Object> biz = new HashMap<>();
         biz.put("out_trade_no", id);
@@ -112,9 +112,9 @@ public class PayService {
         request.setBizContent(JSON.toJSONString(biz));
         try {
             AlipayTradeQueryResponse response = alipayClient.execute(request);
-            return JSON.toJSONString(response);
+            return response.getCode().equals("10000");
         } catch (AlipayApiException e) {
-            throw new GlobalException(Status.PAY_BUG);
+            throw new GlobalException(Status.QUERY_BUG);
         }
     }
 

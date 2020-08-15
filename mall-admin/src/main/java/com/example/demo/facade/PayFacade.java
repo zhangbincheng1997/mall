@@ -25,29 +25,25 @@ public class PayFacade {
         // 检查状态
         if (!orderMaster.getStatus().equals(OrderStatusEnum.REFUND_REQUEST.getCode())) // 退款请求
             throw new GlobalException(Status.ORDER_NOT_REFUND_REQUEST);
-        // 订单处理退款
+        // 支付：退款
         boolean isSuccess = payService.refund(orderMaster.getId(), orderMaster.getAmount());
         if (!isSuccess) {
             throw new GlobalException(Status.REFUND_BUG);
         }
+        // 订单：退款成功
         orderMasterFacade.returnStock(id);
         orderMasterFacade.updateOrderStatus(id, OrderStatusEnum.REFUND_SUCCESS.getCode());
     }
 
-    public void cancel(Long id) {
+    public void close(Long id) {
         // 确认存在
         OrderMaster orderMaster = orderMasterFacade.get(id);
         // 检查状态
         if (!orderMaster.getStatus().equals(OrderStatusEnum.TO_BE_PAID.getCode())) // 待付款
             throw new GlobalException(Status.ORDER_NOT_TO_BE_PAID);
-        // 订单处理关闭
-        boolean isSuccess = payService.close(orderMaster.getId());
-        if (!isSuccess) {
-            throw new GlobalException(Status.CLOSE_BUG);
-        }
-        // 订单取消
+        // 订单：GM关闭
         orderMasterFacade.returnStock(id);
-        orderMasterFacade.updateOrderStatus(id, OrderStatusEnum.CLOSE.getCode());
+        orderMasterFacade.updateOrderStatus(id, OrderStatusEnum.GM_CLOSE.getCode());
     }
 
     public void ship(Long id) {
@@ -56,7 +52,7 @@ public class PayFacade {
         // 检查状态
         if (!orderMaster.getStatus().equals(OrderStatusEnum.TO_BE_SHIPPED.getCode())) // 待发货
             throw new GlobalException(Status.ORDER_NOT_TO_BE_SHIPPED);
-        // 订单发货
+        // 订单：待收货
         orderMasterFacade.updateOrderStatus(id, OrderStatusEnum.TO_BE_RECEIVED.getCode());
     }
 }

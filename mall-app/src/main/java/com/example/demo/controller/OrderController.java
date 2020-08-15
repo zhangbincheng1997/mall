@@ -9,12 +9,14 @@ import com.example.demo.dto.page.OrderPageRequest;
 import com.example.demo.entity.OrderDetail;
 import com.example.demo.entity.OrderMaster;
 import com.example.demo.facade.OrderMasterFacade;
+import com.example.demo.jwt.JwtUserDetails;
 import com.example.demo.vo.OrderDetailVo;
 import com.example.demo.vo.OrderVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
@@ -30,6 +32,14 @@ public class OrderController {
 
     @Autowired
     private OrderMasterFacade orderMasterFacade;
+
+    @ApiOperation("创建订单")
+    @PostMapping("/create")
+    public Result<String> create(@ApiIgnore Authentication authentication) {
+        JwtUserDetails userDetails = (JwtUserDetails) authentication.getPrincipal();
+        String orderId = orderMasterFacade.create(userDetails.getUser());
+        return Result.success(orderId);
+    }
 
     @ApiOperation("获取订单列表")
     @GetMapping("/list")

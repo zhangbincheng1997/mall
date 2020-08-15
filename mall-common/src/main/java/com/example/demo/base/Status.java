@@ -48,17 +48,15 @@ public enum Status {
     ORDER_NOT_TO_BE_PAID(60001, "订单不属于待付款"),
     ORDER_NOT_TO_BE_SHIPPED(60002, "订单不属于待发货"),
     ORDER_NOT_TO_BE_RECEIVED(60003, "订单不属于待收货"),
-    ORDER_CANCEL(60004, "订单已取消"),
-    ORDER_FINISH(60005, "订单已完成"),
-    ORDER_NOT_REFUND_REQUEST(60006, "订单没有退款申请"),
-    ORDER_REFUND_SUCCESS(60007, "订单退款成功"),
+    ORDER_NOT_REFUND_REQUEST(60004, "订单没有退款申请"),
 
     // 支付相关
     PAY_BUG(70000, "支付异常"),
     PAY_CHECK_BUG(70001, "支付检查异常"),
     REFUND_BUG(70002, "订单退款异常"),
     CLOSE_BUG(70003, "订单关闭异常"),
-    CANCEL_BUG(70004, "订单撤销异常");
+    CANCEL_BUG(70004, "订单取消异常"),
+    QUERY_BUG(70005, "订单查询异常");
 
     private Integer code;
     private String msg;

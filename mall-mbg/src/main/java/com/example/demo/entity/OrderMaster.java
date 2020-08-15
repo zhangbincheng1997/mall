@@ -13,7 +13,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author zzz
- * @since 2020-08-14
+ * @since 2020-08-15
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -48,7 +48,7 @@ public class OrderMaster implements Serializable {
     private BigDecimal amount;
 
     /**
-     * 订单状态：0-6，默认0
+     * 订单状态：0-8，默认0
      */
     private Integer status;
 

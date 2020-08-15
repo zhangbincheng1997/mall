@@ -1,7 +1,7 @@
 # mall
 
 ## 前端技术
-[sell-layui](/sell-layui)
+[web-layui](/web-layui)
 1. [Layui](https://www.layui.com/)
 2. [模板](https://fly.layui.com/store/layuiMaternalBabyMall/)
 3. :smile: ! 注意config.js文件，全局配置
@@ -17,50 +17,53 @@
 | [Spring Boot](https://github.com/spring-projects/spring-boot) | MVC框架 |
 | [Spring Security](https://github.com/spring-projects/spring-security) | 安全框架 |
 | [JWT](https://github.com/jwtk/jjwt) | 单点登录 |
+| [Druid](https://github.com/alibaba/druid/) | 数据库连接池 |
 | [MyBatis](https://github.com/mybatis/mybatis-3) | 数据库框架  |
 | [MyBatis Plus](https://github.com/baomidou/mybatis-plus) | 数据库增强框架 |
 | [MySQL](https://github.com/mysql/mysql-server) | 关系型数据库 |
 | [Redis](https://github.com/antirez/redis) | 缓存型数据库 |
 | [RocketMQ](https://github.com/apache/rocketmq) | 消息队列 |
 | [QiNiu](https://github.com/qiniu/java-sdk) | 对象存储 |
-| [Druid](https://github.com/alibaba/druid/) | 数据库连接池 |
 | [Swagger](https://github.com/swagger-api/swagger-ui) | 文档接口 |
 | [LogStash](https://github.com/elastic/logstash) | 日志收集 |
-| [Lombok](https://github.com/rzwitserloot/lombok) | 简化对象封装工具（需要安装IDEA插件） |
 | [Hutool](https://github.com/looly/hutool) | Java工具类库 |
-| [EasyCaptcha](https://github.com/whvcse/EasyCaptcha) | 验证码 |
+| [Lombok](https://github.com/rzwitserloot/lombok) | 简化对象封装工具（需要安装IDEA插件） |
 
 ## 结构
 mall:  
 ----mall-mbg: 数据库生成  
 ----mall-common: 基础模块  
 ----mall-security: 用户认证  
-----mall-admin: 管理后端开发  
-----mall-app: 商城后端开发
+----mall-app: 商城后端开发  
+----mall-admin: 管理后端开发
 
 ## 启动
-mall-admin: Run AdminApplication.java http://localhost:8081/
-
-mall-app: Run AppApplication.java http://localhost:8080/
-
-Druid: http://localhost:808x/druid/index.html
-
-Swagger: http://localhost:808x/swagger-ui.html
+>* app: Run AppApplication.java http://localhost:8080/
+>* admin: Run AdminApplication.java http://localhost:8081/
+>* app Druid: http://localhost:8080/druid/index.html
+>* admin Druid: http://localhost:8081/druid/index.html
+>* app Swagger: http://localhost:8080/swagger-ui.html
+>* admin Swagger: http://localhost:8081/swagger-ui.html
 
 ## 支付宝沙箱
 >* https://github.com/littleredhat1997/pay-demo
 >* https://openhome.alipay.com/platform/appDaily.htm
->* https://docs.open.alipay.com/284
+>* [alipay.trade.page.pay(统一收单下单并支付页面接口)](https://opendocs.alipay.com/apis/api_1/alipay.trade.page.pay)
+>* [alipay.trade.refund(统一收单交易退款接口)](https://opendocs.alipay.com/apis/api_1/alipay.trade.refund)
+>* [alipay.trade.close(统一收单交易关闭接口)](https://opendocs.alipay.com/apis/api_1/alipay.trade.close)
+>* [alipay.trade.cancel(统一收单交易撤销接口)](https://opendocs.alipay.com/apis/api_1/alipay.trade.cancel)
+>* [alipay.trade.query(统一收单线下交易查询)](https://opendocs.alipay.com/apis/api_1/alipay.trade.query)
 
 ![alt text](docs/支付.png)
 
 ```
+# 内网穿透
 $ ssh -NR 8888:127.0.0.1:8080 root@www.littleredhat1997.com
 
 # 保持连接
 $ vim /etc/ssh/sshd_config
-ClientAliveInterval 60
-ClientAliveCountMax 10
++ ClientAliveInterval 60
++ ClientAliveCountMax 10
 ```
 
 ## MySQL
@@ -69,13 +72,11 @@ ClientAliveCountMax 10
 2. 配置外网访问
 ```
 $ vim /etc/my.cnf
-
-[mysqld]
-port = 3306
-bind-address = 0.0.0.0
++ [mysqld]
++ port = 3306
++ bind-address = 0.0.0.0
 
 $ mysql -u root -p
-
 mysql> GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '123456'; 
 mysql> FLUSH PRIVILEGES;
 ```
@@ -95,11 +96,10 @@ $ yum install redis
 2. 配置外网访问
 ```
 $ vim /etc/redis.conf
-
-bind 127.0.0.1         ----> # bind 127.0.0.1
-protected-mode yes     ----> protected-mode no
-# requirepass foobared ----> requirepass 123456
-daemonize no           ----> daemonize yes
++ bind 127.0.0.1         ----> # bind 127.0.0.1
++ protected-mode yes     ----> protected-mode no
++ # requirepass foobared ----> requirepass 123456
++ daemonize no           ----> daemonize yes
 ```
 
 3. 启动/关闭
@@ -119,6 +119,7 @@ $ mv rocketmq /usr/local
 $ vim /etc/profile
 + export PATH=$PATH:/usr/local/rocketmq/bin
 + export NAMESRV_ADDR=localhost:9876
+
 $ source /etc/profile
 ```
 
@@ -145,9 +146,11 @@ $ nohup mqbroker -c /usr/local/rocketmq/conf/broker.conf &
 OpenJDK 64-Bit Server VM warning: INFO: os::commit_memory(0x00000005c0000000, 8589934592, 0) failed; error='Cannot allocate memory' (errno=12)
 
 $ cd /usr/local/rocketmq/bin/
+
 $ vim runserver.sh
 - JAVA_OPT="${JAVA_OPT} -server -Xms4g -Xmx4g -Xmn2g -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=320m"
 + JAVA_OPT="${JAVA_OPT} -server -Xms128m -Xmx128m -Xmn128m -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=128m"
+
 $ vim runbroker.sh
 - JAVA_OPT="${JAVA_OPT} -server -Xms8g -Xmx8g -Xmn4g"
 + JAVA_OPT="${JAVA_OPT} -server -Xms128m -Xmx128m -Xmn128m"
@@ -180,14 +183,10 @@ $ iptables -L -n
 ```
 
 ## Spring Security
-1. AOP 顺序
 ```
 Filter -> Interceptor -> Aspect -> Controller
 OncePerRequestFilter 重复执行的filter只需要一次执行
-```
 
-2. AuthenticationProvider 顺序
-```
 1. AbstractUserDetailsAuthenticationProvider.java
      private class DefaultPostAuthenticationChecks implements UserDetailsChecker
          -> isAccountNonLocked() -> isEnabled() -> isAccountNonExpired()
@@ -198,7 +197,6 @@ OncePerRequestFilter 重复执行的filter只需要一次执行
      private class DefaultPreAuthenticationChecks implements UserDetailsChecker
          -> isCredentialsNonExpired()
 
-// base/Status.java
 USERNAME_NOT_FOUND(1004, "认证失败：用户名不存在"),
 BAD_CREDENTIALS(1005, "认证失败：密码错误"),
 ACCOUNT_DISABLED(1006, "认证失败：用户不可用"),
@@ -207,30 +205,8 @@ ACCOUNT_EXPIRED(1008, "认证失败：用户过期"),
 CREDENTIALS_EXPIRED(1009, "认证失败：证书过期"),
 ```
 
-3. UserDetailsService 缓存
-```
-// get
-User user = (User) redisService.get(Constants.USER_KEY + username);
-// set
-redisService.set(Constants.USER_KEY + username, user, Constants.USER_EXPIRE);
-
-// utils/Constants.java
-public static final String USER_KEY = "user:"; // 用户缓存
-public static final int USER_EXPIRE = 60 * 60; // 用户缓存过期时间 60*60s
-public static final String ROLE_KEY = "role:"; // 角色缓存
-public static final int ROLE_EXPIRE = 60 * 60; // 角色缓存过期时间 60*60s
-public static final String PERMISSION_KEY = "permission:"; // 权限缓存
-public static final int PERMISSION_EXPIRE = 60 * 60; // 权限缓存过期时间 60*60s
-```
-
 ## 压力测试
 [JMeter](https://jmeter.apache.org/download_jmeter.cgi)
->* http://localhost:8080/test/init?type=1&stock=1000
->* http://localhost:8080/test/init?type=2&stock=1000
->* http://localhost:8080/test/init?type=3&stock=1000
->* http://localhost:8080/test/result
->* http://localhost:8080/test/mysql
->* http://localhost:8080/test/redis
 
 | 项目 | QPS | Time |
 | :----: | :----: | :----: |

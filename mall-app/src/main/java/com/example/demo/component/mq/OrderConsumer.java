@@ -1,8 +1,9 @@
-package com.example.demo.component;
+package com.example.demo.component.mq;
 
 import com.alibaba.fastjson.JSON;
 import com.example.demo.base.GlobalException;
 import com.example.demo.base.Status;
+import com.example.demo.component.MailService;
 import com.example.demo.dao.StockDao;
 import com.example.demo.entity.*;
 import com.example.demo.service.OrderDetailService;
@@ -22,6 +23,7 @@ import java.util.Map;
 
 @Slf4j
 @Component
+@Transactional
 @RocketMQMessageListener(consumerGroup = OrderMessage.TOPIC + "-group", topic = OrderMessage.TOPIC)
 public class OrderConsumer implements RocketMQListener<OrderMessage> {
 
@@ -44,7 +46,6 @@ public class OrderConsumer implements RocketMQListener<OrderMessage> {
     private RocketMQTemplate rocketMQTemplate;
 
     // 这里都是正常操作，不会超卖
-    @Transactional
     @Override
     public void onMessage(OrderMessage orderMessage) {
         try {

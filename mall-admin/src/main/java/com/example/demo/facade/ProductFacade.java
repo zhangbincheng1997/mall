@@ -42,7 +42,7 @@ public class ProductFacade {
     public void save(ProductDto productDto) {
         Product product = Convert.convert(Product.class, productDto);
         productService.save(product);
-        if (product.getStatus() != null && product.getStatus()) {
+        if (product.getStatus()) {
             redisService.set(Constants.PRODUCT_STOCK + product.getId(), product.getStock()); // 加入预减库存
         }
     }
@@ -50,7 +50,7 @@ public class ProductFacade {
     public void update(Long id, ProductDto productDto) {
         Product product = Convert.convert(Product.class, productDto).setId(id);
         productService.updateById(product);
-        if (product.getStatus() != null && product.getStatus()) {
+        if (product.getStatus()) {
             redisService.set(Constants.PRODUCT_STOCK + product.getId(), product.getStock()); // 加入预减库存
         }
     }

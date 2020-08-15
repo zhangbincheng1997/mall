@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.Map;
 
 @SpringBootApplication
 @MapperScan({"com.example.demo.mapper", "com.example.demo.dao"}) // 扫描Mapper
+@EnableScheduling // 定时器
 public class AppApplication implements CommandLineRunner {
 
     @Autowired

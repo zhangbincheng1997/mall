@@ -2,12 +2,10 @@ package com.example.demo.controller;
 
 import com.example.demo.base.Result;
 import com.example.demo.facade.PayFacade;
-import com.example.demo.jwt.JwtUserDetails;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
@@ -23,24 +21,16 @@ public class PayController {
     @Autowired
     private PayFacade payFacade;
 
-    @ApiOperation("购买 创建订单")
-    @PostMapping("create")
-    public Result<String> create(@ApiIgnore Authentication authentication) {
-        JwtUserDetails userDetails = (JwtUserDetails) authentication.getPrincipal();
-        String orderId = payFacade.create(userDetails.getUser());
-        return Result.success(orderId);
-    }
-
-    @ApiOperation("购买 PC端支付")
+    @ApiOperation("订单支付")
     @PostMapping("/{id}")
     public void pay(@ApiIgnore Principal principal, @PathVariable("id") Long id, HttpServletResponse response) {
         payFacade.pay(principal.getName(), id, response);
     }
 
-    @ApiOperation("订单取消")
-    @PostMapping(value = "/cancel/{id}")
-    public Result<String> cancel(@ApiIgnore Principal principal, @PathVariable("id") Long id) {
-        payFacade.cancel(principal.getName(), id);
+    @ApiOperation("订单关闭")
+    @PostMapping(value = "/close/{id}")
+    public Result<String> close(@ApiIgnore Principal principal, @PathVariable("id") Long id) {
+        payFacade.close(principal.getName(), id);
         return Result.success();
     }
 
@@ -56,12 +46,5 @@ public class PayController {
     public Result<String> refund(@ApiIgnore Principal principal, @PathVariable("id") Long id) {
         payFacade.refund(principal.getName(), id);
         return Result.success();
-    }
-
-    @ApiOperation("订单查询")
-    @PostMapping(value = "/query/{id}")
-    public Result<String> query(@ApiIgnore Principal principal, @PathVariable("id") Long id) {
-        String result = payFacade.query(principal.getName(), id);
-        return Result.success(result);
     }
 }

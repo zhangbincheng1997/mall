@@ -24,10 +24,10 @@ public class PayController {
         return Result.success();
     }
 
-    @ApiOperation("订单取消")
-    @PostMapping(value = "/cancel/{id}")
-    public Result<String> cancel(@PathVariable("id") Long id) {
-        payFacade.cancel(id);
+    @ApiOperation("订单关闭")
+    @PostMapping(value = "/close/{id}")
+    public Result<String> close(@PathVariable("id") Long id) {
+        payFacade.close(id);
         return Result.success();
     }
 

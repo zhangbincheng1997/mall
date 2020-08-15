@@ -32,9 +32,7 @@ public class CategoryFacade {
 
     @CacheEvict(value = "category", allEntries = true) // clear cache
     public void update(Long id, CategoryDto categoryDto) {
-        Category category = new Category()
-                .setId(id)
-                .setName(categoryDto.getName());
+        Category category = Convert.convert(Category.class, categoryDto).setId(id);
         categoryService.updateById(category);
     }
 

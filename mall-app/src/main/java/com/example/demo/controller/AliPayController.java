@@ -4,6 +4,7 @@ import com.example.demo.component.pay.PayService;
 import com.example.demo.enums.OrderStatusEnum;
 import com.example.demo.facade.OrderMasterFacade;
 import com.example.demo.utils.Constants;
+import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 
 // https://docs.open.alipay.com/270/105899/
 @Slf4j
+@Api(tags = "阿里支付SDK")
 @RestController
 public class AliPayController {
 
@@ -41,7 +43,7 @@ public class AliPayController {
             Long id = new Long(request.getParameter("out_trade_no")); // id
             orderMasterFacade.updateOrderStatus(id, OrderStatusEnum.TO_BE_SHIPPED.getCode());
             log.info("Notify 验证成功");
-            return "success";
+            return "failure";
         }
         log.info("Notify 验证失败");
         return "failure";

@@ -83,7 +83,7 @@
                         layer.msg('请选择一行');
                     } else {
                         layer.confirm('确认购买？', function (index) {
-                            $.post('pay/create', function (res) {
+                            $.post('order/create', function (res) {
                                 if (res.code === 0) {
                                     layer.msg(res.data, {
                                         time: 2000, end: function () {
