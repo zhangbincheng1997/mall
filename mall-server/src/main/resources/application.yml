@@ -1,0 +1,51 @@
+server:
+  port: 8090
+
+spring:
+  application:
+    name: mall
+  datasource:
+    url: jdbc:mysql://81.71.46.41:3306/mall?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=GMT%2B8
+    username: smc
+    password: smc@JNU_2022!
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 10     # 最大连接数（默认10）
+      max-lifetime: 60000       # 连接最长存活时间（默认30分钟）
+      connection-timeout: 30000 # 获取连接超时时间（默认30秒）
+  redis:
+    host: 81.71.46.41
+    password: JNU_smc2022
+    port: 6379
+    database: 0
+    timeout: 60000 # /etc/redis.conf tcp-keepalive 60
+    lettuce:
+      pool:
+        max-active: 8   # 最大连接池数量
+        min-idle: 0     # 最小空闲连接数
+        max-idle: 8     # 最大空闲连接数
+        max-wait: -1 # 获取连接超时时间（默认不超时）
+      cluster:
+        refresh:
+          adaptive: true
+          period: 20 # 20秒自动刷新一次
+  mail:
+    host: smtp.163.com
+    username: jnupri_admin@163.com
+    password: BVEXAQPJOZZEMGOG
+    properties:
+      mail:
+        smtp:
+          auth: true
+          socketFactory:
+            port: 465
+            class: javax.net.ssl.SSLSocketFactory
+          starttls:
+            enable: true
+            required: true
+
+qiniu:
+  accessKey: Kqy56NmqIp-ZhcGSA4MOOwZDTdraNqxG1h1gXEA4
+  secretKey: 6zI3iJR4m1adAaBZWMFTIfbjWVJkHM0sZBV7ZbHR
+  bucketName: zhangbincheng-test
+  domainName: http://qiniu.littleredhat1997.com/
